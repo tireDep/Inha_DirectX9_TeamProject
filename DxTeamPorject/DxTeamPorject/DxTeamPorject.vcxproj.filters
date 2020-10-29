@@ -25,6 +25,9 @@
     <Filter Include="00_3.Cube">
       <UniqueIdentifier>{6a2427ee-1f53-4361-a264-9986c90b80e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00_4.Light">
+      <UniqueIdentifier>{ccbaa62f-59c2-4e7f-a82a-aeafdb60c8b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -57,6 +60,9 @@
     <ClInclude Include="Cube.h">
       <Filter>00_3.Cube</Filter>
     </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -76,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>00_3.Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

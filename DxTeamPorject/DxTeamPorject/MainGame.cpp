@@ -2,10 +2,12 @@
 #include "MainGame.h"
 #include "Camera.h"
 #include "Cube.h"
+#include "Light.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
-	m_pCube(NULL)
+	m_pCube(NULL),
+	m_pLight(NULL)
 {
 }
 
@@ -13,7 +15,7 @@ CMainGame::~CMainGame()
 {
 	SafeDelete(m_pCube);
 	SafeDelete(m_pCamera);
-
+	SafeDelete(m_pLight);
 	g_pDeviceManager->Destroy();
 }
 
@@ -30,6 +32,10 @@ void CMainGame::Setup()
 
 	m_pCamera = new CCamera;
 	m_pCamera->Setup(&m_pCube->GetPosition());
+
+	m_pLight = new CLight;
+	m_pLight->Setup();
+	//m_pLight->Setup(D3DXVECTOR3(0, -0.5, 0));		// ÅÂ¾ç±¤ º¤ÅÍ ¼³Á¤ °¡´É
 }
 
 void CMainGame::Update()
@@ -49,7 +55,8 @@ void CMainGame::Render()
 	D3DXMATRIXA16 matProj;
 	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 4.0f, rc.right / (float)rc.bottom, 1.0f, 1000.0f);
 	
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150,150,150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
