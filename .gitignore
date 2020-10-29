@@ -3,20 +3,8 @@
 
 ### Add Something ###
 # Resource 
-# 3DObj
-*.x
-
-# Img
-*.jpg
-*.png
-*.bmp
-
-# Sound
-*.mp3
-*.wav
 
 # Else
-*.txt
 *.pdf
 *.zip
 

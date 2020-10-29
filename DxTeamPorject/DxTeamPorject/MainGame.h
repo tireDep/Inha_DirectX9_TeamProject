@@ -2,13 +2,13 @@
 
 class CCamera;
 class CCube;
-
+class cUI;
 class CMainGame
 {
 private:
 	CCamera* m_pCamera;
 	CCube* m_pCube;
-
+	cUI *m_pUI;
 public:
 	CMainGame();
 	~CMainGame();
