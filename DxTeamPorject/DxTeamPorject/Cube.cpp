@@ -121,15 +121,16 @@ void CCube::Setup()
 
 void CCube::Update()
 {
+	float speed = 0.001f;
 	if (GetKeyState('A') & 0x8000)
-		m_fRotY -= 0.1f;
+		m_fRotY -= speed;
 	if (GetKeyState('D') & 0x8000)
-		m_fRotY += 0.1f;
+		m_fRotY += speed;
 
 	if (GetKeyState('W') & 0x8000)
-		m_vPosition += (m_vDirection * 0.1f);
+		m_vPosition += (m_vDirection * speed);
 	if (GetKeyState('S') & 0x8000)
-		m_vPosition -= (m_vDirection * 0.1f);
+		m_vPosition -= (m_vDirection * speed);
 	// 이동
 
 	RECT rc;	// 화면 사이즈 변경 x 라면 미리 구해놔도 상관 x
