@@ -3,6 +3,7 @@
 class CCamera;
 class CCube;
 class CGrid;
+class cUI;
 class CLight;
 
 
@@ -10,11 +11,9 @@ class CMainGame
 {
 private:
 	CCamera* m_pCamera;
-
 	CGrid* m_pGrid;
-
-
-	CCube*	m_pCube;
+	CCube* m_pCube;
+	cUI *m_pUI;
 	CLight*	m_pLight;
 
 public:

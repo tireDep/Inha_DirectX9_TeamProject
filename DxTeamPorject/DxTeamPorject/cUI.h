@@ -1,0 +1,34 @@
+#pragma once
+class cUI
+{
+private:
+	LPD3DXSPRITE m_pSprite;
+	D3DXIMAGE_INFO m_stImageInfo, m_stImageInfo2, m_stImageInfo3;
+
+
+
+	LPDIRECT3DTEXTURE9 m_pTextureUI, m_pTextureUI2, m_pTextureUI3;
+
+	POINT pUI;
+	POINT px; //눌렀을때
+	POINT px2; //움직일때
+	POINT px3; //떼었을때
+	D3DXMATRIXA16 matT, matWorld;
+	int movep, movepy;
+	RECT rc, rc2, rc3, rc4;
+	RECT imageRC;
+
+	///
+	
+public:
+	cUI();
+	~cUI();
+	bool m_isLButtonDown;
+	void Setup_UI();
+	void UI_RENDER();
+	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
+	
+
+};
+

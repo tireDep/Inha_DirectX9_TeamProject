@@ -71,6 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>D:\DirectXSDK\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\DirectXSDK\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -144,6 +146,7 @@
     <ClInclude Include="BasicHeader.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="cUI.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="DxTeamPorject.h" />
     <ClInclude Include="Grid.h" />
@@ -157,6 +160,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="cUI.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DxTeamPorject.cpp" />
     <ClCompile Include="Grid.cpp" />

@@ -3,13 +3,15 @@
 #include "Camera.h"
 #include "Cube.h"
 #include "Grid.h"
+#include "cUI.h"
 #include "Light.h"
 
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
 	m_pCube(NULL),
-	m_pLight(NULL)
+	m_pLight(NULL),
+	m_pUI(NULL)
 {
 }
 
@@ -17,6 +19,7 @@ CMainGame::~CMainGame()
 {
 	SafeDelete(m_pCube);
 	SafeDelete(m_pCamera);
+	SafeDelete(m_pUI);
 	SafeDelete(m_pLight);
 	g_pDeviceManager->Destroy();
 }
@@ -25,12 +28,19 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (m_pCamera)
 		m_pCamera->WndProc(hWnd, message, wParam, lParam);
+
+	if (m_pUI)
+		m_pUI->WndProc(hWnd, message, wParam, lParam);
 }
 
 void CMainGame::Setup()
 {
 	m_pCube = new CCube;
 	m_pCube->Setup();
+
+	m_pUI = new cUI;
+	m_pUI->Setup_UI();
+
 
 	m_pCamera = new CCamera;
 	m_pCamera->Setup(&m_pCube->GetPosition());
@@ -50,6 +60,7 @@ void CMainGame::Update()
 	if (m_pCamera)
 		m_pCamera->Update();
 
+
 	if (m_pCube)
 		m_pCube->Update();
 }
@@ -67,6 +78,10 @@ void CMainGame::Render()
 	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150,150,150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
+
+
+	if (m_pUI)
+		m_pUI->UI_RENDER();
 
 	if (m_pCube)
 		m_pCube->Render();
