@@ -25,8 +25,13 @@
     <Filter Include="00_3.Cube">
       <UniqueIdentifier>{6a2427ee-1f53-4361-a264-9986c90b80e1}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="UI">
       <UniqueIdentifier>{a35dae52-b282-4b7f-ba32-65e2ba9727c0}</UniqueIdentifier>
+=======
+    <Filter Include="00_4.Light">
+      <UniqueIdentifier>{ccbaa62f-59c2-4e7f-a82a-aeafdb60c8b1}</UniqueIdentifier>
+>>>>>>> 3c11ace4f32f5b3b01419bf822cdb07a22f77944
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -60,8 +65,13 @@
     <ClInclude Include="Cube.h">
       <Filter>00_3.Cube</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="cUI.h">
       <Filter>UI</Filter>
+=======
+    <ClInclude Include="Light.h">
+      <Filter>Header Files</Filter>
+>>>>>>> 3c11ace4f32f5b3b01419bf822cdb07a22f77944
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,8 +93,13 @@
     <ClCompile Include="Cube.cpp">
       <Filter>00_3.Cube</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="cUI.cpp">
       <Filter>UI</Filter>
+=======
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files</Filter>
+>>>>>>> 3c11ace4f32f5b3b01419bf822cdb07a22f77944
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
