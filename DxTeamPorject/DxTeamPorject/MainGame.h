@@ -2,12 +2,14 @@
 
 class CCamera;
 class CCube;
+class CGrid;
 
 class CMainGame
 {
 private:
 	CCamera* m_pCamera;
 	CCube* m_pCube;
+	CGrid* m_pGrid;
 
 public:
 	CMainGame();

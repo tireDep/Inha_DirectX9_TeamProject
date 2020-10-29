@@ -25,6 +25,9 @@
     <Filter Include="00_3.Cube">
       <UniqueIdentifier>{6a2427ee-1f53-4361-a264-9986c90b80e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00_4.Grid">
+      <UniqueIdentifier>{e138814d-c518-4ee3-a7b9-cb4f1466bbc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -57,6 +60,12 @@
     <ClInclude Include="Cube.h">
       <Filter>00_3.Cube</Filter>
     </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>00_4.Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Pyramid.h">
+      <Filter>00_4.Grid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -76,6 +85,12 @@
     </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>00_3.Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>00_4.Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Pyramid.cpp">
+      <Filter>00_4.Grid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

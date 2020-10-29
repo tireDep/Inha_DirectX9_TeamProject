@@ -2,6 +2,7 @@
 #include "MainGame.h"
 #include "Camera.h"
 #include "Cube.h"
+#include "Grid.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
@@ -30,6 +31,9 @@ void CMainGame::Setup()
 
 	m_pCamera = new CCamera;
 	m_pCamera->Setup(&m_pCube->GetPosition());
+
+	m_pGrid = new CGrid;
+	m_pGrid->Setup();
 }
 
 void CMainGame::Update()
@@ -56,6 +60,9 @@ void CMainGame::Render()
 
 	if (m_pCube)
 		m_pCube->Render();
+
+	if (m_pGrid)
+		m_pGrid->Render();
 
 	g_pD3DDevice->EndScene();
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
