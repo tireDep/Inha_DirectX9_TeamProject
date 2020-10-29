@@ -3,13 +3,19 @@
 class CCamera;
 class CCube;
 class CGrid;
+class CLight;
+
 
 class CMainGame
 {
 private:
 	CCamera* m_pCamera;
-	CCube* m_pCube;
+
 	CGrid* m_pGrid;
+
+
+	CCube*	m_pCube;
+	CLight*	m_pLight;
 
 public:
 	CMainGame();
@@ -20,4 +26,3 @@ public:
 	void Update();
 	void Render();
 };
-
