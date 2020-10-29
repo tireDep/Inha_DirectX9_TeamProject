@@ -47,7 +47,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DXTEAMPORJECT));
 
 	g_pMainGame = new CMainGame;
-	g_pMainGame->SetUp();
+	g_pMainGame->Setup();
 
     MSG msg;
 

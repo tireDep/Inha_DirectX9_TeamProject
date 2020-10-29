@@ -14,7 +14,7 @@ public:
 	CCube();
 	~CCube();
 
-	void SetUp();
+	void Setup();
 	void Update();
 	void Render();
 

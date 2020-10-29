@@ -23,13 +23,13 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		m_pCamera->WndProc(hWnd, message, wParam, lParam);
 }
 
-void CMainGame::SetUp()
+void CMainGame::Setup()
 {
 	m_pCube = new CCube;
-	m_pCube->SetUp();
+	m_pCube->Setup();
 
 	m_pCamera = new CCamera;
-	m_pCamera->SetUp(&m_pCube->GetPosition());
+	m_pCamera->Setup(&m_pCube->GetPosition());
 }
 
 void CMainGame::Update()

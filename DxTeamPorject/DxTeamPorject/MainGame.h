@@ -14,7 +14,7 @@ public:
 	~CMainGame();
 
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-	void SetUp();
+	void Setup();
 	void Update();
 	void Render();
 };

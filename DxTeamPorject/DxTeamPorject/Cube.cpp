@@ -17,7 +17,7 @@ CCube::~CCube()
 {
 }
 
-void CCube::SetUp()
+void CCube::Setup()
 {
 	float cubeSize = 0.5f;
 	ST_PC_VERTEX v;

@@ -17,7 +17,7 @@ CCamera::~CCamera()
 {
 }
 
-void CCamera::SetUp(D3DXVECTOR3* pvTarget)
+void CCamera::Setup(D3DXVECTOR3* pvTarget)
 {
 	m_pvTarget = pvTarget;
 
