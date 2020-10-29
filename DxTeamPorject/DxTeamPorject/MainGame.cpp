@@ -41,18 +41,15 @@ void CMainGame::Setup()
 	m_pUI = new cUI;
 	m_pUI->Setup_UI();
 
-
 	m_pCamera = new CCamera;
 	m_pCamera->Setup(&m_pCube->GetPosition());
-
 
 	m_pGrid = new CGrid;
 	m_pGrid->Setup();
 
 	m_pLight = new CLight;
-	m_pLight->Setup();
-	//m_pLight->Setup(D3DXVECTOR3(0, -0.5, 0));		// ÅÂ¾ç±¤ º¤ÅÍ ¼³Á¤ °¡´É
-
+	//m_pLight->Setup();
+	m_pLight->Setup(D3DXVECTOR3(-0.5, -0.5, 0));		// ÅÂ¾ç±¤ º¤ÅÍ ¼³Á¤ °¡´É
 }
 
 void CMainGame::Update()
@@ -78,7 +75,6 @@ void CMainGame::Render()
 	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150,150,150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
-
 
 	if (m_pUI)
 		m_pUI->UI_RENDER();
