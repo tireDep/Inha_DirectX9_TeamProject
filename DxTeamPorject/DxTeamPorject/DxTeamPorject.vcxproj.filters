@@ -1,135 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-<<<<<<< HEAD
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="cUI.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DxTeamPorject.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MainGame.cpp" />
-    <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Pyramid.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Timer.cpp">
+      <Filter>FPS</Filter>
+    </ClCompile>
+    <ClCompile Include="Fps.cpp">
+      <Filter>FPS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicHeader.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="cUI.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="DxTeamPorject.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Grid.h" />
-    <ClInclude Include="Pyramid.h" />
+    <ClInclude Include="Timer.h">
+      <Filter>FPS</Filter>
+    </ClInclude>
+    <ClInclude Include="Fps.h">
+      <Filter>FPS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DxTeamPorject.rc" />
-=======
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="00. Heder">
-      <UniqueIdentifier>{a8a39bbb-8f2e-4525-8ae1-0ad5f3ab0598}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_1. MainGame">
-      <UniqueIdentifier>{0672e31c-4b3e-4e05-ae1b-d332c796b936}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_2. Camera">
-      <UniqueIdentifier>{a5e91a21-ff6c-4207-9ed6-f263adc08a4c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_3.Cube">
-      <UniqueIdentifier>{6a2427ee-1f53-4361-a264-9986c90b80e1}</UniqueIdentifier>
-    </Filter>
-<<<<<<< HEAD
-    <Filter Include="UI">
-      <UniqueIdentifier>{a35dae52-b282-4b7f-ba32-65e2ba9727c0}</UniqueIdentifier>
-=======
-    <Filter Include="00_4.Light">
-      <UniqueIdentifier>{ccbaa62f-59c2-4e7f-a82a-aeafdb60c8b1}</UniqueIdentifier>
->>>>>>> 3c11ace4f32f5b3b01419bf822cdb07a22f77944
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DxTeamPorject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>00. Heder</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicHeader.h">
-      <Filter>00. Heder</Filter>
-    </ClInclude>
-    <ClInclude Include="MainGame.h">
-      <Filter>00_1. MainGame</Filter>
-    </ClInclude>
-    <ClInclude Include="DeviceManager.h">
-      <Filter>00_1. MainGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>00_2. Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>00_3.Cube</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="cUI.h">
-      <Filter>UI</Filter>
-=======
-    <ClInclude Include="Light.h">
-      <Filter>Header Files</Filter>
->>>>>>> 3c11ace4f32f5b3b01419bf822cdb07a22f77944
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DxTeamPorject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MainGame.cpp">
-      <Filter>00_1. MainGame</Filter>
-    </ClCompile>
-    <ClCompile Include="DeviceManager.cpp">
-      <Filter>00_1. MainGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>00_2. Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>00_3.Cube</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="cUI.cpp">
-      <Filter>UI</Filter>
-=======
-    <ClCompile Include="Light.cpp">
-      <Filter>Source Files</Filter>
->>>>>>> 3c11ace4f32f5b3b01419bf822cdb07a22f77944
-    </ClCompile>
->>>>>>> 964f0696eb94a11ca3e7dd616c6876c82b9bddb8
   </ItemGroup>
   <ItemGroup>
     <Image Include="DxTeamPorject.ico" />
@@ -137,5 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="FPS">
+      <UniqueIdentifier>{6c7a52ee-594e-4b5c-949f-ac22dbd936ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

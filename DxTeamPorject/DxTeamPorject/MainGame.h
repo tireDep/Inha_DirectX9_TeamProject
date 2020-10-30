@@ -5,7 +5,8 @@ class CCube;
 class CGrid;
 class cUI;
 class CLight;
-
+class CTimer;
+class CFps;
 
 class CMainGame
 {
@@ -15,7 +16,10 @@ private:
 	CCube* m_pCube;
 	cUI *m_pUI;
 	CLight*	m_pLight;
-
+	CTimer*	m_pTimer;
+	CFps* m_pFps;
+private:
+	void Frame();
 public:
 	CMainGame();
 	~CMainGame();

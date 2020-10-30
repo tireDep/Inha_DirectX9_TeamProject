@@ -5,13 +5,16 @@
 #include "Grid.h"
 #include "cUI.h"
 #include "Light.h"
-
+#include "Timer.h"
+#include "Fps.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
 	m_pCube(NULL),
 	m_pLight(NULL),
-	m_pUI(NULL)
+	m_pUI(NULL),
+	m_pTimer(NULL),
+	m_pFps(NULL)
 {
 }
 
@@ -21,7 +24,15 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pCamera);
 	SafeDelete(m_pUI);
 	SafeDelete(m_pLight);
+	SafeDelete(m_pTimer);
+	SafeDelete(m_pFps);
 	g_pDeviceManager->Destroy();
+}
+
+void CMainGame::Frame()
+{
+	m_pTimer->Frame();
+	m_pFps->Frame();
 }
 
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -50,13 +61,18 @@ void CMainGame::Setup()
 	m_pLight = new CLight;
 	//m_pLight->Setup();
 	m_pLight->Setup(D3DXVECTOR3(-0.5, -0.5, 0));		// ÅÂ¾ç±¤ º¤ÅÍ ¼³Á¤ °¡´É
+
+	m_pTimer = new CTimer;
+	m_pTimer->Setup();
+
+	m_pFps = new CFps;
+	m_pFps->Setup();
 }
 
 void CMainGame::Update()
 {
 	if (m_pCamera)
 		m_pCamera->Update();
-
 
 	if (m_pCube)
 		m_pCube->Update();
