@@ -77,7 +77,7 @@ void CMainGame::Render()
 	g_pD3DDevice->BeginScene();
 
 	if (m_pUI)
-		m_pUI->UI_RENDER();
+		m_pUI->UI_Render();
 
 	if (m_pCube)
 		m_pCube->Render();
