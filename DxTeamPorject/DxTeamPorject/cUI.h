@@ -25,7 +25,7 @@ public:
 	~cUI();
 	bool m_isLButtonDown;
 	void Setup_UI();
-	void UI_RENDER();
+	void UI_Render();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 	

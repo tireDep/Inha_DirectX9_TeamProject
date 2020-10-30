@@ -11,12 +11,11 @@
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Timer.cpp">
-      <Filter>FPS</Filter>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Fps.cpp">
-      <Filter>FPS</Filter>
-    </ClCompile>
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Fps.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicHeader.h" />
@@ -32,12 +31,26 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Timer.h">
-      <Filter>FPS</Filter>
+    <ClInclude Include="fmod.h">
+      <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="Fps.h">
-      <Filter>FPS</Filter>
+    <ClInclude Include="fmod.hpp">
+      <Filter>Sound</Filter>
     </ClInclude>
+    <ClInclude Include="fmod_codec.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_dsp.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_memoryinfo.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="Fps.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DxTeamPorject.rc" />
@@ -50,8 +63,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="FPS">
-      <UniqueIdentifier>{6c7a52ee-594e-4b5c-949f-ac22dbd936ee}</UniqueIdentifier>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{1cb4280c-1c78-4169-8111-2b4e7818b09c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

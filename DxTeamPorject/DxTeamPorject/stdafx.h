@@ -50,6 +50,10 @@ public:\
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "winmm.lib")	// FPS
 
+#pragma comment(lib, "ws2_32.lib")
+#pragma comment(lib, "msimg32.lib")
+#pragma comment(lib, "fmodex_vc.lib")
+
 #include "DeviceManager.h"
 
 extern HWND g_hWnd;

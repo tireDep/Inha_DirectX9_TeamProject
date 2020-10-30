@@ -58,7 +58,7 @@ void cUI::Setup_UI()
 
 }
 
-void cUI::UI_RENDER()
+void cUI::UI_Render()
 {
 	SetRect(&imageRC, matT._41, matT._42,
 		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);

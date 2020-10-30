@@ -1,4 +1,5 @@
 #include "stdafx.h"
+
 #include "MainGame.h"
 #include "Camera.h"
 #include "Cube.h"
@@ -7,6 +8,7 @@
 #include "Light.h"
 #include "Timer.h"
 #include "Fps.h"
+#include "SoundManager.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
@@ -14,12 +16,14 @@ CMainGame::CMainGame() :
 	m_pLight(NULL),
 	m_pUI(NULL),
 	m_pTimer(NULL),
-	m_pFps(NULL)
+	m_pFps(NULL),
+	m_pSm(NULL)
 {
 }
 
 CMainGame::~CMainGame()
 {
+	SafeDelete(m_pSm);
 	SafeDelete(m_pCube);
 	SafeDelete(m_pCamera);
 	SafeDelete(m_pUI);
@@ -42,6 +46,18 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	if (m_pUI)
 		m_pUI->WndProc(hWnd, message, wParam, lParam);
+
+	switch (message)
+	{
+		case WM_LBUTTONDOWN:
+		{
+			m_pSm->PlaySFX("BombPut");
+		break;
+		}
+		default:
+			break;
+	}
+
 }
 
 void CMainGame::Setup()
@@ -67,6 +83,10 @@ void CMainGame::Setup()
 
 	m_pFps = new CFps;
 	m_pFps->Setup();
+
+	m_pSm = new SoundManager;
+	m_pSm->init();
+
 }
 
 void CMainGame::Update()
@@ -93,7 +113,7 @@ void CMainGame::Render()
 	g_pD3DDevice->BeginScene();
 
 	if (m_pUI)
-		m_pUI->UI_RENDER();
+		m_pUI->UI_Render();
 
 	if (m_pCube)
 		m_pCube->Render();

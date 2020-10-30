@@ -7,6 +7,7 @@ class cUI;
 class CLight;
 class CTimer;
 class CFps;
+class SoundManager;
 
 class CMainGame
 {
@@ -20,6 +21,7 @@ private:
 	CFps* m_pFps;
 private:
 	void Frame();
+	SoundManager* m_pSm;
 public:
 	CMainGame();
 	~CMainGame();
