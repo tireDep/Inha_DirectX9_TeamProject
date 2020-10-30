@@ -1,5 +1,5 @@
 #pragma once
-class cUI
+class CUI
 {
 private:
 	LPD3DXSPRITE m_pSprite;
@@ -21,8 +21,8 @@ private:
 	///
 	
 public:
-	cUI();
-	~cUI();
+	CUI();
+	~CUI();
 	bool m_isLButtonDown;
 	void Setup_UI();
 	void UI_Render();

@@ -22,9 +22,6 @@
     <ClCompile Include="Grid.cpp">
       <Filter>Grid</Filter>
     </ClCompile>
-    <ClCompile Include="cUI.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>Player</Filter>
     </ClCompile>
@@ -39,6 +36,9 @@
     </ClCompile>
     <ClCompile Include="DeviceManager.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -78,9 +78,6 @@
     <ClInclude Include="Grid.h">
       <Filter>Grid</Filter>
     </ClInclude>
-    <ClInclude Include="cUI.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="BasicHeader.h">
       <Filter>Header</Filter>
     </ClInclude>
@@ -104,6 +101,9 @@
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

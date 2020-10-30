@@ -1,24 +1,24 @@
 #include "stdafx.h"
-#include "BasicHeader.h"
+ 
 #include "SoundManager.h"
 
-SoundManager::SoundManager()
+CSoundManager::CSoundManager()
 {
 }
 
-SoundManager::~SoundManager()
+CSoundManager::~CSoundManager()
 {
 	Stop();
 	fmodSystem->close();
 }
 
 // cant use
-void SoundManager::Destroy()
+void CSoundManager::Destroy()
 {
 	delete fmodSystem;
 }
 
-void SoundManager::init()
+void CSoundManager::init()
 {
 	System_Create(&fmodSystem);
 	fmodSystem->init(4, FMOD_INIT_NORMAL, NULL);
@@ -34,29 +34,29 @@ void SoundManager::init()
 	AddSFX("sounds/win.wav", "Win");
 }
 
-void SoundManager::AddBGM(string path)
+void CSoundManager::AddBGM(string path)
 {
 	//fmodSystem->createSound(path.c_str(), FMOD_LOOP_NORMAL, NULL, &bgm);
 	fmodSystem->createStream(path.c_str(), FMOD_LOOP_NORMAL, NULL, &bgm);
 }
 
-void SoundManager::AddSFX(string path, string soundName)
+void CSoundManager::AddSFX(string path, string soundName)
 {
 	fmodSystem->createSound(path.c_str(), FMOD_DEFAULT, NULL, &soundHash[soundName]);
 }
 
-void SoundManager::PlayBGM()
+void CSoundManager::PlayBGM()
 {
 	fmodSystem->playSound(FMOD_CHANNEL_REUSE, bgm, false, &bgmChannel);
 }
 
-void SoundManager::PlaySFX(string soundName)
+void CSoundManager::PlaySFX(string soundName)
 {
 	if (soundHash[soundName] != NULL)
 		fmodSystem->playSound(FMOD_CHANNEL_FREE, soundHash[soundName], false, &sfxChannel);
 }
 
-void SoundManager::Stop()
+void CSoundManager::Stop()
 {
 	sfxChannel->stop();
 	bgmChannel->stop();

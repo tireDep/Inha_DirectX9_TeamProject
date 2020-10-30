@@ -1,5 +1,5 @@
 #pragma once
-#include "BasicHeader.h"
+ 
 
 class CPyramid
 {

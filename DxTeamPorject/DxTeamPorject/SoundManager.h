@@ -1,6 +1,6 @@
 #pragma once
 #include "fmod.hpp"
-#include <map>
+
 
 #define SOUND_MAX 1.0f
 #define SOUND_MIN 0.0f
@@ -9,7 +9,7 @@
 
 using namespace FMOD;
 
-class SoundManager
+class CSoundManager
 {
 private:
 	System * fmodSystem;
@@ -21,8 +21,8 @@ private:
 	map<string, Sound*> soundHash;
 
 public:
-	SoundManager();
-	~SoundManager();
+	CSoundManager();
+	~CSoundManager();
 
 	void init();
 	void AddSFX(string path, string musicName);

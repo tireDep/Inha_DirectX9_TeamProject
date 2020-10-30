@@ -4,7 +4,7 @@
 #include "Camera.h"
 #include "Cube.h"
 #include "Grid.h"
-#include "cUI.h"
+#include "UI.h"
 #include "Light.h"
 #include "Timer.h"
 #include "Fps.h"
@@ -65,7 +65,7 @@ void CMainGame::Setup()
 	m_pCube = new CCube;
 	m_pCube->Setup();
 
-	m_pUI = new cUI;
+	m_pUI = new CUI;
 	m_pUI->Setup_UI();
 
 	m_pCamera = new CCamera;
@@ -84,7 +84,7 @@ void CMainGame::Setup()
 	m_pFps = new CFps;
 	m_pFps->Setup();
 
-	m_pSm = new SoundManager;
+	m_pSm = new CSoundManager;
 	m_pSm->init();
 
 }

@@ -318,7 +318,7 @@ typedef enum
     FMOD_OUTPUTTYPE_OSS,             /* Linux/Linux64/Solaris - Open Sound System output. (Default on Linux/Linux64/Solaris) */
     FMOD_OUTPUTTYPE_ALSA,            /* Linux/Linux64         - Advanced Linux Sound Architecture output. */
     FMOD_OUTPUTTYPE_ESD,             /* Linux/Linux64         - Enlightment Sound Daemon output. */
-    FMOD_OUTPUTTYPE_SOUNDMANAGER,    /* Mac                   - Macintosh SoundManager output. */
+    FMOD_OUTPUTTYPE_CSoundManager,    /* Mac                   - Macintosh CSoundManager output. */
     FMOD_OUTPUTTYPE_COREAUDIO,       /* Mac                   - Macintosh CoreAudio output.  (Default on Mac) */
     FMOD_OUTPUTTYPE_XBOX,            /* Xbox                  - Native hardware output. (Default on Xbox) */
     FMOD_OUTPUTTYPE_PS2,             /* PS2                   - Native hardware output. (Default on PS2) */

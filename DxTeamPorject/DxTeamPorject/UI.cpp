@@ -1,9 +1,9 @@
-#include "BasicHeader.h"
-#include "stdafx.h"
-#include "cUI.h"
-#include <string>
 
-cUI::cUI()
+#include "stdafx.h"
+#include "UI.h"
+
+
+CUI::CUI()
 {
 	m_isLButtonDown = false;
 	movep = 0;
@@ -12,12 +12,12 @@ cUI::cUI()
 }
 
 
-cUI::~cUI()
+CUI::~CUI()
 {
 
 }
 
-void cUI::Setup_UI()
+void CUI::Setup_UI()
 {
 	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
 
@@ -58,7 +58,7 @@ void cUI::Setup_UI()
 
 }
 
-void cUI::UI_Render()
+void CUI::UI_Render()
 {
 	SetRect(&imageRC, matT._41, matT._42,
 		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
@@ -107,7 +107,7 @@ void cUI::UI_Render()
 
 
 
-void cUI::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+void CUI::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{

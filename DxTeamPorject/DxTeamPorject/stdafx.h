@@ -18,6 +18,12 @@
 #include <tchar.h>
 
 // TODO: reference additional headers your program requires here
+
+#include <string>
+#include <vector>
+#include <map>
+using namespace std;
+
 #if _DEBUG
 // DEBUG Mode
 #ifdef UNICODE
