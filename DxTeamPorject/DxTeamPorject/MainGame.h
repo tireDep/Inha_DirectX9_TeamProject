@@ -5,7 +5,7 @@ class CCube;
 class CGrid;
 class cUI;
 class CLight;
-
+class SoundManager;
 
 class CMainGame
 {
@@ -15,7 +15,7 @@ private:
 	CCube* m_pCube;
 	cUI *m_pUI;
 	CLight*	m_pLight;
-
+	SoundManager* m_pSm;
 public:
 	CMainGame();
 	~CMainGame();

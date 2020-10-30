@@ -1,117 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="cUI.cpp" />
+    <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DxTeamPorject.cpp" />
-    <ClCompile Include="Camera.cpp">
-      <Filter>00_1 Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>00_2 Cube</Filter>
-    </ClCompile>
-    <ClCompile Include="Grid.cpp">
-      <Filter>00_3 Grid</Filter>
-    </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>00_4 Light</Filter>
-    </ClCompile>
-    <ClCompile Include="MainGame.cpp">
-      <Filter>MainGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Pyramid.cpp">
-      <Filter>00_3 Grid</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>헤더 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cUI.cpp">
-      <Filter>00_5 UI</Filter>
-    </ClCompile>
-    <ClCompile Include="DeviceManager.cpp">
-      <Filter>DeviceManager</Filter>
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Light.cpp" />
+    <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="Pyramid.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicHeader.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Cube.h" />
+    <ClInclude Include="cUI.h" />
+    <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="DxTeamPorject.h" />
-    <ClInclude Include="Camera.h">
-      <Filter>00_1 Camera</Filter>
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="MainGame.h" />
+    <ClInclude Include="Pyramid.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="fmod.h">
+      <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>00_2 Cube</Filter>
+    <ClInclude Include="fmod.hpp">
+      <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="Grid.h">
-      <Filter>00_3 Grid</Filter>
+    <ClInclude Include="fmod_codec.h">
+      <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>00_4 Light</Filter>
+    <ClInclude Include="fmod_dsp.h">
+      <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="MainGame.h">
-      <Filter>MainGame</Filter>
+    <ClInclude Include="fmod_memoryinfo.h">
+      <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="Pyramid.h">
-      <Filter>00_3 Grid</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cUI.h">
-      <Filter>00_5 UI</Filter>
-    </ClInclude>
-    <ClInclude Include="DeviceManager.h">
-      <Filter>DeviceManager</Filter>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="small.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="DxTeamPorject.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
+    <ResourceCompile Include="DxTeamPorject.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="00_1 Camera">
-      <UniqueIdentifier>{f4e1f8f6-b89a-423e-8b7c-9a219fc02ded}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_2 Cube">
-      <UniqueIdentifier>{4f005891-4593-408a-8588-09457cedfcc6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_3 Grid">
-      <UniqueIdentifier>{073d565f-a61d-4a4c-bbef-c974d33fc30c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_4 Light">
-      <UniqueIdentifier>{e41f42dc-fb00-4564-9a63-67dbf08ae758}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="MainGame">
-      <UniqueIdentifier>{d48e6cd8-cff2-4400-8e87-55ac09de7724}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{bf916149-c79d-431c-9efd-c8141a25d7dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{4c9283e8-5960-4359-8493-bcb556819cfc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00_5 UI">
-      <UniqueIdentifier>{08d39ab3-d8b6-4586-84c8-f644eb30d1e2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DeviceManager">
-      <UniqueIdentifier>{ab11adc5-b032-4253-89aa-a1b07d3b1b58}</UniqueIdentifier>
-    </Filter>
+    <Image Include="DxTeamPorject.ico" />
+    <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="DxTeamPorject.rc">
-      <Filter>리소스 파일</Filter>
-    </ResourceCompile>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{1cb4280c-1c78-4169-8111-2b4e7818b09c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

@@ -1,22 +1,25 @@
 #include "stdafx.h"
+
 #include "MainGame.h"
 #include "Camera.h"
 #include "Cube.h"
 #include "Grid.h"
 #include "cUI.h"
 #include "Light.h"
-
+#include "SoundManager.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
 	m_pCube(NULL),
 	m_pLight(NULL),
-	m_pUI(NULL)
+	m_pUI(NULL),
+	m_pSm(NULL)
 {
 }
 
 CMainGame::~CMainGame()
 {
+	SafeDelete(m_pSm);
 	SafeDelete(m_pCube);
 	SafeDelete(m_pCamera);
 	SafeDelete(m_pUI);
@@ -31,6 +34,18 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 	if (m_pUI)
 		m_pUI->WndProc(hWnd, message, wParam, lParam);
+
+	switch (message)
+	{
+		case WM_LBUTTONDOWN:
+		{
+			m_pSm->PlaySFX("BombPut");
+		break;
+		}
+		default:
+			break;
+	}
+
 }
 
 void CMainGame::Setup()
@@ -50,6 +65,10 @@ void CMainGame::Setup()
 	m_pLight = new CLight;
 	//m_pLight->Setup();
 	m_pLight->Setup(D3DXVECTOR3(-0.5, -0.5, 0));		// ÅÂ¾ç±¤ º¤ÅÍ ¼³Á¤ °¡´É
+
+	m_pSm = new SoundManager;
+	m_pSm->init();
+
 }
 
 void CMainGame::Update()
