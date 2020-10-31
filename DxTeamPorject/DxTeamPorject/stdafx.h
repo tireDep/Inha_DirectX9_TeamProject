@@ -61,6 +61,7 @@ public:\
 #pragma comment(lib, "fmodex_vc.lib")
 
 #include "DeviceManager.h"
+#include "FontManager.h"
 
 extern HWND g_hWnd;
 

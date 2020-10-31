@@ -40,6 +40,12 @@
     <ClCompile Include="UI.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Fps</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Fps</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -78,9 +84,6 @@
     <ClInclude Include="Grid.h">
       <Filter>Grid</Filter>
     </ClInclude>
-    <ClInclude Include="BasicHeader.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="DeviceManager.h">
       <Filter>Header</Filter>
     </ClInclude>
@@ -104,6 +107,12 @@
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>Fps</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Fps</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

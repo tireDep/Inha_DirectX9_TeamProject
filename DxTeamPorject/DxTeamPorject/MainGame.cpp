@@ -9,6 +9,7 @@
 #include "Timer.h"
 #include "Fps.h"
 #include "SoundManager.h"
+#include "Text.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
@@ -17,7 +18,9 @@ CMainGame::CMainGame() :
 	m_pUI(NULL),
 	m_pTimer(NULL),
 	m_pFps(NULL),
-	m_pSm(NULL)
+	m_pSm(NULL),
+	m_pText(NULL),
+	m_isDevMode(false)
 {
 }
 
@@ -30,6 +33,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pLight);
 	SafeDelete(m_pTimer);
 	SafeDelete(m_pFps);
+	SafeDelete(m_pText);
 	g_pDeviceManager->Destroy();
 }
 
@@ -52,8 +56,8 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case WM_LBUTTONDOWN:
 		{
 			m_pSm->PlaySFX("BombPut");
-		break;
 		}
+		break;
 		default:
 			break;
 	}
@@ -76,7 +80,7 @@ void CMainGame::Setup()
 
 	m_pLight = new CLight;
 	//m_pLight->Setup();
-	m_pLight->Setup(D3DXVECTOR3(-0.5, -0.5, 0));		// ÅÂ¾ç±¤ º¤ÅÍ ¼³Á¤ °¡´É
+	m_pLight->Setup(D3DXVECTOR3(0, -1, 0));		// ÅÂ¾ç±¤ º¤ÅÍ ¼³Á¤ °¡´É
 
 	m_pTimer = new CTimer;
 	m_pTimer->Setup();
@@ -87,6 +91,8 @@ void CMainGame::Setup()
 	m_pSm = new CSoundManager;
 	m_pSm->init();
 
+	m_pText = new CText;
+	m_pText->Setup();
 }
 
 void CMainGame::Update()
@@ -96,6 +102,12 @@ void CMainGame::Update()
 
 	if (m_pCube)
 		m_pCube->Update();
+
+	if (GetKeyState(VK_TAB) & 0x0001)
+		m_isDevMode = true;
+	else 
+		m_isDevMode = false;
+	Frame();
 }
 
 void CMainGame::Render()
@@ -120,6 +132,12 @@ void CMainGame::Render()
 
 	if (m_pGrid)
 		m_pGrid->Render();
+
+	if (m_isDevMode)
+	{
+		if (m_pText)
+			m_pText->Render(m_pFps->GetFps());
+	}
 
 	g_pD3DDevice->EndScene();
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);

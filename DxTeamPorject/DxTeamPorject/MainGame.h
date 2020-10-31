@@ -8,6 +8,7 @@ class CLight;
 class CTimer;
 class CFps;
 class CSoundManager;
+class CText;
 
 class CMainGame
 {
@@ -19,9 +20,11 @@ private:
 	CLight*	m_pLight;
 	CTimer*	m_pTimer;
 	CFps* m_pFps;
+	CText*	m_pText;
 private:
 	void Frame();
 	CSoundManager* m_pSm;
+	bool		m_isDevMode;
 public:
 	CMainGame();
 	~CMainGame();

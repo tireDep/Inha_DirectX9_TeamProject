@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Fps.h"
 
-
 CFps::CFps()
 {
 }
@@ -9,7 +8,6 @@ CFps::CFps()
 CFps::CFps(const CFps &)
 {
 }
-
 
 CFps::~CFps()
 {

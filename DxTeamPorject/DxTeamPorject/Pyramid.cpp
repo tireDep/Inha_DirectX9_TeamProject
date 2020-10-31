@@ -45,6 +45,8 @@ void CPyramid::Setup(D3DCOLOR c, D3DXMATRIXA16 & mat)
 
 void CPyramid::Render()
 {
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+
 	D3DXMATRIXA16 matWorld, matS;
 	D3DXMatrixScaling(&matS, 0.1, 2.0f, 0.1f);
 

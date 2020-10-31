@@ -143,9 +143,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicHeader.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="FontManager.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="DxTeamPorject.h" />
@@ -168,6 +169,8 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DxTeamPorject.cpp" />
