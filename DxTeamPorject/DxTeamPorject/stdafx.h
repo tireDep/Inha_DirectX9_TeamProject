@@ -22,6 +22,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <iostream>
 using namespace std;
 
 #if _DEBUG
@@ -68,7 +69,7 @@ extern HWND g_hWnd;
 struct ST_PC_VERTEX
 {
 	D3DXVECTOR3 p;
-	D3DXCOLOR c;
+	D3DCOLOR c;
 
 	enum { FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE };
 };

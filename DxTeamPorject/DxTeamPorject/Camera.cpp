@@ -10,7 +10,7 @@ CCamera::CCamera() :
 	m_isLBtnDown(false),
 	m_vCamRotAngle(0,0,0)
 {
-	m_preMousPos = { 0,0 };
+	m_preMousePos = { 0,0 };
 }
 
 CCamera::~CCamera()
@@ -26,6 +26,7 @@ void CCamera::Setup(D3DXVECTOR3* pvTarget)
 
 	D3DXMATRIXA16 matProj;
 	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 4.0f, rc.right / (float)rc.bottom, 1.0f, 1000.0f);
+	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 }
 
 void CCamera::Update()
@@ -38,7 +39,7 @@ void CCamera::Update()
 	D3DXMatrixRotationY(&matRY, m_vCamRotAngle.y);
 	matR = matRX*matRY;
 
-	m_vEye = D3DXVECTOR3(0, m_fCameraDistance, -m_fCameraDistance);
+	m_vEye = D3DXVECTOR3(0, 0, -m_fCameraDistance);
 	D3DXVec3TransformCoord(&m_vEye, &m_vEye, &matR);
 
 	if (m_pvTarget)
@@ -58,8 +59,8 @@ void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	switch (message)
 	{
 	case WM_LBUTTONDOWN:
-		m_preMousPos.x = LOWORD(lParam);
-		m_preMousPos.y = HIWORD(lParam);
+		m_preMousePos.x = LOWORD(lParam);
+		m_preMousePos.y = HIWORD(lParam);
 
 		m_isLBtnDown = true;
 		break;
@@ -75,27 +76,26 @@ void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			ptCurMouse.x = LOWORD(lParam);
 			ptCurMouse.y = HIWORD(lParam);
 
-			float fDeltaX = (float)ptCurMouse.x - m_preMousPos.x;
-			float fDeltaY = (float)ptCurMouse.y - m_preMousPos.y;
+			float fDeltaX = (float)ptCurMouse.x - m_preMousePos.x;
+			float fDeltaY = (float)ptCurMouse.y - m_preMousePos.y;
 
 			m_vCamRotAngle.y += (fDeltaX / 100.0f);
 			m_vCamRotAngle.x += (fDeltaY / 100.0f);
 
-			if (m_vCamRotAngle.x < -D3DX_PI / 2.0f + 0.0001f)
-				m_vCamRotAngle.x = -D3DX_PI / 2.0f + 0.0001f;
+			if (m_vCamRotAngle.x < D3DX_PI / 12.0f+0.0001f)
+				m_vCamRotAngle.x = D3DX_PI / 12.0f;
 
 			if (m_vCamRotAngle.x > D3DX_PI / 2.0f - 0.0001f)
 				m_vCamRotAngle.x = D3DX_PI / 2.0f - 0.0001f;
 
-			m_preMousPos = ptCurMouse;
+			m_preMousePos = ptCurMouse;
 		}
 		break;
 
 	case WM_MOUSEWHEEL:
 		m_fCameraDistance -= (GET_WHEEL_DELTA_WPARAM(wParam) / 30.0f);
-
-		if (m_fCameraDistance < 0.0001f)
-			m_fCameraDistance = 0.0001f;
+		if (m_fCameraDistance < 5.0+0.0001f)
+			m_fCameraDistance = 5.0f;
 		break;
 	}
 }
