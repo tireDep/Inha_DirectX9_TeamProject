@@ -1,29 +1,20 @@
 #include "stdafx.h"
 #include "DeviceManager.h"
 
-
-CDeviceManager::CDeviceManager() : 
-	m_pD3D(NULL),
-	m_pDevice(NULL)
+CDeviceManager::CDeviceManager()
+	: m_pD3D(NULL)
+	, m_pDevice(NULL)
 {
 	m_pD3D = Direct3DCreate9(D3D_SDK_VERSION);
 
 	D3DCAPS9 caps;
-	m_pD3D->GetDeviceCaps(
-		D3DADAPTER_DEFAULT,
-		D3DDEVTYPE_HAL,
-		&caps
-	);
+	m_pD3D->GetDeviceCaps(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, &caps);
 
 	int vp = 0;
 	if (caps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT)
-	{
 		vp = D3DCREATE_HARDWARE_VERTEXPROCESSING;
-	}
 	else
-	{
 		vp = D3DCREATE_SOFTWARE_VERTEXPROCESSING;
-	}
 
 	D3DPRESENT_PARAMETERS d3dpp;
 	ZeroMemory(&d3dpp, sizeof(D3DPRESENT_PARAMETERS));
@@ -49,11 +40,10 @@ CDeviceManager::CDeviceManager() :
 
 	if (FAILED(hr))
 	{
-		MessageBox(0, L"CreatDeivce Fail", L"ERROR", MB_OK);
+		MessageBox(0, L"CreateDevice Fail", L"ERROR", MB_OK);
 		return;
 	}
 }
-
 
 CDeviceManager::~CDeviceManager()
 {

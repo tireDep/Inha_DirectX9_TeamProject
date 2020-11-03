@@ -17,28 +17,24 @@
 #include <memory.h>
 #include <tchar.h>
 
-// TODO: reference additional headers your program requires here
-
-#include <string>
 #include <vector>
-#include <map>
-#include <iostream>
 using namespace std;
+// TODO: reference additional headers your program requires here
+//#if _DEBUG
+//// DEBUG Mode
+//#ifdef UNICODE
+//#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
+//#else
+//#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+//#endif
+//#else
+//// Release Mode
+//#endif
 
-#if _DEBUG
-// DEBUG Mode
-#ifdef UNICODE
-#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
-#else
-#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
-#endif
-#else
-// Release Mode
-#endif
-
+#define SafeDelete(p)  { if(p) delete p; }
 #define SafeRelease(p) { if(p) p->Release(); p = NULL; }
-#define SafeDelete(p) { if(p) delete p; }
-#define SingleTone(class_name)\
+
+#define SingleTone(class_name) \
 private:\
 	class_name(void);\
 	~class_name(void);\
@@ -49,20 +45,12 @@ public:\
 		return &instance;\
 	}
 
-// ---------------------------------------------------
-
 #include <d3dx9.h>
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 #pragma comment(lib, "dxguid.lib")
-#pragma comment(lib, "winmm.lib")	// FPS
-
-#pragma comment(lib, "ws2_32.lib")
-#pragma comment(lib, "msimg32.lib")
-#pragma comment(lib, "fmodex_vc.lib")
 
 #include "DeviceManager.h"
-#include "FontManager.h"
 
 extern HWND g_hWnd;
 
