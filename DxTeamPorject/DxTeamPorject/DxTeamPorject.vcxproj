@@ -147,6 +147,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="Text.h" />
+    <ClInclude Include="TimeManager.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="DxTeamPorject.h" />
@@ -171,6 +172,7 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Text.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DxTeamPorject.cpp" />

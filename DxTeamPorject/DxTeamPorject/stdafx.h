@@ -17,6 +17,9 @@
 #include <memory.h>
 #include <tchar.h>
 
+#include <MMSystem.h> //FPS
+
+
 // TODO: reference additional headers your program requires here
 
 #include <string>
@@ -57,13 +60,15 @@ public:\
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "winmm.lib")	// FPS
 
+
 #pragma comment(lib, "ws2_32.lib")
 #pragma comment(lib, "msimg32.lib")
 #pragma comment(lib, "fmodex_vc.lib")
 
+
 #include "DeviceManager.h"
 #include "FontManager.h"
-
+#include "TimeManager.h"
 extern HWND g_hWnd;
 
 struct ST_PC_VERTEX

@@ -17,27 +17,28 @@ void CFps::Setup()
 {
 	m_fps = 0;
 	m_count = 0;
-	//m_startTime = timeGetTime();
-	m_startTime = GetTickCount();
+	m_startTime = timeGetTime();
+
+	//m_startTime = GetTickCount();
 }
 
 void CFps::Frame()
 {
 	m_count++;
 
-	//if (timeGetTime() >= (m_startTime + 1000))
-	//{
-	//	m_fps = m_count;
-	//	m_count = 0;
-	//	m_startTime = timeGetTime();
-	//}
-
-	if (GetTickCount() >= (m_startTime + 1000))
+	if (timeGetTime() >= (m_startTime + 1000))
 	{
 		m_fps = m_count;
 		m_count = 0;
-		m_startTime = GetTickCount();
+		m_startTime = timeGetTime();
 	}
+
+	//if (GetTickCount() >= (m_startTime + 1000))
+	//{
+	//	m_fps = m_count;
+	//	m_count = 0;
+	//	m_startTime = GetTickCount();
+	//}
 }
 
 int CFps::GetFps()

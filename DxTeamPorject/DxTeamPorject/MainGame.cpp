@@ -10,6 +10,7 @@
 #include "Fps.h"
 #include "SoundManager.h"
 #include "Text.h"
+#include "TimeManager.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
@@ -20,7 +21,7 @@ CMainGame::CMainGame() :
 	m_pFps(NULL),
 	m_pSm(NULL),
 	m_pText(NULL),
-	m_isDevMode(false)
+	m_isDevMode(true)
 {
 }
 
@@ -97,6 +98,8 @@ void CMainGame::Setup()
 
 void CMainGame::Update()
 {
+	g_pTimeManager->Update();
+
 	if (m_pCamera)
 		m_pCamera->Update();
 
@@ -104,9 +107,9 @@ void CMainGame::Update()
 		m_pCube->Update();
 
 	if (GetKeyState(VK_TAB) & 0x0001)
-		m_isDevMode = true;
-	else 
 		m_isDevMode = false;
+	else 
+		m_isDevMode = true;
 	Frame();
 }
 
