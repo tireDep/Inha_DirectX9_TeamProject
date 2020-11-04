@@ -10,6 +10,7 @@
 CMainGame *g_pMainGame;
 HWND	g_hWnd, g_hMenuWnd;
 int g_nDlgWidth, g_nDlgHeight;
+void Setup_RigidBody();
 
 #define MAX_LOADSTRING 100
 
@@ -51,6 +52,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	g_pMainGame = new CMainGame;
 	g_pMainGame->Setup();
 
+	Setup_RigidBody();
     MSG msg;
 
     // Main message loop:
@@ -80,6 +82,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 }
 
 
+void Setup_RigidBody()
+{
+	char string[10];
+	sprintf(string, "%.4f", 0.0000f);
+	SetDlgItemTextA(g_hMenuWnd, IDC_EDIT_MASS, string);
+	
+	sprintf(string, "%.4f", 0.0000f);
+	SetDlgItemTextA(g_hMenuWnd, IDC_EDIT_DRAG, string);
+
+	sprintf(string, "%.4f", 0.0000f);
+	SetDlgItemTextA(g_hMenuWnd, IDC_EDIT_ADRAG, string);
+}
 
 //
 //  FUNCTION: MyRegisterClass()
