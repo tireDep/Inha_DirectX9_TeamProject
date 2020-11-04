@@ -25,11 +25,17 @@
     <Filter Include="003... Particle">
       <UniqueIdentifier>{341050b9-4160-419f-ab43-84447520fbb6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="004... ForceGenerator">
+    <Filter Include="007... World">
+      <UniqueIdentifier>{191f44f4-43dd-4642-ab6d-611ba1a91af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="006... ForceRegistry">
+      <UniqueIdentifier>{154dab01-5f88-43ba-995f-cca03bc581fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="005... ForceGenerator">
       <UniqueIdentifier>{9ed6929b-04bf-467e-a685-b2af8c537e45}</UniqueIdentifier>
     </Filter>
-    <Filter Include="005... ForceRegistry">
-      <UniqueIdentifier>{154dab01-5f88-43ba-995f-cca03bc581fd}</UniqueIdentifier>
+    <Filter Include="004... Rigidbody">
+      <UniqueIdentifier>{14493aac-0e1b-4e7b-a0f4-2f4032db828d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,22 +70,28 @@
       <Filter>003... Particle</Filter>
     </ClInclude>
     <ClInclude Include="ForceGenerator.h">
-      <Filter>004... ForceGenerator</Filter>
+      <Filter>005... ForceGenerator</Filter>
     </ClInclude>
     <ClInclude Include="Gravity.h">
-      <Filter>004... ForceGenerator</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleForceGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleGravity.h">
-      <Filter>Header Files</Filter>
+      <Filter>005... ForceGenerator</Filter>
     </ClInclude>
     <ClInclude Include="ParticleDrag.h">
-      <Filter>Header Files</Filter>
+      <Filter>003... Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceGenerator.h">
+      <Filter>003... Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleGravity.h">
+      <Filter>003... Particle</Filter>
     </ClInclude>
     <ClInclude Include="ParticleForceRegistry.h">
-      <Filter>Header Files</Filter>
+      <Filter>003... Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleWorld.h">
+      <Filter>003... Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>004... Rigidbody</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -108,22 +120,28 @@
       <Filter>003... Particle</Filter>
     </ClCompile>
     <ClCompile Include="ForceGenerator.cpp">
-      <Filter>004... ForceGenerator</Filter>
+      <Filter>005... ForceGenerator</Filter>
     </ClCompile>
     <ClCompile Include="Gravity.cpp">
-      <Filter>004... ForceGenerator</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleForceGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleGravity.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>005... ForceGenerator</Filter>
     </ClCompile>
     <ClCompile Include="ParticleDrag.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>003... Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleForceGenerator.cpp">
+      <Filter>003... Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleGravity.cpp">
+      <Filter>003... Particle</Filter>
     </ClCompile>
     <ClCompile Include="ParticleForceRegistry.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>003... Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleWorld.cpp">
+      <Filter>003... Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>004... Rigidbody</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

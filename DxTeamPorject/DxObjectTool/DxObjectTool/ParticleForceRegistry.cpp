@@ -3,16 +3,6 @@
 #include "Particle.h"
 #include "ParticleForceGenerator.h"
 
-CParticleForceRegistry::CParticleForceRegistry()
-	: m_vRegistrations(NULL)
-{
-}
-
-CParticleForceRegistry::~CParticleForceRegistry()
-{
-	m_vRegistrations.clear();
-}
-
 void CParticleForceRegistry::add(CParticle * particle, CParticleForceGenerator * fg)
 {
 	ParticleForceRegistration registration;
