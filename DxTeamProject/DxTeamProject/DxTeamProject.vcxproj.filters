@@ -162,7 +162,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="DxTeamPorject.rc">
+    <ResourceCompile Include="DxTeamProject.rc">
       <Filter>Resource</Filter>
     </ResourceCompile>
   </ItemGroup>

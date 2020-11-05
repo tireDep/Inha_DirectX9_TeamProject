@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{977D4F7C-7A7E-4F4F-9693-E9887070C85F}</ProjectGuid>
+    <ProjectGuid>{30F5C1E3-D8C9-48C6-8976-42E6A2D7BBAF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>DxTeamPorject</RootNamespace>
+    <RootNamespace>DxTeamProject</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -71,8 +71,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(DXSDK_DIR)\Include</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(DXSDK_DIR)\Lib\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -145,17 +143,14 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
-    <ClInclude Include="FontManager.h" />
-    <ClInclude Include="Text.h" />
-    <ClInclude Include="TimeManager.h" />
-    <ClInclude Include="UI.h" />
     <ClInclude Include="DeviceManager.h" />
-    <ClInclude Include="DxTeamPorject.h" />
+    <ClInclude Include="DxTeamProject.h" />
     <ClInclude Include="fmod.h" />
     <ClInclude Include="fmod.hpp" />
     <ClInclude Include="fmod_codec.h" />
     <ClInclude Include="fmod_dsp.h" />
     <ClInclude Include="fmod_memoryinfo.h" />
+    <ClInclude Include="FontManager.h" />
     <ClInclude Include="Fps.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Light.h" />
@@ -165,16 +160,16 @@
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
-    <ClCompile Include="FontManager.cpp" />
-    <ClCompile Include="Text.cpp" />
-    <ClCompile Include="TimeManager.cpp" />
-    <ClCompile Include="UI.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
-    <ClCompile Include="DxTeamPorject.cpp" />
+    <ClCompile Include="DxTeamProject.cpp" />
+    <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Fps.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -187,12 +182,15 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="DxTeamPorject.rc" />
+    <ResourceCompile Include="DxTeamProject.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="DxTeamPorject.ico" />
+    <Image Include="DxTeamProject.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

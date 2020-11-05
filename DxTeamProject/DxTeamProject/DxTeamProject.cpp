@@ -1,8 +1,8 @@
-// DxTeamPorject.cpp : Defines the entry point for the application.
+// DxTeamProject.cpp : Defines the entry point for the application.
 //
 
 #include "stdafx.h"
-#include "DxTeamPorject.h"
+#include "DxTeamProject.h"
 
 #include "MainGame.h"
 #include "DeviceManager.h"
@@ -35,7 +35,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_DXTEAMPORJECT, szWindowClass, MAX_LOADSTRING);
+    LoadStringW(hInstance, IDC_DXTEAMPROJECT, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
     // Perform application initialization:
@@ -44,7 +44,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DXTEAMPORJECT));
+    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DXTEAMPROJECT));
 
 	g_pMainGame = new CMainGame;
 	g_pMainGame->Setup();
@@ -106,10 +106,10 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_DXTEAMPORJECT));
+    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_DXTEAMPROJECT));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_DXTEAMPORJECT);
+    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_DXTEAMPROJECT);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
