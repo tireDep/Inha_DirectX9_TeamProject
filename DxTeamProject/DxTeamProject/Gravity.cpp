@@ -8,6 +8,6 @@ CGravity::CGravity(const D3DXVECTOR3 & gravity)
 
 void CGravity::updateForce(CRigidBody * body, float duration)
 {
-	//if (!body->hasFiniteMass()) return;
-	//body->addForce(m_vGravity* body->getMass());
+	if (!body->hasFiniteMass()) return;
+	body->addForce(m_vGravity* body->getMass());
 }

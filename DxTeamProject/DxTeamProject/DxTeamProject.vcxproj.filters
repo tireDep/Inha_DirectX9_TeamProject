@@ -74,6 +74,7 @@
     <ClCompile Include="GridMap.cpp">
       <Filter>Map\GridMap</Filter>
     </ClCompile>
+    <ClCompile Include="ForceRegistry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -170,6 +171,7 @@
     <ClInclude Include="GridMap.h">
       <Filter>Map\GridMap</Filter>
     </ClInclude>
+    <ClInclude Include="ForceRegistry.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

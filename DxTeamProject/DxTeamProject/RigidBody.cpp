@@ -4,7 +4,10 @@
 
 CRigidBody::CRigidBody()
 	: m_flinearDamping(0.999f)
-	, m_vAcceleration(0, -9.8f/3, 0)	// 중력
+	//, m_vAcceleration(0, -9.8f/3, 0)	// 중력
+	, m_vVelocity(0, 0, 0)
+	, m_vforceAccum(0, 0, 0)
+	, m_finverseMass(10.0f)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
@@ -20,7 +23,8 @@ void CRigidBody::intergrate(float duration)
 
 	m_vPosition += (m_vVelocity * duration);
 
-	D3DXVECTOR3	resultingAcc = m_vAcceleration;			// 나중에는 모든 힘을 합쳐서 m_vforceAccum 이거 써야함. 일단 중력 구현을 위해 !
+	D3DXVECTOR3	resultingAcc = m_vAcceleration;			
+	resultingAcc += (m_vforceAccum * m_finverseMass);
 	m_vVelocity += (resultingAcc * duration);
 	m_vVelocity *= powf(m_flinearDamping, duration);
 
@@ -29,15 +33,32 @@ void CRigidBody::intergrate(float duration)
 
 void CRigidBody::clearAccumulators()
 {
-
+	m_vforceAccum.x = m_vforceAccum.y = m_vforceAccum.z = 0.0f;
 }
 
-void CRigidBody::Setup()
+bool CRigidBody::hasFiniteMass() const
 {
-	m_vPosition = D3DXVECTOR3(5, 20, 5);
-	m_vVelocity = D3DXVECTOR3(0, 0, 0);
-	m_finverseMass = 10.0f;
+	return m_finverseMass >= 0.0f;
+}
 
+void CRigidBody::addForce(const D3DXVECTOR3 & force)
+{
+	m_vforceAccum += force;
+}
+
+float CRigidBody::getMass() const
+{
+	if (m_finverseMass == 0)
+		return FLT_MAX;
+	else
+		return ((float)1.0) / m_finverseMass;
+}
+
+void CRigidBody::Setup(D3DXVECTOR3 position, D3DXVECTOR3 acc)
+{
+	m_vPosition = position;
+	m_vAcceleration = acc;
+	
 	float cubeSize = 0.5f;
 	ST_PC_VERTEX v;
 	v.c = D3DCOLOR_XRGB(255, 0, 0);

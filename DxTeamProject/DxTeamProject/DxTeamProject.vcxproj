@@ -155,6 +155,7 @@
     <ClInclude Include="fmod_dsp.h" />
     <ClInclude Include="fmod_memoryinfo.h" />
     <ClInclude Include="FontManager.h" />
+    <ClInclude Include="ForceRegistry.h" />
     <ClInclude Include="Frustum.h" />
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="Gravity.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DxTeamProject.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="ForceRegistry.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="Gravity.cpp" />

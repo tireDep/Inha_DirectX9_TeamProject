@@ -10,6 +10,7 @@ class CText;
 class CGridMap;
 class CColliderObject;
 class CRigidBody;
+class CGravity;
 
 class CMainGame
 {
@@ -27,6 +28,8 @@ private:
 	CColliderObject*		m_pCubePC2;
 
 	CRigidBody*		m_pRigidbody;
+	CRigidBody*		m_pRigidbody2;
+	CGravity*		m_pGravity;
 private:
 	CSoundManager* m_pSm;
 	bool		m_isDevMode;

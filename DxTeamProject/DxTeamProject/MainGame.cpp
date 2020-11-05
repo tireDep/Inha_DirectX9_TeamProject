@@ -23,7 +23,8 @@ CMainGame::CMainGame() :
 	m_pText(NULL),
 	m_isDevMode(true),
 	m_GridMap(NULL), 
-	m_pRigidbody(NULL)
+	m_pRigidbody(NULL),
+	m_pRigidbody2(NULL)
 {
 }
 
@@ -92,7 +93,10 @@ void CMainGame::Setup()
 	m_pText->Setup();
 
 	m_pRigidbody = new CRigidBody;
-	m_pRigidbody->Setup();
+	m_pRigidbody->Setup(D3DXVECTOR3(5, 30, 5), D3DXVECTOR3(0, -9.8f / 3, 0));
+
+	m_pRigidbody2 = new CRigidBody;
+	m_pRigidbody2->Setup(D3DXVECTOR3(-15, 2, -15), D3DXVECTOR3(1, 0, 1));
 }
 
 void CMainGame::Update()
@@ -118,6 +122,9 @@ void CMainGame::Update()
 
 	if (m_pRigidbody)
 		m_pRigidbody->Update();
+
+	if (m_pRigidbody2)
+		m_pRigidbody2->Update();
 }
 
 void CMainGame::Render()
@@ -152,7 +159,8 @@ void CMainGame::Render()
 
 	if (m_pRigidbody)
 		m_pRigidbody->Render();
-
+	if (m_pRigidbody2)
+		m_pRigidbody2->Render();
 	//if (m_pUI)
 	//	m_pUI->UI_Render();
 	g_pD3DDevice->EndScene();
