@@ -5,11 +5,9 @@ class CCube;
 class CGrid;
 class CUI;
 class CLight;
-class CTimer;
-class CFps;
 class CSoundManager;
 class CText;
-
+class CColliderObject;
 class CMainGame
 {
 private:
@@ -18,11 +16,11 @@ private:
 	CCube* m_pCube;
 	CUI *m_pUI;
 	CLight*	m_pLight;
-	CTimer*	m_pTimer;
-	CFps* m_pFps;
 	CText*	m_pText;
+	//충돌큐브
+	CColliderObject*		m_pCubePC;
+	CColliderObject*		m_pCubePC2;
 private:
-	void Frame();
 	CSoundManager* m_pSm;
 	bool		m_isDevMode;
 public:
@@ -33,4 +31,9 @@ public:
 	void Setup();
 	void Update();
 	void Render();
+
+
+	// 충돌
+	void Setup_OBB();
+	void OBB_RENDER();
 };

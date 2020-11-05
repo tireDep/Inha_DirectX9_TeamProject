@@ -21,7 +21,7 @@
 
 
 // TODO: reference additional headers your program requires here
-
+#include <set>
 #include <string>
 #include <vector>
 #include <map>
@@ -53,7 +53,24 @@ public:\
 	}
 
 // ---------------------------------------------------
+#define SafeAddRef(p)	{if(p) p->AddRef() ; }
 
+#define Synthesize_Add_Ref(varType , varName , funName) \
+protected : varType varName ; \
+public : virtual varType Get##funName(void) const { return varName ; } \
+public : virtual void Set##funName(varType var ) { \
+	if( varName != var ) \
+	{ \
+		SafeAddRef(var) ; \
+		SafeRelease(varName) ; \
+		varName = var ; \
+	} \
+}
+
+//SafeAddRef(var); \
+//SafeRelease(varName); \
+//varName = var; \
+//----------------------------------------------------
 #include <d3dx9.h>
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
@@ -70,6 +87,9 @@ public:\
 #include "FontManager.h"
 #include "TimeManager.h"
 extern HWND g_hWnd;
+//
+#include "Object.h"
+#include "ObjectManager.h"
 
 struct ST_PC_VERTEX
 {
@@ -78,3 +98,4 @@ struct ST_PC_VERTEX
 
 	enum { FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE };
 };
+

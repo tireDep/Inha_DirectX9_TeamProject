@@ -121,7 +121,7 @@ void CCube::Setup()
 
 void CCube::Update()
 {
-	float speed = 0.01f * g_pTimeManager->GetElapsedTime();
+	float speed = 5.0f * g_pTimeManager->GetElapsedTime();
 	if (GetKeyState('A') & 0x8000)
 		m_fRotY -= speed;
 	if (GetKeyState('D') & 0x8000)
@@ -132,7 +132,6 @@ void CCube::Update()
 	if (GetKeyState('S') & 0x8000)
 		m_vPosition -= (m_vDirection * speed);
 	// 이동
-
 	RECT rc;	// 화면 사이즈 변경 x 라면 미리 구해놔도 상관 x
 	GetClientRect(g_hWnd, &rc);
 

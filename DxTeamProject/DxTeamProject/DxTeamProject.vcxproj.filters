@@ -4,9 +4,6 @@
     <ClCompile Include="SoundManager.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Fps.cpp">
-      <Filter>Fps</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
@@ -44,14 +41,29 @@
       <Filter>TimeManager</Filter>
     </ClCompile>
     <ClCompile Include="DxTeamProject.cpp" />
+    <ClCompile Include="Character.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderObject.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="OBB.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
     <ClCompile Include="RigidBody.cpp">
-      <Filter>099... RigidBody</Filter>
+      <Filter>Tool... Rigidbody</Filter>
     </ClCompile>
     <ClCompile Include="ForceGenerator.cpp">
-      <Filter>098... ForceGenerator</Filter>
+      <Filter>Tool... ForceGenerator</Filter>
     </ClCompile>
     <ClCompile Include="Gravity.cpp">
-      <Filter>098... ForceGenerator</Filter>
+      <Filter>Tool... ForceGenerator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,9 +84,6 @@
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Fps.h">
-      <Filter>Fps</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Camera</Filter>
@@ -119,14 +128,29 @@
       <Filter>TimeManager</Filter>
     </ClInclude>
     <ClInclude Include="DxTeamProject.h" />
+    <ClInclude Include="Character.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderObject.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="OBB.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
     <ClInclude Include="RigidBody.h">
-      <Filter>099... RigidBody</Filter>
+      <Filter>Tool... Rigidbody</Filter>
     </ClInclude>
     <ClInclude Include="ForceGenerator.h">
-      <Filter>098... ForceGenerator</Filter>
+      <Filter>Tool... ForceGenerator</Filter>
     </ClInclude>
     <ClInclude Include="Gravity.h">
-      <Filter>098... ForceGenerator</Filter>
+      <Filter>Tool... ForceGenerator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -172,11 +196,14 @@
     <Filter Include="TimeManager">
       <UniqueIdentifier>{7c62a6c6-703b-4dcf-9a18-bce9d052b873}</UniqueIdentifier>
     </Filter>
-    <Filter Include="099... RigidBody">
-      <UniqueIdentifier>{2796618a-7c65-4e03-af1a-8ba7a7d623bd}</UniqueIdentifier>
+    <Filter Include="Collider">
+      <UniqueIdentifier>{689759b5-f406-41f2-8cec-453b65cd2b34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="098... ForceGenerator">
-      <UniqueIdentifier>{94d3bae1-18bb-4e71-b439-457692bcba0c}</UniqueIdentifier>
+    <Filter Include="Tool... Rigidbody">
+      <UniqueIdentifier>{c099adf8-f170-4468-9e34-7ad903ec4c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tool... ForceGenerator">
+      <UniqueIdentifier>{d46a17b9-f6c6-4acd-add3-6164b58b94af}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
