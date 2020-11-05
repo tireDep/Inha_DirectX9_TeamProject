@@ -15,7 +15,6 @@ protected:
 
 public:
 	virtual ~CCharacter(void);
-
 	virtual void Setup();
 	virtual void Update();
 	virtual void Render();

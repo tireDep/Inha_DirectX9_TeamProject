@@ -4,7 +4,6 @@
 
 CColliderObject::CColliderObject()
 	: m_vDirection(0, 0, 1)
-	, m_vPosition(0, 0, 0)
 	, m_fRotY(0.0f)
 	, m_pOBB(NULL)
 	, m_pCharacterController(NULL)
@@ -160,5 +159,5 @@ COBB* CColliderObject::GetOBB()
 
 D3DXVECTOR3 & CColliderObject::GetPosition()
 {
-	return m_vPosition;
+	return m_pCharacterController->GetPosition();
 }

@@ -66,7 +66,7 @@ void CMainGame::Setup()
 	m_pUI->Setup_UI();
 
 	m_pCamera = new CCamera;
-	m_pCamera->Setup(&m_pCube->GetPosition());
+	m_pCamera->Setup(&m_pCubePC->GetPosition());
 
 	m_pGrid = new CGrid;
 	m_pGrid->Setup();
@@ -120,8 +120,8 @@ void CMainGame::Render()
 
 	OBB_RENDER();
 
-	/*if (m_pCube)
-		m_pCube->Render();*/
+	if (m_pCube)
+		m_pCube->Render();
 
 	if (m_pGrid)
 		m_pGrid->Render();
