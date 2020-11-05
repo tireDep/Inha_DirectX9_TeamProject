@@ -6,7 +6,6 @@
 #include "Grid.h"
 #include "UI.h"
 #include "Light.h"
-#include "Timer.h"
 #include "Fps.h"
 #include "SoundManager.h"
 #include "Text.h"
@@ -40,7 +39,6 @@ CMainGame::~CMainGame()
 
 void CMainGame::Frame()
 {
-	m_pTimer->Frame();
 	m_pFps->Frame();
 }
 
@@ -82,9 +80,6 @@ void CMainGame::Setup()
 	m_pLight = new CLight;
 	//m_pLight->Setup();
 	m_pLight->Setup(D3DXVECTOR3(0, -1, 0));		// ÅÂ¾ç±¤ º¤ÅÍ ¼³Á¤ °¡´É
-
-	m_pTimer = new CTimer;
-	m_pTimer->Setup();
 
 	m_pFps = new CFps;
 	m_pFps->Setup();

@@ -4,9 +4,6 @@
     <ClCompile Include="SoundManager.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Fps</Filter>
-    </ClCompile>
     <ClCompile Include="Fps.cpp">
       <Filter>Fps</Filter>
     </ClCompile>
@@ -68,9 +65,6 @@
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Fps</Filter>
     </ClInclude>
     <ClInclude Include="Fps.h">
       <Filter>Fps</Filter>
