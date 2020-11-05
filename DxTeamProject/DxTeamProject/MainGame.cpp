@@ -125,14 +125,10 @@ void CMainGame::Render()
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150,150,150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 
-	if (m_pCube)
-		m_pCube->Render();
+	//if (m_pCube)
+	//	m_pCube->Render();
 
 	OBB_RENDER();
-
-
-	if (m_pCube)
-		m_pCube->Render();
 
 	// if (m_pGrid)
 	// 	m_pGrid->Render();
