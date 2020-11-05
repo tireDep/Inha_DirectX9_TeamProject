@@ -9,6 +9,7 @@
 #include "SoundManager.h"
 #include "Text.h"
 #include "TimeManager.h"
+#include "GridMap.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
@@ -17,7 +18,8 @@ CMainGame::CMainGame() :
 	m_pUI(NULL),
 	m_pSm(NULL),
 	m_pText(NULL),
-	m_isDevMode(true)
+	m_isDevMode(true),
+	m_GridMap(NULL)
 {
 }
 
@@ -29,6 +31,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pUI);
 	SafeDelete(m_pLight);
 	SafeDelete(m_pText);
+	SafeDelete(m_GridMap);
 	g_pDeviceManager->Destroy();
 }
 
@@ -63,6 +66,9 @@ void CMainGame::Setup()
 
 	m_pCamera = new CCamera;
 	m_pCamera->Setup(&m_pCube->GetPosition());
+
+	m_GridMap = new CGridMap;
+	m_GridMap->Setup();
 
 	m_pGrid = new CGrid;
 	m_pGrid->Setup();
@@ -108,13 +114,13 @@ void CMainGame::Render()
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150,150,150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 
-
-
 	if (m_pCube)
 		m_pCube->Render();
 
-	if (m_pGrid)
-		m_pGrid->Render();
+	// if (m_pGrid)
+	// 	m_pGrid->Render();
+
+	m_GridMap->Render();
 
 	if (m_isDevMode)
 	{

@@ -151,7 +151,10 @@
     <ClInclude Include="fmod_dsp.h" />
     <ClInclude Include="fmod_memoryinfo.h" />
     <ClInclude Include="FontManager.h" />
+    <ClInclude Include="Frustum.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="GridMap.h" />
+    <ClInclude Include="IMap.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Pyramid.h" />
@@ -169,7 +172,10 @@
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DxTeamProject.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="GridMap.cpp" />
+    <ClCompile Include="IMap.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Pyramid.cpp" />

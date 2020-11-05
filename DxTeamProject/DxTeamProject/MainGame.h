@@ -7,6 +7,7 @@ class CUI;
 class CLight;
 class CSoundManager;
 class CText;
+class CGridMap;
 
 class CMainGame
 {
@@ -17,9 +18,12 @@ private:
 	CUI *m_pUI;
 	CLight*	m_pLight;
 	CText*	m_pText;
+	CGridMap* m_GridMap;
+
 private:
 	CSoundManager* m_pSm;
 	bool		m_isDevMode;
+
 public:
 	CMainGame();
 	~CMainGame();

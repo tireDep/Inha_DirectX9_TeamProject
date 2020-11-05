@@ -41,6 +41,15 @@
       <Filter>TimeManager</Filter>
     </ClCompile>
     <ClCompile Include="DxTeamProject.cpp" />
+    <ClCompile Include="Frustum.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="IMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="GridMap.cpp">
+      <Filter>Map\GridMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -104,6 +113,15 @@
       <Filter>TimeManager</Filter>
     </ClInclude>
     <ClInclude Include="DxTeamProject.h" />
+    <ClInclude Include="IMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Frustum.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GridMap.h">
+      <Filter>Map\GridMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -147,6 +165,12 @@
     </Filter>
     <Filter Include="TimeManager">
       <UniqueIdentifier>{7c62a6c6-703b-4dcf-9a18-bce9d052b873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{32b3c5f8-bb8f-4738-ae4a-f545219d4545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\GridMap">
+      <UniqueIdentifier>{96471b9e-0b0a-4298-b190-b040fe486073}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
