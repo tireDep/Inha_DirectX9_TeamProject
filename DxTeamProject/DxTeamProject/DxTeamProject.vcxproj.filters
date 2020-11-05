@@ -56,9 +56,24 @@
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
-    <ClCompile Include="Frustum.cpp" />
-    <ClCompile Include="GridMap.cpp" />
-    <ClCompile Include="IMap.cpp" />
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Tool... Rigidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceGenerator.cpp">
+      <Filter>Tool... ForceGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="Gravity.cpp">
+      <Filter>Tool... ForceGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="Frustum.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="IMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="GridMap.cpp">
+      <Filter>Map\GridMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -137,9 +152,24 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>Collider</Filter>
     </ClInclude>
-    <ClInclude Include="Frustum.h" />
-    <ClInclude Include="GridMap.h" />
-    <ClInclude Include="IMap.h" />
+    <ClInclude Include="RigidBody.h">
+      <Filter>Tool... Rigidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerator.h">
+      <Filter>Tool... ForceGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="Gravity.h">
+      <Filter>Tool... ForceGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="IMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Frustum.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GridMap.h">
+      <Filter>Map\GridMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -186,6 +216,18 @@
     </Filter>
     <Filter Include="Collider">
       <UniqueIdentifier>{689759b5-f406-41f2-8cec-453b65cd2b34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tool... Rigidbody">
+      <UniqueIdentifier>{c099adf8-f170-4468-9e34-7ad903ec4c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tool... ForceGenerator">
+      <UniqueIdentifier>{d46a17b9-f6c6-4acd-add3-6164b58b94af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{5fda7b83-e918-4258-9e6c-0e6475f3b481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\GridMap">
+      <UniqueIdentifier>{a9dadde6-6054-40d9-962c-ffd8e58769bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
