@@ -12,6 +12,7 @@
 #include "GridMap.h"
 #include "ColliderObject.h"
 #include "OBB.h"
+#include "RigidBody.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
@@ -21,7 +22,8 @@ CMainGame::CMainGame() :
 	m_pSm(NULL),
 	m_pText(NULL),
 	m_isDevMode(true),
-	m_GridMap(NULL)
+	m_GridMap(NULL), 
+	m_pRigidbody(NULL)
 {
 }
 
@@ -34,6 +36,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pLight);
 	SafeDelete(m_pText);
 	SafeDelete(m_GridMap);
+	SafeDelete(m_pRigidbody);
 	g_pDeviceManager->Destroy();
 }
 
@@ -87,6 +90,9 @@ void CMainGame::Setup()
 
 	m_pText = new CText;
 	m_pText->Setup();
+
+	m_pRigidbody = new CRigidBody;
+	m_pRigidbody->Setup();
 }
 
 void CMainGame::Update()
@@ -109,6 +115,9 @@ void CMainGame::Update()
 		m_isDevMode = false;
 	else 
 		m_isDevMode = true;
+
+	if (m_pRigidbody)
+		m_pRigidbody->Update();
 }
 
 void CMainGame::Render()
@@ -130,8 +139,8 @@ void CMainGame::Render()
 
 	OBB_RENDER();
 
-	// if (m_pGrid)
-	// 	m_pGrid->Render();
+	 //if (m_pGrid)
+	 //	m_pGrid->Render();
 
 	m_GridMap->Render();
 
@@ -141,8 +150,11 @@ void CMainGame::Render()
 			m_pText->Render(g_pTimeManager->GetFPS());
 	}
 
-	if (m_pUI)
-		m_pUI->UI_Render();
+	if (m_pRigidbody)
+		m_pRigidbody->Render();
+
+	//if (m_pUI)
+	//	m_pUI->UI_Render();
 	g_pD3DDevice->EndScene();
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
 }

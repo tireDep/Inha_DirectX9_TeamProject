@@ -9,6 +9,7 @@ class CSoundManager;
 class CText;
 class CGridMap;
 class CColliderObject;
+class CRigidBody;
 
 class CMainGame
 {
@@ -25,6 +26,7 @@ private:
 	CColliderObject*		m_pCubePC;
 	CColliderObject*		m_pCubePC2;
 
+	CRigidBody*		m_pRigidbody;
 private:
 	CSoundManager* m_pSm;
 	bool		m_isDevMode;

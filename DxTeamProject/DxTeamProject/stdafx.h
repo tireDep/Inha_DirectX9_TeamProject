@@ -16,6 +16,7 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+#include <assert.h>	// warning
 
 #include <MMSystem.h> //FPS
 
