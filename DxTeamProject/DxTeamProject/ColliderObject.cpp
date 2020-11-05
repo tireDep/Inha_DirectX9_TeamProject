@@ -15,7 +15,7 @@ CColliderObject::CColliderObject()
 
 CColliderObject::~CColliderObject()
 {
-	SafeRealse(m_pCharacterController);
+	SafeRelease(m_pCharacterController);
 
 	SafeDelete(m_pOBB);
 }

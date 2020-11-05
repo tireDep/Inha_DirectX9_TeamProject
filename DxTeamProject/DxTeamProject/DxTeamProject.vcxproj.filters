@@ -41,6 +41,21 @@
       <Filter>TimeManager</Filter>
     </ClCompile>
     <ClCompile Include="DxTeamProject.cpp" />
+    <ClCompile Include="Character.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderObject.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="OBB.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -104,6 +119,21 @@
       <Filter>TimeManager</Filter>
     </ClInclude>
     <ClInclude Include="DxTeamProject.h" />
+    <ClInclude Include="Character.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderObject.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="OBB.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -147,6 +177,9 @@
     </Filter>
     <Filter Include="TimeManager">
       <UniqueIdentifier>{7c62a6c6-703b-4dcf-9a18-bce9d052b873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collider">
+      <UniqueIdentifier>{689759b5-f406-41f2-8cec-453b65cd2b34}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

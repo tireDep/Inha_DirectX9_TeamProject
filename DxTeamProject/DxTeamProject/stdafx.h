@@ -62,7 +62,7 @@ public : virtual void Set##funName(varType var ) { \
 	if( varName != var ) \
 	{ \
 		SafeAddRef(var) ; \
-		SafeRealse(varName) ; \
+		SafeRelease(varName) ; \
 		varName = var ; \
 	} \
 }

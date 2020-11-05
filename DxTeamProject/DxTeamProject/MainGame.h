@@ -17,6 +17,7 @@ private:
 	CUI *m_pUI;
 	CLight*	m_pLight;
 	CText*	m_pText;
+	//충돌큐브
 	CColliderObject*		m_pCubePC;
 	CColliderObject*		m_pCubePC2;
 private:
