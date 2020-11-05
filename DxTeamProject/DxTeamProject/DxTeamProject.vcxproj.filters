@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Pyramid.cpp">
+      <Filter>Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Fps</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Fps</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>TimeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="DxTeamProject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="fmod.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod.hpp">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_codec.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_dsp.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="fmod_memoryinfo.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Pyramid.h">
+      <Filter>Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>Fps</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Fps</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>TimeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="DxTeamProject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="DxTeamProject.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{1cb4280c-1c78-4169-8111-2b4e7818b09c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fps">
+      <UniqueIdentifier>{2a8afa16-9c00-4d5b-be8e-e57b0c956de2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{1212ae98-26b0-4bc5-aa14-a0a1c05ddb37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Light">
+      <UniqueIdentifier>{69bd9bbd-9355-496e-a841-9615de3ea8f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Grid">
+      <UniqueIdentifier>{f49ecafc-a35e-4da2-888f-08adfc910a10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{dd665daa-979a-46e4-b720-6d863eed202f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{281bfd11-2ba5-4195-b519-7b541697e431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{5a3dc30d-86d4-4f6b-a1d1-184aa6266167}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{1ab2f460-83fc-4be0-8d64-ce8956f3d453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{d5211f99-4a0d-4050-b823-b1f08136988e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TimeManager">
+      <UniqueIdentifier>{7c62a6c6-703b-4dcf-9a18-bce9d052b873}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DxTeamProject.rc">
+      <Filter>Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

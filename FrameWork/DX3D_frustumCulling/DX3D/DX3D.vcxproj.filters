@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="02. Object_obj">
+      <UniqueIdentifier>{9d5f5a34-c85a-45b9-999f-af0e84ea7949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object_ASE">
+      <UniqueIdentifier>{d52f6f3d-218a-4481-bc53-51dd232b6df7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. CubeMan_parts">
+      <UniqueIdentifier>{d8fa7376-c585-4cac-8f75-b00590010d7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Picking">
+      <UniqueIdentifier>{0f990ebc-5439-42da-897d-8d2ff2ab0b07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. HeightMap">
+      <UniqueIdentifier>{33bb42a6-2b40-43ac-8ffe-4d4c7fffcc02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_1. Surface">
+      <UniqueIdentifier>{5c3dae3f-c9e8-4683-9c38-9985a3930733}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. SkinedMesh">
+      <UniqueIdentifier>{f3a6b83d-58dd-437e-8f15-e28e7651e224}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07. FrustumCulling">
+      <UniqueIdentifier>{cb1d590c-8871-4b39-a218-7e725130ad79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08. OBB">
+      <UniqueIdentifier>{96814fa5-8957-4ea8-ad22-b812d7a692fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09. UI">
+      <UniqueIdentifier>{335fd7cd-7261-4cc8-b96c-37f3b0673e08}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DX3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cDeviceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cCubePC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cPyramid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cCubePNT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cCubeNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cBody.h">
+      <Filter>01. CubeMan_parts</Filter>
+    </ClInclude>
+    <ClInclude Include="cHead.h">
+      <Filter>01. CubeMan_parts</Filter>
+    </ClInclude>
+    <ClInclude Include="cLeftArm.h">
+      <Filter>01. CubeMan_parts</Filter>
+    </ClInclude>
+    <ClInclude Include="cLeftLeg.h">
+      <Filter>01. CubeMan_parts</Filter>
+    </ClInclude>
+    <ClInclude Include="cRightArm.h">
+      <Filter>01. CubeMan_parts</Filter>
+    </ClInclude>
+    <ClInclude Include="cRightLeg.h">
+      <Filter>01. CubeMan_parts</Filter>
+    </ClInclude>
+    <ClInclude Include="cCharacter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cCubeMan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectionLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpotLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cObject.h">
+      <Filter>02. Object_obj</Filter>
+    </ClInclude>
+    <ClInclude Include="cGroup.h">
+      <Filter>02. Object_obj</Filter>
+    </ClInclude>
+    <ClInclude Include="cMtlTex.h">
+      <Filter>02. Object_obj</Filter>
+    </ClInclude>
+    <ClInclude Include="cObjLoader.h">
+      <Filter>02. Object_obj</Filter>
+    </ClInclude>
+    <ClInclude Include="cObjectManager.h">
+      <Filter>02. Object_obj</Filter>
+    </ClInclude>
+    <ClInclude Include="cTextureManager.h">
+      <Filter>02. Object_obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Asciitok.h">
+      <Filter>03. Object_ASE</Filter>
+    </ClInclude>
+    <ClInclude Include="cFrame.h">
+      <Filter>03. Object_ASE</Filter>
+    </ClInclude>
+    <ClInclude Include="cAseLoader.h">
+      <Filter>03. Object_ASE</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>04. Picking</Filter>
+    </ClInclude>
+    <ClInclude Include="HeigthMap.h">
+      <Filter>05. HeightMap</Filter>
+    </ClInclude>
+    <ClInclude Include="iMap.h">
+      <Filter>03_1. Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="cObjMap.h">
+      <Filter>03_1. Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>06. SkinedMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="AllocateHierarchy.h">
+      <Filter>06. SkinedMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinnedMesh.h">
+      <Filter>06. SkinedMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Frustum.h">
+      <Filter>07. FrustumCulling</Filter>
+    </ClInclude>
+    <ClInclude Include="OBB.h">
+      <Filter>08. OBB</Filter>
+    </ClInclude>
+    <ClInclude Include="Zealot.h">
+      <Filter>08. OBB</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinnedMeshManager.h">
+      <Filter>06. SkinedMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="cMainGame.h">
+      <Filter>09. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>09. UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DX3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cDeviceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cCubePC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cGrid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cPyramid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cCubePNT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cCubeNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cBody.cpp">
+      <Filter>01. CubeMan_parts</Filter>
+    </ClCompile>
+    <ClCompile Include="cHead.cpp">
+      <Filter>01. CubeMan_parts</Filter>
+    </ClCompile>
+    <ClCompile Include="cLeftArm.cpp">
+      <Filter>01. CubeMan_parts</Filter>
+    </ClCompile>
+    <ClCompile Include="cLeftLeg.cpp">
+      <Filter>01. CubeMan_parts</Filter>
+    </ClCompile>
+    <ClCompile Include="cRightArm.cpp">
+      <Filter>01. CubeMan_parts</Filter>
+    </ClCompile>
+    <ClCompile Include="cRightLeg.cpp">
+      <Filter>01. CubeMan_parts</Filter>
+    </ClCompile>
+    <ClCompile Include="cCharacter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cCubeMan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cObjLoader.cpp">
+      <Filter>02. Object_obj</Filter>
+    </ClCompile>
+    <ClCompile Include="cGroup.cpp">
+      <Filter>02. Object_obj</Filter>
+    </ClCompile>
+    <ClCompile Include="cMtlTex.cpp">
+      <Filter>02. Object_obj</Filter>
+    </ClCompile>
+    <ClCompile Include="cObject.cpp">
+      <Filter>02. Object_obj</Filter>
+    </ClCompile>
+    <ClCompile Include="cTextureManager.cpp">
+      <Filter>02. Object_obj</Filter>
+    </ClCompile>
+    <ClCompile Include="cObjectManager.cpp">
+      <Filter>02. Object_obj</Filter>
+    </ClCompile>
+    <ClCompile Include="cFrame.cpp">
+      <Filter>03. Object_ASE</Filter>
+    </ClCompile>
+    <ClCompile Include="cAseLoader.cpp">
+      <Filter>03. Object_ASE</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>04. Picking</Filter>
+    </ClCompile>
+    <ClCompile Include="HeigthMap.cpp">
+      <Filter>05. HeightMap</Filter>
+    </ClCompile>
+    <ClCompile Include="iMap.cpp">
+      <Filter>03_1. Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="cObjMap.cpp">
+      <Filter>03_1. Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>06. SkinedMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="AllocateHierarchy.cpp">
+      <Filter>06. SkinedMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinnedMesh.cpp">
+      <Filter>06. SkinedMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Frustum.cpp">
+      <Filter>07. FrustumCulling</Filter>
+    </ClCompile>
+    <ClCompile Include="OBB.cpp">
+      <Filter>08. OBB</Filter>
+    </ClCompile>
+    <ClCompile Include="Zealot.cpp">
+      <Filter>08. OBB</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinnedMeshManager.cpp">
+      <Filter>06. SkinedMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="cMainGame.cpp">
+      <Filter>09. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>09. UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DX3D.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DX3D.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

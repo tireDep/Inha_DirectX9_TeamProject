@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="001... Grid">
+      <UniqueIdentifier>{f4931414-4f18-4b23-b5f6-b3b10233c2af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="002... Camera">
+      <UniqueIdentifier>{3245ba00-9e9a-4c32-9ff5-9737f177a6cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="099... Etc">
+      <UniqueIdentifier>{cf5d660e-d7df-446d-aca6-1de58a170ab5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="099... Etc\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="003... Particle">
+      <UniqueIdentifier>{341050b9-4160-419f-ab43-84447520fbb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="007... World">
+      <UniqueIdentifier>{191f44f4-43dd-4642-ab6d-611ba1a91af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="006... ForceRegistry">
+      <UniqueIdentifier>{154dab01-5f88-43ba-995f-cca03bc581fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="005... ForceGenerator">
+      <UniqueIdentifier>{9ed6929b-04bf-467e-a685-b2af8c537e45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="004... Rigidbody">
+      <UniqueIdentifier>{14493aac-0e1b-4e7b-a0f4-2f4032db828d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>001... Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Pyramid.h">
+      <Filter>001... Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>002... Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceManager.h">
+      <Filter>099... Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="DxObjectTool.h">
+      <Filter>099... Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>099... Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>099... Etc</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>003... Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerator.h">
+      <Filter>005... ForceGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="Gravity.h">
+      <Filter>005... ForceGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleDrag.h">
+      <Filter>003... Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceGenerator.h">
+      <Filter>003... Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleGravity.h">
+      <Filter>003... Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceRegistry.h">
+      <Filter>003... Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleWorld.h">
+      <Filter>003... Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>004... Rigidbody</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DxObjectTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>001... Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Pyramid.cpp">
+      <Filter>001... Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>002... Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>099... Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceManager.cpp">
+      <Filter>099... Etc</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>003... Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceGenerator.cpp">
+      <Filter>005... ForceGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="Gravity.cpp">
+      <Filter>005... ForceGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleDrag.cpp">
+      <Filter>003... Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleForceGenerator.cpp">
+      <Filter>003... Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleGravity.cpp">
+      <Filter>003... Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleForceRegistry.cpp">
+      <Filter>003... Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleWorld.cpp">
+      <Filter>003... Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>004... Rigidbody</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DxObjectTool.rc">
+      <Filter>099... Etc\Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>099... Etc\Resource Files</Filter>
+    </Image>
+    <Image Include="DxObjectTool.ico">
+      <Filter>099... Etc\Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>099... Etc</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
