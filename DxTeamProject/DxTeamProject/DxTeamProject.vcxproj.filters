@@ -41,15 +41,24 @@
       <Filter>TimeManager</Filter>
     </ClCompile>
     <ClCompile Include="DxTeamProject.cpp" />
-    <ClCompile Include="Frustum.cpp">
-      <Filter>Map</Filter>
+    <ClCompile Include="Character.cpp">
+      <Filter>Collider</Filter>
     </ClCompile>
-    <ClCompile Include="IMap.cpp">
-      <Filter>Map</Filter>
+    <ClCompile Include="ColliderObject.cpp">
+      <Filter>Collider</Filter>
     </ClCompile>
-    <ClCompile Include="GridMap.cpp">
-      <Filter>Map\GridMap</Filter>
+    <ClCompile Include="OBB.cpp">
+      <Filter>Collider</Filter>
     </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Frustum.cpp" />
+    <ClCompile Include="GridMap.cpp" />
+    <ClCompile Include="IMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -113,15 +122,24 @@
       <Filter>TimeManager</Filter>
     </ClInclude>
     <ClInclude Include="DxTeamProject.h" />
-    <ClInclude Include="IMap.h">
-      <Filter>Map</Filter>
+    <ClInclude Include="Character.h">
+      <Filter>Collider</Filter>
     </ClInclude>
-    <ClInclude Include="Frustum.h">
-      <Filter>Map</Filter>
+    <ClInclude Include="ColliderObject.h">
+      <Filter>Collider</Filter>
     </ClInclude>
-    <ClInclude Include="GridMap.h">
-      <Filter>Map\GridMap</Filter>
+    <ClInclude Include="OBB.h">
+      <Filter>Collider</Filter>
     </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Frustum.h" />
+    <ClInclude Include="GridMap.h" />
+    <ClInclude Include="IMap.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -166,11 +184,8 @@
     <Filter Include="TimeManager">
       <UniqueIdentifier>{7c62a6c6-703b-4dcf-9a18-bce9d052b873}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Map">
-      <UniqueIdentifier>{32b3c5f8-bb8f-4738-ae4a-f545219d4545}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Map\GridMap">
-      <UniqueIdentifier>{96471b9e-0b0a-4298-b190-b040fe486073}</UniqueIdentifier>
+    <Filter Include="Collider">
+      <UniqueIdentifier>{689759b5-f406-41f2-8cec-453b65cd2b34}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

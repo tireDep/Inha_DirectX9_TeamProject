@@ -132,7 +132,6 @@ void CCube::Update()
 	if (GetKeyState('S') & 0x8000)
 		m_vPosition -= (m_vDirection * speed);
 	// 이동
-
 	RECT rc;	// 화면 사이즈 변경 x 라면 미리 구해놔도 상관 x
 	GetClientRect(g_hWnd, &rc);
 
