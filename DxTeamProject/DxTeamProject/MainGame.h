@@ -5,8 +5,6 @@ class CCube;
 class CGrid;
 class CUI;
 class CLight;
-class CTimer;
-class CFps;
 class CSoundManager;
 class CText;
 
@@ -18,11 +16,8 @@ private:
 	CCube* m_pCube;
 	CUI *m_pUI;
 	CLight*	m_pLight;
-	CTimer*	m_pTimer;
-	CFps* m_pFps;
 	CText*	m_pText;
 private:
-	void Frame();
 	CSoundManager* m_pSm;
 	bool		m_isDevMode;
 public:

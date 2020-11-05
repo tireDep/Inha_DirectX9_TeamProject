@@ -121,7 +121,7 @@ void CCube::Setup()
 
 void CCube::Update()
 {
-	float speed = 0.01f * g_pTimeManager->GetElapsedTime();
+	float speed = 5.0f * g_pTimeManager->GetElapsedTime();
 	if (GetKeyState('A') & 0x8000)
 		m_fRotY -= speed;
 	if (GetKeyState('D') & 0x8000)

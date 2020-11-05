@@ -151,7 +151,6 @@
     <ClInclude Include="fmod_dsp.h" />
     <ClInclude Include="fmod_memoryinfo.h" />
     <ClInclude Include="FontManager.h" />
-    <ClInclude Include="Fps.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MainGame.h" />
@@ -170,7 +169,6 @@
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DxTeamProject.cpp" />
     <ClCompile Include="FontManager.cpp" />
-    <ClCompile Include="Fps.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MainGame.cpp" />

@@ -3,13 +3,11 @@
 
 
 CTimeManager::CTimeManager()
+	:m_fFPS_Timer(0)
+	,m_FPS(0)
+	,m_count(0)
 {
-	//m_dwLastUpdateTime = GetCurrentTime();
-
-	QueryPerformanceFrequency((LARGE_INTEGER*)&m_frequency);
-
-	m_ticsPerMs = (float)(m_frequency / 1000);
-	QueryPerformanceCounter((LARGE_INTEGER*)&m_startTime);
+	QueryPerformanceCounter(&m_liLastTime);
 }
 
 
@@ -19,25 +17,35 @@ CTimeManager::~CTimeManager()
 
 void CTimeManager::Update()
 {
-	//DWORD dwCurrentTime = GetCurrentTime();
-	//m_fElapsedTime = (dwCurrentTime - m_dwLastUpdateTime) / 1000.f;
-	//m_dwLastUpdateTime = dwCurrentTime;
+	LARGE_INTEGER CurTime, frequency, DeltaTime;
+	QueryPerformanceFrequency(&frequency);
+	QueryPerformanceCounter(&CurTime);
+	DeltaTime.QuadPart = (CurTime.QuadPart - m_liLastTime.QuadPart) * 1000000;
+	DeltaTime.QuadPart /= frequency.QuadPart;
 
-	INT64	currentTime = 0;
-	QueryPerformanceCounter((LARGE_INTEGER*)&currentTime);
+	m_fElapsedTime = DeltaTime.QuadPart * 0.000001f;
 
-	float timeDifference = (float)(currentTime - m_startTime);
-	m_frameTime = timeDifference / m_ticsPerMs;
-	m_startTime = currentTime;
+	m_fFPS_Timer += m_fElapsedTime;
+	
+	m_count++;
+
+	if (m_fFPS_Timer > 1)
+	{
+		m_fFPS_Timer = 0;
+		m_FPS = m_count;
+		m_count = 0;
+	}
+
+	m_liLastTime = CurTime;
 }
 
 float CTimeManager::GetElapsedTime()
 {
-	//return m_fElapsedTime;
-	return m_frameTime;
+	return m_fElapsedTime;
 }
 
-float CTimeManager::GetLastUpdateTime()
+int CTimeManager::GetFPS()
 {
-	return m_dwLastUpdateTime / 1000.f;
+	return m_FPS;
 }
+

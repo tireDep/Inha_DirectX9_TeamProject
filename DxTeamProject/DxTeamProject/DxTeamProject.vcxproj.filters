@@ -4,9 +4,6 @@
     <ClCompile Include="SoundManager.cpp">
       <Filter>Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Fps.cpp">
-      <Filter>Fps</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
@@ -23,9 +20,6 @@
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="DxTeamPorject.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="MainGame.cpp">
@@ -46,6 +40,7 @@
     <ClCompile Include="TimeManager.cpp">
       <Filter>TimeManager</Filter>
     </ClCompile>
+    <ClCompile Include="DxTeamProject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -65,9 +60,6 @@
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Fps.h">
-      <Filter>Fps</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Camera</Filter>
@@ -93,9 +85,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="DxTeamPorject.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Resource</Filter>
     </ClInclude>
@@ -114,14 +103,13 @@
     <ClInclude Include="TimeManager.h">
       <Filter>TimeManager</Filter>
     </ClInclude>
+    <ClInclude Include="DxTeamProject.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="DxTeamPorject.ico">
-      <Filter>Resource</Filter>
-    </Image>
     <Image Include="small.ico">
       <Filter>Resource</Filter>
     </Image>
+    <Image Include="DxTeamProject.ico" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

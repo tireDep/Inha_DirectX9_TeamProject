@@ -6,7 +6,6 @@
 #include "Grid.h"
 #include "UI.h"
 #include "Light.h"
-#include "Fps.h"
 #include "SoundManager.h"
 #include "Text.h"
 #include "TimeManager.h"
@@ -16,8 +15,6 @@ CMainGame::CMainGame() :
 	m_pCube(NULL),
 	m_pLight(NULL),
 	m_pUI(NULL),
-	m_pTimer(NULL),
-	m_pFps(NULL),
 	m_pSm(NULL),
 	m_pText(NULL),
 	m_isDevMode(true)
@@ -31,15 +28,8 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pCamera);
 	SafeDelete(m_pUI);
 	SafeDelete(m_pLight);
-	SafeDelete(m_pTimer);
-	SafeDelete(m_pFps);
 	SafeDelete(m_pText);
 	g_pDeviceManager->Destroy();
-}
-
-void CMainGame::Frame()
-{
-	m_pFps->Frame();
 }
 
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -81,9 +71,6 @@ void CMainGame::Setup()
 	//m_pLight->Setup();
 	m_pLight->Setup(D3DXVECTOR3(0, -1, 0));		// ÅÂ¾ç±¤ º¤ÅÍ ¼³Á¤ °¡´É
 
-	m_pFps = new CFps;
-	m_pFps->Setup();
-
 	m_pSm = new CSoundManager;
 	m_pSm->init();
 
@@ -105,7 +92,6 @@ void CMainGame::Update()
 		m_isDevMode = false;
 	else 
 		m_isDevMode = true;
-	Frame();
 }
 
 void CMainGame::Render()
@@ -133,7 +119,7 @@ void CMainGame::Render()
 	if (m_isDevMode)
 	{
 		if (m_pText)
-			m_pText->Render(m_pFps->GetFps());
+			m_pText->Render(g_pTimeManager->GetFPS());
 	}
 
 	if (m_pUI)
