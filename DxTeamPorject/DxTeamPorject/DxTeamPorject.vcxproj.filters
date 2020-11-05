@@ -46,6 +46,19 @@
     <ClCompile Include="Text.cpp">
       <Filter>Fps</Filter>
     </ClCompile>
+    <ClCompile Include="OBB.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderObject.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -114,6 +127,19 @@
     <ClInclude Include="Text.h">
       <Filter>Fps</Filter>
     </ClInclude>
+    <ClInclude Include="OBB.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderObject.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="DxTeamPorject.ico">
@@ -156,6 +182,9 @@
     </Filter>
     <Filter Include="Source">
       <UniqueIdentifier>{d5211f99-4a0d-4050-b823-b1f08136988e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{5abfde31-a40b-4e37-9c83-995afd0ff59e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

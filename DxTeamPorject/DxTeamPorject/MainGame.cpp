@@ -10,7 +10,8 @@
 #include "Fps.h"
 #include "SoundManager.h"
 #include "Text.h"
-
+#include "ColliderObject.h"
+#include "OBB.h"
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
 	m_pCube(NULL),
@@ -21,6 +22,8 @@ CMainGame::CMainGame() :
 	m_pSm(NULL),
 	m_pText(NULL),
 	m_isDevMode(false)
+	, m_pCubePC(NULL)
+	, m_pCubePC2(NULL)
 {
 }
 
@@ -34,6 +37,8 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pTimer);
 	SafeDelete(m_pFps);
 	SafeDelete(m_pText);
+	SafeDelete(m_pCubePC);
+	SafeDelete(m_pCubePC2);
 	g_pDeviceManager->Destroy();
 }
 
@@ -66,14 +71,16 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
-	m_pCube = new CCube;
-	m_pCube->Setup();
+	/*m_pCube = new CCube;
+	m_pCube->Setup();*/
 
+
+	Setup_OBB();
 	m_pUI = new CUI;
 	m_pUI->Setup_UI();
 
 	m_pCamera = new CCamera;
-	m_pCamera->Setup(&m_pCube->GetPosition());
+	m_pCamera->Setup(NULL);
 
 	m_pGrid = new CGrid;
 	m_pGrid->Setup();
@@ -93,6 +100,9 @@ void CMainGame::Setup()
 
 	m_pText = new CText;
 	m_pText->Setup();
+
+	
+	
 }
 
 void CMainGame::Update()
@@ -100,13 +110,21 @@ void CMainGame::Update()
 	if (m_pCamera)
 		m_pCamera->Update();
 
-	if (m_pCube)
-		m_pCube->Update();
+	if (m_pCubePC)
+		m_pCubePC->Update();
+	if (m_pCubePC2)
+		m_pCubePC2->Update();
+
+	/*if (m_pCube)
+		m_pCube->Update();*/
 
 	if (GetKeyState(VK_TAB) & 0x0001)
 		m_isDevMode = true;
 	else 
 		m_isDevMode = false;
+
+	
+
 	Frame();
 }
 
@@ -124,11 +142,14 @@ void CMainGame::Render()
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150,150,150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 
+	//OBB
+	OBB_RENDER();
+
 	if (m_pUI)
 		m_pUI->UI_Render();
 
-	if (m_pCube)
-		m_pCube->Render();
+	/*if (m_pCube)
+		m_pCube->Render();*/
 
 	if (m_pGrid)
 		m_pGrid->Render();
@@ -139,6 +160,43 @@ void CMainGame::Render()
 			m_pText->Render(m_pFps->GetFps());
 	}
 
+	
+
+
+
 	g_pD3DDevice->EndScene();
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
+}
+
+void CMainGame::Setup_OBB()
+{
+	
+
+	m_pCubePC = new CColliderObject;
+	m_pCubePC->Setup();
+
+	m_pCubePC2 = new CColliderObject;
+	m_pCubePC2->Setup();
+
+	CCharacter* pCharacter = new CCharacter;
+	m_pCubePC->SetCharecterController(pCharacter);
+	SafeRealse(pCharacter);
+}
+
+void CMainGame::OBB_RENDER()
+{
+
+	D3DCOLOR c = D3DCOLOR_XRGB(0, 0, 0);
+	if (COBB::IsCollision(m_pCubePC->GetOBB(), m_pCubePC2->GetOBB()) == true)
+	{
+		c = D3DCOLOR_XRGB(255, 255, 255);
+	}
+
+
+	if (m_pCubePC)
+		m_pCubePC->Render(c);
+
+	if (m_pCubePC2)
+		m_pCubePC2->Render(c);
+
 }
