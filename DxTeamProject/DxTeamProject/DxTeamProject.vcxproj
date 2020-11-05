@@ -151,12 +151,15 @@
     <ClInclude Include="fmod_dsp.h" />
     <ClInclude Include="fmod_memoryinfo.h" />
     <ClInclude Include="FontManager.h" />
+    <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="Fps.h" />
+    <ClInclude Include="Gravity.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="RigidBody.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -170,11 +173,14 @@
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DxTeamProject.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="Fps.cpp" />
+    <ClCompile Include="Gravity.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Pyramid.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

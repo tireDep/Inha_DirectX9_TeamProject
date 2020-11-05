@@ -25,9 +25,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="DxTeamPorject.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="MainGame.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -45,6 +42,16 @@
     </ClCompile>
     <ClCompile Include="TimeManager.cpp">
       <Filter>TimeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="DxTeamProject.cpp" />
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>099... RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceGenerator.cpp">
+      <Filter>098... ForceGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="Gravity.cpp">
+      <Filter>098... ForceGenerator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -93,9 +100,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="DxTeamPorject.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Resource</Filter>
     </ClInclude>
@@ -114,14 +118,22 @@
     <ClInclude Include="TimeManager.h">
       <Filter>TimeManager</Filter>
     </ClInclude>
+    <ClInclude Include="DxTeamProject.h" />
+    <ClInclude Include="RigidBody.h">
+      <Filter>099... RigidBody</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerator.h">
+      <Filter>098... ForceGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="Gravity.h">
+      <Filter>098... ForceGenerator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="DxTeamPorject.ico">
-      <Filter>Resource</Filter>
-    </Image>
     <Image Include="small.ico">
       <Filter>Resource</Filter>
     </Image>
+    <Image Include="DxTeamProject.ico" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -159,6 +171,12 @@
     </Filter>
     <Filter Include="TimeManager">
       <UniqueIdentifier>{7c62a6c6-703b-4dcf-9a18-bce9d052b873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="099... RigidBody">
+      <UniqueIdentifier>{2796618a-7c65-4e03-af1a-8ba7a7d623bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="098... ForceGenerator">
+      <UniqueIdentifier>{94d3bae1-18bb-4e71-b439-457692bcba0c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
