@@ -17,6 +17,10 @@ protected:
 	D3DXVECTOR3		m_vforceAccum;
 	D3DXVECTOR3		m_vtorqueAccum;
 
+	D3DXVECTOR3		m_vAcceleration;
+	D3DXVECTOR3		m_vlastFrameAcceleration;
+
+	D3DXMATRIXA16	m_inverseInertiaTensorWorld;
 	bool			m_isAwake;
 public:
 	void addForce(const D3DXVECTOR3& force);
@@ -25,7 +29,8 @@ public:
 	void addForceAtPoint(const D3DXVECTOR3& force, const D3DXVECTOR3& point);
 	void addForceAtBodyPoint(const D3DXVECTOR3& force, const D3DXVECTOR3& point);
 	D3DXVECTOR3 getPointInLocalSpace(const D3DXVECTOR3& point) const;
-
+	
 	bool hasFiniteMass() const;
 	float getMass() const;
+	void calculateDerivedData();
 };
