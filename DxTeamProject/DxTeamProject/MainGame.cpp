@@ -55,6 +55,7 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case WM_LBUTTONDOWN:
 		{
 			m_pSm->PlaySFX("BombPut");
+			break;
 		}
 		break;
 
