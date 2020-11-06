@@ -76,6 +76,9 @@
     <ClCompile Include="Character.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="ForceRegistry.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="GameManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -173,6 +176,13 @@
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceRegistry.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="IListener.h" />
+    <ClInclude Include="GameManager.h">
+      <Filter>Tool... Rigidbody</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

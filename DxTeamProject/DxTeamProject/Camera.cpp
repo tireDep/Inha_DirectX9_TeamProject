@@ -11,6 +11,7 @@ CCamera::CCamera() :
 	m_vCamRotAngle(0,0,0)
 {
 	m_preMousePos = { 0,0 };
+	m_strName = "Camera";
 }
 
 CCamera::~CCamera()
@@ -54,7 +55,7 @@ void CCamera::Update()
 	g_pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
 }
 
-void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+void CCamera::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
@@ -63,13 +64,14 @@ void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		m_preMousePos.y = HIWORD(lParam);
 
 		m_isLBtnDown = true;
-		break;
+	break;
 
 	case WM_LBUTTONUP:
 		m_isLBtnDown = false;
 		break;
 
 	case WM_MOUSEMOVE:
+	{
 		if (m_isLBtnDown)
 		{
 			POINT ptCurMouse;
@@ -82,20 +84,32 @@ void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			m_vCamRotAngle.y += (fDeltaX / 100.0f);
 			m_vCamRotAngle.x += (fDeltaY / 100.0f);
 
-			if (m_vCamRotAngle.x < D3DX_PI / 12.0f+0.0001f)
+			if (m_vCamRotAngle.x < D3DX_PI / 12.0f + 0.0001f)
 				m_vCamRotAngle.x = D3DX_PI / 12.0f;
 
 			if (m_vCamRotAngle.x > D3DX_PI / 2.0f - 0.0001f)
 				m_vCamRotAngle.x = D3DX_PI / 2.0f - 0.0001f;
 
 			m_preMousePos = ptCurMouse;
-		}
+		}	// : if
+	}
 		break;
 
 	case WM_MOUSEWHEEL:
+	{
 		m_fCameraDistance -= (GET_WHEEL_DELTA_WPARAM(wParam) / 30.0f);
-		if (m_fCameraDistance < 5.0+0.0001f)
+
+		if (m_fCameraDistance < 5.0 + 0.0001f)
 			m_fCameraDistance = 5.0f;
+	}
+		break;
+
+	default:
 		break;
 	}
+}
+
+string CCamera::GetName()
+{
+	return m_strName;
 }

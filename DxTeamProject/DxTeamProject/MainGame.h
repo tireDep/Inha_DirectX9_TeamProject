@@ -21,18 +21,15 @@ private:
 	CText*	m_pText;
 	CGridMap* m_GridMap;
 
-
-
 	//충돌큐브
 	vector<CColliderObject*> m_vColliderCube;
 
 	CRigidBody*		m_pRigidbody;
 	CRigidBody*		m_pRigidbody2;
 	CGravity*		m_pGravity;
-private:
+
 	CSoundManager* m_pSm;
-	bool		m_isDevMode;
-	bool		m_Uimode;
+
 public:
 	CMainGame();
 	~CMainGame();

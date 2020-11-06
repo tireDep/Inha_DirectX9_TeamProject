@@ -157,10 +157,13 @@
     <ClInclude Include="ForceRegistry.h" />
     <ClInclude Include="Frustum.h" />
     <ClInclude Include="ForceGenerator.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Gravity.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridMap.h" />
+    <ClInclude Include="IListener.h" />
     <ClInclude Include="IMap.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="OBB.h" />
@@ -169,6 +172,7 @@
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -186,10 +190,12 @@
     <ClCompile Include="ForceRegistry.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="ForceGenerator.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Gravity.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridMap.cpp" />
     <ClCompile Include="IMap.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="OBB.cpp" />

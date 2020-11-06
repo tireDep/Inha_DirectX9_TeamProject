@@ -1,4 +1,6 @@
 #pragma once
+#include "IListener.h"
+
 class CObject
 {
 public:
