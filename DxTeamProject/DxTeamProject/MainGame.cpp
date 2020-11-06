@@ -21,7 +21,8 @@ CMainGame::CMainGame() :
 	m_pUI(NULL),
 	m_pSm(NULL),
 	m_pText(NULL),
-	m_isDevMode(true),
+	m_isDevMode(false),
+	m_Uimode(false),
 	m_GridMap(NULL), 
 	m_pRigidbody(NULL),
 	m_pRigidbody2(NULL)
@@ -60,6 +61,17 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 	}
 
+	if (message == WM_ACTIVATE)
+	{
+		if (LOWORD(wParam) == WA_INACTIVE)
+			cout << "off\n";
+		else
+		{
+			cout << "on\n";
+			
+
+		}
+	}
 }
 
 void CMainGame::Setup()
@@ -116,9 +128,14 @@ void CMainGame::Update()
 		m_pCubePC2->Update();
 
 	if (GetKeyState(VK_TAB) & 0x0001)
-		m_isDevMode = false;
-	else 
 		m_isDevMode = true;
+	else 
+		m_isDevMode = false;
+
+	if (GetKeyState(VK_CONTROL) & 0x0001)
+		m_Uimode = true;
+	else
+		m_Uimode = false;
 
 	if (m_pRigidbody)
 		m_pRigidbody->Update();
@@ -159,10 +176,16 @@ void CMainGame::Render()
 
 	if (m_pRigidbody)
 		m_pRigidbody->Render();
+
 	if (m_pRigidbody2)
 		m_pRigidbody2->Render();
-	//if (m_pUI)
-	//	m_pUI->UI_Render();
+
+	if (m_Uimode)
+	{
+		if (m_pUI)
+			m_pUI->UI_Render();
+	}
+
 	g_pD3DDevice->EndScene();
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
 }

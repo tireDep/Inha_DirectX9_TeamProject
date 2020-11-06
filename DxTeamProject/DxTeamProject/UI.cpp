@@ -21,8 +21,10 @@ void CUI::Setup_UI()
 {
 	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
 
+	GetClientRect(g_hWnd, &rc);
+
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/panel-info.png",
+		"UI/pngegg.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -32,28 +34,28 @@ void CUI::Setup_UI()
 		, D3DX_DEFAULT, 0, &m_stImageInfo, NULL, &m_pTextureUI);
 
 
-	//버튼1
-	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/btn-med-up.png",
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT,
-		0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED, D3DX_FILTER_NONE
-		, D3DX_DEFAULT, 0, &m_stImageInfo2, NULL, &m_pTextureUI2);
+	////버튼1
+	//D3DXCreateTextureFromFileExA(g_pD3DDevice,
+	//	"UI/btn-med-up.png",
+	//	D3DX_DEFAULT_NONPOW2,
+	//	D3DX_DEFAULT_NONPOW2,
+	//	D3DX_DEFAULT,
+	//	0,
+	//	D3DFMT_UNKNOWN,
+	//	D3DPOOL_MANAGED, D3DX_FILTER_NONE
+	//	, D3DX_DEFAULT, 0, &m_stImageInfo2, NULL, &m_pTextureUI2);
 
 
-	//버튼2
-	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/btn-med-up.png",
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT,
-		0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED, D3DX_FILTER_NONE
-		, D3DX_DEFAULT, 0, &m_stImageInfo3, NULL, &m_pTextureUI3);
+	////버튼2
+	//D3DXCreateTextureFromFileExA(g_pD3DDevice,
+	//	"UI/btn-med-up.png",
+	//	D3DX_DEFAULT_NONPOW2,
+	//	D3DX_DEFAULT_NONPOW2,
+	//	D3DX_DEFAULT,
+	//	0,
+	//	D3DFMT_UNKNOWN,
+	//	D3DPOOL_MANAGED, D3DX_FILTER_NONE
+	//	, D3DX_DEFAULT, 0, &m_stImageInfo3, NULL, &m_pTextureUI3);
 
 
 }
@@ -71,8 +73,7 @@ void CUI::UI_Render()
 	m_pSprite->SetTransform(&matWorld);
 
 	//MAIN UI
-	SetRect(&rc, 0, 0,
-		m_stImageInfo.Width, m_stImageInfo.Height);
+	SetRect(&rc,-500,-50,m_stImageInfo.Width, m_stImageInfo.Height);
 
 	m_pSprite->Draw(m_pTextureUI, &rc,
 		&D3DXVECTOR3(0, 0, 0),
@@ -81,23 +82,23 @@ void CUI::UI_Render()
 
 	//BUTTON 1
 
-	SetRect(&rc3, rc.left - 145, rc.top - 300,
-		m_stImageInfo2.Width, m_stImageInfo2.Height);
+	//SetRect(&rc3, rc.left - 145, rc.top - 300,
+	//	m_stImageInfo2.Width, m_stImageInfo2.Height);
 
-	m_pSprite->Draw(m_pTextureUI2, &rc3,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	//m_pSprite->Draw(m_pTextureUI2, &rc3,
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	//BUTTON2
+	////BUTTON2
 
-	SetRect(&rc4, rc.left - 145, rc.top - 365,
-		m_stImageInfo3.Width, m_stImageInfo3.Height);
+	//SetRect(&rc4, rc.left - 145, rc.top - 365,
+	//	m_stImageInfo3.Width, m_stImageInfo3.Height);
 
-	m_pSprite->Draw(m_pTextureUI3, &rc4,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	//m_pSprite->Draw(m_pTextureUI3, &rc4,
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	D3DCOLOR_ARGB(255, 255, 255, 255));
 
 
 	m_pSprite->End();
@@ -127,14 +128,14 @@ void CUI::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_MOUSEMOVE:
 
-		if (m_isLButtonDown == true)
-		{
-			px2.x = LOWORD(lParam);
-			px2.y = HIWORD(lParam);
+		//if (m_isLButtonDown == true)
+		//{
+		//	px2.x = LOWORD(lParam);
+		//	px2.y = HIWORD(lParam);
 
-			movep = px3.x + px2.x - px.x;
-			movepy = px3.y + px2.y - px.y;
-		}
+		//	movep = px3.x + px2.x - px.x;
+		//	movepy = px3.y + px2.y - px.y;
+		//}
 		break;
 	default:
 		break;

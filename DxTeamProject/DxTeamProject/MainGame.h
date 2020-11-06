@@ -33,7 +33,7 @@ private:
 private:
 	CSoundManager* m_pSm;
 	bool		m_isDevMode;
-
+	bool		m_Uimode;
 public:
 	CMainGame();
 	~CMainGame();
