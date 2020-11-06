@@ -1,5 +1,7 @@
 #pragma once
-class CCamera
+#include "IListener.h"
+
+class CCamera : public IListener
 {
 private:
 	D3DXVECTOR3 m_vEye;
@@ -19,6 +21,7 @@ public:
 	void Setup(D3DXVECTOR3* pvTarget);
 	void Update();
 
-	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	void ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam) override;
+	string GetName();
 };
 

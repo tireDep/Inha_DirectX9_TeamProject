@@ -2,7 +2,6 @@
 
 #include "MainGame.h"
 #include "Camera.h"
-#include "Cube.h"
 #include "Grid.h"
 #include "UI.h"
 #include "Light.h"
@@ -13,16 +12,15 @@
 #include "ColliderObject.h"
 #include "OBB.h"
 #include "RigidBody.h"
+#include "InputManager.h"
+#include "GameManager.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
-	m_pCube(NULL),
 	m_pLight(NULL),
 	m_pUI(NULL),
 	m_pSm(NULL),
 	m_pText(NULL),
-	m_isDevMode(false),
-	m_Uimode(false),
 	m_GridMap(NULL), 
 	m_pRigidbody(NULL),
 	m_pRigidbody2(NULL)
@@ -32,7 +30,6 @@ CMainGame::CMainGame() :
 CMainGame::~CMainGame()
 {
 	SafeDelete(m_pSm);
-	SafeDelete(m_pCube);
 	SafeDelete(m_pCamera);
 	SafeDelete(m_pUI);
 	SafeDelete(m_pLight);
@@ -44,43 +41,42 @@ CMainGame::~CMainGame()
 
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	if (m_pCamera)
-		m_pCamera->WndProc(hWnd, message, wParam, lParam);
+	// if (m_pCamera)
+	// 	m_pCamera->WndProc(hWnd, message, wParam, lParam);
 
-	if (m_pUI)
-		m_pUI->WndProc(hWnd, message, wParam, lParam);
+	// if (m_pUI)
+	// 	m_pUI->WndProc(hWnd, message, wParam, lParam);
 
-	switch (message)
-	{
-		case WM_LBUTTONDOWN:
-		{
-			m_pSm->PlaySFX("BombPut");
-			break;
-		}
-		break;
+	g_pInputManager->CheckInput(message, wParam, lParam);
 
-		case WM_KEYDOWN:
-		{
-			if (GetKeyState(VK_CONTROL) & 0x8000 || GetKeyState(VK_CONTROL) & 0x0000)
-				m_Uimode = !m_Uimode;
-		
-
-			if (GetKeyState(VK_TAB) & 0x8000 || GetKeyState(VK_TAB) & 0x0000)
-				m_isDevMode = !m_isDevMode;
-		}
-			break;
-		default:
-			break;
-	}
+	// switch (message)
+	// {
+	// 	case WM_LBUTTONDOWN:
+	// 	{
+	// 		m_pSm->PlaySFX("BombPut");
+	// 		break;
+	// 	}
+	// 	break;
+	// 
+	// 	case WM_KEYDOWN:
+	// 	{
+	// 		if (GetKeyState(VK_CONTROL) & 0x8000 || GetKeyState(VK_CONTROL) & 0x0000)
+	// 			m_Uimode = !m_Uimode;
+	// 
+	// 		if (GetKeyState(VK_TAB) & 0x8000 || GetKeyState(VK_TAB) & 0x0000)
+	// 			m_isDevMode = !m_isDevMode;
+	// 	}
+	// 	break;
+	// 
+	// 	default:
+	// 		break;
+	// }
 }
 
 void CMainGame::Setup()
 {
 	//OBB
 	Setup_OBB();
-
-	m_pCube = new CCube;
-	m_pCube->Setup();
 
 	m_pUI = new CUI;
 	m_pUI->Setup_UI();
@@ -109,6 +105,9 @@ void CMainGame::Setup()
 
 	m_pRigidbody2 = new CRigidBody;
 	m_pRigidbody2->Setup(D3DXVECTOR3(-15, 2, -15), D3DXVECTOR3(1, 0, 1));
+
+	g_pInputManager->AddListener(g_gameManager);
+	g_pInputManager->AddListener(m_pCamera);
 }
 
 void CMainGame::Update()
@@ -117,9 +116,6 @@ void CMainGame::Update()
 
 	if (m_pCamera)
 		m_pCamera->Update();
-
-	if (m_pCube)
-		m_pCube->Update();
 
 	D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 	m_vColliderCube[0]->Update(c);
@@ -159,9 +155,6 @@ void CMainGame::Render()
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150,150,150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 
-	//if (m_pCube)
-	//	m_pCube->Render();
-
 	OBB_RENDER();
 
 	 //if (m_pGrid)
@@ -169,7 +162,7 @@ void CMainGame::Render()
 
 	m_GridMap->Render();
 
-	if (m_isDevMode)
+	if (g_gameManager->GetDevMode())
 	{
 		if (m_pText)
 			m_pText->Render(g_pTimeManager->GetFPS());
@@ -181,7 +174,7 @@ void CMainGame::Render()
 	if (m_pRigidbody2)
 		m_pRigidbody2->Render();
 
-	if (m_Uimode)
+	if (g_gameManager->GetUImode())
 	{
 		if (m_pUI)
 			m_pUI->UI_Render();
@@ -193,20 +186,15 @@ void CMainGame::Render()
 
 void CMainGame::Setup_OBB()
 {
-
-
 	for (int i = 0; i < 5; ++i)
 	{
 		m_vColliderCube.push_back(new CColliderObject);
 		m_vColliderCube[i]->Setup(D3DXVECTOR3(i, 0, i));
-		cout << "´Ù¼¸°³ ¼Â¾÷" << endl;
 	}
-
 
 	CCharacter* pCharacter = new CCharacter;
 	m_vColliderCube[0]->SetCharecterController(pCharacter);
 	SafeRelease(pCharacter);
-
 }
 
 void CMainGame::OBB_RENDER()
@@ -216,7 +204,4 @@ void CMainGame::OBB_RENDER()
 	{
 		m_vColliderCube[i]->Render();
 	}
-
-
-
 }
