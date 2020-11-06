@@ -8,7 +8,9 @@
 #include "DeviceManager.h"
 CMainGame *g_pMainGame;
 
-HWND g_hWnd;
+HWND g_hWnd, g_hMenuWnd;
+int g_nDlgWidth, g_nDlgHeight;
+void Setup_RigidBody();
 
 #define MAX_LOADSTRING 100
 
@@ -21,6 +23,7 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK	MenuDlgProc(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -48,6 +51,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	g_pMainGame = new CMainGame;
 	g_pMainGame->Setup();
 
+	Setup_RigidBody();
     MSG msg;
 
     // Main message loop:
@@ -87,7 +91,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     return (int) msg.wParam;
 }
 
+void Setup_RigidBody()
+{
+	char string[10];
+	sprintf(string, "%.4f", 0.0000f);
+	SetDlgItemTextA(g_hMenuWnd, IDC_EDIT_MASS, string);
 
+	sprintf(string, "%.4f", 0.0000f);
+	SetDlgItemTextA(g_hMenuWnd, IDC_EDIT_DRAG, string);
+
+	sprintf(string, "%.4f", 0.0000f);
+	SetDlgItemTextA(g_hMenuWnd, IDC_EDIT_ADRAG, string);
+}
 
 //
 //  FUNCTION: MyRegisterClass()
@@ -110,7 +125,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
     wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_DXTEAMPROJECT);
     wcex.lpszClassName  = szWindowClass;
-    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_MAIN));
 
     return RegisterClassExW(&wcex);
 }
@@ -142,6 +157,17 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
+   RECT rtWindow, rtDlg;
+   GetWindowRect(g_hWnd, &rtWindow);
+
+   g_hMenuWnd = CreateDialog(hInst, MAKEINTRESOURCE(IDD_DIALOG_RigidBody), hWnd, MenuDlgProc);
+   GetWindowRect(g_hMenuWnd, &rtDlg);
+   g_nDlgWidth = rtDlg.right - rtDlg.left + 1;
+   g_nDlgHeight = rtDlg.bottom - rtDlg.top + 1;
+
+   MoveWindow(g_hMenuWnd, rtWindow.right - 12, rtWindow.top + 1, g_nDlgWidth, g_nDlgHeight, TRUE);
+   ShowWindow(g_hMenuWnd, nCmdShow);
+
    return TRUE;
 }
 
@@ -160,8 +186,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	if (g_pMainGame)
 		g_pMainGame->WndProc(hWnd, message, wParam, lParam);
 
+	RECT rtWindow;
+
     switch (message)
     {
+	case WM_MOVE:
+		GetWindowRect(hWnd, &rtWindow);
+		MoveWindow(g_hMenuWnd, rtWindow.right - 12, rtWindow.top + 1, g_nDlgWidth, g_nDlgHeight, TRUE);
+		break;
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -189,4 +221,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
     return 0;
+}
+INT_PTR CALLBACK MenuDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	UNREFERENCED_PARAMETER(lParam);
+	switch (message)
+	{
+	case WM_INITDIALOG:
+		return (INT_PTR)TRUE;
+
+	case WM_COMMAND:
+		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
+		{
+			EndDialog(hDlg, LOWORD(wParam));
+			return (INT_PTR)TRUE;
+		}
+		break;
+	}
+	return (INT_PTR)FALSE;
 }
