@@ -34,9 +34,9 @@ void CUI::Setup_UI()
 		, D3DX_DEFAULT, 0, &m_stImageInfo, NULL, &m_pTextureUI);
 
 
-	////버튼1
+	//////버튼1
 	//D3DXCreateTextureFromFileExA(g_pD3DDevice,
-	//	"UI/btn-med-up.png",
+	//	"UI/Button.png",
 	//	D3DX_DEFAULT_NONPOW2,
 	//	D3DX_DEFAULT_NONPOW2,
 	//	D3DX_DEFAULT,
@@ -80,7 +80,7 @@ void CUI::UI_Render()
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	//BUTTON 1
+	////BUTTON 1
 
 	//SetRect(&rc3, rc.left - 145, rc.top - 300,
 	//	m_stImageInfo2.Width, m_stImageInfo2.Height);
