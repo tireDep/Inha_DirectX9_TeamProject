@@ -54,16 +54,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	Setup_RigidBody();
     MSG msg;
 
-    // Main message loop:
-    // while (GetMessage(&msg, nullptr, 0, 0))
-    // {
-    //     if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-    //     {
-    //         TranslateMessage(&msg);
-    //         DispatchMessage(&msg);
-    //     }
-    // }
-
 	while (true)
 	{
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))

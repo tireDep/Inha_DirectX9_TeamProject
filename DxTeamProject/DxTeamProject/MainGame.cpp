@@ -2,7 +2,6 @@
 
 #include "MainGame.h"
 #include "Camera.h"
-#include "Cube.h"
 #include "Grid.h"
 #include "UI.h"
 #include "Light.h"
@@ -16,7 +15,6 @@
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
-	m_pCube(NULL),
 	m_pLight(NULL),
 	m_pUI(NULL),
 	m_pSm(NULL),
@@ -32,7 +30,6 @@ CMainGame::CMainGame() :
 CMainGame::~CMainGame()
 {
 	SafeDelete(m_pSm);
-	SafeDelete(m_pCube);
 	SafeDelete(m_pCamera);
 	SafeDelete(m_pUI);
 	SafeDelete(m_pLight);
@@ -81,9 +78,6 @@ void CMainGame::Setup()
 	//OBB
 	Setup_OBB();
 
-	m_pCube = new CCube;
-	m_pCube->Setup();
-
 	m_pUI = new CUI;
 	m_pUI->Setup_UI();
 
@@ -119,9 +113,6 @@ void CMainGame::Update()
 
 	if (m_pCamera)
 		m_pCamera->Update();
-
-	if (m_pCube)
-		m_pCube->Update();
 
 	D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 	m_vColliderCube[0]->Update(c);
@@ -161,9 +152,6 @@ void CMainGame::Render()
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150,150,150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 
-	//if (m_pCube)
-	//	m_pCube->Render();
-
 	OBB_RENDER();
 
 	 //if (m_pGrid)
@@ -195,20 +183,15 @@ void CMainGame::Render()
 
 void CMainGame::Setup_OBB()
 {
-
-
 	for (int i = 0; i < 5; ++i)
 	{
 		m_vColliderCube.push_back(new CColliderObject);
 		m_vColliderCube[i]->Setup(D3DXVECTOR3(i, 0, i));
-		cout << "´Ù¼¸°³ ¼Â¾÷" << endl;
 	}
-
 
 	CCharacter* pCharacter = new CCharacter;
 	m_vColliderCube[0]->SetCharecterController(pCharacter);
 	SafeRelease(pCharacter);
-
 }
 
 void CMainGame::OBB_RENDER()
@@ -218,7 +201,4 @@ void CMainGame::OBB_RENDER()
 	{
 		m_vColliderCube[i]->Render();
 	}
-
-
-
 }

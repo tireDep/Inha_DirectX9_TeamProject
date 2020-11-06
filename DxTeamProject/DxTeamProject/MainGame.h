@@ -1,7 +1,6 @@
 #pragma once
 
 class CCamera;
-class CCube;
 class CGrid;
 class CUI;
 class CLight;
@@ -17,7 +16,6 @@ class CMainGame
 private:
 	CCamera* m_pCamera;
 	CGrid* m_pGrid;
-	CCube* m_pCube;
 	CUI *m_pUI;
 	CLight*	m_pLight;
 	CText*	m_pText;

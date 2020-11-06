@@ -146,12 +146,12 @@ void CColliderObject::Update(D3DXCOLOR c)
 
 void CColliderObject::Render()
 {
-	
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTexture(0, nullptr);
 
-	//if (m_pOBB)
-	//	m_pOBB->OBBBOX_RENDER(c);
+	D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
+	if (m_pOBB)
+		m_pOBB->OBBBOX_RENDER(c);
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_pOBB->m_matWorldTM);
 

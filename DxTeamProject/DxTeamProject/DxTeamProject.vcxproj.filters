@@ -16,9 +16,6 @@
     <ClCompile Include="Grid.cpp">
       <Filter>Grid</Filter>
     </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -39,10 +36,6 @@
     </ClCompile>
     <ClCompile Include="TimeManager.cpp">
       <Filter>TimeManager</Filter>
-    </ClCompile>
-    <ClCompile Include="DxTeamProject.cpp" />
-    <ClCompile Include="Character.cpp">
-      <Filter>Collider</Filter>
     </ClCompile>
     <ClCompile Include="ColliderObject.cpp">
       <Filter>Collider</Filter>
@@ -74,7 +67,15 @@
     <ClCompile Include="GridMap.cpp">
       <Filter>Map\GridMap</Filter>
     </ClCompile>
-    <ClCompile Include="ForceRegistry.cpp" />
+    <ClCompile Include="ForceRegistry.cpp">
+      <Filter>Tool... ForceGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="DxTeamProject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -122,9 +123,6 @@
     <ClInclude Include="Resource.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Player</Filter>
-    </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -136,10 +134,6 @@
     </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>TimeManager</Filter>
-    </ClInclude>
-    <ClInclude Include="DxTeamProject.h" />
-    <ClInclude Include="Character.h">
-      <Filter>Collider</Filter>
     </ClInclude>
     <ClInclude Include="ColliderObject.h">
       <Filter>Collider</Filter>
@@ -171,7 +165,15 @@
     <ClInclude Include="GridMap.h">
       <Filter>Map\GridMap</Filter>
     </ClInclude>
-    <ClInclude Include="ForceRegistry.h" />
+    <ClInclude Include="ForceRegistry.h">
+      <Filter>Tool... ForceGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="DxTeamProject.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
