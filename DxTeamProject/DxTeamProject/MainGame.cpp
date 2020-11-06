@@ -61,15 +61,12 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 		case WM_KEYDOWN:
 		{
-			if (GetKeyState(VK_CONTROL) & 0x0001)
-				m_Uimode = true;
-			else
-				m_Uimode = false;
+			if (GetKeyState(VK_CONTROL) & 0x8000 || GetKeyState(VK_CONTROL) & 0x0000)
+				m_Uimode = !m_Uimode;
+		
 
-			if (GetKeyState(VK_TAB) & 0x0001)
-				m_isDevMode = true;
-			else
-				m_isDevMode = false;
+			if (GetKeyState(VK_TAB) & 0x8000 || GetKeyState(VK_TAB) & 0x0000)
+				m_isDevMode = !m_isDevMode;
 		}
 			break;
 		default:
