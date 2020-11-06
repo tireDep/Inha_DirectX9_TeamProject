@@ -57,20 +57,22 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			m_pSm->PlaySFX("BombPut");
 		}
 		break;
+
+		case WM_KEYDOWN:
+		{
+			if (GetKeyState(VK_CONTROL) & 0x0001)
+				m_Uimode = true;
+			else
+				m_Uimode = false;
+
+			if (GetKeyState(VK_TAB) & 0x0001)
+				m_isDevMode = true;
+			else
+				m_isDevMode = false;
+		}
+			break;
 		default:
 			break;
-	}
-
-	if (message == WM_ACTIVATE)
-	{
-		if (LOWORD(wParam) == WA_INACTIVE)
-			cout << "off\n";
-		else
-		{
-			cout << "on\n";
-			
-
-		}
 	}
 }
 
@@ -127,15 +129,15 @@ void CMainGame::Update()
 	if (m_pCubePC2)
 		m_pCubePC2->Update();
 
-	if (GetKeyState(VK_TAB) & 0x0001)
-		m_isDevMode = true;
-	else 
-		m_isDevMode = false;
+	// if (GetKeyState(VK_TAB) & 0x0001)
+	// 	m_isDevMode = true;
+	// else 
+	// 	m_isDevMode = false;
 
-	if (GetKeyState(VK_CONTROL) & 0x0001)
-		m_Uimode = true;
-	else
-		m_Uimode = false;
+	//if (GetKeyState(VK_CONTROL) & 0x0001)
+	//	m_Uimode = true;
+	//else
+	//	m_Uimode = false;
 
 	if (m_pRigidbody)
 		m_pRigidbody->Update();
