@@ -23,9 +23,10 @@ private:
 	CText*	m_pText;
 	CGridMap* m_GridMap;
 
+
+
 	//충돌큐브
-	CColliderObject*		m_pCubePC;
-	CColliderObject*		m_pCubePC2;
+	vector<CColliderObject*> m_vColliderCube;
 
 	CRigidBody*		m_pRigidbody;
 	CRigidBody*		m_pRigidbody2;

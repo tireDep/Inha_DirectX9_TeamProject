@@ -86,7 +86,7 @@ void CMainGame::Setup()
 	m_pUI->Setup_UI();
 
 	m_pCamera = new CCamera;
-	m_pCamera->Setup(&m_pCubePC->GetPosition());
+	m_pCamera->Setup(&m_vColliderCube[0]->GetPosition());
 
 	m_GridMap = new CGridMap;
 	m_GridMap->Setup();
@@ -121,11 +121,22 @@ void CMainGame::Update()
 	if (m_pCube)
 		m_pCube->Update();
 
-	if (m_pCubePC)
-		m_pCubePC->Update();
+	D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
+	m_vColliderCube[0]->Update(c);
 
-	if (m_pCubePC2)
-		m_pCubePC2->Update();
+	for (int i = 0; i < 5; ++i)
+	{
+		if (COBB::IsCollision(m_vColliderCube[0]->GetOBB(), m_vColliderCube[i]->GetOBB()) == true)
+		{
+			c = D3DCOLOR_XRGB(255, 255, 0); // 충돌하였을때
+			m_vColliderCube[i]->Update(c);		
+		}
+		else
+		{
+			c = D3DCOLOR_XRGB(255, 0, 0); // 충돌하지 않았을때
+			m_vColliderCube[i]->Update(c);
+		}
+	}
 
 	if (GetKeyState(VK_TAB) & 0x0001)
 		m_isDevMode = true;
@@ -192,13 +203,18 @@ void CMainGame::Render()
 
 void CMainGame::Setup_OBB()
 {
-	m_pCubePC =  new CColliderObject;
-	m_pCubePC->Setup();
-	m_pCubePC2 = new CColliderObject;
-	m_pCubePC2->Setup();
+
+
+	for (int i = 0; i < 5; ++i)
+	{
+		m_vColliderCube.push_back(new CColliderObject);
+		m_vColliderCube[i]->Setup(D3DXVECTOR3(i, 0, i));
+		cout << "다섯개 셋업" << endl;
+	}
+
 
 	CCharacter* pCharacter = new CCharacter;
-	m_pCubePC->SetCharecterController(pCharacter);
+	m_vColliderCube[0]->SetCharecterController(pCharacter);
 	SafeRelease(pCharacter);
 
 }
@@ -206,15 +222,11 @@ void CMainGame::Setup_OBB()
 void CMainGame::OBB_RENDER()
 {
 	D3DCOLOR c = D3DCOLOR_XRGB(0, 0, 0);
-	if (COBB::IsCollision(m_pCubePC->GetOBB(), m_pCubePC2->GetOBB()) == true)
+	for (vector<CColliderObject>::size_type i = 0; i < m_vColliderCube.size(); ++i)
 	{
-		c = D3DCOLOR_XRGB(255, 255, 255);
+		m_vColliderCube[i]->Render();
 	}
 
 
-	if (m_pCubePC)
-		m_pCubePC->Render(c);
 
-	if (m_pCubePC2)
-		m_pCubePC2->Render(c);
 }
