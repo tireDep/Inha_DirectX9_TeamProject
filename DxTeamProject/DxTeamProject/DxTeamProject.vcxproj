@@ -169,6 +169,7 @@
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="resource2.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="stdafx.h" />
@@ -214,7 +215,10 @@
     <ResourceCompile Include="DxTeamProject.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Documents\카카오톡 받은 파일\KakaoTalk_20201106_115906724.png" />
+    <Image Include="Colorful_Travel.ico" />
     <Image Include="DxTeamProject.ico" />
+    <Image Include="icon1.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

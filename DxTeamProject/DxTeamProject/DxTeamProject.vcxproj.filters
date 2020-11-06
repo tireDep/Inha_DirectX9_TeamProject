@@ -172,12 +172,16 @@
       <Filter>Map\GridMap</Filter>
     </ClInclude>
     <ClInclude Include="ForceRegistry.h" />
+    <ClInclude Include="resource2.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
       <Filter>Resource</Filter>
     </Image>
     <Image Include="DxTeamProject.ico" />
+    <Image Include="..\..\..\..\Documents\카카오톡 받은 파일\KakaoTalk_20201106_115906724.png" />
+    <Image Include="icon1.ico" />
+    <Image Include="Colorful_Travel.ico" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
