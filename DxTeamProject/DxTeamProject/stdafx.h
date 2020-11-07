@@ -87,6 +87,9 @@ public : virtual void Set##funName(varType var ) { \
 #include "DeviceManager.h"
 #include "FontManager.h"
 #include "TimeManager.h"
+#include "InputManager.h"
+#include "GameManager.h"
+
 extern HWND g_hWnd;
 //
 #include "Object.h"

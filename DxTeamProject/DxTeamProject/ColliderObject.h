@@ -16,7 +16,7 @@ private :
 	D3DXVECTOR3					m_vPosition;
 	D3DXVECTOR3					m_vCPosition;
 	D3DXMATRIXA16 m_matWorldTM;
-	Synthesize_Add_Ref(CCharacter*, m_pCharacterController, CharecterController);
+	//Synthesize_Add_Ref(CCharacter*, m_pCharacterController, CharecterController);
 	
 public:
 	D3DXVECTOR3 m_vMin;

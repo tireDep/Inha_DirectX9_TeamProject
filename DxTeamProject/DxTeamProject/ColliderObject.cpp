@@ -7,7 +7,7 @@ CColliderObject::CColliderObject()
 	, m_fRotY(0.0f)
 	, m_pOBB(NULL)
 	, m_vCPosition(0, 0, 0)
-	, m_pCharacterController(NULL)
+//	, m_pCharacterController(NULL)
 {
 
 }
@@ -15,7 +15,7 @@ CColliderObject::CColliderObject()
 
 CColliderObject::~CColliderObject()
 {
-	SafeRelease(m_pCharacterController);
+//	SafeRelease(m_pCharacterController);
 
 	SafeDelete(m_pOBB);
 }
@@ -131,12 +131,12 @@ void CColliderObject::Update(D3DXCOLOR c)
 	D3DXMatrixTranslation(&m_pOBB->m_matWorldTM, m_vCPosition.x,
 		m_vCPosition.y, m_vCPosition.z);
 
-	if (m_pCharacterController)
-		m_pCharacterController->Update();
+	//if (m_pCharacterController)
+	//	m_pCharacterController->Update();
 
-	if (m_pOBB)
-		m_pOBB->Update(m_pCharacterController ?
-			m_pCharacterController->GetTransform() : NULL);
+	//if (m_pOBB)
+	//	m_pOBB->Update(m_pCharacterController ?
+	//		m_pCharacterController->GetTransform() : NULL);
 
 	for (unsigned int i = 0; i < m_vecVertex.size(); ++i)
 	{
@@ -168,5 +168,6 @@ COBB* CColliderObject::GetOBB()
 
 D3DXVECTOR3 & CColliderObject::GetPosition()
 {
-	return m_pCharacterController->GetPosition();
+	return D3DXVECTOR3(0, 0, 0);
+//	return m_pCharacterController->GetPosition();
 }

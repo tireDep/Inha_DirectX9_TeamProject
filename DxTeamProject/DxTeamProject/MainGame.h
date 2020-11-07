@@ -3,11 +3,14 @@
 class CCamera;
 class CGrid;
 class CUI;
+class CText;
+class CColliderObject;
+class CCharacter;
+
+/// 릴리즈 버전을 위한 주석처리
 //class CLight;
 //class CSoundManager;
-class CText;
 //class CGridMap;
-class CColliderObject;
 //class CRigidBody;
 //class CGravity;
 
@@ -17,19 +20,17 @@ private:
 	CCamera* m_pCamera;
 	CGrid* m_pGrid;
 	CUI *m_pUI;
-	//CLight*	m_pLight;
 	CText*	m_pText;
-	//CGridMap* m_GridMap;
-
-	//충돌큐브
+	CCharacter*	m_pCharacter;
 	vector<CColliderObject*> m_vColliderCube;
 
+	/// 릴리즈 버전을 위한 주석처리
+	//CLight*	m_pLight;
+	//CGridMap* m_GridMap;
 	//CRigidBody*		m_pRigidbody;
 	//CRigidBody*		m_pRigidbody2;
 	//CGravity*		m_pGravity;
-
 	//CSoundManager* m_pSm;
-
 public:
 	CMainGame();
 	~CMainGame();
@@ -39,7 +40,6 @@ public:
 	void Update();
 	void Render();
 
-	// 충돌
 	void Setup_OBB();
 	void OBB_RENDER();
 };

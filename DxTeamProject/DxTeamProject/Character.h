@@ -1,7 +1,7 @@
 #pragma once
 
-
-class CCharacter : public CObject
+//class CCharacter : public CObject
+class CCharacter
 {
 public:
 	CCharacter();
@@ -11,8 +11,6 @@ protected:
 	D3DXVECTOR3		m_vDirection;
 	D3DXVECTOR3		m_vPosition;
 	D3DXMATRIXA16	m_matWorld;
-
-
 public:
 	virtual ~CCharacter(void);
 	virtual void Setup();
