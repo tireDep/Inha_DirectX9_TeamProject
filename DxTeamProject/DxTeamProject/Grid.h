@@ -1,5 +1,4 @@
 #pragma once
- 
 
 class CPyramid;
 
@@ -15,4 +14,3 @@ public:
 	void Setup(int nNumHalfTile = 15, float fInterval = 1.0f);
 	void Render();
 };
-

@@ -64,7 +64,7 @@ void CMainGame::Setup()
 	m_pUI->Setup_UI();
 
 	m_pCamera = new CCamera;
-	m_pCamera->Setup(NULL);
+	m_pCamera->Setup(&m_pCharacter->GetPosition());
 
 	/// 릴리즈 버전을 위한 주석처리
 	//m_GridMap = new CGridMap;
@@ -92,22 +92,21 @@ void CMainGame::Update()
 	if (m_pCharacter)
 		m_pCharacter->Update();		// 추가. 카메라의 벡터 받아오기
 
-	{
-		D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
-		m_vColliderCube[0]->Update(c);
+	D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 
-		for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 5; ++i)
+	{
+		if (COBB::IsCollision(m_pCharacter->GetOBB(), m_vColliderCube[i]->GetOBB()) == true)
 		{
-			if (COBB::IsCollision(m_vColliderCube[0]->GetOBB(), m_vColliderCube[i]->GetOBB()) == true)
-			{
-				c = D3DCOLOR_XRGB(255, 255, 0); // 충돌하였을때
-				m_vColliderCube[i]->Update(c);
-			}
-			else
-			{
-				c = D3DCOLOR_XRGB(255, 0, 0); // 충돌하지 않았을때
-				m_vColliderCube[i]->Update(c);
-			}
+			//cout << "iscollision" << endl;
+			c = D3DCOLOR_XRGB(255,255, 0); // 충돌하였을때
+			m_vColliderCube[i]->Update(c);
+		}
+		else
+		{
+			//cout << "123456879564645687897645" << endl;
+			c = D3DCOLOR_XRGB(255, 0, 0); // 충돌하지 않았을때
+			m_vColliderCube[i]->Update(c);
 		}
 	}
 
@@ -130,7 +129,6 @@ void CMainGame::Render()
 	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150,150,150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
-
 
 	 if (m_pGrid)
 	 	m_pGrid->Render();
@@ -166,12 +164,8 @@ void CMainGame::Setup_OBB()
 	for (int i = 0; i < 5; ++i)
 	{
 		m_vColliderCube.push_back(new CColliderObject);
-		m_vColliderCube[i]->Setup(D3DXVECTOR3(i, 0, i));
+		m_vColliderCube[i]->Setup(D3DXVECTOR3(i*2 + 2+1.0f, 0, i*2 + 2+1.0f));
 	}
-
-	CCharacter* pCharacter = new CCharacter;
-//	m_vColliderCube[0]->SetCharecterController(pCharacter);
-	SafeDelete(pCharacter);
 }
 
 void CMainGame::OBB_RENDER()
