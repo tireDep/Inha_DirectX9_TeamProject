@@ -147,16 +147,16 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
-   RECT rtWindow, rtDlg;
-   GetWindowRect(g_hWnd, &rtWindow);
+   //RECT rtWindow, rtDlg;
+   //GetWindowRect(g_hWnd, &rtWindow);
 
-   g_hMenuWnd = CreateDialog(hInst, MAKEINTRESOURCE(IDD_DIALOG_RigidBody), hWnd, MenuDlgProc);
-   GetWindowRect(g_hMenuWnd, &rtDlg);
-   g_nDlgWidth = rtDlg.right - rtDlg.left + 1;
-   g_nDlgHeight = rtDlg.bottom - rtDlg.top + 1;
+   //g_hMenuWnd = CreateDialog(hInst, MAKEINTRESOURCE(IDD_DIALOG_RigidBody), hWnd, MenuDlgProc);
+   //GetWindowRect(g_hMenuWnd, &rtDlg);
+   //g_nDlgWidth = rtDlg.right - rtDlg.left + 1;
+   //g_nDlgHeight = rtDlg.bottom - rtDlg.top + 1;
 
-   MoveWindow(g_hMenuWnd, rtWindow.right - 12, rtWindow.top + 1, g_nDlgWidth, g_nDlgHeight, TRUE);
-   ShowWindow(g_hMenuWnd, nCmdShow);
+   //MoveWindow(g_hMenuWnd, rtWindow.right - 12, rtWindow.top + 1, g_nDlgWidth, g_nDlgHeight, TRUE);
+   //ShowWindow(g_hMenuWnd, nCmdShow);
 
    return TRUE;
 }
@@ -176,13 +176,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	if (g_pMainGame)
 		g_pMainGame->WndProc(hWnd, message, wParam, lParam);
 
-	RECT rtWindow;
+	//RECT rtWindow;
 
     switch (message)
     {
 	case WM_MOVE:
-		GetWindowRect(hWnd, &rtWindow);
-		MoveWindow(g_hMenuWnd, rtWindow.right - 12, rtWindow.top + 1, g_nDlgWidth, g_nDlgHeight, TRUE);
+		//GetWindowRect(hWnd, &rtWindow);
+		//MoveWindow(g_hMenuWnd, rtWindow.right - 12, rtWindow.top + 1, g_nDlgWidth, g_nDlgHeight, TRUE);
 		break;
     case WM_COMMAND:
         {

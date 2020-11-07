@@ -3,13 +3,13 @@
 class CCamera;
 class CGrid;
 class CUI;
-class CLight;
-class CSoundManager;
+//class CLight;
+//class CSoundManager;
 class CText;
-class CGridMap;
+//class CGridMap;
 class CColliderObject;
-class CRigidBody;
-class CGravity;
+//class CRigidBody;
+//class CGravity;
 
 class CMainGame
 {
@@ -17,18 +17,18 @@ private:
 	CCamera* m_pCamera;
 	CGrid* m_pGrid;
 	CUI *m_pUI;
-	CLight*	m_pLight;
+	//CLight*	m_pLight;
 	CText*	m_pText;
-	CGridMap* m_GridMap;
+	//CGridMap* m_GridMap;
 
 	//충돌큐브
 	vector<CColliderObject*> m_vColliderCube;
 
-	CRigidBody*		m_pRigidbody;
-	CRigidBody*		m_pRigidbody2;
-	CGravity*		m_pGravity;
+	//CRigidBody*		m_pRigidbody;
+	//CRigidBody*		m_pRigidbody2;
+	//CGravity*		m_pGravity;
 
-	CSoundManager* m_pSm;
+	//CSoundManager* m_pSm;
 
 public:
 	CMainGame();
@@ -38,7 +38,6 @@ public:
 	void Setup();
 	void Update();
 	void Render();
-
 
 	// 충돌
 	void Setup_OBB();

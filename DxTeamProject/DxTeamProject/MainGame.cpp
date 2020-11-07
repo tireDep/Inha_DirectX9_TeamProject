@@ -4,38 +4,38 @@
 #include "Camera.h"
 #include "Grid.h"
 #include "UI.h"
-#include "Light.h"
-#include "SoundManager.h"
+//#include "Light.h"
+//#include "SoundManager.h"
 #include "Text.h"
 #include "TimeManager.h"
-#include "GridMap.h"
+//#include "GridMap.h"
 #include "ColliderObject.h"
 #include "OBB.h"
-#include "RigidBody.h"
+//#include "RigidBody.h"
 #include "InputManager.h"
 #include "GameManager.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
-	m_pLight(NULL),
+	//m_pLight(NULL),
 	m_pUI(NULL),
-	m_pSm(NULL),
-	m_pText(NULL),
-	m_GridMap(NULL), 
-	m_pRigidbody(NULL),
-	m_pRigidbody2(NULL)
+	//m_pSm(NULL),
+	m_pText(NULL)
+	//m_GridMap(NULL), 
+	//m_pRigidbody(NULL),
+	//m_pRigidbody2(NULL)
 {
 }
 
 CMainGame::~CMainGame()
 {
-	SafeDelete(m_pSm);
+	//SafeDelete(m_pSm);
 	SafeDelete(m_pCamera);
 	SafeDelete(m_pUI);
-	SafeDelete(m_pLight);
+	//SafeDelete(m_pLight);
 	SafeDelete(m_pText);
-	SafeDelete(m_GridMap);
-	SafeDelete(m_pRigidbody);
+	//SafeDelete(m_GridMap);
+	//SafeDelete(m_pRigidbody);
 	g_pDeviceManager->Destroy();
 }
 
@@ -84,27 +84,26 @@ void CMainGame::Setup()
 	m_pCamera = new CCamera;
 	m_pCamera->Setup(&m_vColliderCube[0]->GetPosition());
 
-	m_GridMap = new CGridMap;
-	m_GridMap->Setup();
+	//m_GridMap = new CGridMap;
+	//m_GridMap->Setup();
 
 	m_pGrid = new CGrid;
-	m_pGrid->Setup();
+	m_pGrid->Setup(50, 1.0f);
 
-	m_pLight = new CLight;
-	//m_pLight->Setup();
-	m_pLight->Setup(D3DXVECTOR3(0, -1, 0));		// ÅÂ¾ç±¤ º¤ÅÍ ¼³Á¤ °¡´É
+	//m_pLight = new CLight;
+	////m_pLight->Setup();
+	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0));		// ÅÂ¾ç±¤ º¤ÅÍ ¼³Á¤ °¡´É
 
-	m_pSm = new CSoundManager;
-	m_pSm->init();
+	//m_pSm = new CSoundManager;
+	//m_pSm->init();
 
 	m_pText = new CText;
 	m_pText->Setup();
 
-	m_pRigidbody = new CRigidBody;
-	m_pRigidbody->Setup(D3DXVECTOR3(5, 30, 5), D3DXVECTOR3(0, -9.8f / 3, 0));
-
-	m_pRigidbody2 = new CRigidBody;
-	m_pRigidbody2->Setup(D3DXVECTOR3(-15, 2, -15), D3DXVECTOR3(1, 0, 1));
+	//m_pRigidbody = new CRigidBody;
+	//m_pRigidbody->Setup(D3DXVECTOR3(5, 30, 5), D3DXVECTOR3(0, -9.8f / 3, 0));
+	//m_pRigidbody2 = new CRigidBody;
+	//m_pRigidbody2->Setup(D3DXVECTOR3(-15, 2, -15), D3DXVECTOR3(1, 0, 1));
 
 	g_pInputManager->AddListener(g_gameManager);
 	g_pInputManager->AddListener(m_pCamera);
@@ -134,11 +133,10 @@ void CMainGame::Update()
 		}
 	}
 
-	if (m_pRigidbody)
-		m_pRigidbody->Update();
-
-	if (m_pRigidbody2)
-		m_pRigidbody2->Update();
+	//if (m_pRigidbody)
+	//	m_pRigidbody->Update();
+	//if (m_pRigidbody2)
+	//	m_pRigidbody2->Update();
 }
 
 void CMainGame::Render()
@@ -157,10 +155,10 @@ void CMainGame::Render()
 
 	OBB_RENDER();
 
-	 //if (m_pGrid)
-	 //	m_pGrid->Render();
+	 if (m_pGrid)
+	 	m_pGrid->Render();
 
-	m_GridMap->Render();
+	//m_GridMap->Render();
 
 	if (g_gameManager->GetDevMode())
 	{
@@ -168,11 +166,10 @@ void CMainGame::Render()
 			m_pText->Render(g_pTimeManager->GetFPS());
 	}
 
-	if (m_pRigidbody)
-		m_pRigidbody->Render();
-
-	if (m_pRigidbody2)
-		m_pRigidbody2->Render();
+	//if (m_pRigidbody)
+	//	m_pRigidbody->Render();
+	//if (m_pRigidbody2)
+	//	m_pRigidbody2->Render();
 
 	if (g_gameManager->GetUImode())
 	{
