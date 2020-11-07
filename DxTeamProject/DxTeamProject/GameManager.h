@@ -6,8 +6,12 @@
 class CGameManager : public IListener 
 {
 private:
+	bool m_isDevMoveIn;
 	bool m_isDevMode;
-	bool m_UImode;
+
+	bool m_isUIModeIn;
+	bool m_isUIMode;
+
 	CGameManager();
 
 public:

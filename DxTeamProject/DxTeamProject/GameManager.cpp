@@ -6,7 +6,7 @@ CGameManager::CGameManager()
 	m_strName = "GameManager";
 
 	m_isDevMode = false;
-	m_UImode = false;
+	m_isUIMode = false;
 }
 
 CGameManager* CGameManager::GetInstance()
@@ -22,7 +22,7 @@ bool CGameManager::GetDevMode()
 
 bool CGameManager::GetUImode()
 {
-	return m_UImode;
+	return m_isUIMode;
 }
 
 void CGameManager::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
@@ -31,14 +31,29 @@ void CGameManager::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_KEYDOWN:
 	{
-		if (VK_CONTROL == wParam && (GetKeyState(wParam) & 0x8000 || GetKeyState(wParam) & 0x0000))
-			m_UImode = !m_UImode;
+		if (VK_CONTROL == wParam && !m_isUIModeIn)
+		{
+			m_isUIMode = !m_isUIMode;
+			m_isUIModeIn = !m_isUIModeIn;
+		}
 
-		if (VK_TAB == wParam && (GetKeyState(wParam) & 0x8000 || GetKeyState(wParam) & 0x0000))
+		if (VK_TAB == wParam && !m_isDevMoveIn)
+		{
 			m_isDevMode = !m_isDevMode;
+			m_isDevMoveIn = !m_isDevMoveIn;
+		}
 	}
-		break;
+	break;
 
+	case WM_KEYUP:
+	{
+		if (VK_CONTROL == wParam)
+			m_isUIModeIn = false;
+
+		if (VK_TAB == wParam)
+			m_isDevMoveIn = false;
+	}
+	break;
 	}
 }
 
