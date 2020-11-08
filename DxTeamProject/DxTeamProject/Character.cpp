@@ -3,16 +3,22 @@
 #include "OBB.h"
 
 CCharacter::CCharacter()
-	: m_fRotY(0.0f)
-	, m_vDirection(0, 0, 1)
+	: m_vDirection(0, 0, 1)
 	, m_vPosition(0, 0, 0)
 {
 	D3DXMatrixIdentity(&m_matWorld);
+	D3DXMatrixIdentity(&m_matRotY);
 }
 
 COBB * CCharacter::GetOBB()
 {
 	return m_pOBB;
+}
+
+void CCharacter::SetColor(D3DCOLOR c)
+{
+	for (int i = 12; i <= 17; i++)
+		m_vecVertex[i].c = c;
 }
 
 CCharacter::~CCharacter()
@@ -78,39 +84,42 @@ void CCharacter::Setup()
 
 	m_pOBB = new COBB;
 	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11]);
+	cout.precision(2);
+	cout << fixed;
 }
 
-void CCharacter::Update()
+void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
-	if (GetKeyState('A') & 0X8000)
-	{
-		m_fRotY -= 0.001f;
-	}
-	if (GetKeyState('D') & 0X8000)
-	{
-		m_fRotY += 0.001f;
-	}
-
 	D3DXVECTOR3 vPosition = m_vPosition;
+	m_vDirection = cameradirection;
 	if (GetKeyState('W') & 0X8000)
 	{
-		vPosition = m_vPosition + (m_vDirection*0.001f);
+		vPosition = m_vPosition + (m_vDirection * 0.005f);
 	}
 	if (GetKeyState('S') & 0X8000)
 	{
-		vPosition = m_vPosition - (m_vDirection*0.001f);
+		vPosition = m_vPosition - (m_vDirection * 0.005f);
+	}
+	if (GetKeyState('A') & 0X8000)
+	{
+		D3DXMatrixRotationY(&m_matRotY, -D3DX_PI / 2.0F);
+		D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &m_matRotY);
+		vPosition = m_vPosition + (m_vDirection * 0.005f);
+	}
+	if (GetKeyState('D') & 0X8000)
+	{
+		D3DXMatrixRotationY(&m_matRotY, +D3DX_PI / 2.0F);
+		D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &m_matRotY);
+		vPosition = m_vPosition + (m_vDirection * 0.005f);
 	}
 
-	D3DXMATRIXA16 matR, matT;
-	D3DXMatrixRotationY(&matR, m_fRotY);
-
-	m_vDirection = D3DXVECTOR3(0, 0, 1);
-	D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &matR);
+	D3DXMATRIXA16 matT;
 
 	m_vPosition = vPosition;
+	m_vPosition.y = 0.0f;
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 
-	m_matWorld = matR * matT;
+	m_matWorld = matT;
 }
 
 void CCharacter::Render()

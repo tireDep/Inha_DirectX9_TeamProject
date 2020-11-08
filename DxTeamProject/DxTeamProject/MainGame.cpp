@@ -90,21 +90,20 @@ void CMainGame::Update()
 	if (m_pCamera)
 		m_pCamera->Update();
 	if (m_pCharacter)
-		m_pCharacter->Update();		// 추가. 카메라의 벡터 받아오기
+		m_pCharacter->Update(m_pCamera->GetCameraDirection());		// 추가. 카메라의 벡터 받아오기
 
 	D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 
+	m_pCharacter->m_pOBB->Update(m_pCharacter->GetTransform());
 	for (int i = 0; i < 5; ++i)
 	{
 		if (COBB::IsCollision(m_pCharacter->GetOBB(), m_vColliderCube[i]->GetOBB()) == true)
 		{
-			//cout << "iscollision" << endl;
-			c = D3DCOLOR_XRGB(255,255, 0); // 충돌하였을때
+			c = D3DCOLOR_XRGB(255, 255, 0); // 충돌하였을때
 			m_vColliderCube[i]->Update(c);
 		}
 		else
 		{
-			//cout << "123456879564645687897645" << endl;
 			c = D3DCOLOR_XRGB(255, 0, 0); // 충돌하지 않았을때
 			m_vColliderCube[i]->Update(c);
 		}
@@ -124,9 +123,9 @@ void CMainGame::Render()
 
 	D3DXMATRIXA16 matProj;
 	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 4.0f, rc.right / (float)rc.bottom, 1.0f, 1000.0f);
-	
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
+
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150,150,150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 
@@ -164,13 +163,12 @@ void CMainGame::Setup_OBB()
 	for (int i = 0; i < 5; ++i)
 	{
 		m_vColliderCube.push_back(new CColliderObject);
-		m_vColliderCube[i]->Setup(D3DXVECTOR3(i*2 + 2+1.0f, 0, i*2 + 2+1.0f));
+		m_vColliderCube[i]->Setup(D3DXVECTOR3(i * 2 + 3, 0.5f, i * 2 + 3));
 	}
 }
 
 void CMainGame::OBB_RENDER()
 {
-	D3DCOLOR c = D3DCOLOR_XRGB(0, 0, 0);
 	for (vector<CColliderObject>::size_type i = 0; i < m_vColliderCube.size(); ++i)
 	{
 		m_vColliderCube[i]->Render();

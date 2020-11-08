@@ -13,15 +13,15 @@ private:
 	bool m_isLBtnDown;
 	float m_fCameraDistance;
 	D3DXVECTOR3 m_vCamRotAngle;
-
 public:
 	CCamera();
 	~CCamera();
 
 	void Setup(D3DXVECTOR3* pvTarget);
 	void Update();
+	D3DXVECTOR3 GetCameraDirection();
 
 	void ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam) override;
 	string GetName();
+	
 };
-
