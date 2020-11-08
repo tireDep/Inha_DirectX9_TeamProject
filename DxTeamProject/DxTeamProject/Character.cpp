@@ -84,21 +84,24 @@ void CCharacter::Setup()
 
 	m_pOBB = new COBB;
 	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11]);
-	cout.precision(2);
-	cout << fixed;
 }
 
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	D3DXVECTOR3 vPosition = m_vPosition;
 	m_vDirection = cameradirection;
+
 	if (GetKeyState('W') & 0X8000)
 	{
+		D3DXMatrixRotationY(&m_matRotY, 0.0f);
+		D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &m_matRotY);
 		vPosition = m_vPosition + (m_vDirection * 0.005f);
 	}
 	if (GetKeyState('S') & 0X8000)
 	{
-		vPosition = m_vPosition - (m_vDirection * 0.005f);
+		D3DXMatrixRotationY(&m_matRotY, D3DX_PI);
+		D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &m_matRotY);
+		vPosition = m_vPosition + (m_vDirection * 0.005f);
 	}
 	if (GetKeyState('A') & 0X8000)
 	{
@@ -114,12 +117,11 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 	}
 
 	D3DXMATRIXA16 matT;
-
 	m_vPosition = vPosition;
 	m_vPosition.y = 0.0f;
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 
-	m_matWorld = matT;
+	m_matWorld = m_matRotY * matT;
 }
 
 void CCharacter::Render()

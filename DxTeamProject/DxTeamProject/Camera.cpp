@@ -75,6 +75,14 @@ void CCamera::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 
 	case WM_MOUSEMOVE:
 	{
+		if (g_gameManager->GetUImode())
+		{
+			POINT ptCurMouse;
+			ptCurMouse.x = LOWORD(lParam);
+			ptCurMouse.y = HIWORD(lParam);
+			m_preMousePos = ptCurMouse;
+			return;
+		}
 		//if (m_isLBtnDown)
 		//{
 			POINT ptCurMouse;
