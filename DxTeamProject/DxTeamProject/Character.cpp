@@ -57,8 +57,8 @@ void CCharacter::Setup()
 	v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 
-	v.c = D3DCOLOR_XRGB(255, 255, 255);
 	// : left
+	v.c = D3DCOLOR_XRGB(255, 255, 255);
 	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
@@ -67,6 +67,7 @@ void CCharacter::Setup()
 	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 
 	// : right 
+	v.c = D3DCOLOR_XRGB(0, 0, 0);
 	v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
@@ -88,40 +89,42 @@ void CCharacter::Setup()
 
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
-	D3DXVECTOR3 vPosition = m_vPosition;
 	m_vDirection = cameradirection;
 
+	// >> todo
+	// - UI가 켜져있을 때 이동 여부 확인 필요
+	// - 대각선 이동 여부 확인 필요
+	//   => 대각선 이동시 속도 증가됨
+	//   => sa, sd 반대로 작동됨
+
 	if (GetKeyState('W') & 0X8000)
-	{
-		D3DXMatrixRotationY(&m_matRotY, 0.0f);
-		D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &m_matRotY);
-		vPosition = m_vPosition + (m_vDirection * 0.005f);
-	}
+		m_vPosition = DoMove(0.0f);
 	if (GetKeyState('S') & 0X8000)
-	{
-		D3DXMatrixRotationY(&m_matRotY, D3DX_PI);
-		D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &m_matRotY);
-		vPosition = m_vPosition + (m_vDirection * 0.005f);
-	}
+		m_vPosition = DoMove(D3DX_PI);
 	if (GetKeyState('A') & 0X8000)
-	{
-		D3DXMatrixRotationY(&m_matRotY, -D3DX_PI / 2.0F);
-		D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &m_matRotY);
-		vPosition = m_vPosition + (m_vDirection * 0.005f);
-	}
+		m_vPosition = DoMove(-D3DX_PI/2.0f);
 	if (GetKeyState('D') & 0X8000)
-	{
-		D3DXMatrixRotationY(&m_matRotY, +D3DX_PI / 2.0F);
-		D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &m_matRotY);
-		vPosition = m_vPosition + (m_vDirection * 0.005f);
-	}
+		m_vPosition = DoMove(D3DX_PI / 2.0f);
 
 	D3DXMATRIXA16 matT;
-	m_vPosition = vPosition;
-	m_vPosition.y = 0.0f;
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 
 	m_matWorld = m_matRotY * matT;
+}
+
+D3DXVECTOR3 CCharacter::DoMove(const float& radian)
+{
+	m_vDirection.y = 0;
+	D3DXMatrixRotationY(&m_matRotY, radian);
+	D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &m_matRotY);
+	D3DXVec3Normalize(&m_vDirection, &m_vDirection);
+
+	D3DXVECTOR3 tempPos(0, 0, 0);
+	D3DXVECTOR3 tempUp(0, 1, 0);
+	D3DXMatrixLookAtLH(&m_matRotY, &tempPos, &m_vDirection, &tempUp);
+	D3DXMatrixTranspose(&m_matRotY, &m_matRotY);
+
+	return m_vPosition + (m_vDirection * 0.005f);
 }
 
 void CCharacter::Render()

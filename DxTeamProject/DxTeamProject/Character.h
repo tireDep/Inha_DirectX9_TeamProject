@@ -17,6 +17,7 @@ public:
 	virtual ~CCharacter(void);
 	virtual void Setup();
 	virtual void Update(D3DXVECTOR3 cameradirection);
+	virtual D3DXVECTOR3 DoMove(const float& radian);
 	virtual void Render();
 	virtual D3DXVECTOR3& GetPosition();
 	virtual D3DXMATRIXA16* GetTransform();
