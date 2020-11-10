@@ -124,6 +124,7 @@ void CColliderObject::Setup(D3DXVECTOR3 position)
 
 	m_pOBB = new COBB;
 	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11]);
+	m_color = D3DCOLOR_XRGB(255, 255, 255);
 }
 
 void CColliderObject::Update(D3DXCOLOR c)
@@ -145,6 +146,7 @@ void CColliderObject::Update(D3DXCOLOR c)
 	{
 		m_vecVertex[i].c = c;
 	}
+	m_color = c;
 }
 
 void CColliderObject::Render()
@@ -152,9 +154,6 @@ void CColliderObject::Render()
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTexture(0, nullptr);
 
-	D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
-	//if (m_pOBB)
-	//	m_pOBB->OBBBOX_RENDER(c);
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorldTM);
 

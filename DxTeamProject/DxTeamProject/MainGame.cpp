@@ -96,21 +96,21 @@ void CMainGame::Update()
 	if (m_pCharacter)
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());		// 추가. 카메라의 벡터 받아오기
 
-	D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
-
-	m_pCharacter->m_pOBB->Update(m_pCharacter->GetTransform());
+	//D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
+	
+	//m_pCharacter->m_pOBB->Update(m_pCharacter->GetTransform());
 	for (int i = 0; i < 1; ++i)
 	{
 		if (COBB::IsCollision(m_pCharacter->GetOBB(), m_vColliderCube[i]->GetOBB()) == true)
-		{
+		{		
 			m_vColliderCube[i]->Update(m_pCharacter->GetColor());
 		}
 		else
-		{
-			m_vColliderCube[i]->Update(c);
+		{	
+			m_vColliderCube[i]->Update(m_vColliderCube[i]->m_color);
 		}
 	}
-
+	
 	/// 릴리즈 버전을 위한 주석처리
 	//if (m_pRigidbody)
 	//	m_pRigidbody->Update();
