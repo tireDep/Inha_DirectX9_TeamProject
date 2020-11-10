@@ -1,9 +1,10 @@
 #pragma once
+#include "IListener.h"
 
 //class CCharacter : public CObject
 class COBB;
 
-class CCharacter
+class CCharacter : public IListener
 {
 public:
 	CCharacter();
@@ -27,4 +28,7 @@ public:
 
 	// get UI color -> set head color. Çö¿ì¾¾¶û ÇÕÄ¡±â
 	virtual void SetColor(D3DCOLOR c);
+
+	virtual void ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam);
+	virtual string GetName();
 };

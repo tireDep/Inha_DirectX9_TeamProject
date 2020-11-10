@@ -78,14 +78,17 @@ void CMainGame::Setup()
 	//m_pRigidbody->Setup(D3DXVECTOR3(5, 30, 5), D3DXVECTOR3(0, -9.8f / 3, 0));
 	//m_pRigidbody2 = new CRigidBody;
 	//m_pRigidbody2->Setup(D3DXVECTOR3(-15, 2, -15), D3DXVECTOR3(1, 0, 1));
-
+	
+	g_pInputManager->Setup();
 	g_pInputManager->AddListener(g_gameManager);
 	g_pInputManager->AddListener(m_pCamera);
+	g_pInputManager->AddListener(m_pCharacter);
 }
 
 void CMainGame::Update()
 {
 	g_pTimeManager->Update();
+	g_pInputManager->Update();
 
 	if (m_pCamera)
 		m_pCamera->Update();

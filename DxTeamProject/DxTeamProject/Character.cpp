@@ -8,6 +8,7 @@ CCharacter::CCharacter()
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
+	m_strName = "Character";
 }
 
 COBB * CCharacter::GetOBB()
@@ -19,6 +20,41 @@ void CCharacter::SetColor(D3DCOLOR c)
 {
 	for (int i = 12; i <= 17; i++)
 		m_vecVertex[i].c = c;
+}
+
+void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
+{
+	// >> todo
+	// - UI가 켜져있을 때 이동 여부 확인 필요
+	// - 대각선 이동 여부 확인 필요
+	//   => 대각선 이동시 속도 증가됨
+	//   => sa, sd 반대로 작동됨
+
+	 switch (message)
+	 {
+	 case 'W':
+	 	m_vPosition = DoMove(0.0f);
+	 	break;
+	 case 'S':
+	 	m_vPosition = DoMove(D3DX_PI);
+	 	break;
+	 case 'A':
+	 	m_vPosition = DoMove(-D3DX_PI / 2.0f);
+	 	break;
+	 case 'D':
+	 	m_vPosition = DoMove(D3DX_PI / 2.0f);
+	 	break;
+	 }
+
+	D3DXMATRIXA16 matT;
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+
+	m_matWorld = m_matRotY * matT;
+}
+
+string CCharacter::GetName()
+{
+	return m_strName;
 }
 
 CCharacter::~CCharacter()
@@ -89,27 +125,8 @@ void CCharacter::Setup()
 
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
-	m_vDirection = cameradirection;
-
-	// >> todo
-	// - UI가 켜져있을 때 이동 여부 확인 필요
-	// - 대각선 이동 여부 확인 필요
-	//   => 대각선 이동시 속도 증가됨
-	//   => sa, sd 반대로 작동됨
-
-	if (GetKeyState('W') & 0X8000)
-		m_vPosition = DoMove(0.0f);
-	if (GetKeyState('S') & 0X8000)
-		m_vPosition = DoMove(D3DX_PI);
-	if (GetKeyState('A') & 0X8000)
-		m_vPosition = DoMove(-D3DX_PI/2.0f);
-	if (GetKeyState('D') & 0X8000)
-		m_vPosition = DoMove(D3DX_PI / 2.0f);
-
-	D3DXMATRIXA16 matT;
-	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-
-	m_matWorld = m_matRotY * matT;
+	// if (m_vDirection != cameradirection)
+		m_vDirection = cameradirection;
 }
 
 D3DXVECTOR3 CCharacter::DoMove(const float& radian)
