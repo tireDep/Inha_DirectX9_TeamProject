@@ -6,9 +6,11 @@ CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
 	, m_vPosition(0, 0, 0)
 	,m_pOBB(NULL)
+	, m_fRot(0.0f)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
+	m_strName = "Character";
 }
 
 COBB * CCharacter::GetOBB()
@@ -22,6 +24,307 @@ void CCharacter::SetColor(D3DCOLOR c)
 		m_vecVertex[i].c = c;
 
 	m_color = c;
+}
+
+static bool pushA = false;
+static bool pushD = false;
+static bool pushW = false;
+static bool pushS = false;
+void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
+{
+	// >> todo
+	// - 대각선 이동 여부 확인 필요
+	//   => 대각선 이동시 속도 증가됨
+	//   => sa, sd 반대로 작동됨
+
+	//if (message == 'W')
+	//{
+	//	if (message == 'A')
+	//	{
+	//		DoRotation(+D3DX_PI / 4.0f);
+	//		DoMove(0.003f);
+	//		DoMatrix();
+	//		return;
+	//	}
+	//	else if (message == 'D')
+	//	{
+	//		DoRotation(-D3DX_PI / 4.0f);
+	//		DoMove(0.003f);
+	//		DoMatrix();
+	//		return;
+	//	}
+	//	else
+	//	{
+	//		DoRotation(0.0f);
+	//		DoMove(0.003f);
+	//		DoMatrix();
+	//		return;
+	//	}
+	//}
+
+	//if (message == 'S')
+	//{
+	//	if (message == 'A')
+	//	{
+	//		DoRotation(+D3DX_PI * 3 / 4.0f);
+	//		DoMove(0.003f);
+	//		DoMatrix();
+	//		return;
+	//	}
+	//	else if (message == 'D')
+	//	{
+	//		DoRotation(-D3DX_PI * 3 / 4.0f);
+	//		DoMove(0.003f);
+	//		DoMatrix();
+	//		return;
+	//	}
+	//	else
+	//	{
+	//		DoRotation(D3DX_PI);
+	//		DoMove(0.003f);
+	//		DoMatrix();
+	//		return;
+	//	}
+	//}
+
+	//if (message == 'A')
+	//{
+	//	if (message == 'W')
+	//	{
+	//		DoRotation(D3DX_PI / 2.0f - D3DX_PI / 4.0f);
+	//		DoMove(0.003f);
+	//		DoMatrix();
+	//		return;
+	//	}
+	//	else if (message == 'S')
+	//	{
+	//		DoRotation(D3DX_PI / 2.0f + D3DX_PI / 4.0f);
+	//		DoMove(0.003f);
+	//		DoMatrix();
+	//		return;
+	//	}
+	//	else
+	//	{
+	//		DoRotation(D3DX_PI / 2.0f);
+	//		DoMove(0.003f);
+	//		DoMatrix();
+	//		return;
+	//	}
+	//}
+
+	//if (message == 'D')
+	//{
+	//	if (message == 'W')
+	//	{
+	//		DoRotation(-D3DX_PI / 4.0f);
+	//		DoMove(0.003f);
+	//		DoMatrix();
+	//		return;
+	//	}
+	//	else if (message == 'S')
+	//	{
+	//		DoRotation(-D3DX_PI * 3 / 4.0f);
+	//		DoMove(0.003f);
+	//		DoMatrix();
+	//		return;
+	//	}
+	//	else
+	//	{
+	//		DoRotation(D3DX_PI / 2.0f);
+	//		DoMove(0.003f);
+	//		DoMatrix();
+	//		return;
+	//	}
+	//}
+
+	//static bool pushW;
+	//static bool pushS;
+	//static bool pushA;
+	//static bool pushD;
+
+	//switch (message)
+	//{
+	//	case 'W':
+	//		pushW = true;
+	//		if (pushA)
+	//		{
+
+	//			pushW = false;
+	//		}
+	//		else if (pushD)
+	//		{
+	//			DoRotation(+D3DX_PI / 4.0f);
+	//			DoMove(0.0021f);
+	//			pushW = false;
+	//		}
+	//		else
+	//		{
+	//			DoRotation(0.0f);
+	//			DoMove(0.003f);
+	//			pushW = false;
+	//		}
+	//		//m_vPosition = DoMove(0.0f);
+	//		break;
+	//	case 'S':
+	//		pushS = true;
+	//		if (pushA)
+	//		{
+	//			DoRotation(-D3DX_PI * 3 / 4.0f);
+	//			DoMove(0.0021f);
+	//			pushS = false;
+	//		}
+	//		else if (pushD)
+	//		{
+	//			DoRotation(+D3DX_PI * 3 / 4.0f);
+	//			DoMove(0.0021f);
+	//			pushS = false;
+	//		}
+	//		{
+	//			DoRotation(D3DX_PI);
+	//			DoMove(0.003f);
+	//			pushS = false;
+	//		}
+	//		//m_vPosition = DoMove(D3DX_PI);
+	//		break;
+	//	case 'A':
+	//		pushA = true;
+	//		if (pushW)
+	//		{
+	//			DoRotation(-D3DX_PI / 4.0f);
+	//			DoMove(0.0021f);
+	//			pushA = false;
+	//		}
+	//		else if (pushS)
+	//		{
+	//			DoRotation(-D3DX_PI * 3 / 4.0f);
+	//			DoMove(0.0021f);
+	//			pushA = false;
+	//		}
+	//		{
+	//			DoRotation(-D3DX_PI / 2.0f);
+	//			DoMove(0.003f);
+	//			pushA = false;
+	//		}
+	//		//m_vPosition = DoMove(-D3DX_PI / 2.0f);
+	//		break;
+	//	case 'D':
+	//		pushD = true;
+	//		if (pushW)
+	//		{
+	//			DoRotation(D3DX_PI / 4.0f);
+	//			DoMove(0.0021f);
+	//			pushD = false;
+	//		}
+	//		else if (pushS)
+	//		{
+	//			DoRotation(D3DX_PI * 3 / 4.0f);
+	//			DoMove(0.0021f);
+	//			pushD = false;
+	//		}
+	//		{
+	//			DoRotation(D3DX_PI / 2.0f);
+	//			DoMove(0.003f);
+	//			pushD = false;
+	//		}
+	//		//m_vPosition = DoMove(D3DX_PI / 2.0f);
+	//		break;
+	//}
+
+	pushW = GetAsyncKeyState('W') & 0x8000 ? true : false;
+	pushS = GetAsyncKeyState('S') & 0x8000 ? true : false;
+	pushA = GetAsyncKeyState('A') & 0x8000 ? true : false;
+	pushD = GetAsyncKeyState('D') & 0x8000 ? true : false;
+
+	float speed = 0.0f;
+
+	switch (message)
+	{
+		case 'W':
+			speed = 0.003f;
+			m_fRot = 0.0f;
+			if (pushA)
+			{
+				m_fRot = D3DX_PI / 4.0f * -1;
+				speed = 0.0021f;
+				DoRotation(m_fRot);
+				DoMove(speed);
+				break;
+			}
+			else if (pushD)
+			{
+				m_fRot = D3DX_PI / 4.0f;
+				speed = 0.0021f;
+				DoRotation(m_fRot);
+				DoMove(speed);
+				break;
+			}
+			DoRotation(m_fRot);
+			DoMove(speed);
+			break;
+
+		case 'S':
+			m_fRot = D3DX_PI;
+			speed = 0.003f;
+			if (pushA)
+			{
+				m_fRot = D3DX_PI + D3DX_PI / 4.0f;
+				speed = 0.0021f;
+				DoRotation(m_fRot);
+				DoMove(speed);
+				break;
+			}
+			else if (pushD)
+			{
+				m_fRot = (D3DX_PI + D3DX_PI / 4.0f) * -1;
+				speed = 0.0021f;
+				DoRotation(m_fRot);
+				DoMove(speed);
+				break;
+			}
+			DoRotation(m_fRot);
+			DoMove(speed);
+			break;
+
+		case 'A':
+			m_fRot = -D3DX_PI / 2.0f;
+			speed = 0.003f;
+			if (pushW || pushS) 
+			{ 
+				m_fRot = 0; 
+				speed = 0.0021f; 
+				DoRotation(m_fRot);
+				DoMove(speed);
+				break;
+			}
+			DoRotation(m_fRot);
+			DoMove(speed);
+			break;
+
+		case 'D':
+			m_fRot = D3DX_PI / 2.0f;
+			speed = 0.003f;
+			if (pushW || pushS)
+			{
+				m_fRot = 0;
+				speed = 0.0021f;
+				DoRotation(m_fRot);
+				DoMove(speed);
+				break;
+			}			
+			DoRotation(m_fRot);
+			DoMove(speed);
+			break;
+	}
+
+	D3DXMATRIXA16 matT;
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+
+	m_matWorld = m_matRotY * matT;
+}
+
+string CCharacter::GetName()
+{
+	return m_strName;
 }
 
 CCharacter::~CCharacter()
@@ -92,6 +395,7 @@ void CCharacter::Setup()
 
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
+
 	m_vDirection = cameradirection;
 	
 	// >> todo
@@ -100,14 +404,7 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 	//   => 대각선 이동시 속도 증가됨
 	//   => sa, sd 반대로 작동됨
 
-	if (GetKeyState('W') & 0X8000)
-		m_vPosition = DoMove(0.0f);
-	if (GetKeyState('S') & 0X8000)
-		m_vPosition = DoMove(D3DX_PI);
-	if (GetKeyState('A') & 0X8000)
-		m_vPosition = DoMove(-D3DX_PI/2.0f);
-	if (GetKeyState('D') & 0X8000)
-		m_vPosition = DoMove(D3DX_PI / 2.0f);
+	
 
 	if (GetKeyState('1') & 0X8000) // 빨
 		 SetColor(D3DCOLOR_XRGB(255, 0, 0));
@@ -136,10 +433,11 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 	if (m_pOBB)
 		m_pOBB->Update(&m_matWorld);
 
-
+	// if (m_vDirection != cameradirection)
+		m_vDirection = cameradirection;
 }
 
-D3DXVECTOR3 CCharacter::DoMove(const float& radian)
+void CCharacter::DoRotation(const float & radian)
 {
 	m_vDirection.y = 0;
 	D3DXMatrixRotationY(&m_matRotY, radian);
@@ -150,8 +448,18 @@ D3DXVECTOR3 CCharacter::DoMove(const float& radian)
 	D3DXVECTOR3 tempUp(0, 1, 0);
 	D3DXMatrixLookAtLH(&m_matRotY, &tempPos, &m_vDirection, &tempUp);
 	D3DXMatrixTranspose(&m_matRotY, &m_matRotY);
+}
 
-	return m_vPosition + (m_vDirection * 0.005f);
+void CCharacter::DoMove(const float& velocity)
+{
+	m_vPosition = m_vPosition + (m_vDirection * velocity);
+}
+
+void CCharacter::DoMatrix()
+{
+	D3DXMATRIXA16 matT;
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	m_matWorld = m_matRotY * matT;
 }
 
 void CCharacter::Render()

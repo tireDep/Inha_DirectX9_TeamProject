@@ -1,9 +1,10 @@
 #pragma once
+#include "IListener.h"
 
 //class CCharacter : public CObject
 class COBB;
 
-class CCharacter
+class CCharacter : public IListener
 {
 public:
 	CCharacter();
@@ -13,12 +14,18 @@ protected:
 	D3DXVECTOR3		m_vPosition;
 	D3DXMATRIXA16	m_matRotY;
 	D3DXMATRIXA16	m_matWorld;
+
 	D3DCOLOR m_color;
+
+	float			m_fRot;
+
 public:
 	virtual ~CCharacter(void);
 	virtual void Setup();
 	virtual void Update(D3DXVECTOR3 cameradirection);
-	virtual D3DXVECTOR3 DoMove(const float& radian);
+	virtual void DoRotation(const float& radian);
+	virtual void DoMove(const float& velocity);
+	virtual void DoMatrix();
 	virtual void Render();
 	virtual D3DXVECTOR3& GetPosition();
 	virtual D3DXMATRIXA16* GetTransform();
@@ -30,4 +37,7 @@ public:
 
 	// get UI color -> set head color. Çö¿ì¾¾¶û ÇÕÄ¡±â
 	virtual void SetColor(D3DCOLOR c);
+
+	virtual void ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam);
+	virtual string GetName();
 };
