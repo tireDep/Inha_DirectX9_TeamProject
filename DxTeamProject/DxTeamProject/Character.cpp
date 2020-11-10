@@ -5,8 +5,7 @@
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
 	, m_vPosition(0, 0, 0)
-	,m_pOBB(NULL)
-	, m_fRot(0.0f)
+	, m_pOBB(NULL)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
@@ -22,213 +21,16 @@ void CCharacter::SetColor(D3DCOLOR c)
 {
 	for (int i = 12; i <= 17; i++)
 		m_vecVertex[i].c = c;
-
 	m_color = c;
 }
 
-static bool pushA = false;
-static bool pushD = false;
-static bool pushW = false;
-static bool pushS = false;
+
 void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 {
-	// >> todo
-	// - 대각선 이동 여부 확인 필요
-	//   => 대각선 이동시 속도 증가됨
-	//   => sa, sd 반대로 작동됨
-
-	//if (message == 'W')
-	//{
-	//	if (message == 'A')
-	//	{
-	//		DoRotation(+D3DX_PI / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else if (message == 'D')
-	//	{
-	//		DoRotation(-D3DX_PI / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else
-	//	{
-	//		DoRotation(0.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//}
-
-	//if (message == 'S')
-	//{
-	//	if (message == 'A')
-	//	{
-	//		DoRotation(+D3DX_PI * 3 / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else if (message == 'D')
-	//	{
-	//		DoRotation(-D3DX_PI * 3 / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else
-	//	{
-	//		DoRotation(D3DX_PI);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//}
-
-	//if (message == 'A')
-	//{
-	//	if (message == 'W')
-	//	{
-	//		DoRotation(D3DX_PI / 2.0f - D3DX_PI / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else if (message == 'S')
-	//	{
-	//		DoRotation(D3DX_PI / 2.0f + D3DX_PI / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else
-	//	{
-	//		DoRotation(D3DX_PI / 2.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//}
-
-	//if (message == 'D')
-	//{
-	//	if (message == 'W')
-	//	{
-	//		DoRotation(-D3DX_PI / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else if (message == 'S')
-	//	{
-	//		DoRotation(-D3DX_PI * 3 / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else
-	//	{
-	//		DoRotation(D3DX_PI / 2.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//}
-
-	//static bool pushW;
-	//static bool pushS;
-	//static bool pushA;
-	//static bool pushD;
-
-	//switch (message)
-	//{
-	//	case 'W':
-	//		pushW = true;
-	//		if (pushA)
-	//		{
-
-	//			pushW = false;
-	//		}
-	//		else if (pushD)
-	//		{
-	//			DoRotation(+D3DX_PI / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushW = false;
-	//		}
-	//		else
-	//		{
-	//			DoRotation(0.0f);
-	//			DoMove(0.003f);
-	//			pushW = false;
-	//		}
-	//		//m_vPosition = DoMove(0.0f);
-	//		break;
-	//	case 'S':
-	//		pushS = true;
-	//		if (pushA)
-	//		{
-	//			DoRotation(-D3DX_PI * 3 / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushS = false;
-	//		}
-	//		else if (pushD)
-	//		{
-	//			DoRotation(+D3DX_PI * 3 / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushS = false;
-	//		}
-	//		{
-	//			DoRotation(D3DX_PI);
-	//			DoMove(0.003f);
-	//			pushS = false;
-	//		}
-	//		//m_vPosition = DoMove(D3DX_PI);
-	//		break;
-	//	case 'A':
-	//		pushA = true;
-	//		if (pushW)
-	//		{
-	//			DoRotation(-D3DX_PI / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushA = false;
-	//		}
-	//		else if (pushS)
-	//		{
-	//			DoRotation(-D3DX_PI * 3 / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushA = false;
-	//		}
-	//		{
-	//			DoRotation(-D3DX_PI / 2.0f);
-	//			DoMove(0.003f);
-	//			pushA = false;
-	//		}
-	//		//m_vPosition = DoMove(-D3DX_PI / 2.0f);
-	//		break;
-	//	case 'D':
-	//		pushD = true;
-	//		if (pushW)
-	//		{
-	//			DoRotation(D3DX_PI / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushD = false;
-	//		}
-	//		else if (pushS)
-	//		{
-	//			DoRotation(D3DX_PI * 3 / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushD = false;
-	//		}
-	//		{
-	//			DoRotation(D3DX_PI / 2.0f);
-	//			DoMove(0.003f);
-	//			pushD = false;
-	//		}
-	//		//m_vPosition = DoMove(D3DX_PI / 2.0f);
-	//		break;
-	//}
+	static bool pushA = false;
+	static bool pushD = false;
+	static bool pushW = false;
+	static bool pushS = false;
 
 	pushW = GetAsyncKeyState('W') & 0x8000 ? true : false;
 	pushS = GetAsyncKeyState('S') & 0x8000 ? true : false;
@@ -236,82 +38,63 @@ void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 	pushD = GetAsyncKeyState('D') & 0x8000 ? true : false;
 
 	float speed = 0.0f;
+	float rotation = 0.0f;
 
 	switch (message)
 	{
 		case 'W':
 			speed = 0.003f;
-			m_fRot = 0.0f;
+			rotation = 0.0f;
 			if (pushA)
 			{
-				m_fRot = D3DX_PI / 4.0f * -1;
+				rotation = D3DX_PI / 4.0f * -1;
 				speed = 0.0021f;
-				DoRotation(m_fRot);
-				DoMove(speed);
-				break;
 			}
 			else if (pushD)
 			{
-				m_fRot = D3DX_PI / 4.0f;
+				rotation = D3DX_PI / 4.0f;
 				speed = 0.0021f;
-				DoRotation(m_fRot);
-				DoMove(speed);
-				break;
 			}
-			DoRotation(m_fRot);
+			DoRotation(rotation);
 			DoMove(speed);
 			break;
-
 		case 'S':
-			m_fRot = D3DX_PI;
+			rotation = D3DX_PI;
 			speed = 0.003f;
 			if (pushA)
 			{
-				m_fRot = D3DX_PI + D3DX_PI / 4.0f;
+				rotation = D3DX_PI + D3DX_PI / 4.0f;
 				speed = 0.0021f;
-				DoRotation(m_fRot);
-				DoMove(speed);
-				break;
 			}
 			else if (pushD)
 			{
-				m_fRot = (D3DX_PI + D3DX_PI / 4.0f) * -1;
+				rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
 				speed = 0.0021f;
-				DoRotation(m_fRot);
-				DoMove(speed);
-				break;
 			}
-			DoRotation(m_fRot);
+			DoRotation(rotation);
 			DoMove(speed);
 			break;
 
 		case 'A':
-			m_fRot = -D3DX_PI / 2.0f;
+			rotation = -D3DX_PI / 2.0f;
 			speed = 0.003f;
 			if (pushW || pushS) 
 			{ 
-				m_fRot = 0; 
+				rotation = 0; 
 				speed = 0.0021f; 
-				DoRotation(m_fRot);
-				DoMove(speed);
-				break;
 			}
-			DoRotation(m_fRot);
+			DoRotation(rotation);
 			DoMove(speed);
 			break;
-
 		case 'D':
-			m_fRot = D3DX_PI / 2.0f;
+			rotation = D3DX_PI / 2.0f;
 			speed = 0.003f;
 			if (pushW || pushS)
 			{
-				m_fRot = 0;
+				rotation = 0;
 				speed = 0.0021f;
-				DoRotation(m_fRot);
-				DoMove(speed);
-				break;
 			}			
-			DoRotation(m_fRot);
+			DoRotation(rotation);
 			DoMove(speed);
 			break;
 	}
@@ -364,7 +147,7 @@ void CCharacter::Setup()
 	v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 
 	// : left
-	v.c = D3DCOLOR_XRGB(255, 255, 255);
+	v.c = D3DCOLOR_XRGB(255, 255, 255); // 캐릭터 왼면(흰)
 	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
@@ -373,7 +156,7 @@ void CCharacter::Setup()
 	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 
 	// : right 
-	v.c = D3DCOLOR_XRGB(0, 0, 0);
+	v.c = D3DCOLOR_XRGB(0, 0, 0); // 캐릭터 오른면(흑)
 	v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
@@ -395,16 +178,7 @@ void CCharacter::Setup()
 
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
-
 	m_vDirection = cameradirection;
-	
-	// >> todo
-	// - UI가 켜져있을 때 이동 여부 확인 필요
-	// - 대각선 이동 여부 확인 필요
-	//   => 대각선 이동시 속도 증가됨
-	//   => sa, sd 반대로 작동됨
-
-	
 
 	if (GetKeyState('1') & 0X8000) // 빨
 		 SetColor(D3DCOLOR_XRGB(255, 0, 0));
@@ -427,14 +201,10 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 	D3DXMATRIXA16 matT;
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 
-
 	m_matWorld = m_matRotY * matT;
 
 	if (m_pOBB)
 		m_pOBB->Update(&m_matWorld);
-
-	// if (m_vDirection != cameradirection)
-		m_vDirection = cameradirection;
 }
 
 void CCharacter::DoRotation(const float & radian)
@@ -455,20 +225,9 @@ void CCharacter::DoMove(const float& velocity)
 	m_vPosition = m_vPosition + (m_vDirection * velocity);
 }
 
-void CCharacter::DoMatrix()
-{
-	D3DXMATRIXA16 matT;
-	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	m_matWorld = m_matRotY * matT;
-}
-
 void CCharacter::Render()
 {
-
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	//D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
-	/*if (m_pOBB)
-		m_pOBB->OBBBOX_RENDER(c);*/
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
 	 m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PC_VERTEX));
@@ -486,8 +245,5 @@ D3DXMATRIXA16 * CCharacter::GetTransform()
 
 D3DCOLOR CCharacter::GetColor()
 {
-	
 	return m_color;
 }
-
-

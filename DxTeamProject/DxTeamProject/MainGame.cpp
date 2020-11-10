@@ -45,7 +45,6 @@ CMainGame::~CMainGame()
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	g_pInputManager->CheckInput(message, wParam, lParam);
-
 }
 
 void CMainGame::Setup()
@@ -94,11 +93,8 @@ void CMainGame::Update()
 	if (m_pCamera)
 		m_pCamera->Update();
 	if (m_pCharacter)
-		m_pCharacter->Update(m_pCamera->GetCameraDirection());		// 추가. 카메라의 벡터 받아오기
+		m_pCharacter->Update(m_pCamera->GetCameraDirection());
 
-	//D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
-	
-	//m_pCharacter->m_pOBB->Update(m_pCharacter->GetTransform());
 	for (int i = 0; i < 1; ++i)
 	{
 		if (COBB::IsCollision(m_pCharacter->GetOBB(), m_vColliderCube[i]->GetOBB()) == true)
@@ -107,7 +103,7 @@ void CMainGame::Update()
 		}
 		else
 		{	
-			m_vColliderCube[i]->Update(m_vColliderCube[i]->m_color);
+			m_vColliderCube[i]->Update(m_vColliderCube[i]->GetColor());
 		}
 	}
 	

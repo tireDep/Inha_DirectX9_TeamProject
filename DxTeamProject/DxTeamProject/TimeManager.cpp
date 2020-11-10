@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "TimeManager.h"
 
-
 CTimeManager::CTimeManager()
 	:m_fFPS_Timer(0)
 	,m_FPS(0)
@@ -9,7 +8,6 @@ CTimeManager::CTimeManager()
 {
 	QueryPerformanceCounter(&m_liLastTime);
 }
-
 
 CTimeManager::~CTimeManager()
 {
@@ -48,4 +46,3 @@ int CTimeManager::GetFPS()
 {
 	return m_FPS;
 }
-

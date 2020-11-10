@@ -18,6 +18,4 @@ public:
 	void Update();
 	float GetElapsedTime();
 	int GetFPS();
-
 };
-
