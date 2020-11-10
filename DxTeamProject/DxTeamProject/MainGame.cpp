@@ -45,6 +45,7 @@ CMainGame::~CMainGame()
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	g_pInputManager->CheckInput(message, wParam, lParam);
+
 }
 
 void CMainGame::Setup()
@@ -95,16 +96,14 @@ void CMainGame::Update()
 	D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 
 	m_pCharacter->m_pOBB->Update(m_pCharacter->GetTransform());
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 1; ++i)
 	{
 		if (COBB::IsCollision(m_pCharacter->GetOBB(), m_vColliderCube[i]->GetOBB()) == true)
 		{
-			c = D3DCOLOR_XRGB(255, 255, 0); // 충돌하였을때
-			m_vColliderCube[i]->Update(c);
+			m_vColliderCube[i]->Update(m_pCharacter->GetColor());
 		}
 		else
 		{
-			c = D3DCOLOR_XRGB(255, 0, 0); // 충돌하지 않았을때
 			m_vColliderCube[i]->Update(c);
 		}
 	}
@@ -160,7 +159,7 @@ void CMainGame::Render()
 
 void CMainGame::Setup_OBB()
 {
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 1; ++i)
 	{
 		m_vColliderCube.push_back(new CColliderObject);
 		m_vColliderCube[i]->Setup(D3DXVECTOR3(i * 2 + 3, 0.5f, i * 2 + 3));

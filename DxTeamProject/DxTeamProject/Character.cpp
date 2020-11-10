@@ -5,6 +5,7 @@
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
 	, m_vPosition(0, 0, 0)
+	,m_pOBB(NULL)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
@@ -19,6 +20,8 @@ void CCharacter::SetColor(D3DCOLOR c)
 {
 	for (int i = 12; i <= 17; i++)
 		m_vecVertex[i].c = c;
+
+	m_color = c;
 }
 
 CCharacter::~CCharacter()
@@ -90,7 +93,7 @@ void CCharacter::Setup()
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
-
+	
 	// >> todo
 	// - UI가 켜져있을 때 이동 여부 확인 필요
 	// - 대각선 이동 여부 확인 필요
@@ -106,10 +109,34 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 	if (GetKeyState('D') & 0X8000)
 		m_vPosition = DoMove(D3DX_PI / 2.0f);
 
+	if (GetKeyState('1') & 0X8000) // 빨
+		 SetColor(D3DCOLOR_XRGB(255, 0, 0));
+
+	if (GetKeyState('2') & 0X8000) // 초록
+		SetColor(D3DCOLOR_XRGB(0, 255, 0));
+
+	if (GetKeyState('3') & 0X8000) //파랑
+		SetColor(D3DCOLOR_XRGB(0, 0, 255));
+
+	if (GetKeyState('4') & 0X8000) //흰색
+		SetColor(D3DCOLOR_XRGB(255, 255, 255));
+
+	if (GetKeyState('5') & 0X8000) //노란
+		SetColor(D3DCOLOR_XRGB(255, 255, 0));
+
+	if (GetKeyState('6') & 0X8000) //검정
+		SetColor(D3DCOLOR_XRGB(0, 0, 0));
+
 	D3DXMATRIXA16 matT;
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 
+
 	m_matWorld = m_matRotY * matT;
+
+	if (m_pOBB)
+		m_pOBB->Update(&m_matWorld);
+
+
 }
 
 D3DXVECTOR3 CCharacter::DoMove(const float& radian)
@@ -129,9 +156,14 @@ D3DXVECTOR3 CCharacter::DoMove(const float& radian)
 
 void CCharacter::Render()
 {
+
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	//D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
+	/*if (m_pOBB)
+		m_pOBB->OBBBOX_RENDER(c);*/
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PC_VERTEX));
+	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
+	 m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PC_VERTEX));
 }
 
 D3DXVECTOR3 & CCharacter::GetPosition()
@@ -143,3 +175,11 @@ D3DXMATRIXA16 * CCharacter::GetTransform()
 {
 	return &m_matWorld;
 }
+
+D3DCOLOR CCharacter::GetColor()
+{
+	
+	return m_color;
+}
+
+

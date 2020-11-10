@@ -128,7 +128,7 @@ void CColliderObject::Setup(D3DXVECTOR3 position)
 
 void CColliderObject::Update(D3DXCOLOR c)
 {
-	D3DXMatrixTranslation(&m_pOBB->m_matWorldTM, m_vCPosition.x,
+	D3DXMatrixTranslation(&m_matWorldTM, m_vCPosition.x,
 		m_vCPosition.y, m_vCPosition.z);
 
 	//if (m_pCharacterController)
@@ -137,6 +137,9 @@ void CColliderObject::Update(D3DXCOLOR c)
 	//if (m_pOBB)
 	//	m_pOBB->Update(m_pCharacterController ?
 	//		m_pCharacterController->GetTransform() : NULL);
+
+	if (m_pOBB)
+		m_pOBB->Update(&m_matWorldTM);
 
 	for (unsigned int i = 0; i < m_vecVertex.size(); ++i)
 	{
@@ -150,10 +153,10 @@ void CColliderObject::Render()
 	g_pD3DDevice->SetTexture(0, nullptr);
 
 	D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
-	if (m_pOBB)
-		m_pOBB->OBBBOX_RENDER(c);
+	//if (m_pOBB)
+	//	m_pOBB->OBBBOX_RENDER(c);
 
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_pOBB->m_matWorldTM);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorldTM);
 
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
