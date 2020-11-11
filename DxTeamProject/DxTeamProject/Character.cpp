@@ -36,7 +36,6 @@ void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 	// - 대각선 이동 여부 확인 필요
 	//   => 대각선 이동시 속도 증가됨
 	//   => sa, sd 반대로 작동됨
-
 	//if (message == 'W')
 	//{
 	//	if (message == 'A')
@@ -61,7 +60,6 @@ void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 	//		return;
 	//	}
 	//}
-
 	//if (message == 'S')
 	//{
 	//	if (message == 'A')
@@ -86,7 +84,6 @@ void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 	//		return;
 	//	}
 	//}
-
 	//if (message == 'A')
 	//{
 	//	if (message == 'W')
@@ -111,7 +108,6 @@ void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 	//		return;
 	//	}
 	//}
-
 	//if (message == 'D')
 	//{
 	//	if (message == 'W')
@@ -136,19 +132,16 @@ void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 	//		return;
 	//	}
 	//}
-
 	//static bool pushW;
 	//static bool pushS;
 	//static bool pushA;
 	//static bool pushD;
-
 	//switch (message)
 	//{
 	//	case 'W':
 	//		pushW = true;
 	//		if (pushA)
 	//		{
-
 	//			pushW = false;
 	//		}
 	//		else if (pushD)
@@ -314,8 +307,9 @@ void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 			DoRotation(m_fRot);
 			DoMove(speed);
 			break;
-	}
 
+	}
+	
 	D3DXMATRIXA16 matT;
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 

@@ -16,7 +16,7 @@ private :
 	D3DXVECTOR3					m_vPosition;
 	D3DXVECTOR3					m_vCPosition;
 	D3DXMATRIXA16			    m_matWorldTM;
-	
+	D3DXCOLOR					m_color;
 	//Synthesize_Add_Ref(CCharacter*, m_pCharacterController, CharecterController);
 	
 public:
@@ -25,9 +25,10 @@ public:
 	COBB* m_pOBB;
 public :
 	void Setup(D3DXVECTOR3 position);
-	D3DXCOLOR					m_color;
+	
 	void Update(D3DXCOLOR C);
 	void Render();
+	D3DXCOLOR GetColor();
 	COBB* GetOBB();
 	D3DXVECTOR3& GetPosition();
 };

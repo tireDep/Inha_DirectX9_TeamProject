@@ -162,6 +162,11 @@ void CColliderObject::Render()
 		m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PC_VERTEX));
 }
 
+D3DXCOLOR CColliderObject::GetColor()
+{
+	return m_color;
+}
+
 
 COBB* CColliderObject::GetOBB()
 {

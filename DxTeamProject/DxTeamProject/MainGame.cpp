@@ -107,7 +107,7 @@ void CMainGame::Update()
 		}
 		else
 		{	
-			m_vColliderCube[i]->Update(m_vColliderCube[i]->m_color);
+			m_vColliderCube[i]->Update(m_vColliderCube[i]->GetColor());
 		}
 	}
 	
