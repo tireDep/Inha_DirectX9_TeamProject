@@ -5,8 +5,6 @@ private:
 	LPD3DXSPRITE m_pSprite;
 	D3DXIMAGE_INFO m_stImageInfo, m_stImageInfo2, m_stImageInfo3;
 
-
-
 	LPDIRECT3DTEXTURE9 m_pTextureUI, m_pTextureUI2, m_pTextureUI3;
 
 	POINT pUI;
@@ -27,8 +25,4 @@ public:
 	void Setup_UI();
 	void UI_Render();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-
-	
-
 };
-

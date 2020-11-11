@@ -1,7 +1,5 @@
-
 #include "stdafx.h"
 #include "UI.h"
-
 
 CUI::CUI()
 {
@@ -11,10 +9,8 @@ CUI::CUI()
 	px3 = { 0,0 };
 }
 
-
 CUI::~CUI()
 {
-
 }
 
 void CUI::Setup_UI()
@@ -45,7 +41,6 @@ void CUI::Setup_UI()
 	//	D3DPOOL_MANAGED, D3DX_FILTER_NONE
 	//	, D3DX_DEFAULT, 0, &m_stImageInfo2, NULL, &m_pTextureUI2);
 
-
 	////¹öÆ°2
 	//D3DXCreateTextureFromFileExA(g_pD3DDevice,
 	//	"UI/btn-med-up.png",
@@ -56,8 +51,6 @@ void CUI::Setup_UI()
 	//	D3DFMT_UNKNOWN,
 	//	D3DPOOL_MANAGED, D3DX_FILTER_NONE
 	//	, D3DX_DEFAULT, 0, &m_stImageInfo3, NULL, &m_pTextureUI3);
-
-
 }
 
 void CUI::UI_Render()
@@ -102,11 +95,7 @@ void CUI::UI_Render()
 
 
 	m_pSprite->End();
-
 }
-
-
-
 
 void CUI::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -141,5 +130,3 @@ void CUI::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 }
-
-

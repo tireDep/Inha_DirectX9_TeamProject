@@ -1,16 +1,13 @@
 #include "stdafx.h"
 #include "OBB.h"
 
-
 COBB::COBB() : m_vecVertex(NULL)
 {
 }
 
-
 COBB::~COBB()
 {
 }
-
 
 void COBB::SetupCube(ST_PC_VERTEX v1, ST_PC_VERTEX v2)
 {
@@ -32,7 +29,6 @@ void COBB::SetupCube(ST_PC_VERTEX v1, ST_PC_VERTEX v2)
 	m_fAxisHalfLen[2] = m_fAxisLen[2] / 2.0f;
 
 	vector<D3DXVECTOR3> vecVertex;
-
 
 	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], 0, -m_fAxisHalfLen[2])); // 0
 	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisLen[1], -m_fAxisHalfLen[2])); //1
@@ -78,7 +74,6 @@ void COBB::SetupCube(ST_PC_VERTEX v1, ST_PC_VERTEX v2)
 	vecIndex.push_back(3);
 	vecIndex.push_back(7);
 
-
 	m_vecVertex.resize(vecIndex.size());
 
 	for (unsigned int i = 0; i < vecIndex.size(); ++i)
@@ -87,11 +82,8 @@ void COBB::SetupCube(ST_PC_VERTEX v1, ST_PC_VERTEX v2)
 	}
 	D3DXMatrixIdentity(&m_matWorldTM);
 }
-
-
 void COBB::Update(D3DXMATRIXA16* pmatWorld)
 {
-
 	if (pmatWorld)
 		m_matWorldTM = *pmatWorld;
 
@@ -112,7 +104,6 @@ void COBB::Update(D3DXMATRIXA16* pmatWorld)
 
 bool COBB::IsCollision(COBB* pOBB1, COBB* pOBB2)
 {
-
 	float cos[3][3];
 	float absCos[3][3];
 	float dist[3];
@@ -219,7 +210,6 @@ void COBB::OBBBOX_RENDER(D3DXCOLOR c)
 	{
 		m_vecVertex[i].c = c;
 	}
-
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTexture(0, nullptr);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorldTM);
