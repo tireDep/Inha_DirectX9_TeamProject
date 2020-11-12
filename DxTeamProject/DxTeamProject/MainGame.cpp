@@ -8,7 +8,8 @@
 #include "Character.h"
 #include "ColliderObject.h"
 #include "OBB.h"
-
+#include "Ray.h"
+#include "Light.h"
 /// 릴리즈 버전을 위한 주석처리
 //#include "Light.h"
 //#include "SoundManager.h"
@@ -66,11 +67,15 @@ void CMainGame::Setup()
 	m_pCamera = new CCamera;
 	m_pCamera->Setup(&m_pCharacter->GetPosition());
 
+	Setup_PickingObj();
+
+	m_pLight = new CLight;
+	m_pLight->Setup();
+
 	/// 릴리즈 버전을 위한 주석처리
 	//m_GridMap = new CGridMap;
 	//m_GridMap->Setup();
-	//m_pLight = new CLight;
-	////m_pLight->Setup();
+	
 	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0));		// 태양광 벡터 설정 가능
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
@@ -108,6 +113,23 @@ void CMainGame::Update()
 			m_vColliderCube[i]->Update(m_vColliderCube[i]->GetColor());
 		}
 	}
+
+	RECT rc;
+	GetClientRect(g_hWnd, &rc);
+	CRay r = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
+
+	for (int i = 0; i < m_vecSphere.size(); i++)
+	{
+		if (r.IsPicked(&m_vecSphere[i]) == true)
+		{
+			m_vecSphere[i].isPicked = true;
+		}
+		else
+		{
+			m_vecSphere[i].isPicked = false;
+		}
+
+	}
 	
 	/// 릴리즈 버전을 위한 주석처리
 	//if (m_pRigidbody)
@@ -142,6 +164,8 @@ void CMainGame::Render()
 		m_pCharacter->Render();
 	OBB_RENDER();
 
+	PickingObj_Render();
+
 	/// 릴리즈 버전을 위한 주석처리
 	//m_GridMap->Render();
 	//if (m_pRigidbody)
@@ -174,3 +198,64 @@ void CMainGame::OBB_RENDER()
 		m_vColliderCube[i]->Render();
 	}
 }
+
+void CMainGame::Setup_PickingObj()
+{
+	D3DXCreateSphere(g_pD3DDevice, 0.5f, 10, 10, &m_pMeshSphere, NULL);
+	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
+	m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
+	m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
+	m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
+
+	for (int i = 0; i <= 10; i++)
+	{
+		ST_SPHERE s;
+		s.fRadius = 0.5f;
+		s.vCenter = D3DXVECTOR3(0, 0, -10 + 2 * i);
+		m_vecSphere.push_back(s);
+		m_vecSphere[i].isPicked = false;
+	}
+
+	ZeroMemory(&m_stMtlNone, sizeof(D3DMATERIAL9));
+	m_stMtlNone.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
+	m_stMtlNone.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
+	m_stMtlNone.Specular = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
+
+	ZeroMemory(&m_stMtlPicked, sizeof(D3DMATERIAL9));
+	m_stMtlPicked.Ambient = D3DXCOLOR(0.7f, 0.0f, 0.0f, 1.0f);
+	m_stMtlPicked.Diffuse = D3DXCOLOR(0.7f, 0.0f, 0.0f, 1.0f);
+	m_stMtlPicked.Specular = D3DXCOLOR(0.7f, 0.0f, 0.0f, 1.0f);
+
+}
+
+void CMainGame::PickingObj_Render()
+{
+	D3DXMATRIXA16 matWorld;
+
+	D3DXMatrixIdentity(&matWorld);
+
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	g_pD3DDevice->SetTexture(0, 0);
+
+
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+
+
+	for (int i = 0; i < m_vecSphere.size(); i++)
+	{
+		D3DXMatrixIdentity(&matWorld);
+		matWorld._41 = m_vecSphere[i].vCenter.x;
+		matWorld._42 = m_vecSphere[i].vCenter.y;
+		matWorld._43 = m_vecSphere[i].vCenter.z;
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+		g_pD3DDevice->SetMaterial(m_vecSphere[i].isPicked ?
+			&m_stMtlPicked : &m_stMtlNone);
+		m_pMeshSphere->DrawSubset(0);
+	}
+
+	g_pD3DDevice->SetMaterial(&m_stMtlNone);
+
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	m_pMeshSphere->DrawSubset(0);
+}
+

@@ -79,6 +79,9 @@
     <ClCompile Include="ForceRegistry.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Ray.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -183,6 +186,9 @@
     <ClInclude Include="IListener.h" />
     <ClInclude Include="GameManager.h">
       <Filter>Tool... Rigidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
