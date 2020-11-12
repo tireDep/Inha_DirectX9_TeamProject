@@ -2,6 +2,8 @@
 #include "Particle.h"
 
 CParticle::CParticle()
+	: m_finverseMass(10.0f)
+	, m_fdamping(0.999f)
 {
 }
 

@@ -7,7 +7,7 @@ class CText;
 class CColliderObject;
 class CCharacter;
 class CLight;
-
+class CParticleWorld;
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
 //class CGridMap;
@@ -29,6 +29,7 @@ private:
 	LPD3DXMESH			m_pMeshSphere; // 메쉬 원
 	D3DMATERIAL9		m_stMtlSphere; // 메쉬 원 메터리얼
 
+	CParticleWorld*		m_pParticleWorld;
 	/// 릴리즈 버전을 위한 주석처리
 	//CGridMap* m_GridMap;
 	//CSoundManager* m_pSm;

@@ -1,6 +1,6 @@
 #pragma once
-#include "ParticleForceRegistry.h"
-class CParticleGravity : public CParticleForceRegistry
+#include "ParticleForceGenerator.h"
+class CParticleGravity : public CParticleForceGenerator
 {
 private:
 	D3DXVECTOR3	m_vGravity;

@@ -84,6 +84,9 @@
     <ClCompile Include="ParticleDrag.cpp">
       <Filter>Physics_Particle</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleWorld.cpp">
+      <Filter>Physics_Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -190,6 +193,9 @@
       <Filter>Physics_Particle</Filter>
     </ClInclude>
     <ClInclude Include="ParticleDrag.h">
+      <Filter>Physics_Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleWorld.h">
       <Filter>Physics_Particle</Filter>
     </ClInclude>
   </ItemGroup>

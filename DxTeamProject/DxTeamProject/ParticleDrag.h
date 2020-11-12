@@ -1,6 +1,6 @@
 #pragma once
-#include "ParticleForceRegistry.h"
-class CParticleDrag : public CParticleForceRegistry
+#include "ParticleForceGenerator.h"
+class CParticleDrag : public CParticleForceGenerator
 {
 private:
 	float m_fk1;

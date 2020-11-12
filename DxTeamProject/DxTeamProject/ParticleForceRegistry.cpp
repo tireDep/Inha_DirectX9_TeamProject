@@ -31,7 +31,10 @@ void CParticleForceRegistry::Clear()
 
 void CParticleForceRegistry::UpdateForces(float duration)
 {
-	Registry::iterator it;
-	for (it = m_stRegistrations.begin(); it != m_stRegistrations.end(); it++)
+	/// 이 부분 에러 m_stRegistrations 초기화되버림...
+	Registry::iterator it = m_stRegistrations.begin();
+	for (; it != m_stRegistrations.end(); it++)
+	{
 		it->fg->UpdateForce(it->particle, duration);
+	}
 }

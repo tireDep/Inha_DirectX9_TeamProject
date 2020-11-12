@@ -10,6 +10,9 @@
 #include "OBB.h"
 #include "Ray.h"
 #include "Light.h"
+
+#include "ParticleWorld.h"
+
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
 //#include "GridMap.h"
@@ -19,7 +22,8 @@ CMainGame::CMainGame() :
 	m_pUI(NULL),
 	m_pText(NULL),
 	m_pCharacter(NULL),
-	m_pLight(NULL)
+	m_pLight(NULL),
+	m_pParticleWorld(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 	//m_GridMap(NULL)
@@ -31,10 +35,11 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pCamera);
 	SafeDelete(m_pUI);
 	SafeDelete(m_pText);
+	SafeDelete(m_pLight);
+	SafeDelete(m_pParticleWorld);
 	g_pDeviceManager->Destroy();
 	/// 릴리즈 버전을 위한 주석처리
 	//SafeDelete(m_pSm);
-	//SafeDelete(m_pLight);
 	//SafeDelete(m_GridMap);
 }
 
@@ -67,6 +72,9 @@ void CMainGame::Setup()
 
 	m_pLight = new CLight;
 	m_pLight->Setup();
+
+	//m_pParticleWorld = new CParticleWorld;
+	//m_pParticleWorld->Setup();
 
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0));		// 태양광 벡터 설정 가능
@@ -126,7 +134,8 @@ void CMainGame::Update()
 		}
 
 	}
-	
+	//if(m_pParticleWorld)
+	//	m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
 	/// 릴리즈 버전을 위한 주석처리
 }
 
@@ -158,6 +167,8 @@ void CMainGame::Render()
 
 	PickingObj_Render();
 
+	//if (m_pParticleWorld)
+	//	m_pParticleWorld->Render();
 	/// 릴리즈 버전을 위한 주석처리
 	//m_GridMap->Render();
 
