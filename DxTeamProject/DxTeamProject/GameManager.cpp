@@ -7,6 +7,8 @@ CGameManager::CGameManager()
 
 	m_isDevMode = false;
 	m_isUIMode = false;
+
+	ShowCursor(false);
 }
 
 CGameManager* CGameManager::GetInstance()
@@ -35,6 +37,11 @@ void CGameManager::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 		{
 			m_isUIMode = !m_isUIMode;
 			m_isUIModeIn = !m_isUIModeIn;
+
+			if (m_isUIMode)
+				ShowCursor(true);
+			else
+				ShowCursor(false);
 		}
 
 		if (VK_TAB == wParam && !m_isDevMoveIn)
