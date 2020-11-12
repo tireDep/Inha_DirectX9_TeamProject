@@ -100,7 +100,12 @@ void CMainGame::Update()
 	if (m_pCamera)
 		m_pCamera->Update();
 	if (m_pCharacter)
+	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
+		if (m_pUI->OnButton)
+			m_pCharacter->SetColor(D3DCOLOR_XRGB(255, 0, 0));
+	}
+		
 
 	for (int i = 0; i < 1; ++i)
 	{

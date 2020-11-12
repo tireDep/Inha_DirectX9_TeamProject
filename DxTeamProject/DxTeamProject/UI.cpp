@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "UI.h"
+#include "Character.h"
 
 CUI::CUI()
 {
@@ -109,10 +110,14 @@ void CUI::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_LBUTTONDOWN:
 		px.x = LOWORD(lParam);
 		px.y = HIWORD(lParam);
-		cout << " x : " << px.x << " y: " << px.y;
+
 		if (PtInRect(&imageRC, px) == true)
 		{
 			m_isLButtonDown = true;
+		}
+
+		if (OnButton)
+		{
 
 		}
 		break;
@@ -124,7 +129,7 @@ void CUI::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		px2.x = LOWORD(lParam);
 		px2.y = HIWORD(lParam);
-		cout << " x : " << px2.x << " y: " << px2.y;
+
 		if (px2.x > 660 && px2.x < 720 && px2.y > 260 && px2.y < 320)
 		{
 			OnButton = true;

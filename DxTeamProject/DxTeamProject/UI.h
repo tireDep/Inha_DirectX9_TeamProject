@@ -18,7 +18,6 @@ private:
 	RECT rc, rc2, rc3, rc4;
 	RECT imageRC;
 
-	bool OnButton;
 	///
 	
 public:
@@ -30,4 +29,6 @@ public:
 
 	void ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam) override;
 	string GetName() override;
+
+	bool OnButton;
 };
