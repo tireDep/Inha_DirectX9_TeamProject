@@ -14,7 +14,6 @@
 //#include "Light.h"
 //#include "SoundManager.h"
 //#include "GridMap.h"
-//#include "RigidBody.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
@@ -24,9 +23,7 @@ CMainGame::CMainGame() :
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pLight(NULL),
 	//m_pSm(NULL),
-	//m_GridMap(NULL),
-	//m_pRigidbody(NULL),
-	//m_pRigidbody2(NULL)
+	//m_GridMap(NULL)
 {
 }
 
@@ -40,7 +37,6 @@ CMainGame::~CMainGame()
 	//SafeDelete(m_pSm);
 	//SafeDelete(m_pLight);
 	//SafeDelete(m_GridMap);
-	//SafeDelete(m_pRigidbody);
 }
 
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -80,10 +76,6 @@ void CMainGame::Setup()
 	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0));		// 태양광 벡터 설정 가능
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
-	//m_pRigidbody = new CRigidBody;
-	//m_pRigidbody->Setup(D3DXVECTOR3(5, 30, 5), D3DXVECTOR3(0, -9.8f / 3, 0));
-	//m_pRigidbody2 = new CRigidBody;
-	//m_pRigidbody2->Setup(D3DXVECTOR3(-15, 2, -15), D3DXVECTOR3(1, 0, 1));
 	
 	g_pInputManager->Setup();
 	g_pInputManager->AddListener(g_gameManager);
@@ -139,10 +131,6 @@ void CMainGame::Update()
 	}
 	
 	/// 릴리즈 버전을 위한 주석처리
-	//if (m_pRigidbody)
-	//	m_pRigidbody->Update();
-	//if (m_pRigidbody2)
-	//	m_pRigidbody2->Update();
 }
 
 void CMainGame::Render()
@@ -175,10 +163,6 @@ void CMainGame::Render()
 
 	/// 릴리즈 버전을 위한 주석처리
 	//m_GridMap->Render();
-	//if (m_pRigidbody)
-	//	m_pRigidbody->Render();
-	//if (m_pRigidbody2)
-	//	m_pRigidbody2->Render();
 
 	if (g_gameManager->GetUImode())
 	{

@@ -10,8 +10,6 @@ class CLight;
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
 //class CGridMap;
-//class CRigidBody;
-//class CGravity;
 
 class CMainGame
 {
@@ -31,9 +29,6 @@ private:
 	CLight*	m_pLight;
 	/// 릴리즈 버전을 위한 주석처리
 	//CGridMap* m_GridMap;
-	//CRigidBody*		m_pRigidbody;
-	//CRigidBody*		m_pRigidbody2;
-	//CGravity*		m_pGravity;
 	//CSoundManager* m_pSm;
 public:
 	CMainGame();

@@ -154,11 +154,8 @@
     <ClInclude Include="fmod_dsp.h" />
     <ClInclude Include="fmod_memoryinfo.h" />
     <ClInclude Include="FontManager.h" />
-    <ClInclude Include="ForceRegistry.h" />
     <ClInclude Include="Frustum.h" />
-    <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="Gravity.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="IListener.h" />
@@ -172,7 +169,6 @@
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="stdafx.h" />
@@ -188,11 +184,8 @@
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DxTeamProject.cpp" />
     <ClCompile Include="FontManager.cpp" />
-    <ClCompile Include="ForceRegistry.cpp" />
     <ClCompile Include="Frustum.cpp" />
-    <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="Gravity.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridMap.cpp" />
     <ClCompile Include="IMap.cpp" />
@@ -204,7 +197,6 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="Ray.cpp" />
-    <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -49,15 +49,6 @@
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
-    <ClCompile Include="RigidBody.cpp">
-      <Filter>Tool... Rigidbody</Filter>
-    </ClCompile>
-    <ClCompile Include="ForceGenerator.cpp">
-      <Filter>Tool... ForceGenerator</Filter>
-    </ClCompile>
-    <ClCompile Include="Gravity.cpp">
-      <Filter>Tool... ForceGenerator</Filter>
-    </ClCompile>
     <ClCompile Include="Frustum.cpp">
       <Filter>Map</Filter>
     </ClCompile>
@@ -67,16 +58,12 @@
     <ClCompile Include="GridMap.cpp">
       <Filter>Map\GridMap</Filter>
     </ClCompile>
-    <ClCompile Include="ForceRegistry.cpp">
-      <Filter>Tool... ForceGenerator</Filter>
-    </ClCompile>
     <ClCompile Include="DxTeamProject.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="ForceRegistry.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Ray.cpp">
@@ -153,15 +140,6 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>Collider</Filter>
     </ClInclude>
-    <ClInclude Include="RigidBody.h">
-      <Filter>Tool... Rigidbody</Filter>
-    </ClInclude>
-    <ClInclude Include="ForceGenerator.h">
-      <Filter>Tool... ForceGenerator</Filter>
-    </ClInclude>
-    <ClInclude Include="Gravity.h">
-      <Filter>Tool... ForceGenerator</Filter>
-    </ClInclude>
     <ClInclude Include="IMap.h">
       <Filter>Map</Filter>
     </ClInclude>
@@ -171,25 +149,19 @@
     <ClInclude Include="GridMap.h">
       <Filter>Map\GridMap</Filter>
     </ClInclude>
-    <ClInclude Include="ForceRegistry.h">
-      <Filter>Tool... ForceGenerator</Filter>
-    </ClInclude>
     <ClInclude Include="DxTeamProject.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="ForceRegistry.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="IListener.h" />
-    <ClInclude Include="GameManager.h">
-      <Filter>Tool... Rigidbody</Filter>
-    </ClInclude>
     <ClInclude Include="Ray.h">
       <Filter>Camera</Filter>
     </ClInclude>
+    <ClInclude Include="GameManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -241,12 +213,6 @@
     </Filter>
     <Filter Include="Collider">
       <UniqueIdentifier>{689759b5-f406-41f2-8cec-453b65cd2b34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tool... Rigidbody">
-      <UniqueIdentifier>{c099adf8-f170-4468-9e34-7ad903ec4c31}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tool... ForceGenerator">
-      <UniqueIdentifier>{d46a17b9-f6c6-4acd-add3-6164b58b94af}</UniqueIdentifier>
     </Filter>
     <Filter Include="Map">
       <UniqueIdentifier>{5fda7b83-e918-4258-9e6c-0e6475f3b481}</UniqueIdentifier>
