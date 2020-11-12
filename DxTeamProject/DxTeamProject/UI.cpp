@@ -30,16 +30,16 @@ void CUI::Setup_UI()
 		, D3DX_DEFAULT, 0, &m_stImageInfo, NULL, &m_pTextureUI);
 
 
-	//////버튼1
-	//D3DXCreateTextureFromFileExA(g_pD3DDevice,
-	//	"UI/Button.png",
-	//	D3DX_DEFAULT_NONPOW2,
-	//	D3DX_DEFAULT_NONPOW2,
-	//	D3DX_DEFAULT,
-	//	0,
-	//	D3DFMT_UNKNOWN,
-	//	D3DPOOL_MANAGED, D3DX_FILTER_NONE
-	//	, D3DX_DEFAULT, 0, &m_stImageInfo2, NULL, &m_pTextureUI2);
+	////BackG
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/back.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_stImageInfo2, NULL, &m_pTextureUI2);
 
 	////버튼2
 	//D3DXCreateTextureFromFileExA(g_pD3DDevice,
@@ -65,6 +65,16 @@ void CUI::UI_Render()
 
 	m_pSprite->SetTransform(&matWorld);
 
+	//BackG
+
+	SetRect(&rc3, 0,0,
+		m_stImageInfo2.Width, m_stImageInfo2.Height);
+
+	m_pSprite->Draw(m_pTextureUI2, &rc3,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(150, 255, 255, 255));
+
 	//MAIN UI
 	SetRect(&rc,-500,-50,m_stImageInfo.Width, m_stImageInfo.Height);
 
@@ -73,15 +83,6 @@ void CUI::UI_Render()
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	////BUTTON 1
-
-	//SetRect(&rc3, rc.left - 145, rc.top - 300,
-	//	m_stImageInfo2.Width, m_stImageInfo2.Height);
-
-	//m_pSprite->Draw(m_pTextureUI2, &rc3,
-	//	&D3DXVECTOR3(0, 0, 0),
-	//	&D3DXVECTOR3(0, 0, 0),
-	//	D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	////BUTTON2
 
