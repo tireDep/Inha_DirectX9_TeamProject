@@ -99,10 +99,12 @@ void CMainGame::Update()
 	{
 		if (COBB::IsCollision(m_pCharacter->GetOBB(), m_vColliderCube[i]->GetOBB()) == true)
 		{		
+			m_pCharacter->Collider(true);
 			m_vColliderCube[i]->Update(m_pCharacter->GetColor());
 		}
 		else
 		{	
+			m_pCharacter->Collider(false);
 			m_vColliderCube[i]->Update(m_vColliderCube[i]->GetColor());
 		}
 	}

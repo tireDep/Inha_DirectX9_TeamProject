@@ -4,8 +4,9 @@
 
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
-	, m_vPosition(0, 0, 0)
+	, m_vPosition(0, 0.5f, 0)
 	, m_pOBB(NULL)
+	, istrue(false)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
@@ -373,6 +374,8 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
 
+
+
 	if (GetKeyState('1') & 0X8000) // »¡
 		 SetColor(D3DCOLOR_XRGB(255, 0, 0));
 
@@ -390,6 +393,9 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 
 	if (GetKeyState('6') & 0X8000) //°ËÁ¤
 		SetColor(D3DCOLOR_XRGB(0, 0, 0));
+
+//	if(GetKeyState('F') & 0X8000)// ¹Ð¶§
+		
 
 	D3DXMATRIXA16 matT;
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
@@ -415,11 +421,26 @@ void CCharacter::DoRotation(const float & radian)
 
 void CCharacter::DoMove(const float& velocity)
 {
+	static D3DXVECTOR3 m_position = m_vPosition;
+
+	if (istrue)
+	{
+		m_vPosition = m_position;
+	}
+	else
+	{
+		m_position = m_vPosition;
+	}
+
+
+
 	m_vPosition = m_vPosition + (m_vDirection * velocity);
 }
 
 void CCharacter::Render()
 {
+	D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
+	m_pOBB->OBBBOX_RENDER(c);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
@@ -439,4 +460,18 @@ D3DXMATRIXA16 * CCharacter::GetTransform()
 D3DCOLOR CCharacter::GetColor()
 {
 	return m_color;
+}
+
+bool CCharacter::Collider(bool a)
+{
+	istrue = a;
+	if (istrue == true)
+	{
+		return istrue;
+	}
+	else
+	{	
+		return istrue;
+	}
+		
 }
