@@ -23,4 +23,6 @@ public:
 
 	void ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam) override;
 	string GetName() override;
+
+	void SetClipCursur(int ySize);
 };
