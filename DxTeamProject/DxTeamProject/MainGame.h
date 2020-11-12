@@ -7,6 +7,7 @@ class CText;
 class CColliderObject;
 class CCharacter;
 class CLight;
+
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
 //class CGridMap;
@@ -20,13 +21,14 @@ private:
 	CText*	m_pText;
 	CCharacter*	m_pCharacter;
 	vector<CColliderObject*> m_vColliderCube;
+
+	CLight*				m_pLight;
 	vector<ST_SPHERE>	m_vecSphere; // 피킹 될 오브젝트
 	D3DMATERIAL9		m_stMtlNone; //  피킹 안되어있을떄
 	D3DMATERIAL9		m_stMtlPicked; // 피킹되었을때
-	LPD3DXMESH		m_pMeshSphere; // 메쉬 원
-	D3DMATERIAL9	m_stMtlSphere; // 메쉬 원 메터리얼
+	LPD3DXMESH			m_pMeshSphere; // 메쉬 원
+	D3DMATERIAL9		m_stMtlSphere; // 메쉬 원 메터리얼
 
-	CLight*	m_pLight;
 	/// 릴리즈 버전을 위한 주석처리
 	//CGridMap* m_GridMap;
 	//CSoundManager* m_pSm;

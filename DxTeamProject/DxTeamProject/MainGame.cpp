@@ -11,7 +11,6 @@
 #include "Ray.h"
 #include "Light.h"
 /// 릴리즈 버전을 위한 주석처리
-//#include "Light.h"
 //#include "SoundManager.h"
 //#include "GridMap.h"
 
@@ -19,9 +18,9 @@ CMainGame::CMainGame() :
 	m_pCamera(NULL),
 	m_pUI(NULL),
 	m_pText(NULL),
-	m_pCharacter(NULL)
+	m_pCharacter(NULL),
+	m_pLight(NULL)
 	/// 릴리즈 버전을 위한 주석처리
-	//m_pLight(NULL),
 	//m_pSm(NULL),
 	//m_GridMap(NULL)
 {
@@ -70,10 +69,9 @@ void CMainGame::Setup()
 	m_pLight->Setup();
 
 	/// 릴리즈 버전을 위한 주석처리
+	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0));		// 태양광 벡터 설정 가능
 	//m_GridMap = new CGridMap;
 	//m_GridMap->Setup();
-	
-	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0));		// 태양광 벡터 설정 가능
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
 	
@@ -98,7 +96,6 @@ void CMainGame::Update()
 			m_pCharacter->SetColor(D3DCOLOR_XRGB(255, 0, 0));
 	}
 		
-
 	for (int i = 0; i < 1; ++i)
 	{
 		if (COBB::IsCollision(m_pCharacter->GetOBB(), m_vColliderCube[i]->GetOBB()) == true)
@@ -216,22 +213,16 @@ void CMainGame::Setup_PickingObj()
 	m_stMtlPicked.Ambient = D3DXCOLOR(0.7f, 0.0f, 0.0f, 1.0f);
 	m_stMtlPicked.Diffuse = D3DXCOLOR(0.7f, 0.0f, 0.0f, 1.0f);
 	m_stMtlPicked.Specular = D3DXCOLOR(0.7f, 0.0f, 0.0f, 1.0f);
-
 }
 
 void CMainGame::PickingObj_Render()
 {
 	D3DXMATRIXA16 matWorld;
-
 	D3DXMatrixIdentity(&matWorld);
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 	g_pD3DDevice->SetTexture(0, 0);
-
-
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-
-
 	for (int i = 0; i < m_vecSphere.size(); i++)
 	{
 		D3DXMatrixIdentity(&matWorld);
@@ -243,10 +234,7 @@ void CMainGame::PickingObj_Render()
 			&m_stMtlPicked : &m_stMtlNone);
 		m_pMeshSphere->DrawSubset(0);
 	}
-
 	g_pD3DDevice->SetMaterial(&m_stMtlNone);
-
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 	m_pMeshSphere->DrawSubset(0);
 }
-

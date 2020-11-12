@@ -54,6 +54,16 @@ public:\
 	}
 
 // ---------------------------------------------------
+#define Synthesize(varType, varName, funName) \
+protected : varType varName ; \
+public : inline varType Get##funName(void) const { return varName ; } \
+public : inline void Set##funName(const varType var) { varName = var ; }
+
+#define Synthesize_Pass_by_Ref(varType, varName, funName) \
+protected : varType varName ; \
+public : varType& Get##funName(void) { return varName ; } \
+public : void Set##funName(const varType& var) { varName = var ;}
+
 #define SafeAddRef(p)	{if(p) p->AddRef() ; }
 
 #define Synthesize_Add_Ref(varType , varName , funName) \

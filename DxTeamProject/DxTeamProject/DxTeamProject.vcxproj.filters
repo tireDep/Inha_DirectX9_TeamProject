@@ -69,6 +69,21 @@
     <ClCompile Include="Ray.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Physics_Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleForceGenerator.cpp">
+      <Filter>Physics_Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleGravity.cpp">
+      <Filter>Physics_Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleForceRegistry.cpp">
+      <Filter>Physics_Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleDrag.cpp">
+      <Filter>Physics_Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -162,6 +177,21 @@
       <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Particle.h">
+      <Filter>Physics_Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceGenerator.h">
+      <Filter>Physics_Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleGravity.h">
+      <Filter>Physics_Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceRegistry.h">
+      <Filter>Physics_Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleDrag.h">
+      <Filter>Physics_Particle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -219,6 +249,9 @@
     </Filter>
     <Filter Include="Map\GridMap">
       <UniqueIdentifier>{a9dadde6-6054-40d9-962c-ffd8e58769bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics_Particle">
+      <UniqueIdentifier>{3b98db7b-735a-44c2-b164-89fc9bcfc99b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
