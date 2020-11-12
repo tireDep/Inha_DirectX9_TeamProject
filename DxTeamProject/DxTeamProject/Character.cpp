@@ -232,9 +232,10 @@ void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 
 	float speed = 0.0f;
 	float rotation = 0.0f;
-
-	switch (message)
+	if (!g_gameManager->GetUImode())
 	{
+		switch (message)
+		{
 		case 'W':
 			speed = 0.003f;
 			rotation = 0.0f;
@@ -271,10 +272,10 @@ void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 		case 'A':
 			rotation = -D3DX_PI / 2.0f;
 			speed = 0.003f;
-			if (pushW || pushS) 
-			{ 
-				rotation = 0; 
-				speed = 0.0021f; 
+			if (pushW || pushS)
+			{
+				rotation = 0;
+				speed = 0.0021f;
 			}
 			DoRotation(rotation);
 			DoMove(speed);
@@ -286,13 +287,13 @@ void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 			{
 				rotation = 0;
 				speed = 0.0021f;
-			}			
+			}
 			DoRotation(rotation);
 			DoMove(speed);
 			break;
 
+		}
 	}
-	
 	D3DXMATRIXA16 matT;
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 
