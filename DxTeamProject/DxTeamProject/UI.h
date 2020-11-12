@@ -1,5 +1,7 @@
 #pragma once
-class CUI
+#include "IListener.h"
+
+class CUI : public IListener
 {
 private:
 	LPD3DXSPRITE m_pSprite;
@@ -16,6 +18,7 @@ private:
 	RECT rc, rc2, rc3, rc4;
 	RECT imageRC;
 
+	bool OnButton;
 	///
 	
 public:
@@ -24,5 +27,7 @@ public:
 	bool m_isLButtonDown;
 	void Setup_UI();
 	void UI_Render();
-	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
+	void ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam) override;
+	string GetName() override;
 };

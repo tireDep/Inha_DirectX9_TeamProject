@@ -46,6 +46,7 @@ CMainGame::~CMainGame()
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	g_pInputManager->CheckInput(message, wParam, lParam);
+	//m_pUI->WndProc(hWnd,message,wParam,lParam);
 }
 
 void CMainGame::Setup()
@@ -88,6 +89,7 @@ void CMainGame::Setup()
 	g_pInputManager->AddListener(g_gameManager);
 	g_pInputManager->AddListener(m_pCamera);
 	g_pInputManager->AddListener(m_pCharacter);
+	g_pInputManager->AddListener(m_pUI);
 }
 
 void CMainGame::Update()

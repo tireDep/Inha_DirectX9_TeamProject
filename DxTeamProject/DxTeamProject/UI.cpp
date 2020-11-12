@@ -4,9 +4,11 @@
 CUI::CUI()
 {
 	m_isLButtonDown = false;
+	OnButton = false;
 	movep = 0;
 	movepy = 0;
 	px3 = { 0,0 };
+	m_strName = "UI";
 }
 
 CUI::~CUI()
@@ -41,16 +43,16 @@ void CUI::Setup_UI()
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_stImageInfo2, NULL, &m_pTextureUI2);
 
-	////버튼2
-	//D3DXCreateTextureFromFileExA(g_pD3DDevice,
-	//	"UI/btn-med-up.png",
-	//	D3DX_DEFAULT_NONPOW2,
-	//	D3DX_DEFAULT_NONPOW2,
-	//	D3DX_DEFAULT,
-	//	0,
-	//	D3DFMT_UNKNOWN,
-	//	D3DPOOL_MANAGED, D3DX_FILTER_NONE
-	//	, D3DX_DEFAULT, 0, &m_stImageInfo3, NULL, &m_pTextureUI3);
+	//버튼2
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/red.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_stImageInfo3, NULL, &m_pTextureUI3);
 }
 
 void CUI::UI_Render()
@@ -84,27 +86,30 @@ void CUI::UI_Render()
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 
-	////BUTTON2
+	//RED BUTTON
+	if (OnButton)
+	{
+		SetRect(&rc4, -630, -230,
+			m_stImageInfo3.Width, m_stImageInfo3.Height);
 
-	//SetRect(&rc4, rc.left - 145, rc.top - 365,
-	//	m_stImageInfo3.Width, m_stImageInfo3.Height);
-
-	//m_pSprite->Draw(m_pTextureUI3, &rc4,
-	//	&D3DXVECTOR3(0, 0, 0),
-	//	&D3DXVECTOR3(0, 0, 0),
-	//	D3DCOLOR_ARGB(255, 255, 255, 255));
+		m_pSprite->Draw(m_pTextureUI3, &rc4,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
 
 	m_pSprite->End();
 }
 
-void CUI::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+void CUI::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
 	case WM_LBUTTONDOWN:
 		px.x = LOWORD(lParam);
 		px.y = HIWORD(lParam);
+		cout << " x : " << px.x << " y: " << px.y;
 		if (PtInRect(&imageRC, px) == true)
 		{
 			m_isLButtonDown = true;
@@ -112,22 +117,27 @@ void CUI::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 	case WM_LBUTTONUP:
-
 		px3 = { (LONG)matT._41,(LONG)matT._42 };
 		m_isLButtonDown = false;
 		break;
 	case WM_MOUSEMOVE:
-
-		//if (m_isLButtonDown == true)
-		//{
-		//	px2.x = LOWORD(lParam);
-		//	px2.y = HIWORD(lParam);
-
-		//	movep = px3.x + px2.x - px.x;
-		//	movepy = px3.y + px2.y - px.y;
-		//}
-		break;
+	{
+		px2.x = LOWORD(lParam);
+		px2.y = HIWORD(lParam);
+		cout << " x : " << px2.x << " y: " << px2.y;
+		if (px2.x > 660 && px2.x < 720 && px2.y > 260 && px2.y < 320)
+		{
+			OnButton = true;
+		}
+		else OnButton = false;
+	}
+	break;
 	default:
 		break;
 	}
+}
+
+string CUI::GetName()
+{
+	return m_strName;
 }
