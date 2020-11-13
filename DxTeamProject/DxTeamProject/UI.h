@@ -1,9 +1,20 @@
 #pragma once
 #include "IListener.h"
 
+enum class Color : int
+{
+	Red = 0, Yellow, Green, Blue, Black, White, NONE = 999
+};
+
+enum class Pick : int
+{
+	Red = 0, Yellow, Green, Blue, Black, White, NONE = 999
+};
+
 class CUI : public IListener
 {
 private:
+	
 	LPD3DXSPRITE m_pSprite;
 	D3DXIMAGE_INFO m_stImageInfo, m_stImageInfo2, m_stImageInfo3;
 
@@ -17,11 +28,13 @@ private:
 	int movep, movepy;
 	RECT rc, rc2, rc3, rc4;
 	RECT imageRC;
-	bool OnRedButton;
-	bool PickRed;
+	Color OnButton;
+	Pick PickColor;
 	///
 	
 public:
+
+
 	CUI();
 	~CUI();
 	bool m_isLButtonDown;
@@ -31,8 +44,8 @@ public:
 	void ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam) override;
 	string GetName() override;
 
-	bool GetOnButton();
-	bool GetPickColor();
+	Color GetOnButton();
+	Pick GetPickColor();
 	void SetPickColor();
 
 };

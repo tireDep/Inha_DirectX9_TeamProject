@@ -105,15 +105,18 @@ void CCamera::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 		}	// : if
 	}
 		break;
-
+#if _DEBUG
+// DEBUG Mode
 	case WM_MOUSEWHEEL:
-	{
-		m_fCameraDistance -= (GET_WHEEL_DELTA_WPARAM(wParam) / 30.0f);
-
-		if (m_fCameraDistance < 5.0 + 0.0001f)
-			m_fCameraDistance = 5.0f;
-	}
+		{
+			m_fCameraDistance -= (GET_WHEEL_DELTA_WPARAM(wParam) / 30.0f);
+			if (m_fCameraDistance < 5.0 + 0.0001f)
+				m_fCameraDistance = 5.0f;
+		}
 		break;
+#else
+// RELEASE Mode
+#endif
 	default:
 		break;
 	}

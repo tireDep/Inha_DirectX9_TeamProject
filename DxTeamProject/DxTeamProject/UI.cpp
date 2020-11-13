@@ -2,11 +2,13 @@
 #include "UI.h"
 #include "Character.h"
 
+
+
 CUI::CUI()
 {
 	m_isLButtonDown = false;
-	OnRedButton = false;
-	PickRed = false;
+	OnButton = Color::NONE;
+	PickColor = Pick::NONE;
 	movep = 0;
 	movepy = 0;
 	px3 = { 0,0 };
@@ -89,7 +91,19 @@ void CUI::UI_Render()
 
 
 	//RED BUTTON
-	if (OnRedButton)
+	if (OnButton == Color::Red)
+	{
+		SetRect(&rc4, -630, -230,
+			m_stImageInfo3.Width, m_stImageInfo3.Height);
+
+		m_pSprite->Draw(m_pTextureUI3, &rc4,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+
+	//Green BUTTON
+	if (OnButton == Color::Green)
 	{
 		SetRect(&rc4, -630, -230,
 			m_stImageInfo3.Width, m_stImageInfo3.Height);
@@ -117,9 +131,21 @@ void CUI::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 			m_isLButtonDown = true;
 		}
 
-		if (OnRedButton)
+		//if (OnButton == CUI::Red)
+		//{
+		//	PickRed = true;
+		//}
+
+		switch (OnButton)
 		{
-			PickRed = true;
+		case Color::Red: PickColor = Pick::Red;
+			break;
+		case Color::Yellow:PickColor = Pick::Yellow;
+			break;
+		case Color::Green: PickColor = Pick::Green;
+			break;
+		default:
+			break;
 		}
 		break;
 	case WM_LBUTTONUP:
@@ -133,9 +159,9 @@ void CUI::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 
 		if (px2.x > 660 && px2.x < 720 && px2.y > 260 && px2.y < 320)
 		{
-			OnRedButton = true;
+			OnButton = Color::Red;
 		}
-		else OnRedButton = false;
+		else OnButton = Color::NONE;
 	}
 	break;
 	default:
@@ -148,17 +174,17 @@ string CUI::GetName()
 	return m_strName;
 }
 
-bool CUI::GetOnButton()
+Color CUI::GetOnButton()
 {
-	return OnRedButton;
+	return Color::NONE;
 }
 
-bool CUI::GetPickColor()
+Pick CUI::GetPickColor()
 {
-	return PickRed;
+	return PickColor;
 }
 
 void CUI::SetPickColor()
 {
-	PickRed = false;
+	//PickRed = false;
 }

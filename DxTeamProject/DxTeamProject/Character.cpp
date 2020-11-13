@@ -28,197 +28,6 @@ void CCharacter::SetColor(D3DCOLOR c)
 
 void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 {
-	// >> todo
-	// - 대각선 이동 여부 확인 필요
-	//   => 대각선 이동시 속도 증가됨
-	//   => sa, sd 반대로 작동됨
-	//if (message == 'W')
-	//{
-	//	if (message == 'A')
-	//	{
-	//		DoRotation(+D3DX_PI / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else if (message == 'D')
-	//	{
-	//		DoRotation(-D3DX_PI / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else
-	//	{
-	//		DoRotation(0.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//}
-	//if (message == 'S')
-	//{
-	//	if (message == 'A')
-	//	{
-	//		DoRotation(+D3DX_PI * 3 / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else if (message == 'D')
-	//	{
-	//		DoRotation(-D3DX_PI * 3 / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else
-	//	{
-	//		DoRotation(D3DX_PI);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//}
-	//if (message == 'A')
-	//{
-	//	if (message == 'W')
-	//	{
-	//		DoRotation(D3DX_PI / 2.0f - D3DX_PI / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else if (message == 'S')
-	//	{
-	//		DoRotation(D3DX_PI / 2.0f + D3DX_PI / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else
-	//	{
-	//		DoRotation(D3DX_PI / 2.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//}
-	//if (message == 'D')
-	//{
-	//	if (message == 'W')
-	//	{
-	//		DoRotation(-D3DX_PI / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else if (message == 'S')
-	//	{
-	//		DoRotation(-D3DX_PI * 3 / 4.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//	else
-	//	{
-	//		DoRotation(D3DX_PI / 2.0f);
-	//		DoMove(0.003f);
-	//		DoMatrix();
-	//		return;
-	//	}
-	//}
-	//static bool pushW;
-	//static bool pushS;
-	//static bool pushA;
-	//static bool pushD;
-	//switch (message)
-	//{
-	//	case 'W':
-	//		pushW = true;
-	//		if (pushA)
-	//		{
-	//			pushW = false;
-	//		}
-	//		else if (pushD)
-	//		{
-	//			DoRotation(+D3DX_PI / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushW = false;
-	//		}
-	//		else
-	//		{
-	//			DoRotation(0.0f);
-	//			DoMove(0.003f);
-	//			pushW = false;
-	//		}
-	//		//m_vPosition = DoMove(0.0f);
-	//		break;
-	//	case 'S':
-	//		pushS = true;
-	//		if (pushA)
-	//		{
-	//			DoRotation(-D3DX_PI * 3 / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushS = false;
-	//		}
-	//		else if (pushD)
-	//		{
-	//			DoRotation(+D3DX_PI * 3 / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushS = false;
-	//		}
-	//		{
-	//			DoRotation(D3DX_PI);
-	//			DoMove(0.003f);
-	//			pushS = false;
-	//		}
-	//		//m_vPosition = DoMove(D3DX_PI);
-	//		break;
-	//	case 'A':
-	//		pushA = true;
-	//		if (pushW)
-	//		{
-	//			DoRotation(-D3DX_PI / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushA = false;
-	//		}
-	//		else if (pushS)
-	//		{
-	//			DoRotation(-D3DX_PI * 3 / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushA = false;
-	//		}
-	//		{
-	//			DoRotation(-D3DX_PI / 2.0f);
-	//			DoMove(0.003f);
-	//			pushA = false;
-	//		}
-	//		//m_vPosition = DoMove(-D3DX_PI / 2.0f);
-	//		break;
-	//	case 'D':
-	//		pushD = true;
-	//		if (pushW)
-	//		{
-	//			DoRotation(D3DX_PI / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushD = false;
-	//		}
-	//		else if (pushS)
-	//		{
-	//			DoRotation(D3DX_PI * 3 / 4.0f);
-	//			DoMove(0.0021f);
-	//			pushD = false;
-	//		}
-	//		{
-	//			DoRotation(D3DX_PI / 2.0f);
-	//			DoMove(0.003f);
-	//			pushD = false;
-	//		}
-	//		//m_vPosition = DoMove(D3DX_PI / 2.0f);
-	//		break;
-	//}
-
 	static bool pushA = false;
 	static bool pushD = false;
 	static bool pushW = false;
@@ -315,7 +124,7 @@ void CCharacter::Setup()
 	float cubeSize = 0.5f;
 
 	// : front
-	v.c = D3DCOLOR_XRGB(255, 0, 0); // 캐릭터 후면 빨강
+	v.c = RED; // 캐릭터 후면 빨강
 	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
@@ -324,7 +133,7 @@ void CCharacter::Setup()
 	v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 
 	// : back 
-	v.c = D3DCOLOR_XRGB(0, 0, 255); // 캐릭터 정면 파랑
+	v.c = BLUE; // 캐릭터 정면 파랑
 	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
@@ -342,7 +151,7 @@ void CCharacter::Setup()
 	v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 
 	// : left
-	v.c = D3DCOLOR_XRGB(255, 255, 255); // 캐릭터 왼면(흰)
+	v.c = WHITE; // 캐릭터 왼면(흰)
 	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
@@ -351,7 +160,7 @@ void CCharacter::Setup()
 	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 
 	// : right 
-	v.c = D3DCOLOR_XRGB(0, 0, 0); // 캐릭터 오른면(흑)
+	v.c = BLACK; // 캐릭터 오른면(흑)
 	v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
@@ -375,25 +184,23 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
 
-
-
 	if (GetKeyState('1') & 0X8000) // 빨
-		 SetColor(D3DCOLOR_XRGB(255, 0, 0));
+		 SetColor(RED);
 
 	if (GetKeyState('2') & 0X8000) // 초록
-		SetColor(D3DCOLOR_XRGB(0, 255, 0));
+		SetColor(GREEN);
 
 	if (GetKeyState('3') & 0X8000) //파랑
-		SetColor(D3DCOLOR_XRGB(0, 0, 255));
+		SetColor(BLUE);
 
 	if (GetKeyState('4') & 0X8000) //흰색
-		SetColor(D3DCOLOR_XRGB(255, 255, 255));
+		SetColor(WHITE);
 
 	if (GetKeyState('5') & 0X8000) //노란
-		SetColor(D3DCOLOR_XRGB(255, 255, 0));
+		SetColor(YELLOW);
 
 	if (GetKeyState('6') & 0X8000) //검정
-		SetColor(D3DCOLOR_XRGB(0, 0, 0));
+		SetColor(BLACK);
 
 //	if(GetKeyState('F') & 0X8000)// 밀때
 		
@@ -432,15 +239,12 @@ void CCharacter::DoMove(const float& velocity)
 	{
 		m_position = m_vPosition;
 	}
-
-
-
 	m_vPosition = m_vPosition + (m_vDirection * velocity);
 }
 
 void CCharacter::Render()
 {
-	D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
+	D3DCOLOR c = WHITE;
 	m_pOBB->OBBBOX_RENDER(c);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);

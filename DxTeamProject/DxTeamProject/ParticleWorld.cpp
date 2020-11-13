@@ -31,8 +31,6 @@ void CParticleWorld::Setup()
 
 	CParticleGravity* gravity = new CParticleGravity;
 
-	//CParticleGravity gravity;
-	//CParticleGravity gravity(D3DXVECTOR3(0, -9.81f / 3, 0));
 	for (int i = 0; i < 8; i++)
 		m_stRegistrations.Add(m_vecParticles[i], gravity);
 	UpdatePosition();
@@ -112,11 +110,11 @@ void CParticleWorld::UpdatePosition()
 	for (size_t i = 0; i < vecIndex.size(); i += 3)
 	{
 		m_vecVertex[i + 0].p = m_vecParticles[vecIndex[i + 0]]->GetPosition();
-		m_vecVertex[i + 0].c = D3DCOLOR_XRGB(255, 0, 0);
+		m_vecVertex[i + 0].c = RED;
 		m_vecVertex[i + 1].p = m_vecParticles[vecIndex[i + 1]]->GetPosition();
-		m_vecVertex[i + 1].c = D3DCOLOR_XRGB(255, 0, 0);
+		m_vecVertex[i + 1].c = RED;
 		m_vecVertex[i + 2].p = m_vecParticles[vecIndex[i + 2]]->GetPosition();
-		m_vecVertex[i + 2].c = D3DCOLOR_XRGB(255, 0, 0);
+		m_vecVertex[i + 2].c = RED;
 	}
 	for (size_t i = 0; i < m_vecVertex.size(); i++)
 	{

@@ -138,3 +138,10 @@ struct ST_SPHERE
 	bool		isPicked;
 	ST_SPHERE() : fRadius(0.0f), vCenter(0, 0, 0) {}
 };
+
+#define WHITE	D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)
+#define BLACK	D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f)
+#define RED		D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f)
+#define GREEN	D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f)
+#define BLUE	D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f)
+#define YELLOW	D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f)
