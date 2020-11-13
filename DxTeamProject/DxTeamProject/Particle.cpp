@@ -4,6 +4,8 @@
 CParticle::CParticle()
 	: m_finverseMass(10.0f)
 	, m_fdamping(0.999f)
+	, m_vVelocity(0, 0, 0)
+	, m_vAcceleration(0, 0, 0)
 {
 }
 

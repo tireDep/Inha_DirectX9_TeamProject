@@ -18,7 +18,7 @@ CParticleWorld::~CParticleWorld()
 void CParticleWorld::Setup()
 {
 	CParticle* particle = NULL;
-	float cubesize = 0.5f;
+	const float cubesize = 0.5f;
 
 	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, -cubesize, -cubesize));	m_vecParticles.push_back(particle);
 	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize,  cubesize, -cubesize));	m_vecParticles.push_back(particle);

@@ -137,7 +137,6 @@ void CMainGame::Update()
 
 	}
 
-
 	for (int i = 0; i < m_vecPlaneVertex.size(); i += 3)
 	{
 		if (r.IntersectTri(m_vecPlaneVertex[i + 0].p, m_vecPlaneVertex[i + 1].p, m_vecPlaneVertex[i + 2].p) == true)
