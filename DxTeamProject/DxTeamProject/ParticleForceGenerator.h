@@ -1,6 +1,5 @@
 #pragma once
-
-class CParticle;
+#include "Particle.h"
 
 class CParticleForceGenerator
 {

@@ -278,5 +278,4 @@ bool CCharacter::Collider(bool a)
 	{	
 		return istrue;
 	}
-		
 }

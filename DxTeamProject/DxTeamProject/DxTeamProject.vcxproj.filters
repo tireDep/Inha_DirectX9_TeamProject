@@ -87,6 +87,7 @@
     <ClCompile Include="ParticleWorld.cpp">
       <Filter>Physics_Particle</Filter>
     </ClCompile>
+    <ClCompile Include="ParticlePusingForce.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -198,6 +199,7 @@
     <ClInclude Include="ParticleWorld.h">
       <Filter>Physics_Particle</Filter>
     </ClInclude>
+    <ClInclude Include="ParticlePusingForce.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

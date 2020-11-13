@@ -10,7 +10,6 @@
 #include "OBB.h"
 #include "Ray.h"
 #include "Light.h"
-
 #include "ParticleWorld.h"
 
 /// 릴리즈 버전을 위한 주석처리
@@ -78,7 +77,7 @@ void CMainGame::Setup()
 	m_pParticleWorld->Setup();
 
 	/// 릴리즈 버전을 위한 주석처리
-	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0));		// 태양광 벡터 설정 가능
+	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0)); // sun light vector
 	//m_GridMap = new CGridMap;
 	//m_GridMap->Setup();
 	//m_pSm = new CSoundManager;
@@ -107,7 +106,6 @@ void CMainGame::Update()
 			m_pCharacter->SetColor(RED);
 			m_pUI->SetPickColor();
 		}
-			
 	}
 		
 	for (int i = 0; i < 1; ++i)
@@ -124,6 +122,15 @@ void CMainGame::Update()
 		}
 	}
 
+	if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
+	{
+		D3DXVECTOR3 direction = m_pParticleWorld->GetPosition() - m_pCharacter->GetPosition();
+		// cout << direction.x << ' ' << direction.y << ' ' << direction.z << endl;
+		cout << "m_pParticle : " << m_pParticleWorld->GetPosition().x << ' ' << m_pParticleWorld->GetPosition().y << ' ' << m_pParticleWorld->GetPosition().z << endl;
+		cout << "m_pChar : "<< m_pCharacter->GetPosition().x << ' ' << m_pCharacter->GetPosition().y << ' ' << m_pCharacter->GetPosition().z << endl;
+		m_pParticleWorld->SetPusingForce(direction);
+	}
+
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
 	CRay r = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
@@ -138,7 +145,6 @@ void CMainGame::Update()
 		{
 			m_vecSphere[i].isPicked = false;
 		}
-
 	}
 
 	for (int i = 0; i < m_vecPlaneVertex.size(); i += 3)
@@ -158,8 +164,6 @@ void CMainGame::Update()
 			}
 		}
 	}
-	//if(m_pParticleWorld)
-	//	m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
 
 	if(m_pParticleWorld)
 		m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
@@ -195,11 +199,7 @@ void CMainGame::Render()
 
 	PickingObj_Render();
 
-
 	PickingCube_Render();
-
-	//if (m_pParticleWorld)
-	//	m_pParticleWorld->Render();
 
 	if (m_pParticleWorld)
 		m_pParticleWorld->Render();
