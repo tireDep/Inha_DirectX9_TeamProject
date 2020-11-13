@@ -115,10 +115,34 @@ void CMainGame::Update()
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
-		if (m_pUI->GetPickColor()!=Pick::NONE)
+		switch (m_pUI->GetPickColor())
 		{
+		case Pick::Red:
 			m_pCharacter->SetColor(RED);
 			m_pUI->SetPickColor();
+			break;
+		case Pick::Yellow:
+			m_pCharacter->SetColor(YELLOW);
+			m_pUI->SetPickColor();
+			break;
+		case Pick::Green:
+			m_pCharacter->SetColor(GREEN);
+			m_pUI->SetPickColor();
+			break;
+		case Pick::Blue:
+			m_pCharacter->SetColor(BLUE);
+			m_pUI->SetPickColor();
+			break;
+		case Pick::Black:
+			m_pCharacter->SetColor(BLACK);
+			m_pUI->SetPickColor();
+			break;
+		case Pick::White:
+			m_pCharacter->SetColor(WHITE);
+			m_pUI->SetPickColor();
+			break;
+		default:
+			break;
 		}	
 	}
 
