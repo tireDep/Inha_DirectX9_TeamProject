@@ -97,10 +97,11 @@ void CMainGame::Update()
 
 	if (m_pCamera)
 		m_pCamera->Update();
+
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
-		if (m_pUI->OnButton)
+		if (m_pUI->GetPickColor())
 			m_pCharacter->SetColor(D3DCOLOR_XRGB(255, 0, 0));
 	}
 		
@@ -163,6 +164,7 @@ void CMainGame::Render()
 
 	if (m_pCharacter)
 		m_pCharacter->Render();
+
 	OBB_RENDER();
 
 	PickingObj_Render();
