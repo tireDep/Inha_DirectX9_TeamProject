@@ -16,9 +16,13 @@ class CUI : public IListener
 private:
 	
 	LPD3DXSPRITE m_pSprite;
-	D3DXIMAGE_INFO m_stImageInfo, m_stImageInfo2, m_stImageInfo3;
+	D3DXIMAGE_INFO m_stImageInfo, m_stImageInfo2, m_stImageInfo3,
+		m_stImageInfo4, m_stImageInfo5, m_stImageInfo6, m_stImageInfo7,
+		m_stImageInfo8;
 
-	LPDIRECT3DTEXTURE9 m_pTextureUI, m_pTextureUI2, m_pTextureUI3;
+	LPDIRECT3DTEXTURE9 m_pTextureUI, m_pTextureUI2, m_pTextureUI3,
+		m_pTextureUI4, m_pTextureUI5, m_pTextureUI6, m_pTextureUI7,
+		m_pTextureUI8;
 
 	POINT pUI;
 	POINT px; //´­·¶À»¶§
@@ -26,7 +30,7 @@ private:
 	POINT px3; //¶¼¾úÀ»¶§
 	D3DXMATRIXA16 matT, matWorld;
 	int movep, movepy;
-	RECT rc, rc2, rc3, rc4;
+	RECT UIrc, Backrc,  Redrc, Yellowrc, Greenrc, Bluerc , Blackrc, Whiterc;
 	RECT imageRC;
 	Color OnButton;
 	Pick PickColor;
