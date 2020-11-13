@@ -122,6 +122,15 @@ struct ST_PNT_VERTEX
 	enum { FVF = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 };
 };
 
+struct ST_CUBE
+{
+	D3DXVECTOR3  p;
+	bool isPicked;
+
+	ST_CUBE() : isPicked(false) {}
+};
+
+
 struct ST_SPHERE
 {
 	float		fRadius;

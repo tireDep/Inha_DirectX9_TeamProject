@@ -29,6 +29,9 @@ private:
 	LPD3DXMESH			m_pMeshSphere; // 메쉬 원
 	D3DMATERIAL9		m_stMtlSphere; // 메쉬 원 메터리얼
 
+	LPD3DXMESH	 	m_sMeshCube;// 피킹 큐브
+	vector<ST_CUBE>	m_vecPlaneVertex;
+
 	CParticleWorld*		m_pParticleWorld;
 	/// 릴리즈 버전을 위한 주석처리
 	//CGridMap* m_GridMap;
@@ -47,4 +50,7 @@ public:
 
 	void Setup_PickingObj();
 	void PickingObj_Render();
+
+	void Setup_PickingCube();
+	void PickingCube_Render();
 };

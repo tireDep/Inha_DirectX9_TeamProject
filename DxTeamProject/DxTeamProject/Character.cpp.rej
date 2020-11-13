@@ -1,0 +1,9 @@
+diff a/DxTeamProject/DxTeamProject/Character.cpp b/DxTeamProject/DxTeamProject/Character.cpp	(rejected hunks)
+@@ -314,6 +314,7 @@
+ 	ST_PC_VERTEX v;
+ 	float cubeSize = 0.5f;
+ 
++
+ 	// : front
+ 	v.c = D3DCOLOR_XRGB(255, 0, 0); // ĳ���� �ĸ� ����
+ 	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
