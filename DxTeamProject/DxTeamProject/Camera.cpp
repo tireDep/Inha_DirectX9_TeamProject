@@ -83,8 +83,8 @@ void CCamera::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 			m_preMousePos = ptCurMouse;
 			return;
 		}
-		//if (m_isLBtnDown)
-		//{
+		if (m_isLBtnDown)
+		{
 			POINT ptCurMouse;
 			ptCurMouse.x = LOWORD(lParam);
 			ptCurMouse.y = HIWORD(lParam);
@@ -102,7 +102,7 @@ void CCamera::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 				m_vCamRotAngle.x = D3DX_PI / 2.0f - 0.0001f;
 
 			m_preMousePos = ptCurMouse;
-		//}	// : if
+		}	// : if
 	}
 		break;
 #if _DEBUG

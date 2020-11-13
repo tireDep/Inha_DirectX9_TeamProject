@@ -4,14 +4,16 @@
 #define mapSize 15
 #define mapSpace 1.f
 
-CRITICAL_SECTION cs;
-
 CGridMap::CGridMap() :
 	m_Texture(NULL),
 	m_origMesh(NULL),
 	m_nowMesh(NULL),
-	m_frustum(NULL)
+	m_frustum(NULL),
+	m_thread(NULL),
+	m_isThreadRun(0.0f),
+	m_IsIn(false)
 {
+	InitializeCriticalSection(&m_cs);
 }
 
 CGridMap::~CGridMap()
@@ -19,11 +21,17 @@ CGridMap::~CGridMap()
 	SafeRelease(m_origMesh);
 	SafeRelease(m_nowMesh);
 	SafeRelease(m_Texture);
+
+	if (m_thread != NULL)
+	{
+		if (m_thread->joinable())
+			m_thread->join();
+	}
 }
 
 void CGridMap::Setup()
 {
-	InitializeCriticalSection(&cs);
+	InitializeCriticalSection(&m_cs);
 
 	ST_PNT_VERTEX vertex;
 	// >> vertex
@@ -102,6 +110,34 @@ void CGridMap::Setup()
 
 void CGridMap::Render()
 {
+	if (m_IsIn)
+	{
+		m_IsIn = false;
+		SafeRelease(m_nowMesh);
+
+		D3DXCreateMeshFVF(m_vectempIndex.size() / 3, m_vecVertex.size(),
+			D3DXMESH_MANAGED | D3DXMESH_32BIT, ST_PNT_VERTEX::FVF, g_pD3DDevice, &m_nowMesh);
+
+		ST_PNT_VERTEX* pV = NULL;
+		m_nowMesh->LockVertexBuffer(0, (LPVOID*)&pV);
+		memcpy(pV, &m_vecVertex[0], m_vecVertex.size() * sizeof(ST_PNT_VERTEX));
+		m_nowMesh->UnlockVertexBuffer();
+
+		DWORD* pI = NULL;
+		m_nowMesh->LockIndexBuffer(0, (LPVOID*)&pI);
+		memcpy(pI, &m_vectempIndex[0], m_vectempIndex.size() * sizeof(DWORD));
+		m_nowMesh->UnlockIndexBuffer();
+
+		DWORD* pA = NULL;
+		m_nowMesh->LockAttributeBuffer(0, &pA);
+		ZeroMemory(pA, (m_vectempIndex.size() / 3) * sizeof(DWORD)); // 전체 0으로 세팅
+		m_nowMesh->UnlockAttributeBuffer();
+
+		vector<DWORD> vecAdj(m_vectempIndex.size());
+		m_nowMesh->GenerateAdjacency(0.0f, &vecAdj[0]);
+		m_nowMesh->OptimizeInplace(D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_IGNOREVERTS, &vecAdj[0], 0, 0, 0);
+	}
+
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
 
@@ -135,10 +171,6 @@ void CGridMap::CalcFrustumMap(const vector<bool>& vecCheck)
 
 	} // : for
 
-	// int a = 0;
-	// a = vecIndex.size();
-	// printf("%d\n", a++);
-
 	if (vecIndex.size() == 0)
 	{
 		// 터짐 방지 코드
@@ -146,35 +178,15 @@ void CGridMap::CalcFrustumMap(const vector<bool>& vecCheck)
 		return;
 	}
 
-	m_nowMesh = NULL;
-	D3DXCreateMeshFVF(vecIndex.size() / 3, m_vecVertex.size(),
-		D3DXMESH_MANAGED | D3DXMESH_32BIT, ST_PNT_VERTEX::FVF, g_pD3DDevice, &m_nowMesh);
-
-	ST_PNT_VERTEX* pV = NULL;
-	m_nowMesh->LockVertexBuffer(0, (LPVOID*)&pV);
-	memcpy(pV, &m_vecVertex[0], m_vecVertex.size() * sizeof(ST_PNT_VERTEX));
-	m_nowMesh->UnlockVertexBuffer();
-
-	DWORD* pI = NULL;
-	m_nowMesh->LockIndexBuffer(0, (LPVOID*)&pI);
-	memcpy(pI, &vecIndex[0], vecIndex.size() * sizeof(DWORD));
-	m_nowMesh->UnlockIndexBuffer();
-
-	DWORD* pA = NULL;
-	m_nowMesh->LockAttributeBuffer(0, &pA);
-	ZeroMemory(pA, (vecIndex.size() / 3) * sizeof(DWORD)); // 전체 0으로 세팅
-	m_nowMesh->UnlockAttributeBuffer();
-
-	vector<DWORD> vecAdj(vecIndex.size());
-	m_nowMesh->GenerateAdjacency(0.0f, &vecAdj[0]);
-	m_nowMesh->OptimizeInplace(D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_VERTEXCACHE, &vecAdj[0], 0, 0, 0);
+	m_vectempIndex = vecIndex;
+	m_IsIn = true;
 }
 
 void CGridMap::ThreadFunc()
 {
 	if (m_frustum != NULL)
 	{
-		EnterCriticalSection(&cs);
+		EnterCriticalSection(&m_cs);
 		vector<bool> vecIsIn;
 		int maxSize = m_vecDIndex.size();
 		for (int i = 0; i < maxSize; i++)
@@ -187,34 +199,76 @@ void CGridMap::ThreadFunc()
 
 		CalcFrustumMap(vecIsIn);
 
-		LeaveCriticalSection(&cs);
+		LeaveCriticalSection(&m_cs);
 	}
 }
 
-void CGridMap::CalcNewMap(CFrustum frustum)
+void CGridMap::UpdateNewMap(D3DXVECTOR3 playerPos)
 {
-	// DWORD id;
-	// HANDLE h;
-	//h = (HANDLE)_beginthreadex(NULL, 0, ThreadFunc, 0, 0, (unsigned*)&id);
+	// >> 맵 판정 변경
+	/*
+	D3DXVECTOR3 camLookAt = CamPos;
 
-	m_frustum = &frustum;
-	// m_thread = thread(&CGridMap::ThreadFunc, this);
-	// m_thread.join();
-	// thread m_thread2 = thread(&CGridMap::ThreadFunc, this);
-	// m_thread2.join();
-	// WaitForSingleObject(&thread, INFINITE);
+	float x = ((float)mapSize * 2 / 2.0f) + camLookAt.x;
+	float z = ((float)mapSize * 2 / 2.0f) - camLookAt.z;
 
-	// >>
+	x = floorf(x);
+	z = floorf(z);
 
-	// vector<bool> vecIsIn;
-	// int maxSize = m_vecDIndex.size();
-	// for (int i = 0; i < maxSize; i++)
+	// >> calc index
+
+	int maxSize = m_vecVertex.size();
+	vector<bool> vecIsIn;
+
+	for (int i = 0; i < maxSize; i++)
+	vecIsIn.push_back(false);
+
+	int checkSize = 50;
+	int minX, minZ, maxX, maxZ;
+	minX = x - checkSize <= 0 ? 1 : x - checkSize;
+	maxX = x + checkSize >= mapSize * 2 ? (mapSize * 2) - 1 : x + checkSize;
+
+	minZ = z - checkSize <= 0 ? 1 : z - checkSize;
+	maxZ = z + checkSize >= mapSize * 2 ? (mapSize * 2) - 1 : z + checkSize;
+
+	for (int j = maxZ; j >= minZ; j--)
+	{
+	for (int i = minX; i <= maxX; i++)
+	{
+	if (j + i >= mapSize * 2)
+	{
+	cout << "asdfasdfasdf" << endl;
+	break;
+	}
+
+	vecIsIn[i + j * mapSize * 2] = true;
+	}
+	}
+
+	// for (int j = 100; j >= 0; j--)
 	// {
-	// 	if (frustum.IsInFrustum(m_vecVertex[i].p))
-	// 		vecIsIn.push_back(true);
-	// 	else
-	// 		vecIsIn.push_back(false);
+	// 	for (int i = 0; i <= 50; i++)
+	// 	{
+	// 		vecIsIn[i + j * mapSize * 2] = true;
+	// 	}
 	// }
-	// 
-	// CalcFrustumMap(vecIsIn);
+
+	CalcFrustumMap(vecIsIn);
+	*/
+	// << 맵 판정 변경
+}
+
+void CGridMap::CalcNewMap(CFrustum* frustum)
+{
+	m_frustum = frustum;
+
+	if (m_thread == NULL)
+	{
+		m_thread = new thread(&CGridMap::ThreadFunc, this);
+	}
+	else
+	{
+		if (m_thread->joinable()) m_thread->join();
+		m_thread = NULL;
+	}
 }
