@@ -72,7 +72,7 @@ void CColliderObject::Setup(D3DXVECTOR3 position)
 
 	m_pOBB = new COBB;
 	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11]);
-	m_color = D3DCOLOR_XRGB(255, 255, 255);
+	m_color = WHITE;
 }
 
 void CColliderObject::Update(D3DXCOLOR c)
