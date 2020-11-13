@@ -5,7 +5,8 @@
 CUI::CUI()
 {
 	m_isLButtonDown = false;
-	OnButton = false;
+	OnRedButton = false;
+	PickRed = false;
 	movep = 0;
 	movepy = 0;
 	px3 = { 0,0 };
@@ -88,7 +89,7 @@ void CUI::UI_Render()
 
 
 	//RED BUTTON
-	if (OnButton)
+	if (OnRedButton)
 	{
 		SetRect(&rc4, -630, -230,
 			m_stImageInfo3.Width, m_stImageInfo3.Height);
@@ -116,9 +117,9 @@ void CUI::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 			m_isLButtonDown = true;
 		}
 
-		if (OnButton)
+		if (OnRedButton)
 		{
-
+			PickRed = true;
 		}
 		break;
 	case WM_LBUTTONUP:
@@ -132,9 +133,9 @@ void CUI::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 
 		if (px2.x > 660 && px2.x < 720 && px2.y > 260 && px2.y < 320)
 		{
-			OnButton = true;
+			OnRedButton = true;
 		}
-		else OnButton = false;
+		else OnRedButton = false;
 	}
 	break;
 	default:
@@ -145,4 +146,14 @@ void CUI::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 string CUI::GetName()
 {
 	return m_strName;
+}
+
+bool CUI::GetOnButton()
+{
+	return OnRedButton;
+}
+
+bool CUI::GetPickColor()
+{
+	return PickRed;
 }

@@ -17,7 +17,8 @@ private:
 	int movep, movepy;
 	RECT rc, rc2, rc3, rc4;
 	RECT imageRC;
-
+	bool OnRedButton;
+	bool PickRed;
 	///
 	
 public:
@@ -30,5 +31,6 @@ public:
 	void ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam) override;
 	string GetName() override;
 
-	bool OnButton;
+	bool GetOnButton();
+	bool GetPickColor();
 };
