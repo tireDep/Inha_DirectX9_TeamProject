@@ -74,8 +74,8 @@ void CMainGame::Setup()
 	m_pLight = new CLight;
 	m_pLight->Setup();
 
-	//m_pParticleWorld = new CParticleWorld;
-	//m_pParticleWorld->Setup();
+	m_pParticleWorld = new CParticleWorld;
+	m_pParticleWorld->Setup();
 
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0));		// 태양광 벡터 설정 가능
@@ -98,10 +98,11 @@ void CMainGame::Update()
 
 	if (m_pCamera)
 		m_pCamera->Update();
+
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
-		if (m_pUI->OnButton)
+		if (m_pUI->GetPickColor())
 			m_pCharacter->SetColor(D3DCOLOR_XRGB(255, 0, 0));
 	}
 		
@@ -136,6 +137,7 @@ void CMainGame::Update()
 
 	}
 
+
 	for (int i = 0; i < m_vecPlaneVertex.size(); i += 3)
 	{
 		if (r.IntersectTri(m_vecPlaneVertex[i + 0].p, m_vecPlaneVertex[i + 1].p, m_vecPlaneVertex[i + 2].p) == true)
@@ -155,6 +157,10 @@ void CMainGame::Update()
 	}
 	//if(m_pParticleWorld)
 	//	m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
+
+	if(m_pParticleWorld)
+		m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
+
 	/// 릴리즈 버전을 위한 주석처리
 }
 
@@ -166,7 +172,6 @@ void CMainGame::Render()
 	D3DXMATRIXA16 matProj;
 	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 4.0f, rc.right / (float)rc.bottom, 1.0f, 1000.0f);
 	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
-
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150,150,150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
@@ -182,14 +187,20 @@ void CMainGame::Render()
 
 	if (m_pCharacter)
 		m_pCharacter->Render();
+
 	OBB_RENDER();
 
 	PickingObj_Render();
+
 
 	PickingCube_Render();
 
 	//if (m_pParticleWorld)
 	//	m_pParticleWorld->Render();
+
+	if (m_pParticleWorld)
+		m_pParticleWorld->Render();
+
 	/// 릴리즈 버전을 위한 주석처리
 	//m_GridMap->Render();
 

@@ -10,28 +10,31 @@ CParticleWorld::CParticleWorld()
 
 CParticleWorld::~CParticleWorld()
 {
+	for each(auto p in m_vecParticles)
+		SafeDelete(p);
 }
 
 // Tmp... Gravity Test
 void CParticleWorld::Setup()
 {
-	CParticle particle;
+	CParticle* particle = NULL;
 	float cubesize = 0.5f;
 
-	particle.SetPosition(D3DXVECTOR3(-cubesize, -cubesize, -cubesize));		m_vecParticles.push_back(&particle);
-	particle.SetPosition(D3DXVECTOR3(-cubesize,  cubesize, -cubesize));		m_vecParticles.push_back(&particle);
-	particle.SetPosition(D3DXVECTOR3( cubesize,  cubesize, -cubesize));		m_vecParticles.push_back(&particle);
-	particle.SetPosition(D3DXVECTOR3( cubesize, -cubesize, -cubesize));		m_vecParticles.push_back(&particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, -cubesize, -cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize,  cubesize, -cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize,  cubesize, -cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize, -cubesize, -cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, -cubesize,  cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize,  cubesize,  cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize,  cubesize,  cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize, -cubesize,  cubesize));	m_vecParticles.push_back(particle);
 
-	particle.SetPosition(D3DXVECTOR3(-cubesize, -cubesize,  cubesize));		m_vecParticles.push_back(&particle);
-	particle.SetPosition(D3DXVECTOR3(-cubesize,  cubesize,  cubesize));		m_vecParticles.push_back(&particle);
-	particle.SetPosition(D3DXVECTOR3( cubesize,  cubesize,  cubesize));		m_vecParticles.push_back(&particle);
-	particle.SetPosition(D3DXVECTOR3( cubesize, -cubesize,  cubesize));		m_vecParticles.push_back(&particle);
+	CParticleGravity* gravity = new CParticleGravity;
 
 	//CParticleGravity gravity;
-	CParticleGravity gravity(D3DXVECTOR3(0, -9.81f / 3, 0));
+	//CParticleGravity gravity(D3DXVECTOR3(0, -9.81f / 3, 0));
 	for (int i = 0; i < 8; i++)
-		m_stRegistrations.Add(m_vecParticles[i], &gravity);
+		m_stRegistrations.Add(m_vecParticles[i], gravity);
 	UpdatePosition();
 }
 
@@ -117,7 +120,7 @@ void CParticleWorld::UpdatePosition()
 	}
 	for (size_t i = 0; i < m_vecVertex.size(); i++)
 	{
-		m_vecVertex[i].p += D3DXVECTOR3(5, 30, 5);
+		m_vecVertex[i].p += D3DXVECTOR3(5, 10, 5);
 	}
 }
 
