@@ -12,6 +12,11 @@ private:
 	bool m_isUIModeIn;
 	bool m_isUIMode;
 
+	// >> 맵 완료시 삭제
+	bool m_isGridMapIn;
+	bool m_isGridMap;
+	// << 맵 완료시 삭제
+
 	CGameManager();
 
 public:
@@ -25,4 +30,8 @@ public:
 	string GetName() override;
 
 	void SetClipCursur(int ySize);
+
+	// >> 맵 완료시 삭제
+	bool GetGridMapMode();
+	// << 맵 완료시 삭제
 };

@@ -12,9 +12,10 @@
 #include "Light.h"
 #include "ParticleWorld.h"
 
+#include "GridMap.h"
+
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
-//#include "GridMap.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
@@ -22,10 +23,10 @@ CMainGame::CMainGame() :
 	m_pText(NULL),
 	m_pCharacter(NULL),
 	m_pLight(NULL),
-	m_pParticleWorld(NULL)
+	m_pParticleWorld(NULL),
+	m_GridMap(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
-	//m_GridMap(NULL)
 {
 }
 
@@ -36,16 +37,24 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pText);
 	SafeDelete(m_pLight);
 	SafeDelete(m_pParticleWorld);
+	SafeDelete(m_GridMap);
+
 	g_pDeviceManager->Destroy();
 	/// 릴리즈 버전을 위한 주석처리
 	//SafeDelete(m_pSm);
-	//SafeDelete(m_GridMap);
 }
 
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	g_pInputManager->CheckInput(message, wParam, lParam);
-	//m_pUI->WndProc(hWnd,message,wParam,lParam);
+
+	ST_EVENT eventMsg;
+	eventMsg.eventType = EventType::eInputEvent;
+	eventMsg.message = message;
+	eventMsg.wParam = wParam;
+	eventMsg.lParam = lParam;
+
+	g_pEventManager->CheckEvent(eventMsg);
 }
 
 void CMainGame::Setup()
@@ -78,11 +87,15 @@ void CMainGame::Setup()
 
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0)); // sun light vector
-	//m_GridMap = new CGridMap;
-	//m_GridMap->Setup();
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
 	
+	m_GridMap = new CGridMap;
+	m_GridMap->Setup();
+
+	m_pPrevFrustum.Setup();
+	m_pNowFrustum.Setup();
+
 	g_pInputManager->Setup();
 	g_pInputManager->AddListener(g_gameManager);
 	g_pInputManager->AddListener(m_pCamera);
@@ -101,10 +114,44 @@ void CMainGame::Update()
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
-		if (m_pUI->GetPickColor()!=Pick::NONE)
+		switch (m_pUI->GetPickColor())
 		{
+		case Pick::Red:
 			m_pCharacter->SetColor(RED);
 			m_pUI->SetPickColor();
+			break;
+		case Pick::Yellow:
+			m_pCharacter->SetColor(YELLOW);
+			m_pUI->SetPickColor();
+			break;
+		case Pick::Green:
+			m_pCharacter->SetColor(GREEN);
+			m_pUI->SetPickColor();
+			break;
+		case Pick::Blue:
+			m_pCharacter->SetColor(BLUE);
+			m_pUI->SetPickColor();
+			break;
+		case Pick::Black:
+			m_pCharacter->SetColor(BLACK);
+			m_pUI->SetPickColor();
+			break;
+		case Pick::White:
+			m_pCharacter->SetColor(WHITE);
+			m_pUI->SetPickColor();
+			break;
+		default:
+			break;
+		}	
+	}
+
+	if (g_gameManager->GetDevMode())
+	{
+		m_pPrevFrustum = m_pNowFrustum;
+		m_pNowFrustum.Update();
+		if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum))
+		{
+			m_GridMap->CalcNewMap(&m_pNowFrustum);
 		}
 	}
 		
@@ -204,8 +251,10 @@ void CMainGame::Render()
 	if (m_pParticleWorld)
 		m_pParticleWorld->Render();
 
-	/// 릴리즈 버전을 위한 주석처리
-	//m_GridMap->Render();
+	if (g_gameManager->GetGridMapMode())
+	{
+		m_GridMap->Render();
+	}
 
 	if (g_gameManager->GetUImode())
 	{

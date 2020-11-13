@@ -88,7 +88,7 @@ bool CFrustum::IsInFrustum(D3DXVECTOR3 pos)
 bool CFrustum::IsUpdateCheck(CFrustum const & prevFrustum)
 {	
 	float range = 0.5f;
-	float wheelRange = 0.05f;
+	float wheelRange = 0.5f;
 	for (int i = 0; i < m_vecPlane.size(); i++)
 	{
 		if (abs(this->m_vecPlane[i].a - prevFrustum.m_vecPlane[i].a - 0.0001f) >= range)

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Frustum.h"
+
 class CCamera;
 class CGrid;
 class CUI;
@@ -8,9 +10,11 @@ class CColliderObject;
 class CCharacter;
 class CLight;
 class CParticleWorld;
+class CGridMap;
+// class CFrustum;
+
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
-//class CGridMap;
 
 class CMainGame
 {
@@ -34,8 +38,12 @@ private:
 
 	CParticleWorld*		m_pParticleWorld;
 	/// 릴리즈 버전을 위한 주석처리
-	//CGridMap* m_GridMap;
 	//CSoundManager* m_pSm;
+
+	CFrustum m_pPrevFrustum;
+	CFrustum m_pNowFrustum;
+	CGridMap* m_GridMap;
+
 public:
 	CMainGame();
 	~CMainGame();

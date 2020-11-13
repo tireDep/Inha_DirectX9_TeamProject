@@ -64,8 +64,6 @@
     <ClCompile Include="Character.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Ray.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
@@ -88,6 +86,18 @@
       <Filter>Physics_Particle</Filter>
     </ClCompile>
     <ClCompile Include="ParticlePusingForce.cpp" />
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="IListener.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -174,13 +184,10 @@
     <ClInclude Include="Character.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Singleton.h" />
-    <ClInclude Include="IListener.h" />
     <ClInclude Include="Ray.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Particle.h">
       <Filter>Physics_Particle</Filter>
     </ClInclude>
@@ -200,6 +207,18 @@
       <Filter>Physics_Particle</Filter>
     </ClInclude>
     <ClInclude Include="ParticlePusingForce.h" />
+    <ClInclude Include="EventManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="IListener.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -260,6 +279,9 @@
     </Filter>
     <Filter Include="Physics_Particle">
       <UniqueIdentifier>{3b98db7b-735a-44c2-b164-89fc9bcfc99b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{af4b9a62-73b4-4067-8d39-452aaca773fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

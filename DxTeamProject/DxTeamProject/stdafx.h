@@ -98,6 +98,7 @@ public : virtual void Set##funName(varType var ) { \
 #include "FontManager.h"
 #include "TimeManager.h"
 #include "InputManager.h"
+#include "EventManager.h"
 #include "GameManager.h"
 
 extern HWND g_hWnd;
@@ -137,6 +138,32 @@ struct ST_SPHERE
 	D3DXVECTOR3	vCenter;
 	bool		isPicked;
 	ST_SPHERE() : fRadius(0.0f), vCenter(0, 0, 0) {}
+};
+
+enum EventType : int
+{
+	eInputEvent, eSceneChangeEvent
+};
+
+enum SceneType : int
+{
+	eMainScene, eGameScene, eUIScene, eResultScene
+	// ePauseScene
+};
+
+struct ST_EVENT
+{
+	EventType eventType;
+
+	// >> Input
+	UINT message;
+	WPARAM wParam; 
+	LPARAM lParam;
+	// << Input
+
+	// >> SceneChange
+	SceneType setNowScene;
+	// << SceneChange
 };
 
 #define WHITE	D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)

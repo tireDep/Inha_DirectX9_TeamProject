@@ -23,7 +23,7 @@ void CUI::Setup_UI()
 {
 	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
 
-	GetClientRect(g_hWnd, &rc);
+	GetClientRect(g_hWnd, &UIrc);
 
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
 		"UI/pngegg.png",
@@ -47,7 +47,7 @@ void CUI::Setup_UI()
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_stImageInfo2, NULL, &m_pTextureUI2);
 
-	//버튼2
+	//Red 버튼
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
 		"UI/red.png",
 		D3DX_DEFAULT_NONPOW2,
@@ -57,6 +57,61 @@ void CUI::Setup_UI()
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_stImageInfo3, NULL, &m_pTextureUI3);
+
+	//yellow 버튼
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/yellow.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_stImageInfo4, NULL, &m_pTextureUI4);
+
+	//Green 버튼
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/green.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_stImageInfo5, NULL, &m_pTextureUI5);
+
+	//Blue 버튼
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/blue.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_stImageInfo6, NULL, &m_pTextureUI6);
+
+	//Black 버튼
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/black.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_stImageInfo7, NULL, &m_pTextureUI7);
+
+	//White 버튼
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/White.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_stImageInfo8, NULL, &m_pTextureUI8);
 }
 
 void CUI::UI_Render()
@@ -73,18 +128,18 @@ void CUI::UI_Render()
 
 	//BackG
 
-	SetRect(&rc3, 0,0,
+	SetRect(&Backrc, 0,0,
 		m_stImageInfo2.Width, m_stImageInfo2.Height);
 
-	m_pSprite->Draw(m_pTextureUI2, &rc3,
+	m_pSprite->Draw(m_pTextureUI2, &Backrc,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(150, 255, 255, 255));
 
 	//MAIN UI
-	SetRect(&rc,-500,-50,m_stImageInfo.Width, m_stImageInfo.Height);
+	SetRect(&UIrc,-500,-50,m_stImageInfo.Width, m_stImageInfo.Height);
 
-	m_pSprite->Draw(m_pTextureUI, &rc,
+	m_pSprite->Draw(m_pTextureUI, &UIrc,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -93,10 +148,22 @@ void CUI::UI_Render()
 	//RED BUTTON
 	if (OnButton == Color::Red)
 	{
-		SetRect(&rc4, -630, -230,
+		SetRect(&Redrc, -630, -230,
 			m_stImageInfo3.Width, m_stImageInfo3.Height);
 
-		m_pSprite->Draw(m_pTextureUI3, &rc4,
+		m_pSprite->Draw(m_pTextureUI3, &Redrc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+
+	//Yellow BUTTON
+	if (OnButton == Color::Yellow)
+	{
+		SetRect(&Yellowrc, -550, -200,
+			m_stImageInfo4.Width, m_stImageInfo4.Height);
+
+		m_pSprite->Draw(m_pTextureUI4, &Yellowrc,
 			&D3DXVECTOR3(0, 0, 0),
 			&D3DXVECTOR3(0, 0, 0),
 			D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -105,15 +172,51 @@ void CUI::UI_Render()
 	//Green BUTTON
 	if (OnButton == Color::Green)
 	{
-		SetRect(&rc4, -630, -230,
-			m_stImageInfo3.Width, m_stImageInfo3.Height);
+		SetRect(&Greenrc, -575, -145,
+			m_stImageInfo5.Width, m_stImageInfo5.Height);
 
-		m_pSprite->Draw(m_pTextureUI3, &rc4,
+		m_pSprite->Draw(m_pTextureUI5, &Greenrc,
 			&D3DXVECTOR3(0, 0, 0),
 			&D3DXVECTOR3(0, 0, 0),
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 
+	//Blue BUTTON
+	if (OnButton == Color::Blue)
+	{
+		SetRect(&Bluerc, -635, -120,
+			m_stImageInfo6.Width, m_stImageInfo6.Height);
+
+		m_pSprite->Draw(m_pTextureUI6, &Bluerc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+
+	//Black BUTTON
+	if (OnButton == Color::Black)
+	{
+		SetRect(&Blackrc, -700, -130,
+			m_stImageInfo7.Width, m_stImageInfo7.Height);
+
+		m_pSprite->Draw(m_pTextureUI7, &Blackrc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+
+
+	//White BUTTON
+	if (OnButton == Color::White)
+	{
+		SetRect(&Whiterc, -730, -195,
+			m_stImageInfo8.Width, m_stImageInfo8.Height);
+
+		m_pSprite->Draw(m_pTextureUI8, &Whiterc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
 	m_pSprite->End();
 }
@@ -131,11 +234,6 @@ void CUI::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 			m_isLButtonDown = true;
 		}
 
-		//if (OnButton == CUI::Red)
-		//{
-		//	PickRed = true;
-		//}
-
 		switch (OnButton)
 		{
 		case Color::Red: PickColor = Pick::Red;
@@ -143,6 +241,12 @@ void CUI::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 		case Color::Yellow:PickColor = Pick::Yellow;
 			break;
 		case Color::Green: PickColor = Pick::Green;
+			break;
+		case Color::Blue: PickColor = Pick::Blue;
+			break;
+		case Color::Black: PickColor = Pick::Black;
+			break;
+		case Color::White: PickColor = Pick::White;
 			break;
 		default:
 			break;
@@ -157,9 +261,31 @@ void CUI::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 		px2.x = LOWORD(lParam);
 		px2.y = HIWORD(lParam);
 
+		cout << "x : " << px2.x << " Y : " << px2.y << endl;
+
 		if (px2.x > 660 && px2.x < 720 && px2.y > 260 && px2.y < 320)
 		{
 			OnButton = Color::Red;
+		}
+		else if (px2.x > 580 && px2.x < 640 && px2.y > 230 && px2.y < 280)
+		{
+			OnButton = Color::Yellow;
+		}
+		else if (px2.x > 610 && px2.x < 670 && px2.y > 180 && px2.y < 230)
+		{
+			OnButton = Color::Green;
+		}
+		else if (px2.x > 670 && px2.x < 730 && px2.y > 150 && px2.y < 200)
+		{
+			OnButton = Color::Blue;
+		}
+		else if (px2.x > 735 && px2.x < 795 && px2.y > 165 && px2.y < 215)
+		{
+			OnButton = Color::Black;
+		}
+		else if (px2.x > 765 && px2.x < 825 && px2.y > 230 && px2.y < 280)
+		{
+			OnButton = Color::White;
 		}
 		else OnButton = Color::NONE;
 	}
@@ -176,7 +302,7 @@ string CUI::GetName()
 
 Color CUI::GetOnButton()
 {
-	return Color::NONE;
+	return OnButton;
 }
 
 Pick CUI::GetPickColor()

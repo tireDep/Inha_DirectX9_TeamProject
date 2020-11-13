@@ -7,6 +7,10 @@ CGameManager::CGameManager()
 
 	m_isDevMode = false;
 	m_isUIMode = false;
+	
+	// >> 맵 완료시 삭제 예정
+	m_isGridMap = false;
+	// << 맵 완료시 삭제 예정
 
 	SetClipCursur(0);
 	ShowCursor(false);
@@ -26,6 +30,11 @@ bool CGameManager::GetDevMode()
 bool CGameManager::GetUImode()
 {
 	return m_isUIMode;
+}
+
+bool CGameManager::GetGridMapMode()
+{
+	return m_isGridMap;
 }
 
 void CGameManager::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
@@ -59,6 +68,14 @@ void CGameManager::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 			m_isDevMode = !m_isDevMode;
 			m_isDevMoveIn = !m_isDevMoveIn;	
 		}
+
+		// >> 맵 완료시 삭제 예정
+		if (VK_SCROLL == wParam && !m_isGridMapIn)
+		{
+			m_isGridMap = !m_isGridMap;
+			m_isGridMapIn = !m_isGridMapIn;
+		}
+		// << 맵 완료시 삭제 예정
 	}
 	break;
 
@@ -69,6 +86,11 @@ void CGameManager::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
 
 		if (VK_TAB == wParam)
 			m_isDevMoveIn = false;
+
+		// >> 맵 완료시 삭제 예정
+		if (VK_SCROLL == wParam)
+			m_isGridMapIn = false;
+		// << 맵 완료시 삭제 예정
 	}
 	break;
 	}
