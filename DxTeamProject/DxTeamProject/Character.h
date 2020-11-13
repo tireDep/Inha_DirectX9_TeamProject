@@ -32,7 +32,6 @@ public:
 	virtual D3DCOLOR GetColor();
 
 	virtual bool Collider(bool a);
-
 	COBB* m_pOBB;
 	COBB* GetOBB(); // 시간 없어서 추가함. Setup 내부랑 나중에 지우기.
 

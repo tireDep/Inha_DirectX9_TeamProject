@@ -24,7 +24,7 @@ void CGrid::Setup(int nNumHalfTile, float fInterval)
 	for (int i = 1; i <= nNumHalfTile; i++)
 	{
 		if (i % 5 == 0)
-			v.c = D3DCOLOR_XRGB(255, 255, 255);
+			v.c = WHITE;
 		else
 			v.c = D3DCOLOR_XRGB(128, 128, 128);
 
@@ -49,19 +49,19 @@ void CGrid::Setup(int nNumHalfTile, float fInterval)
 		m_vecVertex.push_back(v);
 	}
 
-	v.c = D3DCOLOR_XRGB(255, 0, 0);
+	v.c = RED;
 	v.p = D3DXVECTOR3(fMin, 0, 0);
 	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(fMax, 0, 0);
 	m_vecVertex.push_back(v);
 
-	v.c = D3DCOLOR_XRGB(0, 255, 0);
+	v.c = GREEN;
 	v.p = D3DXVECTOR3(0, fMin, 0);
 	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(0, fMax, 0);
 	m_vecVertex.push_back(v);
 
-	v.c = D3DCOLOR_XRGB(0, 0, 255);
+	v.c = BLUE;
 	v.p = D3DXVECTOR3(0, 0, fMin); m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(0, 0, fMax); m_vecVertex.push_back(v);
 
@@ -70,17 +70,17 @@ void CGrid::Setup(int nNumHalfTile, float fInterval)
 
 	pPyramid = new CPyramid;
 	D3DXMatrixRotationZ(&matR, D3DX_PI / 2.0F);
-	pPyramid->Setup(D3DCOLOR_XRGB(255, 0, 0), matR);
+	pPyramid->Setup(RED, matR);
 	m_vecPyramid.push_back(pPyramid);
 
 	pPyramid = new CPyramid;
 	D3DXMatrixRotationZ(&matR, D3DX_PI);
-	pPyramid->Setup(D3DCOLOR_XRGB(0, 255, 0), matR);
+	pPyramid->Setup(GREEN, matR);
 	m_vecPyramid.push_back(pPyramid);
 
 	pPyramid = new CPyramid;
 	D3DXMatrixRotationX(&matR, -D3DX_PI / 2.0F);
-	pPyramid->Setup(D3DCOLOR_XRGB(0, 0, 255), matR);
+	pPyramid->Setup(BLUE, matR);
 	m_vecPyramid.push_back(pPyramid);
 }
 
