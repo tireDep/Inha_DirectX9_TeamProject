@@ -13,9 +13,10 @@
 
 #include "ParticleWorld.h"
 
+#include "GridMap.h"
+
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
-//#include "GridMap.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
@@ -23,10 +24,10 @@ CMainGame::CMainGame() :
 	m_pText(NULL),
 	m_pCharacter(NULL),
 	m_pLight(NULL),
-	m_pParticleWorld(NULL)
+	m_pParticleWorld(NULL),
+	m_GridMap(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
-	//m_GridMap(NULL)
 {
 }
 
@@ -37,10 +38,11 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pText);
 	SafeDelete(m_pLight);
 	SafeDelete(m_pParticleWorld);
+	SafeDelete(m_GridMap);
+
 	g_pDeviceManager->Destroy();
 	/// 릴리즈 버전을 위한 주석처리
 	//SafeDelete(m_pSm);
-	//SafeDelete(m_GridMap);
 }
 
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -79,11 +81,15 @@ void CMainGame::Setup()
 
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0));		// 태양광 벡터 설정 가능
-	//m_GridMap = new CGridMap;
-	//m_GridMap->Setup();
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
 	
+	m_GridMap = new CGridMap;
+	m_GridMap->Setup();
+
+	m_pPrevFrustum.Setup();
+	m_pNowFrustum.Setup();
+
 	g_pInputManager->Setup();
 	g_pInputManager->AddListener(g_gameManager);
 	g_pInputManager->AddListener(m_pCamera);
@@ -106,8 +112,17 @@ void CMainGame::Update()
 		{
 			m_pCharacter->SetColor(D3DCOLOR_XRGB(255, 0, 0));
 			m_pUI->SetPickColor();
+		}	
+	}
+
+	if (g_gameManager->GetDevMode())
+	{
+		m_pPrevFrustum = m_pNowFrustum;
+		m_pNowFrustum.Update();
+		if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum))
+		{
+			m_GridMap->CalcNewMap(&m_pNowFrustum);
 		}
-			
 	}
 		
 	for (int i = 0; i < 1; ++i)
@@ -204,8 +219,10 @@ void CMainGame::Render()
 	if (m_pParticleWorld)
 		m_pParticleWorld->Render();
 
-	/// 릴리즈 버전을 위한 주석처리
-	//m_GridMap->Render();
+	if (g_gameManager->GetGridMapMode())
+	{
+		m_GridMap->Render();
+	}
 
 	if (g_gameManager->GetUImode())
 	{

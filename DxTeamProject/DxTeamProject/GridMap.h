@@ -5,8 +5,6 @@
 #include "Frustum.h"
 #include "IMap.h"
 
-#define ThreadCnt 10
-
 class CGridMap : public IMap
 {
 private:
@@ -18,10 +16,14 @@ private:
 
 	vector<ST_PNT_VERTEX> m_vecVertex;
 	vector<DWORD> m_vecDIndex;
+	vector<DWORD> m_vectempIndex;
 
-	HANDLE m_arrThread[ThreadCnt];
-	thread m_thread;
  	CFrustum* m_frustum;
+	
+	thread* m_thread;
+	CRITICAL_SECTION m_cs;
+	bool m_isThreadRun;
+	bool m_IsIn;
 
 public:
 	CGridMap();
@@ -31,8 +33,10 @@ public:
 	virtual void Render();
 	virtual void CalcFrustumMap(const vector<bool>& vecCheck);
 
-	void CalcNewMap(CFrustum frustum);
+	void CalcNewMap(CFrustum* frustum);
 
 	void ThreadFunc();
+
+	void UpdateNewMap(D3DXVECTOR3 playerPos);
 };
 
