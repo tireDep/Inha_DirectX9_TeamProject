@@ -157,3 +157,8 @@ bool CUI::GetPickColor()
 {
 	return PickRed;
 }
+
+void CUI::SetPickColor()
+{
+	PickRed = false;
+}

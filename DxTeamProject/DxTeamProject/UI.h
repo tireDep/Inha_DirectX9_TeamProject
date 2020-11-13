@@ -33,4 +33,6 @@ public:
 
 	bool GetOnButton();
 	bool GetPickColor();
+	void SetPickColor();
+
 };

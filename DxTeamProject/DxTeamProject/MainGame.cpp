@@ -103,7 +103,11 @@ void CMainGame::Update()
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
 		if (m_pUI->GetPickColor())
+		{
 			m_pCharacter->SetColor(D3DCOLOR_XRGB(255, 0, 0));
+			m_pUI->SetPickColor();
+		}
+			
 	}
 		
 	for (int i = 0; i < 1; ++i)
