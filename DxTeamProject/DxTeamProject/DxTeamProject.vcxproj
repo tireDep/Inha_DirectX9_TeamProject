@@ -148,6 +148,7 @@
     <ClInclude Include="ColliderObject.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="DxTeamProject.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="fmod.h" />
     <ClInclude Include="fmod.hpp" />
     <ClInclude Include="fmod_codec.h" />
@@ -189,11 +190,13 @@
     <ClCompile Include="ColliderObject.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="DxTeamProject.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridMap.cpp" />
+    <ClCompile Include="IListener.cpp" />
     <ClCompile Include="IMap.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Light.cpp" />

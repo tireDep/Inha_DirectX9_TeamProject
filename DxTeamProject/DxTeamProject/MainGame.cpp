@@ -48,7 +48,14 @@ CMainGame::~CMainGame()
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	g_pInputManager->CheckInput(message, wParam, lParam);
-	//m_pUI->WndProc(hWnd,message,wParam,lParam);
+
+	ST_EVENT eventMsg;
+	eventMsg.eventType = EventType::eInputEvent;
+	eventMsg.message = message;
+	eventMsg.wParam = wParam;
+	eventMsg.lParam = lParam;
+
+	g_pEventManager->CheckEvent(eventMsg);
 }
 
 void CMainGame::Setup()
