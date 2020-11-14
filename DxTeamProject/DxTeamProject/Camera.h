@@ -21,7 +21,7 @@ public:
 	void Update();
 	D3DXVECTOR3 GetCameraDirection();
 
-	void ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam) override;
+	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName();
 	
 };

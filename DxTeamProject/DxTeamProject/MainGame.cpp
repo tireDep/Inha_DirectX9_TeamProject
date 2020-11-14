@@ -46,8 +46,6 @@ CMainGame::~CMainGame()
 
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	g_pInputManager->CheckInput(message, wParam, lParam);
-
 	ST_EVENT eventMsg;
 	eventMsg.eventType = EventType::eInputEvent;
 	eventMsg.message = message;
@@ -96,17 +94,16 @@ void CMainGame::Setup()
 	m_pPrevFrustum.Setup();
 	m_pNowFrustum.Setup();
 
-	g_pInputManager->Setup();
-	g_pInputManager->AddListener(g_gameManager);
-	g_pInputManager->AddListener(m_pCamera);
-	g_pInputManager->AddListener(m_pCharacter);
-	g_pInputManager->AddListener(m_pUI);
+	g_pEventManager->AddListener(g_gameManager);
+	g_pEventManager->AddListener(m_pCamera);
+	g_pEventManager->AddListener(m_pCharacter);
+	g_pEventManager->AddListener(m_pUI);
 }
 
 void CMainGame::Update()
 {
 	g_pTimeManager->Update();
-	g_pInputManager->Update();
+	g_pEventManager->Update();
 
 	if (m_pCamera)
 		m_pCamera->Update();
@@ -145,7 +142,7 @@ void CMainGame::Update()
 		}	
 	}
 
-	if (g_gameManager->GetDevMode())
+	if (g_gameManager->GetGridMapMode())
 	{
 		m_pPrevFrustum = m_pNowFrustum;
 		m_pNowFrustum.Update();

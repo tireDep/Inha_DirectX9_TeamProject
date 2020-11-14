@@ -34,31 +34,43 @@ bool CEventManager::RemoveListener(IListener * listener)
 	return false;
 }
 
-void CEventManager::Setup()
-{
-	// >> todo : 수정
-	m_vecInputNum.push_back('W');
-	m_vecInputNum.push_back('S');
-	m_vecInputNum.push_back('A');
-	m_vecInputNum.push_back('D');
-	// << todo : 수정
-}
-
 void CEventManager::Update()
 {
-	// >> todo : 수정?
-	for (int i = 0; i < m_vecInputNum.size(); i++)
-	{
-		if (GetKeyState(m_vecInputNum[i]) & 0x8000 && m_IsInScreen)
-		{
-			ST_EVENT msg;
-			msg.eventType = EventType::eInputEvent;
-			msg.message = m_vecInputNum[i];
+	bool pushW = GetKeyState('W') & 0x8000;
+	bool pushS = GetKeyState('S') & 0x8000;
+	bool pushA = GetKeyState('A') & 0x8000;
+	bool pushD = GetKeyState('D') & 0x8000;
+	bool pushF = GetKeyState('F') & 0x8000;
 
-			CheckEvent(msg);
-		}
-	}
-	// << todo : 수정?
+	if (!pushW && !pushS && !pushA && !pushD && !pushF)
+		return;
+
+	ST_EVENT msg;
+	msg.eventType = EventType::eInputEvent;
+
+	if (pushW && pushA)
+		msg.playerInput = eLeftUp;
+	else if (pushW && pushD)
+		msg.playerInput = eRightUp;
+	else if (pushW)
+		msg.playerInput = eUp;
+
+	else if (pushS && pushA)
+		msg.playerInput = eLeftDown;
+	else if (pushS && pushD)
+		msg.playerInput = eRightDown;
+	else if (pushS)
+		msg.playerInput = eDown;
+
+	else if (pushA)
+		msg.playerInput = eLeft;
+	else if (pushD)
+		msg.playerInput = eRight;
+
+	else if (pushF)
+		msg.playerInput = eHold;
+
+	CheckEvent(msg);
 }
 
 void CEventManager::CheckEvent(ST_EVENT eventMsg)

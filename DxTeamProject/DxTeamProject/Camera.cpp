@@ -59,67 +59,70 @@ D3DXVECTOR3 CCamera::GetCameraDirection()
 	return direction;
 }
 
-void CCamera::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
+void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 {
-	switch (message)
+	if (eventMsg.eventType == EventType::eInputEvent)
 	{
-	case WM_LBUTTONDOWN:
-		m_preMousePos.x = LOWORD(lParam);
-		m_preMousePos.y = HIWORD(lParam);
-		m_isLBtnDown = true;
-	break;
-
-	case WM_LBUTTONUP:
-		m_isLBtnDown = false;
-		break;
-
-	case WM_MOUSEMOVE:
-	{
-		if (g_gameManager->GetUImode())
+		switch (eventMsg.message)
 		{
-			POINT ptCurMouse;
-			ptCurMouse.x = LOWORD(lParam);
-			ptCurMouse.y = HIWORD(lParam);
-			m_preMousePos = ptCurMouse;
-			return;
+		case WM_LBUTTONDOWN:
+			m_preMousePos.x = LOWORD(eventMsg.lParam);
+			m_preMousePos.y = HIWORD(eventMsg.lParam);
+			m_isLBtnDown = true;
+			break;
+
+		case WM_LBUTTONUP:
+			m_isLBtnDown = false;
+			break;
+
+		case WM_MOUSEMOVE:
+		{
+			if (g_gameManager->GetUImode())
+			{
+				POINT ptCurMouse;
+				ptCurMouse.x = LOWORD(eventMsg.lParam);
+				ptCurMouse.y = HIWORD(eventMsg.lParam);
+				m_preMousePos = ptCurMouse;
+				return;
+			}
+			//if (m_isLBtnDown)
+			{
+				POINT ptCurMouse;
+				ptCurMouse.x = LOWORD(eventMsg.lParam);
+				ptCurMouse.y = HIWORD(eventMsg.lParam);
+
+				float fDeltaX = (float)ptCurMouse.x - m_preMousePos.x;
+				float fDeltaY = (float)ptCurMouse.y - m_preMousePos.y;
+
+				m_vCamRotAngle.y += (fDeltaX / 150.0f);
+				m_vCamRotAngle.x += (fDeltaY / 150.0f);
+
+				if (m_vCamRotAngle.x < D3DX_PI / 12.0f + 0.0001f)
+					m_vCamRotAngle.x = D3DX_PI / 12.0f;
+
+				if (m_vCamRotAngle.x > D3DX_PI / 2.0f - 0.0001f)
+					m_vCamRotAngle.x = D3DX_PI / 2.0f - 0.0001f;
+
+				m_preMousePos = ptCurMouse;
+			}	// : if
 		}
-		//if (m_isLBtnDown)
-		{
-			POINT ptCurMouse;
-			ptCurMouse.x = LOWORD(lParam);
-			ptCurMouse.y = HIWORD(lParam);
-
-			float fDeltaX = (float)ptCurMouse.x - m_preMousePos.x;
-			float fDeltaY = (float)ptCurMouse.y - m_preMousePos.y;
-
-			m_vCamRotAngle.y += (fDeltaX / 150.0f);
-			m_vCamRotAngle.x += (fDeltaY / 150.0f);
-
-			if (m_vCamRotAngle.x < D3DX_PI / 12.0f + 0.0001f)
-				m_vCamRotAngle.x = D3DX_PI / 12.0f;
-
-			if (m_vCamRotAngle.x > D3DX_PI / 2.0f - 0.0001f)
-				m_vCamRotAngle.x = D3DX_PI / 2.0f - 0.0001f;
-
-			m_preMousePos = ptCurMouse;
-		}	// : if
-	}
 		break;
 #if _DEBUG
-// DEBUG Mode
-	case WM_MOUSEWHEEL:
+		// DEBUG Mode
+		case WM_MOUSEWHEEL:
 		{
-			m_fCameraDistance -= (GET_WHEEL_DELTA_WPARAM(wParam) / 30.0f);
+			m_fCameraDistance -= (GET_WHEEL_DELTA_WPARAM(eventMsg.wParam) / 30.0f);
 			if (m_fCameraDistance < 5.0 + 0.0001f)
 				m_fCameraDistance = 5.0f;
 		}
 		break;
 #else
-// RELEASE Mode
+		// RELEASE Mode
 #endif
-	default:
-		break;
-	}
+		} // << : switch
+
+	} // << : if
+
 }
 
 string CCamera::GetName()

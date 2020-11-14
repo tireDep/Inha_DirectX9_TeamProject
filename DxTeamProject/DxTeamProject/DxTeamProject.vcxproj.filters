@@ -92,9 +92,6 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="IListener.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -211,9 +208,6 @@
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="IListener.h">

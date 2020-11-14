@@ -25,84 +25,64 @@ void CCharacter::SetColor(D3DCOLOR c)
 	m_color = c;
 }
 
-
-void CCharacter::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
+void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 {
-	static bool pushA = false;
-	static bool pushD = false;
-	static bool pushW = false;
-	static bool pushS = false;
+	float speed = 0.003f;
+	float rotation = -1.0f;
 
-
-	pushW = GetAsyncKeyState('W') & 0x8000 ? true : false;
-	pushS = GetAsyncKeyState('S') & 0x8000 ? true : false;
-	pushA = GetAsyncKeyState('A') & 0x8000 ? true : false;
-	pushD = GetAsyncKeyState('D') & 0x8000 ? true : false;
-
-	float speed = 0.0f;
-	float rotation = 0.0f;
 	if (!g_gameManager->GetUImode())
 	{
-		switch (message)
+		// todo : 상태에 따른 애니메이션 출력
+		switch (eventMsg.playerInput)
 		{
-		case 'W':
-			speed = 0.003f;
+		case eUp:
 			rotation = 0.0f;
-			if (pushA)
-			{
-				rotation = D3DX_PI / 4.0f * -1;
-				speed = 0.0021f;
-			}
-			else if (pushD)
-			{
-				rotation = D3DX_PI / 4.0f;
-				speed = 0.0021f;
-			}
-			DoRotation(rotation);
-			DoMove(speed);
 			break;
-		case 'S':
+
+		case eLeftUp:
+			rotation = D3DX_PI / 4.0f * -1;
+			break;
+
+		case eRightUp:
+			rotation = D3DX_PI / 4.0f;
+			break;
+
+		case eDown:
 			rotation = D3DX_PI;
-			speed = 0.003f;
-			if (pushA)
-			{
-				rotation = D3DX_PI + D3DX_PI / 4.0f;
-				speed = 0.0021f;
-			}
-			else if (pushD)
-			{
-				rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
-				speed = 0.0021f;
-			}
-			DoRotation(rotation);
-			DoMove(speed);
 			break;
 
-		case 'A':
+		case eLeftDown:
+			rotation = D3DX_PI + D3DX_PI / 4.0f;
+			break;
+
+		case eRightDown:
+			rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
+			break;
+
+		case eLeft:
 			rotation = -D3DX_PI / 2.0f;
-			speed = 0.003f;
-			if (pushW || pushS)
-			{
-				rotation = 0;
-				speed = 0.0021f;
-			}
-			DoRotation(rotation);
-			DoMove(speed);
-			break;
-		case 'D':
-			rotation = D3DX_PI / 2.0f;
-			speed = 0.003f;
-			if (pushW || pushS)
-			{
-				rotation = 0;
-				speed = 0.0021f;
-			}
-			DoRotation(rotation);
-			DoMove(speed);
 			break;
 
+		case eRight:
+			rotation = D3DX_PI / 2.0f;
+			break;
+
+		case eHold:
+			// todo : 잡기 구현
+			break;
+
+		default:
+			speed = -1.0f;
+			break;
+		}
+
+		if (speed > 0)
+		{
+			DoRotation(rotation);
+			DoMove(speed);
 		}
 	}
+
 	D3DXMATRIXA16 matT;
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 

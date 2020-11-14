@@ -221,77 +221,78 @@ void CUI::UI_Render()
 	m_pSprite->End();
 }
 
-void CUI::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
+void CUI::ReceiveEvent(ST_EVENT eventMsg)
 {
-	switch (message)
+	if (eventMsg.eventType == EventType::eInputEvent)
 	{
-	case WM_LBUTTONDOWN:
-		px.x = LOWORD(lParam);
-		px.y = HIWORD(lParam);
-
-		if (PtInRect(&imageRC, px) == true)
+		switch (eventMsg.message)
 		{
-			m_isLButtonDown = true;
-		}
+		case WM_LBUTTONDOWN:
+			px.x = LOWORD(eventMsg.lParam);
+			px.y = HIWORD(eventMsg.lParam);
 
-		switch (OnButton)
+			if (PtInRect(&imageRC, px) == true)
+			{
+				m_isLButtonDown = true;
+			}
+
+			switch (OnButton)
+			{
+			case Color::Red: PickColor = Pick::Red;
+				break;
+			case Color::Yellow:PickColor = Pick::Yellow;
+				break;
+			case Color::Green: PickColor = Pick::Green;
+				break;
+			case Color::Blue: PickColor = Pick::Blue;
+				break;
+			case Color::Black: PickColor = Pick::Black;
+				break;
+			case Color::White: PickColor = Pick::White;
+				break;
+			default:
+				break;
+			}
+			break;
+
+		case WM_LBUTTONUP:
+			px3 = { (LONG)matT._41,(LONG)matT._42 };
+			m_isLButtonDown = false;
+			break;
+
+		case WM_MOUSEMOVE:
 		{
-		case Color::Red: PickColor = Pick::Red;
-			break;
-		case Color::Yellow:PickColor = Pick::Yellow;
-			break;
-		case Color::Green: PickColor = Pick::Green;
-			break;
-		case Color::Blue: PickColor = Pick::Blue;
-			break;
-		case Color::Black: PickColor = Pick::Black;
-			break;
-		case Color::White: PickColor = Pick::White;
-			break;
-		default:
-			break;
+			px2.x = LOWORD(eventMsg.lParam);
+			px2.y = HIWORD(eventMsg.lParam);
+
+			if (px2.x > 660 && px2.x < 720 && px2.y > 260 && px2.y < 320)
+			{
+				OnButton = Color::Red;
+			}
+			else if (px2.x > 580 && px2.x < 640 && px2.y > 230 && px2.y < 280)
+			{
+				OnButton = Color::Yellow;
+			}
+			else if (px2.x > 610 && px2.x < 670 && px2.y > 180 && px2.y < 230)
+			{
+				OnButton = Color::Green;
+			}
+			else if (px2.x > 670 && px2.x < 730 && px2.y > 150 && px2.y < 200)
+			{
+				OnButton = Color::Blue;
+			}
+			else if (px2.x > 735 && px2.x < 795 && px2.y > 165 && px2.y < 215)
+			{
+				OnButton = Color::Black;
+			}
+			else if (px2.x > 765 && px2.x < 825 && px2.y > 230 && px2.y < 280)
+			{
+				OnButton = Color::White;
+			}
+			else OnButton = Color::NONE;
 		}
 		break;
-	case WM_LBUTTONUP:
-		px3 = { (LONG)matT._41,(LONG)matT._42 };
-		m_isLButtonDown = false;
-		break;
-	case WM_MOUSEMOVE:
-	{
-		px2.x = LOWORD(lParam);
-		px2.y = HIWORD(lParam);
-
-		cout << "x : " << px2.x << " Y : " << px2.y << endl;
-
-		if (px2.x > 660 && px2.x < 720 && px2.y > 260 && px2.y < 320)
-		{
-			OnButton = Color::Red;
 		}
-		else if (px2.x > 580 && px2.x < 640 && px2.y > 230 && px2.y < 280)
-		{
-			OnButton = Color::Yellow;
-		}
-		else if (px2.x > 610 && px2.x < 670 && px2.y > 180 && px2.y < 230)
-		{
-			OnButton = Color::Green;
-		}
-		else if (px2.x > 670 && px2.x < 730 && px2.y > 150 && px2.y < 200)
-		{
-			OnButton = Color::Blue;
-		}
-		else if (px2.x > 735 && px2.x < 795 && px2.y > 165 && px2.y < 215)
-		{
-			OnButton = Color::Black;
-		}
-		else if (px2.x > 765 && px2.x < 825 && px2.y > 230 && px2.y < 280)
-		{
-			OnButton = Color::White;
-		}
-		else OnButton = Color::NONE;
-	}
-	break;
-	default:
-		break;
 	}
 }
 

@@ -26,7 +26,7 @@ public:
 	bool GetDevMode();
 	bool GetUImode();
 
-	void ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam) override;
+	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName() override;
 
 	void SetClipCursur(int ySize);

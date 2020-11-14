@@ -37,6 +37,6 @@ public:
 	COBB* m_pOBB;
 	COBB* GetOBB(); 
 
-	virtual void ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam);
+	void ReceiveEvent(ST_EVENT eventMsg) override;
 	virtual string GetName();
 };

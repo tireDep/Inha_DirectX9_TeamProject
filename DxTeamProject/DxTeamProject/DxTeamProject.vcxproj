@@ -161,7 +161,6 @@
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="IListener.h" />
     <ClInclude Include="IMap.h" />
-    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="OBB.h" />
@@ -199,7 +198,6 @@
     <ClCompile Include="GridMap.cpp" />
     <ClCompile Include="IListener.cpp" />
     <ClCompile Include="IMap.cpp" />
-    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="OBB.cpp" />

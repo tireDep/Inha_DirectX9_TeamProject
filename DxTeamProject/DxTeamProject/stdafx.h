@@ -97,7 +97,6 @@ public : virtual void Set##funName(varType var ) { \
 #include "DeviceManager.h"
 #include "FontManager.h"
 #include "TimeManager.h"
-#include "InputManager.h"
 #include "EventManager.h"
 #include "GameManager.h"
 
@@ -151,6 +150,11 @@ enum SceneType : int
 	// ePauseScene
 };
 
+enum PlayerInputType : int
+{
+	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHold
+};
+
 struct ST_EVENT
 {
 	EventType eventType;
@@ -159,11 +163,14 @@ struct ST_EVENT
 	UINT message;
 	WPARAM wParam; 
 	LPARAM lParam;
+	PlayerInputType playerInput;
 	// << Input
 
 	// >> SceneChange
 	SceneType setNowScene;
 	// << SceneChange
+
+	// void* ptrMessage;
 };
 
 #define WHITE	D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)

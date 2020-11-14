@@ -45,7 +45,7 @@ public:
 	void Setup_UI();
 	void UI_Render();
 
-	void ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam) override;
+	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName() override;
 
 	Color GetOnButton();

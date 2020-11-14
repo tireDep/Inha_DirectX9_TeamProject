@@ -37,62 +37,65 @@ bool CGameManager::GetGridMapMode()
 	return m_isGridMap;
 }
 
-void CGameManager::ReceiveInput(UINT message, WPARAM wParam, LPARAM lParam)
+void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 {
 	RECT rc;
 	POINT p1, p2;
 
-	switch (message)
+	if (eventMsg.eventType == EventType::eInputEvent)
 	{
-	case WM_KEYDOWN:
-	{
-		if (VK_CONTROL == wParam && !m_isUIModeIn)
+		switch (eventMsg.message)
 		{
-			m_isUIMode = !m_isUIMode;
-			m_isUIModeIn = !m_isUIModeIn;
-
-			if (m_isUIMode)
+		case WM_KEYDOWN:
+		{
+			if (VK_CONTROL == eventMsg.wParam && !m_isUIModeIn)
 			{
-				SetClipCursur(-15);
-				ShowCursor(true);
+				m_isUIMode = !m_isUIMode;
+				m_isUIModeIn = !m_isUIModeIn;
+
+				if (m_isUIMode)
+				{
+					SetClipCursur(-15);
+					ShowCursor(true);
+				}
+				else
+				{
+					SetClipCursur(0);
+					ShowCursor(false);
+				}
 			}
-			else
+
+			if (VK_TAB == eventMsg.wParam && !m_isDevMoveIn)
 			{
-				SetClipCursur(0);
-				ShowCursor(false);
+				m_isDevMode = !m_isDevMode;
+				m_isDevMoveIn = !m_isDevMoveIn;
 			}
-		}
 
-		if (VK_TAB == wParam && !m_isDevMoveIn)
+			// >> 맵 완료시 삭제 예정
+			if (VK_SCROLL == eventMsg.wParam && !m_isGridMapIn)
+			{
+				m_isGridMap = !m_isGridMap;
+				m_isGridMapIn = !m_isGridMapIn;
+			}
+			// << 맵 완료시 삭제 예정
+		}
+		break;
+
+		case WM_KEYUP:
 		{
-			m_isDevMode = !m_isDevMode;
-			m_isDevMoveIn = !m_isDevMoveIn;	
+			if (VK_CONTROL == eventMsg.wParam)
+				m_isUIModeIn = false;
+
+			if (VK_TAB == eventMsg.wParam)
+				m_isDevMoveIn = false;
+
+			// >> 맵 완료시 삭제 예정
+			if (VK_SCROLL == eventMsg.wParam)
+				m_isGridMapIn = false;
+			// << 맵 완료시 삭제 예정
 		}
-
-		// >> 맵 완료시 삭제 예정
-		if (VK_SCROLL == wParam && !m_isGridMapIn)
-		{
-			m_isGridMap = !m_isGridMap;
-			m_isGridMapIn = !m_isGridMapIn;
+		break;
 		}
-		// << 맵 완료시 삭제 예정
-	}
-	break;
-
-	case WM_KEYUP:
-	{
-		if (VK_CONTROL == wParam)
-			m_isUIModeIn = false;
-
-		if (VK_TAB == wParam)
-			m_isDevMoveIn = false;
-
-		// >> 맵 완료시 삭제 예정
-		if (VK_SCROLL == wParam)
-			m_isGridMapIn = false;
-		// << 맵 완료시 삭제 예정
-	}
-	break;
 	}
 }
 
