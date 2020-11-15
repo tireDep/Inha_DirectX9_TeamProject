@@ -49,26 +49,26 @@ void CEventManager::Update()
 	msg.eventType = EventType::eInputEvent;
 
 	if (pushW && pushA)
-		msg.playerInput = eLeftUp;
+		msg.playerInput = PlayerInputType::eLeftUp;
 	else if (pushW && pushD)
-		msg.playerInput = eRightUp;
+		msg.playerInput = PlayerInputType::eRightUp;
 	else if (pushW)
-		msg.playerInput = eUp;
+		msg.playerInput = PlayerInputType::eUp;
 
 	else if (pushS && pushA)
-		msg.playerInput = eLeftDown;
+		msg.playerInput = PlayerInputType::eLeftDown;
 	else if (pushS && pushD)
-		msg.playerInput = eRightDown;
+		msg.playerInput = PlayerInputType::eRightDown;
 	else if (pushS)
-		msg.playerInput = eDown;
+		msg.playerInput = PlayerInputType::eDown;
 
 	else if (pushA)
-		msg.playerInput = eLeft;
+		msg.playerInput = PlayerInputType::eLeft;
 	else if (pushD)
-		msg.playerInput = eRight;
+		msg.playerInput = PlayerInputType::eRight;
 
 	else if (pushF)
-		msg.playerInput = eHold;
+		msg.playerInput = PlayerInputType::eHold;
 
 	CheckEvent(msg);
 }

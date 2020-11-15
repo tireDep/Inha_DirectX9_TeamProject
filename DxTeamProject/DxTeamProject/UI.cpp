@@ -223,7 +223,7 @@ void CUI::UI_Render()
 
 void CUI::ReceiveEvent(ST_EVENT eventMsg)
 {
-	if (eventMsg.eventType == EventType::eInputEvent)
+	if (eventMsg.eventType == EventType::eInputEvent && g_gameManager->GetUImode())
 	{
 		switch (eventMsg.message)
 		{

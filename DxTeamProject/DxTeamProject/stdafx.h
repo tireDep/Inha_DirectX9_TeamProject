@@ -141,18 +141,18 @@ struct ST_SPHERE
 	ST_SPHERE() : fRadius(0.0f), vCenter(0, 0, 0) {}
 };
 
-enum EventType : int
+enum class EventType : int
 {
 	eInputEvent, eSceneChangeEvent
 };
 
-enum SceneType : int
+enum class SceneType : int
 {
 	eMainScene, eGameScene, eUIScene, eResultScene
 	// ePauseScene
 };
 
-enum PlayerInputType : int
+enum class PlayerInputType : int
 {
 	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHold
 };

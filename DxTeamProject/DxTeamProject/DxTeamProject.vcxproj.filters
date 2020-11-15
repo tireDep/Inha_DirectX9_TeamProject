@@ -178,7 +178,6 @@
     <ClInclude Include="Character.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="Singleton.h" />
     <ClInclude Include="Ray.h">
       <Filter>Camera</Filter>
     </ClInclude>
@@ -213,6 +212,9 @@
       <Filter>Physics_Particle</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Singleton.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

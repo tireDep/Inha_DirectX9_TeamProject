@@ -35,39 +35,39 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 		// todo : 상태에 따른 애니메이션 출력
 		switch (eventMsg.playerInput)
 		{
-		case eUp:
+		case PlayerInputType::eUp:
 			rotation = 0.0f;
 			break;
 
-		case eLeftUp:
+		case PlayerInputType::eLeftUp:
 			rotation = D3DX_PI / 4.0f * -1;
 			break;
 
-		case eRightUp:
+		case PlayerInputType::eRightUp:
 			rotation = D3DX_PI / 4.0f;
 			break;
 
-		case eDown:
+		case PlayerInputType::eDown:
 			rotation = D3DX_PI;
 			break;
 
-		case eLeftDown:
+		case PlayerInputType::eLeftDown:
 			rotation = D3DX_PI + D3DX_PI / 4.0f;
 			break;
 
-		case eRightDown:
+		case PlayerInputType::eRightDown:
 			rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
 			break;
 
-		case eLeft:
+		case PlayerInputType::eLeft:
 			rotation = -D3DX_PI / 2.0f;
 			break;
 
-		case eRight:
+		case PlayerInputType::eRight:
 			rotation = D3DX_PI / 2.0f;
 			break;
 
-		case eHold:
+		case PlayerInputType::eHold:
 			// todo : 잡기 구현
 			break;
 
