@@ -15,8 +15,7 @@ protected:
 	D3DXMATRIXA16			m_matRotY;
 	D3DXMATRIXA16			m_matWorld;
 	D3DCOLOR				m_color;
-
-	bool istrue;
+	bool					m_isCollided;
 public:
 	virtual ~CCharacter(void);
 	virtual void Setup();
@@ -33,7 +32,7 @@ public:
 
 	// tmp Collision Test
 	// setup erase
-	virtual bool Collider(bool a);
+	virtual bool Collider(bool isCollided);
 	COBB* m_pOBB;
 	COBB* GetOBB(); 
 

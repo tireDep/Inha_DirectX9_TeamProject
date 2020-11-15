@@ -6,7 +6,7 @@ CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
 	, m_vPosition(0, 0.5f, 0)
 	, m_pOBB(NULL)
-	, istrue(false)
+	, m_isCollided(false)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
@@ -27,7 +27,7 @@ void CCharacter::SetColor(D3DCOLOR c)
 
 void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 {
-	float speed = 0.003f;
+	float speed = 0.009f;
 	float rotation = -1.0f;
 
 	if (!g_gameManager->GetUImode())
@@ -163,35 +163,11 @@ void CCharacter::Setup()
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
-
-	if (GetKeyState('1') & 0X8000) // »¡
-		 SetColor(RED);
-
-	if (GetKeyState('2') & 0X8000) // ÃÊ·Ï
-		SetColor(GREEN);
-
-	if (GetKeyState('3') & 0X8000) //ÆÄ¶û
-		SetColor(BLUE);
-
-	if (GetKeyState('4') & 0X8000) //Èò»ö
-		SetColor(WHITE);
-
-	if (GetKeyState('5') & 0X8000) //³ë¶õ
-		SetColor(YELLOW);
-
-	if (GetKeyState('6') & 0X8000) //°ËÁ¤
-		SetColor(BLACK);
-
-//	if(GetKeyState('F') & 0X8000)// ¹Ð¶§
-		
-
-	D3DXMATRIXA16 matT;
-	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-
-	m_matWorld = m_matRotY * matT;
-
+	D3DXMATRIXA16 matWorldOBB;
+	matWorldOBB = m_matWorld;
+	matWorldOBB._42 -= 0.5f;
 	if (m_pOBB)
-		m_pOBB->Update(&m_matWorld);
+		m_pOBB->Update(&matWorldOBB);
 }
 
 void CCharacter::DoRotation(const float & radian)
@@ -211,7 +187,7 @@ void CCharacter::DoMove(const float& velocity)
 {
 	static D3DXVECTOR3 m_position = m_vPosition;
 
-	if (istrue)
+	if (m_isCollided)
 	{
 		m_vPosition = m_position;
 	}
@@ -224,12 +200,12 @@ void CCharacter::DoMove(const float& velocity)
 
 void CCharacter::Render()
 {
-	D3DCOLOR c = WHITE;
-	m_pOBB->OBBBOX_RENDER(c);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
 	 m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PC_VERTEX));
+	D3DCOLOR c = BLACK;
+	m_pOBB->OBBBOX_RENDER(c);
 }
 
 D3DXVECTOR3 & CCharacter::GetPosition()
@@ -247,15 +223,8 @@ D3DCOLOR CCharacter::GetColor()
 	return m_color;
 }
 
-bool CCharacter::Collider(bool a)
+bool CCharacter::Collider(bool isCollided)
 {
-	istrue = a;
-	if (istrue == true)
-	{
-		return istrue;
-	}
-	else
-	{	
-		return istrue;
-	}
+	m_isCollided = isCollided;
+	return m_isCollided;
 }

@@ -12,7 +12,7 @@ CGameManager::CGameManager()
 	m_isGridMap = false;
 	// << 맵 완료시 삭제 예정
 
-	SetClipCursur(0);
+	SetClipCursor(0);
 	ShowCursor(false);
 }
 
@@ -55,12 +55,12 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 
 				if (m_isUIMode)
 				{
-					SetClipCursur(-15);
+					SetClipCursor(-15);
 					ShowCursor(true);
 				}
 				else
 				{
-					SetClipCursur(0);
+					SetClipCursor(0);
 					ShowCursor(false);
 				}
 			}
@@ -104,7 +104,7 @@ string CGameManager::GetName()
 	return m_strName;
 }
 
-void CGameManager::SetClipCursur(int ySize)
+void CGameManager::SetClipCursor(int ySize)
 {
 	RECT rc;
 	POINT p1, p2;

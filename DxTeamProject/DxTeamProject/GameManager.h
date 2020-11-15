@@ -29,7 +29,7 @@ public:
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName() override;
 
-	void SetClipCursur(int ySize);
+	void SetClipCursor(int ySize);
 
 	// >> 맵 완료시 삭제
 	bool GetGridMapMode();
