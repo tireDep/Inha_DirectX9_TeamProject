@@ -21,7 +21,7 @@ void CParticleForceRegistry::Add(CParticle * particle, CParticleForceGenerator *
 
 void CParticleForceRegistry::Remove(CParticle * particle, CParticleForceGenerator * fg)
 {
-	// find + erase를 이용해 이후 추가
+	// vector find + erase
 }
 
 void CParticleForceRegistry::Clear()
@@ -31,7 +31,6 @@ void CParticleForceRegistry::Clear()
 
 void CParticleForceRegistry::UpdateForces(float duration)
 {
-	/// 이 부분 에러 m_stRegistrations 초기화되버림...
 	Registry::iterator it = m_stRegistrations.begin();
 	for (; it != m_stRegistrations.end(); it++)
 	{

@@ -10,4 +10,5 @@ public:
 	void Setup();
 	void RenderFPS(int fps);
 	void RenderCharacterPosition(D3DXVECTOR3 CharacterPosition);
+	void RenderBoxPosition(D3DXVECTOR3 BoxPosition);
 };

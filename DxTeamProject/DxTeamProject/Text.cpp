@@ -67,7 +67,34 @@ void CText::RenderCharacterPosition(D3DXVECTOR3 CharacterPosition)
 	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
 }
 
-//void CText::Render(int fps)
-//{
-//
-//}
+void CText::RenderBoxPosition(D3DXVECTOR3 BoxPosition)
+{
+	stringstream stream;
+	float _x = BoxPosition.x;
+	float _y = BoxPosition.y;
+	float _z = BoxPosition.z;
+
+	string positionString = "Box";
+
+	RECT rc;
+	SetRect(&rc, 10, 70, 100, 60);
+	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
+
+	positionString = "x : ";
+	stream << fixed << setprecision(2) << _x;
+	positionString += stream.str();	stream.str("");
+	SetRect(&rc, 120, 70, 200, 60);
+	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
+
+	positionString = "y : ";
+	stream << fixed << setprecision(2) << _y;
+	positionString += stream.str(); stream.str("");
+	SetRect(&rc, 220, 70, 300, 60);
+	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
+
+	positionString = "z : ";
+	stream << fixed << setprecision(2) << _z;
+	positionString += stream.str(); stream.str("");
+	SetRect(&rc, 320, 70, 400, 60);
+	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
+}

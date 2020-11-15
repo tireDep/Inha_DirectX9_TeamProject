@@ -201,12 +201,13 @@ void CMainGame::Update()
 	if(m_pParticleWorld)
 		m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
 
-	if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
-	{
-		D3DXVECTOR3 direction = m_pCharacter->GetPosition()- m_pParticleWorld->GetPosition();
-		D3DXVec3Normalize(&direction, &direction);
-		m_pParticleWorld->SetPusingForce(direction / 100.0f);
-	}
+	//if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
+	//{
+	//	cout << "in" << endl;
+	//	D3DXVECTOR3 direction = m_pCharacter->GetPosition()- m_pParticleWorld->GetPosition();
+	//	D3DXVec3Normalize(&direction, &direction);
+	//	m_pParticleWorld->SetPusingForce(direction / 100.0f);
+	//}
 
 	/// 릴리즈 버전을 위한 주석처리
 }
@@ -232,6 +233,7 @@ void CMainGame::Render()
 		{
 			m_pText->RenderFPS(g_pTimeManager->GetFPS());
 			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
+			m_pText->RenderBoxPosition(m_pParticleWorld->GetPosition());
 		}
 			
 	}
