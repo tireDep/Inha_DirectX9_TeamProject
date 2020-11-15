@@ -11,7 +11,6 @@
 #include "Ray.h"
 #include "Light.h"
 #include "ParticleWorld.h"
-
 #include "GridMap.h"
 
 /// 릴리즈 버전을 위한 주석처리
@@ -60,7 +59,7 @@ void CMainGame::Setup()
 	Setup_OBB();
 
 	m_pGrid = new CGrid;
-	m_pGrid->Setup(50, 1.0f);
+	m_pGrid->Setup(100, 1.0f);
 
 	m_pCharacter = new CCharacter;
 	m_pCharacter->Setup();
@@ -83,16 +82,15 @@ void CMainGame::Setup()
 	m_pParticleWorld = new CParticleWorld;
 	m_pParticleWorld->Setup();
 
+	m_GridMap = new CGridMap;
+	m_GridMap->Setup();
+	m_pPrevFrustum.Setup();
+	m_pNowFrustum.Setup();
+
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0)); // sun light vector
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
-	
-	m_GridMap = new CGridMap;
-	m_GridMap->Setup();
-
-	m_pPrevFrustum.Setup();
-	m_pNowFrustum.Setup();
 
 	g_pEventManager->AddListener(g_gameManager);
 	g_pEventManager->AddListener(m_pCamera);
@@ -166,15 +164,6 @@ void CMainGame::Update()
 		}
 	}
 
-	if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
-	{
-		D3DXVECTOR3 direction = m_pParticleWorld->GetPosition() - m_pCharacter->GetPosition();
-		// cout << direction.x << ' ' << direction.y << ' ' << direction.z << endl;
-		cout << "m_pParticle : " << m_pParticleWorld->GetPosition().x << ' ' << m_pParticleWorld->GetPosition().y << ' ' << m_pParticleWorld->GetPosition().z << endl;
-		cout << "m_pChar : "<< m_pCharacter->GetPosition().x << ' ' << m_pCharacter->GetPosition().y << ' ' << m_pCharacter->GetPosition().z << endl;
-		m_pParticleWorld->SetPusingForce(direction);
-	}
-
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
 	CRay r = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
@@ -212,6 +201,13 @@ void CMainGame::Update()
 	if(m_pParticleWorld)
 		m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
 
+	if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
+	{
+		D3DXVECTOR3 direction = m_pCharacter->GetPosition()- m_pParticleWorld->GetPosition();
+		D3DXVec3Normalize(&direction, &direction);
+		m_pParticleWorld->SetPusingForce(direction / 100.0f);
+	}
+
 	/// 릴리즈 버전을 위한 주석처리
 }
 
@@ -233,7 +229,11 @@ void CMainGame::Render()
 	if (g_gameManager->GetDevMode())
 	{
 		if (m_pText)
-			m_pText->Render(g_pTimeManager->GetFPS());
+		{
+			m_pText->RenderFPS(g_pTimeManager->GetFPS());
+			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
+		}
+			
 	}
 
 	if (m_pCharacter)
@@ -330,7 +330,6 @@ void CMainGame::PickingObj_Render()
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 	m_pMeshSphere->DrawSubset(0);
 }
-
 
 void CMainGame::Setup_PickingCube()
 {

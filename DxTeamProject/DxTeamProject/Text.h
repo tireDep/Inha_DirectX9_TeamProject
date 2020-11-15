@@ -8,5 +8,6 @@ private:
 	LPD3DXFONT	m_pFont;
 public:
 	void Setup();
-	void Render(int fps);
+	void RenderFPS(int fps);
+	void RenderCharacterPosition(D3DXVECTOR3 CharacterPosition);
 };

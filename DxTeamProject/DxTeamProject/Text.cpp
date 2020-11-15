@@ -16,7 +16,7 @@ void CText::Setup()
 	m_pFont = g_pFontManager->GetFont(CFontManager::E_CABIN);
 }
 
-void CText::Render(int fps)
+void CText::RenderFPS(int fps)
 {
 	if (fps > 9999)
 		fps = 9999;
@@ -24,23 +24,50 @@ void CText::Render(int fps)
 	string fpsString = "FPS : ";
 	fpsString += to_string(fps);
 
-	DWORD red = 0, green = 0, blue = 0;
-
-	if (fps >= 60)
-	{
-		red = 0;	green = 255;	blue = 0;
-	}
-	if (fps < 60)
-	{
-		red = 255;	green = 255;	blue = 0;
-	}
-	if (fps < 30)
-	{
-		red = 255;	green = 0;		blue = 0;
-	}
-
 	RECT rc;
 	SetRect(&rc, 10, 10, 100, 20);
 
-	m_pFont->DrawTextA(NULL, fpsString.c_str(), fpsString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, D3DCOLOR_XRGB(red, green, blue));
+	if (fps >= 60)
+		m_pFont->DrawTextA(NULL, fpsString.c_str(), fpsString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, GREEN);
+	if (fps < 60)
+		m_pFont->DrawTextA(NULL, fpsString.c_str(), fpsString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, YELLOW);
+	if (fps < 30)
+		m_pFont->DrawTextA(NULL, fpsString.c_str(), fpsString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
 }
+
+void CText::RenderCharacterPosition(D3DXVECTOR3 CharacterPosition)
+{
+	stringstream stream;
+	float _x = CharacterPosition.x;
+	float _y = CharacterPosition.y;
+	float _z = CharacterPosition.z;
+
+	string positionString = "Character";
+
+	RECT rc;
+	SetRect(&rc, 10, 40, 100, 60);
+	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
+
+	positionString = "x : ";
+	stream << fixed << setprecision(2) << _x;
+	positionString += stream.str();	stream.str("");
+	SetRect(&rc, 120, 40, 200, 60);
+	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
+
+	positionString = "y : ";
+	stream << fixed << setprecision(2) << _y;
+	positionString += stream.str(); stream.str("");
+	SetRect(&rc, 220, 40, 300, 60);
+	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
+
+	positionString = "z : ";
+	stream << fixed << setprecision(2) << _z;
+	positionString += stream.str(); stream.str("");
+	SetRect(&rc, 320, 40, 400, 60);
+	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
+}
+
+//void CText::Render(int fps)
+//{
+//
+//}

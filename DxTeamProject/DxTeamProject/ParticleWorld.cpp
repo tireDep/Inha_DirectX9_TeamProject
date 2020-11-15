@@ -83,11 +83,11 @@ void CParticleWorld::Update(float duration)
 	StartFrame();
 	Integrate(duration);
 	RunPhysics(duration);
-	D3DXMatrixTranslation(&m_matWorld, m_vecParticles[0]->GetPosition().x, m_vecParticles[0]->GetPosition().y, m_vecParticles[0]->GetPosition().z);
+	m_vPosition = m_vecParticles[0]->GetPosition() + m_vecParticles[6]->GetPosition();
+	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	if (m_pOBB)
 		m_pOBB->Update(&m_matWorld);
 	//m_vPosition = m_vecVertex[0].p + m_vecVertex[11].p;
-	m_vPosition = m_vecParticles[0]->GetPosition() + m_vecParticles[6]->GetPosition();
 }
 
 void CParticleWorld::Render()
@@ -149,15 +149,13 @@ void CParticleWorld::SetCube()
 	for (size_t i = 0; i < vecIndex.size(); i += 3)
 	{
 		m_vecVertex[i + 0].p = m_vecParticles[vecIndex[i + 0]]->GetPosition();
-		m_vecVertex[i + 0].c = RED;
 		m_vecVertex[i + 1].p = m_vecParticles[vecIndex[i + 1]]->GetPosition();
-		m_vecVertex[i + 1].c = RED;
 		m_vecVertex[i + 2].p = m_vecParticles[vecIndex[i + 2]]->GetPosition();
-		m_vecVertex[i + 2].c = RED;
 	}
 	for (size_t i = 0; i < m_vecVertex.size(); i++)
 	{
 		m_vecVertex[i].p += D3DXVECTOR3(-5, 0.5f, -5);
+		m_vecVertex[i].c = RED;
 	}
 
 	m_pOBB = new COBB;

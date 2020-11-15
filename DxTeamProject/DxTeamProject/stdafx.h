@@ -27,6 +27,8 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <iomanip> // setprecision
+#include <sstream> // stringstream
 using namespace std;
 
 #if _DEBUG

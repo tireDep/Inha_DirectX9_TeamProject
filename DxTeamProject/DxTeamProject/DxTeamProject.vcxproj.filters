@@ -19,9 +19,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="MainGame.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="DeviceManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -85,7 +82,6 @@
     <ClCompile Include="ParticleWorld.cpp">
       <Filter>Physics_Particle</Filter>
     </ClCompile>
-    <ClCompile Include="ParticlePusingForce.cpp" />
     <ClCompile Include="EventManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -95,6 +91,10 @@
     <ClCompile Include="IListener.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="ParticlePusingForce.cpp">
+      <Filter>Physics_Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -131,9 +131,6 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="MainGame.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
@@ -203,7 +200,6 @@
     <ClInclude Include="ParticleWorld.h">
       <Filter>Physics_Particle</Filter>
     </ClInclude>
-    <ClInclude Include="ParticlePusingForce.h" />
     <ClInclude Include="EventManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -213,6 +209,10 @@
     <ClInclude Include="IListener.h">
       <Filter>Manager</Filter>
     </ClInclude>
+    <ClInclude Include="ParticlePusingForce.h">
+      <Filter>Physics_Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
