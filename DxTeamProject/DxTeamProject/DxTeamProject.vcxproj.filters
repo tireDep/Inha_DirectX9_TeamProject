@@ -98,6 +98,9 @@
     <ClCompile Include="Sphere.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -219,6 +222,9 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
       <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,6 +8,8 @@ class CObject : public IListener
 {
 protected:
 	static int m_nRefCount;
+	bool		m_isPicked;
+	bool		m_isClicked;
 
 	CObject();
 
