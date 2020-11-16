@@ -22,4 +22,12 @@ void CObject::Release()
 
 void CObject::ReceiveEvent(ST_EVENT eventMsg)
 {
+	if (eventMsg.eventType == EventType::eInputEvent && eventMsg.message == WM_LBUTTONDOWN)
+	{
+		if (m_isPicked == true)
+		{
+			// todo : 색상값 받아와야 함
+			m_isClicked = true;
+		}
+	}
 }

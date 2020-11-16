@@ -13,6 +13,7 @@
 #include "ParticleWorld.h"
 #include "GridMap.h"
 #include "Sphere.h"
+#include "Cube.h"
 
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
@@ -78,11 +79,9 @@ void CMainGame::Setup()
 	for (int i = 0; i < 8; i++)
 	{
 		CSphere* sphere = new CSphere(0.5f, i);
-		g_pObjectManager->AddObject(sphere);
-		g_pEventManager->AddListener(sphere);
 	}
 
-	Setup_PickingCube();
+	CCube* cube = new CCube();
 
 	m_pLight = new CLight;
 	m_pLight->Setup();
@@ -105,10 +104,10 @@ void CMainGame::Setup()
 	g_pEventManager->AddListener(m_pCharacter);
 	g_pEventManager->AddListener(m_pUI);
 
-	// for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
-	// {
-	// 	g_pEventManager->AddListener(g_pObjectManager->GetVecObject()[i]);
-	// }
+	for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
+	{
+		g_pEventManager->AddListener(g_pObjectManager->GetVecObject()[i]);
+	}
 }
 
 void CMainGame::Update()
@@ -185,6 +184,7 @@ void CMainGame::Update()
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray);
 
+
 	//for (int i = 0; i < m_vecPlaneVertex.size(); i += 3)
 	//{
 	//	if (ray.IntersectTri(m_vecPlaneVertex[i + 0].p, m_vecPlaneVertex[i + 1].p, m_vecPlaneVertex[i + 2].p) == true)
@@ -220,6 +220,8 @@ void CMainGame::Update()
 			}
 		}
 	}
+
+
 
 	if(m_pParticleWorld)
 		m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
@@ -267,7 +269,6 @@ void CMainGame::Render()
 	OBB_RENDER();
 
 	g_pObjectManager->Render();
-	PickingCube_Render();
 
 	if (m_pParticleWorld)
 		m_pParticleWorld->Render();
@@ -301,152 +302,4 @@ void CMainGame::OBB_RENDER()
 	{
 		m_vColliderCube[i]->Render();
 	}
-}
-
-void CMainGame::Setup_PickingCube()
-{
-	//D3DXCreateBox(g_pD3DDevice, 1, 1, 1, &m_sMeshCube, NULL);
-
-	//ZeroMemory(&m_stMtlNone, sizeof(D3DMATERIAL9));
-	//m_stMtlNone.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
-	//m_stMtlNone.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
-	//m_stMtlNone.Specular = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
-
-	//ZeroMemory(&m_stMtlPicked, sizeof(D3DMATERIAL9));
-	//m_stMtlPicked.Ambient = D3DXCOLOR(0.7f, 0.0f, 0.0f, 1.0f);
-	//m_stMtlPicked.Diffuse = D3DXCOLOR(0.7f, 0.0f, 0.0f, 1.0f);
-	//m_stMtlPicked.Specular = D3DXCOLOR(0.7f, 0.0f, 0.0f, 1.0f);
-
-
-	//ST_CUBE v;
-
-
-	////밑면
-	//v.p = D3DXVECTOR3(-1, -1, -1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-1, 1, -1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, 1, -1);
-	//m_vecPlaneVertex.push_back(v);
-
-	//v.p = D3DXVECTOR3(-1, -1, -1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, 1, -1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, -1, -1);
-	//m_vecPlaneVertex.push_back(v);
-
-	//// : back 
-	////v.c = D3DCOLOR_XRGB(rand() % 256, rand() % 256, rand() % 256);
-	//v.p = D3DXVECTOR3(-1, -1, 1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, 1, 1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-1, 1, 1);
-	//m_vecPlaneVertex.push_back(v);
-
-	//v.p = D3DXVECTOR3(-1, -1, 1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, -1, 1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, 1, 1);
-	//m_vecPlaneVertex.push_back(v);
-
-	//// : left
-	////v.c = D3DCOLOR_XRGB(rand() % 256, rand() % 256, rand() % 256);
-	//v.p = D3DXVECTOR3(-1, -1, 1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-1, 1, 1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-1, 1, -1);
-	//m_vecPlaneVertex.push_back(v);
-
-	//v.p = D3DXVECTOR3(-1, -1, 1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-1, 1, -1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-1, -1, -1);
-	//m_vecPlaneVertex.push_back(v);
-
-	//// : right 
-	////v.c = D3DCOLOR_XRGB(rand() % 256, rand() % 256, rand() % 256);
-	//v.p = D3DXVECTOR3(1, -1, -1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, 1, -1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, 1, 1);
-	//m_vecPlaneVertex.push_back(v);
-
-	//v.p = D3DXVECTOR3(1, -1, -1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, 1, 1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, -1, 1);
-	//m_vecPlaneVertex.push_back(v);
-
-	//// : top 
-	////v.c = D3DCOLOR_XRGB(rand() % 256, rand() % 256, rand() % 256);
-	//v.p = D3DXVECTOR3(-1, 1, -1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-1, 1, 1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, 1, 1);
-	//m_vecPlaneVertex.push_back(v);
-
-	//v.p = D3DXVECTOR3(-1, 1, -1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, 1, 1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, 1, -1);
-	//m_vecPlaneVertex.push_back(v);
-
-	//// : bottom
-	////	v.c = D3DCOLOR_XRGB(rand() % 256, rand() % 256, rand() % 256);
-	//v.p = D3DXVECTOR3(-1, -1, 1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-1, -1, -1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, -1, -1);
-	//m_vecPlaneVertex.push_back(v);
-
-	//v.p = D3DXVECTOR3(-1, -1, 1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, -1, -1);
-	//m_vecPlaneVertex.push_back(v);
-	//v.p = D3DXVECTOR3(1, -1, 1);
-	//m_vecPlaneVertex.push_back(v);
-
-	//for (int i = 0; i < m_vecPlaneVertex.size(); i++)
-	//{
-	//	m_vecPlaneVertex[i].isPicked = false;
-	//}
-}
-
-void CMainGame::PickingCube_Render()
-{
-
-
-	/*g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	D3DXMATRIXA16 matWorld;
-
-
-	g_pD3DDevice->SetMaterial(&m_stMtlNone);
-	D3DXMatrixIdentity(&matWorld);
-
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
-	g_pD3DDevice->SetTexture(0, 0);
-
-	for (int i = 0; i < 36; i++)
-	{
-		D3DXMatrixIdentity(&matWorld);
-
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
-		g_pD3DDevice->SetMaterial(m_vecPlaneVertex[i].isPicked ?
-			&m_stMtlPicked : &m_stMtlNone);
-
-		m_sMeshCube->DrawSubset(0);
-	}
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);*/
-
-
 }
