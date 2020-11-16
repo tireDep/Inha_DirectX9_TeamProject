@@ -8,6 +8,7 @@ CObject::CObject()
 {
 	CObject::m_nRefCount += 1;
 	g_pObjectManager->AddObject(this);
+	m_color = GRAY;
 }
 
 CObject::~CObject()
@@ -30,4 +31,21 @@ void CObject::ReceiveEvent(ST_EVENT eventMsg)
 			m_isClicked = true;
 		}
 	}
+	else
+		m_isClicked = false;
+}
+
+void CObject::SetColor(D3DXCOLOR ObjectColor)
+{
+	m_color = ObjectColor;
+}
+
+D3DXCOLOR CObject::GetColor()
+{
+	return m_color;
+}
+
+bool CObject::GetisClicked()
+{
+	return m_isClicked;
 }

@@ -3,21 +3,23 @@
 
 CSphere::CSphere() :
 	m_fRadius(0.0f),
-	m_vCenter(0,0,0)
+	m_vCenter(0,0,0),
+	m_pMeshSphere(NULL)
 {
+	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
 	Setup();
 }
 
-CSphere::CSphere(float radius, int zPos)
+CSphere::CSphere(float radius, D3DXVECTOR3 center)
 {
 	m_fRadius = radius;
-	m_vCenter = D3DXVECTOR3(0, 0, -10 + 2 * zPos);
-
+	m_vCenter = center;
 	Setup();
 }
 
 CSphere::~CSphere()
 {
+	SafeRelease(m_pMeshSphere);
 }
 
 void CSphere::Setup()
@@ -28,9 +30,9 @@ void CSphere::Setup()
 
 	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pMeshSphere, NULL);
 	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
-	m_stMtlSphere.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
-	m_stMtlSphere.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
-	m_stMtlSphere.Specular = D3DXCOLOR(0.7f, 0.7f, 0.0f, 1.0f);
+	m_stMtlSphere.Ambient  = m_color;
+	m_stMtlSphere.Diffuse  = m_color;
+	m_stMtlSphere.Specular = m_color;
 }
 
 void CSphere::Update(CRay ray)
@@ -64,40 +66,26 @@ void CSphere::Update(CRay ray)
 
 void CSphere::Render()
 {
-	if (m_isClicked)
-	{
-		// >> todo 색상값 받아오기
-		m_stMtlSphere.Ambient = BLUE;
-		m_stMtlSphere.Diffuse = BLUE;
-		m_stMtlSphere.Specular = BLUE;
-	}
-	else if (m_isPicked)
+	m_stMtlSphere.Ambient = m_color;
+	m_stMtlSphere.Diffuse = m_color;
+	m_stMtlSphere.Specular = m_color;
+
+	if (m_isPicked)
 	{
 		m_stMtlSphere.Ambient = RED;
 		m_stMtlSphere.Diffuse = RED;
 		m_stMtlSphere.Specular = RED;
 	}
-	else
-	{
-		m_stMtlSphere.Ambient = YELLOW;
-		m_stMtlSphere.Diffuse = YELLOW;
-		m_stMtlSphere.Specular = YELLOW;
-	}
-
 
 	D3DXMATRIXA16 matWorld;
-	D3DXMatrixIdentity(&matWorld);
-
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
-	g_pD3DDevice->SetTexture(0, 0);
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	
 	D3DXMatrixIdentity(&matWorld);
 	matWorld._41 = m_vCenter.x;
 	matWorld._42 = m_vCenter.y;
 	matWorld._43 = m_vCenter.z;
-		
+
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	g_pD3DDevice->SetTexture(0, 0);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetMaterial(&m_stMtlSphere);
 	m_pMeshSphere->DrawSubset(0);
 }
@@ -110,14 +98,4 @@ string CSphere::GetName()
 void CSphere::ReceiveEvent(ST_EVENT eventMsg)
 {
 	CObject::ReceiveEvent(eventMsg);
-	//if (eventMsg.eventType == EventType::eInputEvent && eventMsg.message == WM_LBUTTONDOWN)
-	//{
-	//	if (m_isPicked == true)
-	//	{
-	//		// todo : 색상값 받아와야 함
-	//		m_isClicked = true;
-	//	}
-	//	else
-	//		m_isClicked = false;
-	//}
 }

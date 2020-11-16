@@ -15,9 +15,8 @@ public:
 	void RemoveObject(CObject* pObject);
 	void Destroy();
 
-	void Update(CRay ray);
+	void Update(CRay ray, D3DXCOLOR objectcolor);
 	void Render();
 
 	vector<CObject *> GetVecObject();
 };
-

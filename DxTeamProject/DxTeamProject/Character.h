@@ -1,7 +1,6 @@
 #pragma once
 #include "IListener.h"
 
-//class CCharacter : public CObject
 class COBB;
 
 class CCharacter : public IListener

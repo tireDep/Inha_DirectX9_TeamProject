@@ -27,7 +27,7 @@ void CCharacter::SetColor(D3DCOLOR c)
 
 void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 {
-	float speed = 0.009f;
+	float speed = 0.005f;
 	float rotation = -1.0f;
 
 	if (!g_gameManager->GetUImode())
@@ -163,11 +163,13 @@ void CCharacter::Setup()
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
-	D3DXMATRIXA16 matWorldOBB;
-	matWorldOBB = m_matWorld;
-	matWorldOBB._42 -= 0.5f;
+	//D3DXMATRIXA16 matWorldOBB;
+	//matWorldOBB = m_matWorld;
+	//matWorldOBB._42 -= 0.5f;
+	//if (m_pOBB)
+	//	m_pOBB->Update(&matWorldOBB);
 	if (m_pOBB)
-		m_pOBB->Update(&matWorldOBB);
+		m_pOBB->Update(&m_matWorld);
 }
 
 void CCharacter::DoRotation(const float & radian)
@@ -205,7 +207,7 @@ void CCharacter::Render()
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
 	 m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PC_VERTEX));
 	D3DCOLOR c = BLACK;
-	//m_pOBB->OBBBOX_RENDER(c);
+	m_pOBB->OBBBOX_RENDER(c);
 }
 
 D3DXVECTOR3 & CCharacter::GetPosition()

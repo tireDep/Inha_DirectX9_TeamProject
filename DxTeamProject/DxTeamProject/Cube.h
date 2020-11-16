@@ -4,12 +4,16 @@
 class CCube : public CObject
 {
 private:
-	vector<D3DXVECTOR3>  m_vecPos;
+	vector<D3DXVECTOR3>	m_vecPos;
 	LPD3DXMESH			m_pMeshCube;
-	D3DMATERIAL9		m_stMtlCube;
+	D3DMATERIAL9			m_stMtlCube;
 
+	vector<ST_PC_VERTEX>	m_vecSideLineVertex;
+	D3DXVECTOR3				m_vCenter;
+	
 public:
 	CCube();
+	CCube(D3DXVECTOR3 center);
 	~CCube();
 	
 	virtual void Setup();
@@ -19,4 +23,3 @@ public:
 	virtual string GetName();
 	virtual void ReceiveEvent(ST_EVENT eventMsg);
 };
-

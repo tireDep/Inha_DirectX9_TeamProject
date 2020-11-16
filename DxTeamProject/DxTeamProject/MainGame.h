@@ -9,31 +9,29 @@ class CText;
 class CColliderObject;
 class CCharacter;
 class CLight;
-class CParticleWorld;
 class CGridMap;
 // class CFrustum;
 
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
+//class CParticleWorld;
 
 class CMainGame
 {
 private:
-	CCamera* m_pCamera;
-	CGrid* m_pGrid;
-	CUI *m_pUI;
-	CText*	m_pText;
+	CCamera*	m_pCamera;
+	CGrid*		m_pGrid;
+	CUI*		m_pUI;
+	CText*		m_pText;
 	CCharacter*	m_pCharacter;
-	vector<CColliderObject*> m_vColliderCube;
-	CLight*				m_pLight;
-	CParticleWorld*		m_pParticleWorld;
+	CLight*		m_pLight;
+	CFrustum	m_pPrevFrustum;
+	CFrustum	m_pNowFrustum;
+	CGridMap*	m_GridMap;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
-
-	CFrustum m_pPrevFrustum;
-	CFrustum m_pNowFrustum;
-	CGridMap* m_GridMap;
-
+	//CParticleWorld*	m_pParticleWorld;
+	//vector<CColliderObject*> m_vColliderCube;
 public:
 	CMainGame();
 	~CMainGame();
@@ -43,6 +41,7 @@ public:
 	void Update();
 	void Render();
 
-	void Setup_OBB();
-	void OBB_RENDER();
+	/// 릴리즈 버전을 위한 주석처리
+	//void Setup_OBB();
+	//void OBB_RENDER();
 };

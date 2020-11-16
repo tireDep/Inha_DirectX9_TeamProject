@@ -7,12 +7,11 @@ struct ST_EVENT;
 class CObject : public IListener
 {
 protected:
-	static int m_nRefCount;
+	static int  m_nRefCount;
 	bool		m_isPicked;
 	bool		m_isClicked;
-
+	D3DXCOLOR	m_color;
 	CObject();
-
 public:
 	virtual ~CObject(void);
 
@@ -24,5 +23,8 @@ public:
 
 	virtual string GetName() { return string(); }
 	virtual void ReceiveEvent(ST_EVENT eventMsg);
-};
 
+	virtual void SetColor(D3DXCOLOR ObjectColor);
+	virtual D3DXCOLOR GetColor();
+	virtual bool GetisClicked();
+};
