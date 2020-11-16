@@ -1,17 +1,26 @@
 #pragma once
 #include "IListener.h"
+#include "Ray.h"
 
-class CObject
+struct ST_EVENT;
+
+class CObject : public IListener
 {
-public:
-	CObject();
-	//~cObject();
 protected:
-	ULONG m_ulRefCount;
+	static int m_nRefCount;
+
+	CObject();
+
 public:
 	virtual ~CObject(void);
 
-	virtual	void AddRef();
 	virtual void Release();
+
+	virtual void Setup() = 0;
+	virtual void Update(CRay ray) = 0;
+	virtual void Render() = 0;
+
+	virtual string GetName() { return string(); }
+	virtual void ReceiveEvent(ST_EVENT eventMsg);
 };
 

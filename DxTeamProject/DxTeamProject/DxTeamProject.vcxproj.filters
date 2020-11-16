@@ -40,12 +40,6 @@
     <ClCompile Include="OBB.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectManager.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
     <ClCompile Include="Frustum.cpp">
       <Filter>Map</Filter>
     </ClCompile>
@@ -95,6 +89,15 @@
       <Filter>Physics_Particle</Filter>
     </ClCompile>
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="Object.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -157,12 +160,6 @@
     <ClInclude Include="OBB.h">
       <Filter>Collider</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectManager.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
     <ClInclude Include="IMap.h">
       <Filter>Map</Filter>
     </ClInclude>
@@ -214,6 +211,15 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Singleton.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -278,6 +284,9 @@
     </Filter>
     <Filter Include="Manager">
       <UniqueIdentifier>{af4b9a62-73b4-4067-8d39-452aaca773fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{ebfb21f7-f659-4d66-b0c1-4e6fca5611dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

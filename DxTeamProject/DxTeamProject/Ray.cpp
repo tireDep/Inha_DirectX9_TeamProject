@@ -57,27 +57,3 @@ bool CRay::IntersectTri(IN D3DXVECTOR3 & v0, IN D3DXVECTOR3 & v1, IN D3DXVECTOR3
 	//vPickedPosition = m_vOrg + f*m_vDir;
 	return b;
 }
-
-
-bool CRay::IsPicked(ST_SPHERE * pSphere)
-{
-	return D3DXSphereBoundProbe(&pSphere->vCenter, pSphere->fRadius,
-		&m_vOrg, &m_vDir);
-
-	CRay r = (*this);
-	D3DXMATRIXA16 matInvWorld;
-	D3DXMatrixIdentity(&matInvWorld);
-	matInvWorld._41 = -pSphere->vCenter.x;
-	matInvWorld._42 = -pSphere->vCenter.y;
-	matInvWorld._43 = -pSphere->vCenter.z;
-
-	D3DXVec3TransformCoord(&r.m_vOrg, &r.m_vOrg, &matInvWorld);
-	D3DXVec3TransformNormal(&r.m_vDir, &r.m_vDir, &matInvWorld);
-
-	// ( Q.V)^2 -  V.V*(Q.Q - r*r) > 0 
-	float vv = D3DXVec3Dot(&r.m_vDir, &r.m_vDir);
-	float qv = D3DXVec3Dot(&r.m_vOrg, &r.m_vDir);
-	float qq = D3DXVec3Dot(&r.m_vOrg, &r.m_vOrg);
-	float rr = pSphere->fRadius * pSphere->fRadius;
-	return qv*qv - vv * (qq - rr) >= 0;
-}

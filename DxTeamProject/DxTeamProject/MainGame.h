@@ -27,11 +27,11 @@ private:
 	vector<CColliderObject*> m_vColliderCube;
 
 	CLight*				m_pLight;
-	vector<ST_SPHERE>	m_vecSphere; // 피킹 될 오브젝트
-	D3DMATERIAL9		m_stMtlNone; //  피킹 안되어있을떄
-	D3DMATERIAL9		m_stMtlPicked; // 피킹되었을때
-	LPD3DXMESH			m_pMeshSphere; // 메쉬 원
-	D3DMATERIAL9		m_stMtlSphere; // 메쉬 원 메터리얼
+	// vector<ST_SPHERE>	m_vecSphere; // 피킹 될 오브젝트
+	// D3DMATERIAL9		m_stMtlNone; //  피킹 안되어있을떄
+	// D3DMATERIAL9		m_stMtlPicked; // 피킹되었을때
+	// LPD3DXMESH			m_pMeshSphere; // 메쉬 원
+	// D3DMATERIAL9		m_stMtlSphere; // 메쉬 원 메터리얼
 
 	LPD3DXMESH	 	m_sMeshCube;// 피킹 큐브
 	vector<ST_CUBE>	m_vecPlaneVertex;
@@ -55,9 +55,6 @@ public:
 
 	void Setup_OBB();
 	void OBB_RENDER();
-
-	void Setup_PickingObj();
-	void PickingObj_Render();
 
 	void Setup_PickingCube();
 	void PickingCube_Render();

@@ -132,15 +132,6 @@ struct ST_CUBE
 	ST_CUBE() : isPicked(false) {}
 };
 
-
-struct ST_SPHERE
-{
-	float		fRadius;
-	D3DXVECTOR3	vCenter;
-	bool		isPicked;
-	ST_SPHERE() : fRadius(0.0f), vCenter(0, 0, 0) {}
-};
-
 enum class EventType : int
 {
 	eInputEvent, eSceneChangeEvent
@@ -166,6 +157,8 @@ struct ST_EVENT
 	WPARAM wParam; 
 	LPARAM lParam;
 	PlayerInputType playerInput;
+
+	D3DXCOLOR playerColor;
 	// << Input
 
 	// >> SceneChange

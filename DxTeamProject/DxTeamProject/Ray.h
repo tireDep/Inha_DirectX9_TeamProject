@@ -1,4 +1,6 @@
 #pragma once
+
+class CObject;
 class CRay
 {
 public:
@@ -14,8 +16,9 @@ public:
 	};
 
 protected:
-	D3DXVECTOR3		m_vOrg;
-	D3DXVECTOR3		m_vDir;
+	Synthesize(D3DXVECTOR3, m_vOrg, Origin);
+	Synthesize(D3DXVECTOR3, m_vDir, Direction);
+
 	eRaySpace		m_eRaySpace;
 
 public:
@@ -25,7 +28,6 @@ public:
 	bool	IntersectTri(IN D3DXVECTOR3& v0, IN D3DXVECTOR3 & v1,
 		IN D3DXVECTOR3& v2);
 
-	bool	IsPicked(ST_SPHERE* pSphere);
 
 };
 

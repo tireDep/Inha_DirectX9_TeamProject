@@ -1,26 +1,25 @@
 #include "stdafx.h"
 #include "Object.h"
+#include "Ray.h"
 
+int CObject::m_nRefCount = 0;
 
 CObject::CObject()
-	: m_ulRefCount(1)
 {
+	CObject::m_nRefCount += 1;
 	g_pObjectManager->AddObject(this);
 }
 
 CObject::~CObject()
 {
-	g_pObjectManager->RemoveObject(this);
-}
-
-void CObject::AddRef()
-{
-	++m_ulRefCount;
 }
 
 void CObject::Release()
 {
-	--m_ulRefCount;
-	if (m_ulRefCount == 0)
-		delete this;
+	g_pObjectManager->RemoveObject(this);
+	CObject::m_nRefCount -= 1;
+}
+
+void CObject::ReceiveEvent(ST_EVENT eventMsg)
+{
 }

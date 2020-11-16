@@ -1,22 +1,23 @@
 #pragma once
 
+class CObject;
+class CRay;
 #define		g_pObjectManager CObjectManager::GetInstance()
 
 class CObjectManager
 {
-	//public:
-	//	cObjectManager();
-	//	~cObjectManager();
-
-private:
-	
+private:	
 	SingleTone(CObjectManager);
-	std::set<CObject*> m_setObject;
+	vector<CObject *> m_vecObject;
 
 public:
 	void AddObject(CObject* pObject);
 	void RemoveObject(CObject* pObject);
 	void Destroy();
 
+	void Update(CRay ray);
+	void Render();
+
+	vector<CObject *> GetVecObject();
 };
 
