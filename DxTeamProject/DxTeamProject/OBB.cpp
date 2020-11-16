@@ -9,7 +9,7 @@ COBB::~COBB()
 {
 }
 
-void COBB::SetupCube(ST_PC_VERTEX v1, ST_PC_VERTEX v2)
+void COBB::SetupCube(ST_PC_VERTEX v1, ST_PC_VERTEX v2, float CubeSize)
 {
 	D3DXVECTOR3 vMax = v1.p;
 	D3DXVECTOR3 vMin = v2.p;
@@ -30,15 +30,15 @@ void COBB::SetupCube(ST_PC_VERTEX v1, ST_PC_VERTEX v2)
 
 	vector<D3DXVECTOR3> vecVertex;
 
-	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], 0, -m_fAxisHalfLen[2])); // 0
-	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisLen[1], -m_fAxisHalfLen[2])); //1
-	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisLen[1], -m_fAxisHalfLen[2])); //2
-	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], 0, -m_fAxisHalfLen[2])); // 3
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], -CubeSize, -m_fAxisHalfLen[2])); // 0
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisLen[1] - CubeSize, -m_fAxisHalfLen[2])); //1
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisLen[1] - CubeSize, -m_fAxisHalfLen[2])); //2
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], -CubeSize, -m_fAxisHalfLen[2])); // 3
 
-	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], 0, m_fAxisHalfLen[2])); //4 
-	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisLen[1], m_fAxisHalfLen[2])); // 5
-	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisLen[1], m_fAxisHalfLen[2])); //6
-	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], 0, m_fAxisHalfLen[2])); //7
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], -CubeSize, m_fAxisHalfLen[2])); //4 
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisLen[1] - CubeSize, m_fAxisHalfLen[2])); // 5
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisLen[1] - CubeSize, m_fAxisHalfLen[2])); //6
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], -CubeSize, m_fAxisHalfLen[2])); //7
 
 	vector<DWORD> vecIndex;
 	//¾Õ¸é

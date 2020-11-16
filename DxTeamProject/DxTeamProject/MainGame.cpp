@@ -163,7 +163,7 @@ void CMainGame::Update()
 		}
 	}
 		
-	for (int i = 0; i < 1; ++i)
+	for (int i = 0; i < m_vColliderCube.size(); ++i)
 	{
 		if (COBB::IsCollision(m_pCharacter->GetOBB(), m_vColliderCube[i]->GetOBB()) == true)
 		{		
@@ -177,25 +177,46 @@ void CMainGame::Update()
 		}
 	}
 
+
+
+
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray);
 
-	for (int i = 0; i < m_vecPlaneVertex.size(); i += 3)
+	//for (int i = 0; i < m_vecPlaneVertex.size(); i += 3)
+	//{
+	//	if (ray.IntersectTri(m_vecPlaneVertex[i + 0].p, m_vecPlaneVertex[i + 1].p, m_vecPlaneVertex[i + 2].p) == true)
+	//	{
+	//		for (int i = 0; i < 36; ++i)
+	//		{
+	//			m_vecPlaneVertex[i].isPicked = true;
+	//		}
+	//	}
+	//	else
+	//	{	
+	//		for (int i = 0; i < 36; ++i)
+	//		{
+	//			m_vecPlaneVertex[i].isPicked = false;
+	//		}
+	//	}
+	//}
+
+	for (int j = 0; j < 5; ++j)
 	{
-		if (ray.IntersectTri(m_vecPlaneVertex[i + 0].p, m_vecPlaneVertex[i + 1].p, m_vecPlaneVertex[i + 2].p) == true)
+		for (int i = 0; i < m_vColliderCube[j]->GetVecSize(); i += 3)
 		{
-			for (int i = 0; i < 36; ++i)
+			if (ray.IntersectTri(m_vColliderCube[j]->GetVecPosition(i+0) + m_vColliderCube[j]->GetPosition(),
+				m_vColliderCube[j]->GetVecPosition(i+1) + m_vColliderCube[j]->GetPosition(),
+				m_vColliderCube[j]->GetVecPosition(i+2) + m_vColliderCube[j]->GetPosition()) == true)
 			{
-				m_vecPlaneVertex[i].isPicked = true;
+				m_vColliderCube[j]->GetVecPick(true);
+
 			}
-		}
-		else
-		{	
-			for (int i = 0; i < 36; ++i)
+			else
 			{
-				m_vecPlaneVertex[i].isPicked = false;
+				m_vColliderCube[j]->GetVecPick(false);
 			}
 		}
 	}
@@ -267,7 +288,7 @@ void CMainGame::Render()
 
 void CMainGame::Setup_OBB()
 {
-	for (int i = 0; i < 1; ++i)
+	for (int i = 0; i < 5; ++i)
 	{
 		m_vColliderCube.push_back(new CColliderObject);
 		m_vColliderCube[i]->Setup(D3DXVECTOR3(i * 2 + 3, 0.5f, i * 2 + 3));

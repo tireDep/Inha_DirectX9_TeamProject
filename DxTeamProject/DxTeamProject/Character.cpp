@@ -4,7 +4,7 @@
 
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
-	, m_vPosition(0, 0.5f, 0)
+	, m_vPosition(0, 0.0f, 0)
 	, m_pOBB(NULL)
 	, m_isCollided(false)
 {
@@ -157,7 +157,7 @@ void CCharacter::Setup()
 	v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
 
 	m_pOBB = new COBB;
-	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11]);
+	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
 }
 
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
@@ -205,7 +205,7 @@ void CCharacter::Render()
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
 	 m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PC_VERTEX));
 	D3DCOLOR c = BLACK;
-	m_pOBB->OBBBOX_RENDER(c);
+	//m_pOBB->OBBBOX_RENDER(c);
 }
 
 D3DXVECTOR3 & CCharacter::GetPosition()
