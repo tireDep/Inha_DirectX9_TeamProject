@@ -48,29 +48,32 @@ void CObject::SetShader(const D3DXMATRIXA16& setMatWorld)
 {
 	// g_pD3DDevice->SetTransform(D3DTS_WORLD, &setMatWorld);
 
-	if (m_pShader)
-	{
-		D3DXMATRIXA16 matView, matProj, matViewPro, matViewInvTrans;
-		g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
-		g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+	//if (m_pShader)
+	//{
+	//	m_pShader->
+	//	D3DXMATRIXA16 matView, matProj, matViewPro, matViewInvTrans;
+	//	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+	//	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
 
-		matViewPro = matView * matProj;
-		m_pShader->SetMatrix("matViewProjection", &matViewPro);
+	//	matViewPro = matView * matProj;
+	//	m_pShader->SetMatrix("matViewProjection", &matViewPro);
 
-		D3DXMatrixInverse(&matViewInvTrans, NULL, &matView);
-		D3DXMatrixTranspose(&matViewInvTrans, &matViewInvTrans);
-		m_pShader->SetMatrix("matViewInverseTranspose", &matViewInvTrans);
+	//	D3DXMatrixInverse(&matViewInvTrans, NULL, &matView);
+	//	D3DXMatrixTranspose(&matViewInvTrans, &matViewInvTrans);
+	//	m_pShader->SetMatrix("matViewInverseTranspose", &matViewInvTrans);
 
-		m_pShader->SetMatrix("matProjection", &matProj);
+	//	m_pShader->SetMatrix("matProjection", &matProj);
 
-		D3DXMATRIXA16 matWorldInverse;
-		D3DXMatrixInverse(&matWorldInverse, NULL, &setMatWorld);
-		m_pShader->SetMatrix("matWorldInverse", &matWorldInverse);
+	//	D3DXMATRIXA16 matWorldInverse;
+	//	D3DXMatrixInverse(&matWorldInverse, NULL, &setMatWorld);
+	//	m_pShader->SetMatrix("matWorldInverse", &matWorldInverse);
 
-		D3DXMATRIXA16 matWorldViewInverse;
-		D3DXMatrixInverse(&matWorldViewInverse, NULL, &(setMatWorld * matView));
-		m_pShader->SetMatrix("matWorldViewInverse", &matWorldViewInverse);
-	}
+	//	D3DXMATRIXA16 matWorldViewInverse;
+	//	D3DXMATRIXA16 matWorldView;
+	//	matWorldView = setMatWorld * matView;
+	//	D3DXMatrixInverse(&matWorldViewInverse, NULL, &matWorldView);
+	//	m_pShader->SetMatrix("matWorldViewInverse", &matWorldViewInverse);
+	//}
 }
 
 CObject::CObject()
