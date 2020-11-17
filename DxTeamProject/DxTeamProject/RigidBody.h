@@ -5,53 +5,58 @@ public:
 	CRigidBody();
 	~CRigidBody();
 protected:
-	// 중력만을 구현
-	vector<ST_PC_VERTEX>	m_vecVertex;
-	D3DXVECTOR3		m_vPosition;				// 위치
-	D3DXVECTOR3		m_vVelocity;				// 속도
-	D3DXVECTOR3		m_vAcceleration;			// 가속도
-	float			m_finverseMass;				// 역질량. 프로그래밍에서 질량을 표현하는 부분. 
-												// 움직이지 않는 벽이나 바닥 같은 부분을 0으로 두면 힘을 아무리 높게 주어도 고정된다.
-	float			m_flinearDamping;			// 직선운동의 댐핑(기본 마찰력)
-	D3DXMATRIXA16	m_matWorld;					// 월드행렬
-
-	// 직선 운동 구현
-	D3DXVECTOR3		m_vforceAccum;				// 가해진 힘들의 합
-
-	// 직선 운동 구현
-	//{
-	//	D3DXVECTOR3		m_vlastFrameAcceleration;
-	//	bool			m_isAwake;
-	//}
-
-	// 이 아래는 회전에 대한 부분
-	//{
-		//float			m_fangularDamping;
-		//D3DXQUATERNION	m_qDirection;
-		//D3DXVECTOR3		m_vRotation;
-		//D3DXVECTOR3		m_vtorqueAccum;
-		//D3DXMATRIXA16	m_inverseInertiaTensorWorld;
-	//}
+	float m_finverseMass;
+	float m_flinearDamping;
+	float m_fangularDamping;
+	D3DXVECTOR3	m_vPosition;
+	D3DXVECTOR3 m_vVelocity;
+	D3DXVECTOR3 m_vRotation;
+	float m_fmotion;
+	bool m_isAwake;
+	bool m_canSleep;
+	D3DXVECTOR3 m_vforceAccum;
+	D3DXVECTOR3 m_vtorqueAccum;
+	D3DXVECTOR3 m_vAcceleration;
+	D3DXVECTOR3 m_lastFrameAcceleration;
 public:
-	// 중력만 구현
-	void intergrate(float duration);
-	void clearAccumulators();
-
-	// 직선 운동 구현
-	bool hasFiniteMass() const;
-	void addForce(const D3DXVECTOR3& force);
+	void calculateDeriveDate();
+	void integrate(float duration);
+	void setMass(const float mass);
 	float getMass() const;
-
-	/// 이 아래 부분은 추후 구현
-	//{
-	//	void addForceAtPoint(const D3DXVECTOR3& force, const D3DXVECTOR3& point);
-	//	void addForceAtBodyPoint(const D3DXVECTOR3& force, const D3DXVECTOR3& point);
-	//	D3DXVECTOR3 getPointInLocalSpace(const D3DXVECTOR3& point) const;
-	//	void calculateDerivedData();
-	//}
-	
-	// 이 아래 부분은 작용하는지 확인을 위해 잠시만 구현해둔 부분
-	void Setup(D3DXVECTOR3 position, D3DXVECTOR3 acc);
-	void Update();
-	void Render();
+	void setInverseMass(const float inverseMass);
+	float getInverseMass() const;
+	bool hasFiniteMass() const;
+	void setDamping(const float linearDamping, const float angularDamping);
+	void setLinearDamping(const float linearDamping);
+	float getLinearDamping() const;
+	void setAngularDamping(const float angularDamping);
+	float getAngularDamping() const;
+	void setPosition(const D3DXVECTOR3 & position);
+	void setPosition(const float x, const float y, const float z);
+	void getPosition(D3DXVECTOR3* position) const;
+	D3DXVECTOR3 getPosition() const;
+	void setVelocity(const D3DXVECTOR3& velocity);
+	void setVelocity(const float x, const float y, const float z);
+	void getVelocity(D3DXVECTOR3* velocity) const;
+	D3DXVECTOR3 getVelocity() const;
+	void addVelocity(const D3DXVECTOR3 & deltaVelocity);
+	void setRotation(const D3DXVECTOR3 & rotation);
+	void setRotation(const float x, const float y, const float z);
+	void getRotation(D3DXVECTOR3 * rotation) const;
+	D3DXVECTOR3 getRotation() const;
+	void addRotation(const D3DXVECTOR3 & deltaRotation);
+	bool getAwake() const { return m_isAwake; }
+	void setAwake(const bool awake = true);
+	bool getCanSleep() const { return m_canSleep; }
+	void setCanSleep(const bool canSleep = true);
+	void getLastFrameAcceleration(D3DXVECTOR3 * linearAcceleration) const;
+	D3DXVECTOR3 getLastFrameAcceleration() const;
+	void clearAccumulators();
+	void addForce(const D3DXVECTOR3& force);
+	void addForceAtPoint(const D3DXVECTOR3& force, const D3DXVECTOR3& point);
+	void addTorque(const D3DXVECTOR3& torque);
+	void setAcceleration(const D3DXVECTOR3& acceleration);
+	void setAcceleration(const float x, const float y, const float z);
+	void getAcceleration(D3DXVECTOR3* acceleration) const;
+	D3DXVECTOR3 getAcceleration() const;
 };

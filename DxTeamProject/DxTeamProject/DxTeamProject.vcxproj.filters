@@ -101,6 +101,9 @@
     <ClCompile Include="Cube.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Physics_Rigidbody</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -227,6 +230,9 @@
     <ClInclude Include="Cube.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Physics_Rigidbody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -293,6 +299,9 @@
     </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{ebfb21f7-f659-4d66-b0c1-4e6fca5611dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics_Rigidbody">
+      <UniqueIdentifier>{cb8b0dd8-e16f-41de-9434-d30d86f8a7d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
