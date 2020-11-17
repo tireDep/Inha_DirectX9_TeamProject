@@ -7,10 +7,17 @@ struct ST_EVENT;
 class CObject : public IListener
 {
 protected:
-	static int  m_nRefCount;
-	bool		m_isPicked;
-	bool		m_isClicked;
-	D3DXCOLOR	m_color;
+	static int    m_nRefCount;
+	bool		  m_isPicked;
+	bool		  m_isClicked;
+	D3DXCOLOR	  m_color;
+	D3DXMATRIXA16 m_matWorld;
+
+	LPD3DXEFFECT m_pShader;
+	bool LoadAssets();
+	LPD3DXEFFECT LoadShader(const char *fileName);
+	void SetShader(const D3DXMATRIXA16& setMatWorld);
+
 	CObject();
 public:
 	virtual ~CObject(void);

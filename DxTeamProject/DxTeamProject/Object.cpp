@@ -4,15 +4,88 @@
 
 int CObject::m_nRefCount = 0;
 
+bool CObject::LoadAssets()
+{
+	m_pShader = LoadShader("Shader/outLine.fx");
+	if (!m_pShader)
+		return false;
+
+	return true;
+}
+
+LPD3DXEFFECT CObject::LoadShader(const char * fileName)
+{
+	LPD3DXEFFECT ret = NULL;
+
+	LPD3DXBUFFER pError = NULL;
+	DWORD dwShaderFlags = 0;
+
+#if _DEBUG
+	dwShaderFlags |= D3DXSHADER_DEBUG;
+#endif
+
+	D3DXCreateEffectFromFileA(g_pD3DDevice, fileName,
+		NULL, NULL, dwShaderFlags, NULL, &ret, &pError);
+
+	if (!ret && pError)
+	{
+		int size = pError->GetBufferSize();
+		void *ack = pError->GetBufferPointer();
+
+		// if (ack)
+		// {
+		// 	char* str = new char[size];
+		// 	sprintf(str, (const char*)ack, size);
+		// 	OutputDebugString(str);
+		// 	delete[] str;
+		// }
+	}
+
+	return ret;
+}
+
+void CObject::SetShader(const D3DXMATRIXA16& setMatWorld)
+{
+	// g_pD3DDevice->SetTransform(D3DTS_WORLD, &setMatWorld);
+
+	if (m_pShader)
+	{
+		D3DXMATRIXA16 matView, matProj, matViewPro, matViewInvTrans;
+		g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+		g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+
+		matViewPro = matView * matProj;
+		m_pShader->SetMatrix("matViewProjection", &matViewPro);
+
+		D3DXMatrixInverse(&matViewInvTrans, NULL, &matView);
+		D3DXMatrixTranspose(&matViewInvTrans, &matViewInvTrans);
+		m_pShader->SetMatrix("matViewInverseTranspose", &matViewInvTrans);
+
+		m_pShader->SetMatrix("matProjection", &matProj);
+
+		D3DXMATRIXA16 matWorldInverse;
+		D3DXMatrixInverse(&matWorldInverse, NULL, &setMatWorld);
+		m_pShader->SetMatrix("matWorldInverse", &matWorldInverse);
+
+		D3DXMATRIXA16 matWorldViewInverse;
+		D3DXMatrixInverse(&matWorldViewInverse, NULL, &(setMatWorld * matView));
+		m_pShader->SetMatrix("matWorldViewInverse", &matWorldViewInverse);
+	}
+}
+
 CObject::CObject()
 {
 	CObject::m_nRefCount += 1;
 	g_pObjectManager->AddObject(this);
 	m_color = GRAY;
+	m_pShader = NULL;
+	LoadAssets();
+	D3DXMatrixIdentity(&m_matWorld);
 }
 
 CObject::~CObject()
 {
+	SafeRelease(m_pShader);
 }
 
 void CObject::Release()
@@ -27,7 +100,6 @@ void CObject::ReceiveEvent(ST_EVENT eventMsg)
 	{
 		if (m_isPicked == true)
 		{
-			// todo : 색상값 받아와야 함
 			m_isClicked = true;
 		}
 	}

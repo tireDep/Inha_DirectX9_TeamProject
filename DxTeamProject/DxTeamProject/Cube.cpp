@@ -152,12 +152,7 @@ void CCube::Render()
 	m_stMtlCube.Ambient = m_color;
 	m_stMtlCube.Diffuse = m_color;
 	m_stMtlCube.Specular = m_color;
-	if (m_isPicked)
-	{
-		m_stMtlCube.Ambient =  RED;
-		m_stMtlCube.Diffuse =  RED;
-		m_stMtlCube.Specular = RED;
-	}
+
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
 	D3DXMatrixTranslation(&matWorld, m_vCenter.x, m_vCenter.y, m_vCenter.z);
@@ -170,7 +165,34 @@ void CCube::Render()
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetMaterial(&m_stMtlCube);
 	g_pD3DDevice->SetTexture(0, 0);
-	m_pMeshCube->DrawSubset(0);
+
+	if (m_isPicked)
+	{
+		SetShader(matWorld);
+		UINT numPasses = 0;
+		m_pShader->Begin(&numPasses, NULL);
+		{
+			for (UINT i = 0; i < numPasses; ++i)
+			{
+				m_pShader->BeginPass(i); // 구체를 그린다
+
+				if (i == 0)
+					g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW); // 외곽선
+				else
+					g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);	// 내부
+
+				m_pMeshCube->DrawSubset(0);
+
+				m_pShader->EndPass();
+			}
+		}
+		m_pShader->End();
+	}
+
+	else
+	{
+		m_pMeshCube->DrawSubset(0);
+	}
 }
 
 string CCube::GetName()
