@@ -13,7 +13,7 @@ protected:
 	D3DXVECTOR3				m_vPosition;
 	D3DXMATRIXA16			m_matRotY;
 	D3DXMATRIXA16			m_matWorld;
-	D3DCOLOR				m_color;
+	D3DXCOLOR				m_color;
 	bool					m_isCollided;
 public:
 	virtual ~CCharacter(void);
@@ -26,8 +26,8 @@ public:
 	virtual D3DXVECTOR3& GetPosition();
 	virtual D3DXMATRIXA16* GetTransform();
 
-	virtual void SetColor(D3DCOLOR c);
-	virtual D3DCOLOR GetColor();
+	virtual void SetColor(D3DXCOLOR c);
+	virtual D3DXCOLOR GetColor();
 
 	// tmp Collision Test
 	// setup erase

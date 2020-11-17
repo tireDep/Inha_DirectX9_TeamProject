@@ -30,8 +30,4 @@ public:
 
 	virtual string GetName() { return string(); }
 	virtual void ReceiveEvent(ST_EVENT eventMsg);
-
-	virtual void SetColor(D3DXCOLOR ObjectColor);
-	virtual D3DXCOLOR GetColor();
-	virtual bool GetisClicked();
 };

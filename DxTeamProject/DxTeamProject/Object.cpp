@@ -99,28 +99,19 @@ void CObject::Release()
 
 void CObject::ReceiveEvent(ST_EVENT eventMsg)
 {
-	if (eventMsg.eventType == EventType::eInputEvent && eventMsg.message == WM_LBUTTONDOWN)
+	if (eventMsg.eventType == EventType::eColorChangeEvent)
 	{
 		if (m_isPicked == true)
 		{
+			m_color = *(D3DXCOLOR*)eventMsg.ptrMessage;
 			m_isClicked = true;
+
+			ST_EVENT msg;
+			msg.eventType = EventType::eChangedColorEvent;
+			msg.ptrMessage = &m_color;
+			g_pEventManager->CheckEvent(msg);
 		}
 	}
 	else
 		m_isClicked = false;
-}
-
-void CObject::SetColor(D3DXCOLOR ObjectColor)
-{
-	m_color = ObjectColor;
-}
-
-D3DXCOLOR CObject::GetColor()
-{
-	return m_color;
-}
-
-bool CObject::GetisClicked()
-{
-	return m_isClicked;
 }

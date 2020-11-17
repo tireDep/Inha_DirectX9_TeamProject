@@ -43,8 +43,6 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR objectcolor)
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
 		m_vecObject[i]->Update(ray);
-		if (m_vecObject[i]->GetisClicked())
-			m_vecObject[i]->SetColor(objectcolor);
 	}
 }
 

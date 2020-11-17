@@ -126,7 +126,7 @@ struct ST_PNT_VERTEX
 
 enum class EventType : int
 {
-	eInputEvent, eSceneChangeEvent
+	eInputEvent, eSceneChangeEvent, eColorChangeEvent, eChangedColorEvent
 };
 
 enum class SceneType : int
@@ -149,15 +149,13 @@ struct ST_EVENT
 	WPARAM wParam; 
 	LPARAM lParam;
 	PlayerInputType playerInput;
-
-	D3DXCOLOR playerColor;
 	// << Input
 
 	// >> SceneChange
 	SceneType setNowScene;
 	// << SceneChange
 
-	// void* ptrMessage;
+	void* ptrMessage = NULL;
 };
 
 #define GRAY    D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f)

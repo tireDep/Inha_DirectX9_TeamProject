@@ -18,7 +18,7 @@ COBB * CCharacter::GetOBB()
 	return m_pOBB;
 }
 
-void CCharacter::SetColor(D3DCOLOR c)
+void CCharacter::SetColor(D3DXCOLOR c)
 {
 	for (int i = 12; i <= 17; i++)
 		m_vecVertex[i].c = c;
@@ -33,6 +33,22 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 	if (!g_gameManager->GetUImode())
 	{
 		// todo : 상태에 따른 애니메이션 출력
+
+		if (eventMsg.message == WM_LBUTTONDOWN)
+		{
+			ST_EVENT msg;
+			msg.eventType = EventType::eColorChangeEvent;
+			msg.ptrMessage = &m_color;
+
+			g_pEventManager->CheckEvent(msg);
+			return;
+		}
+
+		if (eventMsg.eventType == EventType::eChangedColorEvent)
+		{
+			eventMsg.playerInput = PlayerInputType::eUp;
+		}
+
 		switch (eventMsg.playerInput)
 		{
 		case PlayerInputType::eUp:
@@ -220,7 +236,7 @@ D3DXMATRIXA16 * CCharacter::GetTransform()
 	return &m_matWorld;
 }
 
-D3DCOLOR CCharacter::GetColor()
+D3DXCOLOR CCharacter::GetColor()
 {
 	return m_color;
 }
