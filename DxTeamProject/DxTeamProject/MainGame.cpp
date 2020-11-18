@@ -173,7 +173,7 @@ void CMainGame::Update()
 	/// 릴리즈 버전을 위한 주석처리
 	/// Lim Kyung Tae - Particle World
 
-	if(m_pParticleWorld)
+	if(m_pParticleWorld && g_gameManager->GetUImode() == false)
 		m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
 	//if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
 	//{
