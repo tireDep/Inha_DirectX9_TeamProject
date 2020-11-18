@@ -55,6 +55,7 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	eventMsg.lParam = lParam;
 
 	g_pEventManager->CheckEvent(eventMsg);
+	DefWindowProc(hWnd, message, wParam, lParam);
 }
 
 void CMainGame::Setup()
