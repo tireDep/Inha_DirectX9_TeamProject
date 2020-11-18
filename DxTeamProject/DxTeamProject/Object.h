@@ -11,6 +11,7 @@ protected:
 	bool		  m_isPicked;
 	bool		  m_isClicked;
 	D3DXCOLOR	  m_color;
+	D3DXCOLOR	  m_outLineColor;
 	D3DXMATRIXA16 m_matWorld;
 
 	LPD3DXEFFECT m_pShader;
@@ -25,7 +26,7 @@ public:
 	virtual void Release();
 
 	virtual void Setup() = 0;
-	virtual void Update(CRay ray) = 0;
+	virtual void Update(CRay ray, D3DXCOLOR& playerColor) = 0;
 	virtual void Render() = 0;
 
 	virtual string GetName() { return string(); }

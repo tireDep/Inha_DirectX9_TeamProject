@@ -14,7 +14,7 @@ public:
 	~CSphere();
 
 	void Setup();
-	void Update(CRay ray);
+	void Update(CRay ray, D3DXCOLOR& playerColor);
 	void Render();
 
 	virtual string GetName();

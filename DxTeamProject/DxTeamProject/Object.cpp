@@ -46,34 +46,33 @@ LPD3DXEFFECT CObject::LoadShader(const char * fileName)
 
 void CObject::SetShader(const D3DXMATRIXA16& setMatWorld)
 {
-	// g_pD3DDevice->SetTransform(D3DTS_WORLD, &setMatWorld);
+	if (m_pShader)
+	{
+		// >> 외곽선
+		D3DXMATRIXA16 matView, matProj, matViewPro, matViewInvTrans;
+		g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+		g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
 
-	//if (m_pShader)
-	//{
-	//	m_pShader->
-	//	D3DXMATRIXA16 matView, matProj, matViewPro, matViewInvTrans;
-	//	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
-	//	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+		matViewPro = setMatWorld * matView * matProj;
+		m_pShader->SetMatrix("matViewProjection", &matViewPro);
+		m_pShader->SetFloat("OutlineWidth", 0.1f);
+		// << 외곽선
 
-	//	matViewPro = matView * matProj;
-	//	m_pShader->SetMatrix("matViewProjection", &matViewPro);
+		// >> 라이트 쉐이더
+		m_pShader->SetMatrix("gWorldMatrix", &setMatWorld);
+		m_pShader->SetMatrix("gViewMatrix", &matView);
+		m_pShader->SetMatrix("gProjectionMatrix", &matProj);
 
-	//	D3DXMatrixInverse(&matViewInvTrans, NULL, &matView);
-	//	D3DXMatrixTranspose(&matViewInvTrans, &matViewInvTrans);
-	//	m_pShader->SetMatrix("matViewInverseTranspose", &matViewInvTrans);
+		// ===== 외부변수 받아오기?
+		D3DXMATRIXA16 temp;
+		D3DXMatrixIdentity(&temp);
+		m_pShader->SetMatrix("gWorldCameraPos", &temp);
 
-	//	m_pShader->SetMatrix("matProjection", &matProj);
-
-	//	D3DXMATRIXA16 matWorldInverse;
-	//	D3DXMatrixInverse(&matWorldInverse, NULL, &setMatWorld);
-	//	m_pShader->SetMatrix("matWorldInverse", &matWorldInverse);
-
-	//	D3DXMATRIXA16 matWorldViewInverse;
-	//	D3DXMATRIXA16 matWorldView;
-	//	matWorldView = setMatWorld * matView;
-	//	D3DXMatrixInverse(&matWorldViewInverse, NULL, &matWorldView);
-	//	m_pShader->SetMatrix("matWorldViewInverse", &matWorldViewInverse);
-	//}
+		m_pShader->SetVector("gLightColor", &D3DXVECTOR4(D3DXVECTOR3(1.0f, 1.0f, 1.0f), 1.0f));
+		m_pShader->SetVector("gWorldLightPos", &D3DXVECTOR4(D3DXVECTOR3(0, 10.0f, 0), 1));
+		// ===== 외부변수 받아오기?
+		// << 라이트 쉐이더
+	}
 }
 
 CObject::CObject()
@@ -104,6 +103,7 @@ void CObject::ReceiveEvent(ST_EVENT eventMsg)
 		if (m_isPicked == true)
 		{
 			m_color = *(D3DXCOLOR*)eventMsg.ptrMessage;
+			m_outLineColor = *(D3DXCOLOR*)eventMsg.ptrMessage;
 			m_isClicked = true;
 
 			ST_EVENT msg;
