@@ -17,7 +17,7 @@ public:
 	~CCube();
 	
 	virtual void Setup();
-	virtual void Update(CRay ray);
+	virtual void Update(CRay ray, D3DXCOLOR& playerColor);
 	virtual void Render();
 
 	virtual string GetName();

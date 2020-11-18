@@ -135,12 +135,15 @@ void CCube::Setup()
 	}
 }
 
-void CCube::Update(CRay ray)
+void CCube::Update(CRay ray, D3DXCOLOR& playerColor)
 {
 	for (int i = 0; i < m_vecPos.size(); i+=3)
 	{
 		if (ray.IntersectTri(m_vecPos[i + 0], m_vecPos[i + 1], m_vecPos[i + 2]) == true)
+		{
 			m_isPicked = true;
+			m_outLineColor = playerColor;
+		}
 		else
 			m_isPicked = false;
 	}
@@ -152,12 +155,6 @@ void CCube::Render()
 	m_stMtlCube.Diffuse = m_color;
 	m_stMtlCube.Specular = m_color;
 
-	if (m_isPicked)
-	{
-		m_stMtlCube.Ambient = RED;
-		m_stMtlCube.Diffuse = RED;
-		m_stMtlCube.Specular = RED;
-	}
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
 	D3DXMatrixTranslation(&matWorld, m_vCenter.x, m_vCenter.y, m_vCenter.z);
@@ -165,12 +162,37 @@ void CCube::Render()
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetMaterial(&m_stMtlCube);
 	g_pD3DDevice->SetTexture(0, 0);
-	m_pMeshCube->DrawSubset(0);
-	/// Side Line
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_LINELIST, m_vecSideLineVertex.size() / 2,
-		&m_vecSideLineVertex[0], sizeof(ST_PC_VERTEX));
+
+	SetShader(matWorld);
+
+	if (m_isPicked)
+	{
+		m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(m_outLineColor.r, m_outLineColor.g, m_outLineColor.b, 1));
+		m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(D3DXVECTOR3(m_color), 1));
+
+		UINT numPasses = 0;
+		m_pShader->Begin(&numPasses, NULL);
+		{
+			for (UINT i = 0; i < numPasses; ++i)
+			{
+				m_pShader->BeginPass(i);
+
+				if (i == 0)
+					g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW); // ¿Ü°û¼±
+				else
+					g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);	// ³»ºÎ
+
+				m_pMeshCube->DrawSubset(0);
+
+				m_pShader->EndPass();
+			}
+		}
+		m_pShader->End();
+	}
+	else
+	{
+		m_pMeshCube->DrawSubset(0);
+	}
 }
 
 string CCube::GetName()

@@ -35,7 +35,7 @@ void CSphere::Setup()
 	m_stMtlSphere.Specular = m_color;
 }
 
-void CSphere::Update(CRay ray)
+void CSphere::Update(CRay ray, D3DXCOLOR& playerColor)
 {
 	{
 		// D3DXSphereBoundProbe(&m_vCenter, m_fRadius, &ray.GetOrigin(), &ray.GetDirection());
@@ -59,7 +59,10 @@ void CSphere::Update(CRay ray)
 	}
 
 	if (D3DXSphereBoundProbe(&m_vCenter, m_fRadius, &ray.GetOrigin(), &ray.GetDirection()) == true)
+	{
 		m_isPicked = true;
+		m_outLineColor = playerColor;
+	}
 	else
 		m_isPicked = false;
 }
@@ -69,13 +72,6 @@ void CSphere::Render()
 	m_stMtlSphere.Ambient = m_color;
 	m_stMtlSphere.Diffuse = m_color;
 	m_stMtlSphere.Specular = m_color;
-
-	if (m_isPicked)
-	{
-		m_stMtlSphere.Ambient = RED;
-		m_stMtlSphere.Diffuse = RED;
-		m_stMtlSphere.Specular = RED;
-	}
 
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
@@ -87,7 +83,37 @@ void CSphere::Render()
 	g_pD3DDevice->SetTexture(0, 0);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetMaterial(&m_stMtlSphere);
-	m_pMeshSphere->DrawSubset(0);
+
+	SetShader(matWorld);
+
+	if (m_isPicked)
+	{
+		m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(m_outLineColor.r, m_outLineColor.g, m_outLineColor.b, 1));
+		m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(D3DXVECTOR3(m_color), 1));
+
+		UINT numPasses = 0;
+		m_pShader->Begin(&numPasses, NULL);
+		{
+			for (UINT i = 0; i < numPasses; ++i)
+			{
+				m_pShader->BeginPass(i); // 구체를 그린다
+
+				if (i == 0)
+					g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW); // 외곽선
+				else
+					g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);	// 내부
+
+				m_pMeshSphere->DrawSubset(0);
+
+				m_pShader->EndPass();
+			}
+		}
+		m_pShader->End();
+	}
+	else
+	{
+		m_pMeshSphere->DrawSubset(0);
+	}
 }
 
 string CSphere::GetName()
