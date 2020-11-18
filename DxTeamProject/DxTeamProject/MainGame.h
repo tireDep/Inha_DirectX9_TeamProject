@@ -11,10 +11,10 @@ class CCharacter;
 class CLight;
 class CGridMap;
 // class CFrustum;
+class CParticleWorld;
 
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
-class CParticleWorld;
 
 class CMainGame
 {
@@ -28,9 +28,10 @@ private:
 	CFrustum	m_pPrevFrustum;
 	CFrustum	m_pNowFrustum;
 	CGridMap*	m_GridMap;
+	CParticleWorld*	m_pParticleWorld;
+
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
-	CParticleWorld*	m_pParticleWorld;
 	//vector<CColliderObject*> m_vColliderCube;
 public:
 	CMainGame();

@@ -11,10 +11,10 @@
 #include "GridMap.h"
 #include "Sphere.h"
 #include "Cube.h"
+#include "ParticleWorld.h"
 
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
-#include "ParticleWorld.h"
 //#include "ColliderObject.h"
 //#include "OBB.h"
 
@@ -25,9 +25,9 @@ CMainGame::CMainGame() :
 	m_pCharacter(NULL),
 	m_pLight(NULL),
 	m_GridMap(NULL),
+	m_pParticleWorld(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
-	m_pParticleWorld(NULL)
 {
 }
 
@@ -38,12 +38,12 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pText);
 	SafeDelete(m_pLight);
 	SafeDelete(m_GridMap);
+	SafeDelete(m_pParticleWorld);
 
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 	/// 릴리즈 버전을 위한 주석처리
 	//SafeDelete(m_pSm);
-	SafeDelete(m_pParticleWorld);
 }
 
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -103,12 +103,13 @@ void CMainGame::Setup()
 		g_pEventManager->AddListener(g_pObjectManager->GetVecObject()[i]);
 	}
 
+	m_pParticleWorld = new CParticleWorld;
+	m_pParticleWorld->Setup();
+
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0)); // sun light vector
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
-	m_pParticleWorld = new CParticleWorld;
-	m_pParticleWorld->Setup();
 	//Setup_OBB();
 }
 
@@ -169,12 +170,11 @@ void CMainGame::Update()
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());
 
+	if (m_pParticleWorld && g_gameManager->GetUImode() == false)
+		m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
 
 	/// 릴리즈 버전을 위한 주석처리
 	/// Lim Kyung Tae - Particle World
-
-	if(m_pParticleWorld && g_gameManager->GetUImode() == false)
-		m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
 	//if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
 	//{
 	//	cout << "in" << endl;
@@ -267,9 +267,11 @@ void CMainGame::Render()
 		m_GridMap->Render();
 	}
 
-	/// 릴리즈 버전을 위한 주석처리
 	if (m_pParticleWorld)
 		m_pParticleWorld->Render();
+
+	/// 릴리즈 버전을 위한 주석처리
+
 	//OBB_RENDER();
 
 	if (g_gameManager->GetUImode())

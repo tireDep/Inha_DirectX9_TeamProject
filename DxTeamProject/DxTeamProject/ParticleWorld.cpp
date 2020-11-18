@@ -3,21 +3,37 @@
 #include "Particle.h"
 #include "ParticleGravity.h"
 #include "ParticlePusingForce.h"
+#include "ParticleDrag.h"
+
+#include "ParticleContact.h"
 #include "OBB.h"
 
 CParticleWorld::CParticleWorld()
 	: m_vPosition(0, 0, 0)
+	, m_resolver(NULL)
 {
 	D3DXMatrixIdentity(&m_matWorld);
+}
+
+// collider
+CParticleWorld::CParticleWorld(UINT maxContacts, UINT iterations) 
+	: m_resolver(iterations)
+	, m_unMaxContacts(maxContacts)
+{
+	m_pContacts = new CParticleContact[maxContacts];
+	m_isCalculateIterations = (iterations == 0);
 }
 
 CParticleWorld::~CParticleWorld()
 {
 	for each(auto p in m_vecParticles)
 		SafeDelete(p);
+	// Need Force Delete
+
+	// collider
+	delete[] m_pContacts;
 }
 
-/// Push Test
 void CParticleWorld::Setup()
 {
 	CParticle* particle = NULL;
@@ -32,41 +48,14 @@ void CParticleWorld::Setup()
 	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize,  cubesize,  cubesize));	m_vecParticles.push_back(particle);
 	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize, -cubesize,  cubesize));	m_vecParticles.push_back(particle);
 
-	SetCube();
-	SetPusingForce(D3DXVECTOR3(1, 0, 1));
-}
-/// Push Test
-void CParticleWorld::SetPusingForce(D3DXVECTOR3 direction)
-{
-	D3DXVec3Normalize(&direction, &direction);
-	CParticlePusingForce* pusingforce = new CParticlePusingForce(direction);
 	for (int i = 0; i < m_vecParticles.size(); i++)
-	{
-		m_stRegistrations.Add(m_vecParticles[i], pusingforce);
-	}
-}
+		m_vecParticles[i]->SetPosition(m_vecParticles[i]->GetPosition() + D3DXVECTOR3(0, cubesize, 0));
 
-//void CParticleWorld::Setup()
-//{
-//	CParticle* particle = NULL;
-//	const float cubesize = 0.5f;
-//
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, -cubesize, -cubesize));	m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, cubesize, -cubesize));	m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(cubesize, cubesize, -cubesize));	m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(cubesize, -cubesize, -cubesize));	m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, -cubesize, cubesize));	m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, cubesize, cubesize));	m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(cubesize, cubesize, cubesize));		m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(cubesize, -cubesize, cubesize));	m_vecParticles.push_back(particle);
-//
-//	//CParticleGravity* gravity = new CParticleGravity;
-//	CParticleGravity* gravity = new CParticleGravity(D3DXVECTOR3(0, -9.81f / 5, 0));
-//
-//	for (int i = 0; i < 8; i++)
-//		m_stRegistrations.Add(m_vecParticles[i], gravity);
-//	SetCube();
-//}
+	SetCube();
+	//SetGravity();
+	SetPusingForce(D3DXVECTOR3(1, 0, 1));
+	//SetDragForce(0.4, 0.4);
+}
 
 void CParticleWorld::SetCube()
 {
@@ -128,14 +117,30 @@ void CParticleWorld::SetCube()
 	}
 }
 
-D3DXVECTOR3 & CParticleWorld::GetPosition()
+void CParticleWorld::SetGravity()
 {
-	return m_vPosition;
+	CParticleGravity* gravity = new CParticleGravity(D3DXVECTOR3(0, -9.81f / 5, 0));
+
+	for (int i = 0; i < 8; i++)
+		m_stRegistrations.Add(m_vecParticles[i], gravity);
 }
 
-COBB * CParticleWorld::GetOBB()
+void CParticleWorld::SetPusingForce(D3DXVECTOR3 direction)
 {
-	return m_pOBB;
+	D3DXVec3Normalize(&direction, &direction);
+	CParticlePusingForce* pusingforce = new CParticlePusingForce(direction);
+	for (int i = 0; i < m_vecParticles.size(); i++)
+	{
+		m_stRegistrations.Add(m_vecParticles[i], pusingforce);
+	}
+}
+
+void CParticleWorld::SetDragForce(float k1, float k2)
+{
+	CParticleDrag* drag = new CParticleDrag(k1, k2);
+
+	for (int i = 0; i < 8; i++)
+		m_stRegistrations.Add(m_vecParticles[i], drag);
 }
 
 void CParticleWorld::Update(float duration)
@@ -175,14 +180,50 @@ void CParticleWorld::RunPhysics(float duration)
 {
 	m_stRegistrations.UpdateForces(duration);
 	Integrate(duration);
+	// collider
+	UINT usedContacts = generateContacts();
+	if (usedContacts)
+	{
+		if (m_isCalculateIterations)
+			m_resolver.setIterations(usedContacts * 2);
+		m_resolver.resolveContacts(m_pContacts, usedContacts, duration);
+	}
 }
 
-CParticleWorld::Particles CParticleWorld::GetParticles()
+D3DXVECTOR3 & CParticleWorld::GetPosition()
 {
-	return m_vecParticles;
+	return m_vPosition;
 }
 
-CParticleForceRegistry CParticleWorld::GetForceRegisty()
+unsigned CParticleWorld::generateContacts()
 {
-	return m_stRegistrations;
+	UINT limit = m_unMaxContacts;
+	CParticleContact *nextContact = m_pContacts;
+
+	for (ContactGenerators::iterator g = m_vecContactGenerator.begin(); g != m_vecContactGenerator.end(); g++)
+	{
+		UINT used = (*g)->addContact(nextContact, limit);
+		limit -= used;
+		nextContact += used;
+		if (limit <= 0)
+			break;
+	}
+	return m_unMaxContacts - limit;
 }
+
+///
+//
+//COBB * CParticleWorld::GetOBB()
+//{
+//	return m_pOBB;
+//}
+//
+//CParticleWorld::Particles CParticleWorld::GetParticles()
+//{
+//	return m_vecParticles;
+//}
+//
+//CParticleForceRegistry CParticleWorld::GetForceRegisty()
+//{
+//	return m_stRegistrations;
+//}

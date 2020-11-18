@@ -61,18 +61,6 @@
     <ClCompile Include="Particle.cpp">
       <Filter>Physics_Particle</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleForceGenerator.cpp">
-      <Filter>Physics_Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleGravity.cpp">
-      <Filter>Physics_Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleForceRegistry.cpp">
-      <Filter>Physics_Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleDrag.cpp">
-      <Filter>Physics_Particle</Filter>
-    </ClCompile>
     <ClCompile Include="ParticleWorld.cpp">
       <Filter>Physics_Particle</Filter>
     </ClCompile>
@@ -84,9 +72,6 @@
     </ClCompile>
     <ClCompile Include="IListener.cpp">
       <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticlePusingForce.cpp">
-      <Filter>Physics_Particle</Filter>
     </ClCompile>
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Object.cpp">
@@ -104,8 +89,34 @@
     <ClCompile Include="RigidBody.cpp">
       <Filter>Physics_Rigidbody</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsPlayer.cpp" />
-    <ClCompile Include="HeightMap.cpp" />
+    <ClCompile Include="HeightMap.cpp">
+      <Filter>Physics_Example</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsPlayer.cpp">
+      <Filter>Physics_Example</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleContact.cpp">
+      <Filter>Physics_Particle\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleForceGenerator.cpp">
+      <Filter>Physics_Particle\Force\0... General</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleForceRegistry.cpp">
+      <Filter>Physics_Particle\Force\0... General</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleGravity.cpp">
+      <Filter>Physics_Particle\Force\1... Gravity</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticlePusingForce.cpp">
+      <Filter>Physics_Particle\Force\2... PusingForce</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleDrag.cpp">
+      <Filter>Physics_Particle\Force\3... Drag</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleContactGenerator.cpp">
+      <Filter>Physics_Particle\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleContactResolver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -189,18 +200,6 @@
     <ClInclude Include="Particle.h">
       <Filter>Physics_Particle</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleForceGenerator.h">
-      <Filter>Physics_Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleGravity.h">
-      <Filter>Physics_Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleForceRegistry.h">
-      <Filter>Physics_Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleDrag.h">
-      <Filter>Physics_Particle</Filter>
-    </ClInclude>
     <ClInclude Include="ParticleWorld.h">
       <Filter>Physics_Particle</Filter>
     </ClInclude>
@@ -212,9 +211,6 @@
     </ClInclude>
     <ClInclude Include="IListener.h">
       <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticlePusingForce.h">
-      <Filter>Physics_Particle</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Singleton.h">
@@ -235,8 +231,34 @@
     <ClInclude Include="RigidBody.h">
       <Filter>Physics_Rigidbody</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsPlayer.h" />
-    <ClInclude Include="HeightMap.h" />
+    <ClInclude Include="HeightMap.h">
+      <Filter>Physics_Example</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsPlayer.h">
+      <Filter>Physics_Example</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleContact.h">
+      <Filter>Physics_Particle\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceGenerator.h">
+      <Filter>Physics_Particle\Force\0... General</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceRegistry.h">
+      <Filter>Physics_Particle\Force\0... General</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleGravity.h">
+      <Filter>Physics_Particle\Force\1... Gravity</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticlePusingForce.h">
+      <Filter>Physics_Particle\Force\2... PusingForce</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleDrag.h">
+      <Filter>Physics_Particle\Force\3... Drag</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleContactGenerator.h">
+      <Filter>Physics_Particle\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleContactResolver.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -306,6 +328,27 @@
     </Filter>
     <Filter Include="Physics_Rigidbody">
       <UniqueIdentifier>{cb8b0dd8-e16f-41de-9434-d30d86f8a7d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics_Example">
+      <UniqueIdentifier>{5e6ef1d5-e454-4d82-9659-2819e21f8aa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics_Particle\Force">
+      <UniqueIdentifier>{08dc4132-f85b-45fa-8a2d-ca0f8760370d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics_Particle\Collider">
+      <UniqueIdentifier>{bc66cea3-8d2e-4906-bbee-4e2e2206bf90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics_Particle\Force\0... General">
+      <UniqueIdentifier>{0bb48b78-9422-42b7-a24e-35c82d3e7bb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics_Particle\Force\1... Gravity">
+      <UniqueIdentifier>{d174e938-bea9-41a1-9e71-0bc50c8e09ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics_Particle\Force\2... PusingForce">
+      <UniqueIdentifier>{db4f9bca-6d95-43a4-a452-d5035898332e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics_Particle\Force\3... Drag">
+      <UniqueIdentifier>{e4eb3c3c-385a-4e2b-80bc-267753729587}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
