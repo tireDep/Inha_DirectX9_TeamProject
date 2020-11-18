@@ -160,6 +160,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridMap.h" />
+    <ClInclude Include="HeightMap.h" />
     <ClInclude Include="IListener.h" />
     <ClInclude Include="IMap.h" />
     <ClInclude Include="Light.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="ParticleGravity.h" />
     <ClInclude Include="ParticlePusingForce.h" />
     <ClInclude Include="ParticleWorld.h" />
+    <ClInclude Include="PhysicsPlayer.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Resource.h" />
@@ -200,6 +202,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridMap.cpp" />
+    <ClCompile Include="HeightMap.cpp" />
     <ClCompile Include="IListener.cpp" />
     <ClCompile Include="IMap.cpp" />
     <ClCompile Include="Light.cpp" />
@@ -214,6 +217,7 @@
     <ClCompile Include="ParticleGravity.cpp" />
     <ClCompile Include="ParticlePusingForce.cpp" />
     <ClCompile Include="ParticleWorld.cpp" />
+    <ClCompile Include="PhysicsPlayer.cpp" />
     <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RigidBody.cpp" />

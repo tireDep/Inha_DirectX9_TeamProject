@@ -14,7 +14,7 @@
 
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
-//#include "ParticleWorld.h"
+#include "ParticleWorld.h"
 //#include "ColliderObject.h"
 //#include "OBB.h"
 
@@ -24,10 +24,10 @@ CMainGame::CMainGame() :
 	m_pText(NULL),
 	m_pCharacter(NULL),
 	m_pLight(NULL),
-	m_GridMap(NULL)
+	m_GridMap(NULL),
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
-	//m_pParticleWorld(NULL),
+	m_pParticleWorld(NULL)
 {
 }
 
@@ -43,7 +43,7 @@ CMainGame::~CMainGame()
 	g_pDeviceManager->Destroy();
 	/// 릴리즈 버전을 위한 주석처리
 	//SafeDelete(m_pSm);
-	//SafeDelete(m_pParticleWorld);
+	SafeDelete(m_pParticleWorld);
 }
 
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -107,8 +107,8 @@ void CMainGame::Setup()
 	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0)); // sun light vector
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
-	//m_pParticleWorld = new CParticleWorld;
-	//m_pParticleWorld->Setup();
+	m_pParticleWorld = new CParticleWorld;
+	m_pParticleWorld->Setup();
 	//Setup_OBB();
 }
 
@@ -172,17 +172,17 @@ void CMainGame::Update()
 
 	/// 릴리즈 버전을 위한 주석처리
 	/// Lim Kyung Tae - Particle World
+
+	if(m_pParticleWorld)
+		m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
+	//if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
 	//{
-		//if(m_pParticleWorld)
-		//	m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
-		//if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
-		//{
-		//	cout << "in" << endl;
-		//	D3DXVECTOR3 direction = m_pCharacter->GetPosition()- m_pParticleWorld->GetPosition();
-		//	D3DXVec3Normalize(&direction, &direction);
-		//	m_pParticleWorld->SetPusingForce(direction / 100.0f);
-		//}
+	//	cout << "in" << endl;
+	//	D3DXVECTOR3 direction = m_pCharacter->GetPosition()- m_pParticleWorld->GetPosition();
+	//	D3DXVec3Normalize(&direction, &direction);
+	//	m_pParticleWorld->SetPusingForce(direction / 100.0f);
 	//}
+
 	/// Lee Min Jong - ColliderCube, Plane, Picking
 	//for (int i = 0; i < m_vColliderCube.size(); ++i)
 	//{
@@ -253,7 +253,7 @@ void CMainGame::Render()
 		{
 			m_pText->RenderFPS(g_pTimeManager->GetFPS());
 			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
-			//m_pText->RenderBoxPosition(m_pParticleWorld->GetPosition());
+			m_pText->RenderBoxPosition(m_pParticleWorld->GetPosition());
 		}
 	}
 
@@ -268,8 +268,8 @@ void CMainGame::Render()
 	}
 
 	/// 릴리즈 버전을 위한 주석처리
-	//if (m_pParticleWorld)
-	//	m_pParticleWorld->Render();
+	if (m_pParticleWorld)
+		m_pParticleWorld->Render();
 	//OBB_RENDER();
 
 	if (g_gameManager->GetUImode())

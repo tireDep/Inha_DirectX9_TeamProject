@@ -18,53 +18,55 @@ CParticleWorld::~CParticleWorld()
 }
 
 /// Push Test
-//void CParticleWorld::Setup()
-//{
-//	CParticle* particle = NULL;
-//	const float cubesize = 0.5f;
-//
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, -cubesize, -cubesize));	m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize,  cubesize, -cubesize));	m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize,  cubesize, -cubesize));	m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize, -cubesize, -cubesize));	m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, -cubesize,  cubesize));	m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize,  cubesize,  cubesize));	m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize,  cubesize,  cubesize));	m_vecParticles.push_back(particle);
-//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize, -cubesize,  cubesize));	m_vecParticles.push_back(particle);
-//
-//	SetCube();
-//}
-/// Push Test
-//void CParticleWorld::SetPusingForce(D3DXVECTOR3 direction)
-//{
-//	CParticlePusingForce* pusingforce = new CParticlePusingForce(direction);
-//	for (int i = 0; i < m_vecParticles.size(); i++)
-//	{
-//		m_stRegistrations.Add(m_vecParticles[i], pusingforce);
-//	}
-//}
-
 void CParticleWorld::Setup()
 {
 	CParticle* particle = NULL;
 	const float cubesize = 0.5f;
 
 	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, -cubesize, -cubesize));	m_vecParticles.push_back(particle);
-	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, cubesize, -cubesize));	m_vecParticles.push_back(particle);
-	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(cubesize, cubesize, -cubesize));	m_vecParticles.push_back(particle);
-	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(cubesize, -cubesize, -cubesize));	m_vecParticles.push_back(particle);
-	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, -cubesize, cubesize));	m_vecParticles.push_back(particle);
-	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, cubesize, cubesize));	m_vecParticles.push_back(particle);
-	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(cubesize, cubesize, cubesize));		m_vecParticles.push_back(particle);
-	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(cubesize, -cubesize, cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize,  cubesize, -cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize,  cubesize, -cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize, -cubesize, -cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, -cubesize,  cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize,  cubesize,  cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize,  cubesize,  cubesize));	m_vecParticles.push_back(particle);
+	particle = new CParticle; particle->SetPosition(D3DXVECTOR3( cubesize, -cubesize,  cubesize));	m_vecParticles.push_back(particle);
 
-	//CParticleGravity* gravity = new CParticleGravity;
-	CParticleGravity* gravity = new CParticleGravity(D3DXVECTOR3(0, -9.81f / 5, 0));
-
-	for (int i = 0; i < 8; i++)
-		m_stRegistrations.Add(m_vecParticles[i], gravity);
 	SetCube();
+	SetPusingForce(D3DXVECTOR3(1, 0, 1));
 }
+/// Push Test
+void CParticleWorld::SetPusingForce(D3DXVECTOR3 direction)
+{
+	D3DXVec3Normalize(&direction, &direction);
+	CParticlePusingForce* pusingforce = new CParticlePusingForce(direction);
+	for (int i = 0; i < m_vecParticles.size(); i++)
+	{
+		m_stRegistrations.Add(m_vecParticles[i], pusingforce);
+	}
+}
+
+//void CParticleWorld::Setup()
+//{
+//	CParticle* particle = NULL;
+//	const float cubesize = 0.5f;
+//
+//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, -cubesize, -cubesize));	m_vecParticles.push_back(particle);
+//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, cubesize, -cubesize));	m_vecParticles.push_back(particle);
+//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(cubesize, cubesize, -cubesize));	m_vecParticles.push_back(particle);
+//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(cubesize, -cubesize, -cubesize));	m_vecParticles.push_back(particle);
+//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, -cubesize, cubesize));	m_vecParticles.push_back(particle);
+//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(-cubesize, cubesize, cubesize));	m_vecParticles.push_back(particle);
+//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(cubesize, cubesize, cubesize));		m_vecParticles.push_back(particle);
+//	particle = new CParticle; particle->SetPosition(D3DXVECTOR3(cubesize, -cubesize, cubesize));	m_vecParticles.push_back(particle);
+//
+//	//CParticleGravity* gravity = new CParticleGravity;
+//	CParticleGravity* gravity = new CParticleGravity(D3DXVECTOR3(0, -9.81f / 5, 0));
+//
+//	for (int i = 0; i < 8; i++)
+//		m_stRegistrations.Add(m_vecParticles[i], gravity);
+//	SetCube();
+//}
 
 void CParticleWorld::SetCube()
 {

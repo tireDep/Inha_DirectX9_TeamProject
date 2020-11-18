@@ -104,6 +104,8 @@
     <ClCompile Include="RigidBody.cpp">
       <Filter>Physics_Rigidbody</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsPlayer.cpp" />
+    <ClCompile Include="HeightMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -233,6 +235,8 @@
     <ClInclude Include="RigidBody.h">
       <Filter>Physics_Rigidbody</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsPlayer.h" />
+    <ClInclude Include="HeightMap.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

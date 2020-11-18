@@ -14,7 +14,7 @@ class CGridMap;
 
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
-//class CParticleWorld;
+class CParticleWorld;
 
 class CMainGame
 {
@@ -30,7 +30,7 @@ private:
 	CGridMap*	m_GridMap;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
-	//CParticleWorld*	m_pParticleWorld;
+	CParticleWorld*	m_pParticleWorld;
 	//vector<CColliderObject*> m_vColliderCube;
 public:
 	CMainGame();
