@@ -17,6 +17,6 @@ public:
 	~CXfile();
 	void Update();
 	void Setup();
-	void Render();
+	void Render(D3DXVECTOR3 eye);
 };
 

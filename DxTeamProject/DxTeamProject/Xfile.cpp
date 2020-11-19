@@ -79,21 +79,23 @@ void CXfile::Update()
 	//m_pOBB->Update(&World);
 }
 
-void CXfile::Render()
+void CXfile::Render(D3DXVECTOR3 eye)
 {
 
 
 	if (g_pD3DDevice)
 	{
 		D3DXMATRIXA16 scale;
-	
-		D3DXMatrixScaling(&scale, 0.1f, 0.1f, 0.1f);
-		World = scale;
+		D3DXMATRIXA16 move;
 		
 		if (m_pOBB)
 			m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
 		
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &World);
+	
+		D3DXMatrixScaling(&scale, 0.1f, 0.1f, 0.1f);
+		D3DXMatrixTranslation(&move, eye.x, eye.y, eye.z);
+		D3DXMATRIXA16 World = scale * move;
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &scale);
 
 
 		for (int i = 0; i < Mtrls.size(); i++)

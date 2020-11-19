@@ -59,6 +59,11 @@ D3DXVECTOR3 CCamera::GetCameraDirection()
 	return direction;
 }
 
+D3DXVECTOR3 CCamera::GetCameraEye()
+{
+	return m_vEye;
+}
+
 void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 {
 	if (eventMsg.eventType == EventType::eInputEvent)
