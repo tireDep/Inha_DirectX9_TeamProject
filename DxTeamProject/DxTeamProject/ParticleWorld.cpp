@@ -11,6 +11,7 @@
 CParticleWorld::CParticleWorld()
 	: m_vPosition(0, 0, 0)
 	, m_resolver(NULL)
+	, m_pContacts(NULL)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
@@ -31,7 +32,8 @@ CParticleWorld::~CParticleWorld()
 	// Need Force Delete
 
 	// collider
-	delete[] m_pContacts;
+	if(m_pContacts)
+		delete[] m_pContacts;
 }
 
 void CParticleWorld::Setup()

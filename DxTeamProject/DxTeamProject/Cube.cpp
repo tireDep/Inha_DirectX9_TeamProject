@@ -163,10 +163,9 @@ void CCube::Render()
 	g_pD3DDevice->SetMaterial(&m_stMtlCube);
 	g_pD3DDevice->SetTexture(0, 0);
 
-	SetShader(matWorld);
-
-	if (m_isPicked)
+	if (m_isPicked && m_pShader)
 	{
+		SetShader(matWorld);
 		m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(m_outLineColor.r, m_outLineColor.g, m_outLineColor.b, 1));
 		m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(D3DXVECTOR3(m_color), 1));
 
