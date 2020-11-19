@@ -88,12 +88,12 @@ void CMainGame::Setup()
 
 	for (int i = 0; i < 8; i++)
 	{
-		CSphere* sphere = new CSphere(0.5f, D3DXVECTOR3(5, 0.5f, i * 3));
+		CSphere* sphere = new CSphere(0.5f, D3DXVECTOR3(5, 0.5f, i + 3));
 	}
 
 	for (int i = 0; i < 8; i++)
 	{
-		CCube* cube = new CCube(D3DXVECTOR3(-5, 0.5f, i * 3));
+		CCube* cube = new CCube(D3DXVECTOR3(-10, 0.5f, i + 3));
 	}
 
 	g_pEventManager->AddListener(g_gameManager);

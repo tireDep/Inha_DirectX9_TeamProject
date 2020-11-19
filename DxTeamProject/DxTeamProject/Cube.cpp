@@ -135,7 +135,7 @@ void CCube::Setup()
 	}
 }
 
-void CCube::Update(CRay ray, D3DXCOLOR& playerColor)
+void CCube::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
 {
 	for (int i = 0; i < m_vecPos.size(); i+=3)
 	{
@@ -147,6 +147,9 @@ void CCube::Update(CRay ray, D3DXCOLOR& playerColor)
 		else
 			m_isPicked = false;
 	}
+
+	vecVPos.push_back(m_vCenter);
+	vecIsPick.push_back(m_isPicked);
 }
 
 void CCube::Render()
@@ -163,10 +166,9 @@ void CCube::Render()
 	g_pD3DDevice->SetMaterial(&m_stMtlCube);
 	g_pD3DDevice->SetTexture(0, 0);
 
-	SetShader(matWorld);
-
-	if (m_isPicked)
+	if (m_isPicked && m_pShader)
 	{
+		SetShader(matWorld);
 		m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(m_outLineColor.r, m_outLineColor.g, m_outLineColor.b, 1));
 		m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(D3DXVECTOR3(m_color), 1));
 
@@ -193,6 +195,11 @@ void CCube::Render()
 	{
 		m_pMeshCube->DrawSubset(0);
 	}
+}
+
+void CCube::SetPickState(bool set)
+{
+	m_isPicked = set;
 }
 
 string CCube::GetName()

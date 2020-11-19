@@ -11,6 +11,7 @@
 CParticleWorld::CParticleWorld()
 	: m_vPosition(0, 0, 0)
 	, m_resolver(NULL)
+	, m_pContacts(NULL)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }

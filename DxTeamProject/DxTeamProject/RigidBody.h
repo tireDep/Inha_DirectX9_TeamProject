@@ -23,6 +23,7 @@ protected:
 
 
 	//
+	float m_fangularDamping;
 	float m_fmotion;
 	bool m_canSleep;
 	D3DXVECTOR3 m_vAcceleration;
