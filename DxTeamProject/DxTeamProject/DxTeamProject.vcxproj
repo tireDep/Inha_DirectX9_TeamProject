@@ -191,6 +191,7 @@
     <ClInclude Include="Text.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="Xfile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
@@ -238,6 +239,7 @@
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Xfile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DxTeamProject.rc" />

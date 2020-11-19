@@ -117,6 +117,9 @@
       <Filter>Physics_Particle\Collider</Filter>
     </ClCompile>
     <ClCompile Include="ParticleContactResolver.cpp" />
+    <ClCompile Include="Xfile.cpp">
+      <Filter>Xfile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -259,6 +262,9 @@
       <Filter>Physics_Particle\Collider</Filter>
     </ClInclude>
     <ClInclude Include="ParticleContactResolver.h" />
+    <ClInclude Include="Xfile.h">
+      <Filter>Xfile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -349,6 +355,9 @@
     </Filter>
     <Filter Include="Physics_Particle\Force\3... Drag">
       <UniqueIdentifier>{e4eb3c3c-385a-4e2b-80bc-267753729587}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Xfile">
+      <UniqueIdentifier>{ac0d07fd-91b0-4b6a-aaec-5117f95bdd34}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

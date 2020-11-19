@@ -15,6 +15,9 @@ class CParticleWorld;
 
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
+//
+class CXfile;
+//
 
 class CMainGame
 {
@@ -29,7 +32,7 @@ private:
 	CFrustum	m_pNowFrustum;
 	CGridMap*	m_GridMap;
 	CParticleWorld*	m_pParticleWorld;
-
+	CXfile*		m_Xfile;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 	//vector<CColliderObject*> m_vColliderCube;

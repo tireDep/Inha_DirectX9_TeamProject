@@ -12,6 +12,7 @@
 #include "Sphere.h"
 #include "Cube.h"
 #include "ParticleWorld.h"
+#include "Xfile.h"
 
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
@@ -25,7 +26,8 @@ CMainGame::CMainGame() :
 	m_pCharacter(NULL),
 	m_pLight(NULL),
 	m_GridMap(NULL),
-	m_pParticleWorld(NULL)
+	m_pParticleWorld(NULL),
+	m_Xfile(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
@@ -39,6 +41,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pLight);
 	SafeDelete(m_GridMap);
 	SafeDelete(m_pParticleWorld);
+	SafeDelete(m_Xfile);
 
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
@@ -105,6 +108,9 @@ void CMainGame::Setup()
 
 	m_pParticleWorld = new CParticleWorld;
 	m_pParticleWorld->Setup();
+
+	m_Xfile = new CXfile;
+	m_Xfile->Setup();
 
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0)); // sun light vector
@@ -269,6 +275,9 @@ void CMainGame::Render()
 
 	if (m_pParticleWorld)
 		m_pParticleWorld->Render();
+
+	if (m_Xfile)
+		m_Xfile->Render();
 
 	/// 릴리즈 버전을 위한 주석처리
 
