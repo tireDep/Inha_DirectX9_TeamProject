@@ -20,6 +20,7 @@ public:
 	void Setup(D3DXVECTOR3* pvTarget);
 	void Update();
 	D3DXVECTOR3 GetCameraDirection();
+	D3DXVECTOR3 GetCameraEye();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName();

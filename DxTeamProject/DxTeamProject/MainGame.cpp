@@ -277,7 +277,7 @@ void CMainGame::Render()
 		m_pParticleWorld->Render();
 
 	if (m_Xfile)
-		m_Xfile->Render();
+		m_Xfile->Render(m_pCamera->GetCameraEye());
 
 	/// 릴리즈 버전을 위한 주석처리
 

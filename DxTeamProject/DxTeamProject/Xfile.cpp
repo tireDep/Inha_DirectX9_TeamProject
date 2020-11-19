@@ -50,14 +50,15 @@ void CXfile::Setup()
 	SafeRelease(mtrlBuffer);
 }
 
-void CXfile::Render()
+void CXfile::Render(D3DXVECTOR3 eye)
 {
 	if (g_pD3DDevice)
 	{
 		D3DXMATRIX scale;
-
-		D3DXMatrixScaling(&scale, 0.1f, 0.1f, 0.1f);
-		D3DXMATRIX World = scale;
+		D3DXMATRIX move;
+		D3DXMatrixScaling(&scale, 0.01f, 0.01f, 0.01f);
+		D3DXMatrixTranslation(&move, eye.x, eye.y, eye.z);
+		D3DXMATRIX World = scale * move;
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &World);
 
 
