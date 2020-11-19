@@ -160,6 +160,8 @@ void CMainGame::Update()
 			break;
 		}	
 	}
+	
+	
 
 	if (g_gameManager->GetGridMapMode())
 	{

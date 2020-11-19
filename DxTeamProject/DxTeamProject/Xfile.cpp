@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Xfile.h"
+#include "OBB.h"
 
-
-CXfile::CXfile()
+CXfile::CXfile() 
 {
 }
 
@@ -14,7 +14,11 @@ CXfile::~CXfile()
 void CXfile::Setup()
 {
 	HRESULT hr = 0;
-	hr = D3DXLoadMeshFromX(L"Sky/skydome_text.X", D3DXMESH_MANAGED, g_pD3DDevice, &adjBuffer, &mtrlBuffer, 0, &numMtrls, &Mesh);
+	hr = D3DXLoadMeshFromX(L"Sky/brush model.X", D3DXMESH_MANAGED, g_pD3DDevice, &adjBuffer, &mtrlBuffer, 0, &numMtrls, &Mesh);
+
+
+	
+	
 
 	if (FAILED(hr))
 	{
@@ -31,7 +35,8 @@ void CXfile::Setup()
 			mtrls[i].MatD3D.Ambient = mtrls[i].MatD3D.Diffuse;
 
 			Mtrls.push_back(mtrls[i].MatD3D);
-
+			if (mtrls[i].pTextureFilename == NULL)
+				continue;
 			string filename = string("Sky") + "/" + mtrls[i].pTextureFilename;
 
 			if (mtrls[i].pTextureFilename != 0)
@@ -48,24 +53,58 @@ void CXfile::Setup()
 		}
 	}
 	SafeRelease(mtrlBuffer);
+
+
+	//D3DXCreateBox(g_pD3DDevice, 1.0f, 1.0f, 1.0f, &Mesh, NULL);
+
+	D3DXVECTOR3* pVertices;
+
+	D3DXVECTOR3 m_vMin, m_vMax;
+
+	Mesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+
+	D3DXComputeBoundingBox(pVertices, Mesh->GetNumVertices(), Mesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+
+	Mesh->UnlockVertexBuffer();
+
+	m_pOBB = new COBB;
+	m_pOBB->SetUpXFile(m_vMin * 0.1f, m_vMax * 0.1f);
+
+}
+
+void CXfile::Update()
+{
+
+
+	//m_pOBB->Update(&World);
 }
 
 void CXfile::Render()
 {
+
+
 	if (g_pD3DDevice)
 	{
-		D3DXMATRIX scale;
-
+		D3DXMATRIXA16 scale;
+	
 		D3DXMatrixScaling(&scale, 0.1f, 0.1f, 0.1f);
-		D3DXMATRIX World = scale;
+		World = scale;
+		
+		if (m_pOBB)
+			m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
+		
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &World);
 
 
 		for (int i = 0; i < Mtrls.size(); i++)
 		{
 			g_pD3DDevice->SetMaterial(&Mtrls[i]);
-			g_pD3DDevice->SetTexture(0, Textures[i]);
+			//g_pD3DDevice->SetTexture(0, Textures[i]);
 			Mesh->DrawSubset(i);
 		}
+
+		
 	}
+	
+
 }
