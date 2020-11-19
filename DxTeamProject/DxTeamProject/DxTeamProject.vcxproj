@@ -156,8 +156,10 @@
     <ClInclude Include="fmod_dsp.h" />
     <ClInclude Include="fmod_memoryinfo.h" />
     <ClInclude Include="FontManager.h" />
+    <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="Frustum.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Gravity.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="HeightMap.h" />
@@ -202,8 +204,10 @@
     <ClCompile Include="DxTeamProject.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Gravity.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridMap.cpp" />
     <ClCompile Include="HeightMap.cpp" />
