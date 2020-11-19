@@ -35,7 +35,7 @@ void CSphere::Setup()
 	m_stMtlSphere.Specular = m_color;
 }
 
-void CSphere::Update(CRay ray, D3DXCOLOR& playerColor)
+void CSphere::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
 {
 	if (D3DXSphereBoundProbe(&m_vCenter, m_fRadius, &ray.GetOrigin(), &ray.GetDirection()) == true)
 	{
@@ -44,6 +44,9 @@ void CSphere::Update(CRay ray, D3DXCOLOR& playerColor)
 	}
 	else
 		m_isPicked = false;
+
+	vecVPos.push_back(m_vCenter);
+	vecIsPick.push_back(m_isPicked);
 }
 
 void CSphere::Render()
@@ -92,6 +95,11 @@ void CSphere::Render()
 	{
 		m_pMeshSphere->DrawSubset(0);
 	}
+}
+
+void CSphere::SetPickState(bool set)
+{
+	m_isPicked = set;
 }
 
 string CSphere::GetName()

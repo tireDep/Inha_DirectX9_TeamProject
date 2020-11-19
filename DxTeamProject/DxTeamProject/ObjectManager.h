@@ -19,4 +19,7 @@ public:
 	void Render();
 
 	vector<CObject *> GetVecObject();
+
+private:
+	void Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos);
 };
