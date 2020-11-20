@@ -33,6 +33,7 @@ CMainGame::CMainGame() :
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
+
 }
 
 CMainGame::~CMainGame()
@@ -46,7 +47,10 @@ CMainGame::~CMainGame()
 	SafeDelete(m_Xfile);
 	SafeDelete(m_pSphere1);
 	SafeDelete(m_pSphere2);
-	SafeDelete(m_pWall);
+	
+	for(int i = 0; i < 4; ++i)
+	SafeDelete(m_pWall[i]);
+	
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 	/// 릴리즈 버전을 위한 주석처리
@@ -120,16 +124,28 @@ void CMainGame::Setup()
 	m_pSphere1 = new CPhysicsSphere;
 	m_pSphere1->Setup();
 	m_pSphere1->setCenter(-2.7f, 0.21f, 0.0f);
-	m_pSphere1->setPower(5.0f,5.0f);
+	m_pSphere1->setPower(100.0f,100.0f);
 
 	m_pSphere2 = new CPhysicsSphere;
 	m_pSphere2->Setup();
 	m_pSphere2->setCenter(+2.4f, 0.21f, 0.0f);
 	m_pSphere2->setPower(0, 0);
 
-	m_pWall = new CWall;
-	m_pWall->Setup(0.12f, 0.3f, 6.24f);
-	
+	for (int i = 0; i < 4; ++i)
+	{
+		m_pWall.push_back(new CWall);
+	}
+	m_pWall[0]->Setup(0.12f, 0.3f, 6.24f); 
+	m_pWall[0]->setPosition(5, 0, 0);
+
+	m_pWall[1]->Setup(0.12f, 0.3f, 6.24f);
+	m_pWall[1]->setPosition(-5, 0, 0);
+
+	m_pWall[2]->Setup(10, 0.3f, 0.12f);
+	m_pWall[2]->setPosition(0, 0, 3.0);
+
+	m_pWall[3]->Setup(10, 0.3f, 0.12f);
+	m_pWall[3]->setPosition(0, 0, -3.0);
 
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0)); // sun light vector
@@ -201,8 +217,8 @@ void CMainGame::Update()
 	m_pSphere2->Update(g_pTimeManager->GetElapsedTime());
 
 	m_pSphere1->Hitball(*m_pSphere2);
-	m_pWall->hitBy(*m_pSphere1);
-	m_pWall->hitBy(*m_pSphere2);
+	m_pWall[0]->hitBy(*m_pSphere1);
+	m_pWall[0]->hitBy(*m_pSphere2);
 	/// 릴리즈 버전을 위한 주석처리
 	/// Lim Kyung Tae - Particle World
 	//if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
@@ -262,8 +278,17 @@ void CMainGame::Render()
 	if (m_pSphere2)
 		m_pSphere2->Render();
 
+	if (&m_pWall)
+		m_pWall[0]->draw();
 
+	if (&m_pWall)
+		m_pWall[1]->draw();
 
+	if (&m_pWall)
+		m_pWall[2]->draw();
+
+	if (&m_pWall)
+		m_pWall[3]->draw();
 	/// 릴리즈 버전을 위한 주석처리
 
 	if (g_gameManager->GetUImode())
