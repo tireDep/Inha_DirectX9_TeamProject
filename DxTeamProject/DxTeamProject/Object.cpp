@@ -6,42 +6,11 @@ int CObject::m_nRefCount = 0;
 
 bool CObject::LoadAssets()
 {
-	m_pShader = LoadShader("Shader/outLine.fx");
+	g_pFileLoadManager->FileLoad_Shader("Resource/Shader", "outLine.fx", m_pShader);
 	if (!m_pShader)
 		return false;
 
 	return true;
-}
-
-LPD3DXEFFECT CObject::LoadShader(const char * fileName)
-{
-	LPD3DXEFFECT ret = NULL;
-
-	LPD3DXBUFFER pError = NULL;
-	DWORD dwShaderFlags = 0;
-
-#if _DEBUG
-	dwShaderFlags |= D3DXSHADER_DEBUG;
-#endif
-
-	D3DXCreateEffectFromFileA(g_pD3DDevice, fileName,
-		NULL, NULL, dwShaderFlags, NULL, &ret, &pError);
-
-	if (!ret && pError)
-	{
-		int size = pError->GetBufferSize();
-		void *ack = pError->GetBufferPointer();
-
-		// if (ack)
-		// {
-		// 	char* str = new char[size];
-		// 	sprintf(str, (const char*)ack, size);
-		// 	OutputDebugString(str);
-		// 	delete[] str;
-		// }
-	}
-
-	return ret;
 }
 
 void CObject::SetShader(const D3DXMATRIXA16& setMatWorld)

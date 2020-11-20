@@ -133,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="PhysicsSphere.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="FileLoadManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -291,6 +294,9 @@
     </ClInclude>
     <ClInclude Include="PhysicsSphere.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="FileLoadManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
