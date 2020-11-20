@@ -38,7 +38,6 @@ private:
 	// tmp Physics
 	CPhysicsSphere* m_pSphere1;
 	CPhysicsSphere* m_pSphere2;
-
 	vector<CWall*> m_pWall;
 
 	/// 릴리즈 버전을 위한 주석처리

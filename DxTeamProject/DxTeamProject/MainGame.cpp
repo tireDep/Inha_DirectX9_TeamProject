@@ -52,6 +52,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pWall[i]);
 	
 	g_pObjectManager->Destroy();
+	g_pPhysicsObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 	/// 릴리즈 버전을 위한 주석처리
 	//SafeDelete(m_pSm);
@@ -104,6 +105,24 @@ void CMainGame::Setup()
 		CCube* cube = new CCube(D3DXVECTOR3(-10, 0.5f, i + 3));
 	}
 
+	for (int i = 0; i < 4; i++)
+	{
+		CPhysicsSphere* pSphere = new CPhysicsSphere;
+		pSphere->setCenter(i, 0.21f, 0.0f);
+		pSphere->setPower(-i, i);
+	}
+
+	//// tmp Physics
+	m_pSphere1 = new CPhysicsSphere;
+	//m_pSphere1->Setup();
+	m_pSphere1->setCenter(-2.7f, 0.21f, 0.0f);
+	m_pSphere1->setPower(5.0f, 10.0f);
+
+	m_pSphere2 = new CPhysicsSphere;
+	//m_pSphere2->Setup();
+	m_pSphere2->setCenter(+2.4f, 0.21f, 0.0f);
+	m_pSphere2->setPower(0, 0);
+
 	g_pEventManager->AddListener(g_gameManager);
 	g_pEventManager->AddListener(m_pCamera);
 	g_pEventManager->AddListener(m_pCharacter);
@@ -113,23 +132,17 @@ void CMainGame::Setup()
 	{
 		g_pEventManager->AddListener(g_pObjectManager->GetVecObject()[i]);
 	}
+	// 내일 예슬씨에게 질문 이름이 다른데 에러 호출
+	//for (int i = 0; i < g_pPhysicsObjectManager->getVecObject().size(); i++)
+	//{
+	//	g_pEventManager->AddListener(g_pPhysicsObjectManager->getVecObject()[i]);
+	//}
 
 	m_pParticleWorld = new CParticleWorld;
 	m_pParticleWorld->Setup();
 
 	m_Xfile = new CXfile;
 	m_Xfile->Setup();
-
-	// tmp Physics
-	m_pSphere1 = new CPhysicsSphere;
-	m_pSphere1->Setup();
-	m_pSphere1->setCenter(-2.7f, 0.21f, 0.0f);
-	m_pSphere1->setPower(100.0f,100.0f);
-
-	m_pSphere2 = new CPhysicsSphere;
-	m_pSphere2->Setup();
-	m_pSphere2->setCenter(+2.4f, 0.21f, 0.0f);
-	m_pSphere2->setPower(0, 0);
 
 	for (int i = 0; i < 4; ++i)
 	{
@@ -213,6 +226,21 @@ void CMainGame::Update()
 	if (m_pParticleWorld && g_gameManager->GetUImode() == false)
 		m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
 
+	// tmp
+	g_pPhysicsObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	//for (int hittee = 0; hittee < 4; hittee++)
+	//{
+	//	for (int hitter = 0; hitter < 4; hitter++)
+	//	{
+	//		if (hittee >= hitter)
+	//		{
+	//			continue;
+	//		}
+	//		m_pPhysicsSphere[hittee]->Hitball(&m_pPhysicsSphere[hitter]);
+	//		//m_pPhysicsSphere[hittee].hitBall(m_pPhysicsSphere[hitter]);
+	//	}
+	//}
+
 	m_pSphere1->Update(g_pTimeManager->GetElapsedTime());
 	m_pSphere2->Update(g_pTimeManager->GetElapsedTime());
 
@@ -252,7 +280,7 @@ void CMainGame::Render()
 			m_pText->RenderFPS(g_pTimeManager->GetFPS());
 			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
 			//m_pText->RenderBoxPosition(m_pParticleWorld->GetPosition());
-			m_pText->RenderBoxPosition(m_pSphere1->getCenter());
+			//m_pText->RenderBoxPosition(m_pSphere1->getCenter());
 		}
 	}
 
@@ -272,6 +300,7 @@ void CMainGame::Render()
 	if (m_Xfile)
 		m_Xfile->Render(m_pCamera->GetCameraEye());
 
+	g_pPhysicsObjectManager->Render();
 	if (m_pSphere1)
 		m_pSphere1->Render();
 
@@ -299,21 +328,3 @@ void CMainGame::Render()
 	g_pD3DDevice->EndScene();
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
 }
-
-/// 릴리즈 버전을 위한 주석처리
-//void CMainGame::Setup_OBB()
-//{
-//	for (int i = 0; i < 5; ++i)
-//	{
-//		m_vColliderCube.push_back(new CColliderObject);
-//		m_vColliderCube[i]->Setup(D3DXVECTOR3(i * 2 + 3, 0.5f, i * 2 + 3));
-//	}
-//}
-//
-//void CMainGame::OBB_RENDER()
-//{
-//	for (vector<CColliderObject>::size_type i = 0; i < m_vColliderCube.size(); ++i)
-//	{
-//		m_vColliderCube[i]->Render();
-//	}
-//}

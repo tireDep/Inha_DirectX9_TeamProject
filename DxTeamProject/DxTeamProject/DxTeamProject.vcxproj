@@ -180,6 +180,8 @@
     <ClInclude Include="ParticleGravity.h" />
     <ClInclude Include="ParticlePusingForce.h" />
     <ClInclude Include="ParticleWorld.h" />
+    <ClInclude Include="PhysicsObject.h" />
+    <ClInclude Include="PhysicsObjectManager.h" />
     <ClInclude Include="PhysicsPlayer.h" />
     <ClInclude Include="PhysicsSphere.h" />
     <ClInclude Include="Pyramid.h" />
@@ -231,6 +233,8 @@
     <ClCompile Include="ParticleGravity.cpp" />
     <ClCompile Include="ParticlePusingForce.cpp" />
     <ClCompile Include="ParticleWorld.cpp" />
+    <ClCompile Include="PhysicsObject.cpp" />
+    <ClCompile Include="PhysicsObjectManager.cpp" />
     <ClCompile Include="PhysicsPlayer.cpp" />
     <ClCompile Include="PhysicsSphere.cpp" />
     <ClCompile Include="Pyramid.cpp" />

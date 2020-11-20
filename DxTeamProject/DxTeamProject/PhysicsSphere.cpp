@@ -4,24 +4,23 @@
 CPhysicsSphere::CPhysicsSphere()
 	: m_fRadius(0.21f)
 	, m_vVelocity(0, 0, 0)
-	, m_pMeshSphere(NULL)
 {
-	D3DXMatrixIdentity(&m_matWorld);
-	D3DXMatrixIdentity(&m_matLocal);
-	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
+	//D3DXMatrixIdentity(&m_matWorld);
+	//D3DXMatrixIdentity(&m_matLocal);
+	Setup();
 }
 
 CPhysicsSphere::~CPhysicsSphere()
 {
-	SafeRelease(m_pMeshSphere);
 }
 
 void CPhysicsSphere::Setup()
 {
-	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pMeshSphere, NULL);
-	m_stMtlSphere.Ambient = BLUE;
-	m_stMtlSphere.Diffuse = BLUE;
-	m_stMtlSphere.Specular = BLUE;
+	m_strName = string("PhysicsSphere") + to_string(m_nRefCount);
+	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pMesh, NULL);
+	m_stMtl.Ambient = BLUE;
+	m_stMtl.Diffuse = BLUE;
+	m_stMtl.Specular = BLUE;
 }
 
 void CPhysicsSphere::Update(float duration)
@@ -35,8 +34,8 @@ void CPhysicsSphere::Render()
 	//g_pD3DDevice->MultiplyTransform(D3DTS_WORLD, &m_matLocal);
 	g_pD3DDevice->SetTexture(0, 0);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	g_pD3DDevice->SetMaterial(&m_stMtlSphere);
-	m_pMeshSphere->DrawSubset(0);
+	g_pD3DDevice->SetMaterial(&m_stMtl);
+	m_pMesh->DrawSubset(0);
 }
 
 void CPhysicsSphere::SphereUpdate(float duration)
@@ -62,6 +61,7 @@ void CPhysicsSphere::SphereUpdate(float duration)
 		rate = 0;
 
 	this->setPower(getVelocity_X() * rate, getVelocity_Z() * rate);
+	//this->setPower(getVelocity_X(), getVelocity_Z());
 }
 
 void CPhysicsSphere::Hitball(CPhysicsSphere & ball)

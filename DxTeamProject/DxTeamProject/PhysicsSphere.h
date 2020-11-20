@@ -1,5 +1,7 @@
 #pragma once
-class CPhysicsSphere 
+#include "PhysicsObject.h"
+
+class CPhysicsSphere : public CPhysicsObject
 {
 public:
 	CPhysicsSphere();
@@ -9,10 +11,10 @@ private:
 	float			m_fRadius;
 	D3DXVECTOR3		m_vVelocity;
 
-	D3DXMATRIXA16	m_matLocal;
-	D3DXMATRIXA16	m_matWorld;
-	D3DMATERIAL9	m_stMtlSphere;
-	LPD3DXMESH		m_pMeshSphere;
+	//D3DXMATRIXA16	m_matLocal;
+	//D3DXMATRIXA16	m_matWorld;
+	//D3DMATERIAL9	m_stMtlSphere;
+	//LPD3DXMESH		m_pMeshSphere;
 public:
 	void Setup();
 	void Update(float duration);

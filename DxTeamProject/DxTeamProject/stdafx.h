@@ -106,6 +106,7 @@ extern HWND g_hWnd;
 //
 #include "Object.h"
 #include "ObjectManager.h"
+#include "PhysicsObjectManager.h"
 
 struct ST_PC_VERTEX
 {
