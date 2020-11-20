@@ -93,9 +93,9 @@ void COBB::SetUpXFile(D3DXVECTOR3& xfileMin, D3DXVECTOR3& xfileMax)
 	m_vOriAxisDir[1] = D3DXVECTOR3(0, 1, 0);
 	m_vOriAxisDir[2] = D3DXVECTOR3(0, 0, 1);
 
-	m_fAxisLen[0] = fabs(vMax.x - vMin.x);
-	m_fAxisLen[1] = fabs(vMax.y - vMin.y);
-	m_fAxisLen[2] = fabs(vMax.z - vMin.z);
+	m_fAxisLen[0] = (vMax.x - vMin.x);
+	m_fAxisLen[1] = (vMax.y - vMin.y);
+	m_fAxisLen[2] = (vMax.z - vMin.z);
 
 	m_fAxisHalfLen[0] = m_fAxisLen[0] / 2.0f;
 	m_fAxisHalfLen[1] = m_fAxisLen[1] / 2.0f;
@@ -103,15 +103,15 @@ void COBB::SetUpXFile(D3DXVECTOR3& xfileMin, D3DXVECTOR3& xfileMax)
 
 	vector<D3DXVECTOR3> vecVertex;
 
-	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], 0 , -m_fAxisHalfLen[2])); // 0
-	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisLen[1] , -m_fAxisHalfLen[2])); //1
-	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisLen[1], -m_fAxisHalfLen[2])); //2
-	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], 0, -m_fAxisHalfLen[2])); // 3
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisHalfLen[1]- 1.5, -m_fAxisHalfLen[2])); // 0
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisLen[1] - 0.5 , -m_fAxisHalfLen[2])); //1
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisLen[1] - 0.5, -m_fAxisHalfLen[2])); //2
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisHalfLen[1] - 1.5, -m_fAxisHalfLen[2])); // 3
 
-	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0],0, m_fAxisHalfLen[2])); //4 
-	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisLen[1] , m_fAxisHalfLen[2])); // 5
-	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisLen[1], m_fAxisHalfLen[2])); //6
-	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], 0, m_fAxisHalfLen[2])); //7
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisHalfLen[1] - 1.5, m_fAxisHalfLen[2])); //4 
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisLen[1] - 0.5, m_fAxisHalfLen[2])); // 5
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisLen[1] - 0.5, m_fAxisHalfLen[2])); //6
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisHalfLen[1] - 1.5, m_fAxisHalfLen[2])); //7
 
 	vector<DWORD> vecIndex;
 	//¾Õ¸é

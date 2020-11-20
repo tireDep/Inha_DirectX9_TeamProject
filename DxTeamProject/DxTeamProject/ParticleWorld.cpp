@@ -31,7 +31,7 @@ CParticleWorld::~CParticleWorld()
 	// Need Force Delete
 
 	// collider
-	delete[] m_pContacts;
+	//delete[] m_pContacts;
 }
 
 void CParticleWorld::Setup()

@@ -14,11 +14,7 @@ CXfile::~CXfile()
 void CXfile::Setup()
 {
 	HRESULT hr = 0;
-	hr = D3DXLoadMeshFromX(L"Sky/brush model.X", D3DXMESH_MANAGED, g_pD3DDevice, &adjBuffer, &mtrlBuffer, 0, &numMtrls, &Mesh);
-
-
-	
-	
+	hr = D3DXLoadMeshFromX(L"Sky/brush_model_test.X", D3DXMESH_MANAGED, g_pD3DDevice, &adjBuffer, &mtrlBuffer, 0, &numMtrls, &Mesh);
 
 	if (FAILED(hr))
 	{
@@ -68,7 +64,7 @@ void CXfile::Setup()
 	Mesh->UnlockVertexBuffer();
 
 	m_pOBB = new COBB;
-	m_pOBB->SetUpXFile(m_vMin * 0.1f, m_vMax * 0.1f);
+	m_pOBB->SetUpXFile(m_vMin , m_vMax );
 
 }
 
@@ -92,7 +88,7 @@ void CXfile::Render(D3DXVECTOR3 eye)
 			m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
 		
 	
-		D3DXMatrixScaling(&scale, 0.1f, 0.1f, 0.1f);
+		D3DXMatrixScaling(&scale, 1, 1, 1);
 		D3DXMatrixTranslation(&move, eye.x, eye.y, eye.z);
 		D3DXMATRIXA16 World = scale * move;
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &scale);
