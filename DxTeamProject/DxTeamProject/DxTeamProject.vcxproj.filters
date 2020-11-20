@@ -116,10 +116,16 @@
     <ClCompile Include="ParticleContactGenerator.cpp">
       <Filter>Physics_Particle\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleContactResolver.cpp" />
     <ClCompile Include="Xfile.cpp">
       <Filter>Xfile</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleContactResolver.cpp">
+      <Filter>Physics_Particle\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceGenerator.cpp">
+      <Filter>Physics_Rigidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="Gravity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -261,10 +267,16 @@
     <ClInclude Include="ParticleContactGenerator.h">
       <Filter>Physics_Particle\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleContactResolver.h" />
     <ClInclude Include="Xfile.h">
       <Filter>Xfile</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleContactResolver.h">
+      <Filter>Physics_Particle\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerator.h">
+      <Filter>Physics_Rigidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="Gravity.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

@@ -5,22 +5,43 @@ public:
 	CRigidBody();
 	~CRigidBody();
 protected:
+	// 1..
 	float m_finverseMass;
 	float m_flinearDamping;
-	float m_fangularDamping;
 	D3DXVECTOR3	m_vPosition;
+	D3DXQUATERNION m_qOrientation;
 	D3DXVECTOR3 m_vVelocity;
 	D3DXVECTOR3 m_vRotation;
-	float m_fmotion;
-	bool m_isAwake;
-	bool m_canSleep;
+	D3DXMATRIXA16 m_matTransformmatrix;
+	// 2..
+	D3DXMATRIXA16 m_matinverseInertiaTensor;
+	D3DXMATRIXA16 m_matinverseInertiaTensorWorld;
+	// 3..
 	D3DXVECTOR3 m_vforceAccum;
 	D3DXVECTOR3 m_vtorqueAccum;
+	bool m_isAwake;
+
+
+	//
+	float m_fangularDamping;
+	float m_fmotion;
+	bool m_canSleep;
 	D3DXVECTOR3 m_vAcceleration;
 	D3DXVECTOR3 m_lastFrameAcceleration;
 public:
+	// 1..
 	void calculateDeriveDate();
+	void calculateTransformMatrix();
+	// 2..
+	void calculateTransformInertiaTensor();
+	// 3..
+	void addForce(const D3DXVECTOR3& force);
+	void clearAccumulators();
 	void integrate(float duration);
+	void addForceAtPoint(const D3DXVECTOR3& force, const D3DXVECTOR3& point);
+	void addForceAtBodyPoint(const D3DXVECTOR3& force, const D3DXVECTOR3& point);
+
+	//
 	void setMass(const float mass);
 	float getMass() const;
 	void setInverseMass(const float inverseMass);
@@ -51,9 +72,6 @@ public:
 	void setCanSleep(const bool canSleep = true);
 	void getLastFrameAcceleration(D3DXVECTOR3 * linearAcceleration) const;
 	D3DXVECTOR3 getLastFrameAcceleration() const;
-	void clearAccumulators();
-	void addForce(const D3DXVECTOR3& force);
-	void addForceAtPoint(const D3DXVECTOR3& force, const D3DXVECTOR3& point);
 	void addTorque(const D3DXVECTOR3& torque);
 	void setAcceleration(const D3DXVECTOR3& acceleration);
 	void setAcceleration(const float x, const float y, const float z);

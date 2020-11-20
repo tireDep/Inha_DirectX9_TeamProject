@@ -26,8 +26,9 @@ public:
 	virtual void Release();
 
 	virtual void Setup() = 0;
-	virtual void Update(CRay ray, D3DXCOLOR& playerColor) = 0;
+	virtual void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos) = 0;
 	virtual void Render() = 0;
+	virtual void SetPickState(bool set) = 0;
 
 	virtual string GetName() { return string(); }
 	virtual void ReceiveEvent(ST_EVENT eventMsg);

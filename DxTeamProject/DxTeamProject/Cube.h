@@ -16,10 +16,11 @@ public:
 	CCube(D3DXVECTOR3 center);
 	~CCube();
 	
-	virtual void Setup();
-	virtual void Update(CRay ray, D3DXCOLOR& playerColor);
-	virtual void Render();
+	void Setup();
+	void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos);
+	void Render();
+	void SetPickState(bool set);
 
-	virtual string GetName();
-	virtual void ReceiveEvent(ST_EVENT eventMsg);
+	string GetName();
+	void ReceiveEvent(ST_EVENT eventMsg);
 };

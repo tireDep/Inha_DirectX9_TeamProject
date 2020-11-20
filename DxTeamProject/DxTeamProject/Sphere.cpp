@@ -35,29 +35,8 @@ void CSphere::Setup()
 	m_stMtlSphere.Specular = m_color;
 }
 
-void CSphere::Update(CRay ray, D3DXCOLOR& playerColor)
+void CSphere::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
 {
-	{
-		// D3DXSphereBoundProbe(&m_vCenter, m_fRadius, &ray.GetOrigin(), &ray.GetDirection());
-
-		// CRay r = (*this);
-		// D3DXMATRIXA16 matInvWorld;
-		// D3DXMatrixIdentity(&matInvWorld);
-		// matInvWorld._41 = -pSphere->vCenter.x;
-		// matInvWorld._42 = -pSphere->vCenter.y;
-		// matInvWorld._43 = -pSphere->vCenter.z;
-		// 
-		// D3DXVec3TransformCoord(&r.m_vOrg, &r.m_vOrg, &matInvWorld);
-		// D3DXVec3TransformNormal(&r.m_vDir, &r.m_vDir, &matInvWorld);
-		// 
-		// // ( Q.V)^2 -  V.V*(Q.Q - r*r) > 0 
-		// float vv = D3DXVec3Dot(&r.m_vDir, &r.m_vDir);
-		// float qv = D3DXVec3Dot(&r.m_vOrg, &r.m_vDir);
-		// float qq = D3DXVec3Dot(&r.m_vOrg, &r.m_vOrg);
-		// float rr = pSphere->fRadius * pSphere->fRadius;
-		// return qv*qv - vv * (qq - rr) >= 0;
-	}
-
 	if (D3DXSphereBoundProbe(&m_vCenter, m_fRadius, &ray.GetOrigin(), &ray.GetDirection()) == true)
 	{
 		m_isPicked = true;
@@ -65,6 +44,9 @@ void CSphere::Update(CRay ray, D3DXCOLOR& playerColor)
 	}
 	else
 		m_isPicked = false;
+
+	vecVPos.push_back(m_vCenter);
+	vecIsPick.push_back(m_isPicked);
 }
 
 void CSphere::Render()
@@ -84,10 +66,9 @@ void CSphere::Render()
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetMaterial(&m_stMtlSphere);
 
-	SetShader(matWorld);
-
-	if (m_isPicked)
+	if (m_isPicked && m_pShader)
 	{
+		SetShader(matWorld);
 		m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(m_outLineColor.r, m_outLineColor.g, m_outLineColor.b, 1));
 		m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(D3DXVECTOR3(m_color), 1));
 
@@ -114,6 +95,11 @@ void CSphere::Render()
 	{
 		m_pMeshSphere->DrawSubset(0);
 	}
+}
+
+void CSphere::SetPickState(bool set)
+{
+	m_isPicked = set;
 }
 
 string CSphere::GetName()
