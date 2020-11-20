@@ -107,6 +107,7 @@ extern HWND g_hWnd;
 #include "Object.h"
 #include "ObjectManager.h"
 #include "PhysicsObjectManager.h"
+#include "FileLoadManager.h"
 
 struct ST_PC_VERTEX
 {
@@ -157,6 +158,17 @@ struct ST_EVENT
 	// << SceneChange
 
 	void* ptrMessage = NULL;
+};
+
+struct ST_XFile
+{
+	ID3DXMesh* pMesh;
+	ID3DXBuffer* adjBuffer;
+	ID3DXBuffer* mtrlBuffer;
+
+	DWORD nMtrlNum;
+	vector<D3DMATERIAL9*> vecMtrl;
+	vector<IDirect3DTexture9*> vecTextrure;
 };
 
 #define GRAY    D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f)

@@ -2,103 +2,96 @@
 #include "Xfile.h"
 #include "OBB.h"
 
-CXfile::CXfile() 
+CXfile::CXfile() :
+	m_pMesh(NULL),
+	m_adjBuffer(NULL),
+	m_numMtrls(0),
+	m_vScale(1,1,1),
+	m_vRotate(0,0,0),
+	m_vTranslate(0,0,0)
 {
 }
 
-
 CXfile::~CXfile()
 {
+	SafeDelete(m_pOBB);
+
+	SafeRelease(m_pMesh);
+	SafeRelease(m_adjBuffer);
+	SafeRelease(m_pTexture);
 }
 
 void CXfile::Setup()
 {
-	HRESULT hr = 0;
-	hr = D3DXLoadMeshFromX(L"Sky/brush_model_test.X", D3DXMESH_MANAGED, g_pD3DDevice, &adjBuffer, &mtrlBuffer, 0, &numMtrls, &Mesh);
+	ST_XFile* xfile = new ST_XFile;
 
-	if (FAILED(hr))
+	if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Brush", "brush.X", xfile))
 	{
-		::MessageBox(0, L"D3DXLoadMeshFromX() - FAILED", 0, 0);
+		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
 		return;
 	}
 
-	if (mtrlBuffer != 0 && numMtrls != 0)
-	{
-		D3DXMATERIAL* mtrls = (D3DXMATERIAL*)mtrlBuffer->GetBufferPointer();
+	m_pMesh = xfile->pMesh;
+	m_adjBuffer = xfile->adjBuffer;
+	m_vecMtrls = xfile->vecMtrl;
+	m_vecTextures = xfile->vecTextrure;
+	m_numMtrls = xfile->nMtrlNum;
 
-		for (int i = 0; i < numMtrls; i++)
-		{
-			mtrls[i].MatD3D.Ambient = mtrls[i].MatD3D.Diffuse;
+	delete xfile;
 
-			Mtrls.push_back(mtrls[i].MatD3D);
-			if (mtrls[i].pTextureFilename == NULL)
-				continue;
-			string filename = string("Sky") + "/" + mtrls[i].pTextureFilename;
-
-			if (mtrls[i].pTextureFilename != 0)
-			{
-				IDirect3DTexture9* tex = 0;
-				D3DXCreateTextureFromFileA(g_pD3DDevice, filename.c_str(), &tex);
-
-				Textures.push_back(tex);
-			}
-			else
-			{
-				Textures.push_back(0);
-			}
-		}
-	}
-	SafeRelease(mtrlBuffer);
-
-
-	//D3DXCreateBox(g_pD3DDevice, 1.0f, 1.0f, 1.0f, &Mesh, NULL);
+	g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Brush", "brush_red.png", m_pTexture);
 
 	D3DXVECTOR3* pVertices;
-
 	D3DXVECTOR3 m_vMin, m_vMax;
 
-	Mesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
-
-	D3DXComputeBoundingBox(pVertices, Mesh->GetNumVertices(), Mesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
-
-	Mesh->UnlockVertexBuffer();
+	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+	D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+	m_pMesh->UnlockVertexBuffer();
 
 	m_pOBB = new COBB;
 	m_pOBB->SetUpXFile(m_vMin , m_vMax );
-
 }
 
 void CXfile::Update()
 {
-
-
 	//m_pOBB->Update(&World);
 }
 
 void CXfile::Render(D3DXVECTOR3 eye)
 {
-
-
 	if (g_pD3DDevice)
 	{
-		D3DXMATRIXA16 scale;
-		D3DXMATRIXA16 move;
-		
 		if (m_pOBB)
 			m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
 		
-	
-		D3DXMatrixScaling(&scale, 1, 1, 1);
-		D3DXMatrixTranslation(&move, eye.x, eye.y, eye.z);
-		D3DXMATRIXA16 World = scale * move;
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &scale);
+		D3DXMATRIXA16 matS, matR, matT;
 
+		D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+		
+		D3DXMatrixRotationX(&matR, m_vRotate.x);
+		D3DXMatrixRotationY(&matR, m_vRotate.y);
+		D3DXMatrixRotationZ(&matR, m_vRotate.z);
 
-		for (int i = 0; i < Mtrls.size(); i++)
+		D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
+		// D3DXMatrixTranslation(&matT, eye.x, eye.y, eye.z);
+
+		D3DXMATRIXA16 matWorld = matS * matR * matT;
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+
+		if (m_pMesh == NULL)
+			return;
+
+		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{
-			g_pD3DDevice->SetMaterial(&Mtrls[i]);
-			//g_pD3DDevice->SetTexture(0, Textures[i]);
-			Mesh->DrawSubset(i);
+			g_pD3DDevice->SetMaterial(m_vecMtrls[i]);
+			
+			if(m_vecTextures[i] != 0)
+				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+
+			g_pD3DDevice->SetTexture(0, m_pTexture);
+			// >> 텍스처 매치 안되있을 때
+
+			m_pMesh->DrawSubset(i);
 		}
 
 		

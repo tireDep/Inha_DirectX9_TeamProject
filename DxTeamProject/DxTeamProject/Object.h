@@ -16,7 +16,6 @@ protected:
 
 	LPD3DXEFFECT m_pShader;
 	bool LoadAssets();
-	LPD3DXEFFECT LoadShader(const char *fileName);
 	void SetShader(const D3DXMATRIXA16& setMatWorld);
 
 	CObject();
