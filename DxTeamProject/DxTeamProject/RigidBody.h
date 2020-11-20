@@ -20,14 +20,14 @@ protected:
 	D3DXVECTOR3 m_vforceAccum;
 	D3DXVECTOR3 m_vtorqueAccum;
 	bool m_isAwake;
-
+	// 5..
+	float m_fangularDamping;
+	D3DXVECTOR3 m_lastFrameAcceleration;
+	D3DXVECTOR3 m_vAcceleration;
 
 	//
-	float m_fangularDamping;
 	float m_fmotion;
 	bool m_canSleep;
-	D3DXVECTOR3 m_vAcceleration;
-	D3DXVECTOR3 m_lastFrameAcceleration;
 public:
 	// 1..
 	void calculateDeriveDate();
@@ -40,13 +40,14 @@ public:
 	void integrate(float duration);
 	void addForceAtPoint(const D3DXVECTOR3& force, const D3DXVECTOR3& point);
 	void addForceAtBodyPoint(const D3DXVECTOR3& force, const D3DXVECTOR3& point);
-
-	//
+	// 4..
+	bool hasFiniteMass() const;
 	void setMass(const float mass);
 	float getMass() const;
+
+
 	void setInverseMass(const float inverseMass);
 	float getInverseMass() const;
-	bool hasFiniteMass() const;
 	void setDamping(const float linearDamping, const float angularDamping);
 	void setLinearDamping(const float linearDamping);
 	float getLinearDamping() const;

@@ -66,20 +66,32 @@ void CRigidBody::clearAccumulators()
 
 void CRigidBody::integrate(float duration)
 {
-	// 3..
+	// 5.. right hand
+	m_lastFrameAcceleration = m_vAcceleration;
+	m_lastFrameAcceleration += (m_vforceAccum * m_finverseMass);
+	D3DXVECTOR3 angularAcceleration;
+	angularAcceleration.x = m_matinverseInertiaTensorWorld._11 * m_vtorqueAccum.x + m_matinverseInertiaTensorWorld._12 * m_vtorqueAccum.y + m_matinverseInertiaTensorWorld._13 * m_vtorqueAccum.z;
+	angularAcceleration.y = m_matinverseInertiaTensorWorld._21 * m_vtorqueAccum.x + m_matinverseInertiaTensorWorld._22 * m_vtorqueAccum.y + m_matinverseInertiaTensorWorld._23 * m_vtorqueAccum.z;
+	angularAcceleration.z = m_matinverseInertiaTensorWorld._31 * m_vtorqueAccum.x + m_matinverseInertiaTensorWorld._32 * m_vtorqueAccum.y + m_matinverseInertiaTensorWorld._33 * m_vtorqueAccum.z;
+	m_vVelocity += (m_lastFrameAcceleration * duration);
+	m_vRotation += (angularAcceleration * duration);
+	m_vVelocity *= powf(m_flinearDamping, duration);
+	m_vRotation *= powf(m_fangularDamping, duration);
+	m_vPosition += (m_vVelocity * duration);
+	D3DXQUATERNION q;
+	q.w = 0.0f;
+	q.x = m_vVelocity.x * duration;
+	q.y = m_vVelocity.y * duration;
+	q.z = m_vVelocity.z * duration;
+	m_qOrientation *= q;
+	m_qOrientation.w += q.w * 0.5f;
+	m_qOrientation.x += q.x * 0.5f;
+	m_qOrientation.y += q.y * 0.5f;
+	m_qOrientation.z += q.z * 0.5f;
+	calculateDeriveDate();
 	clearAccumulators();
 
 	//if (!m_isAwake) return;
-	//m_lastFrameAcceleration = m_vAcceleration;
-	//m_lastFrameAcceleration += (m_vforceAccum * m_finverseMass);
-	//D3DXVECTOR3 angularAcceleration = inverseInertiaTensorWorld * m_vtorqueAccum;
-	//m_vVelocity += (m_lastFrameAcceleration * duration);
-	//m_vRotation += (angularAcceleration * duration);
-	//m_vVelocity *= powf(m_flinearDamping, duration);
-	//m_vRotation *= powf(m_fangularDamping, duration);
-	//m_vPosition += (m_vVelocity * duration);
-	//orientation += (m_vRotation, duration);
-	//calculateDeriveDate();
 	//if (m_canSleep)
 	//{
 	//	float currentMotion = D3DXVec3LengthSq(&m_vVelocity) + D3DXVec3LengthSq(&m_vRotation);
@@ -110,6 +122,11 @@ void CRigidBody::addForceAtBodyPoint(const D3DXVECTOR3 & force, const D3DXVECTOR
 	//addForceAtPoint(force, pt);
 }
 
+// 4..
+bool CRigidBody::hasFiniteMass() const
+{
+	return m_finverseMass >= 0.0f;
+}
 
 void CRigidBody::setMass(const float mass)
 {
@@ -139,10 +156,7 @@ float CRigidBody::getInverseMass() const
 	return m_finverseMass;
 }
 
-bool CRigidBody::hasFiniteMass() const
-{
-	return m_finverseMass >= 0.0f;
-}
+
 
 void CRigidBody::setDamping(const float linearDamping, const float angularDamping)
 {

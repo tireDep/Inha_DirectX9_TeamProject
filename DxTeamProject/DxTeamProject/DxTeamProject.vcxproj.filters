@@ -89,12 +89,6 @@
     <ClCompile Include="RigidBody.cpp">
       <Filter>Physics_Rigidbody</Filter>
     </ClCompile>
-    <ClCompile Include="HeightMap.cpp">
-      <Filter>Physics_Example</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsPlayer.cpp">
-      <Filter>Physics_Example</Filter>
-    </ClCompile>
     <ClCompile Include="ParticleContact.cpp">
       <Filter>Physics_Particle\Collider</Filter>
     </ClCompile>
@@ -125,7 +119,19 @@
     <ClCompile Include="ForceGenerator.cpp">
       <Filter>Physics_Rigidbody</Filter>
     </ClCompile>
-    <ClCompile Include="Gravity.cpp" />
+    <ClCompile Include="World.cpp">
+      <Filter>Physics_Rigidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="Gravity.cpp">
+      <Filter>Physics_Rigidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="HeightMap.cpp">
+      <Filter>Physics_Example\Drag</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsPlayer.cpp">
+      <Filter>Physics_Example\Drag</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -240,12 +246,6 @@
     <ClInclude Include="RigidBody.h">
       <Filter>Physics_Rigidbody</Filter>
     </ClInclude>
-    <ClInclude Include="HeightMap.h">
-      <Filter>Physics_Example</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsPlayer.h">
-      <Filter>Physics_Example</Filter>
-    </ClInclude>
     <ClInclude Include="ParticleContact.h">
       <Filter>Physics_Particle\Collider</Filter>
     </ClInclude>
@@ -276,7 +276,19 @@
     <ClInclude Include="ForceGenerator.h">
       <Filter>Physics_Rigidbody</Filter>
     </ClInclude>
-    <ClInclude Include="Gravity.h" />
+    <ClInclude Include="World.h">
+      <Filter>Physics_Rigidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="Gravity.h">
+      <Filter>Physics_Rigidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="HeightMap.h">
+      <Filter>Physics_Example\Drag</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsPlayer.h">
+      <Filter>Physics_Example\Drag</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSphere.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -370,6 +382,12 @@
     </Filter>
     <Filter Include="Xfile">
       <UniqueIdentifier>{ac0d07fd-91b0-4b6a-aaec-5117f95bdd34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics_Example\Drag">
+      <UniqueIdentifier>{3db19872-9cca-4ff4-8e0a-db735ded8337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics_Example\Balls">
+      <UniqueIdentifier>{334931e2-edca-4d35-801d-a89e5d3765c0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

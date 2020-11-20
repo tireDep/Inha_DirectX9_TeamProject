@@ -13,11 +13,10 @@
 #include "Cube.h"
 #include "ParticleWorld.h"
 #include "Xfile.h"
+#include "PhysicsSphere.h"
 
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
-//#include "ColliderObject.h"
-//#include "OBB.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
@@ -27,7 +26,9 @@ CMainGame::CMainGame() :
 	m_pLight(NULL),
 	m_GridMap(NULL),
 	m_pParticleWorld(NULL),
-	m_Xfile(NULL)
+	m_Xfile(NULL),
+	m_pSphere1(NULL),
+	m_pSphere2(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
@@ -42,6 +43,8 @@ CMainGame::~CMainGame()
 	SafeDelete(m_GridMap);
 	SafeDelete(m_pParticleWorld);
 	SafeDelete(m_Xfile);
+	SafeDelete(m_pSphere1);
+	SafeDelete(m_pSphere2);
 
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
@@ -112,11 +115,21 @@ void CMainGame::Setup()
 	m_Xfile = new CXfile;
 	m_Xfile->Setup();
 
+	// tmp Physics
+	m_pSphere1 = new CPhysicsSphere;
+	m_pSphere1->Setup();
+	m_pSphere1->setCenter(-2.7f, 0.21f, 0.0f);
+	m_pSphere1->setPower(1.0f, 0);
+
+	m_pSphere2 = new CPhysicsSphere;
+	m_pSphere2->Setup();
+	m_pSphere2->setCenter(+2.4f, 0.21f, 0.0f);
+	m_pSphere2->setPower(0, 0);
+
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0)); // sun light vector
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
-	//Setup_OBB();
 }
 
 void CMainGame::Update()
@@ -161,8 +174,6 @@ void CMainGame::Update()
 		}	
 	}
 	
-	
-
 	if (g_gameManager->GetGridMapMode())
 	{
 		m_pPrevFrustum = m_pNowFrustum;
@@ -181,6 +192,11 @@ void CMainGame::Update()
 	if (m_pParticleWorld && g_gameManager->GetUImode() == false)
 		m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
 
+	m_pSphere1->Update(g_pTimeManager->GetElapsedTime());
+	m_pSphere2->Update(g_pTimeManager->GetElapsedTime());
+
+	m_pSphere1->Hitball(*m_pSphere2);
+
 	/// 릴리즈 버전을 위한 주석처리
 	/// Lim Kyung Tae - Particle World
 	//if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
@@ -189,54 +205,6 @@ void CMainGame::Update()
 	//	D3DXVECTOR3 direction = m_pCharacter->GetPosition()- m_pParticleWorld->GetPosition();
 	//	D3DXVec3Normalize(&direction, &direction);
 	//	m_pParticleWorld->SetPusingForce(direction / 100.0f);
-	//}
-
-	/// Lee Min Jong - ColliderCube, Plane, Picking
-	//for (int i = 0; i < m_vColliderCube.size(); ++i)
-	//{
-	//	if (COBB::IsCollision(m_pCharacter->GetOBB(), m_vColliderCube[i]->GetOBB()) == true)
-	//	{		
-	//		m_pCharacter->Collider(true);
-	//		m_vColliderCube[i]->Update(m_pCharacter->GetColor());
-	//	}
-	//	else
-	//	{	
-	//		m_pCharacter->Collider(false);
-	//		m_vColliderCube[i]->Update(m_vColliderCube[i]->GetColor());
-	//	}
-	//}
-	//for (int i = 0; i < m_vecPlaneVertex.size(); i += 3)
-	//{
-	//	if (ray.IntersectTri(m_vecPlaneVertex[i + 0].p, m_vecPlaneVertex[i + 1].p, m_vecPlaneVertex[i + 2].p) == true)
-	//	{
-	//		for (int i = 0; i < 36; ++i)
-	//		{
-	//			m_vecPlaneVertex[i].isPicked = true;
-	//		}
-	//	}
-	//	else
-	//	{	
-	//		for (int i = 0; i < 36; ++i)
-	//		{
-	//			m_vecPlaneVertex[i].isPicked = false;
-	//		}
-	//	}
-	//}
-	//for (int j = 0; j < 5; ++j)
-	//{
-	//	for (int i = 0; i < m_vColliderCube[j]->GetVecSize(); i += 3)
-	//	{
-	//		if (ray.IntersectTri(m_vColliderCube[j]->GetVecPosition(i+0) + m_vColliderCube[j]->GetPosition(),
-	//			m_vColliderCube[j]->GetVecPosition(i+1) + m_vColliderCube[j]->GetPosition(),
-	//			m_vColliderCube[j]->GetVecPosition(i+2) + m_vColliderCube[j]->GetPosition()) == true)
-	//		{
-	//			m_vColliderCube[j]->GetVecPick(true);
-	//		}
-	//		else
-	//		{
-	//			m_vColliderCube[j]->GetVecPick(false);
-	//		}
-	//	}
 	//}
 }
 
@@ -261,7 +229,8 @@ void CMainGame::Render()
 		{
 			m_pText->RenderFPS(g_pTimeManager->GetFPS());
 			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
-			m_pText->RenderBoxPosition(m_pParticleWorld->GetPosition());
+			//m_pText->RenderBoxPosition(m_pParticleWorld->GetPosition());
+			m_pText->RenderBoxPosition(m_pSphere1->getCenter());
 		}
 	}
 
@@ -281,9 +250,13 @@ void CMainGame::Render()
 	if (m_Xfile)
 		m_Xfile->Render(m_pCamera->GetCameraEye());
 
-	/// 릴리즈 버전을 위한 주석처리
+	if (m_pSphere1)
+		m_pSphere1->Render();
 
-	//OBB_RENDER();
+	if (m_pSphere2)
+		m_pSphere2->Render();
+
+	/// 릴리즈 버전을 위한 주석처리
 
 	if (g_gameManager->GetUImode())
 	{

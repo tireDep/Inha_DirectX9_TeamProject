@@ -181,6 +181,7 @@
     <ClInclude Include="ParticlePusingForce.h" />
     <ClInclude Include="ParticleWorld.h" />
     <ClInclude Include="PhysicsPlayer.h" />
+    <ClInclude Include="PhysicsSphere.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Resource.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Text.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="World.h" />
     <ClInclude Include="Xfile.h" />
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +231,7 @@
     <ClCompile Include="ParticlePusingForce.cpp" />
     <ClCompile Include="ParticleWorld.cpp" />
     <ClCompile Include="PhysicsPlayer.cpp" />
+    <ClCompile Include="PhysicsSphere.cpp" />
     <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RigidBody.cpp" />
@@ -243,6 +246,7 @@
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="World.cpp" />
     <ClCompile Include="Xfile.cpp" />
   </ItemGroup>
   <ItemGroup>
