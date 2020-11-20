@@ -132,6 +132,7 @@
       <Filter>Physics_Example\Drag</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsSphere.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -289,6 +290,7 @@
       <Filter>Physics_Example\Drag</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsSphere.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

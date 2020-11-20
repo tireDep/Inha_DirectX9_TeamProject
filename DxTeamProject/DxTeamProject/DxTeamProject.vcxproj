@@ -194,6 +194,7 @@
     <ClInclude Include="Text.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="Wall.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="Xfile.h" />
   </ItemGroup>
@@ -246,6 +247,7 @@
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Wall.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="Xfile.cpp" />
   </ItemGroup>

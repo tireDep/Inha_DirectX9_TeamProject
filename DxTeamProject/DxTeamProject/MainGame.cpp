@@ -14,7 +14,7 @@
 #include "ParticleWorld.h"
 #include "Xfile.h"
 #include "PhysicsSphere.h"
-
+#include "Wall.h"
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
 
@@ -28,7 +28,8 @@ CMainGame::CMainGame() :
 	m_pParticleWorld(NULL),
 	m_Xfile(NULL),
 	m_pSphere1(NULL),
-	m_pSphere2(NULL)
+	m_pSphere2(NULL),
+	m_pWall(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
@@ -45,7 +46,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_Xfile);
 	SafeDelete(m_pSphere1);
 	SafeDelete(m_pSphere2);
-
+	SafeDelete(m_pWall);
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 	/// 릴리즈 버전을 위한 주석처리
@@ -119,12 +120,16 @@ void CMainGame::Setup()
 	m_pSphere1 = new CPhysicsSphere;
 	m_pSphere1->Setup();
 	m_pSphere1->setCenter(-2.7f, 0.21f, 0.0f);
-	m_pSphere1->setPower(1.0f, 0);
+	m_pSphere1->setPower(5.0f,5.0f);
 
 	m_pSphere2 = new CPhysicsSphere;
 	m_pSphere2->Setup();
 	m_pSphere2->setCenter(+2.4f, 0.21f, 0.0f);
 	m_pSphere2->setPower(0, 0);
+
+	m_pWall = new CWall;
+	m_pWall->Setup(0.12f, 0.3f, 6.24f);
+	
 
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0)); // sun light vector
@@ -196,7 +201,8 @@ void CMainGame::Update()
 	m_pSphere2->Update(g_pTimeManager->GetElapsedTime());
 
 	m_pSphere1->Hitball(*m_pSphere2);
-
+	m_pWall->hitBy(*m_pSphere1);
+	m_pWall->hitBy(*m_pSphere2);
 	/// 릴리즈 버전을 위한 주석처리
 	/// Lim Kyung Tae - Particle World
 	//if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
@@ -255,6 +261,8 @@ void CMainGame::Render()
 
 	if (m_pSphere2)
 		m_pSphere2->Render();
+
+
 
 	/// 릴리즈 버전을 위한 주석처리
 

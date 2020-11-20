@@ -13,7 +13,7 @@ class CGridMap;
 // class CFrustum;
 class CParticleWorld;
 class CPhysicsSphere;
-
+class CWall;
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
 //
@@ -38,6 +38,8 @@ private:
 	// tmp Physics
 	CPhysicsSphere* m_pSphere1;
 	CPhysicsSphere* m_pSphere2;
+
+	CWall *m_pWall;
 
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;

@@ -1,5 +1,5 @@
 #pragma once
-class CPhysicsSphere
+class CPhysicsSphere 
 {
 public:
 	CPhysicsSphere();

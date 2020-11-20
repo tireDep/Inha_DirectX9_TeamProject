@@ -19,9 +19,9 @@ CPhysicsSphere::~CPhysicsSphere()
 void CPhysicsSphere::Setup()
 {
 	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pMeshSphere, NULL);
-	m_stMtlSphere.Ambient = RED;
-	m_stMtlSphere.Diffuse = RED;
-	m_stMtlSphere.Specular = RED;
+	m_stMtlSphere.Ambient = BLUE;
+	m_stMtlSphere.Diffuse = BLUE;
+	m_stMtlSphere.Specular = BLUE;
 }
 
 void CPhysicsSphere::Update(float duration)
