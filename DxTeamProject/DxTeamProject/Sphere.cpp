@@ -24,15 +24,15 @@ CSphere::~CSphere()
 
 void CSphere::Setup()
 {
-	m_strName = string("Sphere") + to_string(m_nRefCount);
-	m_isPicked = false;
-	m_isClicked = false;
+	//m_strName = string("Sphere") + to_string(m_nRefCount);
+	//m_isPicked = false;
+	//m_isClicked = false;
 
-	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pMeshSphere, NULL);
-	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
-	m_stMtlSphere.Ambient  = m_color;
-	m_stMtlSphere.Diffuse  = m_color;
-	m_stMtlSphere.Specular = m_color;
+	//D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pMeshSphere, NULL);
+	//ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
+	//m_stMtlSphere.Ambient  = m_color;
+	//m_stMtlSphere.Diffuse  = m_color;
+	//m_stMtlSphere.Specular = m_color;
 }
 
 void CSphere::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
@@ -51,9 +51,9 @@ void CSphere::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, 
 
 void CSphere::Render()
 {
-	m_stMtlSphere.Ambient = m_color;
-	m_stMtlSphere.Diffuse = m_color;
-	m_stMtlSphere.Specular = m_color;
+	//m_stMtlSphere.Ambient = m_color;
+	//m_stMtlSphere.Diffuse = m_color;
+	//m_stMtlSphere.Specular = m_color;
 
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
@@ -70,7 +70,7 @@ void CSphere::Render()
 	{
 		SetShader(matWorld);
 		m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(m_outLineColor.r, m_outLineColor.g, m_outLineColor.b, 1));
-		m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(D3DXVECTOR3(m_color), 1));
+		//m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(D3DXVECTOR3(m_color), 1));
 
 		UINT numPasses = 0;
 		m_pShader->Begin(&numPasses, NULL);

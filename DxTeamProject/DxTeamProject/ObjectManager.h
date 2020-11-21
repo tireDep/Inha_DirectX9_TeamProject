@@ -15,6 +15,7 @@ public:
 	void RemoveObject(CObject* pObject);
 	void Destroy();
 
+	void Update(float duration);
 	void Update(CRay ray, D3DXCOLOR& objectcolor);
 	void Render();
 

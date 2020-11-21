@@ -4,6 +4,27 @@
 
 int CObject::m_nRefCount = 0;
 
+CObject::CObject()
+	: m_pMesh(NULL)
+	, m_pShader(NULL)
+	, m_isClicked(false)
+	, m_isPicked(false)
+{
+	CObject::m_nRefCount += 1;
+	g_pObjectManager->AddObject(this);
+	D3DXMatrixIdentity(&m_matWorld);
+	m_Color = GRAY;
+	m_outLineColor = GRAY;
+	ZeroMemory(&m_stMtl, sizeof(D3DMATERIAL9));
+	LoadAssets();
+}
+
+CObject::~CObject()
+{
+	SafeRelease(m_pShader);
+	SafeRelease(m_pMesh);
+}
+
 bool CObject::LoadAssets()
 {
 	g_pFileLoadManager->FileLoad_Shader("Resource/Shader", "outLine.fx", m_pShader);
@@ -17,7 +38,7 @@ void CObject::SetShader(const D3DXMATRIXA16& setMatWorld)
 {
 	if (m_pShader)
 	{
-		// >> 외곽선
+		// >> : OutLine
 		D3DXMATRIXA16 matView, matProj, matViewPro, matViewInvTrans;
 		g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
 		g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
@@ -25,9 +46,9 @@ void CObject::SetShader(const D3DXMATRIXA16& setMatWorld)
 		matViewPro = setMatWorld * matView * matProj;
 		m_pShader->SetMatrix("matViewProjection", &matViewPro);
 		m_pShader->SetFloat("OutlineWidth", 0.1f);
-		// << 외곽선
+		// << : OutLine
 
-		// >> 라이트 쉐이더
+		// >> : Light Shader
 		m_pShader->SetMatrix("gWorldMatrix", &setMatWorld);
 		m_pShader->SetMatrix("gViewMatrix", &matView);
 		m_pShader->SetMatrix("gProjectionMatrix", &matProj);
@@ -40,23 +61,8 @@ void CObject::SetShader(const D3DXMATRIXA16& setMatWorld)
 		m_pShader->SetVector("gLightColor", &D3DXVECTOR4(D3DXVECTOR3(1.0f, 1.0f, 1.0f), 1.0f));
 		m_pShader->SetVector("gWorldLightPos", &D3DXVECTOR4(D3DXVECTOR3(0, 10.0f, 0), 1));
 		// ===== 외부변수 받아오기?
-		// << 라이트 쉐이더
+		// << : Light Shader
 	}
-}
-
-CObject::CObject()
-{
-	CObject::m_nRefCount += 1;
-	g_pObjectManager->AddObject(this);
-	m_color = GRAY;
-	m_pShader = NULL;
-	LoadAssets();
-	D3DXMatrixIdentity(&m_matWorld);
-}
-
-CObject::~CObject()
-{
-	SafeRelease(m_pShader);
 }
 
 void CObject::Release()
@@ -65,19 +71,42 @@ void CObject::Release()
 	CObject::m_nRefCount -= 1;
 }
 
+void CObject::OutlineRender()
+{
+	SetShader(m_matWorld);
+	m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(D3DXVECTOR3(m_outLineColor), 1));
+	m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(D3DXVECTOR3(m_Color), 1));
+
+	UINT numPasses = 0;
+	m_pShader->Begin(&numPasses, NULL);
+	{
+		for (UINT i = 0; i < numPasses; ++i)
+		{
+			m_pShader->BeginPass(i); 
+			if (i == 0)
+				g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW); // 외곽선
+			else
+				g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);	// 내부
+			m_pMesh->DrawSubset(0);
+			m_pShader->EndPass();
+		}
+	}
+	m_pShader->End();
+}
+
 void CObject::ReceiveEvent(ST_EVENT eventMsg)
 {
 	if (eventMsg.eventType == EventType::eColorChangeEvent)
 	{
 		if (m_isPicked == true)
 		{
-			m_color = *(D3DXCOLOR*)eventMsg.ptrMessage;
+			m_Color = *(D3DXCOLOR*)eventMsg.ptrMessage;
 			m_outLineColor = *(D3DXCOLOR*)eventMsg.ptrMessage;
 			m_isClicked = true;
 
 			ST_EVENT msg;
 			msg.eventType = EventType::eChangedColorEvent;
-			msg.ptrMessage = &m_color;
+			msg.ptrMessage = &m_Color;
 			g_pEventManager->CheckEvent(msg);
 		}
 	}

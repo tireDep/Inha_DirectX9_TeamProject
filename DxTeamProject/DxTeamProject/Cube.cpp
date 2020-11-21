@@ -27,9 +27,9 @@ void CCube::Setup()
 	
 	D3DXCreateBox(g_pD3DDevice, 1, 1, 1, &m_pMeshCube, NULL);
 	ZeroMemory(&m_stMtlCube, sizeof(D3DMATERIAL9));
-	m_stMtlCube.Ambient =  m_color;
-	m_stMtlCube.Diffuse =  m_color;
-	m_stMtlCube.Specular = m_color;
+	//m_stMtlCube.Ambient =  m_color;
+	//m_stMtlCube.Diffuse =  m_color;
+	//m_stMtlCube.Specular = m_color;
 
 	{
 		D3DXVECTOR3 v;
@@ -154,9 +154,9 @@ void CCube::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, ve
 
 void CCube::Render()
 {
-	m_stMtlCube.Ambient = m_color;
-	m_stMtlCube.Diffuse = m_color;
-	m_stMtlCube.Specular = m_color;
+	//m_stMtlCube.Ambient = m_color;
+	//m_stMtlCube.Diffuse = m_color;
+	//m_stMtlCube.Specular = m_color;
 
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
@@ -170,7 +170,7 @@ void CCube::Render()
 	{
 		SetShader(matWorld);
 		m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(m_outLineColor.r, m_outLineColor.g, m_outLineColor.b, 1));
-		m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(D3DXVECTOR3(m_color), 1));
+		//m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(D3DXVECTOR3(m_color), 1));
 
 		UINT numPasses = 0;
 		m_pShader->Begin(&numPasses, NULL);

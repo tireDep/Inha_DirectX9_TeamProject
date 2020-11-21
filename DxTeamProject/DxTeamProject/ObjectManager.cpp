@@ -38,6 +38,12 @@ void CObjectManager::Destroy()
 		m_vecObject[i]->Release();
 }
 
+void CObjectManager::Update(float duration)
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+		m_vecObject[i]->Update(duration);
+}
+
 void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 {
 	vector<bool> vecIsPick;
@@ -48,7 +54,6 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 	}
 
 	Update_PickCheck(vecIsPick, vecVPos);
-	// >> todo : 플레이어 거리 판정 추가?
 }
 
 void CObjectManager::Render()
@@ -78,8 +83,6 @@ void CObjectManager::Update_PickCheck(const vector<bool>& vecIsPick, const vecto
 				m_vecObject[index]->SetPickState(false);
 				index = i;
 			}
-
 		} // >> : else
-
 	} // >> : for
 }

@@ -11,15 +11,13 @@ class CCharacter;
 class CLight;
 class CGridMap;
 // class CFrustum;
-class CParticleWorld;
-class CPhysicsSphere;
-class CWall;
+class CXfile;
+/// tmp Physics
+//class CPhysicsSphere;
+//class CWall;
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
-//
-class CXfile;
-//
-
+//class CParticleWorld;
 class CMainGame
 {
 private:
@@ -32,16 +30,15 @@ private:
 	CFrustum	m_pPrevFrustum;
 	CFrustum	m_pNowFrustum;
 	CGridMap*	m_GridMap;
-	CParticleWorld*	m_pParticleWorld;
 	CXfile*		m_Xfile;
-
-	// tmp Physics
-	CPhysicsSphere* m_pSphere1;
-	CPhysicsSphere* m_pSphere2;
-	vector<CWall*> m_pWall;
+	/// tmp Physics
+	//CPhysicsSphere* m_pSphere1;
+	//CPhysicsSphere* m_pSphere2;
+	//vector<CWall*> m_pWall;
 
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
+	//CParticleWorld*	m_pParticleWorld;
 public:
 	CMainGame();
 	~CMainGame();
