@@ -19,12 +19,18 @@
     <Filter Include="Manager">
       <UniqueIdentifier>{c00022bd-7e2f-4d88-a80c-18b1559206d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{7810605b-62cb-4648-aa1e-741fb5c6e245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Grid">
+      <UniqueIdentifier>{14ae3bf7-91aa-43db-950c-5b7b05d6eaf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cube">
+      <UniqueIdentifier>{e3fd9e25-cfbd-4a2e-9c83-6757ddd479c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imconfig.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="imgui.h">
@@ -51,11 +57,25 @@
     <ClInclude Include="DeviceManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="toolMain.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="ImguiClass.h">
       <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Gizmo.h">
+      <Filter>Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="toolMain.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Singleton.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Cube</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,11 +103,21 @@
     <ClCompile Include="DeviceManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="toolMain.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="ImguiClass.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Gizmo.cpp">
+      <Filter>Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="toolMain.cpp" />
+    <ClCompile Include="Cube.cpp">
+      <Filter>Cube</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
