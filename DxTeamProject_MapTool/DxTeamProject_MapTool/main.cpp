@@ -13,6 +13,8 @@
 HWND hwnd, g_hWnd;
 WNDCLASSEX wc; 
 CToolMain* g_pMain;
+POINT windowPos = { 100, 100 };
+POINT windowSize = { 1366, 768 }; // { 1280, 800 };
 
 void Setup_Window();
 void Destroy();
@@ -61,7 +63,7 @@ void Setup_Window()
 	wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("MapTool"), NULL };
 	::RegisterClassEx(&wc);
 
-	hwnd = ::CreateWindow(wc.lpszClassName, _T("Colorful Travel MapTool"), WS_OVERLAPPEDWINDOW, 100, 100, 1280, 800, NULL, NULL, wc.hInstance, NULL);
+	hwnd = ::CreateWindow(wc.lpszClassName, _T("Colorful Travel MapTool"), WS_OVERLAPPEDWINDOW, windowPos.x, windowPos.y, windowSize.x, windowSize.y, NULL, NULL, wc.hInstance, NULL);
 	g_hWnd = hwnd;
 
 	::UnregisterClass(wc.lpszClassName, wc.hInstance);
@@ -76,7 +78,6 @@ void Destroy()
 	::UnregisterClass(wc.lpszClassName, wc.hInstance);
 
 	SafeDelete(g_pMain);
-	g_pDeviceManager->Destroy();
 }
 
 // Forward declare message handler from imgui_impl_win32.cpp
@@ -95,10 +96,17 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
     switch (msg)
     {
-    case WM_SIZE:
-		if (g_pD3DDevice != NULL && wParam != SIZE_MINIMIZED)
-			// g_pMain->GetImgui();
-        return 0;
+    // case WM_SIZE:
+	// 	if (g_pD3DDevice != NULL && wParam != SIZE_MINIMIZED)
+	// 		// g_pMain->GetImgui();
+    //     return 0;
+
+	case WM_GETMINMAXINFO:
+		((MINMAXINFO*)lParam)->ptMaxTrackSize.x = windowSize.x;
+		((MINMAXINFO*)lParam)->ptMaxTrackSize.y = windowSize.y;
+		((MINMAXINFO*)lParam)->ptMinTrackSize.x = windowSize.x;
+		((MINMAXINFO*)lParam)->ptMinTrackSize.y = windowSize.y;
+		break;
 
     case WM_SYSCOMMAND:
         if ((wParam & 0xfff0) == SC_KEYMENU) // Disable ALT application menu

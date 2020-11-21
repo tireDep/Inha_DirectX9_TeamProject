@@ -1,67 +1,82 @@
 #include "stdafx.h"
+#include "Grid.h"
+#include "Cube.h"
+#include "Camera.h"
 #include "ImguiClass.h"
 #include "toolMain.h"
 
 CToolMain::CToolMain()
 {
-	m_pImgui = new CImguiClass;
 }
 
 CToolMain::~CToolMain()
 {
+	SafeDelete(m_pGrid);
+	SafeDelete(m_pCube);
+	SafeDelete(m_pCamera);
+
 	m_pImgui->Destroy();
 	SafeDelete(m_pImgui);
+
+	g_pDeviceManager->Destroy();
 }
 
 void CToolMain::Setup()
 {
+	g_pDeviceManager->Setup();
+
+	m_pGrid = new CGrid;
+	m_pGrid->Setup(25, 1.0f);
+
+	m_pCube = new CCube;
+	m_pCube->Setup();
+
+	m_pCamera = new CCamera;
+	m_pCamera->Setup(&m_pCube->GetPosition());
+
+	m_pImgui = new CImguiClass;
 	m_pImgui->Setup();
 }
 
 void CToolMain::Update()
 {
+	m_pCube->Update();
+	m_pCamera->Update();
 	m_pImgui->Update();
 }
 
 void CToolMain::Render()
 {
 	m_pImgui->SetFrameEnd();
-
-	g_pD3DDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
-	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-	g_pD3DDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
+	
+	//g_pD3DDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
+	//g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	//g_pD3DDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
 
 	g_pD3DDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DXCOLOR(0.5, 0.5, 0.5, 1.0), 1.0f, 0);
 
 	if (g_pD3DDevice->BeginScene() >= 0)
 	{
-		D3DXMATRIXA16 matWorld;
-		D3DXMatrixIdentity(&matWorld);
+		if(m_pGrid)
+			m_pGrid->Render();
 
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
-		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-		g_pD3DDevice->SetTexture(0, 0);
-
-		// >> Do Render
-
-		// << Do Render
+		if (m_pCube)
+			m_pCube->Render();
 
 		m_pImgui->Render(); // UI
+
 		g_pD3DDevice->EndScene();
 	}
 
 	HRESULT result = g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
 
-	// Handle loss of D3D9 device
 	if (result == D3DERR_DEVICELOST && g_pD3DDevice->TestCooperativeLevel() == D3DERR_DEVICENOTRESET)
 		m_pImgui->ResetDevice();
 }
 
 void CToolMain::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	
-
-	DefWindowProc(hWnd, msg, wParam, lParam);
+	m_pCamera->WndProc(hWnd, msg, wParam, lParam);
 }
 
 CImguiClass* CToolMain::GetImgui()

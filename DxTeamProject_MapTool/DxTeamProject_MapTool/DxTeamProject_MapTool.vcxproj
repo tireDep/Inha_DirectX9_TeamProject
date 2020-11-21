@@ -146,7 +146,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="DeviceManager.h" />
+    <ClInclude Include="Gizmo.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui.h" />
     <ClInclude Include="ImguiClass.h" />
@@ -156,11 +160,16 @@
     <ClInclude Include="imstb_rectpack.h" />
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="toolMain.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
+    <ClCompile Include="Gizmo.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="imgui.cpp" />
     <ClCompile Include="ImguiClass.cpp" />
     <ClCompile Include="imgui_demo.cpp" />
