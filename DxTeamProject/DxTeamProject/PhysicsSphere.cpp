@@ -140,3 +140,7 @@ D3DXVECTOR3 CPhysicsSphere::getCenter() const
 	D3DXVECTOR3 org(m_vCenter.x, m_vCenter.y, m_vCenter.z);
 	return org;
 }
+
+void CPhysicsSphere::ReceiveEvent(ST_EVENT eventMsg)
+{
+}

@@ -45,8 +45,8 @@ CMainGame::~CMainGame()
 	SafeDelete(m_GridMap);
 	SafeDelete(m_pParticleWorld);
 	SafeDelete(m_Xfile);
-	SafeDelete(m_pSphere1);
-	SafeDelete(m_pSphere2);
+	//SafeDelete(m_pSphere1);
+	//SafeDelete(m_pSphere2);
 	
 	for(int i = 0; i < 4; ++i)
 	SafeDelete(m_pWall[i]);
@@ -133,10 +133,10 @@ void CMainGame::Setup()
 		g_pEventManager->AddListener(g_pObjectManager->GetVecObject()[i]);
 	}
 	// 내일 예슬씨에게 질문 이름이 다른데 에러 호출
-	//for (int i = 0; i < g_pPhysicsObjectManager->getVecObject().size(); i++)
-	//{
-	//	g_pEventManager->AddListener(g_pPhysicsObjectManager->getVecObject()[i]);
-	//}
+	for (int i = 0; i < g_pPhysicsObjectManager->getVecObject().size(); i++)
+	{
+		g_pEventManager->AddListener(g_pPhysicsObjectManager->getVecObject()[i]);
+	}
 
 	m_pParticleWorld = new CParticleWorld;
 	m_pParticleWorld->Setup();

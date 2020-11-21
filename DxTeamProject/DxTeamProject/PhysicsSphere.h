@@ -34,4 +34,7 @@ public:
 	const D3DXMATRIXA16& getLocalTransform() const { return m_matLocal; }
 	void setLocalTransform(const D3DXMATRIXA16& mLocal) { m_matLocal = mLocal; }
 	D3DXVECTOR3 getCenter() const;
+
+	void ReceiveEvent(ST_EVENT eventMsg);
+	string GetName() { return m_strName; }
 };
