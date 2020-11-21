@@ -185,6 +185,9 @@
     <ClInclude Include="PhysicsObjectManager.h" />
     <ClInclude Include="PhysicsPlayer.h" />
     <ClInclude Include="PhysicsSphere.h" />
+    <ClInclude Include="PSBox.h" />
+    <ClInclude Include="PSCylinder.h" />
+    <ClInclude Include="PSphere.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Resource.h" />
@@ -239,6 +242,9 @@
     <ClCompile Include="PhysicsObjectManager.cpp" />
     <ClCompile Include="PhysicsPlayer.cpp" />
     <ClCompile Include="PhysicsSphere.cpp" />
+    <ClCompile Include="PSBox.cpp" />
+    <ClCompile Include="PSCylinder.cpp" />
+    <ClCompile Include="PSphere.cpp" />
     <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RigidBody.cpp" />

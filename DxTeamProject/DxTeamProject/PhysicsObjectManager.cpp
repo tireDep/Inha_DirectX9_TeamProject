@@ -18,7 +18,7 @@ void CPhysicsObjectManager::AddPhysicsObject(CPhysicsObject * physicsobject)
 void CPhysicsObjectManager::RemovePhysicsObject(CPhysicsObject * physicsObject)
 {
 	vector<CPhysicsObject*>::iterator it;
-	for (it = m_vecPhysicsObject.begin(); it != m_vecPhysicsObject.end(); it++)
+	for (it = m_vecPhysicsObject.begin(); it != m_vecPhysicsObject.end();)
 	{
 		if (*it == physicsObject)
 		{
@@ -47,9 +47,7 @@ void CPhysicsObjectManager::Update(float duration)
 void CPhysicsObjectManager::Render()
 {
 	for (int i = 0; i < m_vecPhysicsObject.size(); i++)
-	{
 		m_vecPhysicsObject[i]->Render();
-	}
 }
 
 vector<CPhysicsObject*> CPhysicsObjectManager::getVecObject()

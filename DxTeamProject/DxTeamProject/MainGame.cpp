@@ -112,6 +112,7 @@ void CMainGame::Setup()
 		pSphere->setPower(-i, i);
 	}
 
+	
 	//// tmp Physics
 	m_pSphere1 = new CPhysicsSphere;
 	//m_pSphere1->Setup();

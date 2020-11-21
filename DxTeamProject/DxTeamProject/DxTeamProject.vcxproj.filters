@@ -143,6 +143,10 @@
     <ClCompile Include="PhysicsObject.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="FileLoadManager.cpp" />
+    <ClCompile Include="PSphere.cpp" />
+    <ClCompile Include="PSBox.cpp" />
+    <ClCompile Include="PSCylinder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -311,6 +315,10 @@
     <ClInclude Include="PhysicsObjectManager.h">
       <Filter>Physics</Filter>
     </ClInclude>
+    <ClInclude Include="FileLoadManager.h" />
+    <ClInclude Include="PSphere.h" />
+    <ClInclude Include="PSBox.h" />
+    <ClInclude Include="PSCylinder.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
