@@ -23,7 +23,12 @@ public:\
 #include <vector>
 #include <string>
 
+extern HWND g_hWnd;
+
+using namespace std;
+
 #include "DeviceManager.h"
+#include "ObjectManager.h"
 
 struct ST_PC_VERTEX
 {
@@ -54,6 +59,3 @@ struct ST_PN_VERTEX
 	enum { FVF = D3DFVF_XYZ | D3DFVF_NORMAL };
 };
 
-extern HWND g_hWnd;
-
-using namespace std;

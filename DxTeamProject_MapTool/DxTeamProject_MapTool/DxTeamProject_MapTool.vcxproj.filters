@@ -28,6 +28,9 @@
     <Filter Include="Cube">
       <UniqueIdentifier>{e3fd9e25-cfbd-4a2e-9c83-6757ddd479c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Background">
+      <UniqueIdentifier>{965d2f05-ea6e-4bc7-bc24-23b5fc4fb310}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imconfig.h">
@@ -77,6 +80,18 @@
     <ClInclude Include="Cube.h">
       <Filter>Cube</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="IObject.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Background</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -118,6 +133,18 @@
     <ClCompile Include="toolMain.cpp" />
     <ClCompile Include="Cube.cpp">
       <Filter>Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="IObject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Background</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

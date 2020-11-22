@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DeviceManager.h" />
@@ -160,11 +161,15 @@
     <ClInclude Include="imstb_rectpack.h" />
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
+    <ClInclude Include="IObject.h" />
+    <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="toolMain.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
@@ -177,7 +182,10 @@
     <ClCompile Include="imgui_impl_dx9.cpp" />
     <ClCompile Include="imgui_impl_win32.cpp" />
     <ClCompile Include="imgui_widgets.cpp" />
+    <ClCompile Include="IObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="toolMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
