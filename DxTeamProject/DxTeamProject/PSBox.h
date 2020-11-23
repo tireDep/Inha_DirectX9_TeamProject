@@ -6,10 +6,13 @@ public:
 	CPSBox();
 	~CPSBox();
 protected:
-	float m_fWidth;
-	float m_fHeight;
-	float m_fDepth;
-	D3DXVECTOR3 m_vCenter;
+	Synthesize(float, m_fWidth, Width);
+	Synthesize(float, m_fHeight, Height);
+	Synthesize(float, m_fDepth, Depth);
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vVelocity, Velocity);
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vAcceleration, Acceleration);
+	D3DXVECTOR3 m_vForceAccum;
 public:
 	void Setup();
 	void Setup(D3DXVECTOR3 center);

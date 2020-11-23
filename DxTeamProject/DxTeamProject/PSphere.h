@@ -6,8 +6,16 @@ public:
 	CPSphere();
 	~CPSphere();
 protected:
-	float		m_fRadius;
-	D3DXVECTOR3	m_vCenter;
+	Synthesize(float, m_fRadius, Radius);
+	Synthesize(float, m_finverseMass, InverseMass);
+	Synthesize(float, m_fDamping, Damping);
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vVelocity, Velocity);
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vAcceleration, Acceleration);
+	D3DXVECTOR3 m_vForceDirection;
+	D3DXVECTOR3	m_vForceAccum;
+	float coefficientofRestitution;
+	
 public:
 	void Setup();
 	void Setup(D3DXVECTOR3 center);
@@ -19,4 +27,16 @@ public:
 
 	virtual string GetName();
 	virtual void ReceiveEvent(ST_EVENT eventMsg);
+
+	// physics
+	void SetMass(const float mass);
+	float GetMass() const;
+	bool hasFiniteMass() const;
+	void SetPusingForce(D3DXVECTOR3 forcedirection);
+	void AddForce(const D3DXVECTOR3 & force);
+	void ClearAccumulator();
+	void Integrate(float duration);
+	void RunPhysics(float duration);
+	bool hasIntersected(CPSphere & othersphere);
+	void Collisionsphere(CPSphere & othersphere);
 };
