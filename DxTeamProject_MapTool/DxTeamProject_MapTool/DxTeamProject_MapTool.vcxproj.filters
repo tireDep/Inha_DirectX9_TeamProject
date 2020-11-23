@@ -92,6 +92,9 @@
     <ClInclude Include="Tile.h">
       <Filter>Background</Filter>
     </ClInclude>
+    <ClInclude Include="FileLoadManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -145,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Background</Filter>
+    </ClCompile>
+    <ClCompile Include="FileLoadManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

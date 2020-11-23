@@ -84,16 +84,18 @@ void CImguiClass::Update()
 	// ============================================================================================
 
 	{ // >> : Menu Title Bar
+		static bool isReset = false;
 		if (ImGui::BeginMainMenuBar())
 		{
 			if (ImGui::BeginMenu("File"))
 			{
-				if (ImGui::MenuItem("Open", " ")) { /* todo Load Map File */ }
-				if (ImGui::MenuItem("Save", " ")) { /* todo Load Map File */ }
+				if (ImGui::MenuItem("Open", " ")) { g_pFileLoadManager->FileLoad_OpenMapData(); }
+				if (ImGui::MenuItem("Save", " ")) { g_pFileLoadManager->FileLoad_SaveMapData(); }
 
 				ImGui::Separator();
 
-				if (ImGui::MenuItem("Reset", " ")) { /* todo Load Map File */ }
+				if (ImGui::MenuItem("Reset", " ")) 
+					isReset = true;
 
 				ImGui::EndMenu();
 			}
@@ -110,16 +112,36 @@ void CImguiClass::Update()
 			}
 			ImGui::EndMainMenuBar();
 		}
+
+		if (isReset)
+		{
+			ImGui::Begin("ResetWindow", &isReset);
+			ImGui::Text("Reset?");
+
+			if (ImGui::Button("Yes"))
+			{
+				g_pObjectManager->Destroy();
+				isReset = false;
+			}
+			
+			ImGui::SameLine();
+			if (ImGui::Button("No"))
+				isReset = false;
+
+			ImGui::End();
+		}
+
 	} // << : Menu Title Bar
 
 	{ // >> : Controller
-		static LPDIRECT3DTEXTURE9 temp;
-		D3DXCreateTextureFromFileA(g_pD3DDevice, "Resource/Test.png", &temp);
-		static ImTextureID test = temp;
+		// >> 렉걸려서 주석처리
+		// static LPDIRECT3DTEXTURE9 temp;
+		// D3DXCreateTextureFromFileA(g_pD3DDevice, "Resource/Test.png", &temp);
+		// static ImTextureID test = temp;
 
 		ImGui::Begin(" ");
 
-		for (int i = 0; i < 5 ; i++)
+		/*for (int i = 0; i < 5 ; i++)
 		{
 			ImGui::PushID(i);
 			int frame_padding = 2;
@@ -140,7 +162,7 @@ void CImguiClass::Update()
 			
 			ImGui::SameLine();
 			ImGui::PopID();
-		}
+		}*/
 		ImGui::End();
 	} // << : Controller
 
