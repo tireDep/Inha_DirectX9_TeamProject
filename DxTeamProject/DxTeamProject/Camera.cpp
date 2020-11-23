@@ -31,24 +31,50 @@ void CCamera::Update()
 	D3DXMatrixTranslation(&matT, 0, move, 0);
 
 	D3DXMATRIXA16 matR, matRX, matRY;
-	D3DXMatrixRotationX(&matRX, m_vCamRotAngle.x);
-	D3DXMatrixRotationY(&matRY, m_vCamRotAngle.y);
+	if (m_vCamRotAngle.x < 0.0001f)
+	{	
+		float rotation_x = -m_vCamRotAngle.x;
+		D3DXMatrixRotationX(&matRX, 0);
+		D3DXMatrixRotationY(&matRY, m_vCamRotAngle.y);
+		matR = matRX * matRY * matT;
 
-	matR = matRX * matRY * matT;
+		m_vEye = D3DXVECTOR3(0, 0, -m_fCameraDistance);
+		D3DXVec3TransformCoord(&m_vEye, &m_vEye, &matR);
 
-	m_vEye = D3DXVECTOR3(0, 0, -m_fCameraDistance);
-	D3DXVec3TransformCoord(&m_vEye, &m_vEye, &matR);
+		if (m_pvTarget)
+		{
+			m_vLookAt = *m_pvTarget + D3DXVECTOR3(0, move, 0);
+			m_vEye += *m_pvTarget;
+		}
 
-	if (m_pvTarget)
-	{
-		m_vLookAt = *m_pvTarget + D3DXVECTOR3(0, move, 0);
-		m_vEye += *m_pvTarget;
+		m_vLookAt += D3DXVECTOR3(0, m_fCameraDistance*sinf(rotation_x), 0);
+		m_vEye += D3DXVECTOR3(0, 0, m_fCameraDistance*cosf(rotation_x));
+		D3DXMATRIXA16 matView;
+		D3DXMatrixLookAtLH(&matView, &m_vEye, &m_vLookAt, &m_vUp);
+
+		g_pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
 	}
+	else 
+	{
+		D3DXMatrixRotationX(&matRX, m_vCamRotAngle.x);
+		D3DXMatrixRotationY(&matRY, m_vCamRotAngle.y);
 
-	D3DXMATRIXA16 matView;
-	D3DXMatrixLookAtLH(&matView, &m_vEye, &m_vLookAt, &m_vUp);
+		matR = matRX * matRY * matT;
 
-	g_pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
+		m_vEye = D3DXVECTOR3(0, 0, -m_fCameraDistance);
+		D3DXVec3TransformCoord(&m_vEye, &m_vEye, &matR);
+
+		if (m_pvTarget)
+		{
+			m_vLookAt = *m_pvTarget + D3DXVECTOR3(0, move, 0);
+			m_vEye += *m_pvTarget;
+		}
+
+		D3DXMATRIXA16 matView;
+		D3DXMatrixLookAtLH(&matView, &m_vEye, &m_vLookAt, &m_vUp);
+
+		g_pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
+	}
 }
 
 D3DXVECTOR3 CCamera::GetCameraDirection()
@@ -75,11 +101,9 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 			m_preMousePos.y = HIWORD(eventMsg.lParam);
 			m_isLBtnDown = true;
 			break;
-
 		case WM_LBUTTONUP:
 			m_isLBtnDown = false;
 			break;
-
 		case WM_MOUSEMOVE:
 		{
 			if (g_gameManager->GetUImode())
@@ -90,8 +114,6 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 				m_preMousePos = ptCurMouse;
 				return;
 			}
-			//if (m_isLBtnDown)
-			{
 				POINT ptCurMouse;
 				ptCurMouse.x = LOWORD(eventMsg.lParam);
 				ptCurMouse.y = HIWORD(eventMsg.lParam);
@@ -99,17 +121,44 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 				float fDeltaX = (float)ptCurMouse.x - m_preMousePos.x;
 				float fDeltaY = (float)ptCurMouse.y - m_preMousePos.y;
 
+				/// 좌우 밖으로 계속 카메라 이동 처리 중
+				RECT rc;
+				GetClientRect(g_hWnd, &rc);
+				
+					if (ptCurMouse.x < rc.left + 1.0f)
+					{
+						cout << ptCurMouse.x << ' ' << ptCurMouse.y << endl;
+						fDeltaX -= 15.0f;
+					}
+					else if (ptCurMouse.x > rc.right - 2.0f)
+					{
+						cout << ptCurMouse.x << ' ' << ptCurMouse.y << endl;
+						fDeltaX += 15.0f;
+					}
+					else if (ptCurMouse.y < rc.top + 1.0f)
+					{
+						cout << ptCurMouse.x << ' ' << ptCurMouse.y << endl;
+						fDeltaY += 15.0f;
+					}
+					else if (ptCurMouse.y > rc.bottom - 2.0f)
+					{
+						cout << ptCurMouse.x << ' ' << ptCurMouse.y << endl;
+						fDeltaY -= 15.0f;
+					}
+					else
+					{
+					}
+				
 				m_vCamRotAngle.y += (fDeltaX / 150.0f);
 				m_vCamRotAngle.x += (fDeltaY / 150.0f);
 
-				if (m_vCamRotAngle.x < D3DX_PI / 12.0f + 0.0001f)
-					m_vCamRotAngle.x = D3DX_PI / 12.0f;
+				if (m_vCamRotAngle.x < - D3DX_PI / 3.0f - 0.0001f)
+					m_vCamRotAngle.x = -D3DX_PI / 3.0f;
 
 				if (m_vCamRotAngle.x > D3DX_PI / 2.0f - 0.0001f)
 					m_vCamRotAngle.x = D3DX_PI / 2.0f - 0.0001f;
 
 				m_preMousePos = ptCurMouse;
-			}	// : if
 		}
 		break;
 #if _DEBUG
@@ -125,9 +174,7 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 		// RELEASE Mode
 #endif
 		} // << : switch
-
 	} // << : if
-
 }
 
 string CCamera::GetName()
