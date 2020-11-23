@@ -29,6 +29,7 @@ using namespace std;
 
 #include "DeviceManager.h"
 #include "ObjectManager.h"
+#include "FileLoadManager.h"
 
 struct ST_PC_VERTEX
 {
