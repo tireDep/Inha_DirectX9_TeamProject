@@ -101,8 +101,11 @@ void CMainGame::Setup()
 
 	for (int i = 0; i < 8; i++)
 	{
-		CPSphere* sphere = new CPSphere();
-		sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
+		CPSphere* Sphere = new CPSphere();
+		Sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
+		if (i % 2 == 0)
+			Sphere->SetPusingForce(D3DXVECTOR3(0, 0, -1));
+		//sphere->SetPusingForce(D3DXVECTOR3(0, 0, -1));
 	}
 
 	for (int i = 0; i < 8; i++)
@@ -282,8 +285,7 @@ void CMainGame::Render()
 		{
 			m_pText->RenderFPS(g_pTimeManager->GetFPS());
 			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
-			//m_pText->RenderBoxPosition(m_pParticleWorld->GetPosition());
-			//m_pText->RenderBoxPosition(m_pSphere1->getCenter());
+			//m_pText->RenderBoxPosition();
 		}
 	}
 

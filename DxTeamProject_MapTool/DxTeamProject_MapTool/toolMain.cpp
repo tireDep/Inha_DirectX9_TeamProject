@@ -3,6 +3,7 @@
 #include "Cube.h"
 #include "Camera.h"
 #include "ImguiClass.h"
+#include "Tile.h"
 #include "toolMain.h"
 
 CToolMain::CToolMain()
@@ -18,6 +19,7 @@ CToolMain::~CToolMain()
 	m_pImgui->Destroy();
 	SafeDelete(m_pImgui);
 
+	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 }
 
@@ -36,12 +38,18 @@ void CToolMain::Setup()
 
 	m_pImgui = new CImguiClass;
 	m_pImgui->Setup();
+
+	CTile* temp = new CTile;
+	temp->Setup();
 }
 
 void CToolMain::Update()
 {
 	m_pCube->Update();
 	m_pCamera->Update();
+
+	g_pObjectManager->Update();
+
 	m_pImgui->Update();
 }
 
@@ -59,6 +67,8 @@ void CToolMain::Render()
 	{
 		if(m_pGrid)
 			m_pGrid->Render();
+
+		g_pObjectManager->Render();
 
 		if (m_pCube)
 			m_pCube->Render();

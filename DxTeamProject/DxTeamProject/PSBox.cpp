@@ -5,7 +5,10 @@ CPSBox::CPSBox()
 	: m_fWidth(1.0f)
 	, m_fHeight(1.0f)
 	, m_fDepth(1.0f)
-	, m_vCenter(0, 0, 0)
+	, m_vPosition(0, 0, 0)
+	, m_vVelocity(0, 0, 0)
+	, m_vAcceleration(0, 0, 0)
+	, m_vForceAccum(0, 0, 0)
 {
 	m_strName = string("Box") + to_string(m_nRefCount);
 }
@@ -22,8 +25,8 @@ void CPSBox::Setup()
 void CPSBox::Setup(D3DXVECTOR3 center)
 {
 	Setup();
-	m_vCenter = center;
-	D3DXMatrixTranslation(&m_matWorld, m_vCenter.x, m_vCenter.y, m_vCenter.z);
+	m_vPosition = center;
+	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
 void CPSBox::Update(float duration)
@@ -52,7 +55,7 @@ void CPSBox::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick, 
 	{
 		m_isPicked = false;
 	}
-	vecVPos.push_back(m_vCenter);
+	vecVPos.push_back(m_vPosition);
 	vecIsPick.push_back(m_isPicked);
 	m_pMesh->UnlockVertexBuffer();
 }
