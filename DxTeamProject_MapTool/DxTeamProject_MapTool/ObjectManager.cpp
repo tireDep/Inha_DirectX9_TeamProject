@@ -28,6 +28,11 @@ void CObjectManager::Destroy()
 {
 	for (int i = 0; i < m_vecObject.size(); i++)
 		m_vecObject[i]->Release();
+
+	if (m_vecObject.size() == 1)
+		m_vecObject[0]->Release(); // 마지막 하나 삭제
+
+	m_vecObject.clear();
 }
 
 void CObjectManager::Update()
@@ -40,4 +45,9 @@ void CObjectManager::Render()
 {
 	for (int i = 0; i < m_vecObject.size(); i++)
 		m_vecObject[i]->Render();
+}
+
+vector<IObject*> CObjectManager::GetVecObject()
+{
+	return m_vecObject;
 }

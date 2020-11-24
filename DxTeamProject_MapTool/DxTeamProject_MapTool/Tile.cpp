@@ -5,10 +5,15 @@ CTile::CTile()
 {
 	m_pMesh = NULL;
 	m_pTexture = NULL;
-	m_strName = string("Tile") + to_string(m_nRefCnt);	
+
+	m_strObjName = string("Tile") + to_string(m_nRefCnt);	
 	// todo : 이름 변경 가능해야 함
 
-	m_BackgroundType = BackgroundType::eTile;
+	m_strFilePath = "tempPath";
+	// todo : 파일 경로로 불러와야 함
+	// todo : text 따로 불러와야 할 수도?
+
+	m_ObjectType = ObjectType::eTile;
 
 	m_vScale = D3DXVECTOR3(1, 1, 1);
 	m_vRotate = D3DXVECTOR3(0, 0, 0);
@@ -23,13 +28,14 @@ CTile::~CTile()
 
 void CTile::Setup()
 {
-	// todo : 파일 로드
 	D3DXCreateBox(g_pD3DDevice, m_vScale.x, m_vScale.y, m_vScale.z, &m_pMesh, NULL);
+	// todo : 파일 로드
 	
 	ZeroMemory(&m_pMtrl, sizeof(D3DMATERIAL9));
 	m_pMtrl.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 	m_pMtrl.Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 	m_pMtrl.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	// todo : 임시 매터리얼 설정 -> 변경
 }
 
 void CTile::Update()
@@ -40,11 +46,21 @@ void CTile::Render()
 {
 	D3DXMATRIXA16 matWorld, matS, matR, matT;
 	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-	
-	// D3DXMatrixRotationYawPitchRoll(&matR, m_vRotate.x, m_vRotate.y, m_vRotate.z);
-	D3DXMatrixRotationX(&matR, m_vRotate.x);
-	D3DXMatrixRotationY(&matR, m_vRotate.y);
-	D3DXMatrixRotationZ(&matR, m_vRotate.z);
+
+	D3DXVECTOR3 v;
+	v.x = D3DXToRadian(m_vRotate.x);
+	v.y = D3DXToRadian(m_vRotate.y);
+	v.z = D3DXToRadian(m_vRotate.z);
+	//m_vRotate.x = D3DXToRadian(m_vRotate.x);
+	//m_vRotate.y = D3DXToRadian(m_vRotate.y);
+	//m_vRotate.z = D3DXToRadian(m_vRotate.z);
+
+	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
+
+	// cout << m_vRotate.x << ", " << m_vRotate.y << ", " << m_vRotate.z << endl;
+	// D3DXMatrixRotationX(&matR, m_vRotate.x);
+	// D3DXMatrixRotationY(&matR, m_vRotate.y);
+	// D3DXMatrixRotationZ(&matR, m_vRotate.z);
 	
 	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
 	matWorld = matS * matR * matT;

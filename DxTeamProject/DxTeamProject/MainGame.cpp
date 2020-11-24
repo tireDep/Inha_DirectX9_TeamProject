@@ -13,8 +13,8 @@
 //#include "Cube.h"
 #include "Xfile.h"
 /// tmp Physics
-//#include "PhysicsSphere.h"
-//#include "Wall.h"
+#include "PhysicsSphere.h"
+#include "Wall.h"
 #include "PSphere.h"
 #include "PSBox.h"
 #include "PSCylinder.h"
@@ -103,8 +103,8 @@ void CMainGame::Setup()
 	{
 		CPSphere* Sphere = new CPSphere();
 		Sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
-		if (i % 2 == 0)
-			Sphere->SetPusingForce(D3DXVECTOR3(0, 0, -0.5f));
+		//if (i % 2 == 0)
+		//	Sphere->SetPusingForce(D3DXVECTOR3(0, 0, -0.5f));
 //		sphere->SetPusingForce(D3DXVECTOR3(0, 0, -1));
 	}
 
@@ -112,15 +112,15 @@ void CMainGame::Setup()
 	{
 		CPSBox* box = new CPSBox();
 		box->Setup(D3DXVECTOR3(-5, 0.5, 2 * i + 3));
-		if (i % 2 == 0)
-			box->SetPusingForce(D3DXVECTOR3(0.5f, 0, -0.5f));
+		//if (i % 2 == 0)
+		//	box->SetPusingForce(D3DXVECTOR3(0.5f, 0, -0.5f));
 	}
 
 	for (int i = 0; i < 8; i++)
 	{
 		CPSCylinder* cylinder = new CPSCylinder();
 		cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 20));
-		cylinder->SetPusingForce(D3DXVECTOR3(0, 0, -1));
+		//cylinder->SetPusingForce(D3DXVECTOR3(0, 0, -1));
 	}
 	
 	/// tmp Physics
@@ -131,9 +131,9 @@ void CMainGame::Setup()
 	//	pSphere->setPower(-i, i);
 	//}
 	//m_pSphere1 = new CPhysicsSphere;
-	////m_pSphere1->Setup();
-	//m_pSphere1->setCenter(-2.7f, 0.21f, 0.0f);
-	//m_pSphere1->setPower(5.0f, 10.0f);
+	//m_pSphere1->Setup();
+	//m_pSphere1->setCenter(-2.7f, 5.0f, 0.0f);
+	
 	//m_pSphere2 = new CPhysicsSphere;
 	////m_pSphere2->Setup();
 	//m_pSphere2->setCenter(+2.4f, 0.21f, 0.0f);
@@ -146,8 +146,8 @@ void CMainGame::Setup()
 	//{
 	//	m_pWall.push_back(new CWall);
 	//}
-	//m_pWall[0]->Setup(0.12f, 0.3f, 6.24f); 
-	//m_pWall[0]->setPosition(5, 0, 0);
+	//m_pWall[0]->Setup(8.0f, 0.0f, 8.0f); 
+	//m_pWall[0]->setPosition(0, 0, 0);
 	//m_pWall[1]->Setup(0.12f, 0.3f, 6.24f);
 	//m_pWall[1]->setPosition(-5, 0, 0);
 	//m_pWall[2]->Setup(10, 0.3f, 0.12f);
@@ -236,6 +236,29 @@ void CMainGame::Update()
 	g_pObjectManager->Update();
 	
 
+
+	//static int count = 0;
+	//static float gravity = -0.98;
+	//static float plane = 1.5;
+	//if (m_pWall[0]->Gravity(*m_pSphere1) == true) //¶¥¿¡ ºÎµúÇûÀ»¶§
+	//{
+	//	//cout << m_pWall[4]->Gravity(*m_pSphere1) << endl;
+	//	m_pWall[0]->hitBy(*m_pSphere1);
+	//	plane -= 0.3f;
+	//	//cout << count++ << endl;
+
+	//}
+	//else // ¶°ÀÖÀ»¶§ Áß·ÂÀ» ÁÜ
+	//{
+	//	if (m_pSphere1->getCenter().y > plane)
+	//	{
+	//		m_pSphere1->setPower(0, gravity, 0);
+	//		//cout << m_pSphere1->getCenter().y << endl;
+	//	}
+	//}
+	//	m_pSphere1->Update(g_pTimeManager->GetElapsedTime());
+
+
 	/// tmp Physics
 	//g_pPhysicsObjectManager->Update(g_pTimeManager->GetElapsedTime());
 	//for (int hittee = 0; hittee < 4; hittee++)
@@ -250,7 +273,7 @@ void CMainGame::Update()
 	//		//m_pPhysicsSphere[hittee].hitBall(m_pPhysicsSphere[hitter]);
 	//	}
 	//}
-	//m_pSphere1->Update(g_pTimeManager->GetElapsedTime());
+
 	//m_pSphere2->Update(g_pTimeManager->GetElapsedTime());
 	//m_pSphere1->Hitball(*m_pSphere2);
 	//m_pWall[0]->hitBy(*m_pSphere1);
@@ -284,15 +307,6 @@ void CMainGame::Render()
 	 if (m_pGrid)
 	 	m_pGrid->Render();
 
-	if (g_gameManager->GetDevMode())
-	{
-		if (m_pText)
-		{
-			m_pText->RenderFPS(g_pTimeManager->GetFPS());
-			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
-			//m_pText->RenderBoxPosition();
-		}
-	}
 
 	if (m_pCharacter)
 		m_pCharacter->Render();
@@ -316,7 +330,7 @@ void CMainGame::Render()
 	//if (&m_pWall)
 	//	m_pWall[0]->draw();
 	//if (&m_pWall)
-	//	m_pWall[1]->draw();
+	//	m_pWall[0]->draw();
 	//if (&m_pWall)
 	//	m_pWall[2]->draw();
 	//if (&m_pWall)
@@ -326,6 +340,16 @@ void CMainGame::Render()
 	//if (m_pParticleWorld)
 	//	m_pParticleWorld->Render();
 
+	if (g_gameManager->GetDevMode())
+	{
+		if (m_pText)
+		{
+			m_pText->RenderFPS(g_pTimeManager->GetFPS());
+			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
+			//m_pText->RenderBoxPosition(m_pSphere1->getCenter());
+			m_pText->RenderGrab(g_pObjectManager->GetVecObject(), m_pCharacter->GetPosition());
+		}
+	}
 	if (g_gameManager->GetUImode())
 	{
 		if (m_pUI)

@@ -14,7 +14,7 @@ HWND hwnd, g_hWnd;
 WNDCLASSEX wc; 
 CToolMain* g_pMain;
 POINT windowPos = { 0, 0 };
-POINT windowSize = { 1920, 1080 }; // { 1280, 800 };
+POINT windowSize = { 1280, 800 };
 
 void Setup_Window();
 void Destroy();

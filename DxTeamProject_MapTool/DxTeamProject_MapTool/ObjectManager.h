@@ -17,5 +17,7 @@ public:
 
 	void Update();
 	void Render();
+
+	vector<IObject *> GetVecObject();
 };
 
