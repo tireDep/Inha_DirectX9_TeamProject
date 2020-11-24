@@ -83,9 +83,12 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			rotation = D3DX_PI / 2.0f;
 			break;
 
-		case PlayerInputType::eHold:
-			speed = -1.0f;
 			// todo : 잡기 구현
+		case PlayerInputType::eHoldPush:
+			speed = -1.0f;
+			break;
+		case PlayerInputType::eHoldPull:
+			speed = -1.0f;
 			break;
 
 		default:
@@ -187,6 +190,21 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 	//	m_pOBB->Update(&matWorldOBB);
 	if (m_pOBB)
 		m_pOBB->Update(&m_matWorld);
+}
+
+int CCharacter::Update(vector<CObject*> ObjectPosition)
+{
+	for (int i = 0; i < ObjectPosition.size(); ++i)
+	{
+		if (ObjectPosition[i]->GetPosition().x - m_vPosition.x < 1.5f
+			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z < 1.5f
+			&& ObjectPosition[i]->GetPosition().x - m_vPosition.x> -1.5f
+			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z > -1.5f)
+			{
+				return i;
+			}
+	}
+	return -1;
 }
 
 void CCharacter::DoRotation(const float & radian)

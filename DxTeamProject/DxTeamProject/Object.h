@@ -44,6 +44,14 @@ public:
 	virtual void ReceiveEvent(ST_EVENT eventMsg);
 
 	// tmp physics
+	virtual void SetMass(const float mass) = 0;
+	virtual float GetMass() const = 0;
+	virtual bool hasFiniteMass() const = 0;
+	virtual void SetPusingForce(D3DXVECTOR3 forcedirection) = 0;
+	virtual void AddForce(const D3DXVECTOR3 & force) = 0;
+	virtual void ClearAccumulator() = 0;
+	virtual void Integrate(float duration) = 0;
+	virtual void RunPhysics(float duration) = 0;
 	virtual bool hasIntersected(CObject * otherobject) = 0;
 	virtual void CollisionOtherObject(CObject * otherobject) = 0;
 };

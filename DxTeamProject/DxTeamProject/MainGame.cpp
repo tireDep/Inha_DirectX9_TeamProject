@@ -216,6 +216,21 @@ void CMainGame::Update()
 		default:
 			break;
 		}	
+		// grab
+		if (m_pCharacter->Update(g_pObjectManager->GetVecObject()) != -1)
+		{
+			m_pText->SetisGrabstate(true);
+			D3DXVECTOR3 v;
+			v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
+			v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
+			v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
+			D3DXVec3Normalize(&v, &v);
+			g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->SetVelocity(v);
+		}
+		else
+		{
+			m_pText->SetisGrabstate(false);
+		}
 	}
 	
 	if (g_gameManager->GetGridMapMode())
@@ -347,9 +362,11 @@ void CMainGame::Render()
 			m_pText->RenderFPS(g_pTimeManager->GetFPS());
 			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
 			//m_pText->RenderBoxPosition(m_pSphere1->getCenter());
-			m_pText->RenderGrab(g_pObjectManager->GetVecObject(), m_pCharacter->GetPosition());
+			//m_pText->RenderGrab(g_pObjectManager->GetVecObject(), m_pCharacter->GetPosition());
 		}
 	}
+	if (m_pText->GetisGrabstate())
+		m_pText->RenderGrab();
 	if (g_gameManager->GetUImode())
 	{
 		if (m_pUI)
