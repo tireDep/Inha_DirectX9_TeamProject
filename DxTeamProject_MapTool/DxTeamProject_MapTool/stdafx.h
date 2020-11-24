@@ -2,6 +2,8 @@
 
 #define SafeRelease(p) { if(p) p->Release(); p = NULL; }
 #define SafeDelete(p) { if(p) delete p; }
+#define SafeAddRef(p)	{if(p) p->AddRef() ; }
+
 #define SingleTone(class_name)\
 private:\
 	class_name(void);\
@@ -12,6 +14,28 @@ public:\
 		static class_name instance;\
 		return &instance;\
 	}
+
+#define Synthesize(varType, varName, funName) \
+protected : varType varName ; \
+public : inline varType Get##funName(void) const { return varName ; } \
+public : inline void Set##funName(const varType var) { varName = var ; }
+
+#define Synthesize_Pass_by_Ref(varType, varName, funName) \
+protected : varType varName ; \
+public : varType& Get##funName(void) { return varName ; } \
+public : void Set##funName(const varType& var) { varName = var ;}
+
+#define Synthesize_Add_Ref(varType , varName , funName) \
+protected : varType varName ; \
+public : virtual varType Get##funName(void) const { return varName ; } \
+public : virtual void Set##funName(varType var ) { \
+	if( varName != var ) \
+	{ \
+		SafeAddRef(var) ; \
+		SafeRelease(varName) ; \
+		varName = var ; \
+	} \
+}
 
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -60,3 +84,7 @@ struct ST_PN_VERTEX
 	enum { FVF = D3DFVF_XYZ | D3DFVF_NORMAL };
 };
 
+enum ObjectType
+{
+	eTile, eBackObj
+};
