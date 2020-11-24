@@ -5,6 +5,8 @@
 # Resource 
 
 # Else
+*.data
+*.config
 *.bin
 *.dat
 *.ini

@@ -41,6 +41,9 @@ void CToolMain::Setup()
 
 	CTile* temp = new CTile;
 	temp->Setup();
+
+	CTile* temp2 = new CTile;
+	temp2->Setup();
 }
 
 void CToolMain::Update()

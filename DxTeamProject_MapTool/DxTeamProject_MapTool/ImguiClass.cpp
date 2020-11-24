@@ -3,6 +3,7 @@
 #include "imgui_impl_win32.h"
 
 #include "stdafx.h"
+#include "IObject.h"
 #include "ImguiClass.h"
 
 CImguiClass::CImguiClass()
@@ -169,10 +170,14 @@ void CImguiClass::Update()
 	{
 		ImGui::Begin("Hiearachy");
 
-		static bool temp = false;
-		static bool temp2 = false;
-		ImGui::Selectable("todo Something", &temp);
-		ImGui::Selectable("todo Something2", &temp2);
+		vector<IObject *> vecObj = g_pObjectManager->GetVecObject();
+		for (int i = 0; i < vecObj.size(); i++)
+		{
+			bool isClick = vecObj[i]->GetClick();
+			if (ImGui::Selectable(vecObj[i]->GetObjectName().c_str(), &isClick))
+				vecObj[i]->SetClick(isClick);
+		}
+
 		// >> 현 상태 : 여러개 선택 가능 => 하나만 선택 가능으로?
 		/*
 		if (ImGui::TreeNode("Basic"))
@@ -279,7 +284,64 @@ void CImguiClass::Update()
 	{
 		ImGui::Begin("Inspector");
 
+		// 
+		vector<IObject *> vecObj = g_pObjectManager->GetVecObject();
+		int index = -1;
+		for (int i = 0; i < vecObj.size(); i++)
+		{
+			if (vecObj[i]->GetClick())
+			{
+				index = i;
+				break;
+			}
+		}
+		// 
+
+		if (index >= 0)
+		{
+			char name[1024] = "\0";
+			int strLength = vecObj[index]->GetObjectName().length();
+			for (int i = 0; i < strLength; i++)
+			{
+				name[i] = vecObj[index]->GetObjectName()[i];
+			}
+			name[strLength] = '\0';
+
+			bool isCheck = false;
+			if (ImGui::InputText("Name", name, 1024))
+			{
+				for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
+				{
+					if (strstr(g_pObjectManager->GetVecObject()[i]->GetObjectName().c_str(), name) != NULL)
+						isCheck = true;
+				}
+
+				if(!isCheck) vecObj[index]->SetObjectName(name);
+			}
+			ImGui::Separator();
+
+			D3DXVECTOR3 vScale = vecObj[index]->GetScale();
+			if (ImGui::InputFloat3("Scale", vScale))
+				vecObj[index]->SetScale(vScale);
+
+			D3DXVECTOR3 vRot = vecObj[index]->GetRotate();
+			if(ImGui::InputFloat3("Rotate", vRot))
+				vecObj[index]->SetRotate(vRot);
+			
+			D3DXVECTOR3 vTrans = vecObj[index]->GetTranslate();
+			if(ImGui::InputFloat3("Translate", vTrans))
+				vecObj[index]->SetTranslate(vTrans);
+
+			ImGui::Separator();
+		}
+		else
+		{
+
+		}
+
 		ImGui::End();
+
+		//if
 	}
 #else
 	{
