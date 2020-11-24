@@ -5,6 +5,9 @@
 # Resource 
 
 # Else
+*.bin
+*.dat
+*.ini
 *.pdf
 *.zip
 
