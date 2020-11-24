@@ -9,7 +9,7 @@ class CObjectManager
 private:	
 	SingleTone(CObjectManager);
 	vector<CObject *> m_vecObject;
-
+	D3DXVECTOR3 ObjectPos;
 public:
 	void AddObject(CObject* pObject);
 	void RemoveObject(CObject* pObject);
@@ -18,6 +18,8 @@ public:
 	void Update(float duration);
 	void Update(CRay ray, D3DXCOLOR& objectcolor);
 	void Render();
+
+	D3DXVECTOR3 GetPosition(int i);
 
 	vector<CObject *> GetVecObject();
 

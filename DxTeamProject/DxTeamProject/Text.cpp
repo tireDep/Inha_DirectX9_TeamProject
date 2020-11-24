@@ -98,3 +98,25 @@ void CText::RenderBoxPosition(D3DXVECTOR3 BoxPosition)
 	SetRect(&rc, 320, 70, 400, 60);
 	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
 }
+
+void CText::RenderGrab(vector<CObject*> ObjectPosition , D3DXVECTOR3 PlayerPosition)
+{
+	RECT rc;
+	SetRect(&rc, 512, 512, 100, 60);
+	stringstream stream;
+	
+	string GrabString = "¿‚±‚(F)";
+
+	
+	for (int i = 0; i < ObjectPosition.size(); ++i)
+	{
+		if (ObjectPosition[i]->GetPosition(0).x - PlayerPosition.x < 1.5f 
+			&& ObjectPosition[i]->GetPosition(0).z - PlayerPosition.z < 1.5f 
+			&&	ObjectPosition[i]->GetPosition(0).x  - PlayerPosition.x> -1.5f 
+			&& ObjectPosition[i]->GetPosition(0).z - PlayerPosition.z > -1.5f)
+		{
+			m_pFont->DrawTextA(NULL, GrabString.c_str(), GrabString.length(),
+				&rc, DT_LEFT | DT_TOP | DT_NOCLIP, BLUE);
+		}
+	}
+}

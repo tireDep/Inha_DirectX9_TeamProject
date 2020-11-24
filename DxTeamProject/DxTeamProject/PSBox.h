@@ -19,7 +19,7 @@ public:
 	void Update(float duration);
 	void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos);
 	void Render();
-
+	D3DXVECTOR3 GetPosition(int i);
 	void SetPickState(bool set);
 
 	virtual string GetName();

@@ -13,8 +13,8 @@ class CGridMap;
 // class CFrustum;
 class CXfile;
 /// tmp Physics
-//class CPhysicsSphere;
-//class CWall;
+class CPhysicsSphere;
+class CWall;
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
 //class CParticleWorld;
@@ -32,9 +32,9 @@ private:
 	CGridMap*	m_GridMap;
 	CXfile*		m_Xfile;
 	/// tmp Physics
-	//CPhysicsSphere* m_pSphere1;
+	CPhysicsSphere* m_pSphere1;
 	//CPhysicsSphere* m_pSphere2;
-	//vector<CWall*> m_pWall;
+	vector<CWall*> m_pWall;
 
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;

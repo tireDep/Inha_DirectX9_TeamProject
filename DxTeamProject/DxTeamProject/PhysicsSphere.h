@@ -26,8 +26,8 @@ public:
 
 	float getVelocity_X() { return this->m_vVelocity.x; }
 	float getVelocity_Z() { return this->m_vVelocity.z; }
-
-	void setPower(double vx, double vz);
+	float getVelocity_Y() { return this->m_vVelocity.y;  }
+	void setPower(double vx, double vy, double vz);
 	void setCenter(float x, float y, float z);
 	void setRadius(float radius) { m_fRadius = radius; }
 	float getRadius() const { return m_fRadius; }

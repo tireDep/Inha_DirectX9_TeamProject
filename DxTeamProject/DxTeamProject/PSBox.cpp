@@ -81,6 +81,11 @@ void CPSBox::Render()
 	}
 }
 
+D3DXVECTOR3 CPSBox::GetPosition(int i)
+{
+	return m_vPosition;
+}
+
 void CPSBox::SetPickState(bool set)
 {
 	m_isPicked = set;

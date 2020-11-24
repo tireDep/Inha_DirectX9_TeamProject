@@ -11,4 +11,5 @@ public:
 	void RenderFPS(int fps);
 	void RenderCharacterPosition(D3DXVECTOR3 CharacterPosition);
 	void RenderBoxPosition(D3DXVECTOR3 BoxPosition);
+	void RenderGrab(vector<CObject*> ObjectPosition, D3DXVECTOR3 PlayerPosition);
 };

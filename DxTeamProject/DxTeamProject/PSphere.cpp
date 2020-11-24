@@ -74,6 +74,11 @@ void CPSphere::Render()
 	}
 }
 
+D3DXVECTOR3 CPSphere::GetPosition(int i)
+{
+	return m_vPosition;
+}
+
 void CPSphere::SetPickState(bool set)
 {
 	m_isPicked = set;

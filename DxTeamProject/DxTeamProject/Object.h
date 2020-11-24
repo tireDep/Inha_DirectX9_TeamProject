@@ -31,7 +31,7 @@ public:
 	virtual void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos) = 0;
 	virtual void Render() = 0;
 	virtual void SetPickState(bool set) = 0;
-
+	virtual D3DXVECTOR3 GetPosition(int i) = 0;
 	virtual void OutlineRender();
 
 	virtual string GetName() { return string(); }

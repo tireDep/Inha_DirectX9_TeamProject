@@ -13,8 +13,8 @@
 //#include "Cube.h"
 #include "Xfile.h"
 /// tmp Physics
-//#include "PhysicsSphere.h"
-//#include "Wall.h"
+#include "PhysicsSphere.h"
+#include "Wall.h"
 #include "PSphere.h"
 #include "PSBox.h"
 #include "PSCylinder.h"
@@ -127,10 +127,10 @@ void CMainGame::Setup()
 	//	pSphere->setCenter(i, 0.21f, 0.0f);
 	//	pSphere->setPower(-i, i);
 	//}
-	//m_pSphere1 = new CPhysicsSphere;
-	////m_pSphere1->Setup();
-	//m_pSphere1->setCenter(-2.7f, 0.21f, 0.0f);
-	//m_pSphere1->setPower(5.0f, 10.0f);
+	m_pSphere1 = new CPhysicsSphere;
+	m_pSphere1->Setup();
+	m_pSphere1->setCenter(-2.7f, 5.0f, 0.0f);
+	
 	//m_pSphere2 = new CPhysicsSphere;
 	////m_pSphere2->Setup();
 	//m_pSphere2->setCenter(+2.4f, 0.21f, 0.0f);
@@ -139,12 +139,12 @@ void CMainGame::Setup()
 	//{
 	//	g_pEventManager->AddListener(g_pPhysicsObjectManager->getVecObject()[i]);
 	//}
-	//for (int i = 0; i < 4; ++i)
-	//{
-	//	m_pWall.push_back(new CWall);
-	//}
-	//m_pWall[0]->Setup(0.12f, 0.3f, 6.24f); 
-	//m_pWall[0]->setPosition(5, 0, 0);
+	for (int i = 0; i < 4; ++i)
+	{
+		m_pWall.push_back(new CWall);
+	}
+	m_pWall[0]->Setup(8.0f, 0.0f, 8.0f); 
+	m_pWall[0]->setPosition(0, 0, 0);
 	//m_pWall[1]->Setup(0.12f, 0.3f, 6.24f);
 	//m_pWall[1]->setPosition(-5, 0, 0);
 	//m_pWall[2]->Setup(10, 0.3f, 0.12f);
@@ -231,6 +231,29 @@ void CMainGame::Update()
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());
 	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
 
+
+	static int count = 0;
+	static float gravity = -0.98;
+	static float plane = 1.5;
+	if (m_pWall[0]->Gravity(*m_pSphere1) == true) //땅에 부딪혔을때
+	{
+		//cout << m_pWall[4]->Gravity(*m_pSphere1) << endl;
+		m_pWall[0]->hitBy(*m_pSphere1);
+		plane -= 0.3f;
+		//cout << count++ << endl;
+
+	}
+	else // 떠있을때 중력을 줌
+	{
+		if (m_pSphere1->getCenter().y > plane)
+		{
+			m_pSphere1->setPower(0, gravity, 0);
+			//cout << m_pSphere1->getCenter().y << endl;
+		}
+	}
+		m_pSphere1->Update(g_pTimeManager->GetElapsedTime());
+
+
 	/// tmp Physics
 	//g_pPhysicsObjectManager->Update(g_pTimeManager->GetElapsedTime());
 	//for (int hittee = 0; hittee < 4; hittee++)
@@ -245,7 +268,7 @@ void CMainGame::Update()
 	//		//m_pPhysicsSphere[hittee].hitBall(m_pPhysicsSphere[hitter]);
 	//	}
 	//}
-	//m_pSphere1->Update(g_pTimeManager->GetElapsedTime());
+
 	//m_pSphere2->Update(g_pTimeManager->GetElapsedTime());
 	//m_pSphere1->Hitball(*m_pSphere2);
 	//m_pWall[0]->hitBy(*m_pSphere1);
@@ -285,7 +308,10 @@ void CMainGame::Render()
 		{
 			m_pText->RenderFPS(g_pTimeManager->GetFPS());
 			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
-			//m_pText->RenderBoxPosition();
+			m_pText->RenderBoxPosition(m_pSphere1->getCenter());
+			
+			m_pText->RenderGrab(g_pObjectManager->GetVecObject(), m_pCharacter->GetPosition());
+			//이쪽 보시면됩니다 경태형
 		}
 	}
 
@@ -304,14 +330,14 @@ void CMainGame::Render()
 
 	/// tmp Physics
 	//g_pPhysicsObjectManager->Render();
-	//if (m_pSphere1)
-	//	m_pSphere1->Render();
+	if (m_pSphere1)
+		m_pSphere1->Render();
 	//if (m_pSphere2)
 	//	m_pSphere2->Render();
 	//if (&m_pWall)
 	//	m_pWall[0]->draw();
-	//if (&m_pWall)
-	//	m_pWall[1]->draw();
+	if (&m_pWall)
+		m_pWall[0]->draw();
 	//if (&m_pWall)
 	//	m_pWall[2]->draw();
 	//if (&m_pWall)

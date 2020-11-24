@@ -82,6 +82,12 @@ void CPSCylinder::Render()
 	}
 }
 
+D3DXVECTOR3 CPSCylinder::GetPosition(int i)
+{
+	
+	return m_vPosition;
+}
+
 void CPSCylinder::SetPickState(bool set)
 {
 	m_isPicked = set;

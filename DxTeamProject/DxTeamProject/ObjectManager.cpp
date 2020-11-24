@@ -51,8 +51,9 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
 		m_vecObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
+		ObjectPos = vecVPos[i];
 	}
-
+	
 	Update_PickCheck(vecIsPick, vecVPos);
 }
 
@@ -62,6 +63,12 @@ void CObjectManager::Render()
 	{
 		m_vecObject[i]->Render();
 	}
+}
+
+D3DXVECTOR3 CObjectManager::GetPosition(int i)
+{
+
+	return ObjectPos;
 }
 
 vector<CObject*> CObjectManager::GetVecObject()
