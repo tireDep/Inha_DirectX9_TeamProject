@@ -46,11 +46,21 @@ void CTile::Render()
 {
 	D3DXMATRIXA16 matWorld, matS, matR, matT;
 	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-	
-	// D3DXMatrixRotationYawPitchRoll(&matR, m_vRotate.x, m_vRotate.y, m_vRotate.z);
-	D3DXMatrixRotationX(&matR, m_vRotate.x);
-	D3DXMatrixRotationY(&matR, m_vRotate.y);
-	D3DXMatrixRotationZ(&matR, m_vRotate.z);
+
+	D3DXVECTOR3 v;
+	v.x = D3DXToRadian(m_vRotate.x);
+	v.y = D3DXToRadian(m_vRotate.y);
+	v.z = D3DXToRadian(m_vRotate.z);
+	//m_vRotate.x = D3DXToRadian(m_vRotate.x);
+	//m_vRotate.y = D3DXToRadian(m_vRotate.y);
+	//m_vRotate.z = D3DXToRadian(m_vRotate.z);
+
+	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
+
+	// cout << m_vRotate.x << ", " << m_vRotate.y << ", " << m_vRotate.z << endl;
+	// D3DXMatrixRotationX(&matR, m_vRotate.x);
+	// D3DXMatrixRotationY(&matR, m_vRotate.y);
+	// D3DXMatrixRotationZ(&matR, m_vRotate.z);
 	
 	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
 	matWorld = matS * matR * matT;
