@@ -18,3 +18,8 @@ void IObject::Release()
 	g_pObjectManager->RemoveObject(this);
 	IObject::m_nRefCnt -= 1;
 }
+
+void IObject::SetRefCnt(int set)
+{
+	IObject::m_nRefCnt = set;
+}

@@ -27,5 +27,7 @@ public:
 	virtual void Setup() = 0;
 	virtual void Update() = 0;
 	virtual void Render() = 0;
+
+	static void SetRefCnt(int set);
 };
 

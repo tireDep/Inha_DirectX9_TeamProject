@@ -171,55 +171,25 @@ void CImguiClass::Update()
 		ImGui::Begin("Hiearachy");
 
 		vector<IObject *> vecObj = g_pObjectManager->GetVecObject();
+		bool isClick;
+		static int index = vecObj.size() - 1;
 		for (int i = 0; i < vecObj.size(); i++)
 		{
-			bool isClick = vecObj[i]->GetClick();
+			isClick = vecObj[i]->GetClick();
 			if (ImGui::Selectable(vecObj[i]->GetObjectName().c_str(), &isClick))
+			{
 				vecObj[i]->SetClick(isClick);
+				index = i;
+			}
 		}
 
-		// >> 현 상태 : 여러개 선택 가능 => 하나만 선택 가능으로?
-		/*
-		if (ImGui::TreeNode("Basic"))
+		for (int i = 0; i < vecObj.size(); i++)
 		{
-		static bool selection[5] = { false, true, false, false, false };
-		ImGui::Selectable("1. I am selectable", &selection[0]);
-		ImGui::Selectable("2. I am selectable", &selection[1]);
-		ImGui::Text("3. I am not selectable");
-		ImGui::Selectable("4. I am selectable", &selection[3]);
-		if (ImGui::Selectable("5. I am double clickable", selection[4], ImGuiSelectableFlags_AllowDoubleClick))
-		if (ImGui::IsMouseDoubleClicked(0))
-		selection[4] = !selection[4];
-		ImGui::TreePop();
+			if (i != index)
+				vecObj[i]->SetClick(false);
 		}
-		if (ImGui::TreeNode("Selection State: Single Selection"))
-		{
-		static int selected = -1;
-		for (int n = 0; n < 5; n++)
-		{
-		char buf[32];
-		sprintf(buf, "Object %d", n);
-		if (ImGui::Selectable(buf, selected == n))
-		selected = n;
-		}
-		ImGui::TreePop();
-		}
-		if (ImGui::TreeNode("Selection State: Multiple Selection"))
-		{
-		HelpMarker("Hold CTRL and click to select multiple items.");
-		static bool selection[5] = { false, false, false, false, false };
-		for (int n = 0; n < 5; n++)
-		{
-		char buf[32];
-		sprintf(buf, "Object %d", n);
-		if (ImGui::Selectable(buf, selection[n]))
-		{
-		if (!ImGui::GetIO().KeyCtrl)    // Clear selection when CTRL is not held
-		memset(selection, 0, sizeof(selection));
-		selection[n] ^= 1;
-		}
-		}
-		*/
+
+		// >> todo : 오브젝트 정렬 필요?(이름순)
 
 		ImGui::End();
 	}
@@ -309,15 +279,22 @@ void CImguiClass::Update()
 
 			bool isCheck = false;
 			if (ImGui::InputText("Name", name, 1024))
+				isCheck = true;
+
+			// >> 이름 변경 판정 다시 하기?
+			if (isCheck)
 			{
+				bool isSame = false;
 				for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
 				{
-					if (strstr(g_pObjectManager->GetVecObject()[i]->GetObjectName().c_str(), name) != NULL)
-						isCheck = true;
+					if (strcmp(g_pObjectManager->GetVecObject()[i]->GetObjectName().c_str(), name) == 0)
+						isSame = true;
 				}
 
-				if(!isCheck) vecObj[index]->SetObjectName(name);
+				if (!isSame) vecObj[index]->SetObjectName(name);
 			}
+			// << 이름 변경 판정 다시 하기?
+
 			ImGui::Separator();
 
 			D3DXVECTOR3 vScale = vecObj[index]->GetScale();
@@ -336,7 +313,13 @@ void CImguiClass::Update()
 		}
 		else
 		{
+			ImGui::InputText("Name", " ", 1024);
+			ImGui::Separator();
 
+			ImGui::InputFloat3("Scale", D3DXVECTOR3(0, 0, 0));
+			ImGui::InputFloat3("Rotate", D3DXVECTOR3(0, 0, 0));
+			ImGui::InputFloat3("Translate", D3DXVECTOR3(0, 0, 0));
+			ImGui::Separator();
 		}
 
 		ImGui::End();

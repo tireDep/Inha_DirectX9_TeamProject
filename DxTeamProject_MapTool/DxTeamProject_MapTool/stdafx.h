@@ -88,3 +88,14 @@ enum ObjectType
 {
 	eTile, eBackObj
 };
+
+struct ST_MapData
+{
+	string strFilePath;
+	string strObjName;
+	ObjectType objType;
+
+	D3DXVECTOR3 vScale;
+	D3DXVECTOR3 vRotate;
+	D3DXVECTOR3 vTranslate;
+};

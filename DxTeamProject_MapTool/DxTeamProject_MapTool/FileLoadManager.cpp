@@ -2,6 +2,7 @@
 #include <tchar.h>
 #include <fstream>
 #include "stdafx.h"
+#include "Tile.h" // temp;
 #include "FileLoadManager.h"
 
 void CFileLoadManager::ReadMapData(string fileName)
@@ -11,55 +12,91 @@ void CFileLoadManager::ReadMapData(string fileName)
 	
 	ifstream mapFile;
 	mapFile.open(fileName.c_str(), ios::in | ios::binary);
-	/*	if (mapFile.is_open())
+
+	if (mapFile.is_open())
 	{
-		tileMap.clear();
-		// >> 새로 읽어오기 전 초기화
+		ST_MapData mapData;
+		string readData;
 
-		POINT pos = { 0,0 };
-		TileMap temp;
-
-		temp.pos = { 0,0,0,0 };
-		temp.type = 0;
-
-		// >> 플레이어
-		mapFile.read((char*)&pos.x, sizeof(int));
-		mapFile.read((char*)&pos.y, sizeof(int));
-
-		pos.x = (pos.x / dKeyCode) - dKeyCode;
-		pos.y = (pos.y / dKeyCode) - dKeyCode;
-
-		temp.pos.left = pos.x - 8;
-		temp.pos.top = pos.y - 8;
-		temp.pos.right = pos.x + 8;
-		temp.pos.bottom = pos.y + 8;
-		temp.type = ePlayerResen;
-		temp.showPos = SetShowType(temp.type);
-
-		tileMap.push_back(temp);
-
-		// >> 맵 정보
-		while (!mapFile.eof())
+		while (getline(mapFile, readData))
 		{
-			mapFile.read((char*)&temp.type, sizeof(int));
-			mapFile.read((char*)&temp.pos.left, sizeof(int));
-			mapFile.read((char*)&temp.pos.top, sizeof(int));
-			mapFile.read((char*)&temp.pos.right, sizeof(int));
-			mapFile.read((char*)&temp.pos.bottom, sizeof(int));
+			if (readData == "# Object_Start")
+				continue;
 
-			temp.type = (temp.type / dKeyCode) - dKeyCode;
-			temp.pos.left = (temp.pos.left / dKeyCode) - dKeyCode;
-			temp.pos.top = (temp.pos.top / dKeyCode) - dKeyCode;
-			temp.pos.right = (temp.pos.right / dKeyCode) - dKeyCode;
-			temp.pos.bottom = (temp.pos.bottom / dKeyCode) - dKeyCode;
+			else if (readData == "# ObjectName")
+			{
+				getline(mapFile, readData);
+				mapData.strObjName = readData;
+			}
 
-			if (temp.type < 0)
-				break;	// >> 무한루프 처리
+			else if (readData == "# FilePath")
+			{
+				getline(mapFile, readData);
+				mapData.strFilePath = readData;
+			}
 
-			temp.showPos = SetShowType(temp.type);
-			tileMap.push_back(temp);
+			else if (readData == "# ObjectType")
+			{
+				getline(mapFile, readData);
+				mapData.objType = (ObjectType)atoi(readData.c_str());
+			}
+
+			else if (readData == "# Scale")
+			{
+				getline(mapFile, readData);
+
+				string temp = readData;
+				int index = temp.find(",");
+				mapData.vScale.x = atof(readData.c_str());
+
+				readData = readData.substr(index + 2, readData.length());
+				index = temp.find(",");
+				mapData.vScale.y = atof(readData.c_str());
+
+				readData = readData.substr(index + 2, readData.length());
+				mapData.vScale.z = atof(readData.c_str());
+			}
+
+			else if (readData == "# Rotate")
+			{
+				getline(mapFile, readData);
+
+				string temp = readData;
+				int index = temp.find(",");
+				mapData.vRotate.x = atof(readData.c_str());
+
+				readData = readData.substr(index + 2, readData.length());
+				index = temp.find(",");
+				mapData.vRotate.y = atof(readData.c_str());
+
+				readData = readData.substr(index + 2, readData.length());
+				mapData.vRotate.z = atof(readData.c_str());
+			}
+
+			else if (readData == "# Translate")
+			{
+				getline(mapFile, readData);
+				string temp = readData;
+				int index = temp.find(",");
+				mapData.vTranslate.x = atof(readData.c_str());
+
+				readData = readData.substr(index + 2, readData.length());
+				index = temp.find(",");
+				mapData.vTranslate.y = atof(readData.c_str());
+
+				readData = readData.substr(index + 2, readData.length());
+				mapData.vTranslate.z = atof(readData.c_str());
+			}
+
+			else if (readData == "# Object_End")
+			{
+				CTile* temp = new CTile;
+				temp->Setup(mapData);
+
+				cout << "todo : load File" << endl;
+			}
 		}
-	} */
+	}
 
 	mapFile.close();
 }
@@ -71,57 +108,45 @@ void CFileLoadManager::SaveMapData(string fileName)
 
 	ofstream mapFile;
 	mapFile.open(fileName.c_str(), ios::out | ios::binary);
-	/*
-	POINT playerPos;
-	bool isPlayerIn = false;
-	for (int i = 0; i < tileMap.size(); i++)
+
+	if (mapFile.is_open())
 	{
-		if (tileMap[i].type == ePlayerResen)
+		vector<IObject *> vecObject = g_pObjectManager->GetVecObject();
+		ST_MapData mapData;
+
+		for (int i = 0; i < vecObject.size(); i++)
 		{
-			isPlayerIn = true;
+			mapData.strObjName = vecObject[i]->GetObjectName();
+			mapData.strFilePath = vecObject[i]->GetFilePath();
+			mapData.objType = vecObject[i]->GetObjType();
+			mapData.vScale = vecObject[i]->GetScale();
+			mapData.vRotate = vecObject[i]->GetRotate();
+			mapData.vTranslate = vecObject[i]->GetTranslate();
 
-			playerPos.x = (tileMap[i].pos.left + tileMap[i].pos.right) * 0.5;
-			playerPos.y = (tileMap[i].pos.top + tileMap[i].pos.bottom) * 0.5;
+			mapFile << "# Object_Start" << endl;
+
+			mapFile << "# ObjectName" << endl;
+			mapFile << mapData.strObjName << endl;
+
+			mapFile << "# FilePath" << endl;
+			mapFile << mapData.strFilePath << endl;
+
+			mapFile << "# ObjectType" << endl;
+			mapFile << mapData.objType << endl;
+
+			mapFile << "# Scale" << endl;
+			mapFile << mapData.vScale.x << ", " << mapData.vScale.y << ", " << mapData.vScale.z << endl;
+
+			mapFile << "# Rotate" << endl;
+			mapFile << mapData.vRotate.x << ", " << mapData.vRotate.y << ", " << mapData.vRotate.z << endl;
+
+			mapFile << "# Translate" << endl;
+			mapFile << mapData.vTranslate.x << ", " << mapData.vTranslate.y << ", " << mapData.vTranslate.z << endl;
+
+			mapFile << "# Object_End" << endl << endl;
 		}
+		mapFile.close();
 	}
-
-	if (!isPlayerIn)
-	{
-		MessageBox(hWnd, L"플레이어 위치가 존재하지 않습니다.", L"파일 저장 실패", MB_OKCANCEL);
-		return;
-	}
-
-	mapFile.open(changeFile);
-
-	// mapFile << playerPos.x << "\t" << playerPos.y << endl;
-	playerPos.x = (playerPos.x + dKeyCode) * dKeyCode;
-	playerPos.y = (playerPos.y + dKeyCode) * dKeyCode;
-
-	mapFile.write((char*)&playerPos.x, sizeof(int));
-	mapFile.write((char*)&playerPos.y, sizeof(int));
-
-	TileMap tempMap;
-	for (int i = 0; i < tileMap.size(); i++)
-	{
-		if (tileMap[i].type != ePlayerResen)
-		{
-			tempMap.type = (tileMap[i].type + dKeyCode) * dKeyCode;
-			tempMap.pos.left = (tileMap[i].pos.left + dKeyCode) * dKeyCode;
-			tempMap.pos.top = (tileMap[i].pos.top + dKeyCode) * dKeyCode;
-			tempMap.pos.right = (tileMap[i].pos.right + dKeyCode) * dKeyCode;
-			tempMap.pos.bottom = (tileMap[i].pos.bottom + dKeyCode) * dKeyCode;
-
-			mapFile.write((char*)&tempMap.type, sizeof(int));
-			mapFile.write((char*)&tempMap.pos.left, sizeof(int));
-			mapFile.write((char*)&tempMap.pos.top, sizeof(int));
-			mapFile.write((char*)&tempMap.pos.right, sizeof(int));
-			mapFile.write((char*)&tempMap.pos.bottom, sizeof(int));
-		}
-		// mapFile << tileMap[i].type << "\t" << tileMap[i].pos.left << "\t" << tileMap[i].pos.top << "\t" << tileMap[i].pos.right << "\t" << tileMap[i].pos.bottom << endl;
-	}
-
-	mapFile.close(); 
-	*/
 
 	mapFile.close();
 }

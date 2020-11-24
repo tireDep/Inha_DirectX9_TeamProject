@@ -38,6 +38,19 @@ void CTile::Setup()
 	// todo : 임시 매터리얼 설정 -> 변경
 }
 
+void CTile::Setup(ST_MapData setData)
+{
+	m_strObjName = setData.strObjName;
+	m_strFilePath = setData.strFilePath;
+	m_ObjectType = setData.objType;
+
+	m_vScale = setData.vScale;
+	m_vRotate = setData.vRotate;
+	m_vTranslate = setData.vTranslate;
+
+	Setup();
+}
+
 void CTile::Update()
 {
 }
@@ -51,17 +64,9 @@ void CTile::Render()
 	v.x = D3DXToRadian(m_vRotate.x);
 	v.y = D3DXToRadian(m_vRotate.y);
 	v.z = D3DXToRadian(m_vRotate.z);
-	//m_vRotate.x = D3DXToRadian(m_vRotate.x);
-	//m_vRotate.y = D3DXToRadian(m_vRotate.y);
-	//m_vRotate.z = D3DXToRadian(m_vRotate.z);
-
+	
 	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
 
-	// cout << m_vRotate.x << ", " << m_vRotate.y << ", " << m_vRotate.z << endl;
-	// D3DXMatrixRotationX(&matR, m_vRotate.x);
-	// D3DXMatrixRotationY(&matR, m_vRotate.y);
-	// D3DXMatrixRotationZ(&matR, m_vRotate.z);
-	
 	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
 	matWorld = matS * matR * matT;
 

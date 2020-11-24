@@ -8,6 +8,7 @@ public:
 	~CTile();
 
 	void Setup();
+	void Setup(ST_MapData setData);
 	void Update();
 	void Render();
 };

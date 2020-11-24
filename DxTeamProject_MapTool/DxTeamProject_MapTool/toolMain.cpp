@@ -48,6 +48,11 @@ void CToolMain::Setup()
 
 void CToolMain::Update()
 {
+	if (GetKeyState('1') & 0x8000)
+	{
+		CTile* tile = new CTile;
+		tile->Setup();
+	}
 #ifdef _DEBUG
 	m_pCube->Update();
 #endif

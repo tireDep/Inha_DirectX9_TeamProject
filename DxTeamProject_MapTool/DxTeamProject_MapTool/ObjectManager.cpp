@@ -33,6 +33,7 @@ void CObjectManager::Destroy()
 		m_vecObject[0]->Release(); // 마지막 하나 삭제
 
 	m_vecObject.clear();
+	IObject::SetRefCnt(0);
 }
 
 void CObjectManager::Update()
