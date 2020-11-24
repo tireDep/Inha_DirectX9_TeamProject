@@ -21,6 +21,13 @@ protected:
 
 	bool LoadAssets();
 	void SetShader(const D3DXMATRIXA16& setMatWorld);
+
+	// tmp physics
+	Synthesize(float, m_fRadius, Radius);
+	Synthesize(float, m_finverseMass, InverseMass);
+	Synthesize(float, m_fDamping, Damping);
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vVelocity, Velocity);
 	CObject();
 public:
 	virtual ~CObject();
@@ -31,9 +38,12 @@ public:
 	virtual void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos) = 0;
 	virtual void Render() = 0;
 	virtual void SetPickState(bool set) = 0;
-
 	virtual void OutlineRender();
 
 	virtual string GetName() { return string(); }
 	virtual void ReceiveEvent(ST_EVENT eventMsg);
+
+	// tmp physics
+	virtual bool hasIntersected(CObject * otherobject) = 0;
+	virtual void CollisionOtherObject(CObject * otherobject) = 0;
 };

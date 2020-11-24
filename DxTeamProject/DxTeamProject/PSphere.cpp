@@ -2,12 +2,7 @@
 #include "PSphere.h"
 
 CPSphere::CPSphere()
-	: m_fRadius(0.5f)
-	, m_finverseMass(10.0f)
-	, m_fDamping(0.999f)
-	, m_vPosition(0, 0, 0)
-	, m_vVelocity(0, 0, 0)
-	, m_vAcceleration(0, 0, 0)
+	: m_vAcceleration(0, 0, 0)
 	, m_vForceDirection(0, 0, 0)
 	, m_vForceAccum(0, 0, 0)
 {
@@ -143,22 +138,23 @@ void CPSphere::RunPhysics(float duration)
 	Integrate(duration);
 }
 
-bool CPSphere::hasIntersected(CPSphere & othersphere)
+bool CPSphere::hasIntersected(CObject * otherobject)
 {
-	if (this == &othersphere)
+	if (this == otherobject)
 		return false;
 
-	D3DXVECTOR3 direction = this->GetPosition() - othersphere.GetPosition();
-	float distance = D3DXVec3LengthSq(&direction);
+	D3DXVECTOR3 direction = this->GetPosition() - otherobject->GetPosition();
+	float distanceSq = direction.x * direction.x + direction.y * direction.y + direction.z * direction.z;
 
-	if (((this->GetRadius() + othersphere.GetRadius())*(this->GetRadius() + othersphere.GetRadius())) < distance)
+	if (((this->GetRadius() + otherobject->GetRadius())*(this->GetRadius() + otherobject->GetRadius())) < distanceSq)
 		return false;
 	else
 		return true;
 }
 
-void CPSphere::Collisionsphere(CPSphere & othersphere)
+void CPSphere::CollisionOtherObject(CObject * otherobject)
 {
+	// declare variable, for performance I set them as static
 	static D3DXVECTOR3 direction;
 	static D3DXVECTOR3 warpVector;
 	static D3DXVECTOR3 totalVelocity;
@@ -169,32 +165,33 @@ void CPSphere::Collisionsphere(CPSphere & othersphere)
 	static float distance;
 	static float overlapInterval;
 
-	if (hasIntersected(othersphere))
+	if (hasIntersected(otherobject))
 	{
-		direction = this->GetPosition() - othersphere.GetPosition();
+		direction = this->GetPosition() - otherobject->GetPosition();
 		distance = sqrt(direction.x * direction.x + direction.z * direction.z);
-		overlapInterval = 2 * othersphere.GetRadius() - distance;
-		warpVector = fix * direction *(overlapInterval / (2 * othersphere.GetRadius() - overlapInterval));
+		overlapInterval = 2 * otherobject->GetRadius() - distance;
+		warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetRadius() - overlapInterval));
 
-		if (((othersphere.m_vVelocity.x * othersphere.m_vVelocity.x) + (othersphere.m_vVelocity.z * othersphere.m_vVelocity.z)) >= ((this->m_vVelocity.x * this->m_vVelocity.x) + (this->m_vVelocity.z * this->m_vVelocity.z)))
+		// implementation of collision
+		if (((otherobject->GetVelocity().x * otherobject->GetVelocity().x) + (otherobject->GetVelocity().z * otherobject->GetVelocity().z)) >= ((this->GetVelocity().x * this->GetVelocity().x) + (this->GetVelocity().z * this->GetVelocity().z)))
 		{
-			othersphere.Collisionsphere(*this);
+			otherobject->CollisionOtherObject(this);
 			return;
 		}
 		else
 		{
 			D3DXVECTOR3 p;
-			p.x = m_vPosition.x + warpVector.x;
-			p.y = m_vPosition.y;
-			p.z = m_vPosition.z + warpVector.z;
+			p.x = this->GetPosition().x + warpVector.x;
+			p.y = this->GetPosition().y;
+			p.z = this->GetPosition().z + warpVector.z;
 			this->SetPosition(p);
 			D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 		}
 
 		D3DXVECTOR3 v;
-		v.x = this->GetVelocity().x + othersphere.GetVelocity().x;
+		v.x = this->GetVelocity().x + otherobject->GetVelocity().x;
 		v.y = 0;
-		v.z = this->GetVelocity().z + othersphere.GetVelocity().z;
+		v.z = this->GetVelocity().z + otherobject->GetVelocity().z;
 		totalVelocity = v;
 		normalizedDirection = (-1) * direction / distance;
 
@@ -206,9 +203,6 @@ void CPSphere::Collisionsphere(CPSphere & othersphere)
 		this->SetVelocity(v);
 		v.x = ballVelocity.x;
 		v.z = ballVelocity.z;
-		othersphere.SetVelocity(v);
-
-		//if (hasIntersected(othersphere))
-		//	this->setCenter(this->GetPosition().x + 3 * warpVector.x, this->GetPosition().y, this->GetPosition().z + 3 * warpVector.z);
+		otherobject->SetVelocity(v);
 	}
 }

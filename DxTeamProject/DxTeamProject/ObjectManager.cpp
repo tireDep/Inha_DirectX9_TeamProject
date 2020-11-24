@@ -52,8 +52,20 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 	{
 		m_vecObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
 	}
-
 	Update_PickCheck(vecIsPick, vecVPos);
+}
+
+void CObjectManager::Update()
+{
+	for (int hittee = 0; hittee < m_vecObject.size(); hittee++)
+	{
+		for (int hitter = 0; hitter < m_vecObject.size(); hitter++)
+		{
+			if (hittee >= hitter)
+				continue;
+			m_vecObject[hittee]->CollisionOtherObject(m_vecObject[hitter]);
+		}
+	}
 }
 
 void CObjectManager::Render()

@@ -77,7 +77,7 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 void CMainGame::Setup()
 {
 	m_pGrid = new CGrid;
-	m_pGrid->Setup(100, 1.0f);
+	m_pGrid->Setup(30, 1.0f);
 
 	m_pCharacter = new CCharacter;
 	m_pCharacter->Setup();
@@ -104,20 +104,23 @@ void CMainGame::Setup()
 		CPSphere* Sphere = new CPSphere();
 		Sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
 		if (i % 2 == 0)
-			Sphere->SetPusingForce(D3DXVECTOR3(0, 0, -1));
-		//sphere->SetPusingForce(D3DXVECTOR3(0, 0, -1));
+			Sphere->SetPusingForce(D3DXVECTOR3(0, 0, -0.5f));
+//		sphere->SetPusingForce(D3DXVECTOR3(0, 0, -1));
 	}
 
 	for (int i = 0; i < 8; i++)
 	{
 		CPSBox* box = new CPSBox();
 		box->Setup(D3DXVECTOR3(-5, 0.5, 2 * i + 3));
+		if (i % 2 == 0)
+			box->SetPusingForce(D3DXVECTOR3(0.5f, 0, -0.5f));
 	}
 
 	for (int i = 0; i < 8; i++)
 	{
 		CPSCylinder* cylinder = new CPSCylinder();
 		cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 20));
+		cylinder->SetPusingForce(D3DXVECTOR3(0, 0, -1));
 	}
 	
 	/// tmp Physics
@@ -230,6 +233,8 @@ void CMainGame::Update()
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());
 	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	g_pObjectManager->Update();
+	
 
 	/// tmp Physics
 	//g_pPhysicsObjectManager->Update(g_pTimeManager->GetElapsedTime());

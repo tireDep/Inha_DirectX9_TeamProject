@@ -9,6 +9,11 @@ CObject::CObject()
 	, m_pShader(NULL)
 	, m_isClicked(false)
 	, m_isPicked(false)
+	, m_fRadius(0.5f)
+	, m_finverseMass(10.0f)
+	, m_fDamping(0.999f)
+	, m_vPosition(0, 0, 0)
+	, m_vVelocity(0, 0, 0)
 {
 	CObject::m_nRefCount += 1;
 	g_pObjectManager->AddObject(this);
@@ -112,4 +117,13 @@ void CObject::ReceiveEvent(ST_EVENT eventMsg)
 	}
 	else
 		m_isClicked = false;
+}
+
+bool CObject::hasIntersected(CObject * otherobject)
+{
+	return true;
+}
+
+void CObject::CollisionOtherObject(CObject * otherobject)
+{
 }
