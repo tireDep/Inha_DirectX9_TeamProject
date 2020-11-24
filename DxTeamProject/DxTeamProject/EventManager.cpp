@@ -67,8 +67,10 @@ void CEventManager::Update()
 	else if (pushD)
 		msg.playerInput = PlayerInputType::eRight;
 
-	else if (pushF)
-		msg.playerInput = PlayerInputType::eHold;
+	else if (pushF && pushW)
+		msg.playerInput = PlayerInputType::eHoldPush;
+	else if (pushF && pushS)
+		msg.playerInput = PlayerInputType::eHoldPull;
 
 	CheckEvent(msg);
 }
