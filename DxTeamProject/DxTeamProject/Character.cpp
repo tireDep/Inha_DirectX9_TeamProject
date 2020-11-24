@@ -84,6 +84,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			break;
 
 		case PlayerInputType::eHold:
+			speed = -1.0f;
 			// todo : 잡기 구현
 			break;
 

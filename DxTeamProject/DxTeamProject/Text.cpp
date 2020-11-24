@@ -103,19 +103,18 @@ void CText::RenderGrab(vector<CObject*> ObjectPosition , D3DXVECTOR3 PlayerPosit
 {
 	for (int i = 0; i < ObjectPosition.size(); ++i)
 	{
-		if (ObjectPosition[i]->GetPosition().x - PlayerPosition.x < 2.0f
-			&& ObjectPosition[i]->GetPosition().z - PlayerPosition.z < 2.0f
-			&& ObjectPosition[i]->GetPosition().x - PlayerPosition.x > -2.0f
-			&& ObjectPosition[i]->GetPosition().z - PlayerPosition.z > -2.0f)
+		if (ObjectPosition[i]->GetPosition().x - PlayerPosition.x < 1.5f
+			&& ObjectPosition[i]->GetPosition().z - PlayerPosition.z < 1.5f
+			&&    ObjectPosition[i]->GetPosition().x - PlayerPosition.x> -1.5f
+			&& ObjectPosition[i]->GetPosition().z - PlayerPosition.z > -1.5f)
 		{
-			RECT rc, GrabRC;
-			GetClientRect(g_hWnd, &rc);
-			SetRect(&GrabRC, rc.right / 2 + 10, rc.bottom, rc.right / 2 + 90, rc.bottom + 20);
-			stringstream stream;
+			RECT rc;
+			// later client rect
+			SetRect(&rc, 732, 360, 100, 60);
 			string GrabString = "Àâ±â(F)";
 			m_pFont->DrawTextA(NULL, GrabString.c_str(), GrabString.length(),
-				&GrabRC, DT_LEFT | DT_TOP | DT_NOCLIP, BLUE);
-			break;
+				&rc, DT_LEFT | DT_TOP | DT_NOCLIP, BLUE);
+			return;
 		}
 	}
 }
