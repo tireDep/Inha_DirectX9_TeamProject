@@ -102,8 +102,8 @@ void CMainGame::Setup()
 	m_pPrevFrustum.Setup();
 	m_pNowFrustum.Setup();
 
-	m_pHeightMap = new CHeight;
-	m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
+	//m_pHeightMap = new CHeight;
+	//m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
 
 	for (int i = 0; i < 8; i++)
 	{
@@ -326,8 +326,8 @@ void CMainGame::Render()
 	if (m_Xfile)
 		m_Xfile->Render(m_pCamera->GetCameraEye());
 
-	if (m_pHeightMap)
-		m_pHeightMap->Render();
+	//if (m_pHeightMap)
+	//	m_pHeightMap->Render();
 
 	if (g_gameManager->GetDevMode())
 	{

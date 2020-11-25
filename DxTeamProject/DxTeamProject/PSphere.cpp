@@ -162,17 +162,60 @@ void CPSphere::CollisionOtherObject(CObject* otherobject)
 	// declare variable, for performance I set them as static
 	static D3DXVECTOR3 direction;
 	static D3DXVECTOR3 warpVector;
-	static D3DXVECTOR3 totalVelocity;
-	static D3DXVECTOR3 normalizedDirection;
-	static D3DXVECTOR3 ballVelocity;
-	static D3DXVECTOR3 thisVelocity;
 	static const float fix = 1.1f;
 	static float distance;
 	static float overlapInterval;
 
+	//static D3DXVECTOR3 totalVelocity;
+	//static D3DXVECTOR3 normalizedDirection;
+	//static D3DXVECTOR3 ballVelocity;
+	//static D3DXVECTOR3 thisVelocity;
+	// 2 dimension -> 3 dimension later editing...
+	//if (hasIntersected(otherobject))
+	//{
+	//	direction = this->GetPosition() - otherobject->GetPosition();
+	//	// 2 dimension -> 3 dimension later editing...
+	//	distance = sqrt(direction.x * direction.x + direction.z * direction.z);
+	//	overlapInterval = 2 * otherobject->GetRadius() - distance;
+	//	warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetRadius() - overlapInterval));
+	//	// implementation of collision
+	//	if (((otherobject->GetVelocity().x * otherobject->GetVelocity().x) + (otherobject->GetVelocity().z * otherobject->GetVelocity().z)) >= ((this->GetVelocity().x * this->GetVelocity().x) + (this->GetVelocity().z * this->GetVelocity().z)))
+	//	{
+	//		otherobject->CollisionOtherObject(this);
+	//		return;
+	//	}
+	//	else
+	//	{
+	//		// 2 dimension -> 3 dimension later editing...
+	//		D3DXVECTOR3 p;
+	//		p.x = this->GetPosition().x + warpVector.x;
+	//		p.y = this->GetPosition().y;
+	//		p.z = this->GetPosition().z + warpVector.z;
+	//		this->SetPosition(p);
+	//		D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	//	}
+	//	// 2 dimension -> 3 dimension later editing...
+	//	D3DXVECTOR3 v;
+	//	v.x = this->GetVelocity().x + otherobject->GetVelocity().x;
+	//	v.y = 0;
+	//	v.z = this->GetVelocity().z + otherobject->GetVelocity().z;
+	//	totalVelocity = v;
+	//	normalizedDirection = (-1) * direction / distance;
+	//	ballVelocity = normalizedDirection * (normalizedDirection.x * totalVelocity.x + normalizedDirection.z * totalVelocity.z);
+	//	thisVelocity = -ballVelocity + totalVelocity;
+	//	v.x = thisVelocity.x;
+	//	v.z = thisVelocity.z;
+	//	this->SetVelocity(v);
+	//	v.x = ballVelocity.x;
+	//	v.z = ballVelocity.z;
+	//	otherobject->SetVelocity(v);
+	//}
+
+	// mass applying
 	if (hasIntersected(otherobject))
 	{
 		direction = this->GetPosition() - otherobject->GetPosition();
+		// 2 dimension -> 3 dimension later editing...
 		distance = sqrt(direction.x * direction.x + direction.z * direction.z);
 		overlapInterval = 2 * otherobject->GetRadius() - distance;
 		warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetRadius() - overlapInterval));
@@ -185,6 +228,7 @@ void CPSphere::CollisionOtherObject(CObject* otherobject)
 		}
 		else
 		{
+			// 2 dimension -> 3 dimension later editing...
 			D3DXVECTOR3 p;
 			p.x = this->GetPosition().x + warpVector.x;
 			p.y = this->GetPosition().y;
@@ -193,21 +237,26 @@ void CPSphere::CollisionOtherObject(CObject* otherobject)
 			D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 		}
 
-		D3DXVECTOR3 v;
-		v.x = this->GetVelocity().x + otherobject->GetVelocity().x;
-		v.y = 0;
-		v.z = this->GetVelocity().z + otherobject->GetVelocity().z;
-		totalVelocity = v;
-		normalizedDirection = (-1) * direction / distance;
+		// 2 dimension -> 3 dimension later editing...
+		float v1, v2;
+		D3DXVECTOR3 massdirection;
+		massdirection = this->GetPosition() - otherobject->GetPosition();
+		D3DXVec3Normalize(&massdirection, &massdirection);
+		v1 = D3DXVec3Dot(&this->GetVelocity(), &massdirection);
+		v2 = D3DXVec3Dot(&otherobject->GetVelocity(), &massdirection);
+		// perfect elastic collision
+		float elasticity = 1.0f;
+		float finalv1, finalv2;
+		finalv1 = (((this->GetMass() - (elasticity * otherobject->GetMass()))*v1) + ((1 + elasticity)*otherobject->GetMass()*v2))
+			/ (this->GetMass() + otherobject->GetMass());
+		finalv2 = (((otherobject->GetMass() - (elasticity * this->GetMass()))*v2) + ((1 + elasticity)*this->GetMass()*v1))
+			/ (this->GetMass() + otherobject->GetMass());
 
-		ballVelocity = normalizedDirection * (normalizedDirection.x * totalVelocity.x + normalizedDirection.z * totalVelocity.z);
-		thisVelocity = -ballVelocity + totalVelocity;
+		D3DXVECTOR3 collisionV1, collisionV2;
+		collisionV1 = this->GetVelocity() + (finalv1 - v1) * massdirection;
+		collisionV2 = otherobject->GetVelocity() + (finalv2 - v2) * massdirection;
 
-		v.x = thisVelocity.x;
-		v.z = thisVelocity.z;
-		this->SetVelocity(v);
-		v.x = ballVelocity.x;
-		v.z = ballVelocity.z;
-		otherobject->SetVelocity(v);
+		this->SetVelocity(collisionV1);
+		otherobject->SetVelocity(collisionV2);
 	}
 }

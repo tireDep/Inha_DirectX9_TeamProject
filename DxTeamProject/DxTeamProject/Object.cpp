@@ -128,7 +128,7 @@ void CObject::ReceiveEvent(ST_EVENT eventMsg)
 			switch (m_tmpColor)
 			{
 				case Color::Black:
-					SetMass(1000);
+					SetMass(100);
 					break;
 				case Color::White:
 					SetMass(0.001f);
