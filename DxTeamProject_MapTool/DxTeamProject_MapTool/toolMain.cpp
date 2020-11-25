@@ -2,6 +2,7 @@
 #include "Grid.h"
 #include "Cube.h"
 #include "Camera.h"
+#include "Ray.h"
 #include "ImguiClass.h"
 #include "Tile.h"
 #include "toolMain.h"

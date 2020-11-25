@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Camera.h"
+#include "Cube.h"
+#include "Ray.h"
 
 CCamera::CCamera() : 
 	m_vEye(0, 0, -5), 
@@ -20,6 +22,8 @@ CCamera::~CCamera()
 void CCamera::Setup(D3DXVECTOR3 * pvTarget)
 {
 	m_pvTarget = pvTarget;
+
+	
 
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
@@ -69,6 +73,12 @@ void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		m_isLButtonDown = false;
 		break;
 
+	case WM_RBUTTONDOWN:
+	{
+		//CRay r = CRay::RayAtWorldSpace(LOWORD(lParam), HIWORD(lParam));
+
+		break;
+	}
 	case WM_MOUSEMOVE:
 		if (m_isLButtonDown)
 		{

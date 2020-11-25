@@ -12,6 +12,7 @@ private:
 	float			m_fCameraDistance;
 	D3DXVECTOR3		m_vCamRotAngle;
 
+
 	float m_fRotY;
 
 public:
