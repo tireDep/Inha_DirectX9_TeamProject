@@ -8,6 +8,7 @@
 #include "toolMain.h"
 
 CToolMain::CToolMain()
+	: m_pRay(NULL)
 {
 }
 
@@ -16,6 +17,7 @@ CToolMain::~CToolMain()
 	SafeDelete(m_pGrid);
 	SafeDelete(m_pCube);
 	SafeDelete(m_pCamera);
+	SafeDelete(m_pRay);
 
 	m_pImgui->Destroy();
 	SafeDelete(m_pImgui);
@@ -40,6 +42,8 @@ void CToolMain::Setup()
 	m_pImgui = new CImguiClass;
 	m_pImgui->Setup();
 
+	m_pRay = new CRay;
+
 	CTile* temp = new CTile;
 	temp->Setup();
 
@@ -60,8 +64,13 @@ void CToolMain::Update()
 	m_pCamera->Update();
 
 	g_pObjectManager->Update();
+	// ray
+	if(m_pRay)
+		g_pObjectManager->Update(m_pRay);
 
 	m_pImgui->Update();
+
+
 }
 
 void CToolMain::Render()
@@ -100,6 +109,19 @@ void CToolMain::Render()
 void CToolMain::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	m_pCamera->WndProc(hWnd, msg, wParam, lParam);
+
+	switch (msg)	
+	{
+		case WM_LBUTTONDOWN:
+			{
+				CRay r = CRay::RayAtWorldSpace(LOWORD(lParam), HIWORD(lParam));
+				m_pRay->SetOrigin(r.GetOrigin());
+				m_pRay->SetDirection(r.GetDirection());
+			}
+			break;
+		default:
+			break;
+	}
 }
 
 CImguiClass* CToolMain::GetImgui()

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "IObject.h"
 #include "ObjectManager.h"
+#include "Ray.h"
 
 void CObjectManager::AddObject(IObject * pObject)
 {
@@ -40,6 +41,12 @@ void CObjectManager::Update()
 {
 	for (int i = 0; i < m_vecObject.size(); i++)
 		m_vecObject[i]->Update();
+}
+
+void CObjectManager::Update(CRay * ray)
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+		m_vecObject[i]->Update(ray);
 }
 
 void CObjectManager::Render()

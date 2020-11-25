@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Ray.h"
+
 class IObject
 {
 protected:
@@ -36,6 +38,8 @@ public:
 
 	virtual void Setup() = 0;
 	virtual void Update() = 0;
+	// ray
+	virtual void Update(CRay * ray) = 0;
 	virtual void Render() = 0;
 
 	static void SetRefCnt(int set);

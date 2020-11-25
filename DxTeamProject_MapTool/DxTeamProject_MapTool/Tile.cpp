@@ -84,6 +84,10 @@ void CTile::Update()
 {
 }
 
+void CTile::Update(CRay * ray)
+{
+}
+
 void CTile::Render()
 {
 	D3DXMATRIXA16 matWorld, matS, matR, matT;
