@@ -101,17 +101,19 @@ void COBB::SetUpXFile(D3DXVECTOR3& xfileMin, D3DXVECTOR3& xfileMax)
 	m_fAxisHalfLen[1] = m_fAxisLen[1] / 2.0f;
 	m_fAxisHalfLen[2] = m_fAxisLen[2] / 2.0f;
 
+	float max = vMax.y;
+
 	vector<D3DXVECTOR3> vecVertex;
 
-	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisHalfLen[1]- 1.5, -m_fAxisHalfLen[2])); // 0
-	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisLen[1] - 0.5 , -m_fAxisHalfLen[2])); //1
-	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisLen[1] - 0.5, -m_fAxisHalfLen[2])); //2
-	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisHalfLen[1] - 1.5, -m_fAxisHalfLen[2])); // 3
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0],  max, -m_fAxisHalfLen[2])); // 0
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], 0, -m_fAxisHalfLen[2])); //1
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0],0, -m_fAxisHalfLen[2])); //2
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], max, -m_fAxisHalfLen[2])); // 3
 
-	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisHalfLen[1] - 1.5, m_fAxisHalfLen[2])); //4 
-	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], m_fAxisLen[1] - 0.5, m_fAxisHalfLen[2])); // 5
-	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisLen[1] - 0.5, m_fAxisHalfLen[2])); //6
-	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], m_fAxisHalfLen[1] - 1.5, m_fAxisHalfLen[2])); //7
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0],  max, m_fAxisHalfLen[2])); //4 
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0],0, m_fAxisHalfLen[2])); // 5
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0],0, m_fAxisHalfLen[2])); //6
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0],  max, m_fAxisHalfLen[2])); //7
 
 	vector<DWORD> vecIndex;
 	//¾Õ¸é

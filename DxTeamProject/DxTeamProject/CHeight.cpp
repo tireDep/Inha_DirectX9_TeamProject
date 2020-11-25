@@ -153,6 +153,17 @@ void CHeight::Setup(char* szFolder,
 
 void CHeight::Render()
 {
+
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXVECTOR3 m_vScale = D3DXVECTOR3(1, 1, 1);
+	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+
+
+	
+	// D3DXMatrixTranslation(&matT, eye.x, eye.y, eye.z);
+
+	D3DXMATRIXA16 matWorld = matS;
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 	g_pD3DDevice->SetMaterial(&m_stMtl);
 	m_pMesh->DrawSubset(0);
 }
