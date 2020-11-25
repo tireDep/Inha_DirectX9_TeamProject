@@ -47,11 +47,6 @@ void CToolMain::Setup()
 
 void CToolMain::Update()
 {
-	if (GetKeyState('1') & 0x8000)
-	{
-		CTile* tile = new CTile;
-		tile->Setup();
-	}
 #ifdef _DEBUG
 	m_pCube->Update();
 #endif
@@ -113,7 +108,10 @@ void CToolMain::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				m_pRay->SetDirection(r.GetDirection());
 			}
 			break;
-		default:
+
+		case WM_KEYDOWN:
+			if (wParam == VK_DELETE)
+				g_pObjectManager->RemoveClickedObj();
 			break;
 	}
 }

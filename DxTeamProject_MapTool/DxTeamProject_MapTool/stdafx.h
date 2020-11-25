@@ -87,7 +87,9 @@ struct ST_PN_VERTEX
 
 enum ObjectType
 {
-	eTile, eBackObj,
+	eTile01, eTile02, eTile03, eTile04, eTile05, eTile06,
+	eTile07, eTile08, eTile09, eTile10, eTile11, eTile12, eTile13,
+	eBackObj,
 	eBox, eSphere, eCylinder
 };
 

@@ -10,11 +10,21 @@ void CImguiClass::SetVecItem()
 {
 	vector<string> tempVec;
 	vector<ObjectType> tempObjType;
-	if (m_NowLoadType == LoadType::eBackground)
+	if (m_NowLoadType == LoadType::eMap)
 	{
-		tempVec.push_back("Tile01"); tempObjType.push_back(eTile);
-		tempVec.push_back("Tile02"); tempObjType.push_back(eTile);
-		// >> todo : item Ãß°¡
+		tempVec.push_back("Tile01"); tempObjType.push_back(eTile01);
+		tempVec.push_back("Tile02"); tempObjType.push_back(eTile02);
+		tempVec.push_back("Tile03"); tempObjType.push_back(eTile03);
+		tempVec.push_back("Tile04"); tempObjType.push_back(eTile04);
+		tempVec.push_back("Tile05"); tempObjType.push_back(eTile05);
+		tempVec.push_back("Tile06"); tempObjType.push_back(eTile06);
+		tempVec.push_back("Tile07"); tempObjType.push_back(eTile07);
+		tempVec.push_back("Tile08"); tempObjType.push_back(eTile08);
+		tempVec.push_back("Tile09"); tempObjType.push_back(eTile09);
+		tempVec.push_back("Tile10"); tempObjType.push_back(eTile10);
+		tempVec.push_back("Tile11"); tempObjType.push_back(eTile11);
+		tempVec.push_back("Tile12"); tempObjType.push_back(eTile12);
+		tempVec.push_back("Tile13"); tempObjType.push_back(eTile13);
 	}
 	else if (m_NowLoadType == LoadType::eObject)
 	{
@@ -224,10 +234,10 @@ void CImguiClass::Update()
 	{ // >> : FileLoad
 		ImGui::Begin("File Loader");
 
-		if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = -1; }
+		if (ImGui::RadioButton("MapTile", m_NowLoadType == LoadType::eMap)) { m_NowLoadType = LoadType::eMap; m_FileLoadIndex = -1; }
 		ImGui::SameLine(); 
 		if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
-
+		// todo : Background
 		if (m_NowLoadType != m_PreLoadType)
 		{
 			SetVecItem();
