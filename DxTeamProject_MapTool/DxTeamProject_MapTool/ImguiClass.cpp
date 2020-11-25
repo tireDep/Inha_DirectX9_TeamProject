@@ -190,7 +190,7 @@ void CImguiClass::Update()
 		}
 
 		// >> todo : 오브젝트 정렬 필요?(이름순)
-
+		vecObj.erase(vecObj.begin(), vecObj.end());
 		ImGui::End();
 	}
 
@@ -205,17 +205,18 @@ void CImguiClass::Update()
 		ImGui::SameLine(); 
 		if (ImGui::RadioButton("Object", mode == LoadType::eObject)) { mode = LoadType::eObject; index = -1; }
 
-		vector<char *> vecItem;
-		vector<ObjectType> vecObjType;
-		// vector<multimap<char*, ObjectType>> vecItem;
+		static vector<string> vecItem;
+		static vector<ObjectType> vecObjType;
 		if (mode == LoadType::eBackground)
 		{
+			vecItem.clear();			 vecObjType.clear();
 			vecItem.push_back("Cube01"); vecObjType.push_back(eTile);
 			vecItem.push_back("Cube02"); vecObjType.push_back(eTile);
 			// >> todo : item 추가
 		}
 		else if (mode == LoadType::eObject)
 		{
+			vecItem.clear();				vecObjType.clear();
 			vecItem.push_back("Box");		vecObjType.push_back(eBox);
 			vecItem.push_back("Sphere");	vecObjType.push_back(eSphere);
 			vecItem.push_back("Cylinder");	vecObjType.push_back(eCylinder);
@@ -223,18 +224,18 @@ void CImguiClass::Update()
 		}
 
 		// << combo
-		const char* showItem;
+		static string showItem;
 		if (index == -1)
 			showItem = " ";
 		else
-			showItem = vecItem[index];
+			showItem = vecItem[index].c_str();
 
-		if (ImGui::BeginCombo(" ", showItem))
+		if (ImGui::BeginCombo(" ", showItem.c_str()))
 		{
 			for (int n = 0; n < vecItem.size(); n++)
 			{
 				const bool is_selected = (index == n);
-				if (ImGui::Selectable(vecItem[n], is_selected))
+				if (ImGui::Selectable(vecItem[n].c_str(), is_selected))
 					index = n;
 
 				if (is_selected)
@@ -289,9 +290,9 @@ void CImguiClass::Update()
 			if (isCheck)
 			{
 				bool isSame = false;
-				for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
+				for (int i = 0; i < vecObj.size(); i++)
 				{
-					if (strcmp(g_pObjectManager->GetVecObject()[i]->GetObjectName().c_str(), name) == 0)
+					if (strcmp(vecObj[i]->GetObjectName().c_str(), name) == 0)
 						isSame = true;
 				}
 
@@ -326,6 +327,7 @@ void CImguiClass::Update()
 			ImGui::Separator();
 		}
 
+		vecObj.erase(vecObj.begin(), vecObj.end());
 		ImGui::End();
 
 		//if
@@ -424,6 +426,7 @@ void CImguiClass::Update()
 			if (ImGui::Selectable(vecObj[i]->GetObjectName().c_str(), &isClick))
 				vecObj[i]->SetClick(isClick);
 		}
+		vecObj.erase(vecObj.begin(), vecObj.end());
 
 		// >> 현 상태 : 여러개 선택 가능 => 하나만 선택 가능으로?
 		/*

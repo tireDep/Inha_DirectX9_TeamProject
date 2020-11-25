@@ -43,12 +43,6 @@ void CToolMain::Setup()
 	m_pImgui->Setup();
 
 	m_pRay = new CRay;
-
-	CTile* temp = new CTile;
-	temp->Setup();
-
-	CTile* temp2 = new CTile;
-	temp2->Setup();
 }
 
 void CToolMain::Update()
