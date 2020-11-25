@@ -25,15 +25,20 @@ void CPSphere::Setup(D3DXVECTOR3 center)
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
-void CPSphere::Update(float duration)
+void CPSphere::Update(float duration, CHeight* pMap)
 {
 	ClearAccumulator();
 	RunPhysics(duration);
 	Integrate(duration);
+	if (pMap)
+	{
+		pMap->GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	}
+
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
-void CPSphere::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
+void CPSphere::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
 {
 	if (D3DXSphereBoundProbe(&m_vPosition, m_fRadius, &ray.GetOrigin(), &ray.GetDirection()) == true)
 	{
@@ -50,8 +55,8 @@ void CPSphere::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick
 
 void CPSphere::Render()
 {
-	m_stMtl.Ambient  = m_Color;
-	m_stMtl.Diffuse  = m_Color;
+	m_stMtl.Ambient = m_Color;
+	m_stMtl.Diffuse = m_Color;
 	m_stMtl.Specular = m_Color;
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
@@ -106,7 +111,7 @@ void CPSphere::SetPusingForce(D3DXVECTOR3 forcedirection)
 	D3DXVec3Normalize(&m_vForceDirection, &forcedirection);
 }
 
-void CPSphere::AddForce(const D3DXVECTOR3 & force)
+void CPSphere::AddForce(const D3DXVECTOR3& force)
 {
 	m_vForceAccum += force;
 }
@@ -138,7 +143,7 @@ void CPSphere::RunPhysics(float duration)
 	Integrate(duration);
 }
 
-bool CPSphere::hasIntersected(CObject * otherobject)
+bool CPSphere::hasIntersected(CObject* otherobject)
 {
 	if (this == otherobject)
 		return false;
@@ -146,13 +151,13 @@ bool CPSphere::hasIntersected(CObject * otherobject)
 	D3DXVECTOR3 direction = this->GetPosition() - otherobject->GetPosition();
 	float distanceSq = direction.x * direction.x + direction.y * direction.y + direction.z * direction.z;
 
-	if (((this->GetRadius() + otherobject->GetRadius())*(this->GetRadius() + otherobject->GetRadius())) < distanceSq)
+	if (((this->GetRadius() + otherobject->GetRadius()) * (this->GetRadius() + otherobject->GetRadius())) < distanceSq)
 		return false;
 	else
 		return true;
 }
 
-void CPSphere::CollisionOtherObject(CObject * otherobject)
+void CPSphere::CollisionOtherObject(CObject* otherobject)
 {
 	// declare variable, for performance I set them as static
 	static D3DXVECTOR3 direction;

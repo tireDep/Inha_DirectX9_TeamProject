@@ -28,15 +28,19 @@ void CPSBox::Setup(D3DXVECTOR3 center)
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
-void CPSBox::Update(float duration)
+void CPSBox::Update(float duration, CHeight* pMap)
 {
 	ClearAccumulator();
 	RunPhysics(duration);
 	Integrate(duration);
+	if (pMap)
+	{
+		pMap->GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	}
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
-void CPSBox::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
+void CPSBox::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
 {
 	D3DXVECTOR3* pVertices;
 
@@ -47,7 +51,7 @@ void CPSBox::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick, 
 	m_vMin.x += m_matWorld._41;			m_vMax.x += m_matWorld._41;
 	m_vMin.y += m_matWorld._42;			m_vMax.y += m_matWorld._42;
 	m_vMin.z += m_matWorld._43;			m_vMax.z += m_matWorld._43;
-	
+
 	if (D3DXBoxBoundProbe(&m_vMin, &m_vMax, &ray.GetOrigin(), &ray.GetDirection()) == true)
 	{
 		m_isPicked = true;
@@ -120,7 +124,7 @@ void CPSBox::SetPusingForce(D3DXVECTOR3 forcedirection)
 	D3DXVec3Normalize(&m_vForceDirection, &forcedirection);
 }
 
-void CPSBox::AddForce(const D3DXVECTOR3 & force)
+void CPSBox::AddForce(const D3DXVECTOR3& force)
 {
 	m_vForceAccum += force;
 }
@@ -152,7 +156,7 @@ void CPSBox::RunPhysics(float duration)
 	Integrate(duration);
 }
 
-bool CPSBox::hasIntersected(CObject * otherobject)
+bool CPSBox::hasIntersected(CObject* otherobject)
 {
 	if (this == otherobject)
 		return false;
@@ -160,13 +164,13 @@ bool CPSBox::hasIntersected(CObject * otherobject)
 	D3DXVECTOR3 direction = this->GetPosition() - otherobject->GetPosition();
 	float distanceSq = direction.x * direction.x + direction.y * direction.y + direction.z * direction.z;
 
-	if (((this->GetRadius() + otherobject->GetRadius())*(this->GetRadius() + otherobject->GetRadius())) < distanceSq)
+	if (((this->GetRadius() + otherobject->GetRadius()) * (this->GetRadius() + otherobject->GetRadius())) < distanceSq)
 		return false;
 	else
 		return true;
 }
 
-void CPSBox::CollisionOtherObject(CObject * otherobject)
+void CPSBox::CollisionOtherObject(CObject* otherobject)
 {
 	// declare variable, for performance I set them as static
 	static D3DXVECTOR3 direction;

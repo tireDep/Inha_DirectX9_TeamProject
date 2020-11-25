@@ -128,7 +128,7 @@ void CMainGame::Setup()
 		cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 20));
 		//cylinder->SetPusingForce(D3DXVECTOR3(0, 0, -1));
 	}
-	
+
 	/// tmp Physics
 	//for (int i = 0; i < 4; i++)
 	//{
@@ -139,7 +139,7 @@ void CMainGame::Setup()
 	//m_pSphere1 = new CPhysicsSphere;
 	//m_pSphere1->Setup();
 	//m_pSphere1->setCenter(-2.7f, 5.0f, 0.0f);
-	
+
 	//m_pSphere2 = new CPhysicsSphere;
 	////m_pSphere2->Setup();
 	//m_pSphere2->setCenter(+2.4f, 0.21f, 0.0f);
@@ -192,7 +192,7 @@ void CMainGame::Update()
 
 	if (m_pCharacter)
 	{
-		m_pCharacter->Update(m_pCamera->GetCameraDirection());
+		m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
@@ -221,7 +221,7 @@ void CMainGame::Update()
 			break;
 		default:
 			break;
-		}	
+		}
 		// grab
 		if (m_pCharacter->Update(g_pObjectManager->GetVecObject()) != -1)
 		{
@@ -238,7 +238,7 @@ void CMainGame::Update()
 			m_pText->SetisGrabstate(false);
 		}
 	}
-	
+
 	if (g_gameManager->GetGridMapMode())
 	{
 		m_pPrevFrustum = m_pNowFrustum;
@@ -253,9 +253,9 @@ void CMainGame::Update()
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());
-	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);
 	g_pObjectManager->Update();
-	
+
 
 
 	//static int count = 0;
@@ -321,11 +321,11 @@ void CMainGame::Render()
 	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 4.0f, rc.right / (float)rc.bottom, 1.0f, 1000.0f);
 	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150,150,150), 1.0f, 0);
+	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150, 150, 150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 
-	 if (m_pGrid)
-	 	m_pGrid->Render();
+	if (m_pGrid)
+		m_pGrid->Render();
 
 
 	if (m_pCharacter)

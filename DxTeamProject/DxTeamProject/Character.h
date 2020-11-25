@@ -20,7 +20,7 @@ protected:
 public:
 	virtual ~CCharacter(void);
 	virtual void Setup();
-	virtual void Update(D3DXVECTOR3 cameradirection);
+	virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
 	int Update(vector<CObject*> ObjectPosition);
 	virtual void DoRotation(const float& radian);
 	virtual void DoMove(const float& velocity);
@@ -36,7 +36,7 @@ public:
 	// setup erase
 	virtual bool Collider(bool isCollided);
 	COBB* m_pOBB;
-	COBB* GetOBB(); 
+	COBB* GetOBB();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	virtual string GetName();
