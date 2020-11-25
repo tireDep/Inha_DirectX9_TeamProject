@@ -135,12 +135,7 @@ void CFileLoadManager::ReadMapData(string fileName)
 			}
 
 			else if (readData == "# Object_End")
-			{
-				CTile* temp = new CTile;
-				temp->Setup(mapData);
-
-				cout << "todo : load File" << endl;
-			}
+				IObject::CreateObject(mapData);
 		}
 	}
 

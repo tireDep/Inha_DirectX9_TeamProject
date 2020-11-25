@@ -45,6 +45,7 @@ public : virtual void Set##funName(varType var ) { \
 
 #include <iostream>
 #include <vector>
+#include <map>
 #include <string>
 
 extern HWND g_hWnd;
@@ -86,7 +87,8 @@ struct ST_PN_VERTEX
 
 enum ObjectType
 {
-	eTile, eBackObj
+	eTile, eBackObj,
+	eBox, eSphere, eCylinder
 };
 
 struct ST_MapData
