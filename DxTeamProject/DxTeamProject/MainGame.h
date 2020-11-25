@@ -15,6 +15,7 @@ class CXfile;
 /// tmp Physics
 class CPhysicsSphere;
 class CWall;
+class CHeight;
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
 //class CParticleWorld;
@@ -35,7 +36,7 @@ private:
 	CPhysicsSphere* m_pSphere1;
 	//CPhysicsSphere* m_pSphere2;
 	vector<CWall*> m_pWall;
-
+	CHeight* m_pHeightMap;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 	//CParticleWorld*	m_pParticleWorld;

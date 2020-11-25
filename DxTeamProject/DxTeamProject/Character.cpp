@@ -196,10 +196,10 @@ int CCharacter::Update(vector<CObject*> ObjectPosition)
 {
 	for (int i = 0; i < ObjectPosition.size(); ++i)
 	{
-		if (ObjectPosition[i]->GetPosition().x - m_vPosition.x < 1.5f
-			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z < 1.5f
-			&& ObjectPosition[i]->GetPosition().x - m_vPosition.x> -1.5f
-			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z > -1.5f)
+		if (ObjectPosition[i]->GetPosition().x - m_vPosition.x < 1.0f
+			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z < 1.0f
+			&& ObjectPosition[i]->GetPosition().x - m_vPosition.x> -1.0f
+			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z > -1.0f)
 			{
 				return i;
 			}

@@ -18,6 +18,7 @@
 #include "PSphere.h"
 #include "PSBox.h"
 #include "PSCylinder.h"
+#include "CHeight.h"
 
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
@@ -30,7 +31,8 @@ CMainGame::CMainGame() :
 	m_pCharacter(NULL),
 	m_pLight(NULL),
 	m_GridMap(NULL),
-	m_Xfile(NULL)
+	m_Xfile(NULL),
+	m_pHeightMap(NULL)
 	/// tmp Physics
 	//m_pSphere1(NULL),
 	//m_pSphere2(NULL),
@@ -50,6 +52,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pLight);
 	SafeDelete(m_GridMap);
 	SafeDelete(m_Xfile);
+	SafeDelete(m_pHeightMap);
 	/// tmp Physics
 	//for(int i = 0; i < 4; ++i)
 	//SafeDelete(m_pWall[i]);
@@ -98,6 +101,9 @@ void CMainGame::Setup()
 	m_GridMap->Setup();
 	m_pPrevFrustum.Setup();
 	m_pNowFrustum.Setup();
+
+	m_pHeightMap = new CHeight;
+	m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
 
 	for (int i = 0; i < 8; i++)
 	{
@@ -261,7 +267,6 @@ void CMainGame::Update()
 	//	m_pWall[0]->hitBy(*m_pSphere1);
 	//	plane -= 0.3f;
 	//	//cout << count++ << endl;
-
 	//}
 	//else // 떠있을때 중력을 줌
 	//{
@@ -335,6 +340,9 @@ void CMainGame::Render()
 
 	if (m_Xfile)
 		m_Xfile->Render(m_pCamera->GetCameraEye());
+
+	if (m_pHeightMap)
+		m_pHeightMap->Render();
 
 	/// tmp Physics
 	//g_pPhysicsObjectManager->Render();
