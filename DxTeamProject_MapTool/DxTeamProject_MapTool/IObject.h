@@ -31,8 +31,9 @@ protected:
 
 	Synthesize(bool, m_isClick, Click);
 
-public:
 	IObject();
+
+public:
 	virtual ~IObject();
 	virtual void Release();
 

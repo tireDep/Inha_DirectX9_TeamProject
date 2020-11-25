@@ -37,6 +37,9 @@
     <Filter Include="Object\Object">
       <UniqueIdentifier>{696c3b97-9b1b-4097-b67c-f21de2c354bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Tile">
+      <UniqueIdentifier>{0866f516-49c1-4b99-9f51-bb55edcf7f08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imconfig.h">
@@ -92,9 +95,6 @@
     <ClInclude Include="Background.h">
       <Filter>Object\Background</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Object\Background</Filter>
-    </ClInclude>
     <ClInclude Include="FileLoadManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -116,11 +116,11 @@
     <ClInclude Include="Ray.h">
       <Filter>Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Object\Tile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="imgui.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
@@ -161,9 +161,6 @@
     <ClCompile Include="Background.cpp">
       <Filter>Object\Background</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Object\Background</Filter>
-    </ClCompile>
     <ClCompile Include="FileLoadManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -187,6 +184,12 @@
     </ClCompile>
     <ClCompile Include="Ray.cpp">
       <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="originMain.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Object\Tile</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

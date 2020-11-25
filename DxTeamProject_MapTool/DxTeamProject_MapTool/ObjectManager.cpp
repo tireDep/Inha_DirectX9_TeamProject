@@ -55,6 +55,18 @@ void CObjectManager::Render()
 		m_vecObject[i]->Render();
 }
 
+void CObjectManager::RemoveClickedObj()
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		if (m_vecObject[i]->GetClick())
+			RemoveObject(m_vecObject[i]);
+	}
+
+	if (m_vecObject.size() == 0)
+		IObject::SetRefCnt(0);
+}
+
 vector<IObject*> CObjectManager::GetVecObject()
 {
 	return m_vecObject;

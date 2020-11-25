@@ -2,7 +2,7 @@
 #include <tchar.h>
 #include <fstream>
 #include "stdafx.h"
-#include "Tile.h" // temp;
+#include "IObject.h"
 #include "FileLoadManager.h"
 
 #define StrFilePath(path, folder, file) { path = string(folder) + "/" + string(file); }

@@ -20,6 +20,8 @@ public:
 	void Update(CRay * ray);
 	void Render();
 
+	void RemoveClickedObj();
+
 	vector<IObject *> GetVecObject();
 };
 
