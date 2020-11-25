@@ -18,6 +18,7 @@
 #include "PSphere.h"
 #include "PSBox.h"
 #include "PSCylinder.h"
+#include "CHeight.h"
 
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
@@ -30,7 +31,8 @@ CMainGame::CMainGame() :
 	m_pCharacter(NULL),
 	m_pLight(NULL),
 	m_GridMap(NULL),
-	m_Xfile(NULL)
+	m_Xfile(NULL),
+	m_pHeightMap(NULL)
 	/// tmp Physics
 	//m_pSphere1(NULL),
 	//m_pSphere2(NULL),
@@ -50,6 +52,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pLight);
 	SafeDelete(m_GridMap);
 	SafeDelete(m_Xfile);
+	SafeDelete(m_pHeightMap);
 	/// tmp Physics
 	//for(int i = 0; i < 4; ++i)
 	//SafeDelete(m_pWall[i]);
@@ -99,6 +102,9 @@ void CMainGame::Setup()
 	m_pPrevFrustum.Setup();
 	m_pNowFrustum.Setup();
 
+	m_pHeightMap = new CHeight;
+	m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
+
 	for (int i = 0; i < 8; i++)
 	{
 		CPSphere* Sphere = new CPSphere();
@@ -122,7 +128,7 @@ void CMainGame::Setup()
 		cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 20));
 		//cylinder->SetPusingForce(D3DXVECTOR3(0, 0, -1));
 	}
-	
+
 	/// tmp Physics
 	//for (int i = 0; i < 4; i++)
 	//{
@@ -133,7 +139,7 @@ void CMainGame::Setup()
 	//m_pSphere1 = new CPhysicsSphere;
 	//m_pSphere1->Setup();
 	//m_pSphere1->setCenter(-2.7f, 5.0f, 0.0f);
-	
+
 	//m_pSphere2 = new CPhysicsSphere;
 	////m_pSphere2->Setup();
 	//m_pSphere2->setCenter(+2.4f, 0.21f, 0.0f);
@@ -186,7 +192,7 @@ void CMainGame::Update()
 
 	if (m_pCharacter)
 	{
-		m_pCharacter->Update(m_pCamera->GetCameraDirection());
+		m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
@@ -215,7 +221,7 @@ void CMainGame::Update()
 			break;
 		default:
 			break;
-		}	
+		}
 		// grab
 		if (m_pCharacter->Update(g_pObjectManager->GetVecObject()) != -1)
 		{
@@ -232,7 +238,7 @@ void CMainGame::Update()
 			m_pText->SetisGrabstate(false);
 		}
 	}
-	
+
 	if (g_gameManager->GetGridMapMode())
 	{
 		m_pPrevFrustum = m_pNowFrustum;
@@ -247,9 +253,9 @@ void CMainGame::Update()
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());
-	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);
 	g_pObjectManager->Update();
-	
+
 
 
 	//static int count = 0;
@@ -261,7 +267,6 @@ void CMainGame::Update()
 	//	m_pWall[0]->hitBy(*m_pSphere1);
 	//	plane -= 0.3f;
 	//	//cout << count++ << endl;
-
 	//}
 	//else // 떠있을때 중력을 줌
 	//{
@@ -316,11 +321,11 @@ void CMainGame::Render()
 	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI / 4.0f, rc.right / (float)rc.bottom, 1.0f, 1000.0f);
 	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150,150,150), 1.0f, 0);
+	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150, 150, 150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 
-	 if (m_pGrid)
-	 	m_pGrid->Render();
+	if (m_pGrid)
+		m_pGrid->Render();
 
 
 	if (m_pCharacter)
@@ -335,6 +340,9 @@ void CMainGame::Render()
 
 	if (m_Xfile)
 		m_Xfile->Render(m_pCamera->GetCameraEye());
+
+	if (m_pHeightMap)
+		m_pHeightMap->Render();
 
 	/// tmp Physics
 	//g_pPhysicsObjectManager->Render();

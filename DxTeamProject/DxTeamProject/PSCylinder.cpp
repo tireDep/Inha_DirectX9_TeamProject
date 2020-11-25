@@ -28,15 +28,20 @@ void CPSCylinder::Setup(D3DXVECTOR3 center)
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
-void CPSCylinder::Update(float duration)
+void CPSCylinder::Update(float duration, CHeight* pMap)
 {
 	ClearAccumulator();
 	RunPhysics(duration);
 	Integrate(duration);
+	if (pMap)
+	{
+		pMap->GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	}
+
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
-void CPSCylinder::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
+void CPSCylinder::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
 {
 	D3DXVECTOR3* pVertices;
 
@@ -120,7 +125,7 @@ void CPSCylinder::SetPusingForce(D3DXVECTOR3 forcedirection)
 	D3DXVec3Normalize(&m_vForceDirection, &forcedirection);
 }
 
-void CPSCylinder::AddForce(const D3DXVECTOR3 & force)
+void CPSCylinder::AddForce(const D3DXVECTOR3& force)
 {
 	m_vForceAccum += force;
 }
@@ -152,7 +157,7 @@ void CPSCylinder::RunPhysics(float duration)
 	Integrate(duration);
 }
 
-bool CPSCylinder::hasIntersected(CObject * otherobject)
+bool CPSCylinder::hasIntersected(CObject* otherobject)
 {
 	if (this == otherobject)
 		return false;
@@ -160,13 +165,13 @@ bool CPSCylinder::hasIntersected(CObject * otherobject)
 	D3DXVECTOR3 direction = this->GetPosition() - otherobject->GetPosition();
 	float distanceSq = direction.x * direction.x + direction.y * direction.y + direction.z * direction.z;
 
-	if (((this->GetRadius() + otherobject->GetRadius())*(this->GetRadius() + otherobject->GetRadius())) < distanceSq)
+	if (((this->GetRadius() + otherobject->GetRadius()) * (this->GetRadius() + otherobject->GetRadius())) < distanceSq)
 		return false;
 	else
 		return true;
 }
 
-void CPSCylinder::CollisionOtherObject(CObject * otherobject)
+void CPSCylinder::CollisionOtherObject(CObject* otherobject)
 {
 	// declare variable, for performance I set them as static
 	static D3DXVECTOR3 direction;
