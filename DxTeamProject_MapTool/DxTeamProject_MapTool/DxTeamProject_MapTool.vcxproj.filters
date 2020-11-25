@@ -113,6 +113,9 @@
     <ClInclude Include="Cylinder.h">
       <Filter>Object\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -181,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
       <Filter>Object\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
