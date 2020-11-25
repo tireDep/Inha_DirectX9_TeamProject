@@ -6,8 +6,35 @@
 #include "IObject.h"
 #include "ImguiClass.h"
 
-CImguiClass::CImguiClass()
+void CImguiClass::SetVecItem()
 {
+	vector<string> tempVec;
+	vector<ObjectType> tempObjType;
+	if (m_NowLoadType == LoadType::eBackground)
+	{
+		tempVec.push_back("Tile01"); tempObjType.push_back(eTile);
+		tempVec.push_back("Tile02"); tempObjType.push_back(eTile);
+		// >> todo : item 추가
+	}
+	else if (m_NowLoadType == LoadType::eObject)
+	{
+		tempVec.push_back("Box");			tempObjType.push_back(eBox);
+		tempVec.push_back("Sphere");		tempObjType.push_back(eSphere);
+		tempVec.push_back("Cylinder");		tempObjType.push_back(eCylinder);
+		// >> todo : item 추가
+	}
+	
+	m_vecItem = tempVec;
+	m_vecObjType = tempObjType;
+}
+
+CImguiClass::CImguiClass() :
+	m_isReset(false),
+	m_FileLoadIndex(-1),
+	m_showItem("\0")
+{
+	m_PreLoadType = LoadType::eNull;
+	m_NowLoadType = LoadType::eNull;
 }
 
 CImguiClass::~CImguiClass()
@@ -85,7 +112,6 @@ void CImguiClass::Update()
 	// ============================================================================================
 
 	{ // >> : Menu Title Bar
-		static bool isReset = false;
 		if (ImGui::BeginMainMenuBar())
 		{
 			if (ImGui::BeginMenu("File"))
@@ -96,7 +122,7 @@ void CImguiClass::Update()
 				ImGui::Separator();
 
 				if (ImGui::MenuItem("Reset", " ")) 
-					isReset = true;
+					m_isReset = true;
 
 				ImGui::EndMenu();
 			}
@@ -114,20 +140,20 @@ void CImguiClass::Update()
 			ImGui::EndMainMenuBar();
 		}
 
-		if (isReset)
+		if (m_isReset)
 		{
-			ImGui::Begin("ResetWindow", &isReset);
+			ImGui::Begin("ResetWindow", &m_isReset);
 			ImGui::Text("Reset?");
 
 			if (ImGui::Button("Yes"))
 			{
 				g_pObjectManager->Destroy();
-				isReset = false;
+				m_isReset = false;
 			}
 			
 			ImGui::SameLine();
 			if (ImGui::Button("No"))
-				isReset = false;
+				m_isReset = false;
 
 			ImGui::End();
 		}
@@ -198,45 +224,30 @@ void CImguiClass::Update()
 	{ // >> : FileLoad
 		ImGui::Begin("File Loader");
 
-		static int index = -1;
-		enum class LoadType { eMap, eBackground, eObject };
-		static LoadType mode = LoadType::eBackground;
-		if (ImGui::RadioButton("Background", mode == LoadType::eBackground)) { mode = LoadType::eBackground; index = -1; } 
+		if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = -1; }
 		ImGui::SameLine(); 
-		if (ImGui::RadioButton("Object", mode == LoadType::eObject)) { mode = LoadType::eObject; index = -1; }
+		if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
 
-		static vector<string> vecItem;
-		static vector<ObjectType> vecObjType;
-		if (mode == LoadType::eBackground)
+		if (m_NowLoadType != m_PreLoadType)
 		{
-			vecItem.clear();			 vecObjType.clear();
-			vecItem.push_back("Cube01"); vecObjType.push_back(eTile);
-			vecItem.push_back("Cube02"); vecObjType.push_back(eTile);
-			// >> todo : item 추가
+			SetVecItem();
+			m_PreLoadType = m_NowLoadType;
 		}
-		else if (mode == LoadType::eObject)
-		{
-			vecItem.clear();				vecObjType.clear();
-			vecItem.push_back("Box");		vecObjType.push_back(eBox);
-			vecItem.push_back("Sphere");	vecObjType.push_back(eSphere);
-			vecItem.push_back("Cylinder");	vecObjType.push_back(eCylinder);
-			// >> todo : item 추가
-		}
+
 
 		// << combo
-		static string showItem;
-		if (index == -1)
-			showItem = " ";
+		if (m_FileLoadIndex == -1)
+			m_showItem = " ";
 		else
-			showItem = vecItem[index].c_str();
+			m_showItem = m_vecItem[m_FileLoadIndex].c_str();
 
-		if (ImGui::BeginCombo(" ", showItem.c_str()))
+		if (ImGui::BeginCombo(" ", m_showItem.c_str()))
 		{
-			for (int n = 0; n < vecItem.size(); n++)
+			for (int n = 0; n < m_vecItem.size(); n++)
 			{
-				const bool is_selected = (index == n);
-				if (ImGui::Selectable(vecItem[n].c_str(), is_selected))
-					index = n;
+				const bool is_selected = (m_FileLoadIndex == n);
+				if (ImGui::Selectable(m_vecItem[n].c_str(), is_selected))
+					m_FileLoadIndex = n;
 
 				if (is_selected)
 					ImGui::SetItemDefaultFocus(); // focus
@@ -246,9 +257,9 @@ void CImguiClass::Update()
 		// << combo
 
 		ImGui::SameLine();
-		if (ImGui::Button("Load") && index != -1)
+		if (ImGui::Button("Load") && m_FileLoadIndex != -1)
 		{
-			IObject::CreateObject(vecObjType[index]);
+			IObject::CreateObject(m_vecObjType[m_FileLoadIndex]);
 		}
 
 		ImGui::Separator();
@@ -316,16 +327,16 @@ void CImguiClass::Update()
 
 			ImGui::Separator();
 		}
-		else
-		{
-			ImGui::InputText("Name", " ", 1024);
-			ImGui::Separator();
-
-			ImGui::InputFloat3("Scale", D3DXVECTOR3(0, 0, 0));
-			ImGui::InputFloat3("Rotate", D3DXVECTOR3(0, 0, 0));
-			ImGui::InputFloat3("Translate", D3DXVECTOR3(0, 0, 0));
-			ImGui::Separator();
-		}
+		// else
+		// {
+		// 	ImGui::InputText("Name", " ", 1024);
+		// 	ImGui::Separator();
+		// 
+		// 	ImGui::InputFloat3("Scale", D3DXVECTOR3(0, 0, 0));
+		// 	ImGui::InputFloat3("Rotate", D3DXVECTOR3(0, 0, 0));
+		// 	ImGui::InputFloat3("Translate", D3DXVECTOR3(0, 0, 0));
+		// 	ImGui::Separator();
+		// }
 
 		vecObj.erase(vecObj.begin(), vecObj.end());
 		ImGui::End();

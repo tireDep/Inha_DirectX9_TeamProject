@@ -10,9 +10,9 @@ CTile::CTile()
 
 	m_ObjectType = ObjectType::eTile;
 
-	m_vScale = D3DXVECTOR3(1, 1, 1);
+	m_vScale = D3DXVECTOR3(0.1, 0.1, 0.1);
 	m_vRotate = D3DXVECTOR3(0, 0, 0);
-	m_vTranslate = D3DXVECTOR3(0, 0.5f, 0);
+	m_vTranslate = D3DXVECTOR3(0, 0, 0);
 }
 
 CTile::~CTile()
@@ -34,7 +34,7 @@ void CTile::Setup()
 
 	ST_XFile* xfile = new ST_XFile;
 
-	g_pFileLoadManager->FileLoad_XFile("Resource/Tile", "Cube_01.X", xfile);
+	g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Tile", "Tile_01.X", xfile);
 
 	m_pMesh = xfile->pMesh;
 	m_adjBuffer = xfile->adjBuffer;
@@ -127,4 +127,6 @@ void CTile::Render()
 
 		m_pMesh->DrawSubset(i);
 	}
+
+	g_pD3DDevice->SetTexture(0, NULL);
 }
