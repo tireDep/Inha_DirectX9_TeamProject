@@ -5,6 +5,40 @@
 #include "Tile.h" // temp;
 #include "FileLoadManager.h"
 
+#define StrFilePath(path, folder, file) { path = string(folder) + "/" + string(file); }
+#define ErrMessageBox(msg, type) { MessageBoxA(g_hWnd, string(msg).c_str(), string(type).c_str(), MB_OK); }
+
+LPD3DXEFFECT CFileLoadManager::LoadShader(const string fileName)
+{
+	LPD3DXEFFECT ret = NULL;
+
+	LPD3DXBUFFER pError = NULL;
+	DWORD dwShaderFlags = 0;
+
+#if _DEBUG
+	dwShaderFlags |= D3DXSHADER_DEBUG;
+#endif
+
+	D3DXCreateEffectFromFileA(g_pD3DDevice, fileName.c_str(),
+		NULL, NULL, dwShaderFlags, NULL, &ret, &pError);
+
+	if (!ret && pError)
+	{
+		int size = pError->GetBufferSize();
+		void *ack = pError->GetBufferPointer();
+
+		// if (ack)
+		// {
+		// 	char* str = new char[size];
+		// 	sprintf(str, (const char*)ack, size);
+		// 	OutputDebugString(str);
+		// 	delete[] str;
+		// }
+	}
+
+	return ret;
+}
+
 void CFileLoadManager::ReadMapData(string fileName)
 {
 	// >> todo : 파싱
@@ -29,10 +63,22 @@ void CFileLoadManager::ReadMapData(string fileName)
 				mapData.strObjName = readData;
 			}
 
+			else if (readData == "# FolderPath")
+			{
+				getline(mapFile, readData);
+				mapData.strFolderPath = readData;
+			}
+
 			else if (readData == "# FilePath")
 			{
 				getline(mapFile, readData);
-				mapData.strFilePath = readData;
+				mapData.strXFilePath = readData;
+			}
+
+			else if (readData == "# TxtPath")
+			{
+				getline(mapFile, readData);
+				mapData.strTxtPath = readData;
 			}
 
 			else if (readData == "# ObjectType")
@@ -89,12 +135,7 @@ void CFileLoadManager::ReadMapData(string fileName)
 			}
 
 			else if (readData == "# Object_End")
-			{
-				CTile* temp = new CTile;
-				temp->Setup(mapData);
-
-				cout << "todo : load File" << endl;
-			}
+				IObject::CreateObject(mapData);
 		}
 	}
 
@@ -117,7 +158,11 @@ void CFileLoadManager::SaveMapData(string fileName)
 		for (int i = 0; i < vecObject.size(); i++)
 		{
 			mapData.strObjName = vecObject[i]->GetObjectName();
-			mapData.strFilePath = vecObject[i]->GetFilePath();
+
+			mapData.strFolderPath = vecObject[i]->GetFolderPath();
+			mapData.strXFilePath = vecObject[i]->GetXFilePath();
+			mapData.strTxtPath = vecObject[i]->GetXTxtPath();
+
 			mapData.objType = vecObject[i]->GetObjType();
 			mapData.vScale = vecObject[i]->GetScale();
 			mapData.vRotate = vecObject[i]->GetRotate();
@@ -128,8 +173,14 @@ void CFileLoadManager::SaveMapData(string fileName)
 			mapFile << "# ObjectName" << endl;
 			mapFile << mapData.strObjName << endl;
 
+			mapFile << "# FolderPath" << endl;
+			mapFile << mapData.strFolderPath << endl;
+
 			mapFile << "# FilePath" << endl;
-			mapFile << mapData.strFilePath << endl;
+			mapFile << mapData.strXFilePath << endl;
+
+			mapFile << "# TxtPath" << endl;
+			mapFile << mapData.strTxtPath << endl;
 
 			mapFile << "# ObjectType" << endl;
 			mapFile << mapData.objType << endl;
@@ -197,16 +248,10 @@ void CFileLoadManager::FileLoad_OpenMapData()
 	ofn.lpstrInitialDir = _tgetcwd(strBuffer, 128);	// 현재 경로 불러오기
 	if (GetOpenFileName(&ofn) != 0)
 	{
-		// wsprintf(fileName, L"%s", ofn.lpstrFile);
-		// MessageBox(g_hWnd, fileName, L"불러오기 선택", MB_OKCANCEL);
 		string realName;
 		if (CheckDataName(fileName, realName))
 			ReadMapData(realName);
 	}
-	// else
-	// {
-	// 	MessageBox(g_hWnd, L"불러오기를 취소하였습니다.", L"불러오기 취소", MB_OKCANCEL);
-	// }
 }
 
 void CFileLoadManager::FileLoad_SaveMapData()
@@ -225,14 +270,103 @@ void CFileLoadManager::FileLoad_SaveMapData()
 	ofn.lpstrInitialDir = _tgetcwd(strBuffer, 128);	// 현재 경로 불러오기
 	if (GetSaveFileName(&ofn) != 0)
 	{
-		// wsprintf(fileName, L"%s", ofn.lpstrFile);
-		// MessageBox(g_hWnd, fileName, L"파일 저장", MB_OKCANCEL);
 		string realName;
 		if (CheckDataName(fileName, realName))
 			SaveMapData(realName);
 	}
-	// else
-	// {
-	// 	MessageBox(g_hWnd, L"파일 저장을 취소하였습니다.", L"저장 취소", MB_OKCANCEL);
-	// }
+}
+
+bool CFileLoadManager::FileLoad_XFile(string szFolder, string szFile, ST_XFile* setXFile)
+{
+	string filePath;
+	StrFilePath(filePath, szFolder, szFile);
+
+	HRESULT hr = D3DXLoadMeshFromXA(filePath.c_str(), D3DXMESH_MANAGED, g_pD3DDevice,
+		&setXFile->adjBuffer, &setXFile->mtrlBuffer, 0, &setXFile->nMtrlNum, &setXFile->pMesh);
+
+	if (FAILED(hr))
+	{
+		ErrMessageBox("XFile Load Error", "ERROR");
+		return false;
+	}
+
+	// >> mtrl, texture
+	if (setXFile->mtrlBuffer != 0 && setXFile->nMtrlNum != 0)
+	{
+		D3DXMATERIAL* mtrls = (D3DXMATERIAL*)setXFile->mtrlBuffer->GetBufferPointer();
+
+		for (int i = 0; i < setXFile->nMtrlNum; i++)
+		{
+			mtrls[i].MatD3D.Ambient = mtrls[i].MatD3D.Diffuse;
+			setXFile->vecMtrl.push_back(&mtrls[i].MatD3D);
+
+			if (mtrls[i].pTextureFilename != NULL)
+			{
+				IDirect3DTexture9* tex = 0;
+
+				string txtFilePath = string(szFolder) + ("/") + string(mtrls[i].pTextureFilename);
+				D3DXCreateTextureFromFileA(g_pD3DDevice, txtFilePath.c_str(), &tex);
+
+				setXFile->vecTextrure.push_back(tex);
+			}
+			else
+				setXFile->vecTextrure.push_back(0);
+		}
+
+		SafeRelease(setXFile->mtrlBuffer);
+	}
+
+	return true;
+}
+
+bool CFileLoadManager::FileLoad_Texture(string szFolder, string szFile, LPDIRECT3DTEXTURE9 & setTexture)
+{
+	string filePath;
+	StrFilePath(filePath, szFolder, szFile);
+
+	if (D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &setTexture))
+	{
+		ErrMessageBox("Texture Load Error", "ERROR");
+		return false;
+	}
+
+	return true;
+}
+
+bool CFileLoadManager::FileLoad_Sprite(string szFolder, string szFile, D3DXIMAGE_INFO& imageInfo, LPDIRECT3DTEXTURE9& lpTexture)
+{
+	string filePath;
+	StrFilePath(filePath, szFolder, szFile);
+
+	if (D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		filePath.c_str(),
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &imageInfo, NULL, &lpTexture))
+	{
+		ErrMessageBox("Sprite Load Error", "ERROR");
+		return false;
+	}
+
+	return true;
+}
+
+bool CFileLoadManager::FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT & setShader)
+{
+	string filePath;;
+	StrFilePath(filePath, szFolder, szFile);
+
+	setShader = LoadShader(filePath);
+
+	if (!setShader)
+	{
+		ErrMessageBox("Shader Load Fail", "Error");
+		return false;
+	}
+
+	return true;
 }

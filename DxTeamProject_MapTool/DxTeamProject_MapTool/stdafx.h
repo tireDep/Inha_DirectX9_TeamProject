@@ -45,6 +45,7 @@ public : virtual void Set##funName(varType var ) { \
 
 #include <iostream>
 #include <vector>
+#include <map>
 #include <string>
 
 extern HWND g_hWnd;
@@ -86,16 +87,31 @@ struct ST_PN_VERTEX
 
 enum ObjectType
 {
-	eTile, eBackObj
+	eTile, eBackObj,
+	eBox, eSphere, eCylinder
 };
 
 struct ST_MapData
 {
-	string strFilePath;
+	string strFolderPath;
+	string strXFilePath;
+	string strTxtPath;
+
 	string strObjName;
 	ObjectType objType;
 
 	D3DXVECTOR3 vScale;
 	D3DXVECTOR3 vRotate;
 	D3DXVECTOR3 vTranslate;
+};
+
+struct ST_XFile
+{
+	ID3DXMesh* pMesh;
+	ID3DXBuffer* adjBuffer;
+	ID3DXBuffer* mtrlBuffer;
+
+	DWORD nMtrlNum;
+	vector<D3DMATERIAL9*> vecMtrl;
+	vector<IDirect3DTexture9*> vecTextrure;
 };

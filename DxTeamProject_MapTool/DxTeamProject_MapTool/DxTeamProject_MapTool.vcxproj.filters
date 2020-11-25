@@ -34,6 +34,9 @@
     <Filter Include="Object\Background">
       <UniqueIdentifier>{965d2f05-ea6e-4bc7-bc24-23b5fc4fb310}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Object">
+      <UniqueIdentifier>{696c3b97-9b1b-4097-b67c-f21de2c354bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imconfig.h">
@@ -98,8 +101,17 @@
     <ClInclude Include="IObject.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="Ray.h">
-      <Filter>Camera</Filter>
+    <ClInclude Include="Object.h">
+      <Filter>Object\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Object\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Object\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Cylinder.h">
+      <Filter>Object\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -158,8 +170,17 @@
     <ClCompile Include="IObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="Ray.cpp">
-      <Filter>Camera</Filter>
+    <ClCompile Include="Object.cpp">
+      <Filter>Object\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Object\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Cylinder.cpp">
+      <Filter>Object\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Object\Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

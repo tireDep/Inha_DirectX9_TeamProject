@@ -206,14 +206,19 @@ void CImguiClass::Update()
 		if (ImGui::RadioButton("Object", mode == LoadType::eObject)) { mode = LoadType::eObject; index = -1; }
 
 		vector<char *> vecItem;
+		vector<ObjectType> vecObjType;
+		// vector<multimap<char*, ObjectType>> vecItem;
 		if (mode == LoadType::eBackground)
 		{
-			vecItem.push_back("BackObj"); vecItem.push_back("BackObj1");
+			vecItem.push_back("Cube01"); vecObjType.push_back(eTile);
+			vecItem.push_back("Cube02"); vecObjType.push_back(eTile);
 			// >> todo : item 추가
 		}
 		else if (mode == LoadType::eObject)
 		{
-			vecItem.push_back("Obj"); vecItem.push_back("Obj1");
+			vecItem.push_back("Box");		vecObjType.push_back(eBox);
+			vecItem.push_back("Sphere");	vecObjType.push_back(eSphere);
+			vecItem.push_back("Cylinder");	vecObjType.push_back(eCylinder);
 			// >> todo : item 추가
 		}
 
@@ -242,8 +247,7 @@ void CImguiClass::Update()
 		ImGui::SameLine();
 		if (ImGui::Button("Load") && index != -1)
 		{
-			// >> todo : File load
-			cout << "load" << endl;
+			IObject::CreateObject(vecObjType[index]);
 		}
 
 		ImGui::Separator();
