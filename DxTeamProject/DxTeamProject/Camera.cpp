@@ -106,7 +106,6 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 			break;
 		case WM_MOUSEMOVE:
 		{
-				cout << "asdfsdfasdf" << endl;
 			if (g_gameManager->GetUImode())
 			{
 				POINT ptCurMouse;
