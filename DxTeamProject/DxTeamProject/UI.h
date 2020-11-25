@@ -1,16 +1,6 @@
 #pragma once
 #include "IListener.h"
 
-enum class Color : int
-{
-	Red = 0, Yellow, Green, Blue, Black, White, NONE = 999
-};
-
-enum class Pick : int
-{
-	Red = 0, Yellow, Green, Blue, Black, White, NONE = 999
-};
-
 class CUI : public IListener
 {
 private:

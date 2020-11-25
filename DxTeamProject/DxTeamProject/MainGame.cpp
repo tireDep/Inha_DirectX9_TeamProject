@@ -109,57 +109,19 @@ void CMainGame::Setup()
 	{
 		CPSphere* Sphere = new CPSphere();
 		Sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
-		//if (i % 2 == 0)
-		//	Sphere->SetPusingForce(D3DXVECTOR3(0, 0, -0.5f));
-//		sphere->SetPusingForce(D3DXVECTOR3(0, 0, -1));
 	}
 
 	for (int i = 0; i < 8; i++)
 	{
 		CPSBox* box = new CPSBox();
 		box->Setup(D3DXVECTOR3(-5, 0.5, 2 * i + 3));
-		//if (i % 2 == 0)
-		//	box->SetPusingForce(D3DXVECTOR3(0.5f, 0, -0.5f));
 	}
 
 	for (int i = 0; i < 8; i++)
 	{
 		CPSCylinder* cylinder = new CPSCylinder();
 		cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 20));
-		//cylinder->SetPusingForce(D3DXVECTOR3(0, 0, -1));
 	}
-
-	/// tmp Physics
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	CPhysicsSphere* pSphere = new CPhysicsSphere;
-	//	pSphere->setCenter(i, 0.21f, 0.0f);
-	//	pSphere->setPower(-i, i);
-	//}
-	//m_pSphere1 = new CPhysicsSphere;
-	//m_pSphere1->Setup();
-	//m_pSphere1->setCenter(-2.7f, 5.0f, 0.0f);
-
-	//m_pSphere2 = new CPhysicsSphere;
-	////m_pSphere2->Setup();
-	//m_pSphere2->setCenter(+2.4f, 0.21f, 0.0f);
-	//m_pSphere2->setPower(0, 0);
-	//for (int i = 0; i < g_pPhysicsObjectManager->getVecObject().size(); i++)
-	//{
-	//	g_pEventManager->AddListener(g_pPhysicsObjectManager->getVecObject()[i]);
-	//}
-	//for (int i = 0; i < 4; ++i)
-	//{
-	//	m_pWall.push_back(new CWall);
-	//}
-	//m_pWall[0]->Setup(8.0f, 0.0f, 8.0f); 
-	//m_pWall[0]->setPosition(0, 0, 0);
-	//m_pWall[1]->Setup(0.12f, 0.3f, 6.24f);
-	//m_pWall[1]->setPosition(-5, 0, 0);
-	//m_pWall[2]->Setup(10, 0.3f, 0.12f);
-	//m_pWall[2]->setPosition(0, 0, 3.0);
-	//m_pWall[3]->Setup(10, 0.3f, 0.12f);
-	//m_pWall[3]->setPosition(0, 0, -3.0);
 
 	g_pEventManager->AddListener(g_gameManager);
 	g_pEventManager->AddListener(m_pCamera);
@@ -180,6 +142,36 @@ void CMainGame::Setup()
 	//m_pSm->init();
 	//m_pParticleWorld = new CParticleWorld;
 	//m_pParticleWorld->Setup();
+	/// tmp Physics
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	CPhysicsSphere* pSphere = new CPhysicsSphere;
+	//	pSphere->setCenter(i, 0.21f, 0.0f);
+	//	pSphere->setPower(-i, i);
+	//}
+	//m_pSphere1 = new CPhysicsSphere;
+	//m_pSphere1->Setup();
+	//m_pSphere1->setCenter(-2.7f, 5.0f, 0.0f);
+	//m_pSphere2 = new CPhysicsSphere;
+	////m_pSphere2->Setup();
+	//m_pSphere2->setCenter(+2.4f, 0.21f, 0.0f);
+	//m_pSphere2->setPower(0, 0);
+	//for (int i = 0; i < g_pPhysicsObjectManager->getVecObject().size(); i++)
+	//{
+	//	g_pEventManager->AddListener(g_pPhysicsObjectManager->getVecObject()[i]);
+	//}
+	//for (int i = 0; i < 4; ++i)
+	//{
+	//	m_pWall.push_back(new CWall);
+	//}
+	//m_pWall[0]->Setup(8.0f, 0.0f, 8.0f); 
+	//m_pWall[0]->setPosition(0, 0, 0);
+	//m_pWall[1]->Setup(0.12f, 0.3f, 6.24f);
+	//m_pWall[1]->setPosition(-5, 0, 0);
+	//m_pWall[2]->Setup(10, 0.3f, 0.12f);
+	//m_pWall[2]->setPosition(0, 0, 3.0);
+	//m_pWall[3]->Setup(10, 0.3f, 0.12f);
+	//m_pWall[3]->setPosition(0, 0, -3.0);
 }
 
 void CMainGame::Update()
@@ -231,7 +223,7 @@ void CMainGame::Update()
 			v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
 			v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
 			D3DXVec3Normalize(&v, &v);
-			g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->SetVelocity(v);
+			g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->SetPusingForce(v);
 		}
 		else
 		{
@@ -256,8 +248,35 @@ void CMainGame::Update()
 	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);
 	g_pObjectManager->Update();
 
-
-
+	/// 릴리즈 버전을 위한 주석처리
+	/// Lim Kyung Tae - Particle World
+	//if (m_pParticleWorld && g_gameManager->GetUImode() == false)
+	//	m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
+	//if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
+	//{
+	//	cout << "in" << endl;
+	//	D3DXVECTOR3 direction = m_pCharacter->GetPosition()- m_pParticleWorld->GetPosition();
+	//	D3DXVec3Normalize(&direction, &direction);
+	//	m_pParticleWorld->SetPusingForce(direction / 100.0f);
+	//}
+	/// tmp Physics
+	//g_pPhysicsObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	//for (int hittee = 0; hittee < 4; hittee++)
+	//{
+	//	for (int hitter = 0; hitter < 4; hitter++)
+	//	{
+	//		if (hittee >= hitter)
+	//		{
+	//			continue;
+	//		}
+	//		m_pPhysicsSphere[hittee]->Hitball(&m_pPhysicsSphere[hitter]);
+	//		//m_pPhysicsSphere[hittee].hitBall(m_pPhysicsSphere[hitter]);
+	//	}
+	//}
+	//m_pSphere2->Update(g_pTimeManager->GetElapsedTime());
+	//m_pSphere1->Hitball(*m_pSphere2);
+	//m_pWall[0]->hitBy(*m_pSphere1);
+	//m_pWall[0]->hitBy(*m_pSphere2);
 	//static int count = 0;
 	//static float gravity = -0.98;
 	//static float plane = 1.5;
@@ -277,39 +296,6 @@ void CMainGame::Update()
 	//	}
 	//}
 	//	m_pSphere1->Update(g_pTimeManager->GetElapsedTime());
-
-
-	/// tmp Physics
-	//g_pPhysicsObjectManager->Update(g_pTimeManager->GetElapsedTime());
-	//for (int hittee = 0; hittee < 4; hittee++)
-	//{
-	//	for (int hitter = 0; hitter < 4; hitter++)
-	//	{
-	//		if (hittee >= hitter)
-	//		{
-	//			continue;
-	//		}
-	//		m_pPhysicsSphere[hittee]->Hitball(&m_pPhysicsSphere[hitter]);
-	//		//m_pPhysicsSphere[hittee].hitBall(m_pPhysicsSphere[hitter]);
-	//	}
-	//}
-
-	//m_pSphere2->Update(g_pTimeManager->GetElapsedTime());
-	//m_pSphere1->Hitball(*m_pSphere2);
-	//m_pWall[0]->hitBy(*m_pSphere1);
-	//m_pWall[0]->hitBy(*m_pSphere2);
-
-	/// 릴리즈 버전을 위한 주석처리
-	/// Lim Kyung Tae - Particle World
-	//if (m_pParticleWorld && g_gameManager->GetUImode() == false)
-	//	m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
-	//if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
-	//{
-	//	cout << "in" << endl;
-	//	D3DXVECTOR3 direction = m_pCharacter->GetPosition()- m_pParticleWorld->GetPosition();
-	//	D3DXVec3Normalize(&direction, &direction);
-	//	m_pParticleWorld->SetPusingForce(direction / 100.0f);
-	//}
 }
 
 void CMainGame::Render()
@@ -327,7 +313,6 @@ void CMainGame::Render()
 	if (m_pGrid)
 		m_pGrid->Render();
 
-
 	if (m_pCharacter)
 		m_pCharacter->Render();
 
@@ -344,6 +329,23 @@ void CMainGame::Render()
 	if (m_pHeightMap)
 		m_pHeightMap->Render();
 
+	if (g_gameManager->GetDevMode())
+	{
+		if (m_pText)
+		{
+			m_pText->RenderFPS(g_pTimeManager->GetFPS());
+			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
+			//m_pText->RenderBoxPosition(m_pSphere1->getCenter());
+			//m_pText->RenderGrab(g_pObjectManager->GetVecObject(), m_pCharacter->GetPosition());
+		}
+	}
+
+	if (m_pText->GetisGrabstate())
+		m_pText->RenderGrab();
+
+	/// 릴리즈 버전을 위한 주석처리
+	//if (m_pParticleWorld)
+	//	m_pParticleWorld->Render();
 	/// tmp Physics
 	//g_pPhysicsObjectManager->Render();
 	//if (m_pSphere1)
@@ -358,23 +360,6 @@ void CMainGame::Render()
 	//	m_pWall[2]->draw();
 	//if (&m_pWall)
 	//	m_pWall[3]->draw();
-
-	/// 릴리즈 버전을 위한 주석처리
-	//if (m_pParticleWorld)
-	//	m_pParticleWorld->Render();
-
-	if (g_gameManager->GetDevMode())
-	{
-		if (m_pText)
-		{
-			m_pText->RenderFPS(g_pTimeManager->GetFPS());
-			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
-			//m_pText->RenderBoxPosition(m_pSphere1->getCenter());
-			//m_pText->RenderGrab(g_pObjectManager->GetVecObject(), m_pCharacter->GetPosition());
-		}
-	}
-	if (m_pText->GetisGrabstate())
-		m_pText->RenderGrab();
 	if (g_gameManager->GetUImode())
 	{
 		if (m_pUI)

@@ -103,6 +103,16 @@ public : virtual void Set##funName(varType var ) { \
 #include "GameManager.h"
 
 extern HWND g_hWnd;
+
+enum class Color : int
+{
+	Red = 0, Yellow, Green, Blue, Black, White, NONE = 999
+};
+
+enum class Pick : int
+{
+	Red = 0, Yellow, Green, Blue, Black, White, NONE = 999
+};
 //
 #include "Object.h"
 #include "ObjectManager.h"
@@ -139,7 +149,7 @@ enum class SceneType : int
 
 enum class PlayerInputType : int
 {
-	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHoldPush, eHoldPull
+	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHold, eHoldPush, eHoldPull
 };
 
 struct ST_EVENT

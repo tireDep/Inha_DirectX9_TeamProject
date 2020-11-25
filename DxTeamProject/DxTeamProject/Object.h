@@ -2,6 +2,7 @@
 #include "IListener.h"
 #include "Ray.h"
 #include "CHeight.h"
+
 struct ST_EVENT;
 
 class CObject : public IListener
@@ -28,6 +29,9 @@ protected:
 	Synthesize(float, m_fDamping, Damping);
 	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);
 	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vVelocity, Velocity);
+
+	// tmp Color change
+	Color		  m_tmpColor;
 	CObject();
 public:
 	virtual ~CObject();

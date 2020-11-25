@@ -28,18 +28,6 @@ void CPSBox::Setup(D3DXVECTOR3 center)
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
-void CPSBox::Update(float duration, CHeight* pMap)
-{
-	ClearAccumulator();
-	RunPhysics(duration);
-	Integrate(duration);
-	if (pMap)
-	{
-		pMap->GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	}
-	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-}
-
 void CPSBox::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
 {
 	D3DXVECTOR3* pVertices;
@@ -154,6 +142,18 @@ void CPSBox::RunPhysics(float duration)
 	if (!hasFiniteMass()) return;
 	AddForce(m_vForceDirection * GetMass());
 	Integrate(duration);
+}
+
+void CPSBox::Update(float duration, CHeight* pMap)
+{
+	ClearAccumulator();
+	RunPhysics(duration);
+	Integrate(duration);
+	if (pMap)
+	{
+		pMap->GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	}
+	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
 bool CPSBox::hasIntersected(CObject* otherobject)

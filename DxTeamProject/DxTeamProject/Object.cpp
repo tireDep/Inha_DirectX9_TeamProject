@@ -10,10 +10,11 @@ CObject::CObject()
 	, m_isClicked(false)
 	, m_isPicked(false)
 	, m_fRadius(0.5f)
-	, m_finverseMass(10.0f)
+	, m_finverseMass(1.0f)
 	, m_fDamping(0.999f)
 	, m_vPosition(0, 0, 0)
 	, m_vVelocity(0, 0, 0)
+	//, m_tmpColor(Color::NONE)
 {
 	CObject::m_nRefCount += 1;
 	g_pObjectManager->AddObject(this);
@@ -109,6 +110,40 @@ void CObject::ReceiveEvent(ST_EVENT eventMsg)
 			m_outLineColor = *(D3DXCOLOR*)eventMsg.ptrMessage;
 			m_isClicked = true;
 
+			// tmp Color change
+			if (m_Color == BLACK)
+				m_tmpColor = Color::Black;
+			else if (m_Color == WHITE)
+				m_tmpColor = Color::White;
+			else if (m_Color == RED)
+				m_tmpColor = Color::Red;
+			else if (m_Color == BLUE)
+				m_tmpColor = Color::Blue;
+			else if (m_Color == YELLOW)
+				m_tmpColor = Color::Yellow;
+			else if (m_Color == GREEN)
+				m_tmpColor = Color::Green;
+			else
+				m_tmpColor = Color::NONE;
+			switch (m_tmpColor)
+			{
+				case Color::Black:
+					SetMass(1000);
+					break;
+				case Color::White:
+					SetMass(0.001f);
+					break;
+				case Color::Red:
+					break;
+				case Color::Blue:
+					break;
+				case Color::Yellow:
+					break;
+				case Color::Green:
+					break;
+				default:
+					break;
+			}
 			ST_EVENT msg;
 			msg.eventType = EventType::eChangedColorEvent;
 			msg.ptrMessage = &m_Color;

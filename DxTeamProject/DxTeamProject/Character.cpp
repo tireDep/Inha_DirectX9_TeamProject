@@ -84,11 +84,29 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			break;
 
 			// todo : 잡기 구현
+		case PlayerInputType::eHold:
+			if (m_nGrabAbleObeject != -1)
+			{
+
+			}
+			else
+				speed = -1.0f;
+			break;
 		case PlayerInputType::eHoldPush:
-			speed = -1.0f;
+			if (m_nGrabAbleObeject != -1)
+			{
+
+			}
+			else
+				speed = -1.0f;
 			break;
 		case PlayerInputType::eHoldPull:
-			speed = -1.0f;
+			if (m_nGrabAbleObeject != -1)
+			{
+
+			}
+			else
+				speed = -1.0f;
 			break;
 
 		default:
@@ -206,9 +224,11 @@ int CCharacter::Update(vector<CObject*> ObjectPosition)
 			&& ObjectPosition[i]->GetPosition().x - m_vPosition.x> -1.0f
 			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z > -1.0f)
 		{
+			//m_nGrabAbleObeject = i;
 			return i;
 		}
 	}
+	//m_nGrabAbleObeject = -1;
 	return -1;
 }
 
