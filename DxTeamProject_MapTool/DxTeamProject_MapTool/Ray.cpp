@@ -1,15 +1,12 @@
 #include "stdafx.h"
 #include "Ray.h"
 
-
-
 CRay::CRay()
 	: m_vOrg(0, 0, 0)
 	, m_vDir(0, 0, 0)
 	, m_eRaySpace(E_NONE)
 {
 }
-
 
 CRay::~CRay()
 {
@@ -48,6 +45,7 @@ CRay CRay::RayAtWorldSpace(int nScreenX, int nScreenY)
 
 	D3DXVec3Normalize(&r.m_vDir, &r.m_vDir);
 	r.m_eRaySpace = E_WORLD;
+
 	return r;
 }
 

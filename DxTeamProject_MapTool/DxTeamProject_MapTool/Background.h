@@ -1,6 +1,8 @@
 #pragma once
 #include "IObject.h"
 
+class CRay;
+
 class CBackground : public IObject
 {
 protected:	
@@ -11,6 +13,8 @@ public:
 
 	virtual void Setup() = 0;
 	virtual void Update() = 0;
+	// ray
+	virtual void Update(CRay * ray) = 0;
 	virtual void Render() = 0;
 };
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "Singleton.h"
+#include "Ray.h"
 
 class IObject;
 
@@ -16,6 +17,7 @@ public:
 	void Destroy();
 
 	void Update();
+	void Update(CRay * ray);
 	void Render();
 
 	vector<IObject *> GetVecObject();

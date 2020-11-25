@@ -4,6 +4,7 @@ class CGrid;
 class CCube;
 class CCamera;
 class CImguiClass;
+class CRay;
 
 class CToolMain
 {
@@ -12,7 +13,7 @@ private:
 	CCube* m_pCube;
 	CCamera* m_pCamera;
 	CImguiClass* m_pImgui;
-
+	CRay* m_pRay;
 public:
 	CToolMain();
 	~CToolMain();
