@@ -106,6 +106,7 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 			break;
 		case WM_MOUSEMOVE:
 		{
+				cout << "asdfsdfasdf" << endl;
 			if (g_gameManager->GetUImode())
 			{
 				POINT ptCurMouse;
@@ -124,7 +125,6 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 				/// 좌우 밖으로 계속 카메라 이동 처리 중
 				RECT rc;
 				GetClientRect(g_hWnd, &rc);
-				
 					if (ptCurMouse.x < rc.left + 1.0f)
 					{
 						cout << ptCurMouse.x << ' ' << ptCurMouse.y << endl;

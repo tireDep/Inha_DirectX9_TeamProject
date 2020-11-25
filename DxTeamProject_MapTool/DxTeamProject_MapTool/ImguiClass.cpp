@@ -208,7 +208,7 @@ void CImguiClass::Update()
 		vector<char *> vecItem;
 		if (mode == LoadType::eBackground)
 		{
-			vecItem.push_back("BackObj"); vecItem.push_back("BackObj1");
+			vecItem.push_back("Cube01"); vecItem.push_back("Cube02");
 			// >> todo : item Ãß°¡
 		}
 		else if (mode == LoadType::eObject)
@@ -243,7 +243,9 @@ void CImguiClass::Update()
 		if (ImGui::Button("Load") && index != -1)
 		{
 			// >> todo : File load
-			cout << "load" << endl;
+			// cout << "load" << endl;
+
+
 		}
 
 		ImGui::Separator();
