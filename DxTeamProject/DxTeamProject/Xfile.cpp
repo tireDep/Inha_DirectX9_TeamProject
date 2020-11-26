@@ -18,7 +18,7 @@ CXfile::~CXfile()
 
 	SafeRelease(m_pMesh);
 	SafeRelease(m_adjBuffer);
-	SafeRelease(m_pTexture);
+	// SafeRelease(m_pTexture);
 }
 
 void CXfile::Setup()
@@ -106,9 +106,7 @@ void CXfile::Render(D3DXVECTOR3 eye)
 
 			m_pMesh->DrawSubset(i);
 		}
-
+		g_pD3DDevice->SetTexture(0, NULL);
 		
 	}
-	
-
 }

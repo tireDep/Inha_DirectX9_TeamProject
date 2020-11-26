@@ -1,7 +1,7 @@
 #pragma once
 
 struct ST_XFile;
-class CXfile;
+struct ST_MapData;
 
 #define g_pFileLoadManager CFileLoadManager::GetInstance()
 
@@ -10,6 +10,8 @@ class CFileLoadManager
 private:
 	CFileLoadManager() { }
 	LPD3DXEFFECT LoadShader(const string fileName);
+
+	void LoadData(string path);
 
 public:
 	static CFileLoadManager* GetInstance();
@@ -23,9 +25,11 @@ public:
 	// >> script(Story) : text
 	*/
 
-	bool FileLoad_XFile(char* szFolder, char* szFile, ST_XFile* setXFile);
-	bool FileLoad_Texture(char* szFolder, char* szFile, LPDIRECT3DTEXTURE9& setTexture);
-	bool FileLoad_Sprite(char* szFolder, char* szFile, D3DXIMAGE_INFO& imageInfo, LPDIRECT3DTEXTURE9& lpTexture);
-	bool FileLoad_Shader(char* szFolder, char* szFile, LPD3DXEFFECT& setShader);
+	bool FileLoad_XFile(string szFolder, string szFile, ST_XFile* setXFile);
+	bool FileLoad_Texture(string szFolder, string szFile, LPDIRECT3DTEXTURE9& setTexture);
+	bool FileLoad_Sprite(string szFolder, string szFile, D3DXIMAGE_INFO& imageInfo, LPDIRECT3DTEXTURE9& lpTexture);
+	bool FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT& setShader);
+
+	bool FileLoad_MapData();
 };
 

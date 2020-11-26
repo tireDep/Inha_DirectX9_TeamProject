@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Object.h"
+#include "IObject.h"
 #include "ObjectManager.h"
 #include "CHeight.h"
 CObjectManager::CObjectManager()
@@ -24,6 +25,28 @@ void CObjectManager::RemoveObject(CObject * pObject)
 		{
 			CObject* temp = *it;
 			it = m_vecObject.erase(it);
+			delete temp;
+			return;
+		}
+		else
+			it++;
+	}
+}
+
+void CObjectManager::AddObject(IObject * pObject)
+{
+	m_vecIObject.push_back(pObject);
+}
+
+void CObjectManager::RemoveObject(IObject * pObject)
+{
+	vector<IObject*>::iterator it;
+	for (it = m_vecIObject.begin(); it != m_vecIObject.end();)
+	{
+		if (*it == pObject)
+		{
+			IObject* temp = *it;
+			it = m_vecIObject.erase(it);
 			delete temp;
 			return;
 		}
@@ -68,17 +91,27 @@ void CObjectManager::Update()
 	}
 }
 
+vector<CObject*> CObjectManager::GetVecObject()
+{
+	return m_vecObject;
+}
+
 void CObjectManager::Render()
 {
+	for (int i = 0; i < m_vecIObject.size(); i++)
+	{
+		m_vecIObject[i]->Render();
+	}
+
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
 		m_vecObject[i]->Render();
 	}
 }
 
-vector<CObject*> CObjectManager::GetVecObject()
+vector<IObject*> CObjectManager::GetVecIObject()
 {
-	return m_vecObject;
+	return m_vecIObject;
 }
 
 void CObjectManager::Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos)

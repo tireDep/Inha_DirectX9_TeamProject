@@ -152,6 +152,12 @@
     <ClCompile Include="CHeight.cpp">
       <Filter>Map</Filter>
     </ClCompile>
+    <ClCompile Include="IObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Object\Tile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -329,6 +335,12 @@
     <ClInclude Include="CHeight.h">
       <Filter>Map</Filter>
     </ClInclude>
+    <ClInclude Include="IObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Object\Tile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -428,6 +440,9 @@
     </Filter>
     <Filter Include="Physics\Physics_Rigidbody">
       <UniqueIdentifier>{cb8b0dd8-e16f-41de-9434-d30d86f8a7d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Tile">
+      <UniqueIdentifier>{5becf119-4d39-4d39-a36b-44ee9bbd76bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

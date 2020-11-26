@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Xfile.h"
+#include "IObject.h"
 #include "FileLoadManager.h"
 
 #define StrFilePath(path, folder, file) { path = string(folder) + "/" + string(file); }
@@ -36,13 +37,103 @@ LPD3DXEFFECT CFileLoadManager::LoadShader(const string fileName)
 	return ret;
 }
 
+void CFileLoadManager::LoadData(string path)
+{
+	ifstream file;
+	file.open(path.c_str(), ios::in | ios::binary);
+
+	if (file.is_open())
+	{
+		ST_MapData mapData;
+		string readData;
+
+		while (getline(file, readData))
+		{
+			if (readData == "# Object_Start")
+				continue;
+
+			else if (readData == "# ObjectName")
+			{
+				getline(file, readData);
+				mapData.strObjName = readData;
+			}
+
+			else if (readData == "# FolderPath")
+			{
+				getline(file, readData);
+				mapData.strFolderPath = readData;
+			}
+
+			else if (readData == "# FilePath")
+			{
+				getline(file, readData);
+				mapData.strXFilePath = readData;
+			}
+
+			else if (readData == "# TxtPath")
+			{
+				getline(file, readData);
+				mapData.strTxtPath = readData;
+			}
+
+			else if (readData == "# ObjectType")
+			{
+				getline(file, readData);
+				mapData.objType = (ObjectType)atoi(readData.c_str());
+			}
+
+			else if (readData == "# Scale")
+			{
+				getline(file, readData);
+				mapData.vScale.x = atof(readData.c_str());
+
+				getline(file, readData);
+				mapData.vScale.y = atof(readData.c_str());
+
+				getline(file, readData);
+				mapData.vScale.z = atof(readData.c_str());
+			}
+
+			else if (readData == "# Rotate")
+			{
+				getline(file, readData);
+				mapData.vRotate.x = atof(readData.c_str());
+
+				getline(file, readData);
+				mapData.vRotate.y = atof(readData.c_str());
+
+				getline(file, readData);
+				mapData.vRotate.z = atof(readData.c_str());
+			}
+
+			else if (readData == "# Translate")
+			{
+				getline(file, readData);
+				mapData.vTranslate.x = atof(readData.c_str());
+
+				getline(file, readData);
+				mapData.vTranslate.y = atof(readData.c_str());
+
+				getline(file, readData);
+				mapData.vTranslate.z = atof(readData.c_str());
+			}
+
+			else if (readData == "# Object_End")
+				IObject::CreateObject(mapData);
+		}
+	}
+
+	file.close();
+}
+
+
 CFileLoadManager * CFileLoadManager::GetInstance()
 {
 	static CFileLoadManager instance;
 	return &instance;
 }
 
-bool CFileLoadManager::FileLoad_XFile(char* szFolder, char* szFile, ST_XFile* setXFile)
+bool CFileLoadManager::FileLoad_XFile(string szFolder, string szFile, ST_XFile* setXFile)
 {
 	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
@@ -85,7 +176,7 @@ bool CFileLoadManager::FileLoad_XFile(char* szFolder, char* szFile, ST_XFile* se
 	return true;
 }
 
-bool CFileLoadManager::FileLoad_Texture(char * szFolder, char * szFile, LPDIRECT3DTEXTURE9 & setTexture)
+bool CFileLoadManager::FileLoad_Texture(string szFolder, string szFile, LPDIRECT3DTEXTURE9 & setTexture)
 {
 	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
@@ -99,7 +190,7 @@ bool CFileLoadManager::FileLoad_Texture(char * szFolder, char * szFile, LPDIRECT
 	return true;
 }
 
-bool CFileLoadManager::FileLoad_Sprite(char * szFolder, char * szFile, D3DXIMAGE_INFO& imageInfo, LPDIRECT3DTEXTURE9& lpTexture)
+bool CFileLoadManager::FileLoad_Sprite(string szFolder, string szFile, D3DXIMAGE_INFO& imageInfo, LPDIRECT3DTEXTURE9& lpTexture)
 {
 	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
@@ -121,7 +212,7 @@ bool CFileLoadManager::FileLoad_Sprite(char * szFolder, char * szFile, D3DXIMAGE
 	return true;
 }
 
-bool CFileLoadManager::FileLoad_Shader(char * szFolder, char * szFile, LPD3DXEFFECT & setShader)
+bool CFileLoadManager::FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT & setShader)
 {
 	string filePath;;
 	StrFilePath(filePath, szFolder, szFile);
@@ -136,3 +227,19 @@ bool CFileLoadManager::FileLoad_Shader(char * szFolder, char * szFile, LPD3DXEFF
 
 	return true;
 }
+
+bool CFileLoadManager::FileLoad_MapData()
+{
+	string filePath = "Resource/MapData";
+	string file = "mapData.dat";
+	StrFilePath(filePath, filePath, file);
+	LoadData(filePath);
+
+	filePath = "Resource/MapData";
+	file = "objData.dat";
+	StrFilePath(filePath, filePath, file);
+	LoadData(filePath);
+
+	return true;
+}
+

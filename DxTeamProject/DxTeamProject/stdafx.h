@@ -7,6 +7,7 @@
 
 #include "targetver.h"
 
+#define _CRT_SECURE_NO_WARNINGS
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 // Windows Header Files:
 #include <windows.h>
@@ -29,6 +30,10 @@
 #include <iostream>
 #include <iomanip> // setprecision
 #include <sstream> // stringstream
+
+#include <tchar.h>
+#include <fstream>
+
 using namespace std;
 
 #if _DEBUG
@@ -179,6 +184,28 @@ struct ST_XFile
 	DWORD nMtrlNum;
 	vector<D3DMATERIAL9*> vecMtrl;
 	vector<IDirect3DTexture9*> vecTextrure;
+};
+
+enum ObjectType
+{
+	eTile01, eTile02, eTile03, eTile04, eTile05, eTile06,
+	eTile07, eTile08, eTile09, eTile10, eTile11, eTile12, eTile13,
+	eBackObj,
+	eBox, eSphere, eCylinder
+};
+
+struct ST_MapData
+{
+	string strFolderPath;
+	string strXFilePath;
+	string strTxtPath;
+
+	string strObjName;
+	ObjectType objType;
+
+	D3DXVECTOR3 vScale;
+	D3DXVECTOR3 vRotate;
+	D3DXVECTOR3 vTranslate;
 };
 
 #define GRAY    D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f)
