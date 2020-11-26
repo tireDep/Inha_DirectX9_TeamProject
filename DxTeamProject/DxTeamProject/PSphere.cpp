@@ -25,6 +25,37 @@ void CPSphere::Setup(D3DXVECTOR3 center)
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
+void CPSphere::Update(float duration)
+{
+	D3DXVECTOR3 linearforce;
+	if (m_isForceApplied)
+	{
+		if (!hasFiniteMass()) return;
+		linearforce = m_vForceDirection * GetMass();
+		m_isForceApplied = false;
+	}
+	else
+		linearforce = D3DXVECTOR3(0, 0, 0);
+
+	if (m_finverseMass <= 0.0f) return;
+	assert(duration > 0.0f);
+
+	m_vAcceleration = linearforce * m_finverseMass;
+	m_vVelocity += (m_vAcceleration * duration);
+	m_vVelocity *= powf(m_fDamping, duration);
+	//m_vPosition += (m_vVelocity * duration);
+	m_vVelocity *= m_fDrag;
+	if (m_vVelocity.x > 0.001f || m_vVelocity.y > 0.001f || m_vVelocity.z > 0.001f)
+	{
+		m_vPosition += (m_vVelocity * duration);
+	}
+	else
+	{
+		m_vVelocity.x = m_vVelocity.y = m_vVelocity.z = 0.0f;
+	}
+	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+}
+
 void CPSphere::Update(float duration, CHeight* pMap)
 {
 	ClearAccumulator();
@@ -34,7 +65,6 @@ void CPSphere::Update(float duration, CHeight* pMap)
 	{
 		pMap->GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	}
-
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
@@ -74,6 +104,38 @@ void CPSphere::Render()
 	}
 }
 
+void CPSphere::ClearAccumulator()
+{
+	m_vForceAccum.x = m_vForceAccum.y = m_vForceAccum.z = 0.0f;
+}
+
+void CPSphere::RunPhysics(float duration)
+{
+	if (!hasFiniteMass()) return;
+	AddForce(m_vForceDirection * GetMass());
+	Integrate(duration);
+}
+
+void CPSphere::AddForce(const D3DXVECTOR3& force)
+{
+	m_vForceAccum += force;
+}
+
+void CPSphere::Integrate(float duration)
+{
+	if (m_finverseMass <= 0.0f) return;
+	assert(duration > 0.0f);
+
+	m_vPosition += (m_vVelocity * duration);
+
+	D3DXVECTOR3 resultingAcc = m_vAcceleration;
+	resultingAcc += (m_vForceAccum * m_finverseMass);
+	m_vVelocity += (resultingAcc * duration);
+	m_vVelocity *= powf(m_fDamping, duration);
+
+	ClearAccumulator();
+}
+
 void CPSphere::SetPickState(bool set)
 {
 	m_isPicked = set;
@@ -109,38 +171,8 @@ bool CPSphere::hasFiniteMass() const
 void CPSphere::SetPusingForce(D3DXVECTOR3 forcedirection)
 {
 	D3DXVec3Normalize(&m_vForceDirection, &forcedirection);
-}
-
-void CPSphere::AddForce(const D3DXVECTOR3& force)
-{
-	m_vForceAccum += force;
-}
-
-void CPSphere::ClearAccumulator()
-{
-	m_vForceAccum.x = m_vForceAccum.y = m_vForceAccum.z = 0.0f;
-}
-
-void CPSphere::Integrate(float duration)
-{
-	if (m_finverseMass <= 0.0f) return;
-	assert(duration > 0.0f);
-
-	m_vPosition += (m_vVelocity * duration);
-
-	D3DXVECTOR3 resultingAcc = m_vAcceleration;
-	resultingAcc += (m_vForceAccum * m_finverseMass);
-	m_vVelocity += (resultingAcc * duration);
-	m_vVelocity *= powf(m_fDamping, duration);
-
-	ClearAccumulator();
-}
-
-void CPSphere::RunPhysics(float duration)
-{
-	if (!hasFiniteMass()) return;
-	AddForce(m_vForceDirection * GetMass());
-	Integrate(duration);
+	m_vForceDirection *= 100.0f;
+	SetForceApplied(true);
 }
 
 bool CPSphere::hasIntersected(CObject* otherobject)
@@ -244,8 +276,9 @@ void CPSphere::CollisionOtherObject(CObject* otherobject)
 		D3DXVec3Normalize(&massdirection, &massdirection);
 		v1 = D3DXVec3Dot(&this->GetVelocity(), &massdirection);
 		v2 = D3DXVec3Dot(&otherobject->GetVelocity(), &massdirection);
-		// perfect elastic collision
-		float elasticity = 1.0f;
+		/// perfect elastic collision
+		//float elasticity = 1.0f;
+		float elasticity = (this->GetElasticity() + otherobject->GetElasticity()) / 2;
 		float finalv1, finalv2;
 		finalv1 = (((this->GetMass() - (elasticity * otherobject->GetMass()))*v1) + ((1 + elasticity)*otherobject->GetMass()*v2))
 			/ (this->GetMass() + otherobject->GetMass());

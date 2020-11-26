@@ -21,6 +21,7 @@ public:
 
 	void Destroy();
 
+	void Update(float duration);
 	void Update(float duration , CHeight* pMap);
 	void Update(CRay ray, D3DXCOLOR& objectcolor);
 	void Render();

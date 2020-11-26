@@ -10,10 +10,13 @@ CObject::CObject()
 	, m_isClicked(false)
 	, m_isPicked(false)
 	, m_fRadius(0.5f)
-	, m_finverseMass(1.0f)
+	, m_finverseMass(10.0f)
 	, m_fDamping(0.999f)
 	, m_vPosition(0, 0, 0)
 	, m_vVelocity(0, 0, 0)
+	, m_fElasticity(1.0f)
+	, m_isForceApplied(false)
+	, m_fDrag(0.995f)
 	//, m_tmpColor(Color::NONE)
 {
 	CObject::m_nRefCount += 1;
@@ -110,7 +113,7 @@ void CObject::ReceiveEvent(ST_EVENT eventMsg)
 			m_outLineColor = *(D3DXCOLOR*)eventMsg.ptrMessage;
 			m_isClicked = true;
 
-			// tmp Color change
+			// tmp Color change Need to modify...
 			if (m_Color == BLACK)
 				m_tmpColor = Color::Black;
 			else if (m_Color == WHITE)
@@ -129,17 +132,33 @@ void CObject::ReceiveEvent(ST_EVENT eventMsg)
 			{
 				case Color::Black:
 					SetMass(100);
+					SetElasticity(1.0f);
+					SetDrag(0.995f);
 					break;
 				case Color::White:
 					SetMass(0.001f);
+					SetElasticity(1.0f);
+					SetDrag(0.995f);
 					break;
 				case Color::Red:
+					SetMass(1.0f);
+					SetElasticity(1.0f);
+					SetDrag(0.995f);
 					break;
 				case Color::Blue:
+					SetMass(1.0f);
+					SetElasticity(1.0f);
+					SetDrag(0.995f);
 					break;
 				case Color::Yellow:
+					SetMass(1.0f);
+					SetElasticity(1.0f);
+					SetDrag(0.9999f);
 					break;
 				case Color::Green:
+					SetMass(1.0f);
+					SetElasticity(5.0f);
+					SetDrag(0.995f);
 					break;
 				default:
 					break;

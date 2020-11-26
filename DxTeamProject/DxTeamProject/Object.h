@@ -24,12 +24,15 @@ protected:
 	void SetShader(const D3DXMATRIXA16& setMatWorld);
 
 	// tmp physics
-	Synthesize(float, m_fRadius, Radius);
-	Synthesize(float, m_finverseMass, InverseMass);
-	Synthesize(float, m_fDamping, Damping);
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vVelocity, Velocity);
-
+	Synthesize(bool, m_isForceApplied, ForceApplied);
+	Synthesize(float, m_fRadius, Radius);	// collision radius
+	Synthesize(float, m_finverseMass, InverseMass);	// mass
+	Synthesize(float, m_fDamping, Damping);	// floating point error
+	Synthesize(float, m_fDrag, Drag);	// drag
+	Synthesize(float, m_fElasticity, Elasticity); // elasticity
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);	// center position
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vVelocity, Velocity); // velocity
+	
 	// tmp Color change
 	Color		  m_tmpColor;
 	CObject();
@@ -38,6 +41,7 @@ public:
 	virtual void Release();
 
 	virtual void Setup() = 0;
+	virtual void Update(float duration) = 0;
 	virtual void Update(float duration , CHeight* pMap) = 0;
 	virtual void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos) = 0;
 	virtual void Render() = 0;
