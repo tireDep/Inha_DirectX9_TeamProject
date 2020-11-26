@@ -48,10 +48,10 @@ void IObject::CreateObject(const ObjectType objType)
 		mapData.strFolderPath = "Resource/XFile/Tile";
 		mapData.strTxtPath = "Texture_01.png";
 
-		if(eTile01 <= objType <= eTile10)
-			mapData.strXFilePath = string("Tile_0") + to_string(objType + 1) + ".X";
-		else if(eTile11 <= objType <=eTile13)
+		if(objType == eTile10 || objType == eTile11 || objType == eTile12 || objType == eTile13)
 			mapData.strXFilePath = string("Tile_") + to_string(objType + 1) + ".X";
+		else
+			mapData.strXFilePath = string("Tile_0") + to_string(objType + 1) + ".X";
 
 		CTile* tile = new CTile;
 		tile->Setup(mapData);
