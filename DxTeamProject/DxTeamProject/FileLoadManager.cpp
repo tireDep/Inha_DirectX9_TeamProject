@@ -49,40 +49,48 @@ void CFileLoadManager::LoadData(string path)
 
 		while (getline(file, readData))
 		{
-			if (readData == "# Object_Start")
+			if (strstr(readData.c_str(), "# Object_Start"))
 				continue;
 
-			else if (readData == "# ObjectName")
+			else if (strstr(readData.c_str(), "# ObjectName"))
 			{
 				getline(file, readData);
+				if(strstr(readData.c_str(), "\r"))
+					readData = readData.substr(0, readData.length() - 1);
 				mapData.strObjName = readData;
 			}
 
-			else if (readData == "# FolderPath")
+			else if (strstr(readData.c_str(), "# FolderPath"))
 			{
 				getline(file, readData);
+				if (strstr(readData.c_str(), "\r"))
+					readData = readData.substr(0, readData.length() - 1);
 				mapData.strFolderPath = readData;
 			}
 
-			else if (readData == "# FilePath")
+			else if (strstr(readData.c_str(), "# FilePath"))
 			{
 				getline(file, readData);
+				if (strstr(readData.c_str(), "\r"))
+					readData = readData.substr(0, readData.length() - 1);
 				mapData.strXFilePath = readData;
 			}
 
-			else if (readData == "# TxtPath")
+			else if (strstr(readData.c_str(), "# TxtPath"))
 			{
 				getline(file, readData);
+				if (strstr(readData.c_str(), "\r"))
+					readData = readData.substr(0, readData.length() - 1);
 				mapData.strTxtPath = readData;
 			}
 
-			else if (readData == "# ObjectType")
+			else if (strstr(readData.c_str(), "# ObjectType"))
 			{
 				getline(file, readData);
 				mapData.objType = (ObjectType)atoi(readData.c_str());
 			}
 
-			else if (readData == "# Scale")
+			else if (strstr(readData.c_str(), "# Scale"))
 			{
 				getline(file, readData);
 				mapData.vScale.x = atof(readData.c_str());
@@ -94,7 +102,7 @@ void CFileLoadManager::LoadData(string path)
 				mapData.vScale.z = atof(readData.c_str());
 			}
 
-			else if (readData == "# Rotate")
+			else if (strstr(readData.c_str(), "# Rotate"))
 			{
 				getline(file, readData);
 				mapData.vRotate.x = atof(readData.c_str());
@@ -106,7 +114,7 @@ void CFileLoadManager::LoadData(string path)
 				mapData.vRotate.z = atof(readData.c_str());
 			}
 
-			else if (readData == "# Translate")
+			else if (strstr(readData.c_str(), "# Translate"))
 			{
 				getline(file, readData);
 				mapData.vTranslate.x = atof(readData.c_str());
@@ -118,7 +126,7 @@ void CFileLoadManager::LoadData(string path)
 				mapData.vTranslate.z = atof(readData.c_str());
 			}
 
-			else if (readData == "# Object_End")
+			else if (strstr(readData.c_str(), "# Object_End"))
 				IObject::CreateObject(mapData);
 		}
 	}
