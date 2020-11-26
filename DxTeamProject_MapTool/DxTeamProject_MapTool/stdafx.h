@@ -105,6 +105,8 @@ struct ST_MapData
 	D3DXVECTOR3 vScale;
 	D3DXVECTOR3 vRotate;
 	D3DXVECTOR3 vTranslate;
+
+	D3DXCOLOR dxColor;
 };
 
 struct ST_XFile

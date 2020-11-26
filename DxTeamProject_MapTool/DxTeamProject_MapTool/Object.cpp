@@ -6,6 +6,13 @@ CObject::CObject()
 	m_vScale = D3DXVECTOR3(1, 1, 1);
 	m_vRotate = D3DXVECTOR3(0, 0, 0);
 	m_vTranslate = D3DXVECTOR3(0, 0.5f, 0);
+
+	ZeroMemory(&m_pMtrl, sizeof(D3DMATERIAL9));
+	m_pMtrl.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	m_pMtrl.Specular = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	m_pMtrl.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+
+	m_dxColor = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
 }
 
 CObject::~CObject()
@@ -16,11 +23,6 @@ CObject::~CObject()
 
 void CObject::Setup()
 {
-	ZeroMemory(&m_pMtrl, sizeof(D3DMATERIAL9));
-	m_pMtrl.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	m_pMtrl.Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	m_pMtrl.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-	// todo : 임시 매터리얼 설정 -> 변경
 }
 
 void CObject::Setup(ST_MapData setData)
@@ -36,6 +38,8 @@ void CObject::Setup(ST_MapData setData)
 	m_vScale = setData.vScale;
 	m_vRotate = setData.vRotate;
 	m_vTranslate = setData.vTranslate;
+
+	m_dxColor = setData.dxColor;
 }
 
 void CObject::Update()
@@ -44,6 +48,15 @@ void CObject::Update()
 
 void CObject::Render()
 {
+	m_pMtrl.Ambient = m_dxColor;
+	m_pMtrl.Specular = m_dxColor;
+	m_pMtrl.Diffuse = m_dxColor;
+
+	g_pD3DDevice->SetMaterial(&m_pMtrl);
+	g_pD3DDevice->SetTexture(0, NULL);
+
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+
 	D3DXMATRIXA16 matWorld, matS, matR, matT;
 	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
 
@@ -62,6 +75,5 @@ void CObject::Render()
 	if (m_pMesh == NULL)
 		return;
 
-	g_pD3DDevice->SetMaterial(&m_pMtrl);
 	m_pMesh->DrawSubset(0);
 }

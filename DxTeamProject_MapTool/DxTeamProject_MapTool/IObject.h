@@ -31,6 +31,8 @@ protected:
 
 	Synthesize(bool, m_isClick, Click);
 
+	Synthesize(D3DXCOLOR, m_dxColor, Color);
+
 	IObject();
 
 public:

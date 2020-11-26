@@ -44,7 +44,18 @@ CImguiClass::CImguiClass() :
 	m_showItem("\0")
 {
 	m_PreLoadType = LoadType::eNull;
-	m_NowLoadType = LoadType::eNull;
+	m_NowLoadType = LoadType::eMap;
+
+	m_PrecolorType = ColorType::eNull;
+	m_NowcolorType = ColorType::eGray;
+	
+	m_vecColor.push_back(ColorType::eGray);
+	m_vecColor.push_back(ColorType::eBlack);
+	m_vecColor.push_back(ColorType::eWhite);
+	m_vecColor.push_back(ColorType::eRed);
+	m_vecColor.push_back(ColorType::eBlue);
+	m_vecColor.push_back(ColorType::eGreen);
+	m_vecColor.push_back(ColorType::eYellow);
 }
 
 CImguiClass::~CImguiClass()
@@ -341,7 +352,56 @@ void CImguiClass::Update()
 				vecObj[index]->SetTranslate(vTrans);
 
 			ImGui::Separator();
+
+			// >> object만 색 지정 가능
+			if (vecObj[index]->GetObjType() == eBox || vecObj[index]->GetObjType() == eSphere || vecObj[index]->GetObjType() == eCylinder)
+			{
+				ImGui::Text("Set Color");
+				string charName[8] = { "Gray", "Black", "White", "Red", "Blue", "Green", "Yellow" };
+				for (int i = 0; i < m_vecColor.size(); i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str() , m_NowcolorType == m_vecColor[i])) 
+					{ 
+						m_NowcolorType = m_vecColor[i]; 
+						
+						D3DXCOLOR color;
+						switch (m_NowcolorType)
+						{
+						case ColorType::eGray:
+							color = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+							break; 
+						case ColorType::eBlack:
+							color = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
+							break;
+						case ColorType::eWhite:
+							color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+							break;
+						case ColorType::eRed:
+							color = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+							break;
+						case ColorType::eBlue:
+							color = D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f);
+							break;
+						case ColorType::eGreen:
+							color = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
+							break;
+						case ColorType::eYellow:
+							color = D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f);
+							break;
+						}
+						vecObj[index]->SetColor(color);
+					}
+
+					if (i != 2) 
+						ImGui::SameLine();
+
+				} // << : for
+
+			} // << : if
+			// else
+				// ImGui::Separator();
 		}
+
 		// else
 		// {
 		// 	ImGui::InputText("Name", " ", 1024);

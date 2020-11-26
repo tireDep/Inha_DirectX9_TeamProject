@@ -40,6 +40,9 @@
     <Filter Include="Object\Tile">
       <UniqueIdentifier>{0866f516-49c1-4b99-9f51-bb55edcf7f08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Light">
+      <UniqueIdentifier>{44727541-c243-4a48-8b15-0c294f9a06f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imconfig.h">
@@ -119,6 +122,9 @@
     <ClInclude Include="Tile.h">
       <Filter>Object\Tile</Filter>
     </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Light</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui.cpp">
@@ -190,6 +196,9 @@
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Object\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Light</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,10 +5,12 @@
 #include "Ray.h"
 #include "ImguiClass.h"
 #include "Tile.h"
+#include "Light.h"
 #include "toolMain.h"
 
-CToolMain::CToolMain()
-	: m_pRay(NULL)
+CToolMain::CToolMain() : 
+	m_pRay(NULL),
+	m_pLight(NULL)
 {
 }
 
@@ -18,6 +20,7 @@ CToolMain::~CToolMain()
 	SafeDelete(m_pCube);
 	SafeDelete(m_pCamera);
 	SafeDelete(m_pRay);
+	SafeDelete(m_pLight);
 
 	m_pImgui->Destroy();
 	SafeDelete(m_pImgui);
@@ -43,6 +46,9 @@ void CToolMain::Setup()
 	m_pImgui->Setup();
 
 	m_pRay = new CRay;
+
+	m_pLight = new CLight;
+	m_pLight->Setup();
 }
 
 void CToolMain::Update()
