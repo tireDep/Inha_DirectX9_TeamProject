@@ -53,10 +53,10 @@
       <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="Particle.cpp">
-      <Filter>Physics\Physics_Particle</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle</Filter>
     </ClCompile>
     <ClCompile Include="ParticleWorld.cpp">
-      <Filter>Physics\Physics_Particle</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle</Filter>
     </ClCompile>
     <ClCompile Include="EventManager.cpp">
       <Filter>Manager</Filter>
@@ -71,69 +71,60 @@
     <ClCompile Include="Object.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="RigidBody.cpp">
-      <Filter>Physics\Physics_Rigidbody</Filter>
+      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
     </ClCompile>
     <ClCompile Include="ParticleContact.cpp">
-      <Filter>Physics\Physics_Particle\Collider</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClCompile>
     <ClCompile Include="ParticleForceGenerator.cpp">
-      <Filter>Physics\Physics_Particle\Force\0... General</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Force\0... General</Filter>
     </ClCompile>
     <ClCompile Include="ParticleForceRegistry.cpp">
-      <Filter>Physics\Physics_Particle\Force\0... General</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Force\0... General</Filter>
     </ClCompile>
     <ClCompile Include="ParticleGravity.cpp">
-      <Filter>Physics\Physics_Particle\Force\1... Gravity</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Force\1... Gravity</Filter>
     </ClCompile>
     <ClCompile Include="ParticlePusingForce.cpp">
-      <Filter>Physics\Physics_Particle\Force\2... PusingForce</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Force\2... PusingForce</Filter>
     </ClCompile>
     <ClCompile Include="ParticleDrag.cpp">
-      <Filter>Physics\Physics_Particle\Force\3... Drag</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Force\3... Drag</Filter>
     </ClCompile>
     <ClCompile Include="ParticleContactGenerator.cpp">
-      <Filter>Physics\Physics_Particle\Collider</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClCompile>
     <ClCompile Include="Xfile.cpp">
       <Filter>Xfile</Filter>
     </ClCompile>
     <ClCompile Include="ParticleContactResolver.cpp">
-      <Filter>Physics\Physics_Particle\Collider</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClCompile>
     <ClCompile Include="ForceGenerator.cpp">
-      <Filter>Physics\Physics_Rigidbody</Filter>
+      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
-      <Filter>Physics\Physics_Rigidbody</Filter>
+      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
     </ClCompile>
     <ClCompile Include="Gravity.cpp">
-      <Filter>Physics\Physics_Rigidbody</Filter>
+      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
     </ClCompile>
     <ClCompile Include="HeightMap.cpp">
-      <Filter>Physics\Physics_Example\Drag</Filter>
+      <Filter>...TrashCan\Physics\Physics_Example\Drag</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsPlayer.cpp">
-      <Filter>Physics\Physics_Example\Drag</Filter>
+      <Filter>...TrashCan\Physics\Physics_Example\Drag</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsSphere.cpp">
-      <Filter>Physics</Filter>
+      <Filter>...TrashCan\Physics</Filter>
     </ClCompile>
     <ClCompile Include="Wall.cpp">
-      <Filter>Physics</Filter>
+      <Filter>...TrashCan\Physics</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsObject.cpp">
-      <Filter>Physics</Filter>
+      <Filter>...TrashCan\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="PSphere.cpp" />
-    <ClCompile Include="PSBox.cpp" />
-    <ClCompile Include="PSCylinder.cpp" />
     <ClCompile Include="TimeManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -157,6 +148,21 @@
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Object\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>...TrashCan</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>...TrashCan</Filter>
+    </ClCompile>
+    <ClCompile Include="PSphere.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PSCylinder.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PSBox.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,10 +239,10 @@
       <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="Particle.h">
-      <Filter>Physics\Physics_Particle</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle</Filter>
     </ClInclude>
     <ClInclude Include="ParticleWorld.h">
-      <Filter>Physics\Physics_Particle</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle</Filter>
     </ClInclude>
     <ClInclude Include="EventManager.h">
       <Filter>Manager</Filter>
@@ -254,69 +260,60 @@
     <ClInclude Include="Object.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="RigidBody.h">
-      <Filter>Physics\Physics_Rigidbody</Filter>
+      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
     </ClInclude>
     <ClInclude Include="ParticleContact.h">
-      <Filter>Physics\Physics_Particle\Collider</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClInclude>
     <ClInclude Include="ParticleForceGenerator.h">
-      <Filter>Physics\Physics_Particle\Force\0... General</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Force\0... General</Filter>
     </ClInclude>
     <ClInclude Include="ParticleForceRegistry.h">
-      <Filter>Physics\Physics_Particle\Force\0... General</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Force\0... General</Filter>
     </ClInclude>
     <ClInclude Include="ParticleGravity.h">
-      <Filter>Physics\Physics_Particle\Force\1... Gravity</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Force\1... Gravity</Filter>
     </ClInclude>
     <ClInclude Include="ParticlePusingForce.h">
-      <Filter>Physics\Physics_Particle\Force\2... PusingForce</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Force\2... PusingForce</Filter>
     </ClInclude>
     <ClInclude Include="ParticleDrag.h">
-      <Filter>Physics\Physics_Particle\Force\3... Drag</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Force\3... Drag</Filter>
     </ClInclude>
     <ClInclude Include="ParticleContactGenerator.h">
-      <Filter>Physics\Physics_Particle\Collider</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClInclude>
     <ClInclude Include="Xfile.h">
       <Filter>Xfile</Filter>
     </ClInclude>
     <ClInclude Include="ParticleContactResolver.h">
-      <Filter>Physics\Physics_Particle\Collider</Filter>
+      <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClInclude>
     <ClInclude Include="ForceGenerator.h">
-      <Filter>Physics\Physics_Rigidbody</Filter>
+      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
-      <Filter>Physics\Physics_Rigidbody</Filter>
+      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
     </ClInclude>
     <ClInclude Include="Gravity.h">
-      <Filter>Physics\Physics_Rigidbody</Filter>
+      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
     </ClInclude>
     <ClInclude Include="HeightMap.h">
-      <Filter>Physics\Physics_Example\Drag</Filter>
+      <Filter>...TrashCan\Physics\Physics_Example\Drag</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsPlayer.h">
-      <Filter>Physics\Physics_Example\Drag</Filter>
+      <Filter>...TrashCan\Physics\Physics_Example\Drag</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsSphere.h">
-      <Filter>Physics</Filter>
+      <Filter>...TrashCan\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Wall.h">
-      <Filter>Physics</Filter>
+      <Filter>...TrashCan\Physics</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsObject.h">
-      <Filter>Physics</Filter>
+      <Filter>...TrashCan\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="PSphere.h" />
-    <ClInclude Include="PSBox.h" />
-    <ClInclude Include="PSCylinder.h" />
     <ClInclude Include="TimeManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -340,6 +337,21 @@
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Object\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>...TrashCan</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>...TrashCan</Filter>
+    </ClInclude>
+    <ClInclude Include="PSphere.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PSCylinder.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PSBox.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -405,44 +417,47 @@
     <Filter Include="Xfile">
       <UniqueIdentifier>{ac0d07fd-91b0-4b6a-aaec-5117f95bdd34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Physics">
-      <UniqueIdentifier>{5fe0e44b-4f38-402f-b055-0187a8aa291a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Physics_Example">
-      <UniqueIdentifier>{5e6ef1d5-e454-4d82-9659-2819e21f8aa2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Physics_Example\Drag">
-      <UniqueIdentifier>{3db19872-9cca-4ff4-8e0a-db735ded8337}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Physics_Example\Balls">
-      <UniqueIdentifier>{334931e2-edca-4d35-801d-a89e5d3765c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Physics_Particle">
-      <UniqueIdentifier>{3b98db7b-735a-44c2-b164-89fc9bcfc99b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Physics_Particle\Force">
-      <UniqueIdentifier>{08dc4132-f85b-45fa-8a2d-ca0f8760370d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Physics_Particle\Force\0... General">
-      <UniqueIdentifier>{0bb48b78-9422-42b7-a24e-35c82d3e7bb3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Physics_Particle\Force\1... Gravity">
-      <UniqueIdentifier>{d174e938-bea9-41a1-9e71-0bc50c8e09ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Physics_Particle\Force\2... PusingForce">
-      <UniqueIdentifier>{db4f9bca-6d95-43a4-a452-d5035898332e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Physics_Particle\Force\3... Drag">
-      <UniqueIdentifier>{e4eb3c3c-385a-4e2b-80bc-267753729587}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Physics_Particle\Collider">
-      <UniqueIdentifier>{bc66cea3-8d2e-4906-bbee-4e2e2206bf90}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Physics\Physics_Rigidbody">
-      <UniqueIdentifier>{cb8b0dd8-e16f-41de-9434-d30d86f8a7d0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Tile">
       <UniqueIdentifier>{5becf119-4d39-4d39-a36b-44ee9bbd76bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan">
+      <UniqueIdentifier>{ca5cac3f-681d-4e19-823a-36efbbf714fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan\Physics">
+      <UniqueIdentifier>{5fe0e44b-4f38-402f-b055-0187a8aa291a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan\Physics\Physics_Example">
+      <UniqueIdentifier>{5e6ef1d5-e454-4d82-9659-2819e21f8aa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan\Physics\Physics_Example\Drag">
+      <UniqueIdentifier>{3db19872-9cca-4ff4-8e0a-db735ded8337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan\Physics\Physics_Example\Balls">
+      <UniqueIdentifier>{334931e2-edca-4d35-801d-a89e5d3765c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan\Physics\Physics_Particle">
+      <UniqueIdentifier>{3b98db7b-735a-44c2-b164-89fc9bcfc99b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan\Physics\Physics_Particle\Force">
+      <UniqueIdentifier>{08dc4132-f85b-45fa-8a2d-ca0f8760370d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan\Physics\Physics_Particle\Force\0... General">
+      <UniqueIdentifier>{0bb48b78-9422-42b7-a24e-35c82d3e7bb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan\Physics\Physics_Particle\Force\1... Gravity">
+      <UniqueIdentifier>{d174e938-bea9-41a1-9e71-0bc50c8e09ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan\Physics\Physics_Particle\Force\2... PusingForce">
+      <UniqueIdentifier>{db4f9bca-6d95-43a4-a452-d5035898332e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan\Physics\Physics_Particle\Force\3... Drag">
+      <UniqueIdentifier>{e4eb3c3c-385a-4e2b-80bc-267753729587}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan\Physics\Physics_Particle\Collider">
+      <UniqueIdentifier>{bc66cea3-8d2e-4906-bbee-4e2e2206bf90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan\Physics\Physics_Rigidbody">
+      <UniqueIdentifier>{cb8b0dd8-e16f-41de-9434-d30d86f8a7d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -21,12 +21,12 @@ public:
 
 	void Destroy();
 
-	void Update(float duration);
-	void Update(float duration , CHeight* pMap);
-	void Update(CRay ray, D3DXCOLOR& objectcolor);
+	void Update();										// Collision
+	void Update(float duration);						// 2D Physics
+	void Update(float duration , CHeight* pMap);		// 3D Physics
+	void Update(CRay ray, D3DXCOLOR& objectcolor);		// Color Change
 	void Render();
 
-	void Update();
 	vector<CObject *> GetVecObject();
 	vector<IObject *> GetVecIObject();
 

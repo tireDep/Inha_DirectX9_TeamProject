@@ -6,19 +6,16 @@ class CCamera;
 class CGrid;
 class CUI;
 class CText;
-class CColliderObject;
 class CCharacter;
 class CLight;
 class CGridMap;
 // class CFrustum;
-class CXfile;
-/// tmp Physics
-class CPhysicsSphere;
-class CWall;
+/// 이 아래는 지울 수도 있는 선언
 class CHeight;
+class CXfile;
+class CColliderObject;
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
-//class CParticleWorld;
 class CMainGame
 {
 private:
@@ -31,15 +28,11 @@ private:
 	CFrustum	m_pPrevFrustum;
 	CFrustum	m_pNowFrustum;
 	CGridMap*	m_GridMap;
+	/// 이 아래는 지울 수도 있는 선언
 	CXfile*		m_Xfile;
-	/// tmp Physics
-	CPhysicsSphere* m_pSphere1;
-	//CPhysicsSphere* m_pSphere2;
-	vector<CWall*> m_pWall;
 	CHeight* m_pHeightMap;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
-	//CParticleWorld*	m_pParticleWorld;
 public:
 	CMainGame();
 	~CMainGame();
@@ -48,6 +41,5 @@ public:
 	void Setup();
 	void Update();
 	void Render();
-
 	/// 릴리즈 버전을 위한 주석처리
 };

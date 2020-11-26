@@ -9,20 +9,15 @@
 #include "Ray.h"
 #include "Light.h"
 #include "GridMap.h"
-//#include "Sphere.h"
-//#include "Cube.h"
-#include "Xfile.h"
-/// tmp Physics
-#include "PhysicsSphere.h"
-#include "Wall.h"
 #include "PSphere.h"
 #include "PSBox.h"
 #include "PSCylinder.h"
+/// 이 아래는 지울 수도 있는 선언
+#include "Xfile.h"
 #include "CHeight.h"
 
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
-//#include "ParticleWorld.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
@@ -31,15 +26,11 @@ CMainGame::CMainGame() :
 	m_pCharacter(NULL),
 	m_pLight(NULL),
 	m_GridMap(NULL),
+	/// 이 아래는 지울 수도 있는 선언
 	m_Xfile(NULL),
 	m_pHeightMap(NULL)
-	/// tmp Physics
-	//m_pSphere1(NULL),
-	//m_pSphere2(NULL),
-	//m_pWall(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
-	//m_pParticleWorld(NULL),
 {
 
 }
@@ -51,18 +42,14 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pText);
 	SafeDelete(m_pLight);
 	SafeDelete(m_GridMap);
+	/// 이 아래는 지울 수도 있는 선언
 	SafeDelete(m_Xfile);
 	SafeDelete(m_pHeightMap);
-	/// tmp Physics
-	//for(int i = 0; i < 4; ++i)
-	//SafeDelete(m_pWall[i]);
-	//g_pPhysicsObjectManager->Destroy();
 
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 	/// 릴리즈 버전을 위한 주석처리
 	//SafeDelete(m_pSm);
-	//SafeDelete(m_pParticleWorld);
 }
 
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -98,32 +85,33 @@ void CMainGame::Setup()
 
 	m_pLight = new CLight;
 	m_pLight->Setup();
+	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0)); // sun light vector
 
 	m_GridMap = new CGridMap;
 	m_GridMap->Setup();
 	m_pPrevFrustum.Setup();
 	m_pNowFrustum.Setup();
 
-	//m_pHeightMap = new CHeight;
-	//m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
-
+	/// 이 아래는 지울 수도 있는 선언
 	for (int i = 0; i < 8; i++)
 	{
 		CPSphere* Sphere = new CPSphere();
 		Sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
 	}
-
 	for (int i = 0; i < 8; i++)
 	{
 		CPSBox* box = new CPSBox();
 		box->Setup(D3DXVECTOR3(-5, 0.5, 2 * i + 3));
 	}
-
 	for (int i = 0; i < 8; i++)
 	{
 		CPSCylinder* cylinder = new CPSCylinder();
 		cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 20));
 	}
+	//m_pHeightMap = new CHeight;
+	//m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
+	m_Xfile = new CXfile;
+	m_Xfile->Setup();
 
 	g_pEventManager->AddListener(g_gameManager);
 	g_pEventManager->AddListener(m_pCamera);
@@ -135,45 +123,9 @@ void CMainGame::Setup()
 		g_pEventManager->AddListener(g_pObjectManager->GetVecObject()[i]);
 	}
 
-	m_Xfile = new CXfile;
-	m_Xfile->Setup();
-
 	/// 릴리즈 버전을 위한 주석처리
-	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0)); // sun light vector
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
-	//m_pParticleWorld = new CParticleWorld;
-	//m_pParticleWorld->Setup();
-	/// tmp Physics
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	CPhysicsSphere* pSphere = new CPhysicsSphere;
-	//	pSphere->setCenter(i, 0.21f, 0.0f);
-	//	pSphere->setPower(-i, i);
-	//}
-	//m_pSphere1 = new CPhysicsSphere;
-	//m_pSphere1->Setup();
-	//m_pSphere1->setCenter(-2.7f, 5.0f, 0.0f);
-	//m_pSphere2 = new CPhysicsSphere;
-	////m_pSphere2->Setup();
-	//m_pSphere2->setCenter(+2.4f, 0.21f, 0.0f);
-	//m_pSphere2->setPower(0, 0);
-	//for (int i = 0; i < g_pPhysicsObjectManager->getVecObject().size(); i++)
-	//{
-	//	g_pEventManager->AddListener(g_pPhysicsObjectManager->getVecObject()[i]);
-	//}
-	//for (int i = 0; i < 4; ++i)
-	//{
-	//	m_pWall.push_back(new CWall);
-	//}
-	//m_pWall[0]->Setup(8.0f, 0.0f, 8.0f); 
-	//m_pWall[0]->setPosition(0, 0, 0);
-	//m_pWall[1]->Setup(0.12f, 0.3f, 6.24f);
-	//m_pWall[1]->setPosition(-5, 0, 0);
-	//m_pWall[2]->Setup(10, 0.3f, 0.12f);
-	//m_pWall[2]->setPosition(0, 0, 3.0);
-	//m_pWall[3]->Setup(10, 0.3f, 0.12f);
-	//m_pWall[3]->setPosition(0, 0, -3.0);
 }
 
 void CMainGame::Update()
@@ -186,7 +138,7 @@ void CMainGame::Update()
 
 	if (m_pCharacter)
 	{
-		m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);
+		m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
@@ -246,40 +198,13 @@ void CMainGame::Update()
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
-	g_pObjectManager->Update(ray, m_pCharacter->GetColor());
-	g_pObjectManager->Update();
-	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
-	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);
+	g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
+	g_pObjectManager->Update();													// Collision
+	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());					// 2D Physics
+	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
 
 	/// 릴리즈 버전을 위한 주석처리
-	/// Lim Kyung Tae - Particle World
-	//if (m_pParticleWorld && g_gameManager->GetUImode() == false)
-	//	m_pParticleWorld->Update(g_pTimeManager->GetElapsedTime());
-	//if (COBB::IsCollision(m_pCharacter->GetOBB(), m_pParticleWorld->GetOBB()) == true)
-	//{
-	//	cout << "in" << endl;
-	//	D3DXVECTOR3 direction = m_pCharacter->GetPosition()- m_pParticleWorld->GetPosition();
-	//	D3DXVec3Normalize(&direction, &direction);
-	//	m_pParticleWorld->SetPusingForce(direction / 100.0f);
-	//}
-	/// tmp Physics
-	//g_pPhysicsObjectManager->Update(g_pTimeManager->GetElapsedTime());
-	//for (int hittee = 0; hittee < 4; hittee++)
-	//{
-	//	for (int hitter = 0; hitter < 4; hitter++)
-	//	{
-	//		if (hittee >= hitter)
-	//		{
-	//			continue;
-	//		}
-	//		m_pPhysicsSphere[hittee]->Hitball(&m_pPhysicsSphere[hitter]);
-	//		//m_pPhysicsSphere[hittee].hitBall(m_pPhysicsSphere[hitter]);
-	//	}
-	//}
-	//m_pSphere2->Update(g_pTimeManager->GetElapsedTime());
-	//m_pSphere1->Hitball(*m_pSphere2);
-	//m_pWall[0]->hitBy(*m_pSphere1);
-	//m_pWall[0]->hitBy(*m_pSphere2);
+	// 민종씨 코드
 	//static int count = 0;
 	//static float gravity = -0.98;
 	//static float plane = 1.5;
