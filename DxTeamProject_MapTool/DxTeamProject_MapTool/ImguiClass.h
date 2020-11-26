@@ -4,6 +4,7 @@ class CImguiClass
 {
 private:
 	enum class LoadType { eNull, eMap, eBackground, eObject };
+	enum class ColorType { eNull, eGray, eBlack, eWhite, eRed, eBlue, eGreen, eYellow };
 
 	bool m_isReset;
 
@@ -14,6 +15,10 @@ private:
 	int m_FileLoadIndex;
 	LoadType m_PreLoadType;
 	LoadType m_NowLoadType;
+
+	vector<ColorType> m_vecColor;
+	ColorType m_PrecolorType;
+	ColorType m_NowcolorType;
 
 	void SetVecItem();
 

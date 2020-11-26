@@ -5,6 +5,7 @@ class CCube;
 class CCamera;
 class CImguiClass;
 class CRay;
+class CLight;
 
 class CToolMain
 {
@@ -14,6 +15,8 @@ private:
 	CCamera* m_pCamera;
 	CImguiClass* m_pImgui;
 	CRay* m_pRay;
+	CLight* m_pLight;
+
 public:
 	CToolMain();
 	~CToolMain();

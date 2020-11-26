@@ -149,6 +149,8 @@ void CCube::Update()
 
 void CCube::Render()
 {
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+
 	g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);

@@ -120,6 +120,21 @@ void CFileLoadManager::ReadMapData(string fileName)
 				mapData.vTranslate.z = atof(readData.c_str());
 			}
 
+			else if (readData == "# Color")
+			{
+				getline(mapFile, readData);
+				mapData.dxColor.r = atof(readData.c_str());
+
+				getline(mapFile, readData);
+				mapData.dxColor.g = atof(readData.c_str());
+
+				getline(mapFile, readData);
+				mapData.dxColor.b = atof(readData.c_str());
+				
+				getline(mapFile, readData);
+				mapData.dxColor.a = atof(readData.c_str());
+			}
+
 			else if (readData == "# Object_End")
 				IObject::CreateObject(mapData);
 		}
@@ -159,6 +174,8 @@ void CFileLoadManager::SaveMapData(string fileName)
 			mapData.vScale = vecObject[i]->GetScale();
 			mapData.vRotate = vecObject[i]->GetRotate();
 			mapData.vTranslate = vecObject[i]->GetTranslate();
+
+			mapData.dxColor = vecObject[i]->GetColor();
 
 			FileSave(saveFile, mapData);
 
@@ -211,6 +228,9 @@ void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
 
 	file << "# Translate" << endl;
 	file << mapData.vTranslate.x << endl << mapData.vTranslate.y << endl << mapData.vTranslate.z << endl;
+
+	file << "# Color" << endl;
+	file << mapData.dxColor.r << endl << mapData.dxColor.g << endl << mapData.dxColor.b << endl << mapData.dxColor.a << endl;
 
 	file << "# Object_End" << endl << endl;
 }
