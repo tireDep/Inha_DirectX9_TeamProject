@@ -79,6 +79,8 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
+	g_pFileLoadManager->FileLoad_MapData();
+
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
 

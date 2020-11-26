@@ -234,49 +234,49 @@ bool COBB::IsCollision(COBB* pOBB1, COBB* pOBB2)
 		// : 0
 		r = abs(dist[0] * cos[2][0] - dist[2] * cos[0][0]);
 		r0 = pOBB1->m_fAxisHalfLen[0] * absCos[2][0] + pOBB1->m_fAxisHalfLen[2] * absCos[0][0];
-		r1 = pOBB1->m_fAxisHalfLen[1] * absCos[1][2] + pOBB1->m_fAxisHalfLen[2] * absCos[1][1];
+		r1 = pOBB2->m_fAxisHalfLen[1] * absCos[1][2] + pOBB2->m_fAxisHalfLen[2] * absCos[1][1];
 		if (r > r0 + r1) return false;
 
 		r = abs(dist[0] * cos[2][1] - dist[2] * cos[0][1]);
 		r0 = pOBB1->m_fAxisHalfLen[0] * absCos[2][1] + pOBB1->m_fAxisHalfLen[2] * absCos[0][1];
-		r1 = pOBB1->m_fAxisHalfLen[0] * absCos[1][2] + pOBB1->m_fAxisHalfLen[2] * absCos[1][0];
+		r1 = pOBB2->m_fAxisHalfLen[0] * absCos[1][2] + pOBB2->m_fAxisHalfLen[2] * absCos[1][0];
 		if (r > r0 + r1) return false;
 
 		r = abs(dist[0] * cos[2][2] - dist[2] * cos[0][2]);
 		r0 = pOBB1->m_fAxisHalfLen[0] * absCos[2][2] + pOBB1->m_fAxisHalfLen[2] * absCos[0][2];
-		r1 = pOBB1->m_fAxisHalfLen[1] * absCos[1][1] + pOBB1->m_fAxisHalfLen[2] * absCos[1][0];
+		r1 = pOBB2->m_fAxisHalfLen[1] * absCos[1][1] + pOBB2->m_fAxisHalfLen[2] * absCos[1][0];
 		if (r > r0 + r1) return false;
 
 		// : 1
 		r = abs(dist[1] * cos[0][0] - dist[0] * cos[1][0]);
 		r0 = pOBB1->m_fAxisHalfLen[0] * absCos[1][0] + pOBB1->m_fAxisHalfLen[1] * absCos[0][0];
-		r1 = pOBB1->m_fAxisHalfLen[1] * absCos[2][2] + pOBB1->m_fAxisHalfLen[2] * absCos[2][1];
+		r1 = pOBB2->m_fAxisHalfLen[1] * absCos[2][2] + pOBB2->m_fAxisHalfLen[2] * absCos[2][1];
 		if (r > r0 + r1) return false;
 
 		r = abs(dist[1] * cos[0][1] - dist[0] * cos[1][1]);
 		r0 = pOBB1->m_fAxisHalfLen[0] * absCos[1][1] + pOBB1->m_fAxisHalfLen[1] * absCos[0][1];
-		r1 = pOBB1->m_fAxisHalfLen[0] * absCos[2][2] + pOBB1->m_fAxisHalfLen[2] * absCos[2][0];
+		r1 = pOBB2->m_fAxisHalfLen[0] * absCos[2][2] + pOBB2->m_fAxisHalfLen[2] * absCos[2][0];
 		if (r > r0 + r1) return false;
 
 		r = abs(dist[1] * cos[0][2] - dist[0] * cos[1][2]);
 		r0 = pOBB1->m_fAxisHalfLen[0] * absCos[1][2] + pOBB1->m_fAxisHalfLen[1] * absCos[0][2];
-		r1 = pOBB1->m_fAxisHalfLen[1] * absCos[2][1] + pOBB1->m_fAxisHalfLen[1] * absCos[2][0];
+		r1 = pOBB2->m_fAxisHalfLen[1] * absCos[2][1] + pOBB2->m_fAxisHalfLen[1] * absCos[2][0];
 		if (r > r0 + r1) return false;
 
 		// : 2
 		r = abs(dist[2] * cos[1][0] - dist[1] * cos[2][0]);
 		r0 = pOBB1->m_fAxisHalfLen[1] * absCos[2][0] + pOBB1->m_fAxisHalfLen[2] * absCos[1][0];
-		r1 = pOBB1->m_fAxisHalfLen[1] * absCos[0][2] + pOBB1->m_fAxisHalfLen[2] * absCos[0][1];
+		r1 = pOBB2->m_fAxisHalfLen[1] * absCos[0][2] + pOBB2->m_fAxisHalfLen[2] * absCos[0][1];
 		if (r > r0 + r1) return false;
 
 		r = abs(dist[2] * cos[1][1] - dist[1] * cos[1][1]);
 		r0 = pOBB1->m_fAxisHalfLen[1] * absCos[2][1] + pOBB1->m_fAxisHalfLen[2] * absCos[1][1];
-		r1 = pOBB1->m_fAxisHalfLen[0] * absCos[0][2] + pOBB1->m_fAxisHalfLen[2] * absCos[0][0];
+		r1 = pOBB2->m_fAxisHalfLen[0] * absCos[0][2] + pOBB2->m_fAxisHalfLen[2] * absCos[0][0];
 		if (r > r0 + r1) return false;
 
 		r = abs(dist[2] * cos[1][2] - dist[1] * cos[2][2]);
 		r0 = pOBB1->m_fAxisHalfLen[1] * absCos[2][2] + pOBB1->m_fAxisHalfLen[2] * absCos[1][2];
-		r1 = pOBB1->m_fAxisHalfLen[0] * absCos[0][1] + pOBB1->m_fAxisHalfLen[1] * absCos[0][0];
+		r1 = pOBB2->m_fAxisHalfLen[0] * absCos[0][1] + pOBB2->m_fAxisHalfLen[1] * absCos[0][0];
 		if (r > r0 + r1) return false;
 	}
 	return true;
