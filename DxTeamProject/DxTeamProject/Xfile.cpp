@@ -31,7 +31,7 @@ void CXfile::Setup()
 		return;
 	}*/
 
-	if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Cube", "Cube_01.X", xfile))
+	if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Tile", "Tile_01.X", xfile))
 	{
 		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
 		return;
