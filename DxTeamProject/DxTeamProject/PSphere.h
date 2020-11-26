@@ -16,6 +16,12 @@ protected:
 	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vAcceleration, Acceleration);
 	D3DXVECTOR3 m_vForceDirection;
 	D3DXVECTOR3	m_vForceAccum;
+	// rotation
+	D3DXVECTOR3		m_vCurrentOrientation;
+	D3DXVECTOR3		m_vAngularVelocity;
+	D3DXVECTOR3		m_vAngularAcceleration;
+	D3DXVECTOR3		m_vRotationalInertia;
+	D3DXVECTOR3		m_vTorque;
 public:
 	void Setup();
 	void Setup(D3DXVECTOR3 center);
@@ -39,4 +45,8 @@ public:
 	void RunPhysics(float duration);
 	bool hasIntersected(CObject* otherobject);
 	void CollisionOtherObject(CObject* otherobject);
+
+	// rotation tmp setup update
+	void SetupRotation();
+	void UpdateRotation(float duration, D3DXVECTOR3 point);
 };
