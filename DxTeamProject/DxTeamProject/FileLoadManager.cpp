@@ -231,12 +231,12 @@ bool CFileLoadManager::FileLoad_Shader(string szFolder, string szFile, LPD3DXEFF
 bool CFileLoadManager::FileLoad_MapData()
 {
 	string filePath = "Resource/MapData";
-	string file = "mapData.dat";
+	string file = "mapData.config";
 	StrFilePath(filePath, filePath, file);
 	LoadData(filePath);
 
 	filePath = "Resource/MapData";
-	file = "objData.dat";
+	file = "objData.config";
 	StrFilePath(filePath, filePath, file);
 	LoadData(filePath);
 

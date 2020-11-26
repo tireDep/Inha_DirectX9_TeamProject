@@ -41,9 +41,6 @@ LPD3DXEFFECT CFileLoadManager::LoadShader(const string fileName)
 
 void CFileLoadManager::ReadMapData(string fileName)
 {
-	// >> todo : ÆÄ½Ì
-	cout << " todo Something_readMap " << endl;
-	
 	ifstream mapFile;
 	mapFile.open(fileName.c_str(), ios::in | ios::binary);
 
@@ -140,10 +137,10 @@ void CFileLoadManager::SaveMapData(string fileName)
 	saveFile.open(fileName.c_str(), ios::out | ios::binary);
 
 	ofstream mapFile;
-	mapFile.open("mapData.dat", ios::out | ios::binary);
+	mapFile.open("mapData.config", ios::out | ios::binary);
 
 	ofstream objFile;
-	objFile.open("objData.dat", ios::out | ios::binary);
+	objFile.open("objData.config", ios::out | ios::binary);
 
 	if (mapFile.is_open() && objFile.is_open() && saveFile.is_open())
 	{
