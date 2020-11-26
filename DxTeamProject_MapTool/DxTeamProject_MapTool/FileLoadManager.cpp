@@ -90,47 +90,36 @@ void CFileLoadManager::ReadMapData(string fileName)
 			else if (readData == "# Scale")
 			{
 				getline(mapFile, readData);
-
-				string temp = readData;
-				int index = temp.find(",");
 				mapData.vScale.x = atof(readData.c_str());
 
-				readData = readData.substr(index + 2, readData.length());
-				index = temp.find(",");
+				getline(mapFile, readData);
 				mapData.vScale.y = atof(readData.c_str());
 
-				readData = readData.substr(index + 2, readData.length());
+				getline(mapFile, readData);
 				mapData.vScale.z = atof(readData.c_str());
 			}
 
 			else if (readData == "# Rotate")
 			{
 				getline(mapFile, readData);
-
-				string temp = readData;
-				int index = temp.find(",");
 				mapData.vRotate.x = atof(readData.c_str());
 
-				readData = readData.substr(index + 2, readData.length());
-				index = temp.find(",");
+				getline(mapFile, readData);
 				mapData.vRotate.y = atof(readData.c_str());
 
-				readData = readData.substr(index + 2, readData.length());
+				getline(mapFile, readData);
 				mapData.vRotate.z = atof(readData.c_str());
 			}
 
 			else if (readData == "# Translate")
 			{
 				getline(mapFile, readData);
-				string temp = readData;
-				int index = temp.find(",");
 				mapData.vTranslate.x = atof(readData.c_str());
 
-				readData = readData.substr(index + 2, readData.length());
-				index = temp.find(",");
+				getline(mapFile, readData);
 				mapData.vTranslate.y = atof(readData.c_str());
 
-				readData = readData.substr(index + 2, readData.length());
+				getline(mapFile, readData);
 				mapData.vTranslate.z = atof(readData.c_str());
 			}
 
@@ -147,10 +136,16 @@ void CFileLoadManager::SaveMapData(string fileName)
 	// >> todo : ÆÄ½Ì
 	cout << " todo Something_saveMap " << endl;
 
-	ofstream mapFile;
-	mapFile.open(fileName.c_str(), ios::out | ios::binary);
+	ofstream saveFile;
+	saveFile.open(fileName.c_str(), ios::out | ios::binary);
 
-	if (mapFile.is_open())
+	ofstream mapFile;
+	mapFile.open("mapData.dat", ios::out | ios::binary);
+
+	ofstream objFile;
+	objFile.open("objData.dat", ios::out | ios::binary);
+
+	if (mapFile.is_open() && objFile.is_open() && saveFile.is_open())
 	{
 		vector<IObject *> vecObject = g_pObjectManager->GetVecObject();
 		ST_MapData mapData;
@@ -168,38 +163,59 @@ void CFileLoadManager::SaveMapData(string fileName)
 			mapData.vRotate = vecObject[i]->GetRotate();
 			mapData.vTranslate = vecObject[i]->GetTranslate();
 
-			mapFile << "# Object_Start" << endl;
+			FileSave(saveFile, mapData);
 
-			mapFile << "# ObjectName" << endl;
-			mapFile << mapData.strObjName << endl;
+			switch (mapData.objType)
+			{
+			case eBox:
+			case eSphere:
+			case eCylinder:
+				FileSave(objFile, mapData);
+				break;
 
-			mapFile << "# FolderPath" << endl;
-			mapFile << mapData.strFolderPath << endl;
+			default:
+				FileSave(mapFile, mapData);
+				break;
+			} // << : switch
 
-			mapFile << "# FilePath" << endl;
-			mapFile << mapData.strXFilePath << endl;
-
-			mapFile << "# TxtPath" << endl;
-			mapFile << mapData.strTxtPath << endl;
-
-			mapFile << "# ObjectType" << endl;
-			mapFile << mapData.objType << endl;
-
-			mapFile << "# Scale" << endl;
-			mapFile << mapData.vScale.x << ", " << mapData.vScale.y << ", " << mapData.vScale.z << endl;
-
-			mapFile << "# Rotate" << endl;
-			mapFile << mapData.vRotate.x << ", " << mapData.vRotate.y << ", " << mapData.vRotate.z << endl;
-
-			mapFile << "# Translate" << endl;
-			mapFile << mapData.vTranslate.x << ", " << mapData.vTranslate.y << ", " << mapData.vTranslate.z << endl;
-
-			mapFile << "# Object_End" << endl << endl;
-		}
+		} // << : for
+		saveFile.close();
+		objFile.close();
 		mapFile.close();
-	}
 
-	mapFile.close();
+	} // << : if
+
+}
+
+void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
+{
+	file << "# Object_Start" << endl;
+
+	file << "# ObjectName" << endl;
+	file << mapData.strObjName << endl;
+
+	file << "# FolderPath" << endl;
+	file << mapData.strFolderPath << endl;
+
+	file << "# FilePath" << endl;
+	file << mapData.strXFilePath << endl;
+
+	file << "# TxtPath" << endl;
+	file << mapData.strTxtPath << endl;
+
+	file << "# ObjectType" << endl;
+	file << mapData.objType << endl;
+
+	file << "# Scale" << endl;
+	file << mapData.vScale.x << endl << mapData.vScale.y << endl << mapData.vScale.z << endl;
+
+	file << "# Rotate" << endl;
+	file << mapData.vRotate.x << endl << mapData.vRotate.y << endl << mapData.vRotate.z << endl;
+
+	file << "# Translate" << endl;
+	file << mapData.vTranslate.x << endl << mapData.vTranslate.y << endl << mapData.vTranslate.z << endl;
+
+	file << "# Object_End" << endl << endl;
 }
 
 bool CFileLoadManager::CheckDataName(TCHAR * openFileName, string& realName)

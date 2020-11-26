@@ -2,6 +2,7 @@
 #include "Singleton.h"
 
 struct ST_XFile;
+struct ST_MapData;
 
 #define g_pFileLoadManager CFileLoadManager::GetInstance()
 
@@ -11,6 +12,8 @@ private:
 	bool CheckDataName(TCHAR* openFileName, string& realName);
 	void ReadMapData(string fileName);
 	void SaveMapData(string fileName);
+
+	void FileSave(ofstream& file, const ST_MapData& mapData);
 
 	LPD3DXEFFECT LoadShader(const string fileName);
 
