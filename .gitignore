@@ -6,7 +6,6 @@
 
 # Else
 *.data
-*.dat
 *.ini
 *.pdf
 *.zip
