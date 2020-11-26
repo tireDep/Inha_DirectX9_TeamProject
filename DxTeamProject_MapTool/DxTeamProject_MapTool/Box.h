@@ -13,5 +13,7 @@ public:
 	// ray
 	void Update(CRay * ray);
 	void Render();
+
+	void SetDiffScale(D3DXVECTOR3 set) { };
 };
 

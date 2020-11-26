@@ -11,7 +11,9 @@ public:
 	void Setup(ST_MapData setData);
 	void Update();
 	// ray
-	void Update(CRay * ray) {};
+	void Update(CRay * ray);
 	void Render();
+
+	void SetDiffScale(D3DXVECTOR3 set);
 };
 
