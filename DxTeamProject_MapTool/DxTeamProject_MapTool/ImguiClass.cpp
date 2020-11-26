@@ -325,7 +325,12 @@ void CImguiClass::Update()
 
 			D3DXVECTOR3 vScale = vecObj[index]->GetScale();
 			if (ImGui::InputFloat3("Scale", vScale))
-				vecObj[index]->SetScale(vScale);
+			{
+				if (vecObj[index]->GetObjType() == eSphere || vecObj[index]->GetObjType() == eCylinder)
+					vecObj[index]->SetDiffScale(vScale);
+				else
+					vecObj[index]->SetScale(vScale);
+			}
 
 			D3DXVECTOR3 vRot = vecObj[index]->GetRotate();
 			if(ImGui::InputFloat3("Rotate", vRot))
