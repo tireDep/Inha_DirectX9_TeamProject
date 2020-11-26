@@ -245,8 +245,9 @@ void CMainGame::Update()
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());
-	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);
 	g_pObjectManager->Update();
+	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);
 
 	/// 릴리즈 버전을 위한 주석처리
 	/// Lim Kyung Tae - Particle World

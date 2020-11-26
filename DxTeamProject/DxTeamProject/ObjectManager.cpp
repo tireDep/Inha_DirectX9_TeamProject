@@ -38,6 +38,12 @@ void CObjectManager::Destroy()
 		m_vecObject[i]->Release();
 }
 
+void CObjectManager::Update(float duration)
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+		m_vecObject[i]->Update(duration);
+}
+
 void CObjectManager::Update(float duration, CHeight* pMap)
 {
 	for (int i = 0; i < m_vecObject.size(); i++)

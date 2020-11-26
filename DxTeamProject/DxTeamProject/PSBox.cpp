@@ -28,6 +28,37 @@ void CPSBox::Setup(D3DXVECTOR3 center)
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
+void CPSBox::Update(float duration)
+{
+	D3DXVECTOR3 linearforce;
+	if (m_isForceApplied)
+	{
+		if (!hasFiniteMass()) return;
+		linearforce = m_vForceDirection * GetMass();
+		m_isForceApplied = false;
+	}
+	else
+		linearforce = D3DXVECTOR3(0, 0, 0);
+
+	if (m_finverseMass <= 0.0f) return;
+	assert(duration > 0.0f);
+
+	m_vAcceleration = linearforce * m_finverseMass;
+	m_vVelocity += (m_vAcceleration * duration);
+	m_vVelocity *= powf(m_fDamping, duration);
+	//m_vPosition += (m_vVelocity * duration);
+	m_vVelocity *= m_fDrag;
+	if (m_vVelocity.x > 0.001f || m_vVelocity.y > 0.001f || m_vVelocity.z > 0.001f)
+	{
+		m_vPosition += (m_vVelocity * duration);
+	}
+	else
+	{
+		m_vVelocity.x = m_vVelocity.y = m_vVelocity.z = 0.0f;
+	}
+	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+}
+
 void CPSBox::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
 {
 	D3DXVECTOR3* pVertices;
@@ -110,6 +141,8 @@ bool CPSBox::hasFiniteMass() const
 void CPSBox::SetPusingForce(D3DXVECTOR3 forcedirection)
 {
 	D3DXVec3Normalize(&m_vForceDirection, &forcedirection);
+	m_vForceDirection *= 100.0f;
+	SetForceApplied(true);
 }
 
 void CPSBox::AddForce(const D3DXVECTOR3& force)
@@ -141,8 +174,8 @@ void CPSBox::RunPhysics(float duration)
 {
 	/// physics edting
 	if (!hasFiniteMass()) return;
-	//AddForce(m_vForceDirection * GetMass());
-	AddForce(m_vForceDirection);
+	AddForce(m_vForceDirection * GetMass());
+	//AddForce(m_vForceDirection);
 	Integrate(duration);
 }
 
@@ -260,8 +293,9 @@ void CPSBox::CollisionOtherObject(CObject* otherobject)
 		D3DXVec3Normalize(&massdirection, &massdirection);
 		v1 = D3DXVec3Dot(&this->GetVelocity(), &massdirection);
 		v2 = D3DXVec3Dot(&otherobject->GetVelocity(), &massdirection);
-		// perfect elastic collision
-		float elasticity = 1.0f;
+		/// perfect elastic collision
+		//float elasticity = 1.0f;
+		float elasticity = (this->GetElasticity() + otherobject->GetElasticity()) / 2;
 		float finalv1, finalv2;
 		finalv1 = (((this->GetMass() - (elasticity * otherobject->GetMass()))*v1) + ((1 + elasticity)*otherobject->GetMass()*v2)) 
 					/ (this->GetMass() + otherobject->GetMass());
