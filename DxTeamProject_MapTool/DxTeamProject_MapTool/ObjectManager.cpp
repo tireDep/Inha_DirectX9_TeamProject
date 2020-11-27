@@ -37,6 +37,8 @@ void CObjectManager::Destroy()
 	m_vecObject.clear();
 	IObject::SetRefCnt(0);
 	m_sameNum = 0;
+	g_pFileLoadManager->SetIndexNumZero();
+
 }
 
 void CObjectManager::Update()
@@ -66,7 +68,11 @@ void CObjectManager::RemoveClickedObj()
 	}
 
 	if (m_vecObject.size() == 0)
+	{
 		IObject::SetRefCnt(0);
+		m_sameNum = 0;
+		g_pFileLoadManager->SetIndexNumZero();
+	}
 }
 
 void CObjectManager::CheckSameName()
