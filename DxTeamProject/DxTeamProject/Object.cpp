@@ -3,6 +3,7 @@
 #include "PSBox.h"
 #include "PSphere.h"
 #include "PSCylinder.h"
+#include "Background.h"
 #include "Ray.h"
 
 int CObject::m_nRefCount = 0;
@@ -210,6 +211,15 @@ void CObject::CreateObject(const ST_MapData & mapData)
 		cylinder->Setup(mapData);
 	}
 	break;*/
+
+	case eATree:
+	case eSTree:
+	case eWTree:
+	{
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+		break;
 
 	}
 }

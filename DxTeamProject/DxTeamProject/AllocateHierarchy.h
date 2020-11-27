@@ -16,6 +16,7 @@ struct ST_BONE_MESH : public D3DXMESHCONTAINER
 	D3DXMATRIX*		pBoneOffsetMatrices;	// 원본 매트릭스 -> 로컬
 	D3DXMATRIX*		pCurrentBoneMatrices;
 };
+
 class CAllocateHierarchy : public ID3DXAllocateHierarchy
 {
 protected:

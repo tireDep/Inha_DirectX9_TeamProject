@@ -259,8 +259,8 @@ void CMainGame::Render()
 		m_GridMap->Render();
 	}
 
-	if (m_pSkinnedMesh)
-		m_pSkinnedMesh->Render(NULL);
+	// if (m_pSkinnedMesh)
+	// 	m_pSkinnedMesh->Render(NULL);
 
 	if (m_Xfile)
 		m_Xfile->Render(m_pCamera->GetCameraEye());

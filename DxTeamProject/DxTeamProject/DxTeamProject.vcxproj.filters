@@ -168,6 +168,8 @@
     <ClCompile Include="AllocateHierarchy.cpp">
       <Filter>SkinnedMesh</Filter>
     </ClCompile>
+    <ClCompile Include="PSOBB.cpp" />
+    <ClCompile Include="Background.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -361,6 +363,8 @@
     <ClInclude Include="AllocateHierarchy.h">
       <Filter>SkinnedMesh</Filter>
     </ClInclude>
+    <ClInclude Include="PSOBB.h" />
+    <ClInclude Include="Background.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

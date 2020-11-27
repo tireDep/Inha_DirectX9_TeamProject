@@ -35,12 +35,40 @@ void CImguiClass::SetVecItem()
 	}
 	else if (m_NowLoadType == LoadType::eBackground)
 	{
-		tempVec.push_back("Tree01");		tempObjType.push_back(eBackObj);
-		tempVec.push_back("Tree02");		tempObjType.push_back(eBackObj);
-		tempVec.push_back("Tree03");		tempObjType.push_back(eBackObj);
-		tempVec.push_back("Tree04");		tempObjType.push_back(eBackObj);
-		tempVec.push_back("Tree05");		tempObjType.push_back(eBackObj);
-		tempVec.push_back("Tree06");		tempObjType.push_back(eBackObj);
+		tempVec.push_back("Tree01");
+		tempVec.push_back("Tree02");
+		tempVec.push_back("Tree03");
+		tempVec.push_back("Tree04");
+		tempVec.push_back("Tree05");
+		tempVec.push_back("Tree06");
+
+		if (m_TreeType == LoadType::eAutumnTree)
+		{
+			tempObjType.push_back(eATree);
+			tempObjType.push_back(eATree);
+			tempObjType.push_back(eATree);
+			tempObjType.push_back(eATree);
+			tempObjType.push_back(eATree);
+			tempObjType.push_back(eATree);
+		}
+		else if (m_TreeType == LoadType::eSummerTree)
+		{
+			tempObjType.push_back(eSTree);
+			tempObjType.push_back(eSTree);
+			tempObjType.push_back(eSTree);
+			tempObjType.push_back(eSTree);
+			tempObjType.push_back(eSTree);
+			tempObjType.push_back(eSTree);
+		}
+		else if (m_TreeType == LoadType::eWinterTree)
+		{
+			tempObjType.push_back(eWTree);
+			tempObjType.push_back(eWTree);
+			tempObjType.push_back(eWTree);
+			tempObjType.push_back(eWTree);
+			tempObjType.push_back(eWTree);
+			tempObjType.push_back(eWTree);
+		}
 		// >> todo : item Ãß°¡
 	}
 	
@@ -58,6 +86,8 @@ CImguiClass::CImguiClass() :
 
 	m_PrecolorType = ColorType::eNull;
 	m_NowcolorType = ColorType::eGray;
+
+	m_TreeType = LoadType::eAutumnTree;
 	
 	m_vecColor.push_back(ColorType::eGray);
 	m_vecColor.push_back(ColorType::eBlack);
@@ -262,12 +292,21 @@ void CImguiClass::Update()
 		if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
 		if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = -1; }
 		// todo : Background
-		if (m_NowLoadType != m_PreLoadType)
+		if (m_NowLoadType != m_PreLoadType && m_NowLoadType != LoadType::eBackground)
 		{
 			SetVecItem();
 			m_PreLoadType = m_NowLoadType;
 		}
+		else if (m_NowLoadType == LoadType::eBackground)
+		{
+			ImGui::Separator();
+			if (ImGui::RadioButton("AutumnTree", m_TreeType == LoadType::eAutumnTree)) { m_TreeType = LoadType::eAutumnTree; m_FileLoadIndex = -1; }
+			ImGui::SameLine(); if (ImGui::RadioButton("SummerTree", m_TreeType == LoadType::eSummerTree)) { m_TreeType = LoadType::eSummerTree; m_FileLoadIndex = -1; }
+			if (ImGui::RadioButton("WinterTree", m_TreeType == LoadType::eWinterTree)) { m_TreeType = LoadType::eWinterTree; m_FileLoadIndex = -1; }
 
+			SetVecItem();
+			m_PreLoadType = m_NowLoadType;
+		}
 
 		// << combo
 		if (m_FileLoadIndex == -1)
