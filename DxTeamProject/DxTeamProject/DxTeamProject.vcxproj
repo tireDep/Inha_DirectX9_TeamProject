@@ -189,6 +189,7 @@
     <ClInclude Include="PhysicsSphere.h" />
     <ClInclude Include="PSBox.h" />
     <ClInclude Include="PSCylinder.h" />
+    <ClInclude Include="PSOBB.h" />
     <ClInclude Include="PSphere.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Ray.h" />
@@ -249,6 +250,7 @@
     <ClCompile Include="PhysicsSphere.cpp" />
     <ClCompile Include="PSBox.cpp" />
     <ClCompile Include="PSCylinder.cpp" />
+    <ClCompile Include="PSOBB.cpp" />
     <ClCompile Include="PSphere.cpp" />
     <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="Ray.cpp" />

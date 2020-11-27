@@ -162,6 +162,7 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="PSphere.cpp" />
+    <ClCompile Include="PSOBB.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -349,6 +350,7 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="PSphere.h" />
+    <ClInclude Include="PSOBB.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
