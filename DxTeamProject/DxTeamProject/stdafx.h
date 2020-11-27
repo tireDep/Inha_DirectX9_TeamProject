@@ -49,6 +49,7 @@ using namespace std;
 
 #define SafeRelease(p) { if(p) p->Release(); p = NULL; }
 #define SafeDelete(p) { if(p) delete p; }
+#define SafeDeleteArray(p)	{ if(p) delete[]p; p=NULL; }
 #define SingleTone(class_name)\
 private:\
 	class_name(void);\

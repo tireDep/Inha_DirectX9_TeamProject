@@ -12,6 +12,7 @@
 #include "PSphere.h"
 #include "PSBox.h"
 #include "PSCylinder.h"
+#include "SkinnedMesh.h"
 /// 이 아래는 지울 수도 있는 선언
 #include "Xfile.h"
 #include "CHeight.h"
@@ -28,7 +29,8 @@ CMainGame::CMainGame() :
 	m_GridMap(NULL),
 	/// 이 아래는 지울 수도 있는 선언
 	m_Xfile(NULL),
-	m_pHeightMap(NULL)
+	m_pHeightMap(NULL),
+	m_pSkinnedMesh(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
@@ -45,7 +47,7 @@ CMainGame::~CMainGame()
 	/// 이 아래는 지울 수도 있는 선언
 	SafeDelete(m_Xfile);
 	SafeDelete(m_pHeightMap);
-
+	SafeDelete(m_pSkinnedMesh);
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 	/// 릴리즈 버전을 위한 주석처리
@@ -113,6 +115,9 @@ void CMainGame::Setup()
 	m_Xfile = new CXfile;
 	m_Xfile->Setup();
 
+	m_pSkinnedMesh = new CSkinnedMesh;
+	m_pSkinnedMesh->SetUp("Resource/XFile/Character", "character_test.X");
+
 	g_pEventManager->AddListener(g_gameManager);
 	g_pEventManager->AddListener(m_pCamera);
 	g_pEventManager->AddListener(m_pCharacter);
@@ -135,6 +140,9 @@ void CMainGame::Update()
 
 	if (m_pCamera)
 		m_pCamera->Update();
+
+	if (m_pSkinnedMesh)
+		m_pSkinnedMesh->Update();
 
 	if (m_pCharacter)
 	{
@@ -250,6 +258,9 @@ void CMainGame::Render()
 	{
 		m_GridMap->Render();
 	}
+
+	if (m_pSkinnedMesh)
+		m_pSkinnedMesh->Render(NULL);
 
 	if (m_Xfile)
 		m_Xfile->Render(m_pCamera->GetCameraEye());

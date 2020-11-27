@@ -14,6 +14,7 @@ class CGridMap;
 class CHeight;
 class CXfile;
 class CColliderObject;
+class CSkinnedMesh;
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
 class CMainGame
@@ -28,6 +29,7 @@ private:
 	CFrustum	m_pPrevFrustum;
 	CFrustum	m_pNowFrustum;
 	CGridMap*	m_GridMap;
+	CSkinnedMesh* m_pSkinnedMesh;
 	/// 이 아래는 지울 수도 있는 선언
 	CXfile*		m_Xfile;
 	CHeight* m_pHeightMap;
