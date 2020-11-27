@@ -48,7 +48,7 @@ public:
 	virtual void SetDiffScale(D3DXVECTOR3 set) = 0;
 
 	static void SetRefCnt(int set);
-	static void CreateObject(const ObjectType objType);
+	static void CreateObject(const ObjectType objType, int index);
 	static void CreateObject(const ST_MapData& mapData);
 };
 

@@ -191,8 +191,9 @@ enum ObjectType
 {
 	eTile01, eTile02, eTile03, eTile04, eTile05, eTile06,
 	eTile07, eTile08, eTile09, eTile10, eTile11, eTile12, eTile13,
-	eBackObj,
-	eBox, eSphere, eCylinder
+	eBackObj, eTree01, eTree02, eTree03, eTree04, eTree05, eTree06,
+	eBox, eSphere, eCylinder,
+	eNull
 };
 
 struct ST_MapData
@@ -207,6 +208,8 @@ struct ST_MapData
 	D3DXVECTOR3 vScale;
 	D3DXVECTOR3 vRotate;
 	D3DXVECTOR3 vTranslate;
+
+	D3DXCOLOR dxColor;
 };
 
 #define GRAY    D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f)

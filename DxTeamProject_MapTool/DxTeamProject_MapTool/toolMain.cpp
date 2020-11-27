@@ -31,10 +31,11 @@ CToolMain::~CToolMain()
 
 void CToolMain::Setup()
 {
+	g_pFileLoadManager->Setup();
 	g_pDeviceManager->Setup();
 
 	m_pGrid = new CGrid;
-	m_pGrid->Setup(25, 1.0f);
+	m_pGrid->Setup(15, 1.0f);
 
 	m_pCube = new CCube;
 	m_pCube->Setup();

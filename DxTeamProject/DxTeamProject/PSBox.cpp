@@ -28,6 +28,46 @@ void CPSBox::Setup(D3DXVECTOR3 center)
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
+void CPSBox::Setup(const ST_MapData & mapData)
+{
+	m_strObjName = mapData.strObjName;
+
+	m_strFolder = mapData.strFolderPath;
+	m_strXFile = mapData.strXFilePath;
+	m_strTxtFile = mapData.strTxtPath;
+
+	m_ObjectType = mapData.objType;
+
+	D3DXVECTOR3 vScale, vRotate;
+	vScale = mapData.vScale;
+	vRotate = mapData.vRotate;
+	m_vPosition = mapData.vTranslate;
+
+	m_Color = mapData.dxColor;
+
+	m_fWidth = vScale.x;
+	m_fHeight = vScale.y;
+	m_fDepth = vScale.z;
+
+	Setup();
+
+	// ============================================================
+
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixScaling(&matS, vScale.x, vScale.y, vScale.z);
+
+	D3DXVECTOR3 v;
+	v.x = D3DXToRadian(vRotate.x);
+	v.y = D3DXToRadian(vRotate.y);
+	v.z = D3DXToRadian(vRotate.z);
+
+	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
+
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	m_matWorld = matS * matR * matT;
+
+}
+
 void CPSBox::Update(float duration)
 {
 	D3DXVECTOR3 linearforce;

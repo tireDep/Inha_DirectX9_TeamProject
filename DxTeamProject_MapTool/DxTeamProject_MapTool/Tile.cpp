@@ -50,6 +50,8 @@ void CTile::Update(CRay * ray)
 
 void CTile::Render()
 {
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+
 	D3DXMATRIXA16 matWorld, matS, matR, matT;
 	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
 
@@ -81,7 +83,6 @@ void CTile::Render()
 		else if (m_pTexture != NULL)
 		{
 			g_pD3DDevice->SetTexture(0, m_pTexture);
-			// cout << "temp";
 		}
 		// >> 텍스처 매치 안되있을 때
 

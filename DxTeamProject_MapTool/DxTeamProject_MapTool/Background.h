@@ -5,16 +5,18 @@ class CRay;
 
 class CBackground : public IObject
 {
-protected:	
-	CBackground();
 
 public:
-	virtual ~CBackground();
+	 CBackground();
+	 virtual ~CBackground();
 
-	virtual void Setup() = 0;
-	virtual void Update() = 0;
+	virtual void Setup();
+	virtual void Setup(ST_MapData setData);
+	virtual void Update();
 	// ray
-	virtual void Update(CRay * ray) = 0;
-	virtual void Render() = 0;
+	virtual void Update(CRay * ray);
+	virtual void Render();
+
+	virtual void SetDiffScale(D3DXVECTOR3 set);
 };
 

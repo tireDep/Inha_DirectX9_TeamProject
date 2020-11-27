@@ -111,13 +111,13 @@ void CFileLoadManager::ReadMapData(string fileName)
 			else if (readData == "# Translate")
 			{
 				getline(mapFile, readData);
-				mapData.vTranslate.x = atof(readData.c_str());
+				mapData.vTranslate.x = atof(readData.c_str()) + m_fNowX;
 
 				getline(mapFile, readData);
 				mapData.vTranslate.y = atof(readData.c_str());
 
 				getline(mapFile, readData);
-				mapData.vTranslate.z = atof(readData.c_str());
+				mapData.vTranslate.z = atof(readData.c_str()) + m_fNowZ;
 			}
 
 			else if (readData == "# Color")
@@ -141,6 +141,18 @@ void CFileLoadManager::ReadMapData(string fileName)
 	}
 
 	mapFile.close();
+
+	cout << m_fNowX << ", " << m_fNowZ << endl;
+	cout << m_fAddNumX << ", " << m_fAddNumZ << ", " << m_fLimitNumX << endl;
+	if (m_fNowX < m_fLimitNumX)
+		m_fNowX += m_fAddNumX;
+	else
+	{
+		m_fNowZ += m_fAddNumZ;
+		m_fNowX = 0;
+	}
+
+	cout << m_fNowX << ", " << m_fNowZ << endl;
 }
 
 void CFileLoadManager::SaveMapData(string fileName)
@@ -263,6 +275,51 @@ bool CFileLoadManager::CheckDataName(TCHAR * openFileName, string& realName)
 			return true;
 		}
 	}
+}
+
+void CFileLoadManager::Setup()
+{
+	m_fNowX = 0;
+	m_fNowZ = 0;
+	m_fAddNumX = 30;
+	m_fAddNumZ = -30;
+	// >> default set
+	m_fLimitNumX = 0;
+
+	ifstream file;
+	file.open("Resource/mapSetValue.txt", ios::in | ios::binary);
+
+	if (file.is_open())
+	{
+		ST_MapData mapData;
+		string readData;
+
+		while (getline(file, readData))
+		{
+			if (strstr(readData.c_str(), "# addX"))
+			{
+				getline(file, readData);
+				m_fAddNumX = atof(readData.c_str());
+			}
+
+			if (strstr(readData.c_str(), "# addZ"))
+			{
+				getline(file, readData);
+				m_fAddNumZ = atof(readData.c_str());
+			}
+
+			if (strstr(readData.c_str(), "# limitX"))
+			{
+				getline(file, readData);
+				m_fLimitNumX = atof(readData.c_str());
+			}
+
+		}
+
+		file.close();
+	}
+	else
+		ErrMessageBox("MapSetting File Open Fail", "ERROR");
 }
 
 void CFileLoadManager::FileLoad_OpenMapData()
@@ -402,4 +459,10 @@ bool CFileLoadManager::FileLoad_Shader(string szFolder, string szFile, LPD3DXEFF
 	}
 
 	return true;
+}
+
+void CFileLoadManager::SetIndexNumZero()
+{
+	m_fNowX = 0;
+	m_fNowZ = 0;
 }

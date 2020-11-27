@@ -4,6 +4,7 @@
 #include "Sphere.h"
 #include "Cylinder.h"
 #include "Tile.h"
+#include "Background.h"
 
 int IObject::m_nRefCnt = 0;
 
@@ -28,7 +29,7 @@ void IObject::SetRefCnt(int set)
 	IObject::m_nRefCnt = set;
 }
 
-void IObject::CreateObject(const ObjectType objType)
+void IObject::CreateObject(const ObjectType objType, int index)
 {
 	// >> FileLoader 생성
 	switch (objType)
@@ -37,7 +38,7 @@ void IObject::CreateObject(const ObjectType objType)
 	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
 	{
 		ST_MapData mapData;
-		mapData.vScale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
+		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
 		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		// >> todo : translate 현 위치 중앙으로 받아오기
@@ -80,6 +81,26 @@ void IObject::CreateObject(const ObjectType objType)
 	}
 		break;
 
+	case eBackObj:
+	{
+		ST_MapData mapData;
+		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
+		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		// >> todo : translate 현 위치 중앙으로 받아오기
+
+		mapData.objType = objType;
+
+		mapData.strObjName = string("Tree") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background";
+		mapData.strTxtPath = "Texture_Winter.png";
+
+		mapData.strXFilePath = string("Tree_0") + to_string(index + 1) + ".X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+		break;
 	}
 }
 

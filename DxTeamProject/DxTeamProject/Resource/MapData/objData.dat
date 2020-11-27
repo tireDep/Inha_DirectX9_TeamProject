@@ -1,0 +1,120 @@
+# Object_Start
+# ObjectName
+Box2
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+20
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+10
+0.5
+5
+# Color
+1
+1
+1
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Box3
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+20
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+10
+0.5
+-5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Box4
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+20
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+10
+0.5
+-10
+# Color
+1
+1
+0
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Box5
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+20
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+10
+0.5
+0
+# Color
+0
+0
+0
+1
+# Object_End
+
