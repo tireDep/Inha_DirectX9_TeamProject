@@ -13,7 +13,7 @@ protected:
 	static int    m_nRefCount;
 
 	// LPD3DXMESH	  m_pMesh;
-	D3DXMATRIXA16 m_matWorld;
+	//D3DXMATRIXA16 m_matWorld;
 
 	bool		  m_isPicked;
 	bool		  m_isClicked;
@@ -34,7 +34,8 @@ protected:
 	Synthesize(float, m_fElasticity, Elasticity); // elasticity
 	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);	// center position
 	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vVelocity, Velocity); // velocity
-	
+	Synthesize_Pass_by_Ref(D3DXMATRIXA16, m_matWorld, matWorld);
+
 	// =========================================================================
 
 	D3DMATERIAL9 m_stMtl;
