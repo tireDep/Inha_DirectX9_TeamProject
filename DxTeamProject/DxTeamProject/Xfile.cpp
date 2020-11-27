@@ -44,7 +44,7 @@ void CXfile::Setup()
 		return;
 	}*/
 
-	if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Character", "character.X", xfile))
+	if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Character", "character_test.X", xfile))
 	{
 		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
 		return;
