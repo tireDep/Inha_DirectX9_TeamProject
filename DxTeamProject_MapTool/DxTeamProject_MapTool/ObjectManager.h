@@ -10,6 +10,7 @@ class CObjectManager : public CSingleton<CObjectManager>
 {
 private:
 	vector<IObject *> m_vecObject;
+	int m_sameNum = 0;
 
 public:
 	void AddObject(IObject* pObject);
@@ -21,6 +22,7 @@ public:
 	void Render();
 
 	void RemoveClickedObj();
+	void CheckSameName();
 
 	vector<IObject *> GetVecObject();
 };

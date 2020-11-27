@@ -18,6 +18,7 @@ void CObjectManager::RemoveObject(IObject * pObject)
 			IObject* temp = *it;
 			it = m_vecObject.erase(it);
 			delete temp;
+			m_sameNum--;
 			return;
 		}
 		else
@@ -35,6 +36,7 @@ void CObjectManager::Destroy()
 
 	m_vecObject.clear();
 	IObject::SetRefCnt(0);
+	m_sameNum = 0;
 }
 
 void CObjectManager::Update()
@@ -65,6 +67,21 @@ void CObjectManager::RemoveClickedObj()
 
 	if (m_vecObject.size() == 0)
 		IObject::SetRefCnt(0);
+}
+
+void CObjectManager::CheckSameName()
+{
+	if (m_vecObject.size() == 0)
+		return;
+
+	for (int i = 0; i < m_vecObject.size() - 1; i++)
+	{
+		for (int j = i + 1; j < m_vecObject.size(); j++)
+		{
+			if (m_vecObject[i]->GetObjectName() == m_vecObject[j]->GetObjectName())
+				m_vecObject[j]->SetObjectName(m_vecObject[j]->GetObjectName() + "(" + to_string(m_sameNum++) + ")");
+		}
+	}
 }
 
 vector<IObject*> CObjectManager::GetVecObject()

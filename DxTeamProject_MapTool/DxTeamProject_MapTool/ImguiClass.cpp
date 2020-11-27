@@ -131,6 +131,8 @@ void CImguiClass::Update()
 	}
 
 	// ============================================================================================
+	
+	g_pObjectManager->CheckSameName();
 
 	{ // >> : Menu Title Bar
 		if (ImGui::BeginMainMenuBar())
