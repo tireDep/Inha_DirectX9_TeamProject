@@ -1,36 +1,6 @@
 # Object_Start
 # ObjectName
-Tile1
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--11.2
-0
-11.2
-# Color
-0
-0
-0
-0
-# Object_End
-
-# Object_Start
-# ObjectName
-Cylinder2
+Box1
 # FolderPath
 
 # FilePath
@@ -38,23 +8,23 @@ Cylinder2
 # TxtPath
 
 # ObjectType
-16
+20
 # Scale
 1
 1
 1
 # Rotate
 0
-90
+0
 0
 # Translate
-5
+0
 0.5
 0
 # Color
-0
-0
-0
+0.5
+0.5
+0.5
 1
 # Object_End
 

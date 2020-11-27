@@ -33,6 +33,16 @@ void CImguiClass::SetVecItem()
 		tempVec.push_back("Cylinder");		tempObjType.push_back(eCylinder);
 		// >> todo : item 추가
 	}
+	else if (m_NowLoadType == LoadType::eBackground)
+	{
+		tempVec.push_back("Tree01");		tempObjType.push_back(eBackObj);
+		tempVec.push_back("Tree02");		tempObjType.push_back(eBackObj);
+		tempVec.push_back("Tree03");		tempObjType.push_back(eBackObj);
+		tempVec.push_back("Tree04");		tempObjType.push_back(eBackObj);
+		tempVec.push_back("Tree05");		tempObjType.push_back(eBackObj);
+		tempVec.push_back("Tree06");		tempObjType.push_back(eBackObj);
+		// >> todo : item 추가
+	}
 	
 	m_vecItem = tempVec;
 	m_vecObjType = tempObjType;
@@ -250,6 +260,7 @@ void CImguiClass::Update()
 		if (ImGui::RadioButton("MapTile", m_NowLoadType == LoadType::eMap)) { m_NowLoadType = LoadType::eMap; m_FileLoadIndex = -1; }
 		ImGui::SameLine(); 
 		if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
+		if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = -1; }
 		// todo : Background
 		if (m_NowLoadType != m_PreLoadType)
 		{
@@ -282,7 +293,7 @@ void CImguiClass::Update()
 		ImGui::SameLine();
 		if (ImGui::Button("Load") && m_FileLoadIndex != -1)
 		{
-			IObject::CreateObject(m_vecObjType[m_FileLoadIndex]);
+			IObject::CreateObject(m_vecObjType[m_FileLoadIndex], m_FileLoadIndex);
 		}
 
 		ImGui::Separator();
