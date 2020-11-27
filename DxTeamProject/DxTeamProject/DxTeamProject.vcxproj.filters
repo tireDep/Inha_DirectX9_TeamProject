@@ -162,6 +162,12 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="PSphere.cpp" />
+    <ClCompile Include="SkinnedMesh.cpp">
+      <Filter>SkinnedMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="AllocateHierarchy.cpp">
+      <Filter>SkinnedMesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -349,6 +355,12 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="PSphere.h" />
+    <ClInclude Include="SkinnedMesh.h">
+      <Filter>SkinnedMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="AllocateHierarchy.h">
+      <Filter>SkinnedMesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -454,6 +466,9 @@
     </Filter>
     <Filter Include="...TrashCan\Physics\Physics_Rigidbody">
       <UniqueIdentifier>{cb8b0dd8-e16f-41de-9434-d30d86f8a7d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SkinnedMesh">
+      <UniqueIdentifier>{8b7bbd42-1924-48c4-91af-f7fa2e255a85}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
