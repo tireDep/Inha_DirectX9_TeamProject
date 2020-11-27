@@ -126,6 +126,21 @@ void CFileLoadManager::LoadData(string path)
 				mapData.vTranslate.z = atof(readData.c_str());
 			}
 
+			else if (readData == "# Color")
+			{
+				getline(file, readData);
+				mapData.dxColor.r = atof(readData.c_str());
+
+				getline(file, readData);
+				mapData.dxColor.g = atof(readData.c_str());
+
+				getline(file, readData);
+				mapData.dxColor.b = atof(readData.c_str());
+
+				getline(file, readData);
+				mapData.dxColor.a = atof(readData.c_str());
+			}
+
 			else if (strstr(readData.c_str(), "# Object_End"))
 				IObject::CreateObject(mapData);
 		}

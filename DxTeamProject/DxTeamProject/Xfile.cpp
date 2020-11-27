@@ -31,11 +31,11 @@ void CXfile::Setup()
 		return;
 	}*/
 
-	if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Tile", "Tile_01.X", xfile))
-	{
-		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
-		return;
-	}
+	//if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Tile", "Tile_01.X", xfile))
+	//{
+	//	MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
+	//	return;
+	//}
 
 
 	/*if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Tree", "autumn_tree_01.X", xfile))
@@ -43,6 +43,12 @@ void CXfile::Setup()
 		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
 		return;
 	}*/
+
+	if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Character", "character_test.X", xfile))
+	{
+		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
+		return;
+	}
 
 	m_pMesh = xfile->pMesh;
 	m_adjBuffer = xfile->adjBuffer;

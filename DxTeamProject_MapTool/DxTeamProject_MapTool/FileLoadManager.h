@@ -9,6 +9,12 @@ struct ST_MapData;
 class CFileLoadManager : public CSingleton<CFileLoadManager>
 {
 private:
+	float m_fNowX;
+	float m_fNowZ;
+	float m_fAddNumX;
+	float m_fAddNumZ;
+	float m_fLimitNumX;
+
 	bool CheckDataName(TCHAR* openFileName, string& realName);
 	void ReadMapData(string fileName);
 	void SaveMapData(string fileName);
@@ -18,6 +24,8 @@ private:
 	LPD3DXEFFECT LoadShader(const string fileName);
 
 public:
+	void Setup();
+
 	void FileLoad_OpenMapData();
 	void FileLoad_SaveMapData();
 
@@ -25,5 +33,7 @@ public:
 	bool FileLoad_Texture(string szFolder, string szFile, LPDIRECT3DTEXTURE9& setTexture);
 	bool FileLoad_Sprite(string szFolder, string szFile, D3DXIMAGE_INFO& imageInfo, LPDIRECT3DTEXTURE9& lpTexture);
 	bool FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT& setShader);
+
+	void SetIndexNumZero();
 };
 

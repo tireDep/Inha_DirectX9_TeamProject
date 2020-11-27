@@ -4,6 +4,8 @@ class IObject
 protected:
 	static int m_nRefCnt;
 
+	D3DXMATRIXA16 m_matWorld;
+
 	D3DMATERIAL9 m_pMtrl;
 	LPDIRECT3DTEXTURE9 m_pTexture;
 
@@ -25,8 +27,6 @@ protected:
 	Synthesize(D3DXVECTOR3, m_vScale, Scale);
 	Synthesize(D3DXVECTOR3, m_vRotate, Rotate);
 	Synthesize(D3DXVECTOR3, m_vTranslate, Translate);
-
-	Synthesize(bool, m_isClick, Click);
 
 	IObject();
 
