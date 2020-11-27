@@ -4,8 +4,19 @@
 
 int IObject::m_nRefCnt = 0;
 
-IObject::IObject()
+IObject::IObject() : 
+	m_pTexture(NULL),
+	m_pMesh(NULL),
+	m_numMtrls(0),
+	m_strObjName(""),
+	m_strFolder(""),
+	m_strTxtFile(""),
+	m_ObjectType(ObjectType::eNull),
+	m_vScale(0,0,0),
+	m_vRotate(0, 0, 0),
+	m_vTranslate(0, 0, 0)
 {
+	D3DXMatrixIdentity(&m_matWorld);
 	g_pObjectManager->AddObject(this);
 	IObject::m_nRefCnt += 1;
 }
@@ -31,6 +42,10 @@ void IObject::CreateObject(const ST_MapData & mapData)
 		tile->Setup(mapData);
 	}
 	break;
+
+	default:
+		CObject::CreateObject(mapData);
+		break;
 
 	/*case eBox:
 	{

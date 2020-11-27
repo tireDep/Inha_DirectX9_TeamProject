@@ -38,15 +38,8 @@ void CTile::Setup(ST_MapData setData)
 	m_numMtrls = xfile->nMtrlNum;
 
 	delete xfile;
-}
 
-void CTile::Update()
-{
-}
-
-void CTile::Render()
-{
-	D3DXMATRIXA16 matWorld, matS, matR, matT;
+	D3DXMATRIXA16 matS, matR, matT;
 	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
 
 	D3DXVECTOR3 v;
@@ -57,9 +50,18 @@ void CTile::Render()
 	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
 
 	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
-	matWorld = matS * matR * matT;
+	m_matWorld = matS * matR * matT;
+}
 
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+void CTile::Update()
+{
+}
+
+void CTile::Render()
+{
+
+
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 
 	// if(m_pMtrl!=NULL)
 	// 	g_pD3DDevice->SetMaterial(&m_pMtrl);

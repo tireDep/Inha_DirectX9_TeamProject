@@ -1,5 +1,8 @@
 #include "stdafx.h"
 #include "Object.h"
+#include "PSBox.h"
+#include "PSphere.h"
+#include "PSCylinder.h"
 #include "Ray.h"
 
 int CObject::m_nRefCount = 0;
@@ -180,4 +183,33 @@ bool CObject::hasIntersected(CObject * otherobject)
 
 void CObject::CollisionOtherObject(CObject * otherobject)
 {
+}
+
+void CObject::CreateObject(const ST_MapData & mapData)
+{
+	switch (mapData.objType)
+	{
+	case eBox:
+	{
+		CPSBox* box = new CPSBox;
+		box->Setup(mapData);
+	}
+	break;
+
+	/*
+	case eSphere:
+	{
+		CSphere* sphere = new CSphere;
+		sphere->Setup(mapData);
+	}
+	break;
+
+	case eCylinder:
+	{
+		CCylinder* cylinder = new CCylinder;
+		cylinder->Setup(mapData);
+	}
+	break;*/
+
+	}
 }
