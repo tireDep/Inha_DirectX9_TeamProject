@@ -25,7 +25,7 @@ void CPSOBB::Setup(CObject & object)
 	m_vOriAxisDir[2] = D3DXVECTOR3(0, 0, 1);
 	m_fAxisHalfLen[0] = fabsf(m_vMax.x - m_vMin.x) / 2.0f;
 	m_fAxisHalfLen[1] = fabsf(m_vMax.y - m_vMin.y) / 2.0f;
-	m_fAxisHalfLen[2] = fabsf(m_vMax.z - m_vMax.z) / 2.0f;
+	m_fAxisHalfLen[2] = fabsf(m_vMax.z - m_vMin.z) / 2.0f;
 
 	// OBB BOX LINE 
 	{

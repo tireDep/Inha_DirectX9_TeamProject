@@ -1,6 +1,9 @@
 #pragma once
 #include "Object.h"
 
+// OBB TEST
+class CPSOBB;
+
 class CBackground : public CObject
 {
 public:
@@ -31,5 +34,7 @@ public:
 
 	virtual void Setup(ST_MapData setData);
 	virtual void Render();
-};
 
+	// OBB TEST
+	CPSOBB* m_pOBB;
+};

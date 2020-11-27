@@ -19,7 +19,7 @@ autumn_texture.png
 0
 # Translate
 0
-0
+1
 5
 # Color
 0
@@ -46,7 +46,7 @@ summer_texture.png
 # Rotate
 0
 0
-0
+33
 # Translate
 5
 0
@@ -75,10 +75,10 @@ winter_texture.png
 0.01
 # Rotate
 0
-0
+33
 0
 # Translate
-0
+3
 0
 -5
 # Color

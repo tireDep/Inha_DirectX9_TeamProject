@@ -1,7 +1,11 @@
 #include "stdafx.h"
 #include "Background.h"
+// OBB Test
+#include "PSOBB.h"
 
 CBackground::CBackground()
+	// OBB Test
+	: m_pOBB(NULL)
 {
 	m_isPicked = false;
 	m_isClicked = false;
@@ -11,6 +15,8 @@ CBackground::CBackground()
 
 CBackground::~CBackground()
 {
+	// OBB Test
+	SafeDelete(m_pOBB);
 }
 
 void CBackground::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
@@ -62,6 +68,10 @@ void CBackground::Setup(ST_MapData setData)
 
 	D3DXMatrixTranslation(&matT, vTranslate.x, vTranslate.y, vTranslate.z);
 	m_matWorld = matS * matR * matT;
+
+	// OBB Test
+	m_pOBB = new CPSOBB;
+	m_pOBB->Setup(*this);
 }
 
 void CBackground::Render()
@@ -90,4 +100,6 @@ void CBackground::Render()
 	}
 
 	g_pD3DDevice->SetTexture(0, NULL);
+	// OBB Test
+	m_pOBB->OBBBOX_RENDER();
 }
