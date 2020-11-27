@@ -5,6 +5,11 @@ CPSphere::CPSphere()
 	: m_vAcceleration(0, 0, 0)
 	, m_vForceDirection(0, 0, 0)
 	, m_vForceAccum(0, 0, 0)
+	// roation
+	, m_vCurrentOrientation(0, 0, 0)
+	, m_vAngularVelocity(0, 0, 0)
+	, m_vAngularAcceleration(0, 0, 0)
+	, m_vTorque(0, 0, 0)
 {
 	m_strName = string("Sphere") + to_string(m_nRefCount);
 }
@@ -23,6 +28,41 @@ void CPSphere::Setup(D3DXVECTOR3 center)
 	Setup();
 	m_vPosition = center;
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+}
+
+void CPSphere::SetupRotation()
+{
+	m_vRotationalInertia.x = m_vRotationalInertia.y = m_vRotationalInertia.z = (2 * this->GetMass() * this->GetRadius() * this->GetRadius() / 3.0f);
+}
+
+void CPSphere::UpdateRotation(float duration, D3DXVECTOR3 point)
+{
+	// need to modify
+	D3DXVECTOR3 pt = point;
+	pt -= m_vPosition;
+	D3DXVECTOR3 tmp;
+	D3DXVec3Cross(&tmp, &m_vForceDirection, &pt);
+	m_vTorque = tmp;
+	m_vAngularAcceleration.x = m_vTorque.x / m_vRotationalInertia.x;
+	m_vAngularAcceleration.y = m_vTorque.y / m_vRotationalInertia.y;
+	m_vAngularAcceleration.z = m_vTorque.z / m_vRotationalInertia.z;
+	m_vAngularVelocity += (m_vAngularAcceleration * duration);
+	// x axis rotation
+	m_vCurrentOrientation.x += (m_vAngularVelocity.x * duration);
+	// y axis rotation
+	m_vCurrentOrientation.y += (m_vAngularVelocity.y * duration);
+	// z axis rotation
+	m_vCurrentOrientation.z += (m_vAngularVelocity.z * duration);
+	
+	D3DXMATRIXA16 matRotX, matRotY, matRotZ, matRotation;
+	D3DXMatrixRotationX(&matRotX, m_vCurrentOrientation.x);
+	D3DXMatrixRotationY(&matRotY, m_vCurrentOrientation.y);
+	D3DXMatrixRotationZ(&matRotZ, m_vCurrentOrientation.z);
+
+	D3DXMatrixMultiply(&matRotation, &matRotX, &matRotY);
+	D3DXMatrixMultiply(&matRotation, &matRotation, &matRotZ);
+	// rotation * translation
+	D3DXMatrixMultiply(&m_matWorld, &matRotation, &m_matWorld);
 }
 
 void CPSphere::Update(float duration)

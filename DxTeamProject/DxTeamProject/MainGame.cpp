@@ -84,8 +84,8 @@ void CMainGame::Setup()
 	m_pCamera->Setup(&m_pCharacter->GetPosition());
 
 	m_pLight = new CLight;
-	m_pLight->Setup();
-	//m_pLight->Setup(D3DXVECTOR3(0, -1, 0)); // sun light vector
+	//m_pLight->Setup();
+	m_pLight->Setup(D3DXVECTOR3(1, 0, 0)); // sun light vector
 
 	m_GridMap = new CGridMap;
 	m_GridMap->Setup();
@@ -96,17 +96,17 @@ void CMainGame::Setup()
 	for (int i = 0; i < 8; i++)
 	{
 		CPSphere* Sphere = new CPSphere();
-		Sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
+		Sphere->Setup(D3DXVECTOR3(25, 0.5f, 2 * i + 3));
 	}
 	for (int i = 0; i < 8; i++)
 	{
 		CPSBox* box = new CPSBox();
-		box->Setup(D3DXVECTOR3(-5, 0.5, 2 * i + 3));
+		box->Setup(D3DXVECTOR3(-25, 0.5, 2 * i + 3));
 	}
 	for (int i = 0; i < 8; i++)
 	{
 		CPSCylinder* cylinder = new CPSCylinder();
-		cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 20));
+		cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 25));
 	}
 	//m_pHeightMap = new CHeight;
 	//m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");

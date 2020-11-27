@@ -155,15 +155,13 @@
     <ClCompile Include="Sphere.cpp">
       <Filter>...TrashCan</Filter>
     </ClCompile>
-    <ClCompile Include="PSphere.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="PSCylinder.cpp">
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="PSBox.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="PSphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -344,15 +342,13 @@
     <ClInclude Include="Sphere.h">
       <Filter>...TrashCan</Filter>
     </ClInclude>
-    <ClInclude Include="PSphere.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="PSCylinder.h">
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="PSBox.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="PSphere.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
