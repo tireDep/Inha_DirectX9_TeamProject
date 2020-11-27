@@ -135,7 +135,7 @@ Material Mat {
  0.000000;0.000000;0.000000;;
 
  TextureFilename {
-  "Mat_DiffuseColor.bmp";
+  "autumn_texture.png";
  }
 }
 

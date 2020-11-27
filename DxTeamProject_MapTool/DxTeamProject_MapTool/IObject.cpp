@@ -81,7 +81,7 @@ void IObject::CreateObject(const ObjectType objType, int index)
 	}
 		break;
 
-	case eBackObj:
+	case eATree:
 	{
 		ST_MapData mapData;
 		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
@@ -91,16 +91,59 @@ void IObject::CreateObject(const ObjectType objType, int index)
 
 		mapData.objType = objType;
 
-		mapData.strObjName = string("Tree") + to_string(m_nRefCnt + 1);
+		mapData.strObjName = string("AutumnTree") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background";
-		mapData.strTxtPath = "Texture_Winter.png";
+		mapData.strTxtPath = "autumn_texture.png";
 
-		mapData.strXFilePath = string("Tree_0") + to_string(index + 1) + ".X";
+		mapData.strXFilePath = string("AutumnTree_0") + to_string(index + 1) + ".X";
 
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
 	}
 		break;
+
+	case eSTree:
+	{
+		ST_MapData mapData;
+		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
+		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		// >> todo : translate 현 위치 중앙으로 받아오기
+
+		mapData.objType = objType;
+
+		mapData.strObjName = string("SummerTree") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background";
+		mapData.strTxtPath = "summer_texture.png";
+
+		mapData.strXFilePath = string("SummerTree_0") + to_string(index + 1) + ".X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+	break;
+
+	case eWTree:
+	{
+		ST_MapData mapData;
+		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
+		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		// >> todo : translate 현 위치 중앙으로 받아오기
+
+		mapData.objType = objType;
+
+		mapData.strObjName = string("WinterTree") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background";
+		mapData.strTxtPath = "winter_texture.png";
+
+		mapData.strXFilePath = string("WinterTree_0") + to_string(index + 1) + ".X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+	break;
+
 	}
 }
 
@@ -137,5 +180,12 @@ void IObject::CreateObject(const ST_MapData& mapData)
 		cylinder->Setup(mapData);
 	}
 	break;
+
+	case eATree:
+	case eSTree:
+	case eWTree:
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+		break;
 	}
 }

@@ -89,7 +89,9 @@ enum ObjectType
 {
 	eTile01, eTile02, eTile03, eTile04, eTile05, eTile06,
 	eTile07, eTile08, eTile09, eTile10, eTile11, eTile12, eTile13,
-	eBackObj, eTree01, eTree02, eTree03, eTree04, eTree05, eTree06,
+	eBackObj, eATree, // eATree02, eATree03, eATree04, eATree05, eATree06,
+	eSTree,// eSTree02, eSTree03, eSTree04, eSTree05, eSTree06,
+	eWTree,// eWTree02, eWTree03, eWTree04, eWTree05, eWTree06,
 	eBox, eSphere, eCylinder
 };
 
