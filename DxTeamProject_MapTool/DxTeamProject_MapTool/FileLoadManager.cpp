@@ -46,6 +46,16 @@ void CFileLoadManager::ReadMapData(string fileName)
 
 	if (mapFile.is_open())
 	{
+		if(m_fNowX == -30 && g_pObjectManager->GetVecObject().size() != 0)
+			m_fNowX += m_fAddNumX; // object exist && first load
+		else if (m_fNowX < m_fLimitNumX)
+			m_fNowX += m_fAddNumX;	// first load, load
+		else
+		{
+			m_fNowZ += m_fAddNumZ;
+			m_fNowX = 0;
+		}
+
 		ST_MapData mapData;
 		string readData;
 
@@ -142,17 +152,7 @@ void CFileLoadManager::ReadMapData(string fileName)
 
 	mapFile.close();
 
-	cout << m_fNowX << ", " << m_fNowZ << endl;
-	cout << m_fAddNumX << ", " << m_fAddNumZ << ", " << m_fLimitNumX << endl;
-	if (m_fNowX < m_fLimitNumX)
-		m_fNowX += m_fAddNumX;
-	else
-	{
-		m_fNowZ += m_fAddNumZ;
-		m_fNowX = 0;
-	}
-
-	cout << m_fNowX << ", " << m_fNowZ << endl;
+	m_vecFileIndex.push_back(g_pObjectManager->GetVecObject().size());
 }
 
 void CFileLoadManager::SaveMapData(string fileName)
@@ -167,25 +167,33 @@ void CFileLoadManager::SaveMapData(string fileName)
 	ofstream objFile;
 	objFile.open("objData.dat", ios::out | ios::binary);
 
-	if (mapFile.is_open() && objFile.is_open() && saveFile.is_open())
+	if (!mapFile.is_open() || !objFile.is_open() || !saveFile.is_open())
+		return;
+
+	if (m_vecFileIndex.size() == 0)
 	{
-		vector<IObject *> vecObject = g_pObjectManager->GetVecObject();
-		ST_MapData mapData;
-
-		for (int i = 0; i < vecObject.size(); i++)
+		for (int j = 0; j < g_pObjectManager->GetVecObject().size(); j++)
 		{
-			mapData.strObjName = vecObject[i]->GetObjectName();
+			// >> todo
+			// - GetReference vecObject
+			// - DoFileSave Funtion()
+			// - Renaming Function
+			// - client passing make(multimap etc..)
+			vector<IObject *> vecObject = g_pObjectManager->GetVecObject();
+			ST_MapData mapData;
 
-			mapData.strFolderPath = vecObject[i]->GetFolderPath();
-			mapData.strXFilePath = vecObject[i]->GetXFilePath();
-			mapData.strTxtPath = vecObject[i]->GetXTxtPath();
+			mapData.strObjName = vecObject[j]->GetObjectName();
 
-			mapData.objType = vecObject[i]->GetObjType();
-			mapData.vScale = vecObject[i]->GetScale();
-			mapData.vRotate = vecObject[i]->GetRotate();
-			mapData.vTranslate = vecObject[i]->GetTranslate();
+			mapData.strFolderPath = vecObject[j]->GetFolderPath();
+			mapData.strXFilePath = vecObject[j]->GetXFilePath();
+			mapData.strTxtPath = vecObject[j]->GetXTxtPath();
 
-			mapData.dxColor = vecObject[i]->GetColor();
+			mapData.objType = vecObject[j]->GetObjType();
+			mapData.vScale = vecObject[j]->GetScale();
+			mapData.vRotate = vecObject[j]->GetRotate();
+			mapData.vTranslate = vecObject[j]->GetTranslate();
+
+			mapData.dxColor = vecObject[j]->GetColor();
 
 			FileSave(saveFile, mapData);
 
@@ -204,19 +212,77 @@ void CFileLoadManager::SaveMapData(string fileName)
 				FileSave(mapFile, mapData);
 				break;
 			} // << : switch
+			FileSave_Section(saveFile);
+			FileSave_Section(mapFile);
+			FileSave_Section(objFile);
+		} // >> : for_j
 
-		} // << : for
-		saveFile.close();
-		objFile.close();
-		mapFile.close();
+	saveFile.close();
+	objFile.close();
+	mapFile.close();
+		return;
+	}
 
-	} // << : if
+	for (int i = 0; i < m_vecFileIndex.size(); i++)
+	{
+		for (int j = 0; j < m_vecFileIndex[i]; j++)
+		{
+			// >> todo
+			// - GetReference vecObject
+			// - DoFileSave Funtion()
+			vector<IObject *> vecObject = g_pObjectManager->GetVecObject();
+			ST_MapData mapData;
 
+			mapData.strObjName = vecObject[j]->GetObjectName();
+
+			mapData.strFolderPath = vecObject[j]->GetFolderPath();
+			mapData.strXFilePath = vecObject[j]->GetXFilePath();
+			mapData.strTxtPath = vecObject[j]->GetXTxtPath();
+
+			mapData.objType = vecObject[j]->GetObjType();
+			mapData.vScale = vecObject[j]->GetScale();
+			mapData.vRotate = vecObject[j]->GetRotate();
+			mapData.vTranslate = vecObject[j]->GetTranslate();
+
+			mapData.dxColor = vecObject[j]->GetColor();
+
+			FileSave(saveFile, mapData);
+
+			switch (mapData.objType)
+			{
+			case eBox:
+			case eSphere:
+			case eCylinder:
+			case eATree:
+			case eSTree:
+			case eWTree:
+				FileSave(objFile, mapData);
+				break;
+
+			default:
+				FileSave(mapFile, mapData);
+				break;
+			} // << : switch
+			FileSave_Section(saveFile);
+			FileSave_Section(mapFile);
+			FileSave_Section(objFile);
+		} // >> : for_j
+		
+	} // >> : for_i
+
+	saveFile.close();
+	objFile.close();
+	mapFile.close();
+}
+
+void CFileLoadManager::DoFileSave(int index)
+{
+	// todo something
 }
 
 void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
 {
-	file << "# Object_Start" << endl;
+	file << "# Object_Start" << endl << endl;
 
 	file << "# ObjectName" << endl;
 	file << mapData.strObjName << endl;
@@ -246,6 +312,11 @@ void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
 	file << mapData.dxColor.r << endl << mapData.dxColor.g << endl << mapData.dxColor.b << endl << mapData.dxColor.a << endl;
 
 	file << "# Object_End" << endl << endl;
+}
+
+void CFileLoadManager::FileSave_Section(ofstream & file)
+{
+	file << "# Section =======================================" << endl << endl;
 }
 
 bool CFileLoadManager::CheckDataName(TCHAR * openFileName, string& realName)
@@ -280,7 +351,7 @@ bool CFileLoadManager::CheckDataName(TCHAR * openFileName, string& realName)
 
 void CFileLoadManager::Setup()
 {
-	m_fNowX = 0;
+	m_fNowX = -30;
 	m_fNowZ = 0;
 	m_fAddNumX = 30;
 	m_fAddNumZ = -30;
