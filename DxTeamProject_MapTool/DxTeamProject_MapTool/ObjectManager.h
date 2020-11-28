@@ -1,5 +1,6 @@
 #pragma once
 #include "Singleton.h"
+#include "Ray.h"
 
 class IObject;
 
@@ -9,6 +10,7 @@ class CObjectManager : public CSingleton<CObjectManager>
 {
 private:
 	vector<IObject *> m_vecObject;
+	int m_sameNum = 0;
 
 public:
 	void AddObject(IObject* pObject);
@@ -16,7 +18,11 @@ public:
 	void Destroy();
 
 	void Update();
+	void Update(CRay * ray);
 	void Render();
+
+	void RemoveClickedObj();
+	void CheckSameName();
 
 	vector<IObject *> GetVecObject();
 };

@@ -2,128 +2,250 @@
 #include <tchar.h>
 #include <fstream>
 #include "stdafx.h"
+#include "IObject.h"
 #include "FileLoadManager.h"
+
+#define StrFilePath(path, folder, file) { path = string(folder) + "/" + string(file); }
+#define ErrMessageBox(msg, type) { MessageBoxA(g_hWnd, string(msg).c_str(), string(type).c_str(), MB_OK); }
+
+LPD3DXEFFECT CFileLoadManager::LoadShader(const string fileName)
+{
+	LPD3DXEFFECT ret = NULL;
+
+	LPD3DXBUFFER pError = NULL;
+	DWORD dwShaderFlags = 0;
+
+#if _DEBUG
+	dwShaderFlags |= D3DXSHADER_DEBUG;
+#endif
+
+	D3DXCreateEffectFromFileA(g_pD3DDevice, fileName.c_str(),
+		NULL, NULL, dwShaderFlags, NULL, &ret, &pError);
+
+	if (!ret && pError)
+	{
+		int size = pError->GetBufferSize();
+		void *ack = pError->GetBufferPointer();
+
+		// if (ack)
+		// {
+		// 	char* str = new char[size];
+		// 	sprintf(str, (const char*)ack, size);
+		// 	OutputDebugString(str);
+		// 	delete[] str;
+		// }
+	}
+
+	return ret;
+}
 
 void CFileLoadManager::ReadMapData(string fileName)
 {
-	// >> todo : 파싱
-	cout << " todo Something_readMap " << endl;
-	
 	ifstream mapFile;
 	mapFile.open(fileName.c_str(), ios::in | ios::binary);
-	/*	if (mapFile.is_open())
+
+	if (mapFile.is_open())
 	{
-		tileMap.clear();
-		// >> 새로 읽어오기 전 초기화
+		ST_MapData mapData;
+		string readData;
 
-		POINT pos = { 0,0 };
-		TileMap temp;
-
-		temp.pos = { 0,0,0,0 };
-		temp.type = 0;
-
-		// >> 플레이어
-		mapFile.read((char*)&pos.x, sizeof(int));
-		mapFile.read((char*)&pos.y, sizeof(int));
-
-		pos.x = (pos.x / dKeyCode) - dKeyCode;
-		pos.y = (pos.y / dKeyCode) - dKeyCode;
-
-		temp.pos.left = pos.x - 8;
-		temp.pos.top = pos.y - 8;
-		temp.pos.right = pos.x + 8;
-		temp.pos.bottom = pos.y + 8;
-		temp.type = ePlayerResen;
-		temp.showPos = SetShowType(temp.type);
-
-		tileMap.push_back(temp);
-
-		// >> 맵 정보
-		while (!mapFile.eof())
+		while (getline(mapFile, readData))
 		{
-			mapFile.read((char*)&temp.type, sizeof(int));
-			mapFile.read((char*)&temp.pos.left, sizeof(int));
-			mapFile.read((char*)&temp.pos.top, sizeof(int));
-			mapFile.read((char*)&temp.pos.right, sizeof(int));
-			mapFile.read((char*)&temp.pos.bottom, sizeof(int));
+			if (readData == "# Object_Start")
+				continue;
 
-			temp.type = (temp.type / dKeyCode) - dKeyCode;
-			temp.pos.left = (temp.pos.left / dKeyCode) - dKeyCode;
-			temp.pos.top = (temp.pos.top / dKeyCode) - dKeyCode;
-			temp.pos.right = (temp.pos.right / dKeyCode) - dKeyCode;
-			temp.pos.bottom = (temp.pos.bottom / dKeyCode) - dKeyCode;
+			else if (readData == "# ObjectName")
+			{
+				getline(mapFile, readData);
+				mapData.strObjName = readData;
+			}
 
-			if (temp.type < 0)
-				break;	// >> 무한루프 처리
+			else if (readData == "# FolderPath")
+			{
+				getline(mapFile, readData);
+				mapData.strFolderPath = readData;
+			}
 
-			temp.showPos = SetShowType(temp.type);
-			tileMap.push_back(temp);
+			else if (readData == "# FilePath")
+			{
+				getline(mapFile, readData);
+				mapData.strXFilePath = readData;
+			}
+
+			else if (readData == "# TxtPath")
+			{
+				getline(mapFile, readData);
+				mapData.strTxtPath = readData;
+			}
+
+			else if (readData == "# ObjectType")
+			{
+				getline(mapFile, readData);
+				mapData.objType = (ObjectType)atoi(readData.c_str());
+			}
+
+			else if (readData == "# Scale")
+			{
+				getline(mapFile, readData);
+				mapData.vScale.x = atof(readData.c_str());
+
+				getline(mapFile, readData);
+				mapData.vScale.y = atof(readData.c_str());
+
+				getline(mapFile, readData);
+				mapData.vScale.z = atof(readData.c_str());
+			}
+
+			else if (readData == "# Rotate")
+			{
+				getline(mapFile, readData);
+				mapData.vRotate.x = atof(readData.c_str());
+
+				getline(mapFile, readData);
+				mapData.vRotate.y = atof(readData.c_str());
+
+				getline(mapFile, readData);
+				mapData.vRotate.z = atof(readData.c_str());
+			}
+
+			else if (readData == "# Translate")
+			{
+				getline(mapFile, readData);
+				mapData.vTranslate.x = atof(readData.c_str()) + m_fNowX;
+
+				getline(mapFile, readData);
+				mapData.vTranslate.y = atof(readData.c_str());
+
+				getline(mapFile, readData);
+				mapData.vTranslate.z = atof(readData.c_str()) + m_fNowZ;
+			}
+
+			else if (readData == "# Color")
+			{
+				getline(mapFile, readData);
+				mapData.dxColor.r = atof(readData.c_str());
+
+				getline(mapFile, readData);
+				mapData.dxColor.g = atof(readData.c_str());
+
+				getline(mapFile, readData);
+				mapData.dxColor.b = atof(readData.c_str());
+				
+				getline(mapFile, readData);
+				mapData.dxColor.a = atof(readData.c_str());
+			}
+
+			else if (readData == "# Object_End")
+				IObject::CreateObject(mapData);
 		}
-	} */
+	}
 
 	mapFile.close();
+
+	cout << m_fNowX << ", " << m_fNowZ << endl;
+	cout << m_fAddNumX << ", " << m_fAddNumZ << ", " << m_fLimitNumX << endl;
+	if (m_fNowX < m_fLimitNumX)
+		m_fNowX += m_fAddNumX;
+	else
+	{
+		m_fNowZ += m_fAddNumZ;
+		m_fNowX = 0;
+	}
+
+	cout << m_fNowX << ", " << m_fNowZ << endl;
 }
 
 void CFileLoadManager::SaveMapData(string fileName)
 {
-	// >> todo : 파싱
-	cout << " todo Something_saveMap " << endl;
+	ofstream saveFile;
+	saveFile.open(fileName.c_str(), ios::out | ios::binary);
 
+	// >> todo : 파일 분리(구역별)?
 	ofstream mapFile;
-	mapFile.open(fileName.c_str(), ios::out | ios::binary);
-	/*
-	POINT playerPos;
-	bool isPlayerIn = false;
-	for (int i = 0; i < tileMap.size(); i++)
+	mapFile.open("mapData.dat", ios::out | ios::binary);
+
+	ofstream objFile;
+	objFile.open("objData.dat", ios::out | ios::binary);
+
+	if (mapFile.is_open() && objFile.is_open() && saveFile.is_open())
 	{
-		if (tileMap[i].type == ePlayerResen)
+		vector<IObject *> vecObject = g_pObjectManager->GetVecObject();
+		ST_MapData mapData;
+
+		for (int i = 0; i < vecObject.size(); i++)
 		{
-			isPlayerIn = true;
+			mapData.strObjName = vecObject[i]->GetObjectName();
 
-			playerPos.x = (tileMap[i].pos.left + tileMap[i].pos.right) * 0.5;
-			playerPos.y = (tileMap[i].pos.top + tileMap[i].pos.bottom) * 0.5;
-		}
-	}
+			mapData.strFolderPath = vecObject[i]->GetFolderPath();
+			mapData.strXFilePath = vecObject[i]->GetXFilePath();
+			mapData.strTxtPath = vecObject[i]->GetXTxtPath();
 
-	if (!isPlayerIn)
-	{
-		MessageBox(hWnd, L"플레이어 위치가 존재하지 않습니다.", L"파일 저장 실패", MB_OKCANCEL);
-		return;
-	}
+			mapData.objType = vecObject[i]->GetObjType();
+			mapData.vScale = vecObject[i]->GetScale();
+			mapData.vRotate = vecObject[i]->GetRotate();
+			mapData.vTranslate = vecObject[i]->GetTranslate();
 
-	mapFile.open(changeFile);
+			mapData.dxColor = vecObject[i]->GetColor();
 
-	// mapFile << playerPos.x << "\t" << playerPos.y << endl;
-	playerPos.x = (playerPos.x + dKeyCode) * dKeyCode;
-	playerPos.y = (playerPos.y + dKeyCode) * dKeyCode;
+			FileSave(saveFile, mapData);
 
-	mapFile.write((char*)&playerPos.x, sizeof(int));
-	mapFile.write((char*)&playerPos.y, sizeof(int));
+			switch (mapData.objType)
+			{
+			case eBox:
+			case eSphere:
+			case eCylinder:
+			case eATree:
+			case eSTree:
+			case eWTree:
+				FileSave(objFile, mapData);
+				break;
 
-	TileMap tempMap;
-	for (int i = 0; i < tileMap.size(); i++)
-	{
-		if (tileMap[i].type != ePlayerResen)
-		{
-			tempMap.type = (tileMap[i].type + dKeyCode) * dKeyCode;
-			tempMap.pos.left = (tileMap[i].pos.left + dKeyCode) * dKeyCode;
-			tempMap.pos.top = (tileMap[i].pos.top + dKeyCode) * dKeyCode;
-			tempMap.pos.right = (tileMap[i].pos.right + dKeyCode) * dKeyCode;
-			tempMap.pos.bottom = (tileMap[i].pos.bottom + dKeyCode) * dKeyCode;
+			default:
+				FileSave(mapFile, mapData);
+				break;
+			} // << : switch
 
-			mapFile.write((char*)&tempMap.type, sizeof(int));
-			mapFile.write((char*)&tempMap.pos.left, sizeof(int));
-			mapFile.write((char*)&tempMap.pos.top, sizeof(int));
-			mapFile.write((char*)&tempMap.pos.right, sizeof(int));
-			mapFile.write((char*)&tempMap.pos.bottom, sizeof(int));
-		}
-		// mapFile << tileMap[i].type << "\t" << tileMap[i].pos.left << "\t" << tileMap[i].pos.top << "\t" << tileMap[i].pos.right << "\t" << tileMap[i].pos.bottom << endl;
-	}
+		} // << : for
+		saveFile.close();
+		objFile.close();
+		mapFile.close();
 
-	mapFile.close(); 
-	*/
+	} // << : if
 
-	mapFile.close();
+}
+
+void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
+{
+	file << "# Object_Start" << endl;
+
+	file << "# ObjectName" << endl;
+	file << mapData.strObjName << endl;
+
+	file << "# FolderPath" << endl;
+	file << mapData.strFolderPath << endl;
+
+	file << "# FilePath" << endl;
+	file << mapData.strXFilePath << endl;
+
+	file << "# TxtPath" << endl;
+	file << mapData.strTxtPath << endl;
+
+	file << "# ObjectType" << endl;
+	file << mapData.objType << endl;
+
+	file << "# Scale" << endl;
+	file << mapData.vScale.x << endl << mapData.vScale.y << endl << mapData.vScale.z << endl;
+
+	file << "# Rotate" << endl;
+	file << mapData.vRotate.x << endl << mapData.vRotate.y << endl << mapData.vRotate.z << endl;
+
+	file << "# Translate" << endl;
+	file << mapData.vTranslate.x << endl << mapData.vTranslate.y << endl << mapData.vTranslate.z << endl;
+
+	file << "# Color" << endl;
+	file << mapData.dxColor.r << endl << mapData.dxColor.g << endl << mapData.dxColor.b << endl << mapData.dxColor.a << endl;
+
+	file << "# Object_End" << endl << endl;
 }
 
 bool CFileLoadManager::CheckDataName(TCHAR * openFileName, string& realName)
@@ -156,6 +278,52 @@ bool CFileLoadManager::CheckDataName(TCHAR * openFileName, string& realName)
 	}
 }
 
+void CFileLoadManager::Setup()
+{
+	m_fNowX = 0;
+	m_fNowZ = 0;
+	m_fAddNumX = 30;
+	m_fAddNumZ = -30;
+	// >> default set
+
+	m_fLimitNumX = 0;
+
+	ifstream file;
+	file.open("Resource/mapSetValue.txt", ios::in | ios::binary);
+
+	if (file.is_open())
+	{
+		ST_MapData mapData;
+		string readData;
+
+		while (getline(file, readData))
+		{
+			/*if (strstr(readData.c_str(), "# addX"))
+			{
+				getline(file, readData);
+				m_fAddNumX = atof(readData.c_str());
+			}
+
+			if (strstr(readData.c_str(), "# addZ"))
+			{
+				getline(file, readData);
+				m_fAddNumZ = atof(readData.c_str());
+			}*/
+
+			if (strstr(readData.c_str(), "# limitX"))
+			{
+				getline(file, readData);
+				m_fLimitNumX = atof(readData.c_str());
+			}
+
+		}
+
+		file.close();
+	}
+	else
+		ErrMessageBox("MapSetting File Open Fail", "ERROR");
+}
+
 void CFileLoadManager::FileLoad_OpenMapData()
 {
 	OPENFILENAME ofn;
@@ -172,16 +340,10 @@ void CFileLoadManager::FileLoad_OpenMapData()
 	ofn.lpstrInitialDir = _tgetcwd(strBuffer, 128);	// 현재 경로 불러오기
 	if (GetOpenFileName(&ofn) != 0)
 	{
-		// wsprintf(fileName, L"%s", ofn.lpstrFile);
-		// MessageBox(g_hWnd, fileName, L"불러오기 선택", MB_OKCANCEL);
 		string realName;
 		if (CheckDataName(fileName, realName))
 			ReadMapData(realName);
 	}
-	// else
-	// {
-	// 	MessageBox(g_hWnd, L"불러오기를 취소하였습니다.", L"불러오기 취소", MB_OKCANCEL);
-	// }
 }
 
 void CFileLoadManager::FileLoad_SaveMapData()
@@ -200,14 +362,109 @@ void CFileLoadManager::FileLoad_SaveMapData()
 	ofn.lpstrInitialDir = _tgetcwd(strBuffer, 128);	// 현재 경로 불러오기
 	if (GetSaveFileName(&ofn) != 0)
 	{
-		// wsprintf(fileName, L"%s", ofn.lpstrFile);
-		// MessageBox(g_hWnd, fileName, L"파일 저장", MB_OKCANCEL);
 		string realName;
 		if (CheckDataName(fileName, realName))
 			SaveMapData(realName);
 	}
-	// else
-	// {
-	// 	MessageBox(g_hWnd, L"파일 저장을 취소하였습니다.", L"저장 취소", MB_OKCANCEL);
-	// }
+}
+
+bool CFileLoadManager::FileLoad_XFile(string szFolder, string szFile, ST_XFile* setXFile)
+{
+	string filePath;
+	StrFilePath(filePath, szFolder, szFile);
+
+	HRESULT hr = D3DXLoadMeshFromXA(filePath.c_str(), D3DXMESH_MANAGED, g_pD3DDevice,
+		&setXFile->adjBuffer, &setXFile->mtrlBuffer, 0, &setXFile->nMtrlNum, &setXFile->pMesh);
+
+	if (FAILED(hr))
+	{
+		ErrMessageBox("XFile Load Error", "ERROR");
+		return false;
+	}
+
+	// >> mtrl, texture
+	if (setXFile->mtrlBuffer != 0 && setXFile->nMtrlNum != 0)
+	{
+		D3DXMATERIAL* mtrls = (D3DXMATERIAL*)setXFile->mtrlBuffer->GetBufferPointer();
+
+		for (int i = 0; i < setXFile->nMtrlNum; i++)
+		{
+			mtrls[i].MatD3D.Ambient = mtrls[i].MatD3D.Diffuse;
+			setXFile->vecMtrl.push_back(&mtrls[i].MatD3D);
+
+			if (mtrls[i].pTextureFilename != NULL)
+			{
+				IDirect3DTexture9* tex = 0;
+
+				string txtFilePath = string(szFolder) + ("/") + string(mtrls[i].pTextureFilename);
+				D3DXCreateTextureFromFileA(g_pD3DDevice, txtFilePath.c_str(), &tex);
+
+				setXFile->vecTextrure.push_back(tex);
+			}
+			else
+				setXFile->vecTextrure.push_back(0);
+		}
+
+		SafeRelease(setXFile->mtrlBuffer);
+	}
+
+	return true;
+}
+
+bool CFileLoadManager::FileLoad_Texture(string szFolder, string szFile, LPDIRECT3DTEXTURE9 & setTexture)
+{
+	string filePath;
+	StrFilePath(filePath, szFolder, szFile);
+
+	if (D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &setTexture))
+	{
+		ErrMessageBox("Texture Load Error", "ERROR");
+		return false;
+	}
+
+	return true;
+}
+
+bool CFileLoadManager::FileLoad_Sprite(string szFolder, string szFile, D3DXIMAGE_INFO& imageInfo, LPDIRECT3DTEXTURE9& lpTexture)
+{
+	string filePath;
+	StrFilePath(filePath, szFolder, szFile);
+
+	if (D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		filePath.c_str(),
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &imageInfo, NULL, &lpTexture))
+	{
+		ErrMessageBox("Sprite Load Error", "ERROR");
+		return false;
+	}
+
+	return true;
+}
+
+bool CFileLoadManager::FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT & setShader)
+{
+	string filePath;;
+	StrFilePath(filePath, szFolder, szFile);
+
+	setShader = LoadShader(filePath);
+
+	if (!setShader)
+	{
+		ErrMessageBox("Shader Load Fail", "Error");
+		return false;
+	}
+
+	return true;
+}
+
+void CFileLoadManager::SetIndexNumZero()
+{
+	m_fNowX = 0;
+	m_fNowZ = 0;
 }

@@ -1,28 +1,34 @@
 #pragma once
 #include "Object.h"
+#include "cHeight.h"
+
 class CPSphere : public CObject
 {
 public:
 	CPSphere();
 	~CPSphere();
 protected:
-	Synthesize(float, m_fRadius, Radius);
-	Synthesize(float, m_finverseMass, InverseMass);
-	Synthesize(float, m_fDamping, Damping);
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vVelocity, Velocity);
+	//Synthesize(float, m_fRadius, Radius);
+	//Synthesize(float, m_finverseMass, InverseMass);
+	//Synthesize(float, m_fDamping, Damping);
+	//Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);
+	//Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vVelocity, Velocity);
 	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vAcceleration, Acceleration);
 	D3DXVECTOR3 m_vForceDirection;
 	D3DXVECTOR3	m_vForceAccum;
-	float coefficientofRestitution;
-	
+	// rotation
+	D3DXVECTOR3		m_vCurrentOrientation;
+	D3DXVECTOR3		m_vAngularVelocity;
+	D3DXVECTOR3		m_vAngularAcceleration;
+	D3DXVECTOR3		m_vRotationalInertia;
+	D3DXVECTOR3		m_vTorque;
 public:
 	void Setup();
 	void Setup(D3DXVECTOR3 center);
 	void Update(float duration);
+	void Update(float duration, CHeight* pMap);
 	void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos);
 	void Render();
-
 	void SetPickState(bool set);
 
 	virtual string GetName();
@@ -33,10 +39,17 @@ public:
 	float GetMass() const;
 	bool hasFiniteMass() const;
 	void SetPusingForce(D3DXVECTOR3 forcedirection);
-	void AddForce(const D3DXVECTOR3 & force);
+	void AddForce(const D3DXVECTOR3& force);
 	void ClearAccumulator();
 	void Integrate(float duration);
 	void RunPhysics(float duration);
-	bool hasIntersected(CPSphere & othersphere);
-	void Collisionsphere(CPSphere & othersphere);
+	bool hasIntersected(CObject* otherobject);
+	void CollisionOtherObject(CObject* otherobject);
+
+	// rotation tmp setup update
+	void SetupRotation();
+	void UpdateRotation(float duration, D3DXVECTOR3 point);
+
+	// >>> pasing
+	void Setup(const ST_MapData & mapData);
 };

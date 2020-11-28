@@ -2,8 +2,9 @@
 #include "Text.h"
 #include "FontManager.h"
 
-CText::CText() : 
-	m_pFont(NULL)
+CText::CText() :
+	m_pFont(NULL),
+	m_isGrabState(false)
 {
 }
 
@@ -77,24 +78,53 @@ void CText::RenderBoxPosition(D3DXVECTOR3 BoxPosition)
 	string positionString = "Box";
 
 	RECT rc;
-	SetRect(&rc, 10, 70, 100, 60);
+	SetRect(&rc, 10, 70, 100, 80);
 	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
 
 	positionString = "x : ";
 	stream << fixed << setprecision(2) << _x;
 	positionString += stream.str();	stream.str("");
-	SetRect(&rc, 120, 70, 200, 60);
+	SetRect(&rc, 120, 70, 200, 80);
 	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
 
 	positionString = "y : ";
 	stream << fixed << setprecision(2) << _y;
 	positionString += stream.str(); stream.str("");
-	SetRect(&rc, 220, 70, 300, 60);
+	SetRect(&rc, 220, 70, 300, 80);
 	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
 
 	positionString = "z : ";
 	stream << fixed << setprecision(2) << _z;
 	positionString += stream.str(); stream.str("");
-	SetRect(&rc, 320, 70, 400, 60);
+	SetRect(&rc, 320, 70, 400, 80);
 	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
+}
+
+//void CText::RenderGrab(vector<CObject*> ObjectPosition , D3DXVECTOR3 PlayerPosition)
+//{
+//	for (int i = 0; i < ObjectPosition.size(); ++i)
+//	{
+//		if (ObjectPosition[i]->GetPosition().x - PlayerPosition.x < 1.5f
+//			&& ObjectPosition[i]->GetPosition().z - PlayerPosition.z < 1.5f
+//			&&    ObjectPosition[i]->GetPosition().x - PlayerPosition.x> -1.5f
+//			&& ObjectPosition[i]->GetPosition().z - PlayerPosition.z > -1.5f)
+//		{
+//			RECT rc;
+//			// later client rect
+//			SetRect(&rc, 732, 360, 100, 60);
+//			string GrabString = "잡기(F)";
+//			m_pFont->DrawTextA(NULL, GrabString.c_str(), GrabString.length(),
+//				&rc, DT_LEFT | DT_TOP | DT_NOCLIP, BLUE);
+//			return;
+//		}
+//	}
+//}
+
+void CText::RenderGrab()
+{
+	RECT rc;
+	// later client rect
+	SetRect(&rc, 732, 360, 100, 60);
+	string GrabString = "잡기(F)";
+	m_pFont->DrawTextA(NULL, GrabString.c_str(), GrabString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, BLUE);
 }

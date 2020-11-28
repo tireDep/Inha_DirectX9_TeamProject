@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Character.h"
 #include "OBB.h"
-
+#include "CHeight.h"
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
 	, m_vPosition(0, 0.0f, 0)
@@ -13,7 +13,7 @@ CCharacter::CCharacter()
 	m_strName = "Character";
 }
 
-COBB * CCharacter::GetOBB()
+COBB* CCharacter::GetOBB()
 {
 	return m_pOBB;
 }
@@ -27,7 +27,11 @@ void CCharacter::SetColor(D3DXCOLOR c)
 
 void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 {
+#if _DEBUG
 	float speed = 0.005f;
+#else
+	float speed = 0.003f;
+#endif
 	float rotation = -1.0f;
 
 	if (!g_gameManager->GetUImode())
@@ -83,8 +87,30 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			rotation = D3DX_PI / 2.0f;
 			break;
 
-		case PlayerInputType::eHold:
 			// todo : 잡기 구현
+		case PlayerInputType::eHold:
+			if (m_nGrabAbleObeject != -1)
+			{
+
+			}
+			else
+				speed = -1.0f;
+			break;
+		case PlayerInputType::eHoldPush:
+			if (m_nGrabAbleObeject != -1)
+			{
+
+			}
+			else
+				speed = -1.0f;
+			break;
+		case PlayerInputType::eHoldPull:
+			if (m_nGrabAbleObeject != -1)
+			{
+
+			}
+			else
+				speed = -1.0f;
 			break;
 
 		default:
@@ -176,7 +202,7 @@ void CCharacter::Setup()
 	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
 }
 
-void CCharacter::Update(D3DXVECTOR3 cameradirection)
+void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
 {
 	m_vDirection = cameradirection;
 	//D3DXMATRIXA16 matWorldOBB;
@@ -184,11 +210,33 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 	//matWorldOBB._42 -= 0.5f;
 	//if (m_pOBB)
 	//	m_pOBB->Update(&matWorldOBB);
+	if (pMap)
+	{
+		pMap->GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	}
+
 	if (m_pOBB)
 		m_pOBB->Update(&m_matWorld);
 }
 
-void CCharacter::DoRotation(const float & radian)
+int CCharacter::Update(vector<CObject*> ObjectPosition)
+{
+	for (int i = 0; i < ObjectPosition.size(); ++i)
+	{
+		if (ObjectPosition[i]->GetPosition().x - m_vPosition.x < 1.0f
+			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z < 1.0f
+			&& ObjectPosition[i]->GetPosition().x - m_vPosition.x> -1.0f
+			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z > -1.0f)
+		{
+			//m_nGrabAbleObeject = i;
+			return i;
+		}
+	}
+	//m_nGrabAbleObeject = -1;
+	return -1;
+}
+
+void CCharacter::DoRotation(const float& radian)
 {
 	m_vDirection.y = 0;
 	D3DXMatrixRotationY(&m_matRotY, radian);
@@ -221,17 +269,17 @@ void CCharacter::Render()
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
-	 m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PC_VERTEX));
+		m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PC_VERTEX));
 	D3DCOLOR c = BLACK;
 	m_pOBB->OBBBOX_RENDER(c);
 }
 
-D3DXVECTOR3 & CCharacter::GetPosition()
+D3DXVECTOR3& CCharacter::GetPosition()
 {
 	return m_vPosition;
 }
 
-D3DXMATRIXA16 * CCharacter::GetTransform()
+D3DXMATRIXA16* CCharacter::GetTransform()
 {
 	return &m_matWorld;
 }

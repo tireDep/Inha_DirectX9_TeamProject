@@ -5,12 +5,13 @@ class CWall
 {
 private:
 	float					m_x;
+	float					m_y;
 	float					m_z;
 	float                   m_width;
 	float                   m_depth;
 	float					m_height;
 	D3DXMATRIXA16	m_matWorld;
-
+	D3DXVECTOR3 WallPos;
 public:
 	CWall(void);
 	~CWall(void) {}
@@ -28,8 +29,9 @@ public:
 
 	float getHeight(void) const { return 0.01; }
 
+	bool Gravity(CPhysicsSphere& ball);
 
-
+	D3DXVECTOR3 GetPosition();
 private:
 	void setLocalTransform(const D3DXMATRIX& mLocal) { m_mLocal = mLocal; }
 

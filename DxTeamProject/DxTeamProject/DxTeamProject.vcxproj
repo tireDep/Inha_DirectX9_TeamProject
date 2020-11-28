@@ -143,8 +143,11 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AllocateHierarchy.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="CHeight.h" />
     <ClInclude Include="ColliderObject.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DeviceManager.h" />
@@ -166,6 +169,7 @@
     <ClInclude Include="HeightMap.h" />
     <ClInclude Include="IListener.h" />
     <ClInclude Include="IMap.h" />
+    <ClInclude Include="IObject.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="OBB.h" />
@@ -187,17 +191,20 @@
     <ClInclude Include="PhysicsSphere.h" />
     <ClInclude Include="PSBox.h" />
     <ClInclude Include="PSCylinder.h" />
+    <ClInclude Include="PSOBB.h" />
     <ClInclude Include="PSphere.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="SkinnedMesh.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Text.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Wall.h" />
@@ -205,8 +212,11 @@
     <ClInclude Include="Xfile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AllocateHierarchy.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CHeight.cpp" />
     <ClCompile Include="ColliderObject.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
@@ -223,6 +233,7 @@
     <ClCompile Include="HeightMap.cpp" />
     <ClCompile Include="IListener.cpp" />
     <ClCompile Include="IMap.cpp" />
+    <ClCompile Include="IObject.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="OBB.cpp" />
@@ -244,10 +255,12 @@
     <ClCompile Include="PhysicsSphere.cpp" />
     <ClCompile Include="PSBox.cpp" />
     <ClCompile Include="PSCylinder.cpp" />
+    <ClCompile Include="PSOBB.cpp" />
     <ClCompile Include="PSphere.cpp" />
     <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RigidBody.cpp" />
+    <ClCompile Include="SkinnedMesh.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -257,6 +270,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Text.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Wall.cpp" />

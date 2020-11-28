@@ -54,7 +54,7 @@ void CGridMap::Setup()
 			vertex.t = D3DXVECTOR2(0, 0);
 			m_vecVertex.push_back(vertex);
 
-			vertex.p = D3DXVECTOR3(j + 1, 0, i);
+			vertex.p = D3DXVECTOR3(j + 1, 5, i);
 			vertex.n = D3DXVECTOR3(0, 1, 0);
 			vertex.t = D3DXVECTOR2(0, 0);
 			m_vecVertex.push_back(vertex);

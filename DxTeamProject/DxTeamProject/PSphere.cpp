@@ -2,14 +2,14 @@
 #include "PSphere.h"
 
 CPSphere::CPSphere()
-	: m_fRadius(0.5f)
-	, m_finverseMass(10.0f)
-	, m_fDamping(0.999f)
-	, m_vPosition(0, 0, 0)
-	, m_vVelocity(0, 0, 0)
-	, m_vAcceleration(0, 0, 0)
+	: m_vAcceleration(0, 0, 0)
 	, m_vForceDirection(0, 0, 0)
 	, m_vForceAccum(0, 0, 0)
+	// roation
+	, m_vCurrentOrientation(0, 0, 0)
+	, m_vAngularVelocity(0, 0, 0)
+	, m_vAngularAcceleration(0, 0, 0)
+	, m_vTorque(0, 0, 0)
 {
 	m_strName = string("Sphere") + to_string(m_nRefCount);
 }
@@ -30,15 +30,125 @@ void CPSphere::Setup(D3DXVECTOR3 center)
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
+void CPSphere::SetupRotation()
+{
+	m_vRotationalInertia.x = m_vRotationalInertia.y = m_vRotationalInertia.z = (2 * this->GetMass() * this->GetRadius() * this->GetRadius() / 3.0f);
+}
+
+void CPSphere::UpdateRotation(float duration, D3DXVECTOR3 point)
+{
+	// need to modify
+	D3DXVECTOR3 pt = point;
+	pt -= m_vPosition;
+	D3DXVECTOR3 tmp;
+	D3DXVec3Cross(&tmp, &m_vForceDirection, &pt);
+	m_vTorque = tmp;
+	m_vAngularAcceleration.x = m_vTorque.x / m_vRotationalInertia.x;
+	m_vAngularAcceleration.y = m_vTorque.y / m_vRotationalInertia.y;
+	m_vAngularAcceleration.z = m_vTorque.z / m_vRotationalInertia.z;
+	m_vAngularVelocity += (m_vAngularAcceleration * duration);
+	// x axis rotation
+	m_vCurrentOrientation.x += (m_vAngularVelocity.x * duration);
+	// y axis rotation
+	m_vCurrentOrientation.y += (m_vAngularVelocity.y * duration);
+	// z axis rotation
+	m_vCurrentOrientation.z += (m_vAngularVelocity.z * duration);
+	
+	D3DXMATRIXA16 matRotX, matRotY, matRotZ, matRotation;
+	D3DXMatrixRotationX(&matRotX, m_vCurrentOrientation.x);
+	D3DXMatrixRotationY(&matRotY, m_vCurrentOrientation.y);
+	D3DXMatrixRotationZ(&matRotZ, m_vCurrentOrientation.z);
+
+	D3DXMatrixMultiply(&matRotation, &matRotX, &matRotY);
+	D3DXMatrixMultiply(&matRotation, &matRotation, &matRotZ);
+	// rotation * translation
+	D3DXMatrixMultiply(&m_matWorld, &matRotation, &m_matWorld);
+}
+
+void CPSphere::Setup(const ST_MapData & mapData)
+{
+	m_strObjName = mapData.strObjName;
+
+	m_strFolder = mapData.strFolderPath;
+	m_strXFile = mapData.strXFilePath;
+	m_strTxtFile = mapData.strTxtPath;
+
+	m_ObjectType = mapData.objType;
+
+	D3DXVECTOR3 vScale, vRotate;
+	vScale = mapData.vScale;
+	vRotate = mapData.vRotate;
+	m_vPosition = mapData.vTranslate;
+
+	m_Color = mapData.dxColor;
+	this->ChangeObjectColor();
+
+	m_fRadius = vScale.x;
+	m_fRadius = vScale.y;
+	m_fRadius = vScale.z;
+
+	Setup();
+
+	// ============================================================
+
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixScaling(&matS, vScale.x, vScale.y, vScale.z);
+
+	D3DXVECTOR3 v;
+	v.x = D3DXToRadian(vRotate.x);
+	v.y = D3DXToRadian(vRotate.y);
+	v.z = D3DXToRadian(vRotate.z);
+
+	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
+
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	m_matWorld = matS * matR * matT;
+}
+
 void CPSphere::Update(float duration)
+{
+	D3DXVECTOR3 linearforce;
+	if (m_isForceApplied)
+	{
+		if (!hasFiniteMass()) return;
+		linearforce = m_vForceDirection * GetMass();
+		m_isForceApplied = false;
+	}
+	else
+		linearforce = D3DXVECTOR3(0, 0, 0);
+
+	if (m_finverseMass <= 0.0f) return;
+	assert(duration > 0.0f);
+
+	m_vAcceleration = linearforce * m_finverseMass;
+	m_vVelocity += (m_vAcceleration * duration);
+	m_vVelocity *= powf(m_fDamping, duration);
+	//m_vPosition += (m_vVelocity * duration);
+	m_vVelocity *= m_fDrag;
+	if (m_vVelocity.x > 0.001f || m_vVelocity.y > 0.001f || m_vVelocity.z > 0.001f)
+	{
+		m_vPosition += (m_vVelocity * duration);
+	}
+	else
+	{
+		m_vVelocity.x = m_vVelocity.y = m_vVelocity.z = 0.0f;
+	}
+	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+}
+
+void CPSphere::Update(float duration, CHeight* pMap)
 {
 	ClearAccumulator();
 	RunPhysics(duration);
 	Integrate(duration);
+	if (pMap)
+	{
+		pMap->GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	}
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
-void CPSphere::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
+void CPSphere::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
 {
 	if (D3DXSphereBoundProbe(&m_vPosition, m_fRadius, &ray.GetOrigin(), &ray.GetDirection()) == true)
 	{
@@ -55,8 +165,8 @@ void CPSphere::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick
 
 void CPSphere::Render()
 {
-	m_stMtl.Ambient  = m_Color;
-	m_stMtl.Diffuse  = m_Color;
+	m_stMtl.Ambient = m_Color;
+	m_stMtl.Diffuse = m_Color;
 	m_stMtl.Specular = m_Color;
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
@@ -72,6 +182,38 @@ void CPSphere::Render()
 	{
 		m_pMesh->DrawSubset(0);
 	}
+}
+
+void CPSphere::ClearAccumulator()
+{
+	m_vForceAccum.x = m_vForceAccum.y = m_vForceAccum.z = 0.0f;
+}
+
+void CPSphere::RunPhysics(float duration)
+{
+	if (!hasFiniteMass()) return;
+	AddForce(m_vForceDirection * GetMass());
+	Integrate(duration);
+}
+
+void CPSphere::AddForce(const D3DXVECTOR3& force)
+{
+	m_vForceAccum += force;
+}
+
+void CPSphere::Integrate(float duration)
+{
+	if (m_finverseMass <= 0.0f) return;
+	assert(duration > 0.0f);
+
+	m_vPosition += (m_vVelocity * duration);
+
+	D3DXVECTOR3 resultingAcc = m_vAcceleration;
+	resultingAcc += (m_vForceAccum * m_finverseMass);
+	m_vVelocity += (resultingAcc * duration);
+	m_vVelocity *= powf(m_fDamping, duration);
+
+	ClearAccumulator();
 }
 
 void CPSphere::SetPickState(bool set)
@@ -109,106 +251,125 @@ bool CPSphere::hasFiniteMass() const
 void CPSphere::SetPusingForce(D3DXVECTOR3 forcedirection)
 {
 	D3DXVec3Normalize(&m_vForceDirection, &forcedirection);
+	m_vForceDirection *= 100.0f;
+	SetForceApplied(true);
 }
 
-void CPSphere::AddForce(const D3DXVECTOR3 & force)
+bool CPSphere::hasIntersected(CObject* otherobject)
 {
-	m_vForceAccum += force;
-}
-
-void CPSphere::ClearAccumulator()
-{
-	m_vForceAccum.x = m_vForceAccum.y = m_vForceAccum.z = 0.0f;
-}
-
-void CPSphere::Integrate(float duration)
-{
-	if (m_finverseMass <= 0.0f) return;
-	assert(duration > 0.0f);
-
-	m_vPosition += (m_vVelocity * duration);
-
-	D3DXVECTOR3 resultingAcc = m_vAcceleration;
-	resultingAcc += (m_vForceAccum * m_finverseMass);
-	m_vVelocity += (resultingAcc * duration);
-	m_vVelocity *= powf(m_fDamping, duration);
-
-	ClearAccumulator();
-}
-
-void CPSphere::RunPhysics(float duration)
-{
-	if (!hasFiniteMass()) return;
-	AddForce(m_vForceDirection * GetMass());
-	Integrate(duration);
-}
-
-bool CPSphere::hasIntersected(CPSphere & othersphere)
-{
-	if (this == &othersphere)
+	if (this == otherobject)
 		return false;
 
-	D3DXVECTOR3 direction = this->GetPosition() - othersphere.GetPosition();
-	float distance = D3DXVec3LengthSq(&direction);
+	D3DXVECTOR3 direction = this->GetPosition() - otherobject->GetPosition();
+	float distanceSq = direction.x * direction.x + direction.y * direction.y + direction.z * direction.z;
 
-	if (((this->GetRadius() + othersphere.GetRadius())*(this->GetRadius() + othersphere.GetRadius())) < distance)
+	if (((this->GetRadius() + otherobject->GetRadius()) * (this->GetRadius() + otherobject->GetRadius())) < distanceSq)
 		return false;
 	else
 		return true;
 }
 
-void CPSphere::Collisionsphere(CPSphere & othersphere)
+void CPSphere::CollisionOtherObject(CObject* otherobject)
 {
+	// declare variable, for performance I set them as static
 	static D3DXVECTOR3 direction;
 	static D3DXVECTOR3 warpVector;
-	static D3DXVECTOR3 totalVelocity;
-	static D3DXVECTOR3 normalizedDirection;
-	static D3DXVECTOR3 ballVelocity;
-	static D3DXVECTOR3 thisVelocity;
 	static const float fix = 1.1f;
 	static float distance;
 	static float overlapInterval;
 
-	if (hasIntersected(othersphere))
-	{
-		direction = this->GetPosition() - othersphere.GetPosition();
-		distance = sqrt(direction.x * direction.x + direction.z * direction.z);
-		overlapInterval = 2 * othersphere.GetRadius() - distance;
-		warpVector = fix * direction *(overlapInterval / (2 * othersphere.GetRadius() - overlapInterval));
+	//static D3DXVECTOR3 totalVelocity;
+	//static D3DXVECTOR3 normalizedDirection;
+	//static D3DXVECTOR3 ballVelocity;
+	//static D3DXVECTOR3 thisVelocity;
+	// 2 dimension -> 3 dimension later editing...
+	//if (hasIntersected(otherobject))
+	//{
+	//	direction = this->GetPosition() - otherobject->GetPosition();
+	//	// 2 dimension -> 3 dimension later editing...
+	//	distance = sqrt(direction.x * direction.x + direction.z * direction.z);
+	//	overlapInterval = 2 * otherobject->GetRadius() - distance;
+	//	warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetRadius() - overlapInterval));
+	//	// implementation of collision
+	//	if (((otherobject->GetVelocity().x * otherobject->GetVelocity().x) + (otherobject->GetVelocity().z * otherobject->GetVelocity().z)) >= ((this->GetVelocity().x * this->GetVelocity().x) + (this->GetVelocity().z * this->GetVelocity().z)))
+	//	{
+	//		otherobject->CollisionOtherObject(this);
+	//		return;
+	//	}
+	//	else
+	//	{
+	//		// 2 dimension -> 3 dimension later editing...
+	//		D3DXVECTOR3 p;
+	//		p.x = this->GetPosition().x + warpVector.x;
+	//		p.y = this->GetPosition().y;
+	//		p.z = this->GetPosition().z + warpVector.z;
+	//		this->SetPosition(p);
+	//		D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	//	}
+	//	// 2 dimension -> 3 dimension later editing...
+	//	D3DXVECTOR3 v;
+	//	v.x = this->GetVelocity().x + otherobject->GetVelocity().x;
+	//	v.y = 0;
+	//	v.z = this->GetVelocity().z + otherobject->GetVelocity().z;
+	//	totalVelocity = v;
+	//	normalizedDirection = (-1) * direction / distance;
+	//	ballVelocity = normalizedDirection * (normalizedDirection.x * totalVelocity.x + normalizedDirection.z * totalVelocity.z);
+	//	thisVelocity = -ballVelocity + totalVelocity;
+	//	v.x = thisVelocity.x;
+	//	v.z = thisVelocity.z;
+	//	this->SetVelocity(v);
+	//	v.x = ballVelocity.x;
+	//	v.z = ballVelocity.z;
+	//	otherobject->SetVelocity(v);
+	//}
 
-		if (((othersphere.m_vVelocity.x * othersphere.m_vVelocity.x) + (othersphere.m_vVelocity.z * othersphere.m_vVelocity.z)) >= ((this->m_vVelocity.x * this->m_vVelocity.x) + (this->m_vVelocity.z * this->m_vVelocity.z)))
+	// mass applying
+	if (hasIntersected(otherobject))
+	{
+		direction = this->GetPosition() - otherobject->GetPosition();
+		// 2 dimension -> 3 dimension later editing...
+		distance = sqrt(direction.x * direction.x + direction.z * direction.z);
+		overlapInterval = 2 * otherobject->GetRadius() - distance;
+		warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetRadius() - overlapInterval));
+
+		// implementation of collision
+		if (((otherobject->GetVelocity().x * otherobject->GetVelocity().x) + (otherobject->GetVelocity().z * otherobject->GetVelocity().z)) >= ((this->GetVelocity().x * this->GetVelocity().x) + (this->GetVelocity().z * this->GetVelocity().z)))
 		{
-			othersphere.Collisionsphere(*this);
+			otherobject->CollisionOtherObject(this);
 			return;
 		}
 		else
 		{
+			// 2 dimension -> 3 dimension later editing...
 			D3DXVECTOR3 p;
-			p.x = m_vPosition.x + warpVector.x;
-			p.y = m_vPosition.y;
-			p.z = m_vPosition.z + warpVector.z;
+			p.x = this->GetPosition().x + warpVector.x;
+			p.y = this->GetPosition().y;
+			p.z = this->GetPosition().z + warpVector.z;
 			this->SetPosition(p);
 			D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 		}
 
-		D3DXVECTOR3 v;
-		v.x = this->GetVelocity().x + othersphere.GetVelocity().x;
-		v.y = 0;
-		v.z = this->GetVelocity().z + othersphere.GetVelocity().z;
-		totalVelocity = v;
-		normalizedDirection = (-1) * direction / distance;
+		// 2 dimension -> 3 dimension later editing...
+		float v1, v2;
+		D3DXVECTOR3 massdirection;
+		massdirection = this->GetPosition() - otherobject->GetPosition();
+		D3DXVec3Normalize(&massdirection, &massdirection);
+		v1 = D3DXVec3Dot(&this->GetVelocity(), &massdirection);
+		v2 = D3DXVec3Dot(&otherobject->GetVelocity(), &massdirection);
+		/// perfect elastic collision
+		//float elasticity = 1.0f;
+		float elasticity = (this->GetElasticity() + otherobject->GetElasticity()) / 2;
+		float finalv1, finalv2;
+		finalv1 = (((this->GetMass() - (elasticity * otherobject->GetMass()))*v1) + ((1 + elasticity)*otherobject->GetMass()*v2))
+			/ (this->GetMass() + otherobject->GetMass());
+		finalv2 = (((otherobject->GetMass() - (elasticity * this->GetMass()))*v2) + ((1 + elasticity)*this->GetMass()*v1))
+			/ (this->GetMass() + otherobject->GetMass());
 
-		ballVelocity = normalizedDirection * (normalizedDirection.x * totalVelocity.x + normalizedDirection.z * totalVelocity.z);
-		thisVelocity = -ballVelocity + totalVelocity;
+		D3DXVECTOR3 collisionV1, collisionV2;
+		collisionV1 = this->GetVelocity() + (finalv1 - v1) * massdirection;
+		collisionV2 = otherobject->GetVelocity() + (finalv2 - v2) * massdirection;
 
-		v.x = thisVelocity.x;
-		v.z = thisVelocity.z;
-		this->SetVelocity(v);
-		v.x = ballVelocity.x;
-		v.z = ballVelocity.z;
-		othersphere.SetVelocity(v);
-
-		//if (hasIntersected(othersphere))
-		//	this->setCenter(this->GetPosition().x + 3 * warpVector.x, this->GetPosition().y, this->GetPosition().z + 3 * warpVector.z);
+		this->SetVelocity(collisionV1);
+		otherobject->SetVelocity(collisionV2);
 	}
 }

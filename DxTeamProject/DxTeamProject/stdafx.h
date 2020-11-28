@@ -7,6 +7,7 @@
 
 #include "targetver.h"
 
+#define _CRT_SECURE_NO_WARNINGS
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 // Windows Header Files:
 #include <windows.h>
@@ -29,6 +30,10 @@
 #include <iostream>
 #include <iomanip> // setprecision
 #include <sstream> // stringstream
+
+#include <tchar.h>
+#include <fstream>
+
 using namespace std;
 
 #if _DEBUG
@@ -44,6 +49,7 @@ using namespace std;
 
 #define SafeRelease(p) { if(p) p->Release(); p = NULL; }
 #define SafeDelete(p) { if(p) delete p; }
+#define SafeDeleteArray(p)	{ if(p) delete[]p; p=NULL; }
 #define SingleTone(class_name)\
 private:\
 	class_name(void);\
@@ -103,6 +109,16 @@ public : virtual void Set##funName(varType var ) { \
 #include "GameManager.h"
 
 extern HWND g_hWnd;
+
+enum class Color : int
+{
+	Red = 0, Yellow, Green, Blue, Black, White, NONE = 999
+};
+
+enum class Pick : int
+{
+	Red = 0, Yellow, Green, Blue, Black, White, NONE = 999
+};
 //
 #include "Object.h"
 #include "ObjectManager.h"
@@ -139,7 +155,7 @@ enum class SceneType : int
 
 enum class PlayerInputType : int
 {
-	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHold
+	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHold, eHoldPush, eHoldPull
 };
 
 struct ST_EVENT
@@ -169,6 +185,31 @@ struct ST_XFile
 	DWORD nMtrlNum;
 	vector<D3DMATERIAL9*> vecMtrl;
 	vector<IDirect3DTexture9*> vecTextrure;
+};
+
+enum ObjectType
+{
+	eTile01, eTile02, eTile03, eTile04, eTile05, eTile06,
+	eTile07, eTile08, eTile09, eTile10, eTile11, eTile12, eTile13,
+	eBackObj, eATree, eSTree, eWTree,
+	eBox, eSphere, eCylinder,
+	eNull
+};
+
+struct ST_MapData
+{
+	string strFolderPath;
+	string strXFilePath;
+	string strTxtPath;
+
+	string strObjName;
+	ObjectType objType;
+
+	D3DXVECTOR3 vScale;
+	D3DXVECTOR3 vRotate;
+	D3DXVECTOR3 vTranslate;
+
+	D3DXCOLOR dxColor;
 };
 
 #define GRAY    D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f)

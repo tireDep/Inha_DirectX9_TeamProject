@@ -124,7 +124,6 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 				/// 좌우 밖으로 계속 카메라 이동 처리 중
 				RECT rc;
 				GetClientRect(g_hWnd, &rc);
-				
 					if (ptCurMouse.x < rc.left + 1.0f)
 					{
 						cout << ptCurMouse.x << ' ' << ptCurMouse.y << endl;
@@ -161,8 +160,8 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 				m_preMousePos = ptCurMouse;
 		}
 		break;
-#if _DEBUG
 		// DEBUG Mode
+//#if _DEBUG
 		case WM_MOUSEWHEEL:
 		{
 			m_fCameraDistance -= (GET_WHEEL_DELTA_WPARAM(eventMsg.wParam) / 30.0f);
@@ -170,9 +169,9 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 				m_fCameraDistance = 5.0f;
 		}
 		break;
-#else
+//#else
+//#endif
 		// RELEASE Mode
-#endif
 		} // << : switch
 	} // << : if
 }

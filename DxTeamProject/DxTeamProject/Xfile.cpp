@@ -6,7 +6,7 @@ CXfile::CXfile() :
 	m_pMesh(NULL),
 	m_adjBuffer(NULL),
 	m_numMtrls(0),
-	m_vScale(1,1,1),
+	m_vScale(0.01,0.01,0.01),
 	m_vRotate(0,0,0),
 	m_vTranslate(0,0,0)
 {
@@ -18,14 +18,33 @@ CXfile::~CXfile()
 
 	SafeRelease(m_pMesh);
 	SafeRelease(m_adjBuffer);
-	SafeRelease(m_pTexture);
+	// SafeRelease(m_pTexture);
 }
 
 void CXfile::Setup()
 {
 	ST_XFile* xfile = new ST_XFile;
 
-	if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Brush", "brush.X", xfile))
+	/*if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Brush", "brush.X", xfile))
+	{
+		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
+		return;
+	}*/
+
+	//if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Tile", "Tile_01.X", xfile))
+	//{
+	//	MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
+	//	return;
+	//}
+
+
+	/*if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Tree", "autumn_tree_01.X", xfile))
+	{
+		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
+		return;
+	}*/
+
+	if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Character", "character_test.X", xfile))
 	{
 		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
 		return;
@@ -39,7 +58,7 @@ void CXfile::Setup()
 
 	delete xfile;
 
-	g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Brush", "brush_red.png", m_pTexture);
+	//g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Brush", "brush_red.png", m_pTexture);
 
 	D3DXVECTOR3* pVertices;
 	D3DXVECTOR3 m_vMin, m_vMax;
@@ -49,7 +68,7 @@ void CXfile::Setup()
 	m_pMesh->UnlockVertexBuffer();
 
 	m_pOBB = new COBB;
-	m_pOBB->SetUpXFile(m_vMin , m_vMax );
+	m_pOBB->SetUpXFile(m_vMin * 0.01, m_vMax * 0.01);
 }
 
 void CXfile::Update()
@@ -88,14 +107,12 @@ void CXfile::Render(D3DXVECTOR3 eye)
 			if(m_vecTextures[i] != 0)
 				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
 
-			g_pD3DDevice->SetTexture(0, m_pTexture);
+			//g_pD3DDevice->SetTexture(0, m_pTexture);
 			// >> 텍스처 매치 안되있을 때
 
 			m_pMesh->DrawSubset(i);
 		}
-
+		g_pD3DDevice->SetTexture(0, NULL);
 		
 	}
-	
-
 }

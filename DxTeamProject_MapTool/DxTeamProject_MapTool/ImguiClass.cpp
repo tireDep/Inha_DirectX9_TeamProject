@@ -6,8 +6,104 @@
 #include "IObject.h"
 #include "ImguiClass.h"
 
-CImguiClass::CImguiClass()
+void CImguiClass::SetVecItem()
 {
+	vector<string> tempVec;
+	vector<ObjectType> tempObjType;
+	if (m_NowLoadType == LoadType::eMap)
+	{
+		tempVec.push_back("Tile01"); tempObjType.push_back(eTile01);
+		tempVec.push_back("Tile02"); tempObjType.push_back(eTile02);
+		tempVec.push_back("Tile03"); tempObjType.push_back(eTile03);
+		tempVec.push_back("Tile04"); tempObjType.push_back(eTile04);
+		tempVec.push_back("Tile05"); tempObjType.push_back(eTile05);
+		tempVec.push_back("Tile06"); tempObjType.push_back(eTile06);
+		tempVec.push_back("Tile07"); tempObjType.push_back(eTile07);
+		tempVec.push_back("Tile08"); tempObjType.push_back(eTile08);
+		tempVec.push_back("Tile09"); tempObjType.push_back(eTile09);
+		tempVec.push_back("Tile10"); tempObjType.push_back(eTile10);
+		tempVec.push_back("Tile11"); tempObjType.push_back(eTile11);
+		tempVec.push_back("Tile12"); tempObjType.push_back(eTile12);
+		tempVec.push_back("Tile13"); tempObjType.push_back(eTile13);
+	}
+	else if (m_NowLoadType == LoadType::eObject)
+	{
+		tempVec.push_back("Box");			tempObjType.push_back(eBox);
+		tempVec.push_back("Sphere");		tempObjType.push_back(eSphere);
+#if _DEBUG
+		tempVec.push_back("Cylinder");		tempObjType.push_back(eCylinder);
+#else
+#endif
+		// >> todo : item 추가
+	}
+	else if (m_NowLoadType == LoadType::eBackground)
+	{
+		tempVec.push_back("Tree01");
+		tempVec.push_back("Tree02");
+		tempVec.push_back("Tree03");
+		tempVec.push_back("Tree04");
+		tempVec.push_back("Tree05");
+		tempVec.push_back("Tree06");
+
+		if (m_TreeType == LoadType::eAutumnTree)
+		{
+			tempObjType.push_back(eATree);
+			tempObjType.push_back(eATree);
+			tempObjType.push_back(eATree);
+			tempObjType.push_back(eATree);
+			tempObjType.push_back(eATree);
+			tempObjType.push_back(eATree);
+		}
+		else if (m_TreeType == LoadType::eSummerTree)
+		{
+			tempObjType.push_back(eSTree);
+			tempObjType.push_back(eSTree);
+			tempObjType.push_back(eSTree);
+			tempObjType.push_back(eSTree);
+			tempObjType.push_back(eSTree);
+			tempObjType.push_back(eSTree);
+		}
+		else if (m_TreeType == LoadType::eWinterTree)
+		{
+			tempObjType.push_back(eWTree);
+			tempObjType.push_back(eWTree);
+			tempObjType.push_back(eWTree);
+			tempObjType.push_back(eWTree);
+			tempObjType.push_back(eWTree);
+			tempObjType.push_back(eWTree);
+		}
+		// >> todo : item 추가
+	}
+	
+	m_vecItem = tempVec;
+	m_vecObjType = tempObjType;
+}
+
+CImguiClass::CImguiClass() :
+	m_isReset(false),
+	m_FileLoadIndex(-1),
+	m_showItem("\0")
+{
+#ifdef _DEBUG
+	m_PreLoadType = LoadType::eNull;
+	m_NowLoadType = LoadType::eMap;
+#else
+	m_PreLoadType = LoadType::eNull;
+	m_NowLoadType = LoadType::eObject;
+#endif // _DEBUG
+
+	m_PrecolorType = ColorType::eNull;
+	m_NowcolorType = ColorType::eGray;
+
+	m_TreeType = LoadType::eAutumnTree;
+	
+	m_vecColor.push_back(ColorType::eGray);
+	m_vecColor.push_back(ColorType::eBlack);
+	m_vecColor.push_back(ColorType::eWhite);
+	m_vecColor.push_back(ColorType::eRed);
+	m_vecColor.push_back(ColorType::eBlue);
+	m_vecColor.push_back(ColorType::eGreen);
+	m_vecColor.push_back(ColorType::eYellow);
 }
 
 CImguiClass::~CImguiClass()
@@ -83,9 +179,10 @@ void CImguiClass::Update()
 	}
 
 	// ============================================================================================
+	
+	g_pObjectManager->CheckSameName();
 
 	{ // >> : Menu Title Bar
-		static bool isReset = false;
 		if (ImGui::BeginMainMenuBar())
 		{
 			if (ImGui::BeginMenu("File"))
@@ -96,7 +193,7 @@ void CImguiClass::Update()
 				ImGui::Separator();
 
 				if (ImGui::MenuItem("Reset", " ")) 
-					isReset = true;
+					m_isReset = true;
 
 				ImGui::EndMenu();
 			}
@@ -114,20 +211,20 @@ void CImguiClass::Update()
 			ImGui::EndMainMenuBar();
 		}
 
-		if (isReset)
+		if (m_isReset)
 		{
-			ImGui::Begin("ResetWindow", &isReset);
+			ImGui::Begin("ResetWindow", &m_isReset);
 			ImGui::Text("Reset?");
 
 			if (ImGui::Button("Yes"))
 			{
 				g_pObjectManager->Destroy();
-				isReset = false;
+				m_isReset = false;
 			}
 			
 			ImGui::SameLine();
 			if (ImGui::Button("No"))
-				isReset = false;
+				m_isReset = false;
 
 			ImGui::End();
 		}
@@ -171,56 +268,26 @@ void CImguiClass::Update()
 		ImGui::Begin("Hiearachy");
 
 		vector<IObject *> vecObj = g_pObjectManager->GetVecObject();
+		bool isClick;
+		static int index = vecObj.size() - 1;
 		for (int i = 0; i < vecObj.size(); i++)
 		{
-			bool isClick = vecObj[i]->GetClick();
+			isClick = vecObj[i]->GetClick();
 			if (ImGui::Selectable(vecObj[i]->GetObjectName().c_str(), &isClick))
+			{
 				vecObj[i]->SetClick(isClick);
+				index = i;
+			}
 		}
 
-		// >> 현 상태 : 여러개 선택 가능 => 하나만 선택 가능으로?
-		/*
-		if (ImGui::TreeNode("Basic"))
+		for (int i = 0; i < vecObj.size(); i++)
 		{
-		static bool selection[5] = { false, true, false, false, false };
-		ImGui::Selectable("1. I am selectable", &selection[0]);
-		ImGui::Selectable("2. I am selectable", &selection[1]);
-		ImGui::Text("3. I am not selectable");
-		ImGui::Selectable("4. I am selectable", &selection[3]);
-		if (ImGui::Selectable("5. I am double clickable", selection[4], ImGuiSelectableFlags_AllowDoubleClick))
-		if (ImGui::IsMouseDoubleClicked(0))
-		selection[4] = !selection[4];
-		ImGui::TreePop();
+			if (i != index)
+				vecObj[i]->SetClick(false);
 		}
-		if (ImGui::TreeNode("Selection State: Single Selection"))
-		{
-		static int selected = -1;
-		for (int n = 0; n < 5; n++)
-		{
-		char buf[32];
-		sprintf(buf, "Object %d", n);
-		if (ImGui::Selectable(buf, selected == n))
-		selected = n;
-		}
-		ImGui::TreePop();
-		}
-		if (ImGui::TreeNode("Selection State: Multiple Selection"))
-		{
-		HelpMarker("Hold CTRL and click to select multiple items.");
-		static bool selection[5] = { false, false, false, false, false };
-		for (int n = 0; n < 5; n++)
-		{
-		char buf[32];
-		sprintf(buf, "Object %d", n);
-		if (ImGui::Selectable(buf, selection[n]))
-		{
-		if (!ImGui::GetIO().KeyCtrl)    // Clear selection when CTRL is not held
-		memset(selection, 0, sizeof(selection));
-		selection[n] ^= 1;
-		}
-		}
-		*/
 
+		// >> todo : 오브젝트 정렬 필요?(이름순)
+		vecObj.erase(vecObj.begin(), vecObj.end());
 		ImGui::End();
 	}
 
@@ -228,39 +295,40 @@ void CImguiClass::Update()
 	{ // >> : FileLoad
 		ImGui::Begin("File Loader");
 
-		static int index = -1;
-		enum class LoadType { eMap, eBackground, eObject };
-		static LoadType mode = LoadType::eBackground;
-		if (ImGui::RadioButton("Background", mode == LoadType::eBackground)) { mode = LoadType::eBackground; index = -1; } 
+		if (ImGui::RadioButton("MapTile", m_NowLoadType == LoadType::eMap)) { m_NowLoadType = LoadType::eMap; m_FileLoadIndex = -1; }
 		ImGui::SameLine(); 
-		if (ImGui::RadioButton("Object", mode == LoadType::eObject)) { mode = LoadType::eObject; index = -1; }
-
-		vector<char *> vecItem;
-		if (mode == LoadType::eBackground)
+		if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
+		if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = -1; }
+		// todo : Background
+		if (m_NowLoadType != m_PreLoadType && m_NowLoadType != LoadType::eBackground)
 		{
-			vecItem.push_back("BackObj"); vecItem.push_back("BackObj1");
-			// >> todo : item 추가
+			SetVecItem();
+			m_PreLoadType = m_NowLoadType;
 		}
-		else if (mode == LoadType::eObject)
+		else if (m_NowLoadType == LoadType::eBackground)
 		{
-			vecItem.push_back("Obj"); vecItem.push_back("Obj1");
-			// >> todo : item 추가
+			ImGui::Separator();
+			if (ImGui::RadioButton("AutumnTree", m_TreeType == LoadType::eAutumnTree)) { m_TreeType = LoadType::eAutumnTree; m_FileLoadIndex = -1; }
+			ImGui::SameLine(); if (ImGui::RadioButton("SummerTree", m_TreeType == LoadType::eSummerTree)) { m_TreeType = LoadType::eSummerTree; m_FileLoadIndex = -1; }
+			if (ImGui::RadioButton("WinterTree", m_TreeType == LoadType::eWinterTree)) { m_TreeType = LoadType::eWinterTree; m_FileLoadIndex = -1; }
+
+			SetVecItem();
+			m_PreLoadType = m_NowLoadType;
 		}
 
 		// << combo
-		const char* showItem;
-		if (index == -1)
-			showItem = " ";
+		if (m_FileLoadIndex == -1)
+			m_showItem = " ";
 		else
-			showItem = vecItem[index];
+			m_showItem = m_vecItem[m_FileLoadIndex].c_str();
 
-		if (ImGui::BeginCombo(" ", showItem))
+		if (ImGui::BeginCombo(" ", m_showItem.c_str()))
 		{
-			for (int n = 0; n < vecItem.size(); n++)
+			for (int n = 0; n < m_vecItem.size(); n++)
 			{
-				const bool is_selected = (index == n);
-				if (ImGui::Selectable(vecItem[n], is_selected))
-					index = n;
+				const bool is_selected = (m_FileLoadIndex == n);
+				if (ImGui::Selectable(m_vecItem[n].c_str(), is_selected))
+					m_FileLoadIndex = n;
 
 				if (is_selected)
 					ImGui::SetItemDefaultFocus(); // focus
@@ -270,10 +338,9 @@ void CImguiClass::Update()
 		// << combo
 
 		ImGui::SameLine();
-		if (ImGui::Button("Load") && index != -1)
+		if (ImGui::Button("Load") && m_FileLoadIndex != -1)
 		{
-			// >> todo : File load
-			cout << "load" << endl;
+			IObject::CreateObject(m_vecObjType[m_FileLoadIndex], m_FileLoadIndex);
 		}
 
 		ImGui::Separator();
@@ -309,20 +376,32 @@ void CImguiClass::Update()
 
 			bool isCheck = false;
 			if (ImGui::InputText("Name", name, 1024))
+				isCheck = true;
+
+			// >> 이름 변경 판정 다시 하기?
+			if (isCheck)
 			{
-				for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
+				bool isSame = false;
+				for (int i = 0; i < vecObj.size(); i++)
 				{
-					if (strstr(g_pObjectManager->GetVecObject()[i]->GetObjectName().c_str(), name) != NULL)
-						isCheck = true;
+					if (strcmp(vecObj[i]->GetObjectName().c_str(), name) == 0)
+						isSame = true;
 				}
 
-				if(!isCheck) vecObj[index]->SetObjectName(name);
+				if (!isSame) vecObj[index]->SetObjectName(name);
 			}
+			// << 이름 변경 판정 다시 하기?
+
 			ImGui::Separator();
 
 			D3DXVECTOR3 vScale = vecObj[index]->GetScale();
 			if (ImGui::InputFloat3("Scale", vScale))
-				vecObj[index]->SetScale(vScale);
+			{
+				if (vecObj[index]->GetObjType() == eSphere || vecObj[index]->GetObjType() == eCylinder)
+					vecObj[index]->SetDiffScale(vScale);
+				else
+					vecObj[index]->SetScale(vScale);
+			}
 
 			D3DXVECTOR3 vRot = vecObj[index]->GetRotate();
 			if(ImGui::InputFloat3("Rotate", vRot))
@@ -333,274 +412,323 @@ void CImguiClass::Update()
 				vecObj[index]->SetTranslate(vTrans);
 
 			ImGui::Separator();
-		}
-		else
-		{
 
+			// >> object만 색 지정 가능
+			if (vecObj[index]->GetObjType() == eBox || vecObj[index]->GetObjType() == eSphere || vecObj[index]->GetObjType() == eCylinder)
+			{
+				ImGui::Text("Set Color");
+				string charName[8] = { "Gray", "Black", "White", "Red", "Blue", "Green", "Yellow" };
+				for (int i = 0; i < m_vecColor.size(); i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str() , m_NowcolorType == m_vecColor[i])) 
+					{ 
+						m_NowcolorType = m_vecColor[i]; 
+						
+						D3DXCOLOR color;
+						switch (m_NowcolorType)
+						{
+						case ColorType::eGray:
+							color = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+							break; 
+						case ColorType::eBlack:
+							color = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
+							break;
+						case ColorType::eWhite:
+							color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+							break;
+						case ColorType::eRed:
+							color = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+							break;
+						case ColorType::eBlue:
+							color = D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f);
+							break;
+						case ColorType::eGreen:
+							color = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
+							break;
+						case ColorType::eYellow:
+							color = D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f);
+							break;
+						}
+						vecObj[index]->SetColor(color);
+					}
+
+					if (i != 2) 
+						ImGui::SameLine();
+
+				} // << : for
+
+			} // << : if
+			// else
+				// ImGui::Separator();
 		}
+
+		// else
+		// {
+		// 	ImGui::InputText("Name", " ", 1024);
+		// 	ImGui::Separator();
+		// 
+		// 	ImGui::InputFloat3("Scale", D3DXVECTOR3(0, 0, 0));
+		// 	ImGui::InputFloat3("Rotate", D3DXVECTOR3(0, 0, 0));
+		// 	ImGui::InputFloat3("Translate", D3DXVECTOR3(0, 0, 0));
+		// 	ImGui::Separator();
+		// }
 
 		ImGui::End();
 
 		//if
 	}
 #else
-	{ // >> : Menu Title Bar
-		static bool isReset = false;
-		if (ImGui::BeginMainMenuBar())
+g_pObjectManager->CheckSameName();
+
+{ // >> : Menu Title Bar
+	if (ImGui::BeginMainMenuBar())
+	{
+		if (ImGui::BeginMenu("File"))
 		{
-			if (ImGui::BeginMenu("File"))
-			{
-				if (ImGui::MenuItem("Open", " ")) { g_pFileLoadManager->FileLoad_OpenMapData(); }
-				if (ImGui::MenuItem("Save", " ")) { g_pFileLoadManager->FileLoad_SaveMapData(); }
+			if (ImGui::MenuItem("Open", " ")) { g_pFileLoadManager->FileLoad_OpenMapData(); }
+			if (ImGui::MenuItem("Save", " ")) { g_pFileLoadManager->FileLoad_SaveMapData(); }
 
-				ImGui::Separator();
+			ImGui::Separator();
 
-				if (ImGui::MenuItem("Reset", " "))
-					isReset = true;
+			if (ImGui::MenuItem("Reset", " "))
+				m_isReset = true;
 
-				ImGui::EndMenu();
-			}
-
-			if (ImGui::BeginMenu("Edit"))
-			{
-				// if (ImGui::MenuItem("Undo", "CTRL+Z")) {}
-				// if (ImGui::MenuItem("Redo", "CTRL+Y", false, false)) {}
-				// ImGui::Separator();
-				// if (ImGui::MenuItem("Cut", "CTRL+X")) {}
-				// if (ImGui::MenuItem("Copy", "CTRL+C")) {}
-				// if (ImGui::MenuItem("Paste", "CTRL+V")) {}
-				ImGui::EndMenu();
-			}
-			ImGui::EndMainMenuBar();
+			ImGui::EndMenu();
 		}
 
-		if (isReset)
+		// if (ImGui::BeginMenu("Edit"))
+		// {
+		// 	// if (ImGui::MenuItem("Undo", "CTRL+Z")) {}
+		// 	// if (ImGui::MenuItem("Redo", "CTRL+Y", false, false)) {}
+		// 	// ImGui::Separator();
+		// 	// if (ImGui::MenuItem("Cut", "CTRL+X")) {}
+		// 	// if (ImGui::MenuItem("Copy", "CTRL+C")) {}
+		// 	// if (ImGui::MenuItem("Paste", "CTRL+V")) {}
+		// 	ImGui::EndMenu();
+		// }
+		ImGui::EndMainMenuBar();
+	}
+
+	if (m_isReset)
+	{
+		ImGui::Begin("ResetWindow", &m_isReset);
+		ImGui::Text("Reset?");
+
+		if (ImGui::Button("Yes"))
 		{
-			ImGui::Begin("ResetWindow", &isReset);
-			ImGui::Text("Reset?");
-
-			if (ImGui::Button("Yes"))
-			{
-				g_pObjectManager->Destroy();
-				isReset = false;
-			}
-
-			ImGui::SameLine();
-			if (ImGui::Button("No"))
-				isReset = false;
-
-			ImGui::End();
-		}
-
-	} // << : Menu Title Bar
-
-	{ // >> : Controller
-	  // >> 렉걸려서 주석처리
-	  // static LPDIRECT3DTEXTURE9 temp;
-	  // D3DXCreateTextureFromFileA(g_pD3DDevice, "Resource/Test.png", &temp);
-	  // static ImTextureID test = temp;
-
-		ImGui::Begin(" ");
-
-		/*for (int i = 0; i < 5 ; i++)
-		{
-		ImGui::PushID(i);
-		int frame_padding = 2;
-		ImVec2 size = ImVec2(32.0f, 32.0f);
-		ImVec2 uv0 = ImVec2(0.0f, 0.0f);
-		ImVec2 uv1 = ImVec2(32.0f / 32, 32.0f / 32);
-		ImVec4 bg_col = ImVec4(0.0f, 0.0f, 0.0f, 1.0f);
-		ImVec4 tint_col = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
-
-		if (ImGui::ImageButton(test, size, uv0, uv1, frame_padding, bg_col, tint_col))
-		{
-		if (i == 0) cout << "Mouse Move Mode" << endl;
-		else if (i == 1) cout << "Object Move Mode" << endl;
-		else if (i == 2) cout << "Object Rotate Mode" << endl;
-		else if (i == 3) cout << "Object Scale Mode" << endl;
-		else if (i == 4) cout << "Object OBB Mode" << endl;
+			g_pObjectManager->Destroy();
+			m_isReset = false;
 		}
 
 		ImGui::SameLine();
-		ImGui::PopID();
-		}*/
-		ImGui::End();
-	} // << : Controller
-
-	{
-		ImGui::Begin("Hiearachy");
-
-		vector<IObject *> vecObj = g_pObjectManager->GetVecObject();
-		for (int i = 0; i < vecObj.size(); i++)
-		{
-			bool isClick = vecObj[i]->GetClick();
-			if (ImGui::Selectable(vecObj[i]->GetObjectName().c_str(), &isClick))
-				vecObj[i]->SetClick(isClick);
-		}
-
-		// >> 현 상태 : 여러개 선택 가능 => 하나만 선택 가능으로?
-		/*
-		if (ImGui::TreeNode("Basic"))
-		{
-		static bool selection[5] = { false, true, false, false, false };
-		ImGui::Selectable("1. I am selectable", &selection[0]);
-		ImGui::Selectable("2. I am selectable", &selection[1]);
-		ImGui::Text("3. I am not selectable");
-		ImGui::Selectable("4. I am selectable", &selection[3]);
-		if (ImGui::Selectable("5. I am double clickable", selection[4], ImGuiSelectableFlags_AllowDoubleClick))
-		if (ImGui::IsMouseDoubleClicked(0))
-		selection[4] = !selection[4];
-		ImGui::TreePop();
-		}
-		if (ImGui::TreeNode("Selection State: Single Selection"))
-		{
-		static int selected = -1;
-		for (int n = 0; n < 5; n++)
-		{
-		char buf[32];
-		sprintf(buf, "Object %d", n);
-		if (ImGui::Selectable(buf, selected == n))
-		selected = n;
-		}
-		ImGui::TreePop();
-		}
-		if (ImGui::TreeNode("Selection State: Multiple Selection"))
-		{
-		HelpMarker("Hold CTRL and click to select multiple items.");
-		static bool selection[5] = { false, false, false, false, false };
-		for (int n = 0; n < 5; n++)
-		{
-		char buf[32];
-		sprintf(buf, "Object %d", n);
-		if (ImGui::Selectable(buf, selection[n]))
-		{
-		if (!ImGui::GetIO().KeyCtrl)    // Clear selection when CTRL is not held
-		memset(selection, 0, sizeof(selection));
-		selection[n] ^= 1;
-		}
-		}
-		*/
+		if (ImGui::Button("No"))
+			m_isReset = false;
 
 		ImGui::End();
 	}
 
+} // << : Menu Title Bar
 
-	{ // >> : FileLoad
-		ImGui::Begin("File Loader");
+{
+	ImGui::Begin("Hiearachy");
 
-		static int index = -1;
-		enum class LoadType { eMap, eBackground, eObject };
-		static LoadType mode = LoadType::eBackground;
-		if (ImGui::RadioButton("Background", mode == LoadType::eBackground)) { mode = LoadType::eBackground; index = -1; }
-		ImGui::SameLine();
-		if (ImGui::RadioButton("Object", mode == LoadType::eObject)) { mode = LoadType::eObject; index = -1; }
-
-		vector<char *> vecItem;
-		if (mode == LoadType::eBackground)
+	vector<IObject *> vecObj = g_pObjectManager->GetVecObject();
+	bool isClick;
+	static int index = vecObj.size() - 1;
+	for (int i = 0; i < vecObj.size(); i++)
+	{
+		isClick = vecObj[i]->GetClick();
+		if (ImGui::Selectable(vecObj[i]->GetObjectName().c_str(), &isClick))
 		{
-			vecItem.push_back("BackObj"); vecItem.push_back("BackObj1");
-			// >> todo : item 추가
+			vecObj[i]->SetClick(isClick);
+			index = i;
 		}
-		else if (mode == LoadType::eObject)
+	}
+
+	for (int i = 0; i < vecObj.size(); i++)
+	{
+		if (i != index)
+			vecObj[i]->SetClick(false);
+	}
+
+	vecObj.erase(vecObj.begin(), vecObj.end());
+	ImGui::End();
+}
+
+
+{ // >> : FileLoad
+	ImGui::Begin("File Loader");
+
+	// if (ImGui::RadioButton("MapTile", m_NowLoadType == LoadType::eMap)) { m_NowLoadType = LoadType::eMap; m_FileLoadIndex = -1; }
+	// ImGui::SameLine();
+	if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
+	// if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = -1; }
+
+	if (m_NowLoadType != m_PreLoadType && m_NowLoadType != LoadType::eBackground)
+	{
+		SetVecItem();
+		m_PreLoadType = m_NowLoadType;
+	}
+	// else if (m_NowLoadType == LoadType::eBackground)
+	// {
+	// 	ImGui::Separator();
+	// 	if (ImGui::RadioButton("AutumnTree", m_TreeType == LoadType::eAutumnTree)) { m_TreeType = LoadType::eAutumnTree; m_FileLoadIndex = -1; }
+	// 	ImGui::SameLine(); if (ImGui::RadioButton("SummerTree", m_TreeType == LoadType::eSummerTree)) { m_TreeType = LoadType::eSummerTree; m_FileLoadIndex = -1; }
+	// 	if (ImGui::RadioButton("WinterTree", m_TreeType == LoadType::eWinterTree)) { m_TreeType = LoadType::eWinterTree; m_FileLoadIndex = -1; }
+	// 
+	// 	SetVecItem();
+	// 	m_PreLoadType = m_NowLoadType;
+	// }
+
+	// << combo
+	if (m_FileLoadIndex == -1)
+		m_showItem = " ";
+	else
+		m_showItem = m_vecItem[m_FileLoadIndex].c_str();
+
+	if (ImGui::BeginCombo(" ", m_showItem.c_str()))
+	{
+		for (int n = 0; n < m_vecItem.size(); n++)
 		{
-			vecItem.push_back("Obj"); vecItem.push_back("Obj1");
-			// >> todo : item 추가
+			const bool is_selected = (m_FileLoadIndex == n);
+			if (ImGui::Selectable(m_vecItem[n].c_str(), is_selected))
+				m_FileLoadIndex = n;
+
+			if (is_selected)
+				ImGui::SetItemDefaultFocus(); // focus
 		}
+		ImGui::EndCombo();
+	}
+	// << combo
 
-		// << combo
-		const char* showItem;
-		if (index == -1)
-			showItem = " ";
-		else
-			showItem = vecItem[index];
+	ImGui::SameLine();
+	if (ImGui::Button("Load") && m_FileLoadIndex != -1)
+	{
+		IObject::CreateObject(m_vecObjType[m_FileLoadIndex], m_FileLoadIndex);
+	}
 
-		if (ImGui::BeginCombo(" ", showItem))
+	ImGui::Separator();
+
+	ImGui::End();
+} // << : FileLoad
+
+{
+	ImGui::Begin("Inspector");
+
+	// 
+	vector<IObject *> vecObj = g_pObjectManager->GetVecObject();
+	int index = -1;
+	for (int i = 0; i < vecObj.size(); i++)
+	{
+		if (vecObj[i]->GetClick())
 		{
-			for (int n = 0; n < vecItem.size(); n++)
+			index = i;
+			break;
+		}
+	}
+	// 
+
+	if (index >= 0)
+	{
+		char name[1024] = "\0";
+		int strLength = vecObj[index]->GetObjectName().length();
+		for (int i = 0; i < strLength; i++)
+		{
+			name[i] = vecObj[index]->GetObjectName()[i];
+		}
+		name[strLength] = '\0';
+
+		bool isCheck = false;
+		if (ImGui::InputText("Name", name, 1024))
+			isCheck = true;
+
+		// >> 이름 변경 판정 다시 하기?
+		if (isCheck)
+		{
+			bool isSame = false;
+			for (int i = 0; i < vecObj.size(); i++)
 			{
-				const bool is_selected = (index == n);
-				if (ImGui::Selectable(vecItem[n], is_selected))
-					index = n;
-
-				if (is_selected)
-					ImGui::SetItemDefaultFocus(); // focus
+				if (strcmp(vecObj[i]->GetObjectName().c_str(), name) == 0)
+					isSame = true;
 			}
-			ImGui::EndCombo();
-		}
-		// << combo
 
-		ImGui::SameLine();
-		if (ImGui::Button("Load") && index != -1)
-		{
-			// >> todo : File load
-			cout << "load" << endl;
+			if (!isSame) vecObj[index]->SetObjectName(name);
 		}
+		// << 이름 변경 판정 다시 하기?
 
 		ImGui::Separator();
 
-		ImGui::End();
-	} // << : FileLoad
-
-	{
-		ImGui::Begin("Inspector");
-
-		// 
-		vector<IObject *> vecObj = g_pObjectManager->GetVecObject();
-		int index = -1;
-		for (int i = 0; i < vecObj.size(); i++)
+		D3DXVECTOR3 vScale = vecObj[index]->GetScale();
+		if (ImGui::InputFloat3("Scale", vScale))
 		{
-			if (vecObj[i]->GetClick())
-			{
-				index = i;
-				break;
-			}
+			if (vecObj[index]->GetObjType() == eSphere || vecObj[index]->GetObjType() == eCylinder)
+				vecObj[index]->SetDiffScale(vScale);
+			else
+				vecObj[index]->SetScale(vScale);
 		}
-		// 
 
-		if (index >= 0)
+		D3DXVECTOR3 vRot = vecObj[index]->GetRotate();
+		if (ImGui::InputFloat3("Rotate", vRot))
+			vecObj[index]->SetRotate(vRot);
+
+		D3DXVECTOR3 vTrans = vecObj[index]->GetTranslate();
+		if (ImGui::InputFloat3("Translate", vTrans))
+			vecObj[index]->SetTranslate(vTrans);
+
+		ImGui::Separator();
+
+		// >> object만 색 지정 가능
+		if (vecObj[index]->GetObjType() == eBox || vecObj[index]->GetObjType() == eSphere || vecObj[index]->GetObjType() == eCylinder)
 		{
-			char name[1024] = "\0";
-			int strLength = vecObj[index]->GetObjectName().length();
-			for (int i = 0; i < strLength; i++)
+			ImGui::Text("Set Color");
+			string charName[8] = { "Gray", "Black", "White", "Red", "Blue", "Green", "Yellow" };
+			for (int i = 0; i < m_vecColor.size(); i++)
 			{
-				name[i] = vecObj[index]->GetObjectName()[i];
-			}
-			name[strLength] = '\0';
-
-			bool isCheck = false;
-			if (ImGui::InputText("Name", name, 1024))
-			{
-				for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
+				if (ImGui::RadioButton(charName[i].c_str(), m_NowcolorType == m_vecColor[i]))
 				{
-					if (strstr(g_pObjectManager->GetVecObject()[i]->GetObjectName().c_str(), name) != NULL)
-						isCheck = true;
+					m_NowcolorType = m_vecColor[i];
+
+					D3DXCOLOR color;
+					switch (m_NowcolorType)
+					{
+					case ColorType::eGray:
+						color = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+						break;
+					case ColorType::eBlack:
+						color = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
+						break;
+					case ColorType::eWhite:
+						color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+						break;
+					case ColorType::eRed:
+						color = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+						break;
+					case ColorType::eBlue:
+						color = D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f);
+						break;
+					case ColorType::eGreen:
+						color = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
+						break;
+					case ColorType::eYellow:
+						color = D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f);
+						break;
+					}
+					vecObj[index]->SetColor(color);
 				}
 
-				if (!isCheck) vecObj[index]->SetObjectName(name);
-			}
-			ImGui::Separator();
+				if (i != 2)
+					ImGui::SameLine();
 
-			D3DXVECTOR3 vScale = vecObj[index]->GetScale();
-			if (ImGui::InputFloat3("Scale", vScale))
-				vecObj[index]->SetScale(vScale);
+			} // << : for
 
-			D3DXVECTOR3 vRot = vecObj[index]->GetRotate();
-			if (ImGui::InputFloat3("Rotate", vRot))
-				vecObj[index]->SetRotate(vRot);
+		} // << : if
 
-			D3DXVECTOR3 vTrans = vecObj[index]->GetTranslate();
-			if (ImGui::InputFloat3("Translate", vTrans))
-				vecObj[index]->SetTranslate(vTrans);
-
-			ImGui::Separator();
-		}
-		else
-		{
-
-		}
-
-		ImGui::End();
 	}
+
+	ImGui::End();
+
+	//if
+}
 #endif // _DEBUG
 }
 

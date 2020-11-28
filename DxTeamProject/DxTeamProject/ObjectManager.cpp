@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Object.h"
+#include "IObject.h"
+#include "PSOBB.h"
 #include "ObjectManager.h"
+#include "CHeight.h"
 
 CObjectManager::CObjectManager()
 {
@@ -32,6 +35,50 @@ void CObjectManager::RemoveObject(CObject * pObject)
 	}
 }
 
+void CObjectManager::AddObject(IObject * pObject)
+{
+	m_vecIObject.push_back(pObject);
+}
+
+void CObjectManager::RemoveObject(IObject * pObject)
+{
+	vector<IObject*>::iterator it;
+	for (it = m_vecIObject.begin(); it != m_vecIObject.end();)
+	{
+		if (*it == pObject)
+		{
+			IObject* temp = *it;
+			it = m_vecIObject.erase(it);
+			delete temp;
+			return;
+		}
+		else
+			it++;
+	}
+}
+
+void CObjectManager::AddOBBbox(CPSOBB * OBBBox)
+{
+	m_vecOBBBox.push_back(OBBBox);
+}
+
+void CObjectManager::RemoveObject(CPSOBB * OBBBox)
+{
+	vector<CPSOBB*>::iterator it;
+	for (it = m_vecOBBBox.begin(); it != m_vecOBBBox.end();)
+	{
+		if (*it == OBBBox)
+		{
+			CPSOBB* temp = *it;
+			it = m_vecOBBBox.erase(it);
+			delete temp;
+			return;
+		}
+		else
+			it++;
+	}
+}
+
 void CObjectManager::Destroy()
 {
 	for (int i = 0; i < m_vecObject.size(); i++)
@@ -44,6 +91,12 @@ void CObjectManager::Update(float duration)
 		m_vecObject[i]->Update(duration);
 }
 
+void CObjectManager::Update(float duration, CHeight* pMap)
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+		m_vecObject[i]->Update(duration , pMap);
+}
+
 void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 {
 	vector<bool> vecIsPick;
@@ -52,21 +105,51 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 	{
 		m_vecObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
 	}
-
 	Update_PickCheck(vecIsPick, vecVPos);
 }
 
-void CObjectManager::Render()
+void CObjectManager::Update()
 {
-	for (int i = 0; i < m_vecObject.size(); i++)
+	for (int hittee = 0; hittee < m_vecObject.size(); hittee++)
 	{
-		m_vecObject[i]->Render();
+		for (int hitter = 0; hitter < m_vecObject.size(); hitter++)
+		{
+			if (hittee >= hitter)
+				continue;
+			m_vecObject[hittee]->CollisionOtherObject(m_vecObject[hitter]);
+		}
 	}
 }
 
 vector<CObject*> CObjectManager::GetVecObject()
 {
 	return m_vecObject;
+}
+
+void CObjectManager::Render()
+{
+	//for (int i = 0; i < m_vecIObject.size(); i++)
+	//{
+	//	m_vecIObject[i]->Render();
+	//}
+
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		m_vecObject[i]->Render();
+	}
+}
+
+void CObjectManager::RenderOBBBox()
+{
+	for (int i = 0; i < m_vecOBBBox.size(); i++)
+	{
+		m_vecOBBBox[i]->Render();
+	}
+}
+
+vector<IObject*> CObjectManager::GetVecIObject()
+{
+	return m_vecIObject;
 }
 
 void CObjectManager::Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos)
