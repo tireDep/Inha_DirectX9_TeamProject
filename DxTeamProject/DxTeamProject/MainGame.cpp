@@ -16,7 +16,8 @@
 /// 이 아래는 지울 수도 있는 선언
 #include "Xfile.h"
 #include "CHeight.h"
-
+// Ray y check
+#include "MeshTile.h"
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
 
@@ -31,8 +32,11 @@ CMainGame::CMainGame() :
 	m_Xfile(NULL),
 	m_pHeightMap(NULL),
 	m_pSkinnedMesh(NULL)
+	// Ray y check
+	, m_pMeshTile(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
+
 {
 
 }
@@ -50,6 +54,8 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pSkinnedMesh);
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
+	// Ray y check
+	SafeDelete(m_pMeshTile);
 	/// 릴리즈 버전을 위한 주석처리
 	//SafeDelete(m_pSm);
 }
@@ -128,6 +134,10 @@ void CMainGame::Setup()
 		g_pEventManager->AddListener(g_pObjectManager->GetVecObject()[i]);
 	}
 
+	// Ray y check
+	m_pMeshTile = new MeshTile;
+	m_pMeshTile->Setup();
+
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
@@ -191,6 +201,8 @@ void CMainGame::Update()
 		{
 			m_pText->SetisGrabstate(false);
 		}
+		// Ray y check
+		m_pCharacter->UpdateRayYCheck(*m_pMeshTile);
 	}
 
 	if (g_gameManager->GetGridMapMode())
@@ -281,6 +293,10 @@ void CMainGame::Render()
 
 	if (m_pText->GetisGrabstate())
 		m_pText->RenderGrab();
+
+	// Ray y check
+	if (m_pMeshTile)
+		m_pMeshTile->Render();
 
 	/// 릴리즈 버전을 위한 주석처리
 	//if (m_pParticleWorld)

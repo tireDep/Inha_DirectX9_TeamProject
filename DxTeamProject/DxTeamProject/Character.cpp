@@ -2,11 +2,15 @@
 #include "Character.h"
 #include "OBB.h"
 #include "CHeight.h"
+// Ray y check
+#include "MeshTile.h"
+
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
 	, m_vPosition(0, 0.0f, 0)
 	, m_pOBB(NULL)
 	, m_isCollided(false)
+	// Ray y check
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
@@ -132,6 +136,25 @@ string CCharacter::GetName()
 	return m_strName;
 }
 
+// Ray y check
+void CCharacter::UpdateRayYCheck(MeshTile & meshtile)
+{
+	BOOL Hit = false;
+	DWORD FaceIndex;
+	float U, V;
+	float Dist;
+	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 10, 0);
+	rayOrigin.x -= meshtile.GetMatWorld()._41;
+	rayOrigin.y -= meshtile.GetMatWorld()._42;
+	rayOrigin.z -= meshtile.GetMatWorld()._43;
+	m_Ray.SetOrigin(rayOrigin);
+	D3DXIntersect(meshtile.GetMesh(), &m_Ray.GetOrigin(), &m_Ray.GetDirection(), &Hit, &FaceIndex, &U, &V, &Dist, NULL, NULL);
+	if (Hit)
+		m_vPosition.y = (m_Ray.GetOrigin().y - Dist + meshtile.GetMatWorld()._42) + 0.5f;
+	else
+		m_vPosition.y = 0.5f;
+}
+
 CCharacter::~CCharacter()
 {
 }
@@ -196,6 +219,11 @@ void CCharacter::Setup()
 
 	m_pOBB = new COBB;
 	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
+
+	// Ray y check
+	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 10, 0);
+	m_Ray.SetOrigin(rayOrigin);
+	m_Ray.SetDirection(D3DXVECTOR3(0, -1, 0));
 }
 
 void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)

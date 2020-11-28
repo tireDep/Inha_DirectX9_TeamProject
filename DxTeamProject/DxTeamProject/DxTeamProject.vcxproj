@@ -172,6 +172,7 @@
     <ClInclude Include="IObject.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="MeshTile.h" />
     <ClInclude Include="OBB.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
@@ -236,6 +237,7 @@
     <ClCompile Include="IObject.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="MeshTile.cpp" />
     <ClCompile Include="OBB.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />

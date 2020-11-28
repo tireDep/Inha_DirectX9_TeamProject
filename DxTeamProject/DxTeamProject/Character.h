@@ -2,6 +2,8 @@
 #include "IListener.h"
 
 class COBB;
+class CRay;
+class MeshTile;
 
 class CCharacter : public IListener
 {
@@ -17,6 +19,8 @@ protected:
 	bool					m_isCollided;
 	// grab
 	int						m_nGrabAbleObeject;
+	// Ray y check
+	CRay					m_Ray;
 public:
 	virtual ~CCharacter(void);
 	virtual void Setup();
@@ -40,4 +44,7 @@ public:
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	virtual string GetName();
+
+	// Ray y check
+	virtual void UpdateRayYCheck(MeshTile & meshtile);
 };

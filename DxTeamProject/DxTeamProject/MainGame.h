@@ -15,6 +15,8 @@ class CHeight;
 class CXfile;
 class CColliderObject;
 class CSkinnedMesh;
+// Ray y check
+class MeshTile;
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
 class CMainGame
@@ -33,6 +35,8 @@ private:
 	/// 이 아래는 지울 수도 있는 선언
 	CXfile*		m_Xfile;
 	CHeight* m_pHeightMap;
+	// Ray y check
+	MeshTile* m_pMeshTile;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 public:
