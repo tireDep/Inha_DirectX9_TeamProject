@@ -18,7 +18,7 @@ CSkinnedMesh::CSkinnedMesh() :
 CSkinnedMesh::~CSkinnedMesh()
 {
 	CAllocateHierarchy ah;
-	// D3DXFrameDestroy(m_pRoot, &ah);
+	D3DXFrameDestroy(m_pRoot, &ah);
 	SafeRelease(m_pAniController);
 }
 
@@ -105,6 +105,7 @@ void CSkinnedMesh::Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent)
 
 void CSkinnedMesh::Render(LPD3DXFRAME pFrame)
 {
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
 	if (pFrame == NULL)
 		pFrame = m_pRoot;
@@ -116,11 +117,12 @@ void CSkinnedMesh::Render(LPD3DXFRAME pFrame)
 		ST_BONE_MESH* pBoneMesh = (ST_BONE_MESH*)pBone->pMeshContainer;
 		if (pBoneMesh->MeshData.pMesh)
 		{
+			D3DXMatrixScaling(&pBone->CombinedTransformationMatrix, 10, 10, 10);
 			g_pD3DDevice->SetTransform(D3DTS_WORLD, &pBone->CombinedTransformationMatrix);
 
 			for (size_t i = 0; i < pBoneMesh->vecMtl.size(); i++)
 			{
-				//g_pD3DDevice->SetTexture(0, pBoneMesh->vecTexture[i]);
+				g_pD3DDevice->SetTexture(0, pBoneMesh->vecTexture[i]);
 				g_pD3DDevice->SetMaterial(&pBoneMesh->vecMtl[i]);
 				pBoneMesh->MeshData.pMesh->DrawSubset(i);
 			}	// : for

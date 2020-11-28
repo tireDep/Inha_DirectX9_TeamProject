@@ -1,13 +1,11 @@
 #include "stdafx.h"
 #include "AllocateHierarchy.h"
 
-
 CAllocateHierarchy::CAllocateHierarchy() :
 	m_vMax(0,0,0),
 	m_vMin(0,0,0)
 {
 }
-
 
 CAllocateHierarchy::~CAllocateHierarchy()
 {
@@ -46,13 +44,14 @@ STDMETHODIMP CAllocateHierarchy::CreateMeshContainer(THIS_ LPCSTR Name,
 	ZeroMemory(pBoneMesh, sizeof(ST_BONE_MESH));
 
 	// >> material & texture
+	LPDIRECT3DTEXTURE9 temp = NULL;
 	for (DWORD i = 0; i < NumMaterials; i++)
 	{
 		pBoneMesh->vecMtl.push_back(pMaterials[i].MatD3D);
 		string sFullPath = m_sFolder;
 		sFullPath = string(sFullPath) + string("/") + string(pMaterials[i].pTextureFilename);
-
-		//pBoneMesh->vecTexture.push_back(g_pFileLoadManager->FileLoad_Texture(sFullPath));
+		g_pFileLoadManager->FileLoad_Texture(m_sFolder, pMaterials[i].pTextureFilename, temp);
+		pBoneMesh->vecTexture.push_back(temp);
 	}	// : for
 	// << material & texture
 

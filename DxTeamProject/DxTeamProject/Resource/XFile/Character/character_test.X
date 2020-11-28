@@ -147,7 +147,7 @@ Material lambert2 {
  0.000000;0.000000;0.000000;;
 
  TextureFilename {
-  "TextureTest01.psd";
+  "characterTxt.png";
  }
 }
 

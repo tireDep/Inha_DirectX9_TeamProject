@@ -157,12 +157,10 @@ void CFileLoadManager::ReadMapData(string fileName)
 
 void CFileLoadManager::SaveMapData(string fileName)
 {
-	// >> todo : 颇教
-	cout << " todo Something_saveMap " << endl;
-
 	ofstream saveFile;
 	saveFile.open(fileName.c_str(), ios::out | ios::binary);
 
+	// >> todo : 颇老 盒府(备开喊)?
 	ofstream mapFile;
 	mapFile.open("mapData.dat", ios::out | ios::binary);
 
@@ -196,6 +194,9 @@ void CFileLoadManager::SaveMapData(string fileName)
 			case eBox:
 			case eSphere:
 			case eCylinder:
+			case eATree:
+			case eSTree:
+			case eWTree:
 				FileSave(objFile, mapData);
 				break;
 
