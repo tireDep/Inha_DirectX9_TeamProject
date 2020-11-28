@@ -94,4 +94,7 @@ public:
 	virtual void CollisionOtherObject(CObject * otherobject) = 0;
 
 	static void CreateObject(const ST_MapData& mapData);
+
+	// color change
+	virtual void ChangeObjectColor();
 };

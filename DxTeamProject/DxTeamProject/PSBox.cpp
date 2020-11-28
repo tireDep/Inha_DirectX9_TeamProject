@@ -44,11 +44,13 @@ void CPSBox::Setup(const ST_MapData & mapData)
 	m_vPosition = mapData.vTranslate;
 
 	m_Color = mapData.dxColor;
+	// color change
+	this->ChangeObjectColor();
 
 	m_fWidth = vScale.x;
 	m_fHeight = vScale.y;
 	m_fDepth = vScale.z;
-
+	
 	Setup();
 
 	// ============================================================
