@@ -10,17 +10,17 @@ Sphere1
 # ObjectType
 18
 # Scale
-1
-1
-1
+0.5
+0.5
+0.5
 # Rotate
 0
 0
 0
 # Translate
-0
+5
 0.5
-0
+5
 # Color
 0.5
 0.5
@@ -40,9 +40,9 @@ Sphere2
 # ObjectType
 18
 # Scale
-1
-1
-1
+0.5
+0.5
+0.5
 # Rotate
 0
 0
@@ -70,9 +70,9 @@ Sphere3
 # ObjectType
 18
 # Scale
-1
-1
-1
+0.5
+0.5
+0.5
 # Rotate
 0
 0

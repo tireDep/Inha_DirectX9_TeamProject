@@ -81,6 +81,7 @@ void CPSphere::Setup(const ST_MapData & mapData)
 	m_vPosition = mapData.vTranslate;
 
 	m_Color = mapData.dxColor;
+	this->ChangeObjectColor();
 
 	m_fRadius = vScale.x;
 	m_fRadius = vScale.y;
