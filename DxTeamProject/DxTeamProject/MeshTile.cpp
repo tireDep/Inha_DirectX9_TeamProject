@@ -16,8 +16,8 @@ void MeshTile::Setup()
 {
 	D3DXCreateBox(g_pD3DDevice, 1, 1, 1, &m_pMesh, NULL);
 
-	D3DXMatrixTranslation(&m_matT, 5, 1, 5);
-	D3DXMatrixScaling(&m_matS, 2, 0.5f, 2);
+	D3DXMatrixTranslation(&m_matT, 8, 1, 8);
+	D3DXMatrixScaling(&m_matS, 10, 0.2f, 10);
 	m_matWorld = m_matS * m_matT;
 
 	DWORD dwVertexNum = m_pMesh->GetNumVertices();
@@ -29,11 +29,9 @@ void MeshTile::Setup()
 	pVB->Lock(0, sizeof(m_pMesh->GetNumBytesPerVertex()) * m_pMesh->GetNumVertices(), (void**)&pVertices, 0);
 	for (DWORD i = 0; i < dwVertexNum * 6; i += 3)
 	{
-		cout << pVertices[i] << ' ' << pVertices[i + 1] << ' ' << pVertices[i + 2] << endl;
 		pVertices[i	   ] *= m_matS._11;		pVertices[i]     += m_matT._41;
 		pVertices[i + 1] *= m_matS._22;		pVertices[i + 1] += m_matT._42;
 		pVertices[i + 2] *= m_matS._33;		pVertices[i + 2] += m_matT._43;
-		cout << pVertices[i] << ' ' << pVertices[i + 1] << ' ' << pVertices[i + 2] << endl;
 	}
 	pVB->Unlock();
 }
