@@ -148,13 +148,14 @@ void CCharacter::UpdateRayYCheck(MeshTile & meshtile)
 	float U, V;
 	float Dist;
 	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 10, 0);
-	rayOrigin.x -= meshtile.GetMatWorld()._41;
-	rayOrigin.y -= meshtile.GetMatWorld()._42;
-	rayOrigin.z -= meshtile.GetMatWorld()._43;
+	//rayOrigin.x -= meshtile.GetMatWorld()._41;
+	//rayOrigin.y -= meshtile.GetMatWorld()._42;
+	//rayOrigin.z -= meshtile.GetMatWorld()._43;
 	m_Ray.SetOrigin(rayOrigin);
 	D3DXIntersect(meshtile.GetMesh(), &m_Ray.GetOrigin(), &m_Ray.GetDirection(), &Hit, &FaceIndex, &U, &V, &Dist, NULL, NULL);
 	if (Hit)
-		m_vPosition.y = (m_Ray.GetOrigin().y - Dist + meshtile.GetMatWorld()._42) + 0.5f;
+		m_vPosition.y = (m_Ray.GetOrigin().y - Dist) + 0.5f;
+		//m_vPosition.y = (m_Ray.GetOrigin().y - Dist + meshtile.GetMatWorld()._42) + 0.5f;
 	else
 		m_vPosition.y = 0.5f;
 }
