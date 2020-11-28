@@ -49,4 +49,7 @@ public:
 	// rotation tmp setup update
 	void SetupRotation();
 	void UpdateRotation(float duration, D3DXVECTOR3 point);
+
+	// >>> pasing
+	void Setup(const ST_MapData & mapData);
 };

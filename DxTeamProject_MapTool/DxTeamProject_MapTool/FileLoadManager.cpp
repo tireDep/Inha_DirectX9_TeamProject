@@ -285,6 +285,7 @@ void CFileLoadManager::Setup()
 	m_fAddNumX = 30;
 	m_fAddNumZ = -30;
 	// >> default set
+
 	m_fLimitNumX = 0;
 
 	ifstream file;
@@ -297,7 +298,7 @@ void CFileLoadManager::Setup()
 
 		while (getline(file, readData))
 		{
-			if (strstr(readData.c_str(), "# addX"))
+			/*if (strstr(readData.c_str(), "# addX"))
 			{
 				getline(file, readData);
 				m_fAddNumX = atof(readData.c_str());
@@ -307,7 +308,7 @@ void CFileLoadManager::Setup()
 			{
 				getline(file, readData);
 				m_fAddNumZ = atof(readData.c_str());
-			}
+			}*/
 
 			if (strstr(readData.c_str(), "# limitX"))
 			{

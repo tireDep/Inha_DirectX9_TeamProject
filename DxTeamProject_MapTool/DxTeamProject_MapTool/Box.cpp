@@ -31,6 +31,7 @@ void CBox::Update()
 
 void CBox::Update(CRay * ray)
 {
+#ifdef _DEBUG
 	D3DXVECTOR3* pVertices;
 
 	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
@@ -47,6 +48,7 @@ void CBox::Update(CRay * ray)
 	{
 	}
 	m_pMesh->UnlockVertexBuffer();
+#endif // _DEBUG
 }
 
 void CBox::Render()

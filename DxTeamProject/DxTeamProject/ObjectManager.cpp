@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "Object.h"
 #include "IObject.h"
+#include "PSOBB.h"
 #include "ObjectManager.h"
 #include "CHeight.h"
+
 CObjectManager::CObjectManager()
 {
 }
@@ -47,6 +49,28 @@ void CObjectManager::RemoveObject(IObject * pObject)
 		{
 			IObject* temp = *it;
 			it = m_vecIObject.erase(it);
+			delete temp;
+			return;
+		}
+		else
+			it++;
+	}
+}
+
+void CObjectManager::AddOBBbox(CPSOBB * OBBBox)
+{
+	m_vecOBBBox.push_back(OBBBox);
+}
+
+void CObjectManager::RemoveObject(CPSOBB * OBBBox)
+{
+	vector<CPSOBB*>::iterator it;
+	for (it = m_vecOBBBox.begin(); it != m_vecOBBBox.end();)
+	{
+		if (*it == OBBBox)
+		{
+			CPSOBB* temp = *it;
+			it = m_vecOBBBox.erase(it);
 			delete temp;
 			return;
 		}
@@ -112,6 +136,14 @@ void CObjectManager::Render()
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
 		m_vecObject[i]->Render();
+	}
+}
+
+void CObjectManager::RenderOBBBox()
+{
+	for (int i = 0; i < m_vecOBBBox.size(); i++)
+	{
+		m_vecOBBBox[i]->Render();
 	}
 }
 

@@ -116,7 +116,7 @@ void CCube::Setup()
 
 void CCube::Update()
 {
-	float fSpeed = 0.005f;
+	float fSpeed = 0.001f;
 	if (GetKeyState(VK_LEFT) & 0X8000)
 	{
 		m_fRotY -= fSpeed;

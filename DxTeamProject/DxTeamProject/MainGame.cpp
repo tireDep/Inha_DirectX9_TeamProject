@@ -92,8 +92,8 @@ void CMainGame::Setup()
 	m_pCamera->Setup(&m_pCharacter->GetPosition());
 
 	m_pLight = new CLight;
-	//m_pLight->Setup();
-	m_pLight->Setup(D3DXVECTOR3(1, 0, 0)); // sun light vector
+	m_pLight->Setup();
+	//m_pLight->Setup(D3DXVECTOR3(1, 0, 0)); // sun light vector
 
 	m_GridMap = new CGridMap;
 	m_GridMap->Setup();
@@ -271,8 +271,8 @@ void CMainGame::Render()
 		m_GridMap->Render();
 	}
 
-	// if (m_pSkinnedMesh)
-	// 	m_pSkinnedMesh->Render(NULL);
+	 if (m_pSkinnedMesh)
+	 	m_pSkinnedMesh->Render(NULL);
 
 	if (m_Xfile)
 		m_Xfile->Render(m_pCamera->GetCameraEye());
@@ -286,6 +286,7 @@ void CMainGame::Render()
 		{
 			m_pText->RenderFPS(g_pTimeManager->GetFPS());
 			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
+			g_pObjectManager->RenderOBBBox();
 			//m_pText->RenderBoxPosition(m_pSphere1->getCenter());
 			//m_pText->RenderGrab(g_pObjectManager->GetVecObject(), m_pCharacter->GetPosition());
 		}

@@ -160,8 +160,8 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 				m_preMousePos = ptCurMouse;
 		}
 		break;
-#if _DEBUG
 		// DEBUG Mode
+//#if _DEBUG
 		case WM_MOUSEWHEEL:
 		{
 			m_fCameraDistance -= (GET_WHEEL_DELTA_WPARAM(eventMsg.wParam) / 30.0f);
@@ -169,9 +169,9 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 				m_fCameraDistance = 5.0f;
 		}
 		break;
-#else
+//#else
+//#endif
 		// RELEASE Mode
-#endif
 		} // << : switch
 	} // << : if
 }

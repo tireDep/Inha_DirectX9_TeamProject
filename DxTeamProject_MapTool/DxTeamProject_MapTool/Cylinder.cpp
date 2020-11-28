@@ -15,6 +15,8 @@ CCylinder::~CCylinder()
 void CCylinder::Setup()
 {
 	CObject::Setup();
+	m_vScale = D3DXVECTOR3(0.5f, 0.5f, 1.0f);
+	m_vTranslate = D3DXVECTOR3(0.0f, 0.5f, 0.0f);
 	D3DXCreateCylinder(g_pD3DDevice, m_vScale.x, m_vScale.y, m_vScale.z, 10, 10, &m_pMesh, NULL);
 }
 
@@ -30,6 +32,7 @@ void CCylinder::Update()
 
 void CCylinder::Update(CRay * ray)
 {
+#ifdef _DEBUG
 	D3DXVECTOR3* pVertices;
 
 	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
@@ -46,6 +49,7 @@ void CCylinder::Update(CRay * ray)
 	{
 	}
 	m_pMesh->UnlockVertexBuffer();
+#endif // _DEBUG
 }
 
 void CCylinder::Render()

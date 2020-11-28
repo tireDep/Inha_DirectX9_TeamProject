@@ -31,7 +31,11 @@ void CCharacter::SetColor(D3DXCOLOR c)
 
 void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 {
+#if _DEBUG
 	float speed = 0.005f;
+#else
+	float speed = 0.003f;
+#endif
 	float rotation = -1.0f;
 
 	if (!g_gameManager->GetUImode())
