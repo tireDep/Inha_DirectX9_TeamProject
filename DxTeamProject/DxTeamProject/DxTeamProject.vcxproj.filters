@@ -170,6 +170,7 @@
     </ClCompile>
     <ClCompile Include="PSOBB.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="MeshTile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -365,6 +366,7 @@
     </ClInclude>
     <ClInclude Include="PSOBB.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="MeshTile.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
