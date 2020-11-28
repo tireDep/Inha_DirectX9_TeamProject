@@ -1,120 +1,90 @@
 # Object_Start
 # ObjectName
-AutumnTree1
+Sphere1
 # FolderPath
-Resource/XFile/Background
+
 # FilePath
-AutumnTree_06.X
+
 # TxtPath
-autumn_texture.png
+
 # ObjectType
-14
+18
 # Scale
-0.01
-0.01
-0.01
+1
+1
+1
 # Rotate
 0
 0
 0
 # Translate
+0
+0.5
+0
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Sphere2
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+18
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+0
+0.5
+5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Sphere3
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+18
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+5
+0.5
+0
+# Color
+1
+1
 0
 1
-5
-# Color
-0
-0
-0
-0
-# Object_End
-
-# Object_Start
-# ObjectName
-SummerTree2
-# FolderPath
-Resource/XFile/Background
-# FilePath
-SummerTree_04.X
-# TxtPath
-summer_texture.png
-# ObjectType
-15
-# Scale
-0.01
-0.01
-0.01
-# Rotate
-0
-0
-33
-# Translate
-5
-0
-0
-# Color
-0
-0
-0
-0
-# Object_End
-
-# Object_Start
-# ObjectName
-WinterTree3
-# FolderPath
-Resource/XFile/Background
-# FilePath
-WinterTree_01.X
-# TxtPath
-winter_texture.png
-# ObjectType
-16
-# Scale
-0.01
-0.01
-0.01
-# Rotate
-0
-33
-0
-# Translate
-3
-0
--5
-# Color
-0
-0
-0
-0
-# Object_End
-
-# Object_Start
-# ObjectName
-AutumnTree9
-# FolderPath
-Resource/XFile/Background
-# FilePath
-AutumnTree_04.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-14
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--5
-0
-0
-# Color
-0
-0
-0
-0
 # Object_End
 

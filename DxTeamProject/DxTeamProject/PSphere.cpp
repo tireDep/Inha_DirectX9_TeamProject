@@ -65,6 +65,45 @@ void CPSphere::UpdateRotation(float duration, D3DXVECTOR3 point)
 	D3DXMatrixMultiply(&m_matWorld, &matRotation, &m_matWorld);
 }
 
+void CPSphere::Setup(const ST_MapData & mapData)
+{
+	m_strObjName = mapData.strObjName;
+
+	m_strFolder = mapData.strFolderPath;
+	m_strXFile = mapData.strXFilePath;
+	m_strTxtFile = mapData.strTxtPath;
+
+	m_ObjectType = mapData.objType;
+
+	D3DXVECTOR3 vScale, vRotate;
+	vScale = mapData.vScale;
+	vRotate = mapData.vRotate;
+	m_vPosition = mapData.vTranslate;
+
+	m_Color = mapData.dxColor;
+
+	m_fRadius = vScale.x;
+	m_fRadius = vScale.y;
+	m_fRadius = vScale.z;
+
+	Setup();
+
+	// ============================================================
+
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixScaling(&matS, vScale.x, vScale.y, vScale.z);
+
+	D3DXVECTOR3 v;
+	v.x = D3DXToRadian(vRotate.x);
+	v.y = D3DXToRadian(vRotate.y);
+	v.z = D3DXToRadian(vRotate.z);
+
+	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
+
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	m_matWorld = matS * matR * matT;
+}
+
 void CPSphere::Update(float duration)
 {
 	D3DXVECTOR3 linearforce;

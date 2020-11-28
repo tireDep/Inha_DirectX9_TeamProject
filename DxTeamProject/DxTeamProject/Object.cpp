@@ -197,20 +197,21 @@ void CObject::CreateObject(const ST_MapData & mapData)
 	}
 	break;
 
-	/*
 	case eSphere:
 	{
-		CSphere* sphere = new CSphere;
+		CPSphere* sphere = new CPSphere;
 		sphere->Setup(mapData);
 	}
 	break;
 
+	/*
 	case eCylinder:
 	{
 		CCylinder* cylinder = new CCylinder;
 		cylinder->Setup(mapData);
 	}
-	break;*/
+	break;
+	*/
 
 	case eATree:
 	case eSTree:
