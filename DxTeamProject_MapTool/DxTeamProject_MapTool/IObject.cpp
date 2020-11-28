@@ -38,7 +38,7 @@ void IObject::CreateObject(const ObjectType objType, int index)
 	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
 	{
 		ST_MapData mapData;
-		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
+		mapData.vScale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
 		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		// >> todo : translate 현 위치 중앙으로 받아오기

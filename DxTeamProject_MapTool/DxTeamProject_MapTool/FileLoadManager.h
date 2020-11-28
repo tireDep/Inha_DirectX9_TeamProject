@@ -9,6 +9,8 @@ struct ST_MapData;
 class CFileLoadManager : public CSingleton<CFileLoadManager>
 {
 private:
+	vector<int> m_vecFileIndex;
+
 	float m_fNowX;
 	float m_fNowZ;
 	float m_fAddNumX;
@@ -19,7 +21,9 @@ private:
 	void ReadMapData(string fileName);
 	void SaveMapData(string fileName);
 
+	void DoFileSave(int index);
 	void FileSave(ofstream& file, const ST_MapData& mapData);
+	void FileSave_Section(ofstream& file);
 
 	LPD3DXEFFECT LoadShader(const string fileName);
 
