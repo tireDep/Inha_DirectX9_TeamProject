@@ -268,7 +268,7 @@ bool CPSOBB::IsCollision(CPSOBB * pOBB1, CPSOBB * pOBB2)
 	return true;
 }
 
-void CPSOBB::OBBBOX_RENDER()
+void CPSOBB::Render()
 {
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTexture(0, NULL);
