@@ -118,55 +118,56 @@ void CObject::ReceiveEvent(ST_EVENT eventMsg)
 			m_isClicked = true;
 
 			// tmp Color change Need to modify...
-			if (m_Color == BLACK)
-				m_tmpColor = Color::Black;
-			else if (m_Color == WHITE)
-				m_tmpColor = Color::White;
-			else if (m_Color == RED)
-				m_tmpColor = Color::Red;
-			else if (m_Color == BLUE)
-				m_tmpColor = Color::Blue;
-			else if (m_Color == YELLOW)
-				m_tmpColor = Color::Yellow;
-			else if (m_Color == GREEN)
-				m_tmpColor = Color::Green;
-			else
-				m_tmpColor = Color::NONE;
-			switch (m_tmpColor)
-			{
-				case Color::Black:
-					SetMass(100);
-					SetElasticity(1.0f);
-					SetDrag(0.995f);
-					break;
-				case Color::White:
-					SetMass(0.001f);
-					SetElasticity(1.0f);
-					SetDrag(0.995f);
-					break;
-				case Color::Red:
-					SetMass(1.0f);
-					SetElasticity(1.0f);
-					SetDrag(0.995f);
-					break;
-				case Color::Blue:
-					SetMass(1.0f);
-					SetElasticity(1.0f);
-					SetDrag(0.995f);
-					break;
-				case Color::Yellow:
-					SetMass(1.0f);
-					SetElasticity(1.0f);
-					SetDrag(0.9999f);
-					break;
-				case Color::Green:
-					SetMass(1.0f);
-					SetElasticity(5.0f);
-					SetDrag(0.995f);
-					break;
-				default:
-					break;
-			}
+			this->ChangeObjectColor();
+			//if (m_Color == BLACK)
+			//	m_tmpColor = Color::Black;
+			//else if (m_Color == WHITE)
+			//	m_tmpColor = Color::White;
+			//else if (m_Color == RED)
+			//	m_tmpColor = Color::Red;
+			//else if (m_Color == BLUE)
+			//	m_tmpColor = Color::Blue;
+			//else if (m_Color == YELLOW)
+			//	m_tmpColor = Color::Yellow;
+			//else if (m_Color == GREEN)
+			//	m_tmpColor = Color::Green;
+			//else
+			//	m_tmpColor = Color::NONE;
+			//switch (m_tmpColor)
+			//{
+			//	case Color::Black:
+			//		SetMass(1000);
+			//		SetElasticity(1.0f);
+			//		SetDrag(0.995f);
+			//		break;
+			//	case Color::White:
+			//		SetMass(0.001f);
+			//		SetElasticity(1.0f);
+			//		SetDrag(0.995f);
+			//		break;
+			//	case Color::Red:
+			//		SetMass(1.0f);
+			//		SetElasticity(1.0f);
+			//		SetDrag(0.995f);
+			//		break;
+			//	case Color::Blue:
+			//		SetMass(1.0f);
+			//		SetElasticity(1.0f);
+			//		SetDrag(0.995f);
+			//		break;
+			//	case Color::Yellow:
+			//		SetMass(1.0f);
+			//		SetElasticity(1.0f);
+			//		SetDrag(0.9999f);
+			//		break;
+			//	case Color::Green:
+			//		SetMass(1.0f);
+			//		SetElasticity(5.0f);
+			//		SetDrag(0.995f);
+			//		break;
+			//	default:
+			//		break;
+			//}
 			ST_EVENT msg;
 			msg.eventType = EventType::eChangedColorEvent;
 			msg.ptrMessage = &m_Color;
@@ -222,5 +223,61 @@ void CObject::CreateObject(const ST_MapData & mapData)
 	}
 		break;
 
+	}
+}
+
+void CObject::ChangeObjectColor()
+{
+	if (m_Color == BLACK)
+		m_tmpColor = Color::Black;
+	else if (m_Color == WHITE)
+		m_tmpColor = Color::White;
+	else if (m_Color == RED)
+		m_tmpColor = Color::Red;
+	else if (m_Color == BLUE)
+		m_tmpColor = Color::Blue;
+	else if (m_Color == YELLOW)
+		m_tmpColor = Color::Yellow;
+	else if (m_Color == GREEN)
+		m_tmpColor = Color::Green;
+	else
+		m_tmpColor = Color::NONE;
+	switch (m_tmpColor)
+	{
+		case Color::Black:
+			SetMass(1000);
+			SetElasticity(1.0f);
+			SetDrag(0.995f);
+			break;
+		case Color::White:
+			SetMass(0.001f);
+			SetElasticity(1.0f);
+			SetDrag(0.995f);
+			break;
+		case Color::Red:
+			SetMass(1.0f);
+			SetElasticity(1.0f);
+			SetDrag(0.995f);
+			break;
+		case Color::Blue:
+			SetMass(1.0f);
+			SetElasticity(1.0f);
+			SetDrag(0.995f);
+			break;
+		case Color::Yellow:
+			SetMass(1.0f);
+			SetElasticity(1.0f);
+			SetDrag(0.9999f);
+			break;
+		case Color::Green:
+			SetMass(1.0f);
+			SetElasticity(5.0f);
+			SetDrag(0.995f);
+			break;
+		default:
+			SetMass(1.0f);
+			SetElasticity(1.0f);
+			SetDrag(0.995f);
+			break;
 	}
 }
