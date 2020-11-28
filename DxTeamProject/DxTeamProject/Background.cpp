@@ -72,6 +72,7 @@ void CBackground::Setup(ST_MapData setData)
 	// OBB Test
 	m_pOBB = new CPSOBB;
 	m_pOBB->Setup(*this);
+	g_pObjectManager->AddOBBbox(m_pOBB);
 }
 
 void CBackground::Render()
@@ -100,6 +101,4 @@ void CBackground::Render()
 	}
 
 	g_pD3DDevice->SetTexture(0, NULL);
-	// OBB Test
-	m_pOBB->OBBBOX_RENDER();
 }
