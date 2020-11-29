@@ -9,8 +9,6 @@ struct ST_MapData;
 class CFileLoadManager : public CSingleton<CFileLoadManager>
 {
 private:
-	vector<int> m_vecFileIndex;
-
 	float m_fNowX;
 	float m_fNowZ;
 	float m_fAddNumX;
@@ -21,7 +19,8 @@ private:
 	void ReadMapData(string fileName);
 	void SaveMapData(string fileName);
 
-	void DoFileSave(int index);
+	ST_MapData SetSaveData(int index);
+	void DoFileSave(ofstream& saveFile, ofstream& mapFile, ofstream& objFile, int index);
 	void FileSave(ofstream& file, const ST_MapData& mapData);
 	void FileSave_Section(ofstream& file);
 

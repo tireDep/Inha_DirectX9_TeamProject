@@ -47,7 +47,7 @@ void CFileLoadManager::ReadMapData(string fileName)
 	if (mapFile.is_open())
 	{
 		if(m_fNowX == -30 && g_pObjectManager->GetVecObject().size() != 0)
-			m_fNowX += m_fAddNumX; // object exist && first load
+			m_fNowX += m_fAddNumX * 2; // object exist && first load
 		else if (m_fNowX < m_fLimitNumX)
 			m_fNowX += m_fAddNumX;	// first load, load
 		else
@@ -151,8 +151,6 @@ void CFileLoadManager::ReadMapData(string fileName)
 	}
 
 	mapFile.close();
-
-	m_vecFileIndex.push_back(g_pObjectManager->GetVecObject().size());
 }
 
 void CFileLoadManager::SaveMapData(string fileName)
@@ -160,7 +158,6 @@ void CFileLoadManager::SaveMapData(string fileName)
 	ofstream saveFile;
 	saveFile.open(fileName.c_str(), ios::out | ios::binary);
 
-	// >> todo : 颇老 盒府(备开喊)?
 	ofstream mapFile;
 	mapFile.open("mapData.dat", ios::out | ios::binary);
 
@@ -170,119 +167,97 @@ void CFileLoadManager::SaveMapData(string fileName)
 	if (!mapFile.is_open() || !objFile.is_open() || !saveFile.is_open())
 		return;
 
-	if (m_vecFileIndex.size() == 0)
+	int saveNum = 0;
+	int halfGridNum = 15;
+
+	int minNumX = -halfGridNum, maxNumX = halfGridNum;
+	int minNumZ = -halfGridNum, maxNumZ = halfGridNum;
+	int maxIndex = g_pObjectManager->GetVecSize();
+
+	while (saveNum < maxIndex)
 	{
-		for (int j = 0; j < g_pObjectManager->GetVecObject().size(); j++)
+		for (int i = 0; i < maxIndex; i++)
 		{
-			// >> todo
-			// - GetReference vecObject
-			// - DoFileSave Funtion()
-			// - Renaming Function
-			// - client passing make(multimap etc..)
-			vector<IObject *> vecObject = g_pObjectManager->GetVecObject();
-			ST_MapData mapData;
-
-			mapData.strObjName = vecObject[j]->GetObjectName();
-
-			mapData.strFolderPath = vecObject[j]->GetFolderPath();
-			mapData.strXFilePath = vecObject[j]->GetXFilePath();
-			mapData.strTxtPath = vecObject[j]->GetXTxtPath();
-
-			mapData.objType = vecObject[j]->GetObjType();
-			mapData.vScale = vecObject[j]->GetScale();
-			mapData.vRotate = vecObject[j]->GetRotate();
-			mapData.vTranslate = vecObject[j]->GetTranslate();
-
-			mapData.dxColor = vecObject[j]->GetColor();
-
-			FileSave(saveFile, mapData);
-
-			switch (mapData.objType)
+			D3DXVECTOR3 vPos = g_pObjectManager->GetIObject(i).GetTranslate();
+			if (minNumX <= vPos.x && vPos.x <= maxNumX && minNumZ <= vPos.z && vPos.z <= maxNumZ)
 			{
-			case eBox:
-			case eSphere:
-			case eCylinder:
-			case eATree:
-			case eSTree:
-			case eWTree:
-				FileSave(objFile, mapData);
-				break;
+				DoFileSave(saveFile, mapFile, objFile, i);
+				saveNum++;
+			}
+		}
 
-			default:
-				FileSave(mapFile, mapData);
-				break;
-			} // << : switch
-			FileSave_Section(saveFile);
-			FileSave_Section(mapFile);
-			FileSave_Section(objFile);
-		} // >> : for_j
-
-	saveFile.close();
-	objFile.close();
-	mapFile.close();
-		return;
-	}
-
-	for (int i = 0; i < m_vecFileIndex.size(); i++)
-	{
-		for (int j = 0; j < m_vecFileIndex[i]; j++)
+		// >> Next map set
+		if (minNumX < m_fLimitNumX)
 		{
-			// >> todo
-			// - GetReference vecObject
-			// - DoFileSave Funtion()
-			vector<IObject *> vecObject = g_pObjectManager->GetVecObject();
-			ST_MapData mapData;
+			minNumX += m_fAddNumX;
+			maxNumX += m_fAddNumX;
+		}
+		else
+		{
+			minNumX = -halfGridNum;
+			maxNumX = halfGridNum;
+			minNumZ += m_fAddNumZ;
+			maxNumX += m_fAddNumZ;
+		}
 
-			mapData.strObjName = vecObject[j]->GetObjectName();
+		FileSave_Section(saveFile);
+		FileSave_Section(mapFile);
+		FileSave_Section(objFile);
+		// << Next map set
 
-			mapData.strFolderPath = vecObject[j]->GetFolderPath();
-			mapData.strXFilePath = vecObject[j]->GetXFilePath();
-			mapData.strTxtPath = vecObject[j]->GetXTxtPath();
-
-			mapData.objType = vecObject[j]->GetObjType();
-			mapData.vScale = vecObject[j]->GetScale();
-			mapData.vRotate = vecObject[j]->GetRotate();
-			mapData.vTranslate = vecObject[j]->GetTranslate();
-
-			mapData.dxColor = vecObject[j]->GetColor();
-
-			FileSave(saveFile, mapData);
-
-			switch (mapData.objType)
-			{
-			case eBox:
-			case eSphere:
-			case eCylinder:
-			case eATree:
-			case eSTree:
-			case eWTree:
-				FileSave(objFile, mapData);
-				break;
-
-			default:
-				FileSave(mapFile, mapData);
-				break;
-			} // << : switch
-			FileSave_Section(saveFile);
-			FileSave_Section(mapFile);
-			FileSave_Section(objFile);
-		} // >> : for_j
-		
-	} // >> : for_i
+	} // >> : while
 
 	saveFile.close();
 	objFile.close();
 	mapFile.close();
 }
 
-void CFileLoadManager::DoFileSave(int index)
+ST_MapData CFileLoadManager::SetSaveData(int index)
 {
-	// todo something
+	IObject& vecObject = g_pObjectManager->GetIObject(index);
+	ST_MapData mapData;
+
+	mapData.strObjName = vecObject.GetObjectName();
+
+	mapData.strFolderPath = vecObject.GetFolderPath();
+	mapData.strXFilePath = vecObject.GetXFilePath();
+	mapData.strTxtPath = vecObject.GetXTxtPath();
+
+	mapData.objType = vecObject.GetObjType();
+	mapData.vScale = vecObject.GetScale();
+	mapData.vRotate = vecObject.GetRotate();
+	mapData.vTranslate = vecObject.GetTranslate();
+
+	mapData.dxColor = vecObject.GetColor();
+
+	return mapData;
+}
+
+void CFileLoadManager::DoFileSave(ofstream & saveFile, ofstream & mapFile, ofstream & objFile, int index)
+{
+	ST_MapData mapData = SetSaveData(index);
+	FileSave(saveFile, mapData);
+
+	switch (mapData.objType)
+	{
+	case eBox:
+	case eSphere:
+	case eCylinder:
+	case eATree:
+	case eSTree:
+	case eWTree:
+		FileSave(objFile, mapData);
+		break;
+
+	default:
+		FileSave(mapFile, mapData);
+		break;
+	} // << : switch
 }
 
 void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
 {
-	file << "# Object_Start" << endl << endl;
+	file << "# Object_Start" << endl;
 
 	file << "# ObjectName" << endl;
 	file << mapData.strObjName << endl;
@@ -351,6 +326,8 @@ bool CFileLoadManager::CheckDataName(TCHAR * openFileName, string& realName)
 
 void CFileLoadManager::Setup()
 {
+	// m_vecFileIndex.push_back(0);
+
 	m_fNowX = -30;
 	m_fNowZ = 0;
 	m_fAddNumX = 30;
@@ -536,6 +513,6 @@ bool CFileLoadManager::FileLoad_Shader(string szFolder, string szFile, LPD3DXEFF
 
 void CFileLoadManager::SetIndexNumZero()
 {
-	m_fNowX = 0;
+	m_fNowX = -30;
 	m_fNowZ = 0;
 }

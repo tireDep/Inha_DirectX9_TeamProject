@@ -25,5 +25,8 @@ public:
 	void CheckSameName();
 
 	vector<IObject *> GetVecObject();
+
+	IObject& GetIObject(int index);
+	int GetVecSize();
 };
 

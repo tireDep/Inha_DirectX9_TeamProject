@@ -94,3 +94,13 @@ vector<IObject*> CObjectManager::GetVecObject()
 {
 	return m_vecObject;
 }
+
+IObject & CObjectManager::GetIObject(int index)
+{
+	return *m_vecObject[index];
+}
+
+int CObjectManager::GetVecSize()
+{
+	return m_vecObject.size();
+}
