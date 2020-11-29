@@ -5,14 +5,24 @@
 #include "ObjectManager.h"
 #include "CHeight.h"
 
-CObjectManager::CObjectManager()
+CObjectManager::CObjectManager() : 
+	m_frustum(NULL),
+	m_thread(NULL)
 {
+	InitializeCriticalSection(&m_cs);
 }
 
 CObjectManager::~CObjectManager()
 {
 	// >> mapTest
 	RemoveMap();
+
+	if (m_thread != NULL)
+	{
+		if (m_thread->joinable())
+			m_thread->join();
+	}
+	SafeDelete(m_thread);
 }
 
 void CObjectManager::AddObject(CObject * pObject)
@@ -85,7 +95,7 @@ void CObjectManager::AddMap()
 {
 	m_mapObject.insert(pair<vector<IObject*>, bool>(m_vecIObject, false));
 
-	// m_vecIObject.clear();
+	m_vecIObject.clear();
 	// >> 테스트 완료 후 적용
 }
 
@@ -97,7 +107,7 @@ void CObjectManager::RemoveMap()
 		for (int i = 0; i < it->first.size(); i++)
 		{
 			if (&it->first != NULL)
-				delete it->first[i];
+				SafeDelete(it->first[i]);
 		}
 	} // >> : for
 
@@ -128,6 +138,57 @@ IObject & CObjectManager::GetIObject(int mapIndex, int vectorIndex)
 
 		return *it->first[vectorIndex];
 	}
+}
+
+void CObjectManager::UpdateNewMap(CFrustum * frustum)
+{
+	// todo : thread
+	m_frustum = frustum;
+	if (m_thread == NULL)
+	{
+		m_thread = new thread(&CObjectManager::Thread_CalcNewMap, this);
+		cout << "thread" << endl;
+	}
+	else
+	{
+		if (m_thread->joinable()) 
+			m_thread->join();
+
+		m_thread = NULL;
+		cout << "threadEnd" << endl;
+	}
+}
+
+void CObjectManager::Thread_CalcNewMap()
+{
+	EnterCriticalSection(&m_cs);
+	bool check = false;
+	multimap<vector<IObject*>, bool>::iterator it;
+	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+	{
+		check = false;
+
+		for (int i = 0; i < it->first.size(); i++)
+		{
+			float radius = 0;
+			radius = it->first[0]->GetScale().x > it->first[0]->GetScale().y ? it->first[0]->GetScale().x : it->first[0]->GetScale().y;
+			radius = radius > it->first[0]->GetScale().z ? radius : it->first[0]->GetScale().z;
+
+			if (m_frustum->IsInFrustum(it->first[i]->GetTranslate(), radius))
+			{
+				it->second = true;
+				check = true;
+				// >> todo
+				// 판정 주변 인덱스 true, 아니면 false 처리
+				// 맵 세로, 가로 크기 알아야 함
+				// 3*3 정도 판정?
+			}
+		}
+
+		if (!check)
+			it->second = false;
+	}
+	LeaveCriticalSection(&m_cs);
 }
 
 void CObjectManager::Destroy()
@@ -180,14 +241,20 @@ vector<CObject*> CObjectManager::GetVecObject()
 void CObjectManager::Render()
 {
 	// << mapTest
-	multimap<vector<IObject*>, bool>::iterator it;
-	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+	if (g_gameManager->GetGridMapMode())
 	{
-		//if (it->second == false)
-		//	continue;
+		multimap<vector<IObject*>, bool>::iterator it;
+		for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+		{
+			if (it->second == false)
+			{
+				// cout << "notRender" << endl;
+				continue;
+			}
 
-		for (int i = 0; i < it->first.size(); i++)
-			it->first[i]->Render();
+			for (int i = 0; i < it->first.size(); i++)
+				it->first[i]->Render();
+		}
 	}
 	// >> mapTest
 

@@ -1,9 +1,16 @@
 #pragma once
 
+// >> mapTest
+#include <process.h>
+#include <thread>
+#include <Windows.h>
+#include "Frustum.h"
+
 class IObject;
 class CObject;
 class CRay;
 class CPSOBB;
+
 #define		g_pObjectManager CObjectManager::GetInstance()
 
 class CObjectManager
@@ -16,6 +23,11 @@ private:
 
 	// >> mapTest
 	multimap<vector<IObject*>, bool> m_mapObject;
+	CFrustum* m_frustum;
+	thread* m_thread;
+	CRITICAL_SECTION m_cs;
+	bool m_isThreadRun;
+	bool m_IsIn;
 
 public:
 	void AddObject(CObject* pObject);
@@ -44,6 +56,8 @@ public:
 	void RemoveMap();
 	int GetMapVecSize(int mapIndex);
 	IObject& GetIObject(int mapIndex, int vectorIndex);
+	void UpdateNewMap(CFrustum* frustum);
+	void Thread_CalcNewMap();
 
 private:
 	void Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos);

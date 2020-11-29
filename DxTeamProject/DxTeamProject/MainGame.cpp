@@ -27,7 +27,7 @@ CMainGame::CMainGame() :
 	m_pText(NULL),
 	m_pCharacter(NULL),
 	m_pLight(NULL),
-	m_GridMap(NULL),
+	// m_GridMap(NULL),
 	/// 이 아래는 지울 수도 있는 선언
 	m_Xfile(NULL),
 	m_pHeightMap(NULL),
@@ -47,7 +47,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pUI);
 	SafeDelete(m_pText);
 	SafeDelete(m_pLight);
-	SafeDelete(m_GridMap);
+	// SafeDelete(m_GridMap);
 	/// 이 아래는 지울 수도 있는 선언
 	SafeDelete(m_Xfile);
 	SafeDelete(m_pHeightMap);
@@ -95,8 +95,8 @@ void CMainGame::Setup()
 	m_pLight->Setup();
 	//m_pLight->Setup(D3DXVECTOR3(1, 0, 0)); // sun light vector
 
-	m_GridMap = new CGridMap;
-	m_GridMap->Setup();
+	// m_GridMap = new CGridMap;
+	// m_GridMap->Setup();
 	m_pPrevFrustum.Setup();
 	m_pNowFrustum.Setup();
 
@@ -205,13 +205,33 @@ void CMainGame::Update()
 		m_pCharacter->UpdateRayYCheck(*m_pMeshTile);
 	}
 
+	// if (g_gameManager->GetGridMapMode())
+	// {
+	// 	m_pPrevFrustum = m_pNowFrustum;
+	// 	m_pNowFrustum.Update();
+	// 	if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum))
+	// 	{
+	// 		m_GridMap->CalcNewMap(&m_pNowFrustum);
+	// 	}
+	// }
+
 	if (g_gameManager->GetGridMapMode())
 	{
 		m_pPrevFrustum = m_pNowFrustum;
 		m_pNowFrustum.Update();
-		if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum))
+
+		static D3DXVECTOR3 lastPlayerPos = D3DXVECTOR3(0, 0, 0);
+		D3DXVECTOR3 tempPos = m_pCharacter->GetPosition();
+		float posCheck = 0.5f;
+
+		// >> todo : 판정 변경
+		if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum) 
+		 || fabs(lastPlayerPos.x - tempPos.x) >= posCheck 
+		 || fabs(lastPlayerPos.y - tempPos.y) >= posCheck 
+		 || fabs(lastPlayerPos.z - tempPos.z) >= posCheck)
 		{
-			m_GridMap->CalcNewMap(&m_pNowFrustum);
+			lastPlayerPos = tempPos;
+			g_pObjectManager->UpdateNewMap(&m_pNowFrustum);
 		}
 	}
 
@@ -266,10 +286,10 @@ void CMainGame::Render()
 
 	g_pObjectManager->Render();
 
-	if (g_gameManager->GetGridMapMode())
-	{
-		m_GridMap->Render();
-	}
+	// if (g_gameManager->GetGridMapMode())
+	// {
+	// 	m_GridMap->Render();
+	// }
 
 	 if (m_pSkinnedMesh)
 	 	m_pSkinnedMesh->Render(NULL);

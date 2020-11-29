@@ -196,12 +196,12 @@ void CFileLoadManager::SaveMapData(string fileName)
 			minNumX = -halfGridNum;
 			maxNumX = halfGridNum;
 			minNumZ += m_fAddNumZ;
-			maxNumX += m_fAddNumZ;
+			maxNumZ += m_fAddNumZ;
 		}
 
+		// << Next map set
 		FileSave_Section(saveFile);
 		FileSave_Section(mapFile);
-		// << Next map set
 
 	} // >> : while
 

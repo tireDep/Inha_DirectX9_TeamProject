@@ -20,5 +20,8 @@ public:
 	bool IsInFrustum(D3DXVECTOR3 pos);
 
 	bool IsUpdateCheck(CFrustum const &prevFrustum);
+
+	// >> mapTest
+	bool IsInFrustum(D3DXVECTOR3 pos, float radius);
 };
 

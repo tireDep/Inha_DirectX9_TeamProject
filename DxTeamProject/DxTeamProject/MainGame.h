@@ -30,7 +30,7 @@ private:
 	CLight*		m_pLight;
 	CFrustum	m_pPrevFrustum;
 	CFrustum	m_pNowFrustum;
-	CGridMap*	m_GridMap;
+	// CGridMap*	m_GridMap;
 	CSkinnedMesh* m_pSkinnedMesh;
 	/// 이 아래는 지울 수도 있는 선언
 	CXfile*		m_Xfile;
