@@ -8,6 +8,8 @@
 #define StrFilePath(path, folder, file) { path = string(folder) + "/" + string(file); }
 #define ErrMessageBox(msg, type) { MessageBoxA(g_hWnd, string(msg).c_str(), string(type).c_str(), MB_OK); }
 
+#define nGridSize 30
+
 LPD3DXEFFECT CFileLoadManager::LoadShader(const string fileName)
 {
 	LPD3DXEFFECT ret = NULL;
@@ -46,7 +48,7 @@ void CFileLoadManager::ReadMapData(string fileName)
 
 	if (mapFile.is_open())
 	{
-		if(m_fNowX == -30 && g_pObjectManager->GetVecObject().size() != 0)
+		if(m_fNowX == -nGridSize && g_pObjectManager->GetVecObject().size() != 0)
 			m_fNowX += m_fAddNumX * 2; // object exist && first load
 		else if (m_fNowX < m_fLimitNumX)
 			m_fNowX += m_fAddNumX;	// first load, load
@@ -161,14 +163,11 @@ void CFileLoadManager::SaveMapData(string fileName)
 	ofstream mapFile;
 	mapFile.open("mapData.dat", ios::out | ios::binary);
 
-	ofstream objFile;
-	objFile.open("objData.dat", ios::out | ios::binary);
-
-	if (!mapFile.is_open() || !objFile.is_open() || !saveFile.is_open())
+	if (!mapFile.is_open() || !saveFile.is_open())
 		return;
 
 	int saveNum = 0;
-	int halfGridNum = 15;
+	int halfGridNum = nGridSize * 0.5f;
 
 	int minNumX = -halfGridNum, maxNumX = halfGridNum;
 	int minNumZ = -halfGridNum, maxNumZ = halfGridNum;
@@ -181,7 +180,7 @@ void CFileLoadManager::SaveMapData(string fileName)
 			D3DXVECTOR3 vPos = g_pObjectManager->GetIObject(i).GetTranslate();
 			if (minNumX <= vPos.x && vPos.x <= maxNumX && minNumZ <= vPos.z && vPos.z <= maxNumZ)
 			{
-				DoFileSave(saveFile, mapFile, objFile, i);
+				DoFileSave(saveFile, mapFile, i);
 				saveNum++;
 			}
 		}
@@ -202,13 +201,11 @@ void CFileLoadManager::SaveMapData(string fileName)
 
 		FileSave_Section(saveFile);
 		FileSave_Section(mapFile);
-		FileSave_Section(objFile);
 		// << Next map set
 
 	} // >> : while
 
 	saveFile.close();
-	objFile.close();
 	mapFile.close();
 }
 
@@ -233,26 +230,11 @@ ST_MapData CFileLoadManager::SetSaveData(int index)
 	return mapData;
 }
 
-void CFileLoadManager::DoFileSave(ofstream & saveFile, ofstream & mapFile, ofstream & objFile, int index)
+void CFileLoadManager::DoFileSave(ofstream & saveFile, ofstream & mapFile, int index)
 {
 	ST_MapData mapData = SetSaveData(index);
 	FileSave(saveFile, mapData);
-
-	switch (mapData.objType)
-	{
-	case eBox:
-	case eSphere:
-	case eCylinder:
-	case eATree:
-	case eSTree:
-	case eWTree:
-		FileSave(objFile, mapData);
-		break;
-
-	default:
-		FileSave(mapFile, mapData);
-		break;
-	} // << : switch
+	FileSave(mapFile, mapData);
 }
 
 void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
@@ -326,12 +308,10 @@ bool CFileLoadManager::CheckDataName(TCHAR * openFileName, string& realName)
 
 void CFileLoadManager::Setup()
 {
-	// m_vecFileIndex.push_back(0);
-
-	m_fNowX = -30;
+	m_fNowX = -nGridSize;
 	m_fNowZ = 0;
-	m_fAddNumX = 30;
-	m_fAddNumZ = -30;
+	m_fAddNumX = nGridSize;
+	m_fAddNumZ = -nGridSize;
 	// >> default set
 
 	m_fLimitNumX = 0;
@@ -513,6 +493,6 @@ bool CFileLoadManager::FileLoad_Shader(string szFolder, string szFile, LPD3DXEFF
 
 void CFileLoadManager::SetIndexNumZero()
 {
-	m_fNowX = -30;
+	m_fNowX = -nGridSize;
 	m_fNowZ = 0;
 }

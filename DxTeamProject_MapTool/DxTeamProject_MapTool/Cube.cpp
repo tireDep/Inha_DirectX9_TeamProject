@@ -116,16 +116,14 @@ void CCube::Setup()
 
 void CCube::Update()
 {
-	float fSpeed = 0.001f;
+	float fSpeed = 0.005f;
 	if (GetKeyState(VK_LEFT) & 0X8000)
 	{
 		m_fRotY -= fSpeed;
-		// m_vPosition -= (D3DXVECTOR3(1, 0, 0) * fSpeed);
 	}
 	if (GetKeyState(VK_RIGHT) & 0X8000)
 	{
 		m_fRotY += fSpeed;
-		// m_vPosition += (D3DXVECTOR3(1, 0, 0) * fSpeed);
 	}
 
 	if (GetKeyState(VK_UP) & 0X8000)

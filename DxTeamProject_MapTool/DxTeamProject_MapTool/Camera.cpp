@@ -23,8 +23,6 @@ void CCamera::Setup(D3DXVECTOR3 * pvTarget)
 {
 	m_pvTarget = pvTarget;
 
-	
-
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
 
