@@ -143,6 +143,10 @@ void CFileLoadManager::LoadData(string path)
 
 			else if (strstr(readData.c_str(), "# Object_End"))
 				IObject::CreateObject(mapData);
+
+			// >> mapTest
+			else if (strstr(readData.c_str(), "# Section"))
+				g_pObjectManager->AddMap();
 		}
 	}
 
@@ -255,11 +259,6 @@ bool CFileLoadManager::FileLoad_MapData()
 {
 	string filePath = "Resource/MapData";
 	string file = "mapData.dat";
-	StrFilePath(filePath, filePath, file);
-	LoadData(filePath);
-
-	filePath = "Resource/MapData";
-	file = "objData.dat";
 	StrFilePath(filePath, filePath, file);
 	LoadData(filePath);
 

@@ -11,6 +11,8 @@ CObjectManager::CObjectManager()
 
 CObjectManager::~CObjectManager()
 {
+	// >> mapTest
+	RemoveMap();
 }
 
 void CObjectManager::AddObject(CObject * pObject)
@@ -79,6 +81,55 @@ void CObjectManager::RemoveObject(CPSOBB * OBBBox)
 	}
 }
 
+void CObjectManager::AddMap()
+{
+	m_mapObject.insert(pair<vector<IObject*>, bool>(m_vecIObject, false));
+
+	// m_vecIObject.clear();
+	// >> 테스트 완료 후 적용
+}
+
+void CObjectManager::RemoveMap()
+{
+	multimap<vector<IObject*>, bool>::iterator it;
+	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+	{
+		for (int i = 0; i < it->first.size(); i++)
+		{
+			if (&it->first != NULL)
+				delete it->first[i];
+		}
+	} // >> : for
+
+	m_mapObject.clear();
+}
+
+int CObjectManager::GetMapVecSize(int mapIndex)
+{
+	int num = 0;
+	multimap<vector<IObject*>, bool>::iterator it;
+	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+	{
+		if (mapIndex != num)
+			continue;
+
+		return it->first.size();
+	}
+}
+
+IObject & CObjectManager::GetIObject(int mapIndex, int vectorIndex)
+{
+	int num = 0;
+	multimap<vector<IObject*>, bool>::iterator it;
+	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+	{
+		if (mapIndex != num)
+			continue;
+
+		return *it->first[vectorIndex];
+	}
+}
+
 void CObjectManager::Destroy()
 {
 	for (int i = 0; i < m_vecObject.size(); i++)
@@ -128,10 +179,22 @@ vector<CObject*> CObjectManager::GetVecObject()
 
 void CObjectManager::Render()
 {
-	//for (int i = 0; i < m_vecIObject.size(); i++)
-	//{
-	//	m_vecIObject[i]->Render();
-	//}
+	// << mapTest
+	multimap<vector<IObject*>, bool>::iterator it;
+	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+	{
+		//if (it->second == false)
+		//	continue;
+
+		for (int i = 0; i < it->first.size(); i++)
+			it->first[i]->Render();
+	}
+	// >> mapTest
+
+	// for (int i = 0; i < m_vecIObject.size(); i++)
+	// {
+	// 	m_vecIObject[i]->Render();
+	// }
 
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{

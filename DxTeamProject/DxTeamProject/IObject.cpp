@@ -46,26 +46,5 @@ void IObject::CreateObject(const ST_MapData & mapData)
 	default:
 		CObject::CreateObject(mapData);
 		break;
-
-	/*case eBox:
-	{
-		CBox* box = new CBox;
-		box->Setup(mapData);
-	}
-	break;
-
-	case eSphere:
-	{
-		CSphere* sphere = new CSphere;
-		sphere->Setup(mapData);
-	}
-	break;
-
-	case eCylinder:
-	{
-		CCylinder* cylinder = new CCylinder;
-		cylinder->Setup(mapData);
-	}
-	break;*/
 	}
 }

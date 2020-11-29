@@ -13,6 +13,10 @@ private:
 	vector<CObject *> m_vecObject;
 	vector<IObject *> m_vecIObject;
 	vector<CPSOBB *> m_vecOBBBox;
+
+	// >> mapTest
+	multimap<vector<IObject*>, bool> m_mapObject;
+
 public:
 	void AddObject(CObject* pObject);
 	void RemoveObject(CObject* pObject);
@@ -34,6 +38,12 @@ public:
 
 	vector<CObject *> GetVecObject();
 	vector<IObject *> GetVecIObject();
+
+	// >> mapTest
+	void AddMap();
+	void RemoveMap();
+	int GetMapVecSize(int mapIndex);
+	IObject& GetIObject(int mapIndex, int vectorIndex);
 
 private:
 	void Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos);
