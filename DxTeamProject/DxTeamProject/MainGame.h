@@ -17,6 +17,8 @@ class CColliderObject;
 class CSkinnedMesh;
 // Ray y check
 class MeshTile;
+// Rotation Test
+class CTestRigidBody;
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
 class CMainGame
@@ -37,6 +39,8 @@ private:
 	CHeight* m_pHeightMap;
 	// Ray y check
 	MeshTile* m_pMeshTile;
+	// Rotation Test
+	CTestRigidBody* m_pRigidBody;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 public:
