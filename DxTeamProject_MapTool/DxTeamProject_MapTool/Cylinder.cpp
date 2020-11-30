@@ -23,7 +23,7 @@ void CCylinder::Setup()
 void CCylinder::Setup(ST_MapData setData)
 {
 	CObject::Setup(setData);
-	Setup();
+	D3DXCreateCylinder(g_pD3DDevice, m_vScale.x, m_vScale.y, m_vScale.z, 10, 10, &m_pMesh, NULL);
 }
 
 void CCylinder::Update()

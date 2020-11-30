@@ -23,7 +23,7 @@ void CSphere::Setup()
 void CSphere::Setup(ST_MapData setData)
 {
 	CObject::Setup(setData);
-	Setup();
+	D3DXCreateSphere(g_pD3DDevice, m_vScale.x, 10, 10, &m_pMesh, NULL);
 }
 
 void CSphere::Update()
