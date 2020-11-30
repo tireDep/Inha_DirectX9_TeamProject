@@ -18,6 +18,10 @@
 #include "CHeight.h"
 // Ray y check
 #include "MeshTile.h"
+// Rotation Test
+#include "TestForce.h"
+#include "TestAngleSet.h"
+#include "TestRigidBody.h"
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
 
@@ -34,6 +38,8 @@ CMainGame::CMainGame() :
 	m_pSkinnedMesh(NULL)
 	// Ray y check
 	, m_pMeshTile(NULL)
+	// Rotation Test
+	, m_pRigidBody(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 
@@ -56,6 +62,8 @@ CMainGame::~CMainGame()
 	g_pDeviceManager->Destroy();
 	// Ray y check
 	SafeDelete(m_pMeshTile);
+	// Rotation Test
+	SafeDelete(m_pRigidBody);
 	/// 릴리즈 버전을 위한 주석처리
 	//SafeDelete(m_pSm);
 }
@@ -138,6 +146,9 @@ void CMainGame::Setup()
 	m_pMeshTile = new MeshTile;
 	m_pMeshTile->Setup();
 
+	// Rotation Test
+	m_pRigidBody = new CTestRigidBody;
+	m_pRigidBody->Setup();
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
@@ -243,6 +254,9 @@ void CMainGame::Update()
 	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());					// 2D Physics
 	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
 
+	// Rotation Test
+	m_pRigidBody->Update(g_pTimeManager->GetElapsedTime());
+
 	/// 릴리즈 버전을 위한 주석처리
 	// 민종씨 코드
 	//static int count = 0;
@@ -318,6 +332,10 @@ void CMainGame::Render()
 	// Ray y check
 	if (m_pMeshTile)
 		m_pMeshTile->Render();
+
+	// Rotation Test
+	if (m_pRigidBody)
+		m_pRigidBody->Render();
 
 	/// 릴리즈 버전을 위한 주석처리
 	//if (m_pParticleWorld)
