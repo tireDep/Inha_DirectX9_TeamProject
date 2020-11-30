@@ -28,5 +28,7 @@ public:
 
 	IObject& GetIObject(int index);
 	int GetVecSize();
+
+	void SetSelectFalse();
 };
 

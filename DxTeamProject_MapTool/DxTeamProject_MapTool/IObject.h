@@ -14,7 +14,7 @@ protected:
 	Synthesize_Add_Ref(ID3DXBuffer*, m_adjBuffer, AdjBuffer);
 
 	Synthesize(DWORD, m_numMtrls, NumMtrl);
-	Synthesize(vector<D3DMATERIAL9*>, m_vecMtrls, VecMtrls);
+	Synthesize(vector<D3DMATERIAL9>, m_vecMtrls, VecMtrls);
 	Synthesize(vector<IDirect3DTexture9*>, m_vecTextures, VecTexture);
 
 	Synthesize(string, m_strObjName, ObjectName);
@@ -30,6 +30,7 @@ protected:
 	Synthesize(D3DXVECTOR3, m_vTranslate, Translate);
 
 	Synthesize(bool, m_isClick, Click);
+	Synthesize(bool, m_isPick, Pick);
 
 	Synthesize(D3DXCOLOR, m_dxColor, Color);
 
@@ -42,7 +43,7 @@ public:
 	virtual void Setup() = 0;
 	virtual void Update() = 0;
 	// ray
-	virtual void Update(CRay * ray) = 0;
+	virtual void Update(CRay * ray);
 	virtual void Render() = 0;
 
 	virtual void SetDiffScale(D3DXVECTOR3 set) = 0;

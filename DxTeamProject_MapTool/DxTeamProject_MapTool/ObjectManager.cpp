@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "IObject.h"
 #include "ObjectManager.h"
+#include "ImguiClass.h"
 #include "Ray.h"
 
 void CObjectManager::AddObject(IObject * pObject)
@@ -38,7 +39,8 @@ void CObjectManager::Destroy()
 	IObject::SetRefCnt(0);
 	m_sameNum = 0;
 	g_pFileLoadManager->SetIndexNumZero();
-
+	CImguiClass::m_nowSelectindex = -1;
+	CImguiClass::m_nowSelectindex = 0;
 }
 
 void CObjectManager::Update()
@@ -49,6 +51,10 @@ void CObjectManager::Update()
 
 void CObjectManager::Update(CRay * ray)
 {
+	// todo
+	// 피킹 오브젝트 선택 판별
+	// 카메라랑 가장 가까운 위치 선택?
+	
 	for (int i = 0; i < m_vecObject.size(); i++)
 		m_vecObject[i]->Update(ray);
 }
@@ -103,4 +109,13 @@ IObject & CObjectManager::GetIObject(int index)
 int CObjectManager::GetVecSize()
 {
 	return m_vecObject.size();
+}
+
+void CObjectManager::SetSelectFalse()
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		m_vecObject[i]->SetClick(false);
+		m_vecObject[i]->SetPick(false);
+	}
 }

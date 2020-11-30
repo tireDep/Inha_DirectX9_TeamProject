@@ -106,20 +106,32 @@ void CToolMain::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	m_pCamera->WndProc(hWnd, msg, wParam, lParam);
 
-	switch (msg)	
+	switch (msg)
 	{
-		case WM_LBUTTONDOWN:
-			{
-				CRay r = CRay::RayAtWorldSpace(LOWORD(lParam), HIWORD(lParam));
-				m_pRay->SetOrigin(r.GetOrigin());
-				m_pRay->SetDirection(r.GetDirection());
-			}
-			break;
+	case WM_LBUTTONDOWN:
+	{
+		CRay r = CRay::RayAtWorldSpace(LOWORD(lParam), HIWORD(lParam));
+		m_pRay->SetOrigin(r.GetOrigin());
+		m_pRay->SetDirection(r.GetDirection());
+	}
+	break;
 
-		case WM_KEYDOWN:
-			if (wParam == VK_DELETE)
-				g_pObjectManager->RemoveClickedObj();
-			break;
+	case WM_RBUTTONDOWN:
+		CImguiClass::m_nowSelectindex = -1;
+		CImguiClass::m_prevSelectIndex = 0;
+		m_pRay->SetOrigin(D3DXVECTOR3(9999, 9999, 9999));
+		m_pRay->SetDirection(D3DXVECTOR3(0, 0, 0));
+		g_pObjectManager->SetSelectFalse();
+		break;
+
+	case WM_KEYDOWN:
+		if (wParam == VK_DELETE)
+		{
+			g_pObjectManager->RemoveClickedObj();
+			CImguiClass::m_nowSelectindex = -1;
+			CImguiClass::m_prevSelectIndex = 0;
+		}
+		break;
 	}
 }
 

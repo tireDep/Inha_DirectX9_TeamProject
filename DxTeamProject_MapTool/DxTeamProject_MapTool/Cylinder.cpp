@@ -32,24 +32,7 @@ void CCylinder::Update()
 
 void CCylinder::Update(CRay * ray)
 {
-#ifdef _DEBUG
-	D3DXVECTOR3* pVertices;
-
-	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
-	D3DXVECTOR3 m_vMin, m_vMax;
-	D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
-	// later.. rotation add
-	m_vMin += m_vTranslate;				m_vMax += m_vTranslate;
-
-	if (D3DXBoxBoundProbe(&m_vMin, &m_vMax, &ray->GetOrigin(), &ray->GetDirection()) == true)
-	{
-		cout << "Picked" << endl;
-	}
-	else
-	{
-	}
-	m_pMesh->UnlockVertexBuffer();
-#endif // _DEBUG
+	IObject::Update(ray);
 }
 
 void CCylinder::Render()
