@@ -12,6 +12,8 @@ CTestRigidBody::CTestRigidBody()
 	, m_vRotationInertia(39.6f, 39.6f, 12.5f)
 	, m_vTorque(0, 0, 0)
 	, m_isForceApplied(true)
+	, m_fElasticity(1.0f)
+	, m_fBoundingSphere(0.68f)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	ZeroMemory(&m_stMtl, sizeof(D3DMATERIAL9));
@@ -56,8 +58,8 @@ CTestAngleSet CTestRigidBody::getCurrentOrientation()
 void CTestRigidBody::Setup()
 {
 	D3DXCreateBox(g_pD3DDevice, 1, 1, 1, &m_pMesh, NULL);
-	sumForces.SetForceVector(D3DXVECTOR3(3.0f, 0.0f, 0.0f));
-	sumForces.SetForceLocation(D3DXVECTOR3(0.0f, 0.0f, -30.0f));
+	//sumForces.SetForceVector(D3DXVECTOR3(3.0f, 0.0f, 0.0f));
+	//sumForces.SetForceLocation(D3DXVECTOR3(0.0f, 0.0f, -30.0f));
 	m_stMtl.Ambient = GRAY;
 	m_stMtl.Diffuse = GRAY;
 	m_stMtl.Specular = GRAY;

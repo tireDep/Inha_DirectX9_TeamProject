@@ -19,6 +19,7 @@ class CSkinnedMesh;
 class MeshTile;
 // Rotation Test
 class CTestRigidBody;
+class CTestCollision;
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
 class CMainGame
@@ -40,7 +41,9 @@ private:
 	// Ray y check
 	MeshTile* m_pMeshTile;
 	// Rotation Test
+	//CTestRigidBody* m_pRigidBody;
 	CTestRigidBody* m_pRigidBody;
+	vector<CTestRigidBody*> vecRigidBody;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 public:
@@ -51,5 +54,8 @@ public:
 	void Setup();
 	void Update();
 	void Render();
+	
+	// Rotation Test
+	void HandleOverlapping(float timeIncrement, int tiger1, int tiger2, CTestCollision& theCollision);
 	/// 릴리즈 버전을 위한 주석처리
 };
