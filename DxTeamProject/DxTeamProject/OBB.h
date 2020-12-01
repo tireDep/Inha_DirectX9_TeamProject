@@ -18,6 +18,7 @@ public:
 	void SetupCube(ST_PC_VERTEX v1, ST_PC_VERTEX v2,float CubeSize);
 	void SetUpXFile(D3DXVECTOR3 &vMin, D3DXVECTOR3 &vMax);
 	void Update(D3DXMATRIXA16 *pmatWorld);
+	void SetupTile(D3DXVECTOR3& vMin, D3DXVECTOR3& vMax, D3DXVECTOR3 xfileY ,float x, float z);
 	static bool IsCollision(COBB * pOBB1, COBB* pOBB2);
 	void OBBBOX_RENDER(D3DXCOLOR c);
 };

@@ -258,10 +258,10 @@ void CObjectManager::Render()
 	}
 	// >> mapTest
 
-	// for (int i = 0; i < m_vecIObject.size(); i++)
-	// {
-	// 	m_vecIObject[i]->Render();
-	// }
+	for (int i = 0; i < m_vecIObject.size(); i++)
+	{
+		m_vecIObject[i]->Render();
+    }
 
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
