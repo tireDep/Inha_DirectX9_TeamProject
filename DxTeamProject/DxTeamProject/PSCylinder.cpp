@@ -28,6 +28,51 @@ void CPSCylinder::Setup(D3DXVECTOR3 center)
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 }
 
+void CPSCylinder::Setup(const ST_MapData & mapData)
+{
+	m_strObjName = mapData.strObjName;
+
+	m_strFolder = mapData.strFolderPath;
+	m_strXFile = mapData.strXFilePath;
+	m_strTxtFile = mapData.strTxtPath;
+
+	m_ObjectType = mapData.objType;
+
+	D3DXVECTOR3 vScale, vRotate;
+	vScale = mapData.vScale;
+	vRotate = mapData.vRotate;
+	m_vPosition = mapData.vTranslate;
+
+	m_Color = mapData.dxColor;
+	// color change
+	this->ChangeObjectColor();
+
+	m_fRadius = vScale.x;
+	m_fHeight = vScale.y;
+	m_fRadius = vScale.z;
+
+	Setup();
+
+	// ============================================================
+
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixScaling(&matS, vScale.x, vScale.y, vScale.z);
+
+	D3DXVECTOR3 v;
+	v.x = D3DXToRadian(vRotate.x);
+	v.y = D3DXToRadian(vRotate.y);
+	v.z = D3DXToRadian(vRotate.z);
+
+	// D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
+	D3DXMatrixRotationX(&matR, v.x);
+	D3DXMatrixRotationY(&matR, v.y);
+	D3DXMatrixRotationZ(&matR, v.z);
+
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	m_matWorld = matS * matR * matT;
+
+}
+
 void CPSCylinder::Update(float duration)
 {
 	D3DXVECTOR3 linearforce;
@@ -57,6 +102,7 @@ void CPSCylinder::Update(float duration)
 		m_vVelocity.x = m_vVelocity.y = m_vVelocity.z = 0.0f;
 	}
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	// >> 수정 필요
 }
 
 void CPSCylinder::Update(float duration, CHeight* pMap)
@@ -70,6 +116,7 @@ void CPSCylinder::Update(float duration, CHeight* pMap)
 	}
 
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	// >> 수정 필요
 }
 
 void CPSCylinder::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)

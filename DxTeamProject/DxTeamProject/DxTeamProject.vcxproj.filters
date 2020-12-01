@@ -169,12 +169,14 @@
       <Filter>SkinnedMesh</Filter>
     </ClCompile>
     <ClCompile Include="PSOBB.cpp" />
-    <ClCompile Include="Background.cpp" />
     <ClCompile Include="MeshTile.cpp" />
     <ClCompile Include="TestRigidBody.cpp" />
     <ClCompile Include="TestForce.cpp" />
     <ClCompile Include="TestAngleSet.cpp" />
     <ClCompile Include="TestCollision.cpp" />
+    <ClCompile Include="Background.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -369,12 +371,14 @@
       <Filter>SkinnedMesh</Filter>
     </ClInclude>
     <ClInclude Include="PSOBB.h" />
-    <ClInclude Include="Background.h" />
     <ClInclude Include="MeshTile.h" />
     <ClInclude Include="TestRigidBody.h" />
     <ClInclude Include="TestForce.h" />
     <ClInclude Include="TestAngleSet.h" />
     <ClInclude Include="TestCollision.h" />
+    <ClInclude Include="Background.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

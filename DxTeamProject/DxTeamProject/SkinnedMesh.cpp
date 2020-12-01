@@ -117,7 +117,7 @@ void CSkinnedMesh::Render(LPD3DXFRAME pFrame)
 		ST_BONE_MESH* pBoneMesh = (ST_BONE_MESH*)pBone->pMeshContainer;
 		if (pBoneMesh->MeshData.pMesh)
 		{
-			D3DXMatrixScaling(&pBone->CombinedTransformationMatrix, 10, 10, 10);
+			// D3DXMatrixScaling(&pBone->CombinedTransformationMatrix, 10, 10, 10);
 			g_pD3DDevice->SetTransform(D3DTS_WORLD, &pBone->CombinedTransformationMatrix);
 
 			for (size_t i = 0; i < pBoneMesh->vecMtl.size(); i++)

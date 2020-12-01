@@ -77,6 +77,7 @@ void CBackground::Setup(ST_MapData setData)
 
 void CBackground::Render()
 {
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 
 	// if(m_pMtrl!=NULL)

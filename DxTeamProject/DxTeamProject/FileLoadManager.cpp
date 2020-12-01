@@ -258,7 +258,7 @@ bool CFileLoadManager::FileLoad_Shader(string szFolder, string szFile, LPD3DXEFF
 bool CFileLoadManager::FileLoad_MapData()
 {
 	string filePath = "Resource/MapData";
-	string file = "mapData.dat";
+	string file = "mapData2.dat";
 	StrFilePath(filePath, filePath, file);
 	LoadData(filePath);
 

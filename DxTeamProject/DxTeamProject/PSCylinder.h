@@ -18,6 +18,7 @@ protected:
 public:
 	void Setup();
 	void Setup(D3DXVECTOR3 center);
+	void Setup(const ST_MapData & mapData);
 	void Update(float duration);
 	void Update(float duration, CHeight* pMap);
 	void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos);
