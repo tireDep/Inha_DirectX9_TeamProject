@@ -13,7 +13,7 @@ COrb::~COrb()
 
 void COrb::Setup()
 {
-	g_pFileLoadManager->FileLoad_Texture("Resource/Sprite/Orb", "Orb_Blue.png", m_pTex0);
+	g_pFileLoadManager->FileLoad_Texture("Resource/Sprite/Orb", "제목 없음-1.png", m_pTex0);
 
 	ST_PT_VERTEX v;
 	v.p = D3DXVECTOR3(0, 0, 0); v.t = D3DXVECTOR2(0, 0.2); m_vecVertex_Multi.push_back(v);
@@ -27,12 +27,21 @@ void COrb::Setup()
 
 void COrb::Render()
 {
+	D3DMATERIAL9 temp;
+	ZeroMemory(&temp,sizeof( D3DMATERIAL9));
+	temp.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f);
+	temp.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f);
+	temp.Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	g_pD3DDevice->SetMaterial(&temp);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
 	g_pD3DDevice->SetFVF(ST_PT_VERTEX::FVF);
 	g_pD3DDevice->SetTexture(0, m_pTex0);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
 		m_vecVertex_Multi.size() / 3,
 		&m_vecVertex_Multi[0],
 		sizeof(ST_PT_VERTEX));
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 	g_pD3DDevice->SetTexture(0, NULL);
 }
 
