@@ -8,9 +8,8 @@ class CUI;
 class CText;
 class CCharacter;
 class CLight;
-class CGridMap;
 class COrb;
-// class CFrustum;
+class CSkydome;
 /// 이 아래는 지울 수도 있는 선언
 class CHeight;
 class CXfile;
@@ -36,10 +35,10 @@ private:
 	CFrustum	m_pNowFrustum;
 
 	COrb*		m_pOrb;
-	// CGridMap*	m_GridMap;
 	CSkinnedMesh* m_pSkinnedMesh;
+
+	CSkydome* m_pSkydome;
 	/// 이 아래는 지울 수도 있는 선언
-	CXfile*		m_Xfile;
 	CHeight* m_pHeightMap;
 	// Ray y check
 	MeshTile* m_pMeshTile;
