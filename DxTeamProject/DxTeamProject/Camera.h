@@ -4,6 +4,10 @@
 class CCamera : public IListener
 {
 private:
+	enum class CamStatus { eNullPos, eLeftPos, eTopPos, eRightPos, eBottomPos };
+
+	CamStatus m_camStatus;
+
 	D3DXVECTOR3 m_vEye;
 	D3DXVECTOR3 m_vLookAt;
 	D3DXVECTOR3 m_vUp;
@@ -13,16 +17,18 @@ private:
 	bool m_isLBtnDown;
 	float m_fCameraDistance;
 	D3DXVECTOR3 m_vCamRotAngle;
+
 public:
 	CCamera();
 	~CCamera();
 
 	void Setup(D3DXVECTOR3* pvTarget);
 	void Update();
+	void Update_MouseMove();
 	D3DXVECTOR3 GetCameraDirection();
 	D3DXVECTOR3 GetCameraEye();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
+	void CheckRotRange();
 	string GetName();
-	
 };
