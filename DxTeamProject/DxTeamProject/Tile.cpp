@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Tile.h"
-
+#include "OBB.h"
 CTile::CTile()
 {
 	m_pMesh = NULL;
@@ -9,6 +9,7 @@ CTile::CTile()
 
 CTile::~CTile()
 {
+	SafeDelete(m_pOBB);
 	SafeRelease(m_pMesh);
 	SafeRelease(m_pTexture);
 }
@@ -20,7 +21,7 @@ void CTile::Setup(ST_MapData setData)
 	m_strXFile = setData.strXFilePath;
 	m_strTxtFile = setData.strTxtPath;
 	m_ObjectType = setData.objType;
-	m_vScale = setData.vScale;
+	m_vScale = setData.vScale; // 0.05, 0.01 ,0.05
 	m_vRotate = setData.vRotate;
 	m_vTranslate = setData.vTranslate;
 
@@ -51,6 +52,17 @@ void CTile::Setup(ST_MapData setData)
 
 	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
 	m_matWorld = matS * matR * matT;
+
+	D3DXVECTOR3 *pVertices;
+	D3DXVECTOR3 m_vMin, m_vMax;
+
+	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+	D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), 
+	m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+	m_pMesh->UnlockVertexBuffer();
+
+	m_pOBB = new COBB;
+	m_pOBB->SetupTile(m_vMin , m_vMax  ,m_vMax * m_vScale.y , m_vScale.x, m_vScale.z);
 }
 
 void CTile::Update()
@@ -59,7 +71,8 @@ void CTile::Update()
 
 void CTile::Render()
 {
-
+	if (m_pOBB)
+		m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 
