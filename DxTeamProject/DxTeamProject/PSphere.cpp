@@ -99,7 +99,10 @@ void CPSphere::Setup(const ST_MapData & mapData)
 	v.y = D3DXToRadian(vRotate.y);
 	v.z = D3DXToRadian(vRotate.z);
 
-	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
+	// D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
+	D3DXMatrixRotationX(&matR, v.x);
+	D3DXMatrixRotationY(&matR, v.y);
+	D3DXMatrixRotationZ(&matR, v.z);
 
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	m_matWorld = matS * matR * matT;

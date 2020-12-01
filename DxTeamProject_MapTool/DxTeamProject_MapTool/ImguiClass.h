@@ -24,6 +24,8 @@ private:
 	void SetVecItem();
 
 public:
+	static int m_nowSelectindex;
+	static int m_prevSelectIndex;
 	CImguiClass();
 	~CImguiClass();
 

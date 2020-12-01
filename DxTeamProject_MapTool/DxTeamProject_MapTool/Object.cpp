@@ -7,11 +7,6 @@ CObject::CObject()
 	m_vRotate = D3DXVECTOR3(0, 0, 0);
 	m_vTranslate = D3DXVECTOR3(0, 0.5f, 0);
 
-	ZeroMemory(&m_pMtrl, sizeof(D3DMATERIAL9));
-	m_pMtrl.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
-	m_pMtrl.Specular = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
-	m_pMtrl.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
-
 	m_dxColor = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
 }
 

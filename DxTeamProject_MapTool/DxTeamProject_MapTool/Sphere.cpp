@@ -32,23 +32,25 @@ void CSphere::Update()
 
 void CSphere::Update(CRay * ray)
 {
-#ifdef _DEBUG
-	D3DXVECTOR3* pVertices;
-
-	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
-	D3DXVECTOR3 center;
-	center = m_vTranslate;
-	float radius;
-	radius = m_vScale.x;
-	if (D3DXSphereBoundProbe(&center, radius, &ray->GetOrigin(), &ray->GetDirection()) == true)
-	{
-		cout << "picked" << endl;
-	}
-	else
-	{
-	}
-	m_pMesh->UnlockVertexBuffer();
-#endif // _DEBUG
+	IObject::Update(ray);
+// #ifdef _DEBUG
+// 	D3DXVECTOR3* pVertices;
+// 
+// 	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+// 	D3DXVECTOR3 center;
+// 	center = m_vTranslate;
+// 	float radius;
+// 	radius = m_vScale.x;
+// 	if (D3DXSphereBoundProbe(&center, radius, &ray->GetOrigin(), &ray->GetDirection()) == true)
+// 	{
+// 		cout << "picked" << endl;
+// 	}
+// 	else
+// 	{
+// 
+// 	}
+// 	m_pMesh->UnlockVertexBuffer();
+// #endif // _DEBUG
 }
 
 void CSphere::Render()

@@ -8,20 +8,75 @@
 
 int IObject::m_nRefCnt = 0;
 
-IObject::IObject()
+IObject::IObject() : 
+	m_pTexture(NULL),
+	m_pMesh(NULL),
+	m_adjBuffer(NULL),
+	m_numMtrls(0),
+	m_strObjName(""),
+	m_strFolder(""),
+	m_strXFile(""),
+	m_strTxtFile(""),
+	m_ObjectType(ObjectType::eNull),
+	m_vScale(0,0,0),
+	m_vRotate(0,0,0),
+	m_vTranslate(0,0,0),
+	m_isClick(false),
+	m_isPick(false),
+	m_dxColor(0.5, 0.5, 0.5, 1)
 {
+	ZeroMemory(&m_pMtrl, sizeof(D3DMATERIAL9));
+	m_pMtrl.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	m_pMtrl.Specular = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	m_pMtrl.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+
 	g_pObjectManager->AddObject(this);
 	IObject::m_nRefCnt += 1;
 }
 
 IObject::~IObject()
 {
+	SafeRelease(m_pMesh);
+	SafeRelease(m_pTexture);
 }
 
 void IObject::Release()
 {
 	g_pObjectManager->RemoveObject(this);
 	IObject::m_nRefCnt -= 1;
+}
+
+void IObject::Update(CRay * ray)
+{
+	D3DXMATRIXA16 matWorld, matS, matR, matT;
+	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+
+	D3DXVECTOR3 v;
+	v.x = D3DXToRadian(m_vRotate.x);
+	v.y = D3DXToRadian(m_vRotate.y);
+	v.z = D3DXToRadian(m_vRotate.z);
+
+	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
+
+	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
+	matWorld = matS * matR * matT;
+
+	D3DXVECTOR3* pVertices;
+	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+	D3DXVECTOR3 m_vMin, m_vMax;
+	D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+	// later.. rotation add
+	// m_vMin += m_vTranslate;				m_vMax += m_vTranslate;
+	D3DXVec3TransformCoord(&m_vMin, &m_vMin, &matWorld);
+	D3DXVec3TransformCoord(&m_vMax, &m_vMax, &matWorld);
+	// >> 월드 좌표계로 돌림
+
+	if (D3DXBoxBoundProbe(&m_vMin, &m_vMax, &ray->GetOrigin(), &ray->GetDirection()) == true)
+		m_isPick = true;
+	else
+		m_isPick = false;
+
+	m_pMesh->UnlockVertexBuffer();
 }
 
 void IObject::SetRefCnt(int set)

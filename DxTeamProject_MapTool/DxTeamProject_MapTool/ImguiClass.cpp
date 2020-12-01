@@ -6,6 +6,8 @@
 #include "IObject.h"
 #include "ImguiClass.h"
 
+int CImguiClass::m_nowSelectindex = -1;
+int CImguiClass::m_prevSelectIndex = 0;
 void CImguiClass::SetVecItem()
 {
 	vector<string> tempVec;
@@ -268,29 +270,68 @@ void CImguiClass::Update()
 		ImGui::Begin("Hiearachy");
 
 		vector<IObject *> vecObj = g_pObjectManager->GetVecObject();
-		bool isClick;
-		static int index = vecObj.size() - 1;
-		for (int i = 0; i < vecObj.size(); i++)
+		bool isClick = false;
+		int checkIndex = -1;
+		int vecSize = g_pObjectManager->GetVecObject().size();
+		if (vecSize > 0)
 		{
-			isClick = vecObj[i]->GetClick();
-			if (ImGui::Selectable(vecObj[i]->GetObjectName().c_str(), &isClick))
+			for (int i = 0; i < vecObj.size(); i++)
 			{
-				vecObj[i]->SetClick(isClick);
-				index = i;
-			}
-		}
+				if (vecObj[i]->GetPick())
+				{
+					checkIndex = i;
+					break;
+					// todo : ray 판정 수정
+					// 같은 라인의 맨 앞에 저장 된 것이 선택 됨
+				}
+			} // << : check pick object
 
-		for (int i = 0; i < vecObj.size(); i++)
-		{
-			if (i != index)
-				vecObj[i]->SetClick(false);
-		}
+			if (checkIndex == -1)
+			{
+				for (int i = 0; i < vecObj.size(); i++)
+				{
+					isClick = vecObj[i]->GetClick();
+					if (ImGui::Selectable(vecObj[i]->GetObjectName().c_str(), &isClick))
+					{
+						CImguiClass::m_nowSelectindex = i;
+						vecObj[i]->SetClick(isClick);
+						vecObj[i]->SetPick(true);
+					}
+				}
+
+			} // << : if_pick not exist
+			else
+			{
+				for (int i = 0; i < vecObj.size(); i++)
+				{
+					if (i == checkIndex)
+					{
+						CImguiClass::m_nowSelectindex = i;
+						ImGui::Selectable(vecObj[i]->GetObjectName().c_str(), true);
+						vecObj[i]->SetClick(true);
+						vecObj[i]->SetPick(true);
+					}
+					else
+						ImGui::Selectable(vecObj[i]->GetObjectName().c_str(), false);
+				} // << : for
+
+			} // << : else_Pick exist
+
+			for (int i = 0; i < vecObj.size(); i++)
+			{
+				if (i != CImguiClass::m_nowSelectindex)
+				{
+					vecObj[i]->SetClick(false);
+					vecObj[i]->SetPick(false);
+				}
+			} // << : for
+
+		} // << : if_objectVector size is not zero
+
 
 		// >> todo : 오브젝트 정렬 필요?(이름순)
-		vecObj.erase(vecObj.begin(), vecObj.end());
 		ImGui::End();
 	}
-
 
 	{ // >> : FileLoad
 		ImGui::Begin("File Loader");
@@ -351,127 +392,138 @@ void CImguiClass::Update()
 	{
 		ImGui::Begin("Inspector");
 
-		// 
-		vector<IObject *> vecObj = g_pObjectManager->GetVecObject();
-		int index = -1;
-		for (int i = 0; i < vecObj.size(); i++)
+		bool isCheck = false;
+		int vecSize = g_pObjectManager->GetVecSize();
+		for (int i = 0; i < vecSize; i++)
 		{
-			if (vecObj[i]->GetClick())
-			{
-				index = i;
-				break;
-			}
-		}
-		// 
-
-		if (index >= 0)
-		{
-			char name[1024] = "\0";
-			int strLength = vecObj[index]->GetObjectName().length();
-			for (int i = 0; i < strLength; i++)
-			{
-				name[i] = vecObj[index]->GetObjectName()[i];
-			}
-			name[strLength] = '\0';
-
-			bool isCheck = false;
-			if (ImGui::InputText("Name", name, 1024))
+			if (g_pObjectManager->GetIObject(i).GetClick() || g_pObjectManager->GetIObject(i).GetPick())
 				isCheck = true;
+		}
+		// >> : 선택된 것이 없으면 인스펙터 창 뜨지 않음
 
-			// >> 이름 변경 판정 다시 하기?
-			if (isCheck)
+		if (m_prevSelectIndex == m_nowSelectindex && isCheck)
+		{
+			if (m_nowSelectindex >= 0)
 			{
-				bool isSame = false;
-				for (int i = 0; i < vecObj.size(); i++)
+				char name[1024] = "\0";
+				int strLength = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjectName().length();
+				for (int i = 0; i < strLength; i++)
 				{
-					if (strcmp(vecObj[i]->GetObjectName().c_str(), name) == 0)
-						isSame = true;
+					name[i] = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjectName()[i];
 				}
+				name[strLength] = '\0';
 
-				if (!isSame) vecObj[index]->SetObjectName(name);
-			}
-			// << 이름 변경 판정 다시 하기?
+				bool isCheck = false;
+				if (ImGui::InputText("Name", name, 1024))
+					isCheck = true;
 
-			ImGui::Separator();
-
-			D3DXVECTOR3 vScale = vecObj[index]->GetScale();
-			if (ImGui::InputFloat3("Scale", vScale))
-			{
-				if (vecObj[index]->GetObjType() == eSphere || vecObj[index]->GetObjType() == eCylinder)
-					vecObj[index]->SetDiffScale(vScale);
-				else
-					vecObj[index]->SetScale(vScale);
-			}
-
-			D3DXVECTOR3 vRot = vecObj[index]->GetRotate();
-			if(ImGui::InputFloat3("Rotate", vRot))
-				vecObj[index]->SetRotate(vRot);
-			
-			D3DXVECTOR3 vTrans = vecObj[index]->GetTranslate();
-			if(ImGui::InputFloat3("Translate", vTrans))
-				vecObj[index]->SetTranslate(vTrans);
-
-			ImGui::Separator();
-
-			// >> object만 색 지정 가능
-			if (vecObj[index]->GetObjType() == eBox || vecObj[index]->GetObjType() == eSphere || vecObj[index]->GetObjType() == eCylinder)
-			{
-				ImGui::Text("Set Color");
-				string charName[8] = { "Gray", "Black", "White", "Red", "Blue", "Green", "Yellow" };
-				for (int i = 0; i < m_vecColor.size(); i++)
+				// >> 이름 변경 판정 다시 하기?
+				if (isCheck)
 				{
-					if (ImGui::RadioButton(charName[i].c_str() , m_NowcolorType == m_vecColor[i])) 
-					{ 
-						m_NowcolorType = m_vecColor[i]; 
-						
-						D3DXCOLOR color;
-						switch (m_NowcolorType)
-						{
-						case ColorType::eGray:
-							color = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
-							break; 
-						case ColorType::eBlack:
-							color = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
-							break;
-						case ColorType::eWhite:
-							color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-							break;
-						case ColorType::eRed:
-							color = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-							break;
-						case ColorType::eBlue:
-							color = D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f);
-							break;
-						case ColorType::eGreen:
-							color = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
-							break;
-						case ColorType::eYellow:
-							color = D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f);
-							break;
-						}
-						vecObj[index]->SetColor(color);
+					bool isSame = false;
+					int vecSize = g_pObjectManager->GetVecSize();
+					for (int i = 0; i < vecSize; i++)
+					{
+						if (strcmp(g_pObjectManager->GetIObject(i).GetObjectName().c_str(), name) == 0)
+							isSame = true;
 					}
 
-					if (i != 2) 
-						ImGui::SameLine();
+					if (!isSame) g_pObjectManager->GetIObject(m_nowSelectindex).SetObjectName(name);
+				}
+				// << 이름 변경 판정 다시 하기?
 
-				} // << : for
+				ImGui::Separator();
 
-			} // << : if
-			// else
-				// ImGui::Separator();
+				D3DXVECTOR3 vScale = g_pObjectManager->GetIObject(m_nowSelectindex).GetScale();
+				if (ImGui::InputFloat3("Scale", vScale))
+				{
+					if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere 
+					 || g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCylinder)
+						g_pObjectManager->GetIObject(m_nowSelectindex).SetDiffScale(vScale);
+					else
+						g_pObjectManager->GetIObject(m_nowSelectindex).SetScale(vScale);
+				}
+
+				D3DXVECTOR3 vRot = g_pObjectManager->GetIObject(m_nowSelectindex).GetRotate();
+				if (ImGui::InputFloat3("Rotate", vRot))
+					g_pObjectManager->GetIObject(m_nowSelectindex).SetRotate(vRot);
+
+				D3DXVECTOR3 vTrans = g_pObjectManager->GetIObject(m_nowSelectindex).GetTranslate();
+				if (ImGui::InputFloat3("Translate", vTrans))
+					g_pObjectManager->GetIObject(m_nowSelectindex).SetTranslate(vTrans);
+
+				ImGui::Separator();
+
+				// >> object만 색 지정 가능
+				if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eBox
+				 || g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere
+				 || g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCylinder)
+				{
+					ImGui::Text("Set Color");
+					string charName[8] = { "Gray", "Black", "White", "Red", "Blue", "Green", "Yellow" };
+					for (int i = 0; i < m_vecColor.size(); i++)
+					{
+						if (ImGui::RadioButton(charName[i].c_str(), m_NowcolorType == m_vecColor[i]))
+						{
+							m_NowcolorType = m_vecColor[i];
+
+							D3DXCOLOR color;
+							switch (m_NowcolorType)
+							{
+							case ColorType::eGray:
+								color = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+								break;
+							case ColorType::eBlack:
+								color = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
+								break;
+							case ColorType::eWhite:
+								color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+								break;
+							case ColorType::eRed:
+								color = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+								break;
+							case ColorType::eBlue:
+								color = D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f);
+								break;
+							case ColorType::eGreen:
+								color = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
+								break;
+							case ColorType::eYellow:
+								color = D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f);
+								break;
+							}
+							g_pObjectManager->GetIObject(m_nowSelectindex).SetColor(color);
+						}
+
+						if (i != 2 && i != m_vecColor.size() - 1)
+							ImGui::SameLine();
+
+					} // << : for
+					ImGui::Separator();
+				} // << : if
+
+			} // << : if (m_nowSelectindex >= 0)
+
+		} // << : if (m_prevSelectIndex == m_nowSelectindex)
+		else
+		{
+			m_prevSelectIndex = m_nowSelectindex;
+			// >> 버그 있음
+			if (g_pObjectManager->GetVecSize() != 0 && m_nowSelectindex >= 0)
+			{
+				D3DXCOLOR temp = g_pObjectManager->GetIObject(CImguiClass::m_nowSelectindex).GetColor();
+			
+				if (temp == D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f))		m_NowcolorType = ColorType::eGray;
+				else if (temp == D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f)) m_NowcolorType = ColorType::eBlack;
+				else if (temp == D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)) m_NowcolorType = ColorType::eWhite;
+				else if (temp == D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f)) m_NowcolorType = ColorType::eRed;
+				else if (temp == D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f)) m_NowcolorType = ColorType::eBlue;
+				else if (temp == D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f)) m_NowcolorType = ColorType::eGreen;
+				else if (temp == D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f)) m_NowcolorType = ColorType::eYellow;
+			}
+			//else
+			//	m_NowcolorType = ColorType::eGray;
 		}
-
-		// else
-		// {
-		// 	ImGui::InputText("Name", " ", 1024);
-		// 	ImGui::Separator();
-		// 
-		// 	ImGui::InputFloat3("Scale", D3DXVECTOR3(0, 0, 0));
-		// 	ImGui::InputFloat3("Rotate", D3DXVECTOR3(0, 0, 0));
-		// 	ImGui::InputFloat3("Translate", D3DXVECTOR3(0, 0, 0));
-		// 	ImGui::Separator();
-		// }
 
 		ImGui::End();
 
