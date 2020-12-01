@@ -205,14 +205,12 @@ void CObject::CreateObject(const ST_MapData & mapData)
 	}
 	break;
 
-	/*
 	case eCylinder:
 	{
-		CCylinder* cylinder = new CCylinder;
+		CPSCylinder* cylinder = new CPSCylinder;
 		cylinder->Setup(mapData);
 	}
 	break;
-	*/
 
 	case eATree:
 	case eSTree:
