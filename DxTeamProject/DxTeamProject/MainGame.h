@@ -9,6 +9,7 @@ class CText;
 class CCharacter;
 class CLight;
 class CGridMap;
+class COrb;
 // class CFrustum;
 /// 이 아래는 지울 수도 있는 선언
 class CHeight;
@@ -19,6 +20,7 @@ class CSkinnedMesh;
 class MeshTile;
 // Rotation Test
 class CTestRigidBody;
+class CTestCollision;
 /// 릴리즈 버전을 위한 주석처리
 //class CSoundManager;
 class CMainGame
@@ -32,6 +34,8 @@ private:
 	CLight*		m_pLight;
 	CFrustum	m_pPrevFrustum;
 	CFrustum	m_pNowFrustum;
+
+	COrb*		m_pOrb;
 	// CGridMap*	m_GridMap;
 	CSkinnedMesh* m_pSkinnedMesh;
 	/// 이 아래는 지울 수도 있는 선언
@@ -40,7 +44,9 @@ private:
 	// Ray y check
 	MeshTile* m_pMeshTile;
 	// Rotation Test
+	//CTestRigidBody* m_pRigidBody;
 	CTestRigidBody* m_pRigidBody;
+	vector<CTestRigidBody*> vecRigidBody;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 public:
@@ -51,5 +57,8 @@ public:
 	void Setup();
 	void Update();
 	void Render();
+	
+	// Rotation Test
+	void HandleOverlapping(float timeIncrement, int tiger1, int tiger2, CTestCollision& theCollision);
 	/// 릴리즈 버전을 위한 주석처리
 };
