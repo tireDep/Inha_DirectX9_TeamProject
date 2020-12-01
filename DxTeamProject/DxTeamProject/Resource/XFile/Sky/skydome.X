@@ -135,7 +135,7 @@ Material blinn1 {
  0.000000;0.000000;0.000000;;
 
  TextureFilename {
-  "Sky.psd";
+  "SimpleSky.png";
  }
 }
 

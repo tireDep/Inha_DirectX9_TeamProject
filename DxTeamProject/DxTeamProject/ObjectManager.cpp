@@ -101,7 +101,7 @@ void CObjectManager::AddMap()
 {
 	m_mapObject.insert(pair<vector<IObject*>, bool>(m_vecIObject, false));
 
-	m_vecIObject.clear();
+	// m_vecIObject.clear();
 	// >> 테스트 완료 후 적용
 }
 
@@ -153,7 +153,7 @@ void CObjectManager::UpdateNewMap(CFrustum * frustum)
 	if (m_thread == NULL)
 	{
 		m_thread = new thread(&CObjectManager::Thread_CalcNewMap, this);
-		cout << "thread" << endl;
+		// cout << "thread" << endl;
 	}
 	else
 	{
@@ -161,7 +161,7 @@ void CObjectManager::UpdateNewMap(CFrustum * frustum)
 			m_thread->join();
 
 		m_thread = NULL;
-		cout << "threadEnd" << endl;
+		// cout << "threadEnd" << endl;
 	}
 }
 
