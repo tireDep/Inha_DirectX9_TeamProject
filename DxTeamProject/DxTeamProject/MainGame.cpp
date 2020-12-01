@@ -6,6 +6,7 @@
 #include "UI.h"
 #include "Text.h"
 #include "Character.h"
+#include "Orb.h"
 #include "Ray.h"
 #include "Light.h"
 #include "GridMap.h"
@@ -31,6 +32,7 @@ CMainGame::CMainGame() :
 	m_pText(NULL),
 	m_pCharacter(NULL),
 	m_pLight(NULL),
+	m_pOrb(NULL),
 	// m_GridMap(NULL),
 	/// 이 아래는 지울 수도 있는 선언
 	m_Xfile(NULL),
@@ -98,6 +100,9 @@ void CMainGame::Setup()
 
 	m_pCamera = new CCamera;
 	m_pCamera->Setup(&m_pCharacter->GetPosition());
+
+	m_pOrb = new COrb;
+	m_pOrb->Setup();
 
 	m_pLight = new CLight;
 	m_pLight->Setup();
@@ -298,6 +303,10 @@ void CMainGame::Render()
 	if (m_pCharacter)
 		m_pCharacter->Render();
 
+	m_pOrb->SetBillbord();
+
+	if (m_pOrb)
+		m_pOrb->Render();
 	g_pObjectManager->Render();
 
 	// if (g_gameManager->GetGridMapMode())

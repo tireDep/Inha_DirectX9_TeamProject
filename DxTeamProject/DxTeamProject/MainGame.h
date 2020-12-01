@@ -9,6 +9,7 @@ class CText;
 class CCharacter;
 class CLight;
 class CGridMap;
+class COrb;
 // class CFrustum;
 /// 이 아래는 지울 수도 있는 선언
 class CHeight;
@@ -32,6 +33,8 @@ private:
 	CLight*		m_pLight;
 	CFrustum	m_pPrevFrustum;
 	CFrustum	m_pNowFrustum;
+
+	COrb*		m_pOrb;
 	// CGridMap*	m_GridMap;
 	CSkinnedMesh* m_pSkinnedMesh;
 	/// 이 아래는 지울 수도 있는 선언

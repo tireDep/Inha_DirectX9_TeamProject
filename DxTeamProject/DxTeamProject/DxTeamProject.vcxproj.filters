@@ -176,6 +176,9 @@
     <ClCompile Include="Background.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Orb.cpp">
+      <Filter>Orb</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -377,6 +380,9 @@
     <ClInclude Include="Background.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="Orb.h">
+      <Filter>Orb</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -485,6 +491,9 @@
     </Filter>
     <Filter Include="SkinnedMesh">
       <UniqueIdentifier>{8b7bbd42-1924-48c4-91af-f7fa2e255a85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Orb">
+      <UniqueIdentifier>{844e52ae-e656-4c99-8f75-56c9ecc26fe7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
