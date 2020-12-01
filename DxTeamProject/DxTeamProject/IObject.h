@@ -27,7 +27,7 @@ protected:
 	Synthesize(D3DXVECTOR3, m_vScale, Scale);
 	Synthesize(D3DXVECTOR3, m_vRotate, Rotate);
 	Synthesize(D3DXVECTOR3, m_vTranslate, Translate);
-
+	
 	IObject();
 
 public:

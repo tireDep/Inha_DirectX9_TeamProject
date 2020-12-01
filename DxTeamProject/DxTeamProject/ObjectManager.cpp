@@ -4,6 +4,7 @@
 #include "PSOBB.h"
 #include "ObjectManager.h"
 #include "CHeight.h"
+#include "OBB.h"
 
 CObjectManager::CObjectManager() : 
 	m_frustum(NULL),
@@ -67,6 +68,11 @@ void CObjectManager::RemoveObject(IObject * pObject)
 		else
 			it++;
 	}
+}
+
+void CObjectManager::AddTileOBB(COBB* OBBbox)
+{
+	m_OBB.push_back(OBBbox);
 }
 
 void CObjectManager::AddOBBbox(CPSOBB * OBBBox)
@@ -231,6 +237,10 @@ void CObjectManager::Update()
 			m_vecObject[hittee]->CollisionOtherObject(m_vecObject[hitter]);
 		}
 	}
+	for (int i = 0; i < m_vecIObject.size(); i++)
+	{
+		m_vecIObject[i]->Update();
+	}
 }
 
 vector<CObject*> CObjectManager::GetVecObject()
@@ -267,6 +277,11 @@ void CObjectManager::Render()
 	{
 		m_vecObject[i]->Render();
 	}
+
+	for (int i = 0; i < m_OBB.size(); i++)
+	{
+		m_OBB[i]->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
+	}
 }
 
 void CObjectManager::RenderOBBBox()
@@ -275,6 +290,7 @@ void CObjectManager::RenderOBBBox()
 	{
 		m_vecOBBBox[i]->Render();
 	}
+	
 }
 
 vector<IObject*> CObjectManager::GetVecIObject()

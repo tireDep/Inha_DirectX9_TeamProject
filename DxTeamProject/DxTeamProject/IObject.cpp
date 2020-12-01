@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Tile.h"
 #include "IObject.h"
+#include "OBB.h"
 
 int IObject::m_nRefCnt = 0;
 

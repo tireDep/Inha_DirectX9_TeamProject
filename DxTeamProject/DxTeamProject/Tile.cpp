@@ -5,6 +5,9 @@ CTile::CTile()
 {
 	m_pMesh = NULL;
 	m_pTexture = NULL;
+	m_pOBB = NULL;
+	D3DXMatrixIdentity(&m_matWorld);
+	D3DXMatrixIdentity(&matWorld);
 }
 
 CTile::~CTile()
@@ -63,16 +66,20 @@ void CTile::Setup(ST_MapData setData)
 
 	m_pOBB = new COBB;
 	m_pOBB->SetupTile(m_vMin , m_vMax  ,m_vMax * m_vScale.y , m_vScale.x, m_vScale.z);
+	g_pObjectManager->AddTileOBB(m_pOBB);
 }
 
 void CTile::Update()
 {
+	if (m_pOBB)
+		m_pOBB->Update(&matWorld);
+
 }
 
 void CTile::Render()
 {
-	if (m_pOBB)
-		m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
+	//if (m_pOBB)
+	//	m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 

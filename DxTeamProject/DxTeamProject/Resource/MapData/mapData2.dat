@@ -10,9 +10,9 @@ Texture_01.png
 # ObjectType
 6
 # Scale
-0.08
+0.3
 0.01
-0.09
+0.3
 # Rotate
 0
 0
@@ -22,4 +22,5 @@ Texture_01.png
 0
 0
 # Object_End
+
 

@@ -18,10 +18,12 @@
 #include "CHeight.h"
 // Ray y check
 #include "MeshTile.h"
+#include "OBB.h"
 // Rotation Test
 #include "TestForce.h"
 #include "TestAngleSet.h"
 #include "TestRigidBody.h"
+#include "Tile.h"
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
 
@@ -83,7 +85,7 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 void CMainGame::Setup()
 {
 	g_pFileLoadManager->FileLoad_MapData();
-
+	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
 
@@ -149,6 +151,8 @@ void CMainGame::Setup()
 	// Rotation Test
 	m_pRigidBody = new CTestRigidBody;
 	m_pRigidBody->Setup();
+
+	
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
@@ -168,6 +172,7 @@ void CMainGame::Update()
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
+	
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
@@ -207,6 +212,8 @@ void CMainGame::Update()
 			v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
 			D3DXVec3Normalize(&v, &v);
 			g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->SetPusingForce(v);
+		
+		
 		}
 		else
 		{
@@ -295,9 +302,25 @@ void CMainGame::Render()
 	if (m_pGrid)
 		m_pGrid->Render();
 
-	if (m_pCharacter)
-		m_pCharacter->Render();
+	
+		D3DCOLOR c = D3DCOLOR_XRGB(255, 0, 0);
+		c = COBB::IsCollision(m_pCharacter->GetOBB(),
+			g_pObjectManager->GetTileOBB()) ? D3DCOLOR_XRGB(255, 0, 0) :
+			D3DCOLOR_XRGB(255, 255, 0);
 
+		if (c == D3DCOLOR_XRGB(255, 0, 0))
+		{
+			m_pCharacter->GetBool(true);
+		}
+		else
+		{
+			m_pCharacter->GetBool(false);
+		}
+
+		if (m_pCharacter)
+			m_pCharacter->Render(c);
+
+	
 	g_pObjectManager->Render();
 
 	// if (g_gameManager->GetGridMapMode())

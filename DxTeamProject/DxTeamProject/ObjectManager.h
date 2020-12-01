@@ -10,6 +10,7 @@ class IObject;
 class CObject;
 class CRay;
 class CPSOBB;
+class COBB;
 
 #define		g_pObjectManager CObjectManager::GetInstance()
 
@@ -20,7 +21,7 @@ private:
 	vector<CObject *> m_vecObject;
 	vector<IObject *> m_vecIObject;
 	vector<CPSOBB *> m_vecOBBBox;
-
+	vector<COBB *> m_OBB;
 	// >> mapTest
 	multimap<vector<IObject*>, bool> m_mapObject;
 	CFrustum* m_frustum;
@@ -36,6 +37,8 @@ public:
 	void AddObject(IObject* pObject);
 	void RemoveObject(IObject* pObject);
 
+	void AddTileOBB(COBB* OBBbox);
+
 	void AddOBBbox(CPSOBB* OBBBox);
 	void RemoveObject(CPSOBB* OBBBox);
 
@@ -50,6 +53,8 @@ public:
 
 	vector<CObject *> GetVecObject();
 	vector<IObject *> GetVecIObject();
+
+	COBB* GetTileOBB() {return m_OBB[0];}
 
 	// >> mapTest
 	void AddMap();

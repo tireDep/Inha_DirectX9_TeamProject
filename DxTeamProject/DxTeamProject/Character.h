@@ -17,6 +17,7 @@ protected:
 	D3DXMATRIXA16			m_matWorld;
 	D3DXCOLOR				m_color;
 	bool					m_isCollided;
+	bool					m_isOBB;
 	// grab
 	int						m_nGrabAbleObeject;
 	// Ray y check
@@ -28,7 +29,7 @@ public:
 	int Update(vector<CObject*> ObjectPosition);
 	virtual void DoRotation(const float& radian);
 	virtual void DoMove(const float& velocity);
-	virtual void Render();
+	virtual void Render(D3DCOLOR c);
 
 	virtual D3DXVECTOR3& GetPosition();
 	virtual D3DXMATRIXA16* GetTransform();
@@ -41,6 +42,7 @@ public:
 	virtual bool Collider(bool isCollided);
 	COBB* m_pOBB;
 	COBB* GetOBB();
+	bool GetBool(bool istrue);
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	virtual string GetName();
