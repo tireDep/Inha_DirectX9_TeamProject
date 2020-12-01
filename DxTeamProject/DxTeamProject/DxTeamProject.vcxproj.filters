@@ -71,9 +71,6 @@
     <ClCompile Include="Object.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="RigidBody.cpp">
-      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
-    </ClCompile>
     <ClCompile Include="ParticleContact.cpp">
       <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClCompile>
@@ -102,9 +99,6 @@
       <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClCompile>
     <ClCompile Include="ForceGenerator.cpp">
-      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
-    </ClCompile>
-    <ClCompile Include="World.cpp">
       <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
     </ClCompile>
     <ClCompile Include="Gravity.cpp">
@@ -161,24 +155,45 @@
     <ClCompile Include="PSBox.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="PSphere.cpp" />
     <ClCompile Include="SkinnedMesh.cpp">
       <Filter>SkinnedMesh</Filter>
     </ClCompile>
     <ClCompile Include="AllocateHierarchy.cpp">
       <Filter>SkinnedMesh</Filter>
     </ClCompile>
-    <ClCompile Include="PSOBB.cpp" />
     <ClCompile Include="MeshTile.cpp" />
-    <ClCompile Include="TestRigidBody.cpp" />
-    <ClCompile Include="TestForce.cpp" />
-    <ClCompile Include="TestAngleSet.cpp" />
-    <ClCompile Include="TestCollision.cpp" />
     <ClCompile Include="Background.cpp">
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="Orb.cpp">
       <Filter>Orb</Filter>
+    </ClCompile>
+    <ClCompile Include="PSOBB.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PSphere.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TestAngleSet.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCollision.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TestForce.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRigidBody.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Physics\cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Physics\cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="Contact.cpp">
+      <Filter>Physics\cyclone</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -276,9 +291,6 @@
     <ClInclude Include="Object.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="RigidBody.h">
-      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
-    </ClInclude>
     <ClInclude Include="ParticleContact.h">
       <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClInclude>
@@ -307,9 +319,6 @@
       <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClInclude>
     <ClInclude Include="ForceGenerator.h">
-      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
-    </ClInclude>
-    <ClInclude Include="World.h">
       <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
     </ClInclude>
     <ClInclude Include="Gravity.h">
@@ -366,24 +375,45 @@
     <ClInclude Include="PSBox.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="PSphere.h" />
     <ClInclude Include="SkinnedMesh.h">
       <Filter>SkinnedMesh</Filter>
     </ClInclude>
     <ClInclude Include="AllocateHierarchy.h">
       <Filter>SkinnedMesh</Filter>
     </ClInclude>
-    <ClInclude Include="PSOBB.h" />
     <ClInclude Include="MeshTile.h" />
-    <ClInclude Include="TestRigidBody.h" />
-    <ClInclude Include="TestForce.h" />
-    <ClInclude Include="TestAngleSet.h" />
-    <ClInclude Include="TestCollision.h" />
     <ClInclude Include="Background.h">
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Orb.h">
       <Filter>Orb</Filter>
+    </ClInclude>
+    <ClInclude Include="PSOBB.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PSphere.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TestAngleSet.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCollision.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TestForce.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRigidBody.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Physics\cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Physics\cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="Contact.h">
+      <Filter>Physics\cyclone</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -496,6 +526,12 @@
     </Filter>
     <Filter Include="Orb">
       <UniqueIdentifier>{844e52ae-e656-4c99-8f75-56c9ecc26fe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{a71dbcd1-0566-48ba-ab36-adfff846e2f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\cyclone">
+      <UniqueIdentifier>{00e05eae-24f5-4dfb-9fc3-f0105fd54c0e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
