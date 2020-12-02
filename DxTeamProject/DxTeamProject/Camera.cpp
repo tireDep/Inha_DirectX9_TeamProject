@@ -90,7 +90,7 @@ void CCamera::Update_MouseMove()
 
 	switch (m_camStatus)
 	{
-	case CamStatus::eLeftPos:
+	case CamStatus::eRightPos:
 	{
 		isIn = true;
 		tempMousePos.x -= 1; tempMousePos.y -= 1;
@@ -102,7 +102,7 @@ void CCamera::Update_MouseMove()
 	}
 	break;
 
-	case CamStatus::eRightPos:
+	case CamStatus::eLeftPos:
 	{
 		isIn = true;
 		tempMousePos.x += 1; tempMousePos.y += 1;

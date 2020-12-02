@@ -2,7 +2,9 @@
 #include "Orb.h"
 
 
-COrb::COrb()
+COrb::COrb() :
+	m_Uv_x(0),
+	m_Uv_y(0.2)
 {
 }
 
@@ -15,14 +17,15 @@ void COrb::Setup()
 {
 	g_pFileLoadManager->FileLoad_Texture("Resource/Sprite/Orb", "제목 없음-1.png", m_pTex0);
 
-	ST_PT_VERTEX v;
-	v.p = D3DXVECTOR3(0, 0, 0); v.t = D3DXVECTOR2(0, 0.2); m_vecVertex_Multi.push_back(v);
-	v.p = D3DXVECTOR3(0, 2, 0); v.t = D3DXVECTOR2(0, 0); m_vecVertex_Multi.push_back(v);
-	v.p = D3DXVECTOR3(2, 0, 0); v.t = D3DXVECTOR2(0.2, 0.2); m_vecVertex_Multi.push_back(v);
+	//ST_PT_VERTEX v;
+	v.p = D3DXVECTOR3(0, 0, 0); v.t = D3DXVECTOR2(m_Uv_x, m_Uv_y); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(0, 2, 0); v.t = D3DXVECTOR2(m_Uv_x, m_Uv_x); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(2, 0, 0); v.t = D3DXVECTOR2(m_Uv_y, m_Uv_y); m_vecVertex_Multi.push_back(v);
 
-	v.p = D3DXVECTOR3(2, 2, 0); v.t = D3DXVECTOR2(0.2, 0); m_vecVertex_Multi.push_back(v);
-	v.p = D3DXVECTOR3(2, 0, 0); v.t = D3DXVECTOR2(0.2, 0.2); m_vecVertex_Multi.push_back(v);
-	v.p = D3DXVECTOR3(0, 2, 0); v.t = D3DXVECTOR2(0, 0); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(2, 2, 0); v.t = D3DXVECTOR2(m_Uv_y, m_Uv_x); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(2, 0, 0); v.t = D3DXVECTOR2(m_Uv_y, m_Uv_y); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(0, 2, 0); v.t = D3DXVECTOR2(m_Uv_x, m_Uv_x); m_vecVertex_Multi.push_back(v);
+
 }
 
 void COrb::Render()
@@ -47,7 +50,26 @@ void COrb::Render()
 
 void COrb::Update()
 {
+	m_Uv_x += 0.2;
+	m_Uv_y += 0.2;
+	if (m_Uv_x == 1)
+	{
+		m_Uv_x = 0;
+		m_Uv_y = m_Uv_y + 0.2;
+	}
+	if (m_Uv_y == 1)
+	{
+		m_Uv_x = 0;
+		m_Uv_y = 0.2;
+	}
 
+	 m_vecVertex_Multi[0].t = D3DXVECTOR2(m_Uv_x, m_Uv_y);
+	 m_vecVertex_Multi[1].t = D3DXVECTOR2(m_Uv_x, m_Uv_x);
+	 m_vecVertex_Multi[2].t = D3DXVECTOR2(m_Uv_y, m_Uv_y);
+	 
+	 m_vecVertex_Multi[3].t = D3DXVECTOR2(m_Uv_y, m_Uv_x);
+	 m_vecVertex_Multi[4].t = D3DXVECTOR2(m_Uv_y, m_Uv_y);
+	 m_vecVertex_Multi[5].t = D3DXVECTOR2(m_Uv_x, m_Uv_x);
 }
 
 void COrb::SetBillbord()

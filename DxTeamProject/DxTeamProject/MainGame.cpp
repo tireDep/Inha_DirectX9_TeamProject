@@ -192,6 +192,7 @@ void CMainGame::Setup()
 	m_pOrb = new COrb;
 	m_pOrb->Setup();
 
+
 	m_pLight = new CLight;
 	m_pLight->Setup();
 	//m_pLight->Setup(D3DXVECTOR3(1, 0, 0)); // sun light vector
@@ -286,6 +287,9 @@ void CMainGame::Update()
 	if (m_pSkinnedMesh)
 		m_pSkinnedMesh->Update();
 
+	if(m_pOrb)
+		m_pOrb->Update();
+
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
@@ -339,6 +343,8 @@ void CMainGame::Update()
 		// Ray y check
 		m_pCharacter->UpdateRayYCheck(*m_pMeshTile);
 	}
+
+
 
 	// if (g_gameManager->GetGridMapMode())
 	// {
