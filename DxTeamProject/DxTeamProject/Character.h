@@ -18,6 +18,7 @@ protected:
 	D3DXCOLOR				m_color;
 	bool					m_isCollided;
 	bool					m_isOBB;
+	
 	// grab
 	int						m_nGrabAbleObeject;
 	// Ray y check
@@ -42,7 +43,8 @@ public:
 	virtual bool Collider(bool isCollided);
 	COBB* m_pOBB;
 	COBB* GetOBB();
-	bool GetBool(bool istrue);
+	void SetBool(bool istrue);
+	
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	virtual string GetName();

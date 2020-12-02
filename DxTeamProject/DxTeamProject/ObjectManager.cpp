@@ -70,9 +70,17 @@ void CObjectManager::RemoveObject(IObject * pObject)
 	}
 }
 
-void CObjectManager::AddTileOBB(COBB* OBBbox)
+
+
+void CObjectManager::SetScale(float scale)
 {
-	m_OBB.push_back(OBBbox);
+	m_vScale = scale;
+	
+}
+
+float CObjectManager::GetScale()
+{
+   return m_vScale;
 }
 
 void CObjectManager::AddOBBbox(CPSOBB * OBBBox)
@@ -248,6 +256,11 @@ vector<CObject*> CObjectManager::GetVecObject()
 	return m_vecObject;
 }
 
+void CObjectManager::AddTileOBB(COBB* OBBbox)
+{
+	m_OBB.push_back(OBBbox);
+}
+
 void CObjectManager::Render()
 {
 	// << mapTest
@@ -296,6 +309,12 @@ void CObjectManager::RenderOBBBox()
 vector<IObject*> CObjectManager::GetVecIObject()
 {
 	return m_vecIObject;
+}
+
+COBB* CObjectManager::GetTileOBB()
+{
+	for(int i =0 ; i < m_OBB.size() ; ++i)
+	 return m_OBB[i];
 }
 
 void CObjectManager::Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos)

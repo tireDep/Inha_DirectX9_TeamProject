@@ -21,8 +21,9 @@ private:
 	vector<CObject *> m_vecObject;
 	vector<IObject *> m_vecIObject;
 	vector<CPSOBB *> m_vecOBBBox;
-	vector<COBB *> m_OBB;
+	
 	// >> mapTest
+	float m_vScale;
 	multimap<vector<IObject*>, bool> m_mapObject;
 	CFrustum* m_frustum;
 	thread* m_thread;
@@ -38,7 +39,9 @@ public:
 	void RemoveObject(IObject* pObject);
 
 	void AddTileOBB(COBB* OBBbox);
-
+	void SetScale(float scale);
+	float GetScale();
+	
 	void AddOBBbox(CPSOBB* OBBBox);
 	void RemoveObject(CPSOBB* OBBBox);
 
@@ -54,8 +57,8 @@ public:
 	vector<CObject *> GetVecObject();
 	vector<IObject *> GetVecIObject();
 
-	COBB* GetTileOBB() {return m_OBB[0];}
-
+	COBB* GetTileOBB();
+	vector<COBB*> m_OBB;
 	// >> mapTest
 	void AddMap();
 	void RemoveMap();

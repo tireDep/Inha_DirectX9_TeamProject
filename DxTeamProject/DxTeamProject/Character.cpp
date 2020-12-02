@@ -10,7 +10,6 @@ CCharacter::CCharacter()
 	, m_vPosition(0, 0.0f, 0)
 	, m_pOBB(NULL)
 	, m_isCollided(false)
-	, m_isOBB(false)
 	// Ray y check
 {
 	D3DXMatrixIdentity(&m_matWorld);
@@ -23,11 +22,12 @@ COBB* CCharacter::GetOBB()
 	return m_pOBB;
 }
 
-bool CCharacter::GetBool(bool istrue)
+void CCharacter::SetBool(bool istrue)
 {
+	
 	m_isOBB = istrue;
-	return m_isOBB;
 }
+
 
 void CCharacter::SetColor(D3DXCOLOR c)
 {
@@ -249,13 +249,29 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
 	//matWorldOBB._42 -= 0.5f;
 	//if (m_pOBB)
 	//	m_pOBB->Update(&matWorldOBB);
-	if (m_isOBB == true)
+	
+	
+	if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[0]) == 1)
 	{
-		m_vPosition.y = 1;
+		m_vPosition.y = g_pObjectManager->GetScale();
+	
+	}
+	else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[1]) == 1)
+	{
+		m_vPosition.y = g_pObjectManager->GetScale();
+	}
+	else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[2]) == 1)
+	{
+		m_vPosition.y = g_pObjectManager->GetScale();
+	}
+	else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[3]) == 1)
+	{
+		m_vPosition.y = g_pObjectManager->GetScale();
 	}
 	else
 	{
 		m_vPosition.y = 0;
+
 	}
 
 	if (pMap)
