@@ -6,8 +6,9 @@ class COBB;
 class CTile : public IObject
 {
 private:
-	COBB* m_pOBB;
-
+	vector<COBB*> m_pOBB;
+	D3DXVECTOR3 m_vMin;
+	vector<D3DXVECTOR3*> m_vMax;
 	D3DXMATRIXA16 matWorld;
 public:
 	CTile();
@@ -18,5 +19,6 @@ public:
 	void Update();
 	void Render();
 	
+	D3DXVECTOR3 GetScale() { return m_vScale; }
 };
 

@@ -177,6 +177,7 @@ void CMainGame::Setup()
 
 	m_pCharacter = new CCharacter;
 	m_pCharacter->Setup();
+	
 
 	m_pText = new CText;
 	m_pText->Setup();
@@ -446,19 +447,9 @@ void CMainGame::Render()
 
 	
 		D3DCOLOR c = D3DCOLOR_XRGB(255, 0, 0);
-		c = COBB::IsCollision(m_pCharacter->GetOBB(),
-			g_pObjectManager->GetTileOBB()) ? D3DCOLOR_XRGB(255, 0, 0) :
-			D3DCOLOR_XRGB(255, 255, 0);
-
-		if (c == D3DCOLOR_XRGB(255, 0, 0))
-		{
-			m_pCharacter->GetBool(true);
-		}
-		else
-		{
-			m_pCharacter->GetBool(false);
-		}
-
+	
+		
+		
 		if (m_pCharacter)
 			m_pCharacter->Render(c);
 

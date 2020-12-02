@@ -5,14 +5,14 @@ CTile::CTile()
 {
 	m_pMesh = NULL;
 	m_pTexture = NULL;
-	m_pOBB = NULL;
+	
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&matWorld);
 }
 
 CTile::~CTile()
 {
-	SafeDelete(m_pOBB);
+	
 	SafeRelease(m_pMesh);
 	SafeRelease(m_pTexture);
 }
@@ -24,9 +24,12 @@ void CTile::Setup(ST_MapData setData)
 	m_strXFile = setData.strXFilePath;
 	m_strTxtFile = setData.strTxtPath;
 	m_ObjectType = setData.objType;
-	m_vScale = setData.vScale; // 0.05, 0.01 ,0.05
+	m_vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
 	m_vRotate = setData.vRotate;
 	m_vTranslate = setData.vTranslate;
+
+
+	
 
 	ST_XFile* xfile = new ST_XFile;
 
@@ -55,24 +58,42 @@ void CTile::Setup(ST_MapData setData)
 
 	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
 	m_matWorld = matS * matR * matT;
-
+	matWorld =  matT;
 	D3DXVECTOR3 *pVertices;
-	D3DXVECTOR3 m_vMin, m_vMax;
+	for (int i = 0; i < m_vecMtrls.size(); ++i)
+	m_vMax.push_back(new D3DXVECTOR3);
 
-	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
-	D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), 
-	m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
-	m_pMesh->UnlockVertexBuffer();
+	
 
-	m_pOBB = new COBB;
-	m_pOBB->SetupTile(m_vMin , m_vMax  ,m_vMax * m_vScale.y , m_vScale.x, m_vScale.z);
-	g_pObjectManager->AddTileOBB(m_pOBB);
+	for (int i = 0; i < m_vecMtrls.size(); ++i)
+	{
+		m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+		D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(),
+			m_pMesh->GetNumBytesPerVertex(), &m_vMin, m_vMax[i]);
+		m_pMesh->UnlockVertexBuffer();
+		
+	}
+	
+	for (int i = 0; i < m_vecMtrls.size(); ++i)
+		m_pOBB.push_back(new COBB);
+	
+	for (int i = 0; i < m_pOBB.size(); ++i)
+	{
+		m_pOBB[i]->SetupTile(m_vMin, *m_vMax[i], *m_vMax[i] * m_vScale.y, m_vScale.x, m_vScale.z);
+		g_pObjectManager->AddTileOBB(m_pOBB[i]);
+		g_pObjectManager->SetScale(m_vMax[i]->y * m_vScale.y * m_vTranslate.y);
+		// 스케일값 , 위치값 따로 받아야함.
+	}
 }
 
 void CTile::Update()
 {
-	if (m_pOBB)
-		m_pOBB->Update(&matWorld);
+
+	
+
+	for (int i = 0; i < m_pOBB.size(); ++i)
+	if (m_pOBB[i])
+		m_pOBB[i]->Update(&matWorld);
 
 }
 
