@@ -16,7 +16,8 @@ private:
 	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);	// Center of mass position
 	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vLinearVelocity, LinearVelocity);	// Linear Velocity
 	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vLinearAccerleration, LinearAccerleration);	// linear Accerleration
-	CTestForce sumForces;	// Force
+	CTestForce constantForce;	// Constant Force(Gravity , ...)
+	CTestForce impulseForce;	// Collision Force
 
 	// rotation
 	CTestAngleSet currentOrientation; // Orientation
@@ -29,13 +30,14 @@ private:
 	Synthesize(float, m_fElasticity, Elasticity);	// Elastcity
 	Synthesize(float, m_fBoundingSphere, BoundingSphere);	// BoundingSphere Radius
 
-	Synthesize(bool, m_isForceApplied, ForceApplied);
 	D3DXMATRIXA16 m_matWorld;
 public:
 	void setMass(float massValue);
 	float getMass();
-	void setForce(CTestForce sumExternalForces);
-	CTestForce getForce();
+	void setConstantForce(CTestForce ConstantForce);
+	CTestForce getConstantForce();
+	void setImpulseForce(CTestForce ImpulseForce);
+	CTestForce getImpulseForce();
 	void setCurrentOrientation(CTestAngleSet newOrientation);
 	CTestAngleSet getCurrentOrientation();
 

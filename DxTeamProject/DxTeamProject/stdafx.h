@@ -226,3 +226,10 @@ struct ST_MapData
 #define BLUE	D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f)
 #define GREEN	D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f)
 #define YELLOW	D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f)
+
+// Physical close to zero
+inline bool CloseToZero(float testValue)
+{
+	bool answer = (testValue >= -0.000001f) && (testValue <= 0.000001f) ? true : false;
+	return answer;
+}

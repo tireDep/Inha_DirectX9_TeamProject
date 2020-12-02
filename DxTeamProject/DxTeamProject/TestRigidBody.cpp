@@ -3,7 +3,7 @@
 
 CTestRigidBody::CTestRigidBody()
 	: m_pMesh(NULL)
-	, m_fMass(10)
+	, m_fMass(100)
 	, m_vPosition(0, 0, 0)
 	, m_vLinearVelocity(0, 0, 0)
 	, m_vLinearAccerleration(0, 0, 0)
@@ -11,8 +11,7 @@ CTestRigidBody::CTestRigidBody()
 	, m_vAngularAccerleration(0, 0, 0)
 	, m_vRotationInertia(39.6f, 39.6f, 12.5f)
 	, m_vTorque(0, 0, 0)
-	, m_isForceApplied(true)
-	, m_fElasticity(1.0f)
+	, m_fElasticity(0.5f)
 	, m_fBoundingSphere(0.68f)
 {
 	D3DXMatrixIdentity(&m_matWorld);
@@ -35,14 +34,24 @@ float CTestRigidBody::getMass()
 	return m_fMass;
 }
 
-void CTestRigidBody::setForce(CTestForce sumExternalForces)
+void CTestRigidBody::setConstantForce(CTestForce ConstantForce)
 {
-	sumForces = sumExternalForces;
+	constantForce = ConstantForce;
 }
 
-CTestForce CTestRigidBody::getForce()
+CTestForce CTestRigidBody::getConstantForce()
 {
-	return sumForces;
+	return constantForce;
+}
+
+void CTestRigidBody::setImpulseForce(CTestForce ImpulseForce)
+{
+	impulseForce = ImpulseForce;
+}
+
+CTestForce CTestRigidBody::getImpulseForce()
+{
+	return impulseForce;
 }
 
 void CTestRigidBody::setCurrentOrientation(CTestAngleSet newOrientation)
@@ -58,8 +67,6 @@ CTestAngleSet CTestRigidBody::getCurrentOrientation()
 void CTestRigidBody::Setup()
 {
 	D3DXCreateBox(g_pD3DDevice, 1, 1, 1, &m_pMesh, NULL);
-	//sumForces.SetForceVector(D3DXVECTOR3(3.0f, 0.0f, 0.0f));
-	//sumForces.SetForceLocation(D3DXVECTOR3(0.0f, 0.0f, -30.0f));
 	m_stMtl.Ambient = GRAY;
 	m_stMtl.Diffuse = GRAY;
 	m_stMtl.Specular = GRAY;
@@ -70,6 +77,8 @@ void CTestRigidBody::Update(float duration)
 	// linear
 	assert(m_fMass != 0);
 
+	CTestForce sumForces;
+	sumForces.SetForceVector(constantForce.GetForceVector() + impulseForce.GetForceVector());
 	m_vLinearAccerleration = sumForces.GetForceVector() / m_fMass;
 	m_vLinearVelocity += m_vLinearAccerleration * duration;
 	m_vPosition += m_vLinearVelocity * duration;
@@ -78,7 +87,7 @@ void CTestRigidBody::Update(float duration)
 	D3DXMatrixTranslation(&totalTransaltion, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 
 	// angular
-	D3DXVec3Cross(&m_vTorque, &sumForces.GetForceLocation(), &sumForces.GetForceVector());
+	D3DXVec3Cross(&m_vTorque, &impulseForce.GetForceLocation(), &impulseForce.GetForceVector());
 
 	m_vAngularAccerleration.x = m_vTorque.x / m_vRotationInertia.x;
 	m_vAngularAccerleration.y = m_vTorque.y / m_vRotationInertia.y;
@@ -98,6 +107,10 @@ void CTestRigidBody::Update(float duration)
 	D3DXMatrixMultiply(&totalRotation, &totalRotation, &rotationZ);
 
 	D3DXMatrixMultiply(&m_matWorld, &totalRotation, &totalTransaltion);
+
+	//D3DXVECTOR3 tmp(0.0f, 0.0f, 0.0f);
+	//impulseForce.SetForceVector(tmp);
+	//impulseForce.SetForceLocation(tmp);
 }
 
 void CTestRigidBody::Render()

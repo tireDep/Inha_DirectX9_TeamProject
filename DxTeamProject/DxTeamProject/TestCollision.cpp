@@ -105,16 +105,10 @@ bool CTestCollision::CalculateReactions()
 	CTestForce impulseForce;
 	impulseForce.SetForceVector(numerator / denominator);
 	impulseForce.SetForceLocation(forcePosition1);
+	m_pFirstObject->setImpulseForce(impulseForce);
 
-	D3DXVECTOR3 existingForce = m_pFirstObject->getForce().GetForceVector();
-
-	CTestForce totalForce;
-	totalForce.SetForceVector(existingForce + impulseForce.GetForceVector());
-	m_pFirstObject->setForce(totalForce);
-
-	existingForce = m_pSecondObject->getForce().GetForceVector();
-	totalForce.SetForceVector(existingForce - impulseForce.GetForceVector());
-	m_pSecondObject->setForce(totalForce);
+	impulseForce.SetForceVector(-1 * impulseForce.GetForceVector());
+	m_pSecondObject->setImpulseForce(impulseForce);
 
 	return true;
 }

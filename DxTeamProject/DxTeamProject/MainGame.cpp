@@ -93,7 +93,7 @@ void CMainGame::HandleOverlapping(float timeIncrement, int firstobject, int seco
 	float changeInTime = timeIncrement;
 
 	collision_status collisionOccured = COLLISTION_OVERLAPPING;
-	for (bool done = false; (!done) && !((-0.00001f < changeInTime) && (changeInTime < 0.00001f));)
+	for (bool done = false; (!done) && (!CloseToZero(changeInTime));)
 	{
 		switch (collisionOccured)
 		{
@@ -110,7 +110,7 @@ void CMainGame::HandleOverlapping(float timeIncrement, int firstobject, int seco
 					tempVector = firstObject->GetLinearVelocity();
 					tempVector *= -1;
 					firstObject->SetLinearVelocity(tempVector);
-					firstObject->getForce().SetForceVector(firstObject->getForce().GetForceVector() * -1);
+					firstObject->impulseForce.SetForceVector(firstObject->impulseForce.GetForceVector() * -1);
 
 					tempVector = secondObject->GetAngularVelocity();
 					tempVector *= -1;
@@ -118,7 +118,7 @@ void CMainGame::HandleOverlapping(float timeIncrement, int firstobject, int seco
 					tempVector = secondObject->GetLinearVelocity();
 					tempVector *= -1;
 					secondObject->SetLinearVelocity(tempVector);
-					secondObject->getForce().SetForceVector(secondObject->getForce().GetForceVector()*-1);
+					secondObject->impulseForce.SetForceVector(secondObject->impulseForce.GetForceVector() * -1);
 
 					firstObject->Update(changeInTime);
 					secondObject->Update(changeInTime);
@@ -131,18 +131,20 @@ void CMainGame::HandleOverlapping(float timeIncrement, int firstobject, int seco
 					//tempVector = firstObject->GetLinearVelocity();
 					//tempVector *= -1;
 					//firstObject->SetLinearVelocity(tempVector);
-					//firstObject->getForce().SetForceVector(firstObject->getForce().GetForceVector()*-1);
+					//firstObject->impulseForce.SetForceVector(firstObject->impulseForce.GetForceVector() * -1);
 					//tempVector = secondObject->GetAngularVelocity();
 					//tempVector *= -1;
 					//secondObject->SetAngularVelocity(tempVector);
 					//tempVector = secondObject->GetLinearVelocity();
 					//tempVector *= -1;
 					//secondObject->SetLinearVelocity(tempVector);
-					//secondObject->getForce().SetForceVector(secondObject->getForce().GetForceVector()*-1);
+					//secondObject->impulseForce.SetForceVector(secondObject->impulseForce.GetForceVector() * -1);
+
 					//firstObject->Update(changeInTime);
 					//secondObject->Update(changeInTime);
-					//vecRigidBody[firstobject] = &firstObject;
-					//vecRigidBody[secondobject] = &secondObject;
+
+					//vecRigidBody[firstobject] = firstObject;
+					//vecRigidBody[secondobject] = secondObject;
 					cout << "in" << endl;
 					collisionOccured = theCollision.CollisionOccurred();
 				}
@@ -160,7 +162,7 @@ void CMainGame::HandleOverlapping(float timeIncrement, int firstobject, int seco
 				break;
 		}	// << : switch
 	}	// << : for
-	if (-0.00001f < changeInTime && changeInTime < 0.00001f)
+	if (CloseToZero(changeInTime))
 	{
 		theCollision.CalculateReactions();
 		vecRigidBody[firstobject]->Update(changeInTime);
@@ -180,7 +182,6 @@ void CMainGame::Setup()
 	m_pCharacter = new CCharacter;
 	m_pCharacter->Setup();
 	
-
 	m_pText = new CText;
 	m_pText->Setup();
 
@@ -193,7 +194,6 @@ void CMainGame::Setup()
 	m_pOrb = new COrb;
 	m_pOrb->Setup();
 
-
 	m_pLight = new CLight;
 	m_pLight->Setup();
 	//m_pLight->Setup(D3DXVECTOR3(1, 0, 0)); // sun light vector
@@ -205,21 +205,21 @@ void CMainGame::Setup()
 	m_pSkydome->Setup("Resource/XFile/Sky", "skydome.X");
 
 	/// 이 아래는 지울 수도 있는 선언
-	for (int i = 0; i < 8; i++)
-	{
-		CPSphere* Sphere = new CPSphere();
-		Sphere->Setup(D3DXVECTOR3(25, 0.5f, 2 * i + 3));
-	}
-	for (int i = 0; i < 8; i++)
-	{
-		CPSBox* box = new CPSBox();
-		box->Setup(D3DXVECTOR3(-25, 0.5, 2 * i + 3));
-	}
-	for (int i = 0; i < 8; i++)
-	{
-		CPSCylinder* cylinder = new CPSCylinder();
-		cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 25));
-	}
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	CPSphere* Sphere = new CPSphere();
+	//	Sphere->Setup(D3DXVECTOR3(25, 0.5f, 2 * i + 3));
+	//}
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	CPSBox* box = new CPSBox();
+	//	box->Setup(D3DXVECTOR3(-25, 0.5, 2 * i + 3));
+	//}
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	CPSCylinder* cylinder = new CPSCylinder();
+	//	cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 25));
+	//}
 	//m_pHeightMap = new CHeight;
 	//m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
 
@@ -241,36 +241,40 @@ void CMainGame::Setup()
 	m_pMeshTile->Setup();
 
 	// Rotation Test
-
-	m_pRigidBody = new CTestRigidBody;
-	m_pRigidBody->Setup();
-
-	
-
 	//m_pRigidBody = new CTestRigidBody;
 	//m_pRigidBody->Setup();
-	CTestForce theForce;
-	for (int i = 0; i < 3; i++)
+
+	for (int i = 0; i < 4; i++)
 	{
 		CTestRigidBody* m_pRigidBody = new CTestRigidBody();
 		m_pRigidBody->Setup();
 		vecRigidBody.push_back(m_pRigidBody);
 	}
-	vecRigidBody[0]->SetPosition(D3DXVECTOR3(-3.0f, 0.5f, 0.0f));
-	theForce.SetForceVector(D3DXVECTOR3(1.0f, 0.0f, 0.0f));
-	theForce.SetForceLocation(D3DXVECTOR3(0.0f, 0.0f, -1.0f));
-	vecRigidBody[0]->setForce(theForce);
+	D3DXVECTOR3 gravity(0, -9.8f, 0);
 
-	vecRigidBody[1]->SetPosition(D3DXVECTOR3(0.0f, 3.5f, 0.0f));
-	theForce.SetForceVector(D3DXVECTOR3(-1.0f, -1.0f, 0.0f));
-	theForce.SetForceLocation(D3DXVECTOR3(0.0f, -1.0f, -1.0f));
-	vecRigidBody[1]->setForce(theForce);
+	vecRigidBody[0]->SetPosition(D3DXVECTOR3(-3.0f, 5.0f, 5.0f));
+	vecRigidBody[0]->constantForce.SetForceVector(gravity);
+	vecRigidBody[0]->constantForce.SetForceLocation(D3DXVECTOR3(-3.0f, 5.0f, 5.0f));
+	vecRigidBody[0]->impulseForce.SetForceVector(D3DXVECTOR3(1.0f, -1.0f, 0.0f));
+	vecRigidBody[0]->impulseForce.SetForceLocation(D3DXVECTOR3(0.0f, 0.0f, -1.0f));
 
-	vecRigidBody[2]->SetPosition(D3DXVECTOR3(0.0f, -2.5f, 0.0f));
-	theForce.SetForceVector(D3DXVECTOR3(0.0f, 2.0f, 0.0f));
-	theForce.SetForceLocation(D3DXVECTOR3(1.0f, -1.0f, 0.0f));
-	vecRigidBody[2]->setForce(theForce);
+	vecRigidBody[1]->SetPosition(D3DXVECTOR3(0.0f, 3.0f, 5.0f));
+	vecRigidBody[1]->constantForce.SetForceVector(gravity);
+	vecRigidBody[1]->constantForce.SetForceLocation(D3DXVECTOR3(0.0f, 3.0f, 5.0f));
+	vecRigidBody[1]->impulseForce.SetForceVector(D3DXVECTOR3(-1.0f, -1.0f, 0.0f));
+	vecRigidBody[1]->impulseForce.SetForceLocation(D3DXVECTOR3(0.0f, -1.0f, -1.0f));
 
+	vecRigidBody[2]->SetPosition(D3DXVECTOR3(4.0f, 4.0f, 7.0f));
+	vecRigidBody[2]->constantForce.SetForceVector(gravity);
+	vecRigidBody[2]->constantForce.SetForceLocation(D3DXVECTOR3(4.0f, 4.0f, 7.0f));
+	vecRigidBody[2]->impulseForce.SetForceVector(D3DXVECTOR3(-3.0f, 3.0f, 0.0f));
+	vecRigidBody[2]->impulseForce.SetForceLocation(D3DXVECTOR3(1.0f, -1.0f, 0.0f));
+
+	vecRigidBody[3]->SetPosition(D3DXVECTOR3(-10.0f, 4.0f, 5.0f));
+	vecRigidBody[3]->constantForce.SetForceVector(gravity);
+	vecRigidBody[3]->constantForce.SetForceLocation(D3DXVECTOR3(-10.0f, 4.0f, 5.0f));
+	vecRigidBody[3]->impulseForce.SetForceVector(D3DXVECTOR3(10.0f, 5.0f, 0.0f));
+	vecRigidBody[3]->impulseForce.SetForceLocation(D3DXVECTOR3(0.0f, 0.0f, 1.0f));
 
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm = new CSoundManager;
@@ -334,8 +338,6 @@ void CMainGame::Update()
 			v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
 			D3DXVec3Normalize(&v, &v);
 			g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->SetPusingForce(v);
-		
-		
 		}
 		else
 		{
@@ -345,17 +347,15 @@ void CMainGame::Update()
 		m_pCharacter->UpdateRayYCheck(*m_pMeshTile);
 	}
 
-
-
-	// if (g_gameManager->GetGridMapMode())
-	// {
-	// 	m_pPrevFrustum = m_pNowFrustum;
-	// 	m_pNowFrustum.Update();
-	// 	if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum))
-	// 	{
-	// 		m_GridMap->CalcNewMap(&m_pNowFrustum);
-	// 	}
-	// }
+	 //if (g_gameManager->GetGridMapMode())
+	 //{
+	 //	m_pPrevFrustum = m_pNowFrustum;
+	 //	m_pNowFrustum.Update();
+	 //	if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum))
+	 //	{
+	 //		m_GridMap->CalcNewMap(&m_pNowFrustum);
+	 //	}
+	 //}
 
 	if (g_gameManager->GetGridMapMode())
 	{
@@ -388,9 +388,10 @@ void CMainGame::Update()
 	// Rotation Test
 	//m_pRigidBody->Update(g_pTimeManager->GetElapsedTime());
 
-	for (int i = 0; i < 2; i++)
+
+	for (int i = 0; i < 3; i++)
 	{
-		for (int j = i + 1; j < 3; j++)
+		for (int j = i + 1; j < 4; j++)
 		{
 			CTestCollision theCollision(vecRigidBody[i], vecRigidBody[j]);
 			collision_status collisionOccurred = theCollision.CollisionOccurred();
@@ -410,9 +411,17 @@ void CMainGame::Update()
 		}
 	}
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 4; i++)
+	{
+		float distance = vecRigidBody[i]->GetPosition().y - vecRigidBody[i]->GetBoundingSphere();
+		if ((CloseToZero(distance) || (distance) < 0.0f))
+		{
+			D3DXVECTOR3 tmp = vecRigidBody[i]->GetLinearVelocity();
+			tmp.y = -tmp.y * vecRigidBody[i]->GetElasticity();
+			vecRigidBody[i]->SetLinearVelocity(tmp);
+		}
 		vecRigidBody[i]->Update(g_pTimeManager->GetElapsedTime());
-	//vecRigidBody[i]->Update(0.01f);
+	}
 
 	/// 릴리즈 버전을 위한 주석처리
 	// 민종씨 코드
@@ -456,12 +465,7 @@ void CMainGame::Render()
 		m_pGrid->Render();
 	
 
-		D3DCOLOR c = D3DCOLOR_XRGB(255, 0, 0);
-	
-		
-
-
-
+	D3DCOLOR c = D3DCOLOR_XRGB(255, 0, 0);
 
 	if (m_pCharacter)
 		m_pCharacter->Render(c);
@@ -502,7 +506,7 @@ void CMainGame::Render()
 	// Rotation Test
 	//if (m_pRigidBody)
 	//	m_pRigidBody->Render();
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 4; i++)
 		vecRigidBody[i]->Render();
 
 	/// 릴리즈 버전을 위한 주석처리
