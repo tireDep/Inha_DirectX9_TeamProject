@@ -14,8 +14,8 @@
 #include "PSBox.h"
 #include "PSCylinder.h"
 #include "SkinnedMesh.h"
+#include "Skydome.h"
 /// 이 아래는 지울 수도 있는 선언
-#include "Xfile.h"
 #include "CHeight.h"
 // Ray y check
 #include "MeshTile.h"
@@ -41,7 +41,7 @@ CMainGame::CMainGame() :
 	m_pOrb(NULL),
 	// m_GridMap(NULL),
 	/// 이 아래는 지울 수도 있는 선언
-	m_Xfile(NULL),
+	m_pSkydome(NULL),
 	m_pHeightMap(NULL),
 	m_pSkinnedMesh(NULL)
 	// Ray y check
@@ -61,9 +61,9 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pUI);
 	SafeDelete(m_pText);
 	SafeDelete(m_pLight);
-	// SafeDelete(m_GridMap);
+	SafeDelete(m_pSkydome);
+
 	/// 이 아래는 지울 수도 있는 선언
-	SafeDelete(m_Xfile);
 	SafeDelete(m_pHeightMap);
 	SafeDelete(m_pSkinnedMesh);
 	g_pObjectManager->Destroy();
@@ -170,7 +170,9 @@ void CMainGame::HandleOverlapping(float timeIncrement, int firstobject, int seco
 
 void CMainGame::Setup()
 {
-	g_pFileLoadManager->FileLoad_MapData();
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	// >> mapData
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData2.dat");
 	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
@@ -195,10 +197,11 @@ void CMainGame::Setup()
 	m_pLight->Setup();
 	//m_pLight->Setup(D3DXVECTOR3(1, 0, 0)); // sun light vector
 
-	// m_GridMap = new CGridMap;
-	// m_GridMap->Setup();
 	m_pPrevFrustum.Setup();
 	m_pNowFrustum.Setup();
+
+	m_pSkydome = new CSkydome;
+	m_pSkydome->Setup("Resource/XFile/Sky", "skydome.X");
 
 	/// 이 아래는 지울 수도 있는 선언
 	for (int i = 0; i < 8; i++)
@@ -218,8 +221,6 @@ void CMainGame::Setup()
 	}
 	//m_pHeightMap = new CHeight;
 	//m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
-	m_Xfile = new CXfile;
-	m_Xfile->Setup();
 
 	//m_pSkinnedMesh = new CSkinnedMesh;
 	//m_pSkinnedMesh->SetUp("Resource/XFile/Character", "1slot Cha.X");
@@ -442,35 +443,33 @@ void CMainGame::Render()
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150, 150, 150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 
+	if (m_pSkydome)
+		m_pSkydome->Render(m_pCamera->GetCameraEye());
+
 	if (m_pGrid)
 		m_pGrid->Render();
-
 	
+
 		D3DCOLOR c = D3DCOLOR_XRGB(255, 0, 0);
 	
 		
-		
-		if (m_pCharacter)
-			m_pCharacter->Render(c);
 
 
-	m_pOrb->SetBillbord();
+
+
+	if (m_pCharacter)
+		m_pCharacter->Render(c);
 
 	if (m_pOrb)
+	{
+		m_pOrb->SetBillbord();
 		m_pOrb->Render();
+	}
 
 	g_pObjectManager->Render();
 
-	// if (g_gameManager->GetGridMapMode())
-	// {
-	// 	m_GridMap->Render();
-	// }
-
 	 //if (m_pSkinnedMesh)
 	 //	m_pSkinnedMesh->Render(NULL);
-
-	if (m_Xfile)
-		m_Xfile->Render(m_pCamera->GetCameraEye());
 
 	//if (m_pHeightMap)
 	//	m_pHeightMap->Render();

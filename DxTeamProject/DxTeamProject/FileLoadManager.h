@@ -30,6 +30,6 @@ public:
 	bool FileLoad_Sprite(string szFolder, string szFile, D3DXIMAGE_INFO& imageInfo, LPDIRECT3DTEXTURE9& lpTexture);
 	bool FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT& setShader);
 
-	bool FileLoad_MapData();
+	bool FileLoad_MapData(string szFolder, string szFile);
 };
 

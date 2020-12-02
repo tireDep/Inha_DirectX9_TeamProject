@@ -102,10 +102,8 @@ void CTile::Render()
 	//if (m_pOBB)
 	//	m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
 
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-
-	// if(m_pMtrl!=NULL)
-	// 	g_pD3DDevice->SetMaterial(&m_pMtrl);
 
 	if (m_pMesh == NULL)
 		return;
