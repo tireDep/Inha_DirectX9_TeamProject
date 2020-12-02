@@ -128,6 +128,7 @@ void CToolMain::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		if (wParam == VK_DELETE)
 		{
 			g_pObjectManager->RemoveClickedObj();
+			g_pFileLoadManager->SetIndexNumPrev();
 			CImguiClass::m_nowSelectindex = -1;
 			CImguiClass::m_prevSelectIndex = 0;
 		}
