@@ -35,16 +35,20 @@ void COrb::Render()
 	temp.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f);
 	temp.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f);
 	temp.Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f);
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	//g_pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ZERO);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 	g_pD3DDevice->SetMaterial(&temp);
-	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	//g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
 	g_pD3DDevice->SetFVF(ST_PT_VERTEX::FVF);
 	g_pD3DDevice->SetTexture(0, m_pTex0);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
 		m_vecVertex_Multi.size() / 3,
 		&m_vecVertex_Multi[0],
 		sizeof(ST_PT_VERTEX));
-	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
 	g_pD3DDevice->SetTexture(0, NULL);
 }
 
