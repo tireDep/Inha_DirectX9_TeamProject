@@ -46,6 +46,7 @@ void CFileLoadManager::ReadMapData(string fileName)
 	ifstream mapFile;
 	mapFile.open(fileName.c_str(), ios::in | ios::binary);
 
+	int loopCnt = 0;
 	if (mapFile.is_open())
 	{
 		if(m_fNowX == -nGridSize && g_pObjectManager->GetVecObject().size() != 0)
@@ -142,17 +143,33 @@ void CFileLoadManager::ReadMapData(string fileName)
 
 				getline(mapFile, readData);
 				mapData.dxColor.b = atof(readData.c_str());
-				
+
 				getline(mapFile, readData);
 				mapData.dxColor.a = atof(readData.c_str());
 			}
 
 			else if (readData == "# Object_End")
 				IObject::CreateObject(mapData);
+
+			else if (strstr(readData.c_str(), "# Section"))
+				loopCnt++;
 		}
 	}
 
 	mapFile.close();
+
+	
+	for (int i = 1; i < loopCnt; i++)		
+	{
+		// >> 한 파일에 여러 맵이 있을 경우 인덱스 계산
+		if (m_fNowX < m_fLimitNumX)
+			m_fNowX += m_fAddNumX;
+		else
+		{
+			m_fNowZ += m_fAddNumZ;
+			m_fNowX = 0;
+		}
+	}
 }
 
 void CFileLoadManager::SaveMapData(string fileName)
@@ -495,4 +512,22 @@ void CFileLoadManager::SetIndexNumZero()
 {
 	m_fNowX = -nGridSize;
 	m_fNowZ = 0;
+}
+
+void CFileLoadManager::SetIndexNumPrev()
+{
+	if (m_fNowX == -nGridSize && m_fNowZ == 0)
+		return;
+
+	bool isCheck = false;
+	if (m_fNowX == -nGridSize)
+	{
+		m_fNowX = m_fLimitNumX;
+		isCheck = true;
+	}
+	else
+		m_fNowX -= m_fAddNumX;
+
+	if (isCheck)
+		m_fNowZ -= m_fAddNumZ;
 }

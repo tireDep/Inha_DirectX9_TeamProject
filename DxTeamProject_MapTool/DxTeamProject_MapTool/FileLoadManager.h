@@ -38,5 +38,6 @@ public:
 	bool FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT& setShader);
 
 	void SetIndexNumZero();
+	void SetIndexNumPrev();
 };
 

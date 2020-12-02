@@ -92,6 +92,9 @@
     <ClCompile Include="ParticleContactGenerator.cpp">
       <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClCompile>
+    <ClCompile Include="Xfile.cpp">
+      <Filter>Xfile</Filter>
+    </ClCompile>
     <ClCompile Include="ParticleContactResolver.cpp">
       <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClCompile>
@@ -191,11 +194,6 @@
     </ClCompile>
     <ClCompile Include="Contact.cpp">
       <Filter>Physics\cyclone</Filter>
-    <ClCompile Include="Skydome.cpp">
-      <Filter>Xfile</Filter>
-    </ClCompile>
-    <ClCompile Include="Xfile.cpp">
-      <Filter>...TrashCan</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +312,9 @@
     <ClInclude Include="ParticleContactGenerator.h">
       <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClInclude>
+    <ClInclude Include="Xfile.h">
+      <Filter>Xfile</Filter>
+    </ClInclude>
     <ClInclude Include="ParticleContactResolver.h">
       <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClInclude>
@@ -413,11 +414,6 @@
     </ClInclude>
     <ClInclude Include="Contact.h">
       <Filter>Physics\cyclone</Filter>
-    <ClInclude Include="Skydome.h">
-      <Filter>Xfile</Filter>
-    </ClInclude>
-    <ClInclude Include="Xfile.h">
-      <Filter>...TrashCan</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
