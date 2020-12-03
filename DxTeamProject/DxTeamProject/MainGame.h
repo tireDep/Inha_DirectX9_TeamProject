@@ -21,6 +21,10 @@ class MeshTile;
 class CTestRigidBody;
 class CTestCollision;
 /// 릴리즈 버전을 위한 주석처리
+
+//Gimmick
+class Color_changer;
+
 //class CSoundManager;
 class CMainGame
 {
@@ -48,6 +52,9 @@ private:
 	vector<CTestRigidBody*> vecRigidBody;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
+
+	//Gimmick;
+	Color_changer* m_pChanger;
 public:
 	CMainGame();
 	~CMainGame();
