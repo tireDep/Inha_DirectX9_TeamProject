@@ -233,3 +233,5 @@ inline bool CloseToZero(float testValue)
 	bool answer = (testValue >= -0.000001f) && (testValue <= 0.000001f) ? true : false;
 	return answer;
 }
+
+#include "ReleaseTimer.h"
