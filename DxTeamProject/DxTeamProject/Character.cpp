@@ -290,7 +290,7 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
 	
 	}
 
-	cout << m_vPosition.y << endl;
+	
 	if (pMap)
 	{
 		pMap->GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
