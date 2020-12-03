@@ -203,6 +203,7 @@
     <ClCompile Include="MainGame.cpp">
       <Filter>Gimmick</Filter>
     </ClCompile>
+    <ClCompile Include="ReleaseTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -429,6 +430,7 @@
     <ClInclude Include="MeshTile.h">
       <Filter>Gimmick</Filter>
     </ClInclude>
+    <ClInclude Include="ReleaseTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
