@@ -196,6 +196,7 @@
     <ClCompile Include="PSOBB.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="ReleaseTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -417,6 +418,7 @@
     <ClInclude Include="PSOBB.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="ReleaseTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

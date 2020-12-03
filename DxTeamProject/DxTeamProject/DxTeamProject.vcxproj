@@ -200,6 +200,7 @@
     <ClInclude Include="PSphere.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="ReleaseTimer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Singleton.h" />
@@ -272,6 +273,7 @@
     <ClCompile Include="PSphere.cpp" />
     <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="ReleaseTimer.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SkinnedMesh.cpp" />
     <ClCompile Include="Skydome.cpp" />
