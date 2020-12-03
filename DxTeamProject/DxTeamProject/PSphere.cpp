@@ -2,14 +2,7 @@
 #include "PSphere.h"
 
 CPSphere::CPSphere()
-	: m_vAcceleration(0, 0, 0)
-	, m_vForceDirection(0, 0, 0)
-	, m_vForceAccum(0, 0, 0)
-	// roation
-	, m_vCurrentOrientation(0, 0, 0)
-	, m_vAngularVelocity(0, 0, 0)
-	, m_vAngularAcceleration(0, 0, 0)
-	, m_vTorque(0, 0, 0)
+	: m_fRadius(0.5f)
 {
 	m_strName = string("Sphere") + to_string(m_nRefCount);
 }
@@ -21,6 +14,11 @@ CPSphere::~CPSphere()
 void CPSphere::Setup()
 {
 	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pMesh, NULL);
+	// tmp BoundingSphere
+	m_fBoundingSphere = m_fRadius;
+	m_vRotationInertia.x = 2 * GetMass() * m_fRadius * m_fRadius / 5.0f;
+	m_vRotationInertia.y = 2 * GetMass() * m_fRadius * m_fRadius / 5.0f;
+	m_vRotationInertia.z = 2 * GetMass() * m_fRadius * m_fRadius / 5.0f;
 }
 
 void CPSphere::Setup(D3DXVECTOR3 center)
@@ -28,41 +26,6 @@ void CPSphere::Setup(D3DXVECTOR3 center)
 	Setup();
 	m_vPosition = center;
 	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-}
-
-void CPSphere::SetupRotation()
-{
-	m_vRotationalInertia.x = m_vRotationalInertia.y = m_vRotationalInertia.z = (2 * this->GetMass() * this->GetRadius() * this->GetRadius() / 3.0f);
-}
-
-void CPSphere::UpdateRotation(float duration, D3DXVECTOR3 point)
-{
-	// need to modify
-	D3DXVECTOR3 pt = point;
-	pt -= m_vPosition;
-	D3DXVECTOR3 tmp;
-	D3DXVec3Cross(&tmp, &m_vForceDirection, &pt);
-	m_vTorque = tmp;
-	m_vAngularAcceleration.x = m_vTorque.x / m_vRotationalInertia.x;
-	m_vAngularAcceleration.y = m_vTorque.y / m_vRotationalInertia.y;
-	m_vAngularAcceleration.z = m_vTorque.z / m_vRotationalInertia.z;
-	m_vAngularVelocity += (m_vAngularAcceleration * duration);
-	// x axis rotation
-	m_vCurrentOrientation.x += (m_vAngularVelocity.x * duration);
-	// y axis rotation
-	m_vCurrentOrientation.y += (m_vAngularVelocity.y * duration);
-	// z axis rotation
-	m_vCurrentOrientation.z += (m_vAngularVelocity.z * duration);
-	
-	D3DXMATRIXA16 matRotX, matRotY, matRotZ, matRotation;
-	D3DXMatrixRotationX(&matRotX, m_vCurrentOrientation.x);
-	D3DXMatrixRotationY(&matRotY, m_vCurrentOrientation.y);
-	D3DXMatrixRotationZ(&matRotZ, m_vCurrentOrientation.z);
-
-	D3DXMatrixMultiply(&matRotation, &matRotX, &matRotY);
-	D3DXMatrixMultiply(&matRotation, &matRotation, &matRotZ);
-	// rotation * translation
-	D3DXMatrixMultiply(&m_matWorld, &matRotation, &m_matWorld);
 }
 
 void CPSphere::Setup(const ST_MapData & mapData)
@@ -114,7 +77,7 @@ void CPSphere::Update(float duration)
 	if (m_isForceApplied)
 	{
 		if (!hasFiniteMass()) return;
-		linearforce = m_vForceDirection * GetMass();
+		linearforce = m_vForceVector * GetMass();
 		m_isForceApplied = false;
 	}
 	else
@@ -123,20 +86,83 @@ void CPSphere::Update(float duration)
 	if (m_finverseMass <= 0.0f) return;
 	assert(duration > 0.0f);
 
-	m_vAcceleration = linearforce * m_finverseMass;
-	m_vVelocity += (m_vAcceleration * duration);
-	m_vVelocity *= powf(m_fDamping, duration);
-	//m_vPosition += (m_vVelocity * duration);
-	m_vVelocity *= m_fDrag;
-	if (m_vVelocity.x > 0.001f || m_vVelocity.y > 0.001f || m_vVelocity.z > 0.001f)
+	m_vLinearAcceleration = linearforce * m_finverseMass;
+	m_vLinearVelocity += (m_vLinearAcceleration * duration);
+	m_vLinearVelocity *= powf(m_fDamping, duration);
+	m_vLinearVelocity *= m_fLinearDrag;
+	if (CloseToZero(m_vLinearVelocity.x) && CloseToZero(m_vLinearVelocity.y) && CloseToZero(m_vLinearVelocity.z))
 	{
-		m_vPosition += (m_vVelocity * duration);
+		m_vLinearVelocity.x = m_vLinearVelocity.y = m_vLinearVelocity.z = 0.0f;
+	}
+	else
+		m_vPosition += (m_vLinearVelocity * duration);
+
+	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+}
+
+void CPSphere::Update3D(float duration)
+{
+	D3DXVECTOR3 linearforce, angularforce;
+	if (m_isForceApplied)
+	{
+		if (!hasFiniteMass()) return;
+		linearforce = m_vForceVector * GetMass();
+		D3DXVec3Cross(&angularforce, &m_vForceLocation, &m_vForceVector);
+		m_isForceApplied = false;
 	}
 	else
 	{
-		m_vVelocity.x = m_vVelocity.y = m_vVelocity.z = 0.0f;
+		linearforce = D3DXVECTOR3(0, 0, 0);
+		angularforce = D3DXVECTOR3(0, 0, 0);
 	}
-	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+		
+	if (m_finverseMass <= 0.0f) return;
+	assert(duration > 0.0f);
+
+	//m_vLinearAcceleration = linearforce * m_finverseMass;
+	m_vLinearAcceleration = (linearforce+GRAVITY) * m_finverseMass;
+	m_vLinearVelocity += (m_vLinearAcceleration * duration);
+	m_vLinearVelocity *= powf(m_fDamping, duration);
+	m_vLinearVelocity *= m_fLinearDrag;
+	if (CloseToZero(m_vLinearVelocity.x) && CloseToZero(m_vLinearVelocity.y) && CloseToZero(m_vLinearVelocity.z))
+	{
+		m_vLinearVelocity.x = m_vLinearVelocity.y = m_vLinearVelocity.z = 0.0f;
+	}
+	else
+		m_vPosition += (m_vLinearVelocity * duration);
+
+	D3DXMATRIXA16 totalTransaltion;
+	D3DXMatrixTranslation(&totalTransaltion, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+
+	m_vTorque = angularforce;
+
+	m_vAngularAcceleration.x = m_vTorque.x / m_vRotationInertia.x;
+	m_vAngularAcceleration.y = m_vTorque.y / m_vRotationInertia.y;
+	m_vAngularAcceleration.z = m_vTorque.z / m_vRotationInertia.z;
+
+	m_vAngularVelocity += m_vAngularAcceleration * duration;
+	m_vAngularVelocity *= powf(m_fDamping, duration);
+	// tmp Test... Need to AngularDrag
+	m_vAngularVelocity *= m_fLinearDrag;
+	if (CloseToZero(m_vAngularVelocity.x) && CloseToZero(m_vAngularVelocity.y) && CloseToZero(m_vAngularVelocity.z))
+	{
+		m_vAngularVelocity.x = m_vAngularVelocity.y = m_vAngularVelocity.z = 0.0f;
+	}
+	else
+		m_vAngularVelocity += (m_vAngularVelocity * duration);
+
+	m_stOrientation.setXAngle(m_stOrientation.getXAngle() + m_vAngularVelocity.x * duration);
+	m_stOrientation.setYAngle(m_stOrientation.getYAngle() + m_vAngularVelocity.y * duration);
+	m_stOrientation.setZAngle(m_stOrientation.getZAngle() + m_vAngularVelocity.z * duration);
+
+	D3DXMATRIXA16 rotationX, rotationY, rotationZ, totalRotation;
+	D3DXMatrixRotationX(&rotationX, m_stOrientation.getXAngle());
+	D3DXMatrixRotationY(&rotationY, m_stOrientation.getYAngle());
+	D3DXMatrixRotationZ(&rotationZ, m_stOrientation.getZAngle());
+	D3DXMatrixMultiply(&totalRotation, &rotationX, &rotationY);
+	D3DXMatrixMultiply(&totalRotation, &totalRotation, &rotationZ);
+
+	D3DXMatrixMultiply(&m_matWorld, &totalRotation, &totalTransaltion);
 }
 
 void CPSphere::Update(float duration, CHeight* pMap)
@@ -195,7 +221,7 @@ void CPSphere::ClearAccumulator()
 void CPSphere::RunPhysics(float duration)
 {
 	if (!hasFiniteMass()) return;
-	AddForce(m_vForceDirection * GetMass());
+	AddForce(m_vForceVector * GetMass());
 	Integrate(duration);
 }
 
@@ -209,12 +235,12 @@ void CPSphere::Integrate(float duration)
 	if (m_finverseMass <= 0.0f) return;
 	assert(duration > 0.0f);
 
-	m_vPosition += (m_vVelocity * duration);
+	m_vPosition += (m_vLinearVelocity * duration);
 
-	D3DXVECTOR3 resultingAcc = m_vAcceleration;
+	D3DXVECTOR3 resultingAcc = m_vLinearAcceleration;
 	resultingAcc += (m_vForceAccum * m_finverseMass);
-	m_vVelocity += (resultingAcc * duration);
-	m_vVelocity *= powf(m_fDamping, duration);
+	m_vLinearVelocity += (resultingAcc * duration);
+	m_vLinearVelocity *= powf(m_fDamping, duration);
 
 	ClearAccumulator();
 }
@@ -234,27 +260,10 @@ void CPSphere::ReceiveEvent(ST_EVENT eventMsg)
 	CObject::ReceiveEvent(eventMsg);
 }
 
-void CPSphere::SetMass(const float mass)
-{
-	assert(mass != 0);
-	m_finverseMass = ((float)1.0) / mass;
-}
-
-float CPSphere::GetMass() const
-{
-	if (m_finverseMass == 0) { return FLT_MAX; }
-	else { return ((float)1.0) / m_finverseMass; }
-}
-
-bool CPSphere::hasFiniteMass() const
-{
-	return m_finverseMass >= 0.0f;
-}
-
 void CPSphere::SetPusingForce(D3DXVECTOR3 forcedirection)
 {
-	D3DXVec3Normalize(&m_vForceDirection, &forcedirection);
-	m_vForceDirection *= 100.0f;
+	D3DXVec3Normalize(&m_vForceVector, &forcedirection);
+	m_vForceVector *= 100.0f;
 	SetForceApplied(true);
 }
 
@@ -266,7 +275,7 @@ bool CPSphere::hasIntersected(CObject* otherobject)
 	D3DXVECTOR3 direction = this->GetPosition() - otherobject->GetPosition();
 	float distanceSq = direction.x * direction.x + direction.y * direction.y + direction.z * direction.z;
 
-	if (((this->GetRadius() + otherobject->GetRadius()) * (this->GetRadius() + otherobject->GetRadius())) < distanceSq)
+	if (((this->GetBoundingSphere() + otherobject->GetBoundingSphere()) * (this->GetBoundingSphere() + otherobject->GetBoundingSphere())) < distanceSq)
 		return false;
 	else
 		return true;
@@ -332,11 +341,11 @@ void CPSphere::CollisionOtherObject(CObject* otherobject)
 		direction = this->GetPosition() - otherobject->GetPosition();
 		// 2 dimension -> 3 dimension later editing...
 		distance = sqrt(direction.x * direction.x + direction.z * direction.z);
-		overlapInterval = 2 * otherobject->GetRadius() - distance;
-		warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetRadius() - overlapInterval));
+		overlapInterval = 2 * otherobject->GetBoundingSphere() - distance;
+		warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetBoundingSphere() - overlapInterval));
 
 		// implementation of collision
-		if (((otherobject->GetVelocity().x * otherobject->GetVelocity().x) + (otherobject->GetVelocity().z * otherobject->GetVelocity().z)) >= ((this->GetVelocity().x * this->GetVelocity().x) + (this->GetVelocity().z * this->GetVelocity().z)))
+		if (((otherobject->GetLinearVelocity().x * otherobject->GetLinearVelocity().x) + (otherobject->GetLinearVelocity().z * otherobject->GetLinearVelocity().z)) >= ((this->GetLinearVelocity().x * this->GetLinearVelocity().x) + (this->GetLinearVelocity().z * this->GetLinearVelocity().z)))
 		{
 			otherobject->CollisionOtherObject(this);
 			return;
@@ -357,8 +366,8 @@ void CPSphere::CollisionOtherObject(CObject* otherobject)
 		D3DXVECTOR3 massdirection;
 		massdirection = this->GetPosition() - otherobject->GetPosition();
 		D3DXVec3Normalize(&massdirection, &massdirection);
-		v1 = D3DXVec3Dot(&this->GetVelocity(), &massdirection);
-		v2 = D3DXVec3Dot(&otherobject->GetVelocity(), &massdirection);
+		v1 = D3DXVec3Dot(&this->GetLinearVelocity(), &massdirection);
+		v2 = D3DXVec3Dot(&otherobject->GetLinearVelocity(), &massdirection);
 		/// perfect elastic collision
 		//float elasticity = 1.0f;
 		float elasticity = (this->GetElasticity() + otherobject->GetElasticity()) / 2;
@@ -369,10 +378,10 @@ void CPSphere::CollisionOtherObject(CObject* otherobject)
 			/ (this->GetMass() + otherobject->GetMass());
 
 		D3DXVECTOR3 collisionV1, collisionV2;
-		collisionV1 = this->GetVelocity() + (finalv1 - v1) * massdirection;
-		collisionV2 = otherobject->GetVelocity() + (finalv2 - v2) * massdirection;
+		collisionV1 = this->GetLinearVelocity() + (finalv1 - v1) * massdirection;
+		collisionV2 = otherobject->GetLinearVelocity() + (finalv2 - v2) * massdirection;
 
-		this->SetVelocity(collisionV1);
-		otherobject->SetVelocity(collisionV2);
+		this->SetLinearVelocity(collisionV1);
+		otherobject->SetLinearVelocity(collisionV2);
 	}
 }

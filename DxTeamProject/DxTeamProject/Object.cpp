@@ -13,14 +13,22 @@ CObject::CObject()
 	, m_pShader(NULL)
 	, m_isClicked(false)
 	, m_isPicked(false)
-	, m_fRadius(0.5f)
+	, m_fBoundingSphere(0.5f)
 	, m_finverseMass(10.0f)
 	, m_fDamping(0.999f)
 	, m_vPosition(0, 0, 0)
-	, m_vVelocity(0, 0, 0)
+	, m_vLinearVelocity(0, 0, 0)
+	, m_vLinearAcceleration(0, 0, 0)
 	, m_fElasticity(1.0f)
 	, m_isForceApplied(false)
-	, m_fDrag(0.995f)
+	, m_fLinearDrag(0.995f)
+	, m_vForceVector(0, 0, 0)
+	, m_vForceLocation(0, 0, 0)
+	, m_vForceAccum(0, 0, 0)
+	, m_vAngularVelocity(0, 0, 0)
+	, m_vAngularAcceleration(0, 0, 0)
+	, m_vRotationInertia(0, 0, 0)
+	, m_vTorque(0, 0, 0)
 	//, m_tmpColor(Color::NONE)
 {
 	CObject::m_nRefCount += 1;
@@ -178,13 +186,21 @@ void CObject::ReceiveEvent(ST_EVENT eventMsg)
 		m_isClicked = false;
 }
 
-bool CObject::hasIntersected(CObject * otherobject)
+void CObject::SetMass(const float mass)
 {
-	return true;
+	assert(mass != 0);
+	m_finverseMass = ((float)1.0) / mass;
 }
 
-void CObject::CollisionOtherObject(CObject * otherobject)
+float CObject::GetMass() const
 {
+	if (m_finverseMass == 0) { return FLT_MAX; }
+	else { return ((float)1.0) / m_finverseMass; }
+}
+
+bool CObject::hasFiniteMass() const
+{
+	return m_finverseMass >= 0.0f;
 }
 
 void CObject::CreateObject(const ST_MapData & mapData)
@@ -277,5 +293,20 @@ void CObject::ChangeObjectColor()
 			SetElasticity(1.0f);
 			SetDrag(0.995f);
 			break;
+	}
+}
+
+void CObject::UpdateLand(float duration)
+{
+	float distance = GetPosition().y - GetBoundingSphere();
+	if (CloseToZero(distance) || distance < 0.0f)
+	{
+		D3DXVECTOR3 tmp = m_vLinearVelocity;
+		tmp.y = -tmp.y * m_fElasticity;
+		m_vLinearVelocity = tmp;
+	}
+	if (distance < -GetBoundingSphere())
+	{
+		m_vPosition.y = 0.5f;
 	}
 }
