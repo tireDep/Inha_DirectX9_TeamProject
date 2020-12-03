@@ -60,13 +60,8 @@ void CToolMain::Update()
 	m_pCamera->Update();
 
 	g_pObjectManager->Update();
-	// ray
-	if(m_pRay)
-		g_pObjectManager->Update(m_pRay);
-
+	
 	m_pImgui->Update();
-
-
 }
 
 void CToolMain::Render()
@@ -109,11 +104,15 @@ void CToolMain::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch (msg)
 	{
 	case WM_LBUTTONDOWN:
-	{
-		CRay r = CRay::RayAtWorldSpace(LOWORD(lParam), HIWORD(lParam));
-		m_pRay->SetOrigin(r.GetOrigin());
-		m_pRay->SetDirection(r.GetDirection());
-	}
+		{
+			CRay r = CRay::RayAtWorldSpace(LOWORD(lParam), HIWORD(lParam));
+			m_pRay->SetOrigin(r.GetOrigin());
+			m_pRay->SetDirection(r.GetDirection());
+
+			// ray
+			if (m_pRay)
+				g_pObjectManager->Update(m_pRay);
+		}
 	break;
 
 	case WM_RBUTTONDOWN:

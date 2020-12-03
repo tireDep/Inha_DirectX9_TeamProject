@@ -34,7 +34,11 @@ protected:
 
 	Synthesize(D3DXCOLOR, m_dxColor, Color);
 
+	LPD3DXEFFECT  m_pShader;
+
 	IObject();
+
+	void SetShader(const D3DXMATRIXA16& setMatWorld);
 
 public:
 	virtual ~IObject();
@@ -44,7 +48,7 @@ public:
 	virtual void Update() = 0;
 	// ray
 	virtual void Update(CRay * ray);
-	virtual void Render() = 0;
+	virtual void Render();
 
 	virtual void SetDiffScale(D3DXVECTOR3 set) = 0;
 
