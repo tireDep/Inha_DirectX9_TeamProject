@@ -60,8 +60,7 @@ void CTile::Setup(ST_MapData setData)
 	m_matWorld = matS * matR * matT;
 	matWorld =  matT;
 	D3DXVECTOR3 *pVertices;
-	for (int i = 0; i < m_vecMtrls.size(); ++i)
-	m_vMax.push_back(new D3DXVECTOR3);
+	
 
 	
 
@@ -69,7 +68,7 @@ void CTile::Setup(ST_MapData setData)
 	{
 		m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
 		D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(),
-			m_pMesh->GetNumBytesPerVertex(), &m_vMin, m_vMax[i]);
+			m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
 		m_pMesh->UnlockVertexBuffer();
 		
 	}
@@ -79,10 +78,10 @@ void CTile::Setup(ST_MapData setData)
 	
 	for (int i = 0; i < m_pOBB.size(); ++i)
 	{
-		m_pOBB[i]->SetupTile(m_vMin, *m_vMax[i], *m_vMax[i] * m_vScale.y, m_vScale.x, m_vScale.z);
+		m_pOBB[i]->SetupTile(m_vMin, m_vMax, m_vMax * m_vScale.y, m_vScale.x, m_vScale.z);
 		g_pObjectManager->AddTileOBB(m_pOBB[i]);
-		g_pObjectManager->SetScale(m_vMax[i]->y * m_vScale.y * m_vTranslate.y);
-		// 스케일값 , 위치값 따로 받아야함.
+		g_pObjectManager->SetScale(m_vMax.y);
+		
 	}
 }
 

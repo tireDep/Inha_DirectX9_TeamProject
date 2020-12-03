@@ -70,8 +70,6 @@ void CObjectManager::RemoveObject(IObject * pObject)
 	}
 }
 
-
-
 void CObjectManager::SetScale(float scale)
 {
 	m_vScale = scale;

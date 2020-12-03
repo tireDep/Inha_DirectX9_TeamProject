@@ -8,7 +8,7 @@ class CTile : public IObject
 private:
 	vector<COBB*> m_pOBB;
 	D3DXVECTOR3 m_vMin;
-	vector<D3DXVECTOR3*> m_vMax;
+	D3DXVECTOR3 m_vMax;
 	D3DXMATRIXA16 matWorld;
 public:
 	CTile();
