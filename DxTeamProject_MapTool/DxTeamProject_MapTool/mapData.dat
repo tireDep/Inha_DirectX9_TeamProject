@@ -1,291 +1,91 @@
 # Object_Start
 # ObjectName
-Tile1
+Box1
 # FolderPath
-Resource/XFile/Tile
+
 # FilePath
-Tile_08.X
+
 # TxtPath
-Texture_01.png
+
 # ObjectType
-7
+17
 # Scale
-0.1
-0.1
-0.1
+2
+1
+2
 # Rotate
 0
 0
 0
 # Translate
-0
-0
+5
+0.5
 0
 # Color
-0
-0
-0
-0
+0.5
+0.5
+0.5
+1
 # Object_End
-
-# Section =======================================
 
 # Object_Start
 # ObjectName
-Tile1(0)
+Sphere2
 # FolderPath
-Resource/XFile/Tile
+
 # FilePath
-Tile_08.X
+
 # TxtPath
-Texture_01.png
+
 # ObjectType
-7
+18
 # Scale
-0.1
-0.1
-0.1
+2
+2
+2
 # Rotate
 0
 0
 0
 # Translate
-30
 0
+5
 0
 # Color
-0
-0
-0
-0
+0.5
+0.5
+0.5
+1
 # Object_End
-
-# Section =======================================
 
 # Object_Start
 # ObjectName
-Tile1(1)
+Cylinder3
 # FolderPath
-Resource/XFile/Tile
+
 # FilePath
-Tile_08.X
+
 # TxtPath
-Texture_01.png
+
 # ObjectType
-7
+19
 # Scale
-0.1
-0.1
-0.1
+2
+2
+1
 # Rotate
 0
-0
-0
-# Translate
-60
-0
-0
-# Color
-0
-0
-0
-0
-# Object_End
-
-# Section =======================================
-
-# Section =======================================
-
-# Object_Start
-# ObjectName
-Tile1(2)
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_08.X
-# TxtPath
-Texture_01.png
-# ObjectType
-7
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
+90
 0
 # Translate
 0
-0
--30
+0.5
+3
 # Color
-0
-0
-0
-0
-# Object_End
-
-# Section =======================================
-
-# Object_Start
-# ObjectName
-Tile1(3)
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_08.X
-# TxtPath
-Texture_01.png
-# ObjectType
-7
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-30
-0
--30
-# Color
-0
-0
-0
-0
-# Object_End
-
-# Section =======================================
-
-# Object_Start
-# ObjectName
-Tile1(4)
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_08.X
-# TxtPath
-Texture_01.png
-# ObjectType
-7
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-60
-0
--30
-# Color
-0
-0
-0
-0
-# Object_End
-
-# Section =======================================
-
-# Section =======================================
-
-# Object_Start
-# ObjectName
-Tile1(5)
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_08.X
-# TxtPath
-Texture_01.png
-# ObjectType
-7
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-0
-0
--60
-# Color
-0
-0
-0
-0
-# Object_End
-
-# Section =======================================
-
-# Object_Start
-# ObjectName
-Tile1(6)
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_08.X
-# TxtPath
-Texture_01.png
-# ObjectType
-7
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-30
-0
--60
-# Color
-0
-0
-0
-0
-# Object_End
-
-# Section =======================================
-
-# Object_Start
-# ObjectName
-Tile1(7)
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_08.X
-# TxtPath
-Texture_01.png
-# ObjectType
-7
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-60
-0
--60
-# Color
-0
-0
-0
-0
+0.5
+0.5
+0.5
+1
 # Object_End
 
 # Section =======================================
