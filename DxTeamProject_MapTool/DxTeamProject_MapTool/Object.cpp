@@ -72,7 +72,7 @@ void CObject::Render()
 	if (m_pMesh == NULL)
 		return;
 
-	if (!m_isPick && !m_isClick)
+	if (!m_isPick && !m_isClick || !m_pShader)
 		m_pMesh->DrawSubset(0);
 	else
 	{

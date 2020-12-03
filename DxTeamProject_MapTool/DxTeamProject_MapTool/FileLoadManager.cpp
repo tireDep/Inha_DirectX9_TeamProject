@@ -191,8 +191,11 @@ void CFileLoadManager::SaveMapData(string fileName)
 	float minNumZ = -halfGridNum - addNum, maxNumZ = halfGridNum + addNum;
 	int maxIndex = g_pObjectManager->GetVecSize();
 
+	int preNum = 0;
+	int checkNum = 0;
 	while (saveNum < maxIndex)
 	{
+		preNum = saveNum;
 		for (int i = 0; i < maxIndex; i++)
 		{
 			D3DXVECTOR3 vPos = g_pObjectManager->GetIObject(i).GetTranslate();
@@ -201,6 +204,16 @@ void CFileLoadManager::SaveMapData(string fileName)
 				DoFileSave(saveFile, mapFile, i);
 				saveNum++;
 			}
+		}
+
+		if (preNum == saveNum)
+			checkNum++;
+
+		if (checkNum >= 9999)
+		{
+			// << 무한루프 처리
+			ErrMessageBox("파일저장에러, 그리드 범위 확인", "ERROR");
+			break;
 		}
 
 		// >> Next map set

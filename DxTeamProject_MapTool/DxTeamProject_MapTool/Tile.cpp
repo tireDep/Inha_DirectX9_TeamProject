@@ -73,7 +73,7 @@ void CTile::Render()
 	if (m_pMesh == NULL)
 		return;
 
-	if (!m_isPick && !m_isClick)
+	if (!m_isPick && !m_isClick || !m_pShader)
 	{
 		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{

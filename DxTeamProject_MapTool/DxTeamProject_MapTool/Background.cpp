@@ -78,23 +78,13 @@ void CBackground::Render()
 	if (m_pMesh == NULL)
 		return;
 
-	if (!m_isPick && !m_isClick)
-	{
-		g_pD3DDevice->SetTexture(0, m_pTexture);
+	g_pD3DDevice->SetTexture(0, m_pTexture);
 
+	if (!m_isPick && !m_isClick || !m_pShader)
+	{
 		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
-
-			//if (m_vecTextures[i] != 0)
-			//	g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
-
-			//else if (m_pTexture != NULL)
-			//{
-			//	g_pD3DDevice->SetTexture(0, m_pTexture);
-			//}
-			//// >> 텍스처 매치 안되있을 때
-
 			m_pMesh->DrawSubset(i);
 		}
 	}

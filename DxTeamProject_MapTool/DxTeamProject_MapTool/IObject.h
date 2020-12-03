@@ -34,7 +34,8 @@ protected:
 
 	Synthesize(D3DXCOLOR, m_dxColor, Color);
 
-	LPD3DXEFFECT  m_pShader;
+	static LPD3DXEFFECT m_pShader;
+	static bool isLoad;
 
 	IObject();
 
