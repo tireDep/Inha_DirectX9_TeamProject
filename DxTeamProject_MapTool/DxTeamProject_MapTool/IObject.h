@@ -56,5 +56,7 @@ public:
 	static void SetRefCnt(int set);
 	static void CreateObject(const ObjectType objType, int index);
 	static void CreateObject(const ST_MapData& mapData);
+
+	static void Destroy();
 };
 

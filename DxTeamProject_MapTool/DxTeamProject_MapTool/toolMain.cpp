@@ -25,6 +25,7 @@ CToolMain::~CToolMain()
 	m_pImgui->Destroy();
 	SafeDelete(m_pImgui);
 
+	IObject::Destroy();
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 }
@@ -130,6 +131,17 @@ void CToolMain::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			g_pFileLoadManager->SetIndexNumPrev();
 			CImguiClass::m_nowSelectindex = -1;
 			CImguiClass::m_prevSelectIndex = 0;
+		}
+
+		if (wParam == 'F')
+		{
+			int index = g_pObjectManager->GetSelectIndex();
+			if (index != -1)
+			{
+				// D3DXVECTOR3 center = g_pFileLoadManager->GetSelectCenterPos(g_pObjectManager->GetIObject(index).GetTranslate());
+				// m_pCamera->SetCameraPos(center);
+				m_pCamera->SetCameraPos(g_pObjectManager->GetIObject(index).GetTranslate());
+			}
 		}
 		break;
 	}

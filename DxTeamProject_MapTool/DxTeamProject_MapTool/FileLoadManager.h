@@ -39,5 +39,7 @@ public:
 
 	void SetIndexNumZero();
 	void SetIndexNumPrev();
+
+	// D3DXVECTOR3 GetSelectCenterPos(D3DXVECTOR3 vSelect);
 };
 

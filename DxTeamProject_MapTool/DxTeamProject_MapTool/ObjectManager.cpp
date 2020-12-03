@@ -143,3 +143,14 @@ void CObjectManager::SetSelectFalse()
 		m_vecObject[i]->SetPick(false);
 	}
 }
+
+int CObjectManager::GetSelectIndex()
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		if (m_vecObject[i]->GetClick() || m_vecObject[i]->GetPick())
+			return i;
+	}
+
+	return -1;
+}

@@ -545,3 +545,21 @@ void CFileLoadManager::SetIndexNumPrev()
 	if (isCheck)
 		m_fNowZ -= m_fAddNumZ;
 }
+
+//D3DXVECTOR3 CFileLoadManager::GetSelectCenterPos(D3DXVECTOR3 vSelect)
+//{
+//	m_fNowX = -nGridSize;
+//	m_fNowZ = 0;
+//	m_fAddNumX = nGridSize;
+//	m_fAddNumZ = -nGridSize;
+//
+//	for (int i = 0; i >= m_fNowZ; i -= nGridSize)
+//	{
+//		for (int j = -nGridSize; j <= m_fLimitNumX; j += nGridSize)
+//		{
+//			if ((vSelect.x <= j && vSelect.x >= j + nGridSize) 
+//			 && (vSelect.z >= i && vSelect.z <= i - nGridSize))
+//				return D3DXVECTOR3((j + nGridSize)*0.5f, 0.5f, (i - nGridSize) * 0.5f);
+//		}
+//	}
+//}

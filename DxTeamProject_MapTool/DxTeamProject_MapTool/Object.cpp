@@ -77,6 +77,7 @@ void CObject::Render()
 	else
 	{
 		SetShader(matWorld);
+		m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(m_dxColor));
 		IObject::Render();
 	}
 }

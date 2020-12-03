@@ -12,8 +12,9 @@ private:
 	float			m_fCameraDistance;
 	D3DXVECTOR3		m_vCamRotAngle;
 
-
 	float m_fRotY;
+
+	D3DXVECTOR3 m_vNowTarget;
 
 public:
 	CCamera();
@@ -21,6 +22,8 @@ public:
 
 	void Setup(D3DXVECTOR3* pvTarget);
 	void Update();
+
+	void SetCameraPos(D3DXVECTOR3 pvTarget);
 
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };

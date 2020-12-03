@@ -71,7 +71,8 @@ void IObject::SetShader(const D3DXMATRIXA16 & setMatWorld)
 		// << : Light Shader
 
 		m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(0, 0, 0, 1));
-		m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(m_dxColor));
+		m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(1, 1, 1, 1));
+
 	}
 }
 
@@ -79,7 +80,6 @@ IObject::~IObject()
 {
 	SafeRelease(m_pMesh);
 	SafeRelease(m_pTexture);
-	SafeRelease(m_pShader);
 }
 
 void IObject::Release()
@@ -307,4 +307,9 @@ void IObject::CreateObject(const ST_MapData& mapData)
 		background->Setup(mapData);
 		break;
 	}
+}
+
+void IObject::Destroy()
+{
+	SafeRelease(m_pShader);
 }

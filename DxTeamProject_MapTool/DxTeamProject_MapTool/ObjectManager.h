@@ -30,5 +30,6 @@ public:
 	int GetVecSize();
 
 	void SetSelectFalse();
+	int GetSelectIndex();
 };
 
