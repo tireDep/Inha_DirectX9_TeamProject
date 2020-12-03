@@ -184,10 +184,11 @@ void CFileLoadManager::SaveMapData(string fileName)
 		return;
 
 	int saveNum = 0;
-	int halfGridNum = nGridSize * 0.5f;
+	float halfGridNum = nGridSize * 0.5f;
+	float addNum = 1.5f; // 그리드 범위 밖 여유 판정
 
-	int minNumX = -halfGridNum, maxNumX = halfGridNum;
-	int minNumZ = -halfGridNum, maxNumZ = halfGridNum;
+	float minNumX = -halfGridNum - addNum, maxNumX = halfGridNum + addNum;
+	float minNumZ = -halfGridNum - addNum, maxNumZ = halfGridNum + addNum;
 	int maxIndex = g_pObjectManager->GetVecSize();
 
 	while (saveNum < maxIndex)

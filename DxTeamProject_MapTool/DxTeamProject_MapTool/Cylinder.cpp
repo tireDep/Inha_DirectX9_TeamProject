@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Cylinder.h"
 
+#define fBasicRadius 0.5f
+#define fBasicHeight 1.0f
+
 CCylinder::CCylinder()
 {
 	m_vRotate.y = 90;
@@ -23,7 +26,8 @@ void CCylinder::Setup()
 void CCylinder::Setup(ST_MapData setData)
 {
 	CObject::Setup(setData);
-	D3DXCreateCylinder(g_pD3DDevice, m_vScale.x, m_vScale.y, m_vScale.z, 10, 10, &m_pMesh, NULL);
+	D3DXCreateCylinder(g_pD3DDevice, fBasicRadius, fBasicRadius, fBasicHeight, 10, 10, &m_pMesh, NULL);
+	// >> 월드매트릭스로 크기, 회전, 위치가 변경되므로 기본값으로 세팅
 }
 
 void CCylinder::Update()

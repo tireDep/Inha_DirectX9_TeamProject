@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "Sphere.h"
 
+#define fBasicRadius 0.5f
+
 CSphere::CSphere()
 {
 	m_strObjName = string("Sphere") + to_string(m_nRefCnt);
-
 	m_ObjectType = ObjectType::eSphere;
 }
 
@@ -23,7 +24,8 @@ void CSphere::Setup()
 void CSphere::Setup(ST_MapData setData)
 {
 	CObject::Setup(setData);
-	D3DXCreateSphere(g_pD3DDevice, m_vScale.x, 10, 10, &m_pMesh, NULL);
+	D3DXCreateSphere(g_pD3DDevice, fBasicRadius, 10, 10, &m_pMesh, NULL);
+	// >> 월드매트릭스로 크기, 회전, 위치가 변경되므로 기본값으로 세팅
 }
 
 void CSphere::Update()

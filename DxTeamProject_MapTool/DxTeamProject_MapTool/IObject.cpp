@@ -23,7 +23,8 @@ IObject::IObject() :
 	m_vTranslate(0,0,0),
 	m_isClick(false),
 	m_isPick(false),
-	m_dxColor(0.5, 0.5, 0.5, 1)
+	m_dxColor(0.5, 0.5, 0.5, 1),
+	m_pShader(NULL)
 {
 	ZeroMemory(&m_pMtrl, sizeof(D3DMATERIAL9));
 	m_pMtrl.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
@@ -32,12 +33,46 @@ IObject::IObject() :
 
 	g_pObjectManager->AddObject(this);
 	IObject::m_nRefCnt += 1;
+
+	g_pFileLoadManager->FileLoad_Shader("Resource/Shader", "outLine.fx", m_pShader);
+}
+
+void IObject::SetShader(const D3DXMATRIXA16 & setMatWorld)
+{
+	// >> : OutLine
+	D3DXMATRIXA16 matView, matProj, matViewPro, matViewInvTrans;
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+
+	matViewPro = setMatWorld * matView * matProj;
+	m_pShader->SetMatrix("matViewProjection", &matViewPro);
+	m_pShader->SetFloat("OutlineWidth", 0.05f);
+	// << : OutLine
+
+	// >> : Light Shader
+	m_pShader->SetMatrix("gWorldMatrix", &setMatWorld);
+	m_pShader->SetMatrix("gViewMatrix", &matView);
+	m_pShader->SetMatrix("gProjectionMatrix", &matProj);
+
+	// ===== 외부변수 받아오기?
+	D3DXMATRIXA16 temp;
+	D3DXMatrixIdentity(&temp);
+	m_pShader->SetMatrix("gWorldCameraPos", &temp);
+
+	m_pShader->SetVector("gLightColor", &D3DXVECTOR4(D3DXVECTOR3(1.0f, 1.0f, 1.0f), 1.0f));
+	m_pShader->SetVector("gWorldLightPos", &D3DXVECTOR4(D3DXVECTOR3(0, 10.0f, 0), 1));
+	// ===== 외부변수 받아오기?
+	// << : Light Shader
+
+	m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(0, 0, 0, 1));
+	m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(m_dxColor));
 }
 
 IObject::~IObject()
 {
 	SafeRelease(m_pMesh);
 	SafeRelease(m_pTexture);
+	SafeRelease(m_pShader);
 }
 
 void IObject::Release()
@@ -77,6 +112,25 @@ void IObject::Update(CRay * ray)
 		m_isPick = false;
 
 	m_pMesh->UnlockVertexBuffer();
+}
+
+void IObject::Render()
+{
+	UINT numPasses = 0;
+	m_pShader->Begin(&numPasses, NULL);
+	{
+		for (UINT i = 0; i < numPasses; ++i)
+		{
+			m_pShader->BeginPass(i);
+			if (i == 0)
+				g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW); // 외곽선
+			else
+				g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);	// 내부
+			m_pMesh->DrawSubset(0);
+			m_pShader->EndPass();
+		}
+	}
+	m_pShader->End();
 }
 
 void IObject::SetRefCnt(int set)

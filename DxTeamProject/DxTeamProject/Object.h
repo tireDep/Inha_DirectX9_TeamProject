@@ -2,39 +2,54 @@
 #include "IListener.h"
 #include "Ray.h"
 #include "CHeight.h"
+#include "TestAngleSet.h"
 
 enum ObjectType;
 struct ST_MapData;
 struct ST_EVENT;
+
+const static D3DXVECTOR3 GRAVITY(0, -9.8f, 0);
 
 class CObject : public IListener
 {
 protected:
 	static int    m_nRefCount;
 
-	// LPD3DXMESH	  m_pMesh;
-	//D3DXMATRIXA16 m_matWorld;
-
 	bool		  m_isPicked;
 	bool		  m_isClicked;
-	// D3DXCOLOR	  m_Color;
 	D3DXCOLOR	  m_outLineColor;
-	// D3DMATERIAL9  m_stMtl;
 	LPD3DXEFFECT  m_pShader;
 
 	bool LoadAssets();
 	void SetShader(const D3DXMATRIXA16& setMatWorld);
 
-	// tmp physics
+	// physics
 	Synthesize(bool, m_isForceApplied, ForceApplied);
-	Synthesize(float, m_fRadius, Radius);	// collision radius
 	Synthesize(float, m_finverseMass, InverseMass);	// mass
-	Synthesize(float, m_fDamping, Damping);	// floating point error
-	Synthesize(float, m_fDrag, Drag);	// drag
-	Synthesize(float, m_fElasticity, Elasticity); // elasticity
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);	// center position
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vVelocity, Velocity); // velocity
 	Synthesize_Pass_by_Ref(D3DXMATRIXA16, m_matWorld, matWorld);
+
+	// force
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vForceAccum, ForceAccum);
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vForceVector, ForceVector);
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vForceLocation, m_vForceLocation);
+
+	// linear
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);	// center position
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vLinearVelocity, LinearVelocity); // velocity
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vLinearAcceleration, LinearAcceleration); // acceleration
+	Synthesize(float, m_fDamping, Damping);	// floating point error
+	Synthesize(float, m_fLinearDrag, Drag);	// linear drag
+
+	// rotation
+	CTestAngleSet m_stOrientation; // Orientation
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vAngularVelocity, AngularVelocity); // Angular Velocity
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vAngularAcceleration, AngularAcceleration);	// Angular Accerleration
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vRotationInertia, RotationInertia);	// Rotation Inertia;
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vTorque, Torque);	// Torque;
+
+	// collision
+	Synthesize(float, m_fBoundingSphere, BoundingSphere);	// collision radius
+	Synthesize(float, m_fElasticity, Elasticity); // elasticity
 
 	// =========================================================================
 
@@ -72,7 +87,9 @@ public:
 
 	virtual void Setup() = 0;
 	virtual void Update(float duration) = 0;
+	virtual void Update3D(float duration) = 0;
 	virtual void Update(float duration , CHeight* pMap) = 0;
+	virtual void UpdateLand(float duration);
 	virtual void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos) = 0;
 	virtual void Render() = 0;
 	virtual void SetPickState(bool set) = 0;
@@ -81,10 +98,10 @@ public:
 	virtual string GetName() { return string(); }
 	virtual void ReceiveEvent(ST_EVENT eventMsg);
 
-	// tmp physics
-	virtual void SetMass(const float mass) = 0;
-	virtual float GetMass() const = 0;
-	virtual bool hasFiniteMass() const = 0;
+	// physics
+	virtual void SetMass(const float mass);
+	virtual float GetMass() const;
+	virtual bool hasFiniteMass() const;
 	virtual void SetPusingForce(D3DXVECTOR3 forcedirection) = 0;
 	virtual void AddForce(const D3DXVECTOR3 & force) = 0;
 	virtual void ClearAccumulator() = 0;

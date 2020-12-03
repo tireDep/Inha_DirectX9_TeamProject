@@ -60,34 +60,38 @@ void CTile::Render()
 	v.x = D3DXToRadian(m_vRotate.x);
 	v.y = D3DXToRadian(m_vRotate.y);
 	v.z = D3DXToRadian(m_vRotate.z);
-	
-	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
+
+	D3DXMatrixRotationX(&matR, v.x);
+	D3DXMatrixRotationY(&matR, v.y);
+	D3DXMatrixRotationZ(&matR, v.z);
 
 	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
 	matWorld = matS * matR * matT;
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 	
-	// if(m_pMtrl!=NULL)
-	// 	g_pD3DDevice->SetMaterial(&m_pMtrl);
-	
 	if (m_pMesh == NULL)
 		return;
 
-	for (int i = 0; i < m_vecMtrls.size(); i++)
+	if (!m_isPick && !m_isClick)
 	{
-		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
-
-		if (m_vecTextures[i] != 0)
-			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
-
-		else if (m_pTexture != NULL)
+		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{
-			g_pD3DDevice->SetTexture(0, m_pTexture);
-		}
-		// >> 텍스처 매치 안되있을 때
+			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
-		m_pMesh->DrawSubset(i);
+			if (m_vecTextures[i] != 0)
+				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+			else if (m_pTexture != NULL)
+				g_pD3DDevice->SetTexture(0, m_pTexture);
+				// >> 텍스처 매치 안되있을 때
+
+			m_pMesh->DrawSubset(i);
+		}
+	}
+	else
+	{
+		SetShader(matWorld);
+		IObject::Render();
 	}
 
 	g_pD3DDevice->SetTexture(0, NULL);

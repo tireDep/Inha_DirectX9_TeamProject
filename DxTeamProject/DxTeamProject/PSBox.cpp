@@ -5,9 +5,6 @@ CPSBox::CPSBox()
 	: m_fWidth(1.0f)
 	, m_fHeight(1.0f)
 	, m_fDepth(1.0f)
-	, m_vAcceleration(0, 0, 0)
-	, m_vForceDirection(0, 0, 0)
-	, m_vForceAccum(0, 0, 0)
 {
 	m_strName = string("Box") + to_string(m_nRefCount);
 }
@@ -19,6 +16,14 @@ CPSBox::~CPSBox()
 void CPSBox::Setup()
 {
 	D3DXCreateBox(g_pD3DDevice, m_fWidth, m_fHeight, m_fDepth, &m_pMesh, NULL);
+	// tmp BoundingSphere
+	float maxLength = max(m_fWidth, m_fHeight);
+	maxLength = max(maxLength, m_fDepth);
+	m_fBoundingSphere = maxLength / 2.0f;
+	// modyfi? 12.0f -> 48.0f?
+	m_vRotationInertia.x = (GetMass() * (m_fHeight * m_fHeight + m_fDepth  * m_fDepth)) / 12.0f;
+	m_vRotationInertia.y = (GetMass() * (m_fWidth  * m_fWidth  + m_fDepth  * m_fDepth)) / 12.0f;
+	m_vRotationInertia.z = (GetMass() * (m_fWidth  * m_fWidth  + m_fHeight * m_fHeight)) / 12.0f;
 }
 
 void CPSBox::Setup(D3DXVECTOR3 center)
@@ -76,7 +81,7 @@ void CPSBox::Update(float duration)
 	if (m_isForceApplied)
 	{
 		if (!hasFiniteMass()) return;
-		linearforce = m_vForceDirection * GetMass();
+		linearforce = m_vForceVector * GetMass();
 		m_isForceApplied = false;
 	}
 	else
@@ -85,20 +90,81 @@ void CPSBox::Update(float duration)
 	if (m_finverseMass <= 0.0f) return;
 	assert(duration > 0.0f);
 
-	m_vAcceleration = linearforce * m_finverseMass;
-	m_vVelocity += (m_vAcceleration * duration);
-	m_vVelocity *= powf(m_fDamping, duration);
-	//m_vPosition += (m_vVelocity * duration);
-	m_vVelocity *= m_fDrag;
-	if (m_vVelocity.x > 0.001f || m_vVelocity.y > 0.001f || m_vVelocity.z > 0.001f)
+	m_vLinearAcceleration = linearforce * m_finverseMass;
+	m_vLinearVelocity += (m_vLinearAcceleration * duration);
+	m_vLinearVelocity *= powf(m_fDamping, duration);
+	m_vLinearVelocity *= m_fLinearDrag;
+	if (CloseToZero(m_vLinearVelocity.x) && CloseToZero(m_vLinearVelocity.y) && CloseToZero(m_vLinearVelocity.z))
 	{
-		m_vPosition += (m_vVelocity * duration);
+		m_vLinearVelocity.x = m_vLinearVelocity.y = m_vLinearVelocity.z = 0.0f;
+	}
+	else
+		m_vPosition += (m_vLinearVelocity * duration);
+	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+}
+
+void CPSBox::Update3D(float duration)
+{
+	D3DXVECTOR3 linearforce, angularforce;
+	if (m_isForceApplied)
+	{
+		if (!hasFiniteMass()) return;
+		linearforce = m_vForceVector * GetMass();
+		D3DXVec3Cross(&angularforce, &m_vForceLocation, &m_vForceVector);
+		m_isForceApplied = false;
 	}
 	else
 	{
-		m_vVelocity.x = m_vVelocity.y = m_vVelocity.z = 0.0f;
+		linearforce = D3DXVECTOR3(0, 0, 0);
+		angularforce = D3DXVECTOR3(0, 0, 0);
 	}
-	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+
+	if (m_finverseMass <= 0.0f) return;
+	assert(duration > 0.0f);
+
+	m_vLinearAcceleration = (linearforce + GRAVITY) * m_finverseMass;
+	m_vLinearVelocity += (m_vLinearAcceleration * duration);
+	m_vLinearVelocity *= powf(m_fDamping, duration);
+	m_vLinearVelocity *= m_fLinearDrag;
+	if (CloseToZero(m_vLinearVelocity.x) && CloseToZero(m_vLinearVelocity.y) && CloseToZero(m_vLinearVelocity.z))
+	{
+		m_vLinearVelocity.x = m_vLinearVelocity.y = m_vLinearVelocity.z = 0.0f;
+	}
+	else
+		m_vPosition += (m_vLinearVelocity * duration);
+
+	D3DXMATRIXA16 totalTransaltion;
+	D3DXMatrixTranslation(&totalTransaltion, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+
+	m_vTorque = angularforce;
+
+	m_vAngularAcceleration.x = m_vTorque.x / m_vRotationInertia.x;
+	m_vAngularAcceleration.y = m_vTorque.y / m_vRotationInertia.y;
+	m_vAngularAcceleration.z = m_vTorque.z / m_vRotationInertia.z;
+
+	m_vAngularVelocity += m_vAngularAcceleration * duration;
+	m_vAngularVelocity *= powf(m_fDamping, duration);
+	// tmp Test... Need to AngularDrag
+	m_vAngularVelocity *= m_fLinearDrag;
+	if (CloseToZero(m_vAngularVelocity.x) && CloseToZero(m_vAngularVelocity.y) && CloseToZero(m_vAngularVelocity.z))
+	{
+		m_vAngularVelocity.x = m_vAngularVelocity.y = m_vAngularVelocity.z = 0.0f;
+	}
+	else
+		m_vAngularVelocity += (m_vAngularVelocity * duration);
+
+	m_stOrientation.setXAngle(m_stOrientation.getXAngle() + m_vAngularVelocity.x * duration);
+	m_stOrientation.setYAngle(m_stOrientation.getYAngle() + m_vAngularVelocity.y * duration);
+	m_stOrientation.setZAngle(m_stOrientation.getZAngle() + m_vAngularVelocity.z * duration);
+
+	D3DXMATRIXA16 rotationX, rotationY, rotationZ, totalRotation;
+	D3DXMatrixRotationX(&rotationX, m_stOrientation.getXAngle());
+	D3DXMatrixRotationY(&rotationY, m_stOrientation.getYAngle());
+	D3DXMatrixRotationZ(&rotationZ, m_stOrientation.getZAngle());
+	D3DXMatrixMultiply(&totalRotation, &rotationX, &rotationY);
+	D3DXMatrixMultiply(&totalRotation, &totalRotation, &rotationZ);
+
+	D3DXMatrixMultiply(&m_matWorld, &totalRotation, &totalTransaltion);
 }
 
 void CPSBox::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
@@ -163,27 +229,10 @@ void CPSBox::ReceiveEvent(ST_EVENT eventMsg)
 	CObject::ReceiveEvent(eventMsg);
 }
 
-void CPSBox::SetMass(const float mass)
-{
-	assert(mass != 0);
-	m_finverseMass = ((float)1.0) / mass;
-}
-
-float CPSBox::GetMass() const
-{
-	if (m_finverseMass == 0) { return FLT_MAX; }
-	else { return ((float)1.0) / m_finverseMass; }
-}
-
-bool CPSBox::hasFiniteMass() const
-{
-	return m_finverseMass >= 0.0f;
-}
-
 void CPSBox::SetPusingForce(D3DXVECTOR3 forcedirection)
 {
-	D3DXVec3Normalize(&m_vForceDirection, &forcedirection);
-	m_vForceDirection *= 100.0f;
+	D3DXVec3Normalize(&m_vForceVector, &forcedirection);
+	m_vForceVector *= 100.0f;
 	SetForceApplied(true);
 }
 
@@ -203,11 +252,11 @@ void CPSBox::Integrate(float duration)
 	if (m_finverseMass <= 0.0f) return;
 	assert(duration > 0.0f);
 
-	D3DXVECTOR3 resultingAcc = m_vAcceleration;
+	D3DXVECTOR3 resultingAcc = m_vLinearAcceleration;
 	resultingAcc += (m_vForceAccum * m_finverseMass);
-	m_vVelocity += (resultingAcc * duration);
-	m_vVelocity *= powf(m_fDamping, duration);
-	m_vPosition += (m_vVelocity * duration);
+	m_vLinearVelocity += (resultingAcc * duration);
+	m_vLinearVelocity *= powf(m_fDamping, duration);
+	m_vPosition += (m_vLinearVelocity * duration);
 
 	ClearAccumulator();
 }
@@ -216,7 +265,7 @@ void CPSBox::RunPhysics(float duration)
 {
 	/// physics edting
 	if (!hasFiniteMass()) return;
-	AddForce(m_vForceDirection * GetMass());
+	AddForce(m_vForceVector * GetMass());
 	//AddForce(m_vForceDirection);
 	Integrate(duration);
 }
@@ -242,7 +291,7 @@ bool CPSBox::hasIntersected(CObject* otherobject)
 	D3DXVECTOR3 direction = this->GetPosition() - otherobject->GetPosition();
 	float distanceSq = direction.x * direction.x + direction.y * direction.y + direction.z * direction.z;
 
-	if (((this->GetRadius() + otherobject->GetRadius()) * (this->GetRadius() + otherobject->GetRadius())) < distanceSq)
+	if (((this->GetBoundingSphere() + otherobject->GetBoundingSphere()) * (this->GetBoundingSphere() + otherobject->GetBoundingSphere())) < distanceSq)
 		return false;
 	else
 		return true;
@@ -308,11 +357,11 @@ void CPSBox::CollisionOtherObject(CObject* otherobject)
 		direction = this->GetPosition() - otherobject->GetPosition();
 		// 2 dimension -> 3 dimension later editing...
 		distance = sqrt(direction.x * direction.x + direction.z * direction.z);
-		overlapInterval = 2 * otherobject->GetRadius() - distance;
-		warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetRadius() - overlapInterval));
+		overlapInterval = 2 * otherobject->GetBoundingSphere() - distance;
+		warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetBoundingSphere() - overlapInterval));
 
 		// implementation of collision
-		if (((otherobject->GetVelocity().x * otherobject->GetVelocity().x) + (otherobject->GetVelocity().z * otherobject->GetVelocity().z)) >= ((this->GetVelocity().x * this->GetVelocity().x) + (this->GetVelocity().z * this->GetVelocity().z)))
+		if (((otherobject->GetLinearVelocity().x * otherobject->GetLinearVelocity().x) + (otherobject->GetLinearVelocity().z * otherobject->GetLinearVelocity().z)) >= ((this->GetLinearVelocity().x * this->GetLinearVelocity().x) + (this->GetLinearVelocity().z * this->GetLinearVelocity().z)))
 		{
 			otherobject->CollisionOtherObject(this);
 			return;
@@ -333,8 +382,8 @@ void CPSBox::CollisionOtherObject(CObject* otherobject)
 		D3DXVECTOR3 massdirection;
 		massdirection = this->GetPosition() - otherobject->GetPosition();
 		D3DXVec3Normalize(&massdirection, &massdirection);
-		v1 = D3DXVec3Dot(&this->GetVelocity(), &massdirection);
-		v2 = D3DXVec3Dot(&otherobject->GetVelocity(), &massdirection);
+		v1 = D3DXVec3Dot(&this->GetLinearVelocity(), &massdirection);
+		v2 = D3DXVec3Dot(&otherobject->GetLinearVelocity(), &massdirection);
 		/// perfect elastic collision
 		//float elasticity = 1.0f;
 		float elasticity = (this->GetElasticity() + otherobject->GetElasticity()) / 2;
@@ -345,10 +394,10 @@ void CPSBox::CollisionOtherObject(CObject* otherobject)
 			/ (this->GetMass() + otherobject->GetMass());
 
 		D3DXVECTOR3 collisionV1, collisionV2;
-		collisionV1 = this->GetVelocity() + (finalv1 - v1) * massdirection;
-		collisionV2 = otherobject->GetVelocity() + (finalv2 - v2) * massdirection;
+		collisionV1 = this->GetLinearVelocity() + (finalv1 - v1) * massdirection;
+		collisionV2 = otherobject->GetLinearVelocity() + (finalv2 - v2) * massdirection;
 
-		this->SetVelocity(collisionV1);
-		otherobject->SetVelocity(collisionV2);
+		this->SetLinearVelocity(collisionV1);
+		otherobject->SetLinearVelocity(collisionV2);
 	}
 }
