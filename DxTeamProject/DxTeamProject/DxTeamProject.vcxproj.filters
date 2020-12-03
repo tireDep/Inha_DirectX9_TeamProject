@@ -67,7 +67,6 @@
     <ClCompile Include="IListener.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Object.cpp">
       <Filter>Object</Filter>
     </ClCompile>
@@ -161,7 +160,6 @@
     <ClCompile Include="AllocateHierarchy.cpp">
       <Filter>SkinnedMesh</Filter>
     </ClCompile>
-    <ClCompile Include="MeshTile.cpp" />
     <ClCompile Include="Background.cpp">
       <Filter>Object</Filter>
     </ClCompile>
@@ -195,6 +193,15 @@
     </ClCompile>
     <ClCompile Include="PSOBB.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Colorchanger.cpp">
+      <Filter>Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshTile.cpp">
+      <Filter>Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>Gimmick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -382,7 +389,6 @@
     <ClInclude Include="AllocateHierarchy.h">
       <Filter>SkinnedMesh</Filter>
     </ClInclude>
-    <ClInclude Include="MeshTile.h" />
     <ClInclude Include="Background.h">
       <Filter>Object</Filter>
     </ClInclude>
@@ -416,6 +422,12 @@
     </ClInclude>
     <ClInclude Include="PSOBB.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Colorchanger.h">
+      <Filter>Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshTile.h">
+      <Filter>Gimmick</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -534,6 +546,9 @@
     </Filter>
     <Filter Include="Physics\cyclone">
       <UniqueIdentifier>{00e05eae-24f5-4dfb-9fc3-f0105fd54c0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gimmick">
+      <UniqueIdentifier>{160a779f-9356-4325-b722-a130a8535a68}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

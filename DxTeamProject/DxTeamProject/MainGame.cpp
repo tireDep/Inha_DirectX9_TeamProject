@@ -29,6 +29,9 @@
 
 #include "TestCollision.h"
 
+//Gimmick
+#include "Colorchanger.h"
+
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
 
@@ -174,7 +177,7 @@ void CMainGame::Setup()
 {
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123.dat");
 	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
@@ -203,6 +206,11 @@ void CMainGame::Setup()
 
 	m_pSkydome = new CSkydome;
 	m_pSkydome->Setup("Resource/XFile/Sky", "skydome.X");
+
+	//--Gimmick
+	m_pChanger = new Color_changer;
+	m_pChanger->Setup();
+
 
 	/// 이 아래는 지울 수도 있는 선언
 	//for (int i = 0; i < 8; i++)
@@ -344,7 +352,7 @@ void CMainGame::Update()
 			m_pText->SetisGrabstate(false);
 		}
 		// Ray y check
-		m_pCharacter->UpdateRayYCheck(*m_pMeshTile);
+		/*m_pCharacter->UpdateRayYCheck(*m_pMeshTile);*/
 	}
 
 	 //if (g_gameManager->GetGridMapMode())
@@ -376,6 +384,9 @@ void CMainGame::Update()
 			g_pObjectManager->UpdateNewMap(&m_pNowFrustum);
 		}
 	}
+
+
+
 
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
@@ -422,28 +433,24 @@ void CMainGame::Update()
 		}
 		vecRigidBody[i]->Update(g_pTimeManager->GetElapsedTime());
 	}
+	if(m_pChanger)
+		m_pChanger->Update();
 
-	/// 릴리즈 버전을 위한 주석처리
-	// 민종씨 코드
-	//static int count = 0;
-	//static float gravity = -0.98;
-	//static float plane = 1.5;
-	//if (m_pWall[0]->Gravity(*m_pSphere1) == true) //땅에 부딪혔을때
-	//{
-	//	//cout << m_pWall[4]->Gravity(*m_pSphere1) << endl;
-	//	m_pWall[0]->hitBy(*m_pSphere1);
-	//	plane -= 0.3f;
-	//	//cout << count++ << endl;
-	//}
-	//else // 떠있을때 중력을 줌
-	//{
-	//	if (m_pSphere1->getCenter().y > plane)
-	//	{
-	//		m_pSphere1->setPower(0, gravity, 0);
-	//		//cout << m_pSphere1->getCenter().y << endl;
-	//	}
-	//}
-	//	m_pSphere1->Update(g_pTimeManager->GetElapsedTime());
+	if (m_pChanger)
+	{
+		if (m_pChanger->RayCheck(*m_pMeshTile) == true);
+		{
+			
+			m_pMeshTile->SetColor(true);
+
+		}
+		if(m_pChanger->RayCheck(*m_pMeshTile) == false)
+		{
+			m_pMeshTile->SetColor(false);
+
+		}
+	}
+	
 }
 
 void CMainGame::Render()
@@ -509,23 +516,10 @@ void CMainGame::Render()
 	for (int i = 0; i < 4; i++)
 		vecRigidBody[i]->Render();
 
-	/// 릴리즈 버전을 위한 주석처리
-	//if (m_pParticleWorld)
-	//	m_pParticleWorld->Render();
-	/// tmp Physics
-	//g_pPhysicsObjectManager->Render();
-	//if (m_pSphere1)
-	//	m_pSphere1->Render();
-	//if (m_pSphere2)
-	//	m_pSphere2->Render();
-	//if (&m_pWall)
-	//	m_pWall[0]->draw();
-	//if (&m_pWall)
-	//	m_pWall[0]->draw();
-	//if (&m_pWall)
-	//	m_pWall[2]->draw();
-	//if (&m_pWall)
-	//	m_pWall[3]->draw();
+	if (m_pChanger)
+		m_pChanger->Render();
+
+
 	if (g_gameManager->GetUImode())
 	{
 		if (m_pUI)
