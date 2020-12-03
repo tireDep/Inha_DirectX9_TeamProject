@@ -174,7 +174,7 @@ void CMainGame::Setup()
 {
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "createmap2.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123456.dat");
 	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
@@ -198,32 +198,28 @@ void CMainGame::Setup()
 	m_pLight->Setup();
 	//m_pLight->Setup(D3DXVECTOR3(1, 0, 0)); // sun light vector
 
-	//m_pPrevFrustum.Setup();
-	//m_pNowFrustum.Setup();
+	m_pPrevFrustum.Setup();
+	m_pNowFrustum.Setup();
 
 	m_pSkydome = new CSkydome;
 	m_pSkydome->Setup("Resource/XFile/Sky", "skydome.X");
 
 	/// 이 아래는 지울 수도 있는 선언
-	for (int i = 0; i < 8; i++)
-	{
-		CPSphere* Sphere = new CPSphere();
-		//Sphere->Setup(D3DXVECTOR3(25, 0.5f, 2 * i + 3));
-		Sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
-	}
-	for (int i = 0; i < 8; i++)
-	{
-		CPSBox* box = new CPSBox();
-		//box->Setup(D3DXVECTOR3(-25, 0.5, 2 * i + 3));
-		box->Setup(D3DXVECTOR3(-5, 0.5, 2 * i + 3));
-	}
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	CPSphere* Sphere = new CPSphere();
+	//	Sphere->Setup(D3DXVECTOR3(25, 0.5f, 2 * i + 3));
+	//}
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	CPSBox* box = new CPSBox();
+	//	box->Setup(D3DXVECTOR3(-25, 0.5, 2 * i + 3));
+	//}
 	//for (int i = 0; i < 8; i++)
 	//{
 	//	CPSCylinder* cylinder = new CPSCylinder();
 	//	cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 25));
-	//	//cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 5));
 	//}
-
 	//m_pHeightMap = new CHeight;
 	//m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
 
@@ -241,39 +237,44 @@ void CMainGame::Setup()
 	}
 
 	// Ray y check
-	//m_pMeshTile = new MeshTile;
-	//m_pMeshTile->Setup();
+	m_pMeshTile = new MeshTile;
+	m_pMeshTile->Setup();
 
-	/// Rotation Test
+	// Rotation Test
 	//m_pRigidBody = new CTestRigidBody;
 	//m_pRigidBody->Setup();
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	CTestRigidBody* m_pRigidBody = new CTestRigidBody();
-	//	m_pRigidBody->Setup();
-	//	vecRigidBody.push_back(m_pRigidBody);
-	//}
-	//D3DXVECTOR3 gravity(0, -9.8f, 0);
-	//vecRigidBody[0]->SetPosition(D3DXVECTOR3(-3.0f, 5.0f, 5.0f));
-	//vecRigidBody[0]->constantForce.SetForceVector(gravity);
-	//vecRigidBody[0]->constantForce.SetForceLocation(D3DXVECTOR3(-3.0f, 5.0f, 5.0f));
-	//vecRigidBody[0]->impulseForce.SetForceVector(D3DXVECTOR3(1.0f, -1.0f, 0.0f));
-	//vecRigidBody[0]->impulseForce.SetForceLocation(D3DXVECTOR3(0.0f, 0.0f, -1.0f));
-	//vecRigidBody[1]->SetPosition(D3DXVECTOR3(0.0f, 3.0f, 5.0f));
-	//vecRigidBody[1]->constantForce.SetForceVector(gravity);
-	//vecRigidBody[1]->constantForce.SetForceLocation(D3DXVECTOR3(0.0f, 3.0f, 5.0f));
-	//vecRigidBody[1]->impulseForce.SetForceVector(D3DXVECTOR3(-1.0f, -1.0f, 0.0f));
-	//vecRigidBody[1]->impulseForce.SetForceLocation(D3DXVECTOR3(0.0f, -1.0f, -1.0f));
-	//vecRigidBody[2]->SetPosition(D3DXVECTOR3(4.0f, 4.0f, 7.0f));
-	//vecRigidBody[2]->constantForce.SetForceVector(gravity);
-	//vecRigidBody[2]->constantForce.SetForceLocation(D3DXVECTOR3(4.0f, 4.0f, 7.0f));
-	//vecRigidBody[2]->impulseForce.SetForceVector(D3DXVECTOR3(-3.0f, 3.0f, 0.0f));
-	//vecRigidBody[2]->impulseForce.SetForceLocation(D3DXVECTOR3(1.0f, -1.0f, 0.0f));
-	//vecRigidBody[3]->SetPosition(D3DXVECTOR3(-10.0f, 4.0f, 5.0f));
-	//vecRigidBody[3]->constantForce.SetForceVector(gravity);
-	//vecRigidBody[3]->constantForce.SetForceLocation(D3DXVECTOR3(-10.0f, 4.0f, 5.0f));
-	//vecRigidBody[3]->impulseForce.SetForceVector(D3DXVECTOR3(10.0f, 5.0f, 0.0f));
-	//vecRigidBody[3]->impulseForce.SetForceLocation(D3DXVECTOR3(0.0f, 0.0f, 1.0f));
+
+	for (int i = 0; i < 4; i++)
+	{
+		CTestRigidBody* m_pRigidBody = new CTestRigidBody();
+		m_pRigidBody->Setup();
+		vecRigidBody.push_back(m_pRigidBody);
+	}
+	D3DXVECTOR3 gravity(0, -9.8f, 0);
+
+	vecRigidBody[0]->SetPosition(D3DXVECTOR3(-3.0f, 5.0f, 5.0f));
+	vecRigidBody[0]->constantForce.SetForceVector(gravity);
+	vecRigidBody[0]->constantForce.SetForceLocation(D3DXVECTOR3(-3.0f, 5.0f, 5.0f));
+	vecRigidBody[0]->impulseForce.SetForceVector(D3DXVECTOR3(1.0f, -1.0f, 0.0f));
+	vecRigidBody[0]->impulseForce.SetForceLocation(D3DXVECTOR3(0.0f, 0.0f, -1.0f));
+
+	vecRigidBody[1]->SetPosition(D3DXVECTOR3(0.0f, 3.0f, 5.0f));
+	vecRigidBody[1]->constantForce.SetForceVector(gravity);
+	vecRigidBody[1]->constantForce.SetForceLocation(D3DXVECTOR3(0.0f, 3.0f, 5.0f));
+	vecRigidBody[1]->impulseForce.SetForceVector(D3DXVECTOR3(-1.0f, -1.0f, 0.0f));
+	vecRigidBody[1]->impulseForce.SetForceLocation(D3DXVECTOR3(0.0f, -1.0f, -1.0f));
+
+	vecRigidBody[2]->SetPosition(D3DXVECTOR3(4.0f, 4.0f, 7.0f));
+	vecRigidBody[2]->constantForce.SetForceVector(gravity);
+	vecRigidBody[2]->constantForce.SetForceLocation(D3DXVECTOR3(4.0f, 4.0f, 7.0f));
+	vecRigidBody[2]->impulseForce.SetForceVector(D3DXVECTOR3(-3.0f, 3.0f, 0.0f));
+	vecRigidBody[2]->impulseForce.SetForceLocation(D3DXVECTOR3(1.0f, -1.0f, 0.0f));
+
+	vecRigidBody[3]->SetPosition(D3DXVECTOR3(-10.0f, 4.0f, 5.0f));
+	vecRigidBody[3]->constantForce.SetForceVector(gravity);
+	vecRigidBody[3]->constantForce.SetForceLocation(D3DXVECTOR3(-10.0f, 4.0f, 5.0f));
+	vecRigidBody[3]->impulseForce.SetForceVector(D3DXVECTOR3(10.0f, 5.0f, 0.0f));
+	vecRigidBody[3]->impulseForce.SetForceLocation(D3DXVECTOR3(0.0f, 0.0f, 1.0f));
 
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm = new CSoundManager;
@@ -291,8 +292,8 @@ void CMainGame::Update()
 	if (m_pSkinnedMesh)
 		m_pSkinnedMesh->Update();
 
-	//if(m_pOrb)
-	//	m_pOrb->Update();
+	if(m_pOrb)
+		m_pOrb->Update();
 
 	if (m_pCharacter)
 	{
@@ -356,67 +357,71 @@ void CMainGame::Update()
 	 //	}
 	 //}
 
-	//if (g_gameManager->GetGridMapMode())
-	//{
-	//	m_pPrevFrustum = m_pNowFrustum;
-	//	m_pNowFrustum.Update();
-	//	static D3DXVECTOR3 lastPlayerPos = D3DXVECTOR3(0, 0, 0);
-	//	D3DXVECTOR3 tempPos = m_pCharacter->GetPosition();
-	//	float posCheck = 0.5f;
-	//	// >> todo : 판정 변경
-	//	if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum) 
-	//	 || fabs(lastPlayerPos.x - tempPos.x) >= posCheck 
-	//	 || fabs(lastPlayerPos.y - tempPos.y) >= posCheck 
-	//	 || fabs(lastPlayerPos.z - tempPos.z) >= posCheck)
-	//	{
-	//		lastPlayerPos = tempPos;
-	//		g_pObjectManager->UpdateNewMap(&m_pNowFrustum);
-	//	}
-	//}
+	if (g_gameManager->GetGridMapMode())
+	{
+		m_pPrevFrustum = m_pNowFrustum;
+		m_pNowFrustum.Update();
+
+		static D3DXVECTOR3 lastPlayerPos = D3DXVECTOR3(0, 0, 0);
+		D3DXVECTOR3 tempPos = m_pCharacter->GetPosition();
+		float posCheck = 0.5f;
+
+		// >> todo : 판정 변경
+		if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum) 
+		 || fabs(lastPlayerPos.x - tempPos.x) >= posCheck 
+		 || fabs(lastPlayerPos.y - tempPos.y) >= posCheck 
+		 || fabs(lastPlayerPos.z - tempPos.z) >= posCheck)
+		{
+			lastPlayerPos = tempPos;
+			g_pObjectManager->UpdateNewMap(&m_pNowFrustum);
+		}
+	}
 
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
 	g_pObjectManager->Update();													// Collision
-	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());					// 2D Physics
+	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());					// 2D Physics
 	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
-	g_pObjectManager->Update3D(g_pTimeManager->GetElapsedTime());	// 3D
-	g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime()); // Land
+
 	// Rotation Test
 	//m_pRigidBody->Update(g_pTimeManager->GetElapsedTime());
-	//for (int i = 0; i < 3; i++)
-	//{
-	//	for (int j = i + 1; j < 4; j++)
-	//	{
-	//		CTestCollision theCollision(vecRigidBody[i], vecRigidBody[j]);
-	//		collision_status collisionOccurred = theCollision.CollisionOccurred();
-	//		switch (collisionOccurred)
-	//		{
-	//			case COLLISION_TOUCHING:
-	//				theCollision.CalculateReactions();
-	//				break;
-	//			case COLLISTION_OVERLAPPING:
-	//				HandleOverlapping(g_pTimeManager->GetElapsedTime(), i, j, theCollision);
-	//				break;
-	//			case COLLISION_NONE:
-	//				break;
-	//			default:
-	//				break;
-	//		}
-	//	}
-	//}
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	float distance = vecRigidBody[i]->GetPosition().y - vecRigidBody[i]->GetBoundingSphere();
-	//	if ((CloseToZero(distance) || (distance) < 0.0f))
-	//	{
-	//		D3DXVECTOR3 tmp = vecRigidBody[i]->GetLinearVelocity();
-	//		tmp.y = -tmp.y * vecRigidBody[i]->GetElasticity();
-	//		vecRigidBody[i]->SetLinearVelocity(tmp);
-	//	}
-	//	vecRigidBody[i]->Update(g_pTimeManager->GetElapsedTime());
-	//}
+
+
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = i + 1; j < 4; j++)
+		{
+			CTestCollision theCollision(vecRigidBody[i], vecRigidBody[j]);
+			collision_status collisionOccurred = theCollision.CollisionOccurred();
+			switch (collisionOccurred)
+			{
+				case COLLISION_TOUCHING:
+					theCollision.CalculateReactions();
+					break;
+				case COLLISTION_OVERLAPPING:
+					HandleOverlapping(g_pTimeManager->GetElapsedTime(), i, j, theCollision);
+					break;
+				case COLLISION_NONE:
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		float distance = vecRigidBody[i]->GetPosition().y - vecRigidBody[i]->GetBoundingSphere();
+		if ((CloseToZero(distance) || (distance) < 0.0f))
+		{
+			D3DXVECTOR3 tmp = vecRigidBody[i]->GetLinearVelocity();
+			tmp.y = -tmp.y * vecRigidBody[i]->GetElasticity();
+			vecRigidBody[i]->SetLinearVelocity(tmp);
+		}
+		vecRigidBody[i]->Update(g_pTimeManager->GetElapsedTime());
+	}
 
 	/// 릴리즈 버전을 위한 주석처리
 	// 민종씨 코드
@@ -465,11 +470,11 @@ void CMainGame::Render()
 	if (m_pCharacter)
 		m_pCharacter->Render(c);
 
-	//if (m_pOrb)
-	//{
-	//	m_pOrb->SetBillbord();
-	//	m_pOrb->Render();
-	//}
+	if (m_pOrb)
+	{
+		m_pOrb->SetBillbord();
+		m_pOrb->Render();
+	}
 
 	g_pObjectManager->Render();
 
@@ -495,16 +500,32 @@ void CMainGame::Render()
 		m_pText->RenderGrab();
 
 	// Ray y check
-	//if (m_pMeshTile)
-	//	m_pMeshTile->Render();
+	if (m_pMeshTile)
+		m_pMeshTile->Render();
 
 	// Rotation Test
 	//if (m_pRigidBody)
 	//	m_pRigidBody->Render();
-	//for (int i = 0; i < 4; i++)
-	//	vecRigidBody[i]->Render();
+	for (int i = 0; i < 4; i++)
+		vecRigidBody[i]->Render();
 
 	/// 릴리즈 버전을 위한 주석처리
+	//if (m_pParticleWorld)
+	//	m_pParticleWorld->Render();
+	/// tmp Physics
+	//g_pPhysicsObjectManager->Render();
+	//if (m_pSphere1)
+	//	m_pSphere1->Render();
+	//if (m_pSphere2)
+	//	m_pSphere2->Render();
+	//if (&m_pWall)
+	//	m_pWall[0]->draw();
+	//if (&m_pWall)
+	//	m_pWall[0]->draw();
+	//if (&m_pWall)
+	//	m_pWall[2]->draw();
+	//if (&m_pWall)
+	//	m_pWall[3]->draw();
 	if (g_gameManager->GetUImode())
 	{
 		if (m_pUI)

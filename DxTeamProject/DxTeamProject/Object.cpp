@@ -305,8 +305,8 @@ void CObject::UpdateLand(float duration)
 		tmp.y = -tmp.y * m_fElasticity;
 		m_vLinearVelocity = tmp;
 	}
-	if (distance < -GetBoundingSphere())
-	{
-		m_vPosition.y = 0.5f;
-	}
+	//if (distance < -GetBoundingSphere())
+	//{
+	//	m_vPosition.y = 0.5f;
+	//}
 }
