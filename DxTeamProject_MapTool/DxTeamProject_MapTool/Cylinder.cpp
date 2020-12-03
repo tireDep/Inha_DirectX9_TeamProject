@@ -6,7 +6,7 @@
 
 CCylinder::CCylinder()
 {
-	m_vRotate.y = 90;
+	m_vRotate.x = 90;
 	m_strObjName = string("Cylinder") + to_string(m_nRefCnt);
 	m_ObjectType = ObjectType::eCylinder;
 }

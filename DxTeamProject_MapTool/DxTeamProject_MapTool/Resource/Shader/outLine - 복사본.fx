@@ -61,68 +61,67 @@ float4 PS(PS_INPUT Input) : COLOR0
 // Pass 1
 //--------------------------------------------------------------//
 
-float4x4 gWorldMatrix;
-float4x4 gViewMatrix;
-float4x4 gProjectionMatrix;
-// >> 컬러 쉐이더
-
 // float4x4 gWorldMatrix;
 // float4x4 gViewMatrix;
 // float4x4 gProjectionMatrix;
+// // >> 컬러 쉐이더
+
+float4x4 gWorldMatrix;
+float4x4 gViewMatrix;
+float4x4 gProjectionMatrix;
 float4	 gWorldLightPos;
 float4   gWorldCameraPos : ViewPosition;
-// // >> 라이트 쉐이더
+// >> 라이트 쉐이더
 
 struct VS_INPUT2
 {
-	float4 Position : POSITION0;
-	// float4 mPosition : POSITION0;
-	// float3 mNormal : NORMAL;
+	float4 mPosition : POSITION0;
+	float3 mNormal : NORMAL;
 };
 
 struct VS_OUTPUT2
 {
-	float4 Position : POSITION;
-	// >> 컬러 쉐이더
+	// float4 Position : POSITION;
+	// // >> 컬러 쉐이더
 
-	// float4 mPosition : POSITION0;
-	// float3 mDiffuse : TEXCOORD1;
-	// float3 mViewDir : TEXCOORD2;
-	// float3 mReflection : TEXCOORD3;
-	// // >> 라이트 쉐이더
+	float4 mPosition : POSITION0;
+	float3 mDiffuse : TEXCOORD1;
+	float3 mViewDir : TEXCOORD2;
+	float3 mReflection : TEXCOORD3;
+	// >> 라이트 쉐이더
 };
 
 VS_OUTPUT2 VS2( VS_INPUT2 Input )
 {
-	VS_OUTPUT2 Output;
-	Output.Position = mul(Input.Position, gWorldMatrix);
-	Output.Position = mul(Output.Position, gViewMatrix);
-	Output.Position = mul(Output.Position, gProjectionMatrix);
-	
-	return Output;
-	// >> 컬러 쉐이더
+	// VS_OUTPUT2 Output;
+	// Output.Position = mul(Input.Position, gWorldMatrix);
+	// Output.Position = mul(Output.Position, gViewMatrix);
+	// Output.Position = mul(Output.Position, gProjectionMatrix);
+	// 
+	// return Output;
+	// // >> 컬러 쉐이더
 
-	 // VS_OUTPUT2 Output;
-	 // 
-	 // Output.mPosition = mul(Input.mPosition, gWorldMatrix);
-	 // 
-	 // float3 lightDir = Output.mPosition.xyz - gWorldLightPos.xyz;
-	 // lightDir = normalize(lightDir);
-	 // 
-	 // float3 viewDir = normalize(Output.mPosition.xyz - gWorldCameraPos.xyz);
-	 // Output.mViewDir = viewDir;
-	 // 
-	 // Output.mPosition = mul(Output.mPosition, gViewMatrix);
-	 // Output.mPosition = mul(Output.mPosition, gProjectionMatrix);
-	 // 
-	 // float3  worldNormal = mul(Input.mNormal, (float3x3)gWorldMatrix);
-	 // worldNormal = normalize(worldNormal);
-	 // Output.mDiffuse = dot(-lightDir, worldNormal);
-	 // 
-	 // Output.mReflection = reflect(lightDir, worldNormal);
-	 // 
-	 // return Output;
-	 // // >> 라이트 쉐이더
+	 VS_OUTPUT2 Output;
+	 
+	 Output.mPosition = mul(Input.mPosition, gWorldMatrix);
+	 
+	 float3 lightDir = Output.mPosition.xyz - gWorldLightPos.xyz;
+	 lightDir = normalize(lightDir);
+	 
+	 float3 viewDir = normalize(Output.mPosition.xyz - gWorldCameraPos.xyz);
+	 Output.mViewDir = viewDir;
+	 
+	 Output.mPosition = mul(Output.mPosition, gViewMatrix);
+	 Output.mPosition = mul(Output.mPosition, gProjectionMatrix);
+	 
+	 float3  worldNormal = mul(Input.mNormal, (float3x3)gWorldMatrix);
+	 worldNormal = normalize(worldNormal);
+	 Output.mDiffuse = dot(-lightDir, worldNormal);
+	 
+	 Output.mReflection = reflect(lightDir, worldNormal);
+	 
+	 return Output;
+	 // >> 라이트 쉐이더
 
 	/*VS_OUTPUT2 Output;
 	Output.Position = mul(Input.Position, matViewProjection);
@@ -136,33 +135,33 @@ float4 gLightColor;
 
 struct PS_INPUT2
 {
-	// float3 mDiffuse : TEXCOORD1;
-	// float3 mViewDir : TEXCOORD2;
-	// float3 mReflection : TEXCOORD3;
+	float3 mDiffuse : TEXCOORD1;
+	float3 mViewDir : TEXCOORD2;
+	float3 mReflection : TEXCOORD3;
 	// >> 라이트 쉐이더
 };
 
 float4 PS2(PS_INPUT2 Input) : COLOR
 {  
-	return SurfaceColor;
+	//return SurfaceColor;
 	//// >> 컬러 쉐이더
 
-	//float3 diffuse = gLightColor.rgb * SurfaceColor.rgb * saturate(Input.mDiffuse);
-	//float3 refelction = normalize(Input.mReflection);
-	//float3 viewDir = normalize(Input.mViewDir);
-	//float3 specular = 0;
+	float3 diffuse = gLightColor.rgb * SurfaceColor.rgb * saturate(Input.mDiffuse);
+	float3 refelction = normalize(Input.mReflection);
+	float3 viewDir = normalize(Input.mViewDir);
+	float3 specular = 0;
 
-	//if (diffuse.x > 0)
-	//{
-	//	specular = saturate(dot(refelction, -viewDir));
-	//	specular = pow(specular, 20.0f);
-	//	specular *= SurfaceColor.rgb * gLightColor.rgb;
-	//}
+	if (diffuse.x > 0)
+	{
+		specular = saturate(dot(refelction, -viewDir));
+		specular = pow(specular, 20.0f);
+		specular *= SurfaceColor.rgb * gLightColor.rgb;
+	}
 
-	//float3 ambient = float3(0.1f, 0.1f, 0.1f) * SurfaceColor;
+	float3 ambient = float3(0.1f, 0.1f, 0.1f) * SurfaceColor;
 
-	//return float4(ambient + diffuse + specular , 1.0f);
-	//// >> 라이트 쉐이더
+	return float4(ambient + diffuse + specular , 1.0f);
+	// >> 라이트 쉐이더
 }
 //--------------------------------------------------------------//
 // Technique Section for Default_DirectX_Effect

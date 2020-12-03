@@ -60,9 +60,18 @@ void CObject::Render()
 	v.y = D3DXToRadian(m_vRotate.y);
 	v.z = D3DXToRadian(m_vRotate.z);
 
-	D3DXMatrixRotationX(&matR, v.x);
-	D3DXMatrixRotationY(&matR, v.y);
-	D3DXMatrixRotationZ(&matR, v.z);
+	// D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z); 
+
+	D3DXMATRIXA16 matX, matY, matZ;
+	D3DXMatrixIdentity(&matX);
+	D3DXMatrixIdentity(&matY);
+	D3DXMatrixIdentity(&matZ);
+
+	D3DXMatrixRotationX(&matX, v.x);
+	D3DXMatrixRotationY(&matY, v.y);
+	D3DXMatrixRotationZ(&matZ, v.z);
+
+	matR = matX * matY * matZ;
 
 	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
 	matWorld = matS * matR * matT;

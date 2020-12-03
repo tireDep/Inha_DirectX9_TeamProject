@@ -56,7 +56,7 @@ void CToolMain::Setup()
 void CToolMain::Update()
 {
 //#ifdef _DEBUG
-	m_pCube->Update();
+	// m_pCube->Update();
 //#endif
 	m_pCamera->Update();
 
@@ -83,8 +83,8 @@ void CToolMain::Render()
 		g_pObjectManager->Render();
 
 //#ifdef _DEBUG
-		if (m_pCube)
-			m_pCube->Render();
+		// if (m_pCube)
+		// 	m_pCube->Render();
 //#endif
 
 		m_pImgui->Render(); // UI
