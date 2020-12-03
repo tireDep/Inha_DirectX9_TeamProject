@@ -174,7 +174,7 @@ void CMainGame::Setup()
 {
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123456.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123.dat");
 	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
