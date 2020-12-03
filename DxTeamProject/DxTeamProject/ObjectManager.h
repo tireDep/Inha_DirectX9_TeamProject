@@ -50,6 +50,8 @@ public:
 	void Update();										// Collision
 	void Update(float duration);						// 2D Physics
 	void Update(float duration , CHeight* pMap);		// 3D Physics
+	void Update3D(float duration);
+	void UpdateLand(float duration);					// Land
 	void Update(CRay ray, D3DXCOLOR& objectcolor);		// Color Change
 	void Render();
 	void RenderOBBBox();

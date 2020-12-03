@@ -223,6 +223,21 @@ void CObjectManager::Update(float duration, CHeight* pMap)
 		m_vecObject[i]->Update(duration , pMap);
 }
 
+void CObjectManager::Update3D(float duration)
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+		m_vecObject[i]->Update3D(duration);
+}
+
+void CObjectManager::UpdateLand(float duration)
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		m_vecObject[i]->UpdateLand(duration);
+		m_vecObject[i]->Update3D(duration);
+	}
+}
+
 void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 {
 	vector<bool> vecIsPick;

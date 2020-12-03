@@ -168,12 +168,6 @@
     <ClCompile Include="Orb.cpp">
       <Filter>Orb</Filter>
     </ClCompile>
-    <ClCompile Include="PSOBB.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="PSphere.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
     <ClCompile Include="TestAngleSet.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
@@ -194,6 +188,13 @@
     </ClCompile>
     <ClCompile Include="Contact.cpp">
       <Filter>Physics\cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="Skydome.cpp" />
+    <ClCompile Include="PSphere.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PSOBB.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -388,12 +389,6 @@
     <ClInclude Include="Orb.h">
       <Filter>Orb</Filter>
     </ClInclude>
-    <ClInclude Include="PSOBB.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="PSphere.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
     <ClInclude Include="TestAngleSet.h">
       <Filter>Physics</Filter>
     </ClInclude>
@@ -414,6 +409,13 @@
     </ClInclude>
     <ClInclude Include="Contact.h">
       <Filter>Physics\cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="Skydome.h" />
+    <ClInclude Include="PSphere.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PSOBB.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
