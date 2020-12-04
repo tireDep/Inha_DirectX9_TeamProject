@@ -211,9 +211,8 @@
     <ClCompile Include="BreakeableWall.cpp">
       <Filter>Gimmick\KT</Filter>
     </ClCompile>
-    <ClCompile Include="RotationBoard.cpp" />
-    <ClCompile Include="Switch.cpp">
-      <Filter>Gimmick\HW</Filter>
+    <ClCompile Include="RotationBoard.cpp">
+      <Filter>Gimmick\KT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -451,9 +450,8 @@
     <ClInclude Include="BreakeableWall.h">
       <Filter>Gimmick\KT</Filter>
     </ClInclude>
-    <ClInclude Include="RotationBoard.h" />
-    <ClInclude Include="Switch.h">
-      <Filter>Gimmick\HW</Filter>
+    <ClInclude Include="RotationBoard.h">
+      <Filter>Gimmick\KT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -578,9 +576,6 @@
     </Filter>
     <Filter Include="Gimmick\KT">
       <UniqueIdentifier>{16e41f8f-ec5b-46a9-8ea9-379ce0d70cd3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Gimmick\HW">
-      <UniqueIdentifier>{b30d072d-140b-4a2a-b366-e6fb6e00fa9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
