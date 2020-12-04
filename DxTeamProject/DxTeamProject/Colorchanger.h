@@ -12,6 +12,7 @@ private:
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_direction;
 	D3DMATERIAL9		m_stMtlSphere;
+
 	bool istrue;
 public:
 	
@@ -22,5 +23,8 @@ public:
 	
 
 	bool RayCheck(MeshTile& meshtile);
+	
+	D3DMATERIAL9 GetColor() { return m_stMtlSphere; }
+
 };
 

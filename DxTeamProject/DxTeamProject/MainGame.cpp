@@ -441,12 +441,12 @@ void CMainGame::Update()
 		if (m_pChanger->RayCheck(*m_pMeshTile) == true);
 		{
 			
-			m_pMeshTile->SetColor(true);
+			m_pMeshTile->SetColor(m_pChanger->GetColor());
 
 		}
 		if(m_pChanger->RayCheck(*m_pMeshTile) == false)
 		{
-			m_pMeshTile->SetColor(false);
+			m_pMeshTile->SetColor(m_pChanger->GetColor());
 
 		}
 	}
