@@ -241,6 +241,11 @@ void CCharacter::Setup()
 	m_Ray.SetDirection(D3DXVECTOR3(0, -1, 0));
 }
 
+void CCharacter::Update(D3DXVECTOR3 cameradirection)
+{
+	m_vDirection = cameradirection;
+}
+
 void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
 {
 	m_vDirection = cameradirection;

@@ -123,6 +123,7 @@ void CPSBox::Update3D(float duration)
 	assert(duration > 0.0f);
 
 	m_vLinearAcceleration = (linearforce + GRAVITY) * m_finverseMass;
+//	m_vLinearAcceleration = (linearforce) * m_finverseMass;
 	m_vLinearVelocity += (m_vLinearAcceleration * duration);
 	m_vLinearVelocity *= powf(m_fDamping, duration);
 	m_vLinearVelocity *= m_fLinearDrag;
@@ -234,6 +235,11 @@ void CPSBox::SetPusingForce(D3DXVECTOR3 forcedirection)
 	D3DXVec3Normalize(&m_vForceVector, &forcedirection);
 	m_vForceVector *= 100.0f;
 	SetForceApplied(true);
+
+	//D3DXVECTOR3 forcePosition = forcedirection * m_fBoundingSphere;
+	//m_vForceLocation = forcePosition;
+	//m_vForceVector = forcedirection * 100.0f;
+	//SetForceApplied(true);
 }
 
 void CPSBox::AddForce(const D3DXVECTOR3& force)

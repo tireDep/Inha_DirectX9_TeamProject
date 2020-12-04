@@ -1,18 +1,17 @@
 #include "stdafx.h"
-#include "TestCollision.h"
-#include "TestRigidBody.h"
+#include "TestObjCollision.h"
 
-CTestCollision::CTestCollision()
+CTestObjCollision::CTestObjCollision()
 	: m_pFirstObject(NULL)
 	, m_pSecondObject(NULL)
 {
 }
 
-CTestCollision::~CTestCollision()
+CTestObjCollision::~CTestObjCollision()
 {
 }
 
-CTestCollision::CTestCollision(CTestRigidBody * firstObject, CTestRigidBody * secondObject)
+CTestObjCollision::CTestObjCollision(CObject * firstObject, CObject * secondObject)
 {
 	assert(firstObject  != NULL);
 	assert(secondObject != NULL);
@@ -20,51 +19,53 @@ CTestCollision::CTestCollision(CTestRigidBody * firstObject, CTestRigidBody * se
 	m_pSecondObject = secondObject;
 }
 
-void CTestCollision::setFirstObject(CTestRigidBody * firstObject)
+void CTestObjCollision::setFirstObejct(CObject * firstObject)
 {
 	assert(firstObject != NULL);
 	m_pFirstObject = firstObject;
 }
 
-CTestRigidBody * CTestCollision::getFirstObject()
+CObject * CTestObjCollision::getFirstObject()
 {
 	return m_pFirstObject;
 }
 
-void CTestCollision::setSecondObject(CTestRigidBody * secondObject)
+void CTestObjCollision::setSeconObject(CObject * secondObject)
 {
 	assert(secondObject != NULL);
 	m_pSecondObject = secondObject;
 }
 
-CTestRigidBody * CTestCollision::getSecondObject()
+CObject * CTestObjCollision::getSecondObject()
 {
 	return m_pSecondObject;
 }
 
-collision_status CTestCollision::CollisionOccurred()
+Collision_Status CTestObjCollision::CollisionOccurred()
 {
 	float distance;
 	D3DXVECTOR3 distanceVector;
-	collision_status collisionStatus = COLLISION_NONE;
+	Collision_Status collisionStatus = Collision_Status::COLLISION_NONE;
 
 	distanceVector = m_pFirstObject->GetPosition() - m_pSecondObject->GetPosition();
-	distance = fabs(D3DXVec3Length(&distanceVector)) - m_pFirstObject->GetBoundingSphere() - m_pSecondObject->GetBoundingSphere();
-	//cout << distance << endl;
-	if (-0.001f < distance  && distance < 0.001f)
+	distance = fabs(D3DXVec3Length(&distanceVector) - m_pFirstObject->GetBoundingSphere() - m_pSecondObject->GetBoundingSphere());
+
+	// need to modify?
+	if (CloseToZero(distance))
 	{
-		collisionStatus = COLLISION_TOUCHING;
+		collisionStatus = Collision_Status::COLLISION_TOUCHING;
 	}
 	else if (distance < 0.0f)
 	{
-		collisionStatus = COLLISTION_OVERLAPPING;
+		collisionStatus = Collision_Status::COLLISION_OVERLAPPING;
 	}
 	return collisionStatus;
 }
 
-bool CTestCollision::CalculateReactions()
+bool CTestObjCollision::CalculateReactions()
 {
 	float averageElasticity = (m_pFirstObject->GetElasticity() + m_pSecondObject->GetElasticity()) / 2.0f;
+
 	D3DXVECTOR3 relativeVelocity = m_pFirstObject->GetAngularVelocity() - m_pSecondObject->GetAngularVelocity();
 	D3DXVECTOR3 numerator = -1 * relativeVelocity * (averageElasticity + 1);
 
@@ -72,7 +73,7 @@ bool CTestCollision::CalculateReactions()
 	D3DXVec3Normalize(&unitNormal, &unitNormal);
 
 	D3DXVECTOR3 forcePosition2 = unitNormal * m_pSecondObject->GetBoundingSphere();
-	
+
 	D3DXVECTOR3 tempVector;
 	D3DXVec3Cross(&tempVector, &forcePosition2, &unitNormal);
 
@@ -83,11 +84,11 @@ bool CTestCollision::CalculateReactions()
 	D3DXVec3Cross(&tempVector, &tempVector, &forcePosition2);
 
 	float part1 = D3DXVec3Dot(&unitNormal, &tempVector);
-	
+
 	unitNormal *= -1;
 	D3DXVECTOR3 forcePosition1 = unitNormal * m_pFirstObject->GetBoundingSphere();
 	D3DXVec3Cross(&tempVector, &forcePosition1, &unitNormal);
-	
+
 	tempVector.x = (tempVector.x / m_pFirstObject->GetRotationInertia().x);
 	tempVector.y = (tempVector.y / m_pFirstObject->GetRotationInertia().y);
 	tempVector.z = (tempVector.z / m_pFirstObject->GetRotationInertia().z);
@@ -96,15 +97,14 @@ bool CTestCollision::CalculateReactions()
 
 	float part2 = D3DXVec3Dot(&unitNormal, &tempVector);
 
-	float denominator = 1 / m_pFirstObject->getMass() + 1 / m_pSecondObject->getMass() + part2 + part1;
+	float denominator = m_pFirstObject->GetInverseMass() + m_pSecondObject->GetInverseMass() + part2 + part1;
 
-	CTestForce impulseForce;
-	impulseForce.SetForceVector(numerator / denominator);
-	impulseForce.SetForceLocation(forcePosition1);
-	m_pFirstObject->setImpulseForce(impulseForce);
+	m_pFirstObject->SetForceVector(numerator / denominator);
+	m_pFirstObject->SetForceLocation(forcePosition1);
 
-	impulseForce.SetForceVector(-1 * impulseForce.GetForceVector());
-	m_pSecondObject->setImpulseForce(impulseForce);
+	m_pSecondObject->SetForceVector(-1 * numerator / denominator);
+	// need to modify?
+	m_pSecondObject->SetForceLocation(forcePosition1);
 
 	return true;
 }
