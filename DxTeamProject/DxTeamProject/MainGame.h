@@ -45,7 +45,7 @@ private:
 	/// 이 아래는 지울 수도 있는 선언
 	CHeight* m_pHeightMap;
 	// Ray y check
-	MeshTile* m_pMeshTile;
+	vector<MeshTile*> m_pMeshTile;
 	// Rotation Test
 	//CTestRigidBody* m_pRigidBody;
 	CTestRigidBody* m_pRigidBody;

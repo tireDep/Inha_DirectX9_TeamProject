@@ -72,7 +72,7 @@ CMainGame::~CMainGame()
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 	// Ray y check
-	SafeDelete(m_pMeshTile);
+	
 	// Rotation Test
 	//SafeDelete(m_pRigidBody);
 	/// 릴리즈 버전을 위한 주석처리
@@ -245,9 +245,11 @@ void CMainGame::Setup()
 	}
 
 	// Ray y check
-	m_pMeshTile = new MeshTile;
-	m_pMeshTile->Setup();
-
+	for (int i = 0; i < 6; ++i)
+	{
+		m_pMeshTile.push_back(new MeshTile);
+		m_pMeshTile[i]->Setup(10, i - 2.5 , 0);
+	}
 	// Rotation Test
 	//m_pRigidBody = new CTestRigidBody;
 	//m_pRigidBody->Setup();
@@ -436,17 +438,18 @@ void CMainGame::Update()
 	if(m_pChanger)
 		m_pChanger->Update();
 
+	for(int i =0 ; i < m_pMeshTile.size(); ++i)
 	if (m_pChanger)
 	{
-		if (m_pChanger->RayCheck(*m_pMeshTile) == true);
+		if (m_pChanger->RayCheck(*m_pMeshTile[i]) == true);
 		{
 			
-			m_pMeshTile->SetColor(m_pChanger->GetColor());
+			m_pMeshTile[i]->SetColor(m_pChanger->GetColor());
 
 		}
-		if(m_pChanger->RayCheck(*m_pMeshTile) == false)
+		if(m_pChanger->RayCheck(*m_pMeshTile[i]) == false)
 		{
-			m_pMeshTile->SetColor(m_pChanger->GetColor());
+			m_pMeshTile[i]->SetColor(m_pChanger->GetColor());
 
 		}
 	}
@@ -507,8 +510,9 @@ void CMainGame::Render()
 		m_pText->RenderGrab();
 
 	// Ray y check
-	if (m_pMeshTile)
-		m_pMeshTile->Render();
+
+	for(int i =0; i < m_pMeshTile.size(); ++i)
+		m_pMeshTile[i]->Render();
 
 	// Rotation Test
 	//if (m_pRigidBody)

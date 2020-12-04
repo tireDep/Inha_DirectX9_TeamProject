@@ -8,10 +8,10 @@ public:
 	~Color_changer();
 private:
 	D3DXMATRIXA16	m_matS, m_matT, m_matWorld;
-	LPD3DXMESH		m_pMesh;
+	LPD3DXMESH		m_pMesh, m_pBarrel;
 	D3DXVECTOR3 m_position;
 	D3DXVECTOR3 m_direction;
-	D3DMATERIAL9		m_stMtlSphere;
+	D3DMATERIAL9		m_stMtlSphere , m_stMtlSphere2;
 
 	bool istrue;
 public:
@@ -24,7 +24,7 @@ public:
 
 	bool RayCheck(MeshTile& meshtile);
 	
-	D3DMATERIAL9 GetColor() { return m_stMtlSphere; }
+	D3DMATERIAL9 GetColor() { return m_stMtlSphere2; }
 
 };
 

@@ -17,7 +17,7 @@ MeshTile::~MeshTile()
 	SafeRelease(m_pMesh);
 }
 
-void MeshTile::Setup()
+void MeshTile::Setup(float x, float y, float z)
 {
 	D3DXCreateBox(g_pD3DDevice, 1, 1, 1, &m_pMesh, NULL);
 
@@ -25,7 +25,7 @@ void MeshTile::Setup()
 	m_stMtlSphere2.Diffuse = RED;
 	m_stMtlSphere2.Specular = RED;
 
-	D3DXMatrixTranslation(&m_matT, 10, 0, 0);
+	D3DXMatrixTranslation(&m_matT, x, y, z);
 	D3DXMatrixScaling(&m_matS, 1, 1, 1);
 	m_matWorld = m_matS * m_matT;
 
@@ -55,7 +55,9 @@ void MeshTile::Render()
 	D3DXMatrixIdentity(&matWorld);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	
-	g_pD3DDevice->SetMaterial(&m_stMtlSphere2);
+
+
+	g_pD3DDevice->SetMaterial(&m_stMtlSphere);
 	
 	
 	

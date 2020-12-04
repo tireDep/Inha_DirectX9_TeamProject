@@ -10,11 +10,11 @@ private:
 	D3DMATERIAL9	m_stMtlSphere , m_stMtlSphere2;
 	
 public:
-	void Setup();
+	void Setup(float x, float y, float z);
 	LPD3DXMESH GetMesh() { return m_pMesh; }
 	void Render();
 	D3DXMATRIXA16 GetMatWorld();
 	void Update();
-	void SetColor(D3DMATERIAL9 color) { m_stMtlSphere2 = color; }
+	void SetColor(D3DMATERIAL9 color) { m_stMtlSphere = color; }
 	
 };
