@@ -131,7 +131,7 @@ void CMainGame::Setup()
 
 	////--Gimmick
 	m_pChanger = new Color_changer;
-	m_pChanger->Setup("Resource/XFile/Gimmick/Switch", "Weight_switch.X"); //"Resource/XFile/Gimmick/ColorChanger","Color_changer.X"
+	m_pChanger->Setup("Resource/XFile/Gimmick/ColorChanger", "Color_changer.X");
 
 	m_pGimmick_Door[0] = new CDoor;
 	m_pGimmick_Door[0]->Setup("Resource/XFile/Gimmick/Door", "door_frame.X");
