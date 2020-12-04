@@ -190,7 +190,7 @@ struct ST_XFile
 	ID3DXBuffer* mtrlBuffer;
 
 	DWORD nMtrlNum;
-	vector<D3DMATERIAL9*> vecMtrl;
+	vector<D3DMATERIAL9> vecMtrl;
 	vector<IDirect3DTexture9*> vecTextrure;
 };
 

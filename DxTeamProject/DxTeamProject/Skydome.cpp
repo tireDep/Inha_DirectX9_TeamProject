@@ -54,7 +54,7 @@ void CSkydome::Render(D3DXVECTOR3 vCamEye)
 			if (m_vecTextures[i] != 0)
 				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
 		
-			g_pD3DDevice->SetMaterial(m_vecMtrls[i]);
+			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
 			if (i == 0 || i == 2)
 				m_pMesh->DrawSubset(i);
