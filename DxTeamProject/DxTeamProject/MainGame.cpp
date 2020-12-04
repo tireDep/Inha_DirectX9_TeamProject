@@ -23,12 +23,7 @@
 // Rotation Test
 #include "TestForce.h"
 #include "TestAngleSet.h"
-#include "TestRigidBody.h"
-
 #include "Tile.h"
-
-#include "TestCollision.h"
-
 //Gimmick
 #include "Colorchanger.h"
 
@@ -172,41 +167,6 @@ void CMainGame::Setup()
 		m_pMeshTile.push_back(new MeshTile);
 		m_pMeshTile[i]->Setup(10, i - 2.5 , 0);
 	}
-	// Rotation Test
-	//m_pRigidBody = new CTestRigidBody;
-	//m_pRigidBody->Setup();
-
-	for (int i = 0; i < 4; i++)
-	{
-		CTestRigidBody* m_pRigidBody = new CTestRigidBody();
-		m_pRigidBody->Setup();
-		vecRigidBody.push_back(m_pRigidBody);
-	}
-	D3DXVECTOR3 gravity(0, -9.8f, 0);
-
-	vecRigidBody[0]->SetPosition(D3DXVECTOR3(-3.0f, 5.0f, 5.0f));
-	vecRigidBody[0]->constantForce.SetForceVector(gravity);
-	vecRigidBody[0]->constantForce.SetForceLocation(D3DXVECTOR3(-3.0f, 5.0f, 5.0f));
-	vecRigidBody[0]->impulseForce.SetForceVector(D3DXVECTOR3(1.0f, -1.0f, 0.0f));
-	vecRigidBody[0]->impulseForce.SetForceLocation(D3DXVECTOR3(0.0f, 0.0f, -1.0f));
-
-	vecRigidBody[1]->SetPosition(D3DXVECTOR3(0.0f, 3.0f, 5.0f));
-	vecRigidBody[1]->constantForce.SetForceVector(gravity);
-	vecRigidBody[1]->constantForce.SetForceLocation(D3DXVECTOR3(0.0f, 3.0f, 5.0f));
-	vecRigidBody[1]->impulseForce.SetForceVector(D3DXVECTOR3(-1.0f, -1.0f, 0.0f));
-	vecRigidBody[1]->impulseForce.SetForceLocation(D3DXVECTOR3(0.0f, -1.0f, -1.0f));
-
-	vecRigidBody[2]->SetPosition(D3DXVECTOR3(4.0f, 4.0f, 7.0f));
-	vecRigidBody[2]->constantForce.SetForceVector(gravity);
-	vecRigidBody[2]->constantForce.SetForceLocation(D3DXVECTOR3(4.0f, 4.0f, 7.0f));
-	vecRigidBody[2]->impulseForce.SetForceVector(D3DXVECTOR3(-3.0f, 3.0f, 0.0f));
-	vecRigidBody[2]->impulseForce.SetForceLocation(D3DXVECTOR3(1.0f, -1.0f, 0.0f));
-
-	vecRigidBody[3]->SetPosition(D3DXVECTOR3(-10.0f, 4.0f, 5.0f));
-	vecRigidBody[3]->constantForce.SetForceVector(gravity);
-	vecRigidBody[3]->constantForce.SetForceLocation(D3DXVECTOR3(-10.0f, 4.0f, 5.0f));
-	vecRigidBody[3]->impulseForce.SetForceVector(D3DXVECTOR3(10.0f, 5.0f, 0.0f));
-	vecRigidBody[3]->impulseForce.SetForceLocation(D3DXVECTOR3(0.0f, 0.0f, 1.0f));
 
 	//m_pMeshTile = new MeshTile;
 	//m_pMeshTile->Setup();
@@ -326,44 +286,6 @@ void CMainGame::Update()
 	g_pObjectManager->Update();													// Collision
 	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
 
-
-	// Rotation Test
-	//m_pRigidBody->Update(g_pTimeManager->GetElapsedTime());
-
-
-	for (int i = 0; i < 3; i++)
-	{
-		for (int j = i + 1; j < 4; j++)
-		{
-			CTestCollision theCollision(vecRigidBody[i], vecRigidBody[j]);
-			collision_status collisionOccurred = theCollision.CollisionOccurred();
-			switch (collisionOccurred)
-			{
-				case COLLISION_TOUCHING:
-					theCollision.CalculateReactions();
-					break;
-				case COLLISTION_OVERLAPPING:
-					//HandleOverlapping(g_pTimeManager->GetElapsedTime(), i, j, theCollision);
-					break;
-				case COLLISION_NONE:
-					break;
-				default:
-					break;
-			}
-		}
-	}
-
-	for (int i = 0; i < 4; i++)
-	{
-		float distance = vecRigidBody[i]->GetPosition().y - vecRigidBody[i]->GetBoundingSphere();
-		if ((CloseToZero(distance) || (distance) < 0.0f))
-		{
-			D3DXVECTOR3 tmp = vecRigidBody[i]->GetLinearVelocity();
-			tmp.y = -tmp.y * vecRigidBody[i]->GetElasticity();
-			vecRigidBody[i]->SetLinearVelocity(tmp);
-		}
-		vecRigidBody[i]->Update(g_pTimeManager->GetElapsedTime());
-	}
 	/*if(m_pChanger)
 		m_pChanger->Update();
 
@@ -448,9 +370,6 @@ void CMainGame::Render()
 
 	//if (m_pMeshTile)
 	//	m_pMeshTile->Render();
-
-
-	// Rotation Test
 
 	//if (m_pChanger)
 	//	m_pChanger->Render();

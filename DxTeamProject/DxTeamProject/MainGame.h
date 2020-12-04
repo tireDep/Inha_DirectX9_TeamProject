@@ -17,9 +17,6 @@ class CColliderObject;
 class CSkinnedMesh;
 // Ray y check
 class MeshTile;
-// Rotation Test
-class CTestRigidBody;
-class CTestCollision;
 /// 릴리즈 버전을 위한 주석처리
 
 //Gimmick
@@ -46,15 +43,10 @@ private:
 	CHeight* m_pHeightMap;
 	// Ray y check
 	vector<MeshTile*> m_pMeshTile;
-	// Rotation Test
-	//CTestRigidBody* m_pRigidBody;
-	CTestRigidBody* m_pRigidBody;
-	vector<CTestRigidBody*> vecRigidBody;
-	/// 릴리즈 버전을 위한 주석처리
-	//CSoundManager* m_pSm;
-
 	//Gimmick;
 	Color_changer* m_pChanger;
+	/// 릴리즈 버전을 위한 주석처리
+	//CSoundManager* m_pSm;
 public:
 	CMainGame();
 	~CMainGame();
@@ -63,7 +55,4 @@ public:
 	void Setup();
 	void Update();
 	void Render();
-	
-	// Rotation Test
-	/// 릴리즈 버전을 위한 주석처리
 };

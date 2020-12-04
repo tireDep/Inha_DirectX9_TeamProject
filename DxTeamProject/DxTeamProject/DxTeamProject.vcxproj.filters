@@ -201,10 +201,7 @@
       <Filter>Gimmick</Filter>
     </ClCompile>
     <ClCompile Include="ReleaseTimer.cpp" />
-<<<<<<< HEAD
-=======
     <ClCompile Include="TestObjCollision.cpp" />
->>>>>>> 361360c4cf938ff0689ad22bc1fb14214669d271
     <ClCompile Include="MainGame.cpp" />
   </ItemGroup>
   <ItemGroup>
