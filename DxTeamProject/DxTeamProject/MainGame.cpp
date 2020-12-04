@@ -13,6 +13,7 @@
 #include "PSphere.h"
 #include "PSBox.h"
 #include "PSCylinder.h"
+#include "TestAngleSet.h"
 #include "SkinnedMesh.h"
 #include "Skydome.h"
 /// 이 아래는 지울 수도 있는 선언
@@ -20,12 +21,12 @@
 // Ray y check
 #include "MeshTile.h"
 #include "OBB.h"
-// Rotation Test
-#include "TestForce.h"
-#include "TestAngleSet.h"
 #include "Tile.h"
 //Gimmick
 #include "Colorchanger.h"
+#include "Door.h"
+#include "BreakeableWall.h"
+#include "RotationBoard.h"
 
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
@@ -43,12 +44,12 @@ CMainGame::CMainGame() :
 	m_pHeightMap(NULL),
 	m_pSkinnedMesh(NULL)
 	// Ray y check
-	, m_pMeshTile(NULL)
-	// Rotation Test
-	//, m_pRigidBody(NULL)
+	, m_pMeshTile(NULL),
+	// Gimmick
+	m_pGimmick_Door(NULL),
+	m_pGimmick_RotationBoard(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
-
 {
 
 }
@@ -60,6 +61,9 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pText);
 	SafeDelete(m_pLight);
 	SafeDelete(m_pSkydome);
+	// Gimmick
+	SafeDelete(m_pGimmick_Door);
+	SafeDelete(m_pGimmick_RotationBoard);
 
 	g_pFileLoadManager->Destroy();
 	
@@ -71,8 +75,6 @@ CMainGame::~CMainGame()
 	g_pDeviceManager->Destroy();
 	// Ray y check
 	
-	// Rotation Test
-	//SafeDelete(m_pRigidBody);
 	/// 릴리즈 버전을 위한 주석처리
 	//SafeDelete(m_pSm);
 }
@@ -93,7 +95,7 @@ void CMainGame::Setup()
 {
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "createmap2.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "createmap2.dat");
 	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
@@ -127,6 +129,11 @@ void CMainGame::Setup()
 	//m_pChanger = new Color_changer;
 	//m_pChanger->Setup();
 
+	m_pGimmick_Door = new CDoor;
+	m_pGimmick_Door->Setup("Resource/XFile/Gimmick/Door", "door_frame.X");
+
+	m_pGimmick_RotationBoard = new RotationBoard;
+	m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
 
 	/// 이 아래는 지울 수도 있는 선언
 	//for (int i = 0; i < 8; i++)
@@ -275,7 +282,6 @@ void CMainGame::Update()
 		}
 	}
 
-
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
@@ -286,8 +292,16 @@ void CMainGame::Update()
 	g_pObjectManager->Update();													// Collision
 	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
 
+	// Gimmick
+	if (m_pGimmick_Door)
+		m_pGimmick_Door->Update();
+
+	if (m_pGimmick_RotationBoard)
+		m_pGimmick_RotationBoard->Update();
+	
 	/*if(m_pChanger)
 		m_pChanger->Update();
+
 
 	for (int i = 0; i < m_pMeshTile.size(); ++i)
 	{
@@ -305,7 +319,6 @@ void CMainGame::Update()
 			}
 		}
 	}*/
-
 }
 
 
@@ -370,6 +383,12 @@ void CMainGame::Render()
 
 	//if (m_pMeshTile)
 	//	m_pMeshTile->Render();
+
+	// Gimmick
+	if (m_pGimmick_Door)
+		m_pGimmick_Door->Render();
+	if (m_pGimmick_RotationBoard)
+		m_pGimmick_RotationBoard->Render();
 
 	//if (m_pChanger)
 	//	m_pChanger->Render();

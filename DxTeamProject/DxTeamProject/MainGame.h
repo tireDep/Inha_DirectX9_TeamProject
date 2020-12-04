@@ -21,6 +21,9 @@ class MeshTile;
 
 //Gimmick
 class Color_changer;
+class CDoor;
+class CBreakableWall;
+class RotationBoard;
 
 //class CSoundManager;
 class CMainGame
@@ -45,6 +48,8 @@ private:
 	vector<MeshTile*> m_pMeshTile;
 	//Gimmick;
 	Color_changer* m_pChanger;
+	CDoor* m_pGimmick_Door;
+	RotationBoard* m_pGimmick_RotationBoard;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 public:

@@ -200,9 +200,18 @@
     <ClCompile Include="MeshTile.cpp">
       <Filter>Gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="ReleaseTimer.cpp" />
     <ClCompile Include="TestObjCollision.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="ReleaseTimer.cpp">
+      <Filter>...TrashCan</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Gimmick\KT</Filter>
+    </ClCompile>
+    <ClCompile Include="BreakeableWall.cpp">
+      <Filter>Gimmick\KT</Filter>
+    </ClCompile>
+    <ClCompile Include="RotationBoard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -429,8 +438,17 @@
     <ClInclude Include="MeshTile.h">
       <Filter>Gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="ReleaseTimer.h" />
     <ClInclude Include="TestObjCollision.h" />
+    <ClInclude Include="ReleaseTimer.h">
+      <Filter>...TrashCan</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Gimmick\KT</Filter>
+    </ClInclude>
+    <ClInclude Include="BreakeableWall.h">
+      <Filter>Gimmick\KT</Filter>
+    </ClInclude>
+    <ClInclude Include="RotationBoard.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -551,6 +569,9 @@
     </Filter>
     <Filter Include="Gimmick">
       <UniqueIdentifier>{160a779f-9356-4325-b722-a130a8535a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gimmick\KT">
+      <UniqueIdentifier>{16e41f8f-ec5b-46a9-8ea9-379ce0d70cd3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

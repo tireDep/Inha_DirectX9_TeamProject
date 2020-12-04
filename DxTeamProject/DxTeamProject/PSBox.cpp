@@ -21,10 +21,14 @@ void CPSBox::Setup()
 	maxLength = max(maxLength, m_fDepth);
 	//m_fBoundingSphere = maxLength / 2.0f;
 	m_fBoundingSphere = maxLength;
-	// modyfi? 12.0f -> 48.0f?
+	// modify? 12.0f -> 48.0f?
 	m_vRotationInertia.x = (GetMass() * (m_fHeight * m_fHeight + m_fDepth  * m_fDepth)) / 12.0f;
 	m_vRotationInertia.y = (GetMass() * (m_fWidth  * m_fWidth  + m_fDepth  * m_fDepth)) / 12.0f;
 	m_vRotationInertia.z = (GetMass() * (m_fWidth  * m_fWidth  + m_fHeight * m_fHeight)) / 12.0f;
+	//SetMass(m_fWidth * m_fHeight * m_fDepth);
+	//m_vRotationInertia.x = 0.3f * (GetMass() * (m_fHeight + m_fDepth));
+	//m_vRotationInertia.y = 0.3f * (GetMass() * (m_fWidth  + m_fDepth));
+	//m_vRotationInertia.z = 0.3f * (GetMass() * (m_fWidth  + m_fHeight));
 }
 
 void CPSBox::Setup(D3DXVECTOR3 center)
@@ -73,7 +77,6 @@ void CPSBox::Setup(const ST_MapData & mapData)
 
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	m_matWorld = matS * matR * matT;
-
 }
 
 void CPSBox::Update(float duration)
