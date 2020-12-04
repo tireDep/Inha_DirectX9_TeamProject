@@ -12,8 +12,6 @@ CObject::CObject()
 
 CObject::~CObject()
 {
-	SafeRelease(m_pMesh);
-	SafeRelease(m_pTexture);
 }
 
 void CObject::Setup()

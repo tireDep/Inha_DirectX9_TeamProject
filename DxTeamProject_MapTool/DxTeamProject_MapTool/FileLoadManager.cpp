@@ -492,35 +492,56 @@ bool CFileLoadManager::FileLoad_Sprite(string szFolder, string szFile, D3DXIMAGE
 	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
 
-	if (D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		filePath.c_str(),
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT,
-		0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED, D3DX_FILTER_NONE
-		, D3DX_DEFAULT, 0, &imageInfo, NULL, &lpTexture))
+	if (m_mapSprite.find(filePath) == m_mapSprite.end())
 	{
-		ErrMessageBox("Sprite Load Error", "ERROR");
-		return false;
+		if (D3DXCreateTextureFromFileExA(g_pD3DDevice,
+			filePath.c_str(),
+			D3DX_DEFAULT_NONPOW2,
+			D3DX_DEFAULT_NONPOW2,
+			D3DX_DEFAULT,
+			0,
+			D3DFMT_UNKNOWN,
+			D3DPOOL_MANAGED, D3DX_FILTER_NONE
+			, D3DX_DEFAULT, 0, &imageInfo, NULL, &lpTexture))
+		{
+			ErrMessageBox("Sprite Load Error", "ERROR");
+			return false;
+		}
+
+		ST_Sprite spriteInfo;
+		spriteInfo.imageInfo = imageInfo;
+		spriteInfo.lpTexture = lpTexture;
+
+		m_mapSprite[filePath] = spriteInfo;
 	}
+
+	imageInfo = m_mapSprite[filePath].imageInfo;
+	lpTexture = m_mapSprite[filePath].lpTexture;
 
 	return true;
 }
 
 bool CFileLoadManager::FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT & setShader)
 {
-	string filePath;;
+	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
 
-	setShader = LoadShader(filePath);
-
-	if (!setShader)
+	if (m_mapShader.find(filePath) == m_mapShader.end())
 	{
-		ErrMessageBox("Shader Load Fail", "Error");
-		return false;
+		setShader = LoadShader(filePath);
+
+		if (!setShader)
+		{
+			ErrMessageBox("Shader Load Fail", "Error");
+			return false;
+		}
+
+		m_mapShader[filePath] = setShader;
 	}
+
+	setShader = m_mapShader[filePath];
+
+	cout << m_mapShader.size() << endl;
 
 	return true;
 }
@@ -557,6 +578,14 @@ void CFileLoadManager::Destroy()
 	}
 
 	m_mapTexture.clear();
+
+
+	for each(auto it in m_mapShader)
+	{
+		SafeRelease(it.second);
+	}
+
+	m_mapShader.clear();
 }
 
 //D3DXVECTOR3 CFileLoadManager::GetSelectCenterPos(D3DXVECTOR3 vSelect)

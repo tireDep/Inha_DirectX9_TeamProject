@@ -9,8 +9,6 @@ CBackground::CBackground()
 
 CBackground::~CBackground()
 {
-	SafeRelease(m_pMesh);
-	SafeRelease(m_pTexture);
 }
 
 void CBackground::Setup()

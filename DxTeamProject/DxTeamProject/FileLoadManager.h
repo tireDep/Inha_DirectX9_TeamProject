@@ -2,14 +2,16 @@
 
 struct ST_XFile;
 struct ST_MapData;
+struct ST_Sprite;
 
 #define g_pFileLoadManager CFileLoadManager::GetInstance()
 
 class CFileLoadManager
 {
 private:
-	map<string, LPDIRECT3DTEXTURE9> m_mapTexture;
-	// >> TextureManager 참고
+	map<string, LPDIRECT3DTEXTURE9> m_mapTexture; // >> TextureManager 참고
+	map<string, LPD3DXEFFECT> m_mapShader;
+	map<string, ST_Sprite> m_mapSprite;
 
 	CFileLoadManager() { }
 	LPD3DXEFFECT LoadShader(const string fileName);

@@ -120,3 +120,9 @@ struct ST_XFile
 	vector<D3DMATERIAL9> vecMtrl;
 	vector<IDirect3DTexture9*> vecTextrure;
 };
+
+struct ST_Sprite
+{
+	D3DXIMAGE_INFO imageInfo;
+	LPDIRECT3DTEXTURE9 lpTexture;
+};

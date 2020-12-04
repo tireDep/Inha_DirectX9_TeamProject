@@ -42,8 +42,6 @@ CObject::CObject()
 
 CObject::~CObject()
 {
-	SafeRelease(m_pShader);
-	SafeRelease(m_pMesh);
 }
 
 bool CObject::LoadAssets()

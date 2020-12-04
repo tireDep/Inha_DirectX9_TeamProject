@@ -7,8 +7,6 @@
 #include "Background.h"
 
 int IObject::m_nRefCnt = 0;
-LPD3DXEFFECT IObject::m_pShader = NULL;
-bool IObject::isLoad = false;
 
 IObject::IObject() : 
 	m_pTexture(NULL),
@@ -34,13 +32,8 @@ IObject::IObject() :
 
 	g_pObjectManager->AddObject(this);
 	IObject::m_nRefCnt += 1;
-
-	if (!isLoad)
-	{
-		g_pFileLoadManager->FileLoad_Shader("Resource/Shader", "outLine.fx", m_pShader);
-		isLoad = true;
-		// >> 맨 처음 한번만 로드
-	}
+	
+	g_pFileLoadManager->FileLoad_Shader("Resource/Shader", "outLine.fx", m_pShader);
 }
 
 void IObject::SetShader(const D3DXMATRIXA16 & setMatWorld)
@@ -79,7 +72,6 @@ void IObject::SetShader(const D3DXMATRIXA16 & setMatWorld)
 IObject::~IObject()
 {
 	SafeRelease(m_pMesh);
-	SafeRelease(m_pTexture);
 }
 
 void IObject::Release()
@@ -318,9 +310,4 @@ void IObject::CreateObject(const ST_MapData& mapData)
 		background->Setup(mapData);
 		break;
 	}
-}
-
-void IObject::Destroy()
-{
-	SafeRelease(m_pShader);
 }
