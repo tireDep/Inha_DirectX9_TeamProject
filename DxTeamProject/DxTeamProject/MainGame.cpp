@@ -139,11 +139,11 @@ void CMainGame::Setup()
 	//	CPSphere* Sphere = new CPSphere();
 	//	Sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
 	//}
-	//for (int i = 0; i < 8; i++)
-	//{
-	//	CPSBox* box = new CPSBox();
-	//	box->Setup(D3DXVECTOR3(-5, 0.5, 2 * i + 3));
-	//}
+	for (int i = 0; i < 1; i++)
+	{
+		CPSBox* box = new CPSBox();
+		box->Setup(D3DXVECTOR3(-5, 3.5, 2 * i + 3));
+	}
 	//for (int i = 0; i < 8; i++)
 	//{
 	//	CPSCylinder* cylinder = new CPSCylinder();
