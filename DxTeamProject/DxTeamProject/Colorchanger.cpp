@@ -1,100 +1,109 @@
 #include "stdafx.h"
 #include "Colorchanger.h"
 #include "MeshTile.h"
+
 Color_changer::Color_changer()
-    : m_pMesh(NULL)
-	, istrue(false)
+	:m_pMesh(NULL)
+	, m_adjBuffer(NULL)
+	, m_numMtrls(0)
 {
-    D3DXMatrixIdentity(&m_matWorld);
-	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
-	ZeroMemory(&m_stMtlSphere2, sizeof(D3DMATERIAL9));
+  
 }
 
 Color_changer::~Color_changer()
 {
-    SafeRelease(m_pMesh);
+	SafeRelease(m_pMesh);
+	SafeRelease(m_adjBuffer);
 	
 }
 
-void Color_changer::Setup()
+void Color_changer::Setup(string folder, string file)
 {
-    D3DXCreateBox(g_pD3DDevice, 1, 1, 1, &m_pMesh, NULL);
-	
-	m_position = D3DXVECTOR3(0, 10, 0);
-	m_direction = D3DXVECTOR3(1, 0, 0);
+	ST_XFile* xfile = new ST_XFile;
 
- 
-	m_stMtlSphere.Ambient = RED;
-	m_stMtlSphere.Diffuse = RED;
-	m_stMtlSphere.Specular = RED;
+	if (!g_pFileLoadManager->FileLoad_XFile(folder, file, xfile))
+	{
+		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
+		return;
+	}
 
-	
-		
-	D3DXCreateBox(g_pD3DDevice, 1.5f, 0.3f, 0.3f, &m_pBarrel, NULL);
-	
-	
-	
+	m_pMesh = xfile->pMesh;
+	m_adjBuffer = xfile->adjBuffer;
+	m_vecMtrls = xfile->vecMtrl;
+	m_vecTextures = xfile->vecTextrure;
+	m_numMtrls = xfile->nMtrlNum;
+
+	if (m_vecTextures.size() > 1)
+	{
+		for (int i = 0; i < m_vecTextures.size(); i++)
+		{
+			string filePath;
+			filePath = string(folder) + "/cubeworld_texture.tga";
+			if (m_vecTextures[i] == NULL)
+				D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &m_vecTextures[i]);
+		}
+	}
+	delete xfile;
+}
+
+void Color_changer::Update()
+{
 }
 
 void Color_changer::Render()
 {
 	
-	g_pD3DDevice->SetMaterial(&m_stMtlSphere);
-    g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-    m_pMesh->DrawSubset(0);
-	m_pBarrel->DrawSubset(0);
-}
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	D3DXMATRIXA16 matWorld;
+	D3DXMatrixIdentity(&matWorld);
 
-void Color_changer::Update()
-{
-	if (istrue == false)
+	D3DXMATRIXA16 matS, matT;
+	D3DXMatrixScaling(&matS, 0.3f, 0.3f, 0.3f);
+	D3DXMatrixTranslation(&matT, 0, 0, 0);
+	matWorld = matS * matT;
+
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	if (m_pMesh == NULL)
+		return;
+	for (int i = 0; i < m_vecMtrls.size(); i++)
 	{
-		m_position.y += 0.001f;
-		if(m_position.y > 5)
-			istrue = true;
-		
+		if (m_vecTextures[i] != 0)
+			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+		g_pD3DDevice->SetMaterial(m_vecMtrls[i]);
 	}
-	else if(istrue == true)
-	{
-		m_position.y -= 0.001f;
-		if (m_position.y < -5)
-			istrue = false;
-	}
-
-	D3DXMatrixTranslation(&m_matT, m_position.x, m_position.y, m_position.z);
-	m_matWorld = m_matT;
-
+	m_pMesh->DrawSubset(0);
+	g_pD3DDevice->SetTexture(0, NULL);
 }
 
 
 
-bool Color_changer::RayCheck(MeshTile& meshtile)
-{
-	BOOL Hit = false;
-	DWORD FaceIndex;
-	float U, V;
-	float Dist;
-	D3DXVECTOR3 rayOrigin = m_position;
-	rayOrigin.x -= meshtile.GetMatWorld()._41;
-	rayOrigin.y -= meshtile.GetMatWorld()._42;
-	rayOrigin.z -= meshtile.GetMatWorld()._43;
-
-	D3DXIntersect(meshtile.GetMesh(), &rayOrigin, &m_direction,
-		&Hit, &FaceIndex, &U, &V, &Dist, NULL, NULL);
-	if (Hit)
-	{
-		m_stMtlSphere2.Ambient = YELLOW;
-		m_stMtlSphere2.Diffuse = YELLOW;
-		m_stMtlSphere2.Specular = YELLOW;
-		return true;
-	}
-	else
-	{
-		m_stMtlSphere2.Ambient = RED;
-		m_stMtlSphere2.Diffuse = RED;
-		m_stMtlSphere2.Specular = RED;
-		return false;
-
-	}
-	
-}
+//bool Color_changer::RayCheck(MeshTile& meshtile)
+//{
+//	BOOL Hit = false;
+//	DWORD FaceIndex;
+//	float U, V;
+//	float Dist;
+//	D3DXVECTOR3 rayOrigin = m_position;
+//	rayOrigin.x -= meshtile.GetMatWorld()._41;
+//	rayOrigin.y -= meshtile.GetMatWorld()._42;
+//	rayOrigin.z -= meshtile.GetMatWorld()._43;
+//
+//	D3DXIntersect(meshtile.GetMesh(), &rayOrigin, &m_direction,
+//		&Hit, &FaceIndex, &U, &V, &Dist, NULL, NULL);
+//	if (Hit)
+//	{
+//		m_stMtlSphere2.Ambient = YELLOW;
+//		m_stMtlSphere2.Diffuse = YELLOW;
+//		m_stMtlSphere2.Specular = YELLOW;
+//		return true;
+//	}
+//	else
+//	{
+//		m_stMtlSphere2.Ambient = RED;
+//		m_stMtlSphere2.Diffuse = RED;
+//		m_stMtlSphere2.Specular = RED;
+//		return false;
+//
+//	}
+//	
+//}

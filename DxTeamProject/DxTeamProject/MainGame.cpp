@@ -131,7 +131,7 @@ void CMainGame::Setup()
 
 	////--Gimmick
 	m_pChanger = new Color_changer;
-	m_pChanger->Setup();
+	m_pChanger->Setup("Resource/XFile/Gimmick/Switch", "Weight_switch.X"); //"Resource/XFile/Gimmick/ColorChanger","Color_changer.X"
 
 	m_pGimmick_Door[0] = new CDoor;
 	m_pGimmick_Door[0]->Setup("Resource/XFile/Gimmick/Door", "door_frame.X");
@@ -404,8 +404,8 @@ void CMainGame::Render()
 	//	m_pGimmick_RotationBoard->Render();
 	if (m_pGimmick_Switch)
 		m_pGimmick_Switch->Render();
-	//if (m_pChanger)
-	//	m_pChanger->Render();
+	if (m_pChanger)
+		m_pChanger->Render();
 
 
 	if (g_gameManager->GetUImode())
