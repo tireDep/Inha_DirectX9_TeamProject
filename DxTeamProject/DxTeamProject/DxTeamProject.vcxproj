@@ -214,6 +214,7 @@
     <ClInclude Include="TestAngleSet.h" />
     <ClInclude Include="TestCollision.h" />
     <ClInclude Include="TestForce.h" />
+    <ClInclude Include="TestObjCollision.h" />
     <ClInclude Include="TestRigidBody.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Tile.h" />
@@ -290,6 +291,7 @@
     <ClCompile Include="TestAngleSet.cpp" />
     <ClCompile Include="TestCollision.cpp" />
     <ClCompile Include="TestForce.cpp" />
+    <ClCompile Include="TestObjCollision.cpp" />
     <ClCompile Include="TestRigidBody.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Tile.cpp" />

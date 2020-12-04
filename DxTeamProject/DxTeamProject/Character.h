@@ -26,6 +26,7 @@ protected:
 public:
 	virtual ~CCharacter(void);
 	virtual void Setup();
+	virtual void Update(D3DXVECTOR3 cameradirection);
 	virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
 	int Update(vector<CObject*> ObjectPosition);
 	virtual void DoRotation(const float& radian);

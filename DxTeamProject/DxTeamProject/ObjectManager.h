@@ -11,6 +11,7 @@ class CObject;
 class CRay;
 class CPSOBB;
 class COBB;
+class CTestObjCollision;
 
 #define		g_pObjectManager CObjectManager::GetInstance()
 
@@ -52,7 +53,10 @@ public:
 	void Update(float duration , CHeight* pMap);		// 3D Physics
 	void Update3D(float duration);
 	void UpdateLand(float duration);					// Land
+	void UpdateCollide(float duration);
 	void Update(CRay ray, D3DXCOLOR& objectcolor);		// Color Change
+	void Collide(float duration);
+	void HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestObjCollision& theCollision);
 	void Render();
 	void RenderOBBBox();
 
@@ -68,7 +72,6 @@ public:
 	IObject& GetIObject(int mapIndex, int vectorIndex);
 	void UpdateNewMap(CFrustum* frustum);
 	void Thread_CalcNewMap();
-
 private:
 	void Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos);
 };

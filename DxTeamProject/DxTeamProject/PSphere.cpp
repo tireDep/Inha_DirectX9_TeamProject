@@ -283,57 +283,11 @@ bool CPSphere::hasIntersected(CObject* otherobject)
 
 void CPSphere::CollisionOtherObject(CObject* otherobject)
 {
-	// declare variable, for performance I set them as static
 	static D3DXVECTOR3 direction;
 	static D3DXVECTOR3 warpVector;
 	static const float fix = 1.1f;
 	static float distance;
 	static float overlapInterval;
-
-	//static D3DXVECTOR3 totalVelocity;
-	//static D3DXVECTOR3 normalizedDirection;
-	//static D3DXVECTOR3 ballVelocity;
-	//static D3DXVECTOR3 thisVelocity;
-	// 2 dimension -> 3 dimension later editing...
-	//if (hasIntersected(otherobject))
-	//{
-	//	direction = this->GetPosition() - otherobject->GetPosition();
-	//	// 2 dimension -> 3 dimension later editing...
-	//	distance = sqrt(direction.x * direction.x + direction.z * direction.z);
-	//	overlapInterval = 2 * otherobject->GetRadius() - distance;
-	//	warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetRadius() - overlapInterval));
-	//	// implementation of collision
-	//	if (((otherobject->GetVelocity().x * otherobject->GetVelocity().x) + (otherobject->GetVelocity().z * otherobject->GetVelocity().z)) >= ((this->GetVelocity().x * this->GetVelocity().x) + (this->GetVelocity().z * this->GetVelocity().z)))
-	//	{
-	//		otherobject->CollisionOtherObject(this);
-	//		return;
-	//	}
-	//	else
-	//	{
-	//		// 2 dimension -> 3 dimension later editing...
-	//		D3DXVECTOR3 p;
-	//		p.x = this->GetPosition().x + warpVector.x;
-	//		p.y = this->GetPosition().y;
-	//		p.z = this->GetPosition().z + warpVector.z;
-	//		this->SetPosition(p);
-	//		D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	//	}
-	//	// 2 dimension -> 3 dimension later editing...
-	//	D3DXVECTOR3 v;
-	//	v.x = this->GetVelocity().x + otherobject->GetVelocity().x;
-	//	v.y = 0;
-	//	v.z = this->GetVelocity().z + otherobject->GetVelocity().z;
-	//	totalVelocity = v;
-	//	normalizedDirection = (-1) * direction / distance;
-	//	ballVelocity = normalizedDirection * (normalizedDirection.x * totalVelocity.x + normalizedDirection.z * totalVelocity.z);
-	//	thisVelocity = -ballVelocity + totalVelocity;
-	//	v.x = thisVelocity.x;
-	//	v.z = thisVelocity.z;
-	//	this->SetVelocity(v);
-	//	v.x = ballVelocity.x;
-	//	v.z = ballVelocity.z;
-	//	otherobject->SetVelocity(v);
-	//}
 
 	// mass applying
 	if (hasIntersected(otherobject))
