@@ -9,9 +9,7 @@ MeshTile::MeshTile()
 	ZeroMemory(&m_stMtlSphere2, sizeof(D3DMATERIAL9));
 
 
-	m_stMtlSphere2.Ambient = BLUE;
-	m_stMtlSphere2.Diffuse = BLUE;
-	m_stMtlSphere2.Specular = BLUE;
+	
 }
 
 MeshTile::~MeshTile()
@@ -23,9 +21,9 @@ void MeshTile::Setup()
 {
 	D3DXCreateBox(g_pD3DDevice, 1, 1, 1, &m_pMesh, NULL);
 
-	m_stMtlSphere.Ambient = RED;
-	m_stMtlSphere.Diffuse = RED;
-	m_stMtlSphere.Specular = RED;
+	m_stMtlSphere2.Ambient = RED;
+	m_stMtlSphere2.Diffuse = RED;
+	m_stMtlSphere2.Specular = RED;
 
 	D3DXMatrixTranslation(&m_matT, 10, 0, 0);
 	D3DXMatrixScaling(&m_matS, 1, 1, 1);
@@ -56,14 +54,11 @@ void MeshTile::Render()
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	if (color == true)
-	{
-		g_pD3DDevice->SetMaterial(&m_stMtlSphere2);
-	}
-	else if(color == false)
-	{
-		g_pD3DDevice->SetMaterial(&m_stMtlSphere);
-	}
+	
+	g_pD3DDevice->SetMaterial(&m_stMtlSphere2);
+	
+	
+	
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	m_pMesh->DrawSubset(0);

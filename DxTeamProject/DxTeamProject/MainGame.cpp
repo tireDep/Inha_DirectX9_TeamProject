@@ -280,24 +280,20 @@ void CMainGame::Update()
 	g_pObjectManager->Update();													// Collision
 	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
 
-	//if(m_pChanger)
-	//	m_pChanger->Update();
-
 	//if (m_pChanger)
 	//{
 	//	if (m_pChanger->RayCheck(*m_pMeshTile) == true);
 	//	{
 	//		
-	//		m_pMeshTile->SetColor(true);
+	//		m_pMeshTile->SetColor(m_pChanger->GetColor());
 
 	//	}
 	//	if(m_pChanger->RayCheck(*m_pMeshTile) == false)
 	//	{
-	//		m_pMeshTile->SetColor(false);
+	//		m_pMeshTile->SetColor(m_pChanger->GetColor());
 
 	//	}
 	//}
-	
 }
 
 void CMainGame::Render()
