@@ -302,7 +302,7 @@ void CMainGame::Update()
 		m_pGimmick_Door[1]->Update();
 
 	if (m_pGimmick_RotationBoard)
-		m_pGimmick_RotationBoard->Update();
+		m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
 	
 	/*if(m_pChanger)
 		m_pChanger->Update();
