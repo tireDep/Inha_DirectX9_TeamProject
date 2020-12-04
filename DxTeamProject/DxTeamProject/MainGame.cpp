@@ -27,6 +27,7 @@
 #include "Door.h"
 #include "BreakeableWall.h"
 #include "RotationBoard.h"
+#include "Switch.h"
 
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
@@ -46,7 +47,8 @@ CMainGame::CMainGame() :
 	// Ray y check
 	, m_pMeshTile(NULL),
 	// Gimmick
-	m_pGimmick_RotationBoard(NULL)
+	m_pGimmick_RotationBoard(NULL),
+	m_pGimmick_Switch(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
@@ -65,6 +67,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pGimmick_Door[0]);
 	SafeDelete(m_pGimmick_Door[1]);
 	SafeDelete(m_pGimmick_RotationBoard);
+	SafeDelete(m_pGimmick_Switch);
 
 	g_pFileLoadManager->Destroy();
 	
@@ -127,8 +130,8 @@ void CMainGame::Setup()
 	//m_pSkydome->Setup("Resource/XFile/Sky", "skydome.X");
 
 	////--Gimmick
-	//m_pChanger = new Color_changer;
-	//m_pChanger->Setup();
+	m_pChanger = new Color_changer;
+	m_pChanger->Setup();
 
 	m_pGimmick_Door[0] = new CDoor;
 	m_pGimmick_Door[0]->Setup("Resource/XFile/Gimmick/Door", "door_frame.X");
@@ -137,6 +140,9 @@ void CMainGame::Setup()
 
 	m_pGimmick_RotationBoard = new RotationBoard;
 	m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
+
+	m_pGimmick_Switch = new CSwitch;
+	m_pGimmick_Switch->Setup("Resource/XFile/Gimmick/Switch", "Weight_switch.X");
 
 	/// 이 아래는 지울 수도 있는 선언
 	//for (int i = 0; i < 8; i++)
@@ -390,13 +396,14 @@ void CMainGame::Render()
 	//	m_pMeshTile->Render();
 
 	// Gimmick
-	if (m_pGimmick_Door[0])
-		m_pGimmick_Door[0]->Render();
-	if (m_pGimmick_Door[1])
-		m_pGimmick_Door[1]->Render();
-	if (m_pGimmick_RotationBoard)
-		m_pGimmick_RotationBoard->Render();
-
+	//if (m_pGimmick_Door[0])
+	//	m_pGimmick_Door[0]->Render();
+	//if (m_pGimmick_Door[1])
+	//	m_pGimmick_Door[1]->Render();
+	//if (m_pGimmick_RotationBoard)
+	//	m_pGimmick_RotationBoard->Render();
+	if (m_pGimmick_Switch)
+		m_pGimmick_Switch->Render();
 	//if (m_pChanger)
 	//	m_pChanger->Render();
 
