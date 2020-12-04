@@ -517,8 +517,8 @@ void CImguiClass::Update()
 				else if (temp == D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f)) m_NowcolorType = ColorType::eBlack;
 				else if (temp == D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)) m_NowcolorType = ColorType::eWhite;
 				else if (temp == D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f)) m_NowcolorType = ColorType::eRed;
-				else if (temp == D3DXCOLOR(1.0f, 0.0f, 1.0f, 1.0f)) m_NowcolorType = ColorType::eBlue;
 				else if (temp == D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f)) m_NowcolorType = ColorType::eGreen;
+				else if (temp == D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f)) m_NowcolorType = ColorType::eBlue;
 				else if (temp == D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f)) m_NowcolorType = ColorType::eYellow;
 			}
 			//else

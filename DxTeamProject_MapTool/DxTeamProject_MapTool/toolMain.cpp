@@ -68,10 +68,6 @@ void CToolMain::Update()
 void CToolMain::Render()
 {
 	m_pImgui->SetFrameEnd();
-	
-	//g_pD3DDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
-	//g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-	//g_pD3DDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
 
 	g_pD3DDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DXCOLOR(0.5, 0.5, 0.5, 1.0), 1.0f, 0);
 
@@ -87,7 +83,15 @@ void CToolMain::Render()
 		// 	m_pCube->Render();
 //#endif
 
+		g_pD3DDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
+		g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+		g_pD3DDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
+
 		m_pImgui->Render(); // UI
+
+		g_pD3DDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
+		g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+		g_pD3DDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, TRUE);
 
 		g_pD3DDevice->EndScene();
 	}
