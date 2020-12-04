@@ -266,7 +266,37 @@ void IObject::CreateObject(const ObjectType objType, int index)
 	}
 	break;
 
+	case eInvisibleWall:
+	{
+		ST_MapData mapData;
+		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+
+		mapData.objType = objType;
+
+		mapData.strObjName = string("InvisibleWall") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "";
+		mapData.strTxtPath = "";
+		mapData.strXFilePath = "";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
 	}
+		break;
+
+	case eGimmik:
+	case eG_BreakWall:
+	case eG_Door:
+	case eG_ColorChanger:
+	case eG_RotateBoard:
+	case eG_Switch:
+	{
+		cout << "todo something" << endl;
+	}
+		break;
+
+	} // << : switch
 }
 
 void IObject::CreateObject(const ST_MapData& mapData)
@@ -306,8 +336,23 @@ void IObject::CreateObject(const ST_MapData& mapData)
 	case eATree:
 	case eSTree:
 	case eWTree:
+	case eInvisibleWall:
+	{
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
-		break;
 	}
+		break;
+
+	case eGimmik:
+	case eG_BreakWall:
+	case eG_Door:
+	case eG_ColorChanger:
+	case eG_RotateBoard:
+	case eG_Switch:
+	{
+		cout << "todo something" << endl;
+	}
+	break;
+
+	} // << : switch
 }
