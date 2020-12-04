@@ -113,6 +113,10 @@ void CObjectManager::AddMap()
 
 void CObjectManager::RemoveMap()
 {
+	if (m_vecIObject.size() == 0)
+		return;
+	// >> 이중 삭제 관련 임시 적용
+
 	multimap<vector<IObject*>, bool>::iterator it;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
@@ -207,6 +211,12 @@ void CObjectManager::Destroy()
 {
 	for (int i = 0; i < m_vecObject.size(); i++)
 		m_vecObject[i]->Release();
+
+	for (int i = 0; i < m_vecIObject.size(); i++)
+		m_vecIObject[i]->Release();
+
+	m_vecObject.clear();
+	m_vecIObject.clear();
 }
 
 void CObjectManager::Update(float duration)

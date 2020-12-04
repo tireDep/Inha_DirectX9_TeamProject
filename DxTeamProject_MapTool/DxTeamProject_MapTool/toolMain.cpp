@@ -26,6 +26,8 @@ CToolMain::~CToolMain()
 	SafeDelete(m_pImgui);
 
 	IObject::Destroy();
+
+	g_pFileLoadManager->Destroy();
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 }

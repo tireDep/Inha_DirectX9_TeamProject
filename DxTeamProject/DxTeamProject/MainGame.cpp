@@ -66,9 +66,12 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pLight);
 	SafeDelete(m_pSkydome);
 
+	g_pFileLoadManager->Destroy();
+	
 	/// 이 아래는 지울 수도 있는 선언
 	SafeDelete(m_pHeightMap);
 	SafeDelete(m_pSkinnedMesh);
+
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 	// Ray y check
@@ -175,7 +178,7 @@ void CMainGame::HandleOverlapping(float timeIncrement, int firstobject, int seco
 
 void CMainGame::Setup()
 {
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123.dat");
 	

@@ -8,6 +8,9 @@ struct ST_MapData;
 class CFileLoadManager
 {
 private:
+	map<string, LPDIRECT3DTEXTURE9> m_mapTexture;
+	// >> TextureManager Âü°í
+
 	CFileLoadManager() { }
 	LPD3DXEFFECT LoadShader(const string fileName);
 
@@ -31,5 +34,7 @@ public:
 	bool FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT& setShader);
 
 	bool FileLoad_MapData(string szFolder, string szFile);
+
+	void Destroy();
 };
 

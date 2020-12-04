@@ -456,8 +456,7 @@ bool CFileLoadManager::FileLoad_XFile(string szFolder, string szFile, ST_XFile* 
 				IDirect3DTexture9* tex = 0;
 
 				string txtFilePath = string(szFolder) + ("/") + string(mtrls[i].pTextureFilename);
-				D3DXCreateTextureFromFileA(g_pD3DDevice, txtFilePath.c_str(), &tex);
-
+				FileLoad_Texture(szFolder, mtrls[i].pTextureFilename, tex);
 				setXFile->vecTextrure.push_back(tex);
 			}
 			else
@@ -475,12 +474,16 @@ bool CFileLoadManager::FileLoad_Texture(string szFolder, string szFile, LPDIRECT
 	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
 
-	if (D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &setTexture))
+	if (m_mapTexture.find(filePath) == m_mapTexture.end())
 	{
-		ErrMessageBox("Texture Load Error", "ERROR");
-		return false;
+		if (D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &m_mapTexture[filePath.c_str()]))
+		{
+			ErrMessageBox("Texture Load Error", "ERROR");
+			return false;
+		}
 	}
 
+	setTexture = m_mapTexture[filePath];
 	return true;
 }
 
@@ -544,6 +547,16 @@ void CFileLoadManager::SetIndexNumPrev()
 
 	if (isCheck)
 		m_fNowZ -= m_fAddNumZ;
+}
+
+void CFileLoadManager::Destroy()
+{
+	for each(auto it in m_mapTexture)
+	{
+		SafeRelease(it.second);
+	}
+
+	m_mapTexture.clear();
 }
 
 //D3DXVECTOR3 CFileLoadManager::GetSelectCenterPos(D3DXVECTOR3 vSelect)
