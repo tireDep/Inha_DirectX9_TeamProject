@@ -189,8 +189,7 @@ bool CFileLoadManager::FileLoad_XFile(string szFolder, string szFile, ST_XFile* 
 				IDirect3DTexture9* tex = 0;
 
 				string txtFilePath = string(szFolder) + ("/") + string(mtrls[i].pTextureFilename);
-				D3DXCreateTextureFromFileA(g_pD3DDevice, txtFilePath.c_str(), &tex);
-
+				FileLoad_Texture(szFolder, mtrls[i].pTextureFilename, tex);
 				setXFile->vecTextrure.push_back(tex);
 			}
 			else
@@ -208,11 +207,16 @@ bool CFileLoadManager::FileLoad_Texture(string szFolder, string szFile, LPDIRECT
 	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
 
-	if (D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &setTexture))
+	if (m_mapTexture.find(filePath) == m_mapTexture.end())
 	{
-		ErrMessageBox("Texture Load Error", "ERROR");
-		return false;
+		if (D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &m_mapTexture[filePath.c_str()]))
+		{
+			ErrMessageBox("Texture Load Error", "ERROR");
+			return false;
+		}
 	}
+
+	setTexture = m_mapTexture[filePath];
 
 	return true;
 }
@@ -222,35 +226,54 @@ bool CFileLoadManager::FileLoad_Sprite(string szFolder, string szFile, D3DXIMAGE
 	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
 
-	if (D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		filePath.c_str(),
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT,
-		0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED, D3DX_FILTER_NONE
-		, D3DX_DEFAULT, 0, &imageInfo, NULL, &lpTexture))
+	if (m_mapSprite.find(filePath) == m_mapSprite.end())
 	{
-		ErrMessageBox("Sprite Load Error", "ERROR");
-		return false;
+		if (D3DXCreateTextureFromFileExA(g_pD3DDevice,
+			filePath.c_str(),
+			D3DX_DEFAULT_NONPOW2,
+			D3DX_DEFAULT_NONPOW2,
+			D3DX_DEFAULT,
+			0,
+			D3DFMT_UNKNOWN,
+			D3DPOOL_MANAGED, D3DX_FILTER_NONE
+			, D3DX_DEFAULT, 0, &imageInfo, NULL, &lpTexture))
+		{
+			ErrMessageBox("Sprite Load Error", "ERROR");
+			return false;
+		}
+
+		ST_Sprite spriteInfo;
+		spriteInfo.imageInfo = imageInfo;
+		spriteInfo.lpTexture = lpTexture;
+
+		m_mapSprite[filePath] = spriteInfo;
 	}
-	
+
+	imageInfo = m_mapSprite[filePath].imageInfo;
+	lpTexture = m_mapSprite[filePath].lpTexture;
+
 	return true;
 }
 
 bool CFileLoadManager::FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT & setShader)
 {
-	string filePath;;
+	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
-	
-	setShader = LoadShader(filePath);
 
-	if (!setShader)
+	if (m_mapShader.find(filePath) == m_mapShader.end())
 	{
-		ErrMessageBox("Shader Load Fail", "Error");
-		return false;
+		setShader = LoadShader(filePath);
+
+		if (!setShader)
+		{
+			ErrMessageBox("Shader Load Fail", "Error");
+			return false;
+		}
+
+		m_mapShader[filePath] = setShader;
 	}
+
+	setShader = m_mapShader[filePath];
 
 	return true;
 }
@@ -264,3 +287,18 @@ bool CFileLoadManager::FileLoad_MapData(string szFolder, string szFile)
 	return true;
 }
 
+void CFileLoadManager::Destroy()
+{
+	for each(auto it in m_mapTexture)
+		SafeRelease(it.second);
+
+	for each(auto it in m_mapShader)
+		SafeRelease(it.second);
+
+	for each(auto it in m_mapSprite)
+		SafeRelease(it.second.lpTexture);
+
+	m_mapTexture.clear();
+	m_mapShader.clear();
+	m_mapSprite.clear();
+}

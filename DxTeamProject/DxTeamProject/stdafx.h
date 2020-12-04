@@ -219,6 +219,12 @@ struct ST_MapData
 	D3DXCOLOR dxColor;
 };
 
+struct ST_Sprite
+{
+	D3DXIMAGE_INFO imageInfo;
+	LPDIRECT3DTEXTURE9 lpTexture;
+};
+
 #define GRAY    D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f)
 #define BLACK	D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f)
 #define WHITE	D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)

@@ -19,7 +19,8 @@ void CPSBox::Setup()
 	// tmp BoundingSphere
 	float maxLength = max(m_fWidth, m_fHeight);
 	maxLength = max(maxLength, m_fDepth);
-	m_fBoundingSphere = maxLength / 2.0f;
+	//m_fBoundingSphere = maxLength / 2.0f;
+	m_fBoundingSphere = maxLength;
 	// modyfi? 12.0f -> 48.0f?
 	m_vRotationInertia.x = (GetMass() * (m_fHeight * m_fHeight + m_fDepth  * m_fDepth)) / 12.0f;
 	m_vRotationInertia.y = (GetMass() * (m_fWidth  * m_fWidth  + m_fDepth  * m_fDepth)) / 12.0f;
@@ -123,6 +124,7 @@ void CPSBox::Update3D(float duration)
 	assert(duration > 0.0f);
 
 	m_vLinearAcceleration = (linearforce + GRAVITY) * m_finverseMass;
+//	m_vLinearAcceleration = (linearforce) * m_finverseMass;
 	m_vLinearVelocity += (m_vLinearAcceleration * duration);
 	m_vLinearVelocity *= powf(m_fDamping, duration);
 	m_vLinearVelocity *= m_fLinearDrag;
@@ -136,7 +138,8 @@ void CPSBox::Update3D(float duration)
 	D3DXMATRIXA16 totalTransaltion;
 	D3DXMatrixTranslation(&totalTransaltion, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 
-	m_vTorque = angularforce;
+	// Need to modify
+	m_vTorque = angularforce * 10000000.0f;
 
 	m_vAngularAcceleration.x = m_vTorque.x / m_vRotationInertia.x;
 	m_vAngularAcceleration.y = m_vTorque.y / m_vRotationInertia.y;
@@ -231,8 +234,13 @@ void CPSBox::ReceiveEvent(ST_EVENT eventMsg)
 
 void CPSBox::SetPusingForce(D3DXVECTOR3 forcedirection)
 {
-	D3DXVec3Normalize(&m_vForceVector, &forcedirection);
-	m_vForceVector *= 100.0f;
+	//D3DXVec3Normalize(&m_vForceVector, &forcedirection);
+	//m_vForceVector *= 100.0f;
+	//SetForceApplied(true);
+
+	D3DXVECTOR3 forcePosition = forcedirection * m_fBoundingSphere;
+	m_vForceLocation = forcePosition;
+	m_vForceVector = forcedirection * 100.0f;
 	SetForceApplied(true);
 }
 

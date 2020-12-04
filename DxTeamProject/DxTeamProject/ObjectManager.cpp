@@ -5,6 +5,7 @@
 #include "ObjectManager.h"
 #include "CHeight.h"
 #include "OBB.h"
+#include "TestObjCollision.h"
 
 CObjectManager::CObjectManager() : 
 	m_frustum(NULL),
@@ -73,7 +74,6 @@ void CObjectManager::RemoveObject(IObject * pObject)
 void CObjectManager::SetScale(float scale)
 {
 	m_vScale = scale;
-	
 }
 
 float CObjectManager::GetScale()
@@ -113,6 +113,10 @@ void CObjectManager::AddMap()
 
 void CObjectManager::RemoveMap()
 {
+	if (m_vecIObject.size() == 0)
+		return;
+	// >> 이중 삭제 관련 임시 적용
+
 	multimap<vector<IObject*>, bool>::iterator it;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
@@ -207,6 +211,12 @@ void CObjectManager::Destroy()
 {
 	for (int i = 0; i < m_vecObject.size(); i++)
 		m_vecObject[i]->Release();
+
+	for (int i = 0; i < m_vecIObject.size(); i++)
+		m_vecIObject[i]->Release();
+
+	m_vecObject.clear();
+	m_vecIObject.clear();
 }
 
 void CObjectManager::Update(float duration)
@@ -236,6 +246,11 @@ void CObjectManager::UpdateLand(float duration)
 	}
 }
 
+void CObjectManager::UpdateCollide(float duration)
+{
+	CObjectManager::Collide(duration);
+}
+
 void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 {
 	vector<bool> vecIsPick;
@@ -245,6 +260,115 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 		m_vecObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
 	}
 	Update_PickCheck(vecIsPick, vecVPos);
+}
+
+void CObjectManager::Collide(float duration)
+{
+	for (int hittee = 0; hittee < m_vecObject.size(); hittee++)
+	{
+		for (int hitter = 0; hitter < m_vecObject.size(); hitter++)
+		{
+			if (hittee >= hitter)
+				continue;
+			CTestObjCollision theCollision(m_vecObject[hittee], m_vecObject[hitter]);
+			Collision_Status collisionOccurred = theCollision.CollisionOccurred();
+			switch (collisionOccurred)
+			{
+				case Collision_Status::COLLISION_TOUCHING:
+					theCollision.CalculateReactions();
+					break;
+				case Collision_Status::COLLISION_OVERLAPPING:
+					HandleOverlapping(duration, hittee, hitter, theCollision);
+					break;
+				case Collision_Status::COLLISION_NONE:
+					break;
+				default:
+					break;
+			}
+		}
+	}
+}
+
+void CObjectManager::HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestObjCollision & theCollision)
+{
+	float changeInTime = timeIncrement;
+
+	Collision_Status collisionOccured = Collision_Status::COLLISION_OVERLAPPING;
+	for (bool done = false; (!done) && (!CloseToZero(changeInTime));)
+	{
+		switch (collisionOccured)
+		{
+			case Collision_Status::COLLISION_OVERLAPPING:
+				{
+					CObject* firstObject;
+					CObject* secondObject;
+					firstObject = m_vecObject[firstobject];
+					secondObject = m_vecObject[secondobject];
+
+					D3DXVECTOR3 tempVector = firstObject->GetAngularVelocity();
+					tempVector *= -1;
+					firstObject->SetAngularVelocity(tempVector);
+					tempVector = firstObject->GetLinearVelocity();
+					tempVector *= -1;
+					firstObject->SetLinearVelocity(tempVector);
+					firstObject->SetForceVector(firstObject->GetForceVector() * -1);
+
+					tempVector = secondObject->GetAngularVelocity();
+					tempVector *= -1;
+					secondObject->SetAngularVelocity(tempVector);
+					tempVector = secondObject->GetLinearVelocity();
+					tempVector *= -1;
+					secondObject->SetLinearVelocity(tempVector);
+					secondObject->SetForceVector(secondObject->GetForceVector() * -1);
+
+					firstObject->Update(changeInTime);
+					secondObject->Update(changeInTime);
+
+					changeInTime /= 2;
+
+					tempVector = firstObject->GetAngularVelocity();
+					tempVector *= -1;
+					firstObject->SetAngularVelocity(tempVector);
+					tempVector = firstObject->GetLinearVelocity();
+					tempVector *= -1;
+					firstObject->SetLinearVelocity(tempVector);
+					firstObject->SetForceVector(firstObject->GetForceVector() * -1);
+
+					tempVector = secondObject->GetAngularVelocity();
+					tempVector *= -1;
+					secondObject->SetAngularVelocity(tempVector);
+					tempVector = secondObject->GetLinearVelocity();
+					tempVector *= -1;
+					secondObject->SetLinearVelocity(tempVector);
+					secondObject->SetForceVector(secondObject->GetForceVector() * -1);
+
+					firstObject->Update(changeInTime);
+					secondObject->Update(changeInTime);
+
+					m_vecObject[firstobject] = firstObject;
+					m_vecObject[secondobject] = secondObject;
+					collisionOccured = theCollision.CollisionOccurred();
+				}
+				break;
+			case Collision_Status::COLLISION_TOUCHING:
+				theCollision.CalculateReactions();
+				done = true;
+				break;
+			case Collision_Status::COLLISION_NONE:
+				m_vecObject[firstobject]->Update(changeInTime);
+				m_vecObject[secondobject]->Update(changeInTime);
+				collisionOccured = theCollision.CollisionOccurred();
+				break;
+			default:
+				break;
+		}	// << : switch
+	}	// << : for
+	if (CloseToZero(changeInTime))
+	{
+		theCollision.CalculateReactions();
+		m_vecObject[firstobject]->Update(changeInTime);
+		m_vecObject[secondobject]->Update(changeInTime);
+	}
 }
 
 void CObjectManager::Update()

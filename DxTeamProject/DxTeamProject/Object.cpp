@@ -42,8 +42,6 @@ CObject::CObject()
 
 CObject::~CObject()
 {
-	SafeRelease(m_pShader);
-	SafeRelease(m_pMesh);
 }
 
 bool CObject::LoadAssets()
@@ -259,12 +257,12 @@ void CObject::ChangeObjectColor()
 	switch (m_tmpColor)
 	{
 		case Color::Black:
-			SetMass(1000);
+			SetMass(100);
 			SetElasticity(1.0f);
 			SetDrag(0.995f);
 			break;
 		case Color::White:
-			SetMass(0.001f);
+			SetMass(0.1f);
 			SetElasticity(1.0f);
 			SetDrag(0.995f);
 			break;

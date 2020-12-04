@@ -65,6 +65,5 @@ public:
 	void Render();
 	
 	// Rotation Test
-	void HandleOverlapping(float timeIncrement, int tiger1, int tiger2, CTestCollision& theCollision);
 	/// 릴리즈 버전을 위한 주석처리
 };

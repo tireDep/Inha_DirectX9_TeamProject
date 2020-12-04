@@ -31,7 +31,7 @@ protected:
 	// force
 	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vForceAccum, ForceAccum);
 	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vForceVector, ForceVector);
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vForceLocation, m_vForceLocation);
+	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vForceLocation, ForceLocation);
 
 	// linear
 	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);	// center position

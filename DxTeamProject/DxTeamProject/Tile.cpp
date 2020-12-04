@@ -12,9 +12,6 @@ CTile::CTile()
 
 CTile::~CTile()
 {
-	
-	SafeRelease(m_pMesh);
-	SafeRelease(m_pTexture);
 }
 
 void CTile::Setup(ST_MapData setData)
@@ -27,9 +24,6 @@ void CTile::Setup(ST_MapData setData)
 	m_vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
 	m_vRotate = setData.vRotate;
 	m_vTranslate = setData.vTranslate;
-
-
-	
 
 	ST_XFile* xfile = new ST_XFile;
 

@@ -49,7 +49,6 @@ void Color_changer::Update()
 {
 	if (istrue == false)
 	{
-	
 		m_position.y += 0.001f;
 		if(m_position.y > 5)
 			istrue = true;

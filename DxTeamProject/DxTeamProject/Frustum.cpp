@@ -68,9 +68,6 @@ void CFrustum::Update()
 						&m_vecWorldVertex[2],
 						&m_vecWorldVertex[6],
 						&m_vecWorldVertex[7]);
-
-	m_vLeftUpPos = D3DXVECTOR3(m_vecPlane[0].a, m_vecPlane[0].b, m_vecPlane[0].c);
-	m_vRightDownPos = D3DXVECTOR3(m_vecPlane[5].a, m_vecPlane[5].b, m_vecPlane[5].c);
 }
 
 bool CFrustum::IsInFrustum(D3DXVECTOR3 pos)

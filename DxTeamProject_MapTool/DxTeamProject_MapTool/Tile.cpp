@@ -9,8 +9,6 @@ CTile::CTile()
 
 CTile::~CTile()
 {
-	SafeRelease(m_pMesh);
-	SafeRelease(m_pTexture);
 }
 
 void CTile::Setup(ST_MapData setData)

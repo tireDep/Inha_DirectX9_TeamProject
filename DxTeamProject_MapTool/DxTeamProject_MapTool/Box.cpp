@@ -11,8 +11,6 @@ CBox::CBox()
 
 CBox::~CBox()
 {
-	SafeRelease(m_pMesh);
-	SafeRelease(m_pTexture);
 }
 
 void CBox::Setup()

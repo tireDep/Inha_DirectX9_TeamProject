@@ -66,9 +66,12 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pLight);
 	SafeDelete(m_pSkydome);
 
+	g_pFileLoadManager->Destroy();
+	
 	/// 이 아래는 지울 수도 있는 선언
 	SafeDelete(m_pHeightMap);
 	SafeDelete(m_pSkinnedMesh);
+
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 	// Ray y check
@@ -91,93 +94,11 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	DefWindowProc(hWnd, message, wParam, lParam);
 }
 
-void CMainGame::HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestCollision & theCollision)
-{
-	float changeInTime = timeIncrement;
-
-	collision_status collisionOccured = COLLISTION_OVERLAPPING;
-	for (bool done = false; (!done) && (!CloseToZero(changeInTime));)
-	{
-		switch (collisionOccured)
-		{
-			case COLLISTION_OVERLAPPING:
-				{
-					CTestRigidBody* firstObject;
-					CTestRigidBody* secondObject;
-					firstObject = vecRigidBody[firstobject];
-					secondObject = vecRigidBody[secondobject];
-
-					D3DXVECTOR3 tempVector = firstObject->GetAngularVelocity();
-					tempVector *= -1;
-					firstObject->SetAngularVelocity(tempVector);
-					tempVector = firstObject->GetLinearVelocity();
-					tempVector *= -1;
-					firstObject->SetLinearVelocity(tempVector);
-					firstObject->impulseForce.SetForceVector(firstObject->impulseForce.GetForceVector() * -1);
-
-					tempVector = secondObject->GetAngularVelocity();
-					tempVector *= -1;
-					secondObject->SetAngularVelocity(tempVector);
-					tempVector = secondObject->GetLinearVelocity();
-					tempVector *= -1;
-					secondObject->SetLinearVelocity(tempVector);
-					secondObject->impulseForce.SetForceVector(secondObject->impulseForce.GetForceVector() * -1);
-
-					firstObject->Update(changeInTime);
-					secondObject->Update(changeInTime);
-
-					//changeInTime /= 2;
-
-					//tempVector = firstObject->GetAngularVelocity();
-					//tempVector *= -1;
-					//firstObject->SetAngularVelocity(tempVector);
-					//tempVector = firstObject->GetLinearVelocity();
-					//tempVector *= -1;
-					//firstObject->SetLinearVelocity(tempVector);
-					//firstObject->impulseForce.SetForceVector(firstObject->impulseForce.GetForceVector() * -1);
-					//tempVector = secondObject->GetAngularVelocity();
-					//tempVector *= -1;
-					//secondObject->SetAngularVelocity(tempVector);
-					//tempVector = secondObject->GetLinearVelocity();
-					//tempVector *= -1;
-					//secondObject->SetLinearVelocity(tempVector);
-					//secondObject->impulseForce.SetForceVector(secondObject->impulseForce.GetForceVector() * -1);
-
-					//firstObject->Update(changeInTime);
-					//secondObject->Update(changeInTime);
-
-					//vecRigidBody[firstobject] = firstObject;
-					//vecRigidBody[secondobject] = secondObject;
-					cout << "in" << endl;
-					collisionOccured = theCollision.CollisionOccurred();
-				}
-				break;
-			case COLLISION_TOUCHING:
-				theCollision.CalculateReactions();
-				done = true;
-				break;
-			case COLLISION_NONE:
-				vecRigidBody[firstobject]->Update(changeInTime);
-				vecRigidBody[secondobject]->Update(changeInTime);
-				collisionOccured = theCollision.CollisionOccurred();
-				break;
-			default:
-				break;
-		}	// << : switch
-	}	// << : for
-	if (CloseToZero(changeInTime))
-	{
-		theCollision.CalculateReactions();
-		vecRigidBody[firstobject]->Update(changeInTime);
-		vecRigidBody[secondobject]->Update(changeInTime);
-	}
-}
-
 void CMainGame::Setup()
 {
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "createmap2.dat");
 	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
@@ -194,35 +115,35 @@ void CMainGame::Setup()
 	m_pCamera = new CCamera;
 	m_pCamera->Setup(&m_pCharacter->GetPosition());
 
-	m_pOrb = new COrb;
-	m_pOrb->Setup();
+	//m_pOrb = new COrb;
+	//m_pOrb->Setup();
 
 	m_pLight = new CLight;
 	m_pLight->Setup();
 	//m_pLight->Setup(D3DXVECTOR3(1, 0, 0)); // sun light vector
 
-	m_pPrevFrustum.Setup();
-	m_pNowFrustum.Setup();
+	// m_pPrevFrustum.Setup();
+	// m_pNowFrustum.Setup();
 
-	m_pSkydome = new CSkydome;
-	m_pSkydome->Setup("Resource/XFile/Sky", "skydome.X");
+	//m_pSkydome = new CSkydome;
+	//m_pSkydome->Setup("Resource/XFile/Sky", "skydome.X");
 
-	//--Gimmick
-	m_pChanger = new Color_changer;
-	m_pChanger->Setup();
+	////--Gimmick
+	//m_pChanger = new Color_changer;
+	//m_pChanger->Setup();
 
 
 	/// 이 아래는 지울 수도 있는 선언
 	//for (int i = 0; i < 8; i++)
 	//{
 	//	CPSphere* Sphere = new CPSphere();
-	//	Sphere->Setup(D3DXVECTOR3(25, 0.5f, 2 * i + 3));
+	//	Sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
 	//}
-	//for (int i = 0; i < 8; i++)
-	//{
-	//	CPSBox* box = new CPSBox();
-	//	box->Setup(D3DXVECTOR3(-25, 0.5, 2 * i + 3));
-	//}
+	for (int i = 0; i < 1; i++)
+	{
+		CPSBox* box = new CPSBox();
+		box->Setup(D3DXVECTOR3(-5, 3.5, 2 * i + 3));
+	}
 	//for (int i = 0; i < 8; i++)
 	//{
 	//	CPSCylinder* cylinder = new CPSCylinder();
@@ -245,6 +166,7 @@ void CMainGame::Setup()
 	}
 
 	// Ray y check
+
 	for (int i = 0; i < 6; ++i)
 	{
 		m_pMeshTile.push_back(new MeshTile);
@@ -286,6 +208,10 @@ void CMainGame::Setup()
 	vecRigidBody[3]->impulseForce.SetForceVector(D3DXVECTOR3(10.0f, 5.0f, 0.0f));
 	vecRigidBody[3]->impulseForce.SetForceLocation(D3DXVECTOR3(0.0f, 0.0f, 1.0f));
 
+	//m_pMeshTile = new MeshTile;
+	//m_pMeshTile->Setup();
+
+
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm = new CSoundManager;
 	//m_pSm->init();
@@ -299,15 +225,16 @@ void CMainGame::Update()
 	if (m_pCamera)
 		m_pCamera->Update();
 
-	if (m_pSkinnedMesh)
-		m_pSkinnedMesh->Update();
+	//if (m_pSkinnedMesh)
+	//	m_pSkinnedMesh->Update();
 
-	if(m_pOrb)
-		m_pOrb->Update();
+	//if(m_pOrb)
+	//	m_pOrb->Update();
 
 	if (m_pCharacter)
 	{
-		m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
+		m_pCharacter->Update(m_pCamera->GetCameraDirection());
+		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 	
 		switch (m_pUI->GetPickColor())
 		{
@@ -343,9 +270,10 @@ void CMainGame::Update()
 		{
 			m_pText->SetisGrabstate(true);
 			D3DXVECTOR3 v;
-			v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
-			v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
-			v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
+			v = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition() - m_pCharacter->GetPosition();
+			//v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
+			//v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
+			//v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
 			D3DXVec3Normalize(&v, &v);
 			g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->SetPusingForce(v);
 		}
@@ -388,15 +316,16 @@ void CMainGame::Update()
 	}
 
 
-
-
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
+	
+	g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
+	//g_pObjectManager->UpdateCollide(g_pTimeManager->GetElapsedTime());			// new Collision
 	g_pObjectManager->Update();													// Collision
-	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());					// 2D Physics
 	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
+
 
 	// Rotation Test
 	//m_pRigidBody->Update(g_pTimeManager->GetElapsedTime());
@@ -414,7 +343,7 @@ void CMainGame::Update()
 					theCollision.CalculateReactions();
 					break;
 				case COLLISTION_OVERLAPPING:
-					HandleOverlapping(g_pTimeManager->GetElapsedTime(), i, j, theCollision);
+					//HandleOverlapping(g_pTimeManager->GetElapsedTime(), i, j, theCollision);
 					break;
 				case COLLISION_NONE:
 					break;
@@ -435,26 +364,28 @@ void CMainGame::Update()
 		}
 		vecRigidBody[i]->Update(g_pTimeManager->GetElapsedTime());
 	}
-	if(m_pChanger)
+	/*if(m_pChanger)
 		m_pChanger->Update();
 
-	for(int i =0 ; i < m_pMeshTile.size(); ++i)
-	if (m_pChanger)
+	for (int i = 0; i < m_pMeshTile.size(); ++i)
 	{
-		if (m_pChanger->RayCheck(*m_pMeshTile[i]) == true);
+		if (m_pChanger)
 		{
-			
-			m_pMeshTile[i]->SetColor(m_pChanger->GetColor());
+			if (m_pChanger->RayCheck(*m_pMeshTile[i]) == true);
+			{
 
-		}
-		if(m_pChanger->RayCheck(*m_pMeshTile[i]) == false)
-		{
-			m_pMeshTile[i]->SetColor(m_pChanger->GetColor());
+				m_pMeshTile[i]->SetColor(m_pChanger->GetColor());
 
+			}
+			if (m_pChanger->RayCheck(*m_pMeshTile[i]) == false)
+			{
+				m_pMeshTile[i]->SetColor(m_pChanger->GetColor());
+			}
 		}
-	}
-	
+	}*/
+
 }
+
 
 void CMainGame::Render()
 {
@@ -468,8 +399,8 @@ void CMainGame::Render()
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150, 150, 150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 
-	if (m_pSkydome)
-		m_pSkydome->Render(m_pCamera->GetCameraEye());
+	//if (m_pSkydome)
+	//	m_pSkydome->Render(m_pCamera->GetCameraEye());
 
 	if (m_pGrid)
 		m_pGrid->Render();
@@ -480,11 +411,11 @@ void CMainGame::Render()
 	if (m_pCharacter)
 		m_pCharacter->Render(c);
 
-	if (m_pOrb)
-	{
-		m_pOrb->SetBillbord();
-		m_pOrb->Render();
-	}
+	//if (m_pOrb)
+	//{
+	//	m_pOrb->SetBillbord();
+	//	m_pOrb->Render();
+	//}
 
 	g_pObjectManager->Render();
 
@@ -511,17 +442,18 @@ void CMainGame::Render()
 
 	// Ray y check
 
+
 	for(int i =0; i < m_pMeshTile.size(); ++i)
 		m_pMeshTile[i]->Render();
 
-	// Rotation Test
-	//if (m_pRigidBody)
-	//	m_pRigidBody->Render();
-	for (int i = 0; i < 4; i++)
-		vecRigidBody[i]->Render();
+	//if (m_pMeshTile)
+	//	m_pMeshTile->Render();
 
-	if (m_pChanger)
-		m_pChanger->Render();
+
+	// Rotation Test
+
+	//if (m_pChanger)
+	//	m_pChanger->Render();
 
 
 	if (g_gameManager->GetUImode())

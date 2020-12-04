@@ -34,8 +34,8 @@ protected:
 
 	Synthesize(D3DXCOLOR, m_dxColor, Color);
 
-	static LPD3DXEFFECT m_pShader;
-	static bool isLoad;
+	LPD3DXEFFECT m_pShader;
+	bool isLoad;
 
 	IObject();
 
@@ -56,7 +56,5 @@ public:
 	static void SetRefCnt(int set);
 	static void CreateObject(const ObjectType objType, int index);
 	static void CreateObject(const ST_MapData& mapData);
-
-	static void Destroy();
 };
 

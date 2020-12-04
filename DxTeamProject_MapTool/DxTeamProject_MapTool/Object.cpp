@@ -12,8 +12,6 @@ CObject::CObject()
 
 CObject::~CObject()
 {
-	SafeRelease(m_pMesh);
-	SafeRelease(m_pTexture);
 }
 
 void CObject::Setup()
@@ -86,7 +84,8 @@ void CObject::Render()
 	else
 	{
 		SetShader(matWorld);
-		m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(m_dxColor));
+		// m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(m_dxColor));
+		// m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(m_dxColor));
 		IObject::Render();
 	}
 }
