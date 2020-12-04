@@ -211,7 +211,9 @@
     <ClCompile Include="BreakeableWall.cpp">
       <Filter>Gimmick\KT</Filter>
     </ClCompile>
-    <ClCompile Include="RotationBoard.cpp" />
+    <ClCompile Include="RotationBoard.cpp">
+      <Filter>Gimmick\KT</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -448,7 +450,9 @@
     <ClInclude Include="BreakeableWall.h">
       <Filter>Gimmick\KT</Filter>
     </ClInclude>
-    <ClInclude Include="RotationBoard.h" />
+    <ClInclude Include="RotationBoard.h">
+      <Filter>Gimmick\KT</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
