@@ -194,9 +194,6 @@
     <ClCompile Include="PSOBB.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="Colorchanger.cpp">
-      <Filter>Gimmick</Filter>
-    </ClCompile>
     <ClCompile Include="MeshTile.cpp">
       <Filter>Gimmick</Filter>
     </ClCompile>
@@ -213,6 +210,12 @@
     </ClCompile>
     <ClCompile Include="RotationBoard.cpp">
       <Filter>Gimmick\KT</Filter>
+    </ClCompile>
+    <ClCompile Include="Switch.cpp">
+      <Filter>Gimmick\HW</Filter>
+    </ClCompile>
+    <ClCompile Include="Colorchanger.cpp">
+      <Filter>Gimmick\MJ</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -434,9 +437,6 @@
     <ClInclude Include="PSOBB.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="Colorchanger.h">
-      <Filter>Gimmick</Filter>
-    </ClInclude>
     <ClInclude Include="MeshTile.h">
       <Filter>Gimmick</Filter>
     </ClInclude>
@@ -452,6 +452,12 @@
     </ClInclude>
     <ClInclude Include="RotationBoard.h">
       <Filter>Gimmick\KT</Filter>
+    </ClInclude>
+    <ClInclude Include="Switch.h">
+      <Filter>Gimmick\HW</Filter>
+    </ClInclude>
+    <ClInclude Include="Colorchanger.h">
+      <Filter>Gimmick\MJ</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -576,6 +582,12 @@
     </Filter>
     <Filter Include="Gimmick\KT">
       <UniqueIdentifier>{16e41f8f-ec5b-46a9-8ea9-379ce0d70cd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gimmick\HW">
+      <UniqueIdentifier>{96ee8b91-2a5b-4739-9acb-e90d036b2c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gimmick\MJ">
+      <UniqueIdentifier>{20582d70-2b5f-4577-b83a-7e923e967f07}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

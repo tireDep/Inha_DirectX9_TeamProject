@@ -24,6 +24,7 @@ class Color_changer;
 class CDoor;
 class CBreakableWall;
 class RotationBoard;
+class CSwitch;
 
 //class CSoundManager;
 class CMainGame
@@ -50,6 +51,7 @@ private:
 	Color_changer* m_pChanger;
 	CDoor* m_pGimmick_Door[2];
 	RotationBoard* m_pGimmick_RotationBoard;
+	CSwitch* m_pGimmick_Switch;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 public:

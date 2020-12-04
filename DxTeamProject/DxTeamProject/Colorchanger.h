@@ -7,24 +7,24 @@ public:
 	Color_changer();
 	~Color_changer();
 private:
-	D3DXMATRIXA16	m_matS, m_matT, m_matWorld;
-	LPD3DXMESH		m_pMesh, m_pBarrel;
-	D3DXVECTOR3 m_position;
-	D3DXVECTOR3 m_direction;
-	D3DMATERIAL9		m_stMtlSphere , m_stMtlSphere2;
+	Synthesize_Add_Ref(ID3DXMesh*, m_pMesh, Mesh);
+	Synthesize_Add_Ref(ID3DXBuffer*, m_adjBuffer, AdjBuffer);
+
+	Synthesize(DWORD, m_numMtrls, NumMtrl);
+	Synthesize(vector<D3DMATERIAL9*>, m_vecMtrls, VecMtrls);
+	Synthesize(vector<IDirect3DTexture9*>, m_vecTextures, VecTexture);
 
 	bool istrue;
 public:
 	
-	LPD3DXMESH GetMesh() { return m_pMesh; }
-	void Setup();
-	void Render();
+
+	void Setup(string folder, string file);
 	void Update();
-	
+	void Render();
 
 	bool RayCheck(MeshTile& meshtile);
 	
-	D3DMATERIAL9 GetColor() { return m_stMtlSphere2; }
+	
 
 };
 
