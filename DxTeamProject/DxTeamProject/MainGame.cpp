@@ -46,12 +46,12 @@ CMainGame::CMainGame() :
 	// Ray y check
 	, m_pMeshTile(NULL),
 	// Gimmick
-	m_pGimmick_Door(NULL),
 	m_pGimmick_RotationBoard(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
-
+	m_pGimmick_Door[0] = NULL;
+	m_pGimmick_Door[1] = NULL;
 }
 
 CMainGame::~CMainGame()
@@ -62,7 +62,8 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pLight);
 	SafeDelete(m_pSkydome);
 	// Gimmick
-	SafeDelete(m_pGimmick_Door);
+	SafeDelete(m_pGimmick_Door[0]);
+	SafeDelete(m_pGimmick_Door[1]);
 	SafeDelete(m_pGimmick_RotationBoard);
 
 	g_pFileLoadManager->Destroy();
@@ -129,8 +130,10 @@ void CMainGame::Setup()
 	//m_pChanger = new Color_changer;
 	//m_pChanger->Setup();
 
-	m_pGimmick_Door = new CDoor;
-	m_pGimmick_Door->Setup("Resource/XFile/Gimmick/Door", "door_frame.X");
+	m_pGimmick_Door[0] = new CDoor;
+	m_pGimmick_Door[0]->Setup("Resource/XFile/Gimmick/Door", "door_frame.X");
+	m_pGimmick_Door[1] = new CDoor;
+	m_pGimmick_Door[1]->Setup("Resource/XFile/Gimmick/Door", "door_right.X");
 
 	m_pGimmick_RotationBoard = new RotationBoard;
 	m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
@@ -293,8 +296,10 @@ void CMainGame::Update()
 	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
 
 	// Gimmick
-	if (m_pGimmick_Door)
-		m_pGimmick_Door->Update();
+	if (m_pGimmick_Door[0])
+		m_pGimmick_Door[0]->Update();
+	if (m_pGimmick_Door[1])
+		m_pGimmick_Door[1]->Update();
 
 	if (m_pGimmick_RotationBoard)
 		m_pGimmick_RotationBoard->Update();
@@ -385,8 +390,10 @@ void CMainGame::Render()
 	//	m_pMeshTile->Render();
 
 	// Gimmick
-	if (m_pGimmick_Door)
-		m_pGimmick_Door->Render();
+	if (m_pGimmick_Door[0])
+		m_pGimmick_Door[0]->Render();
+	if (m_pGimmick_Door[1])
+		m_pGimmick_Door[1]->Render();
 	if (m_pGimmick_RotationBoard)
 		m_pGimmick_RotationBoard->Render();
 
