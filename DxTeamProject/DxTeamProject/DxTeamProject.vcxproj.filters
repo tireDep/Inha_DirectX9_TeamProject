@@ -214,6 +214,9 @@
     <ClCompile Include="RotationBoard.cpp">
       <Filter>Gimmick\KT</Filter>
     </ClCompile>
+    <ClCompile Include="Switch.cpp">
+      <Filter>Gimmick\HW</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -453,6 +456,9 @@
     <ClInclude Include="RotationBoard.h">
       <Filter>Gimmick\KT</Filter>
     </ClInclude>
+    <ClInclude Include="Switch.h">
+      <Filter>Gimmick\HW</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -576,6 +582,9 @@
     </Filter>
     <Filter Include="Gimmick\KT">
       <UniqueIdentifier>{16e41f8f-ec5b-46a9-8ea9-379ce0d70cd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gimmick\HW">
+      <UniqueIdentifier>{96ee8b91-2a5b-4739-9acb-e90d036b2c18}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
