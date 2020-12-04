@@ -96,7 +96,7 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "createmap2.dat");
 	
@@ -122,8 +122,8 @@ void CMainGame::Setup()
 	m_pLight->Setup();
 	//m_pLight->Setup(D3DXVECTOR3(1, 0, 0)); // sun light vector
 
-	//m_pPrevFrustum.Setup();
-	//m_pNowFrustum.Setup();
+	// m_pPrevFrustum.Setup();
+	// m_pNowFrustum.Setup();
 
 	//m_pSkydome = new CSkydome;
 	//m_pSkydome->Setup("Resource/XFile/Sky", "skydome.X");
