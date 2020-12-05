@@ -396,12 +396,12 @@ void CMainGame::Render()
 	//	m_pMeshTile->Render();
 
 	// Gimmick
-	//if (m_pGimmick_Door[0])
-	//	m_pGimmick_Door[0]->Render();
-	//if (m_pGimmick_Door[1])
-	//	m_pGimmick_Door[1]->Render();
-	//if (m_pGimmick_RotationBoard)
-	//	m_pGimmick_RotationBoard->Render();
+	if (m_pGimmick_Door[0])
+		m_pGimmick_Door[0]->Render();
+	if (m_pGimmick_Door[1])
+		m_pGimmick_Door[1]->Render();
+	if (m_pGimmick_RotationBoard)
+		m_pGimmick_RotationBoard->Render();
 	if (m_pGimmick_Switch)
 		m_pGimmick_Switch->Render();
 	if (m_pChanger)

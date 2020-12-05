@@ -6,6 +6,8 @@
 #include "CHeight.h"
 #include "OBB.h"
 #include "TestObjCollision.h"
+// collide
+#include "Contact.h"
 
 CObjectManager::CObjectManager() : 
 	m_frustum(NULL),
@@ -25,6 +27,11 @@ CObjectManager::~CObjectManager()
 			m_thread->join();
 	}
 	SafeDelete(m_thread);
+}
+
+void CObjectManager::GenerateContacts()
+{
+
 }
 
 void CObjectManager::AddObject(CObject * pObject)

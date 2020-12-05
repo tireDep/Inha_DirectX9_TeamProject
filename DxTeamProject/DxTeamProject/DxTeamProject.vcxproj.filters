@@ -197,7 +197,6 @@
     <ClCompile Include="MeshTile.cpp">
       <Filter>Gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="TestObjCollision.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="ReleaseTimer.cpp">
       <Filter>...TrashCan</Filter>
@@ -217,6 +216,10 @@
     <ClCompile Include="Colorchanger.cpp">
       <Filter>Gimmick\MJ</Filter>
     </ClCompile>
+    <ClCompile Include="TestObjCollision.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -440,7 +443,6 @@
     <ClInclude Include="MeshTile.h">
       <Filter>Gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="TestObjCollision.h" />
     <ClInclude Include="ReleaseTimer.h">
       <Filter>...TrashCan</Filter>
     </ClInclude>
@@ -459,6 +461,10 @@
     <ClInclude Include="Colorchanger.h">
       <Filter>Gimmick\MJ</Filter>
     </ClInclude>
+    <ClInclude Include="TestObjCollision.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

@@ -12,6 +12,10 @@ class CRay;
 class CPSOBB;
 class COBB;
 class CTestObjCollision;
+// Collide
+class Contact;
+class CollisionData;
+class ContactResolver;
 
 #define		g_pObjectManager CObjectManager::GetInstance()
 
@@ -32,6 +36,12 @@ private:
 	bool m_isThreadRun;
 	bool m_IsIn;
 
+	// collide
+	//const static unsigned maxContacts = 256;
+	//Contact contacts[maxContacts];
+	//CollisionData cData;
+	//ContactResolver resolver;
+	void GenerateContacts();
 public:
 	void AddObject(CObject* pObject);
 	void RemoveObject(CObject* pObject);
@@ -57,6 +67,7 @@ public:
 	void Update(CRay ray, D3DXCOLOR& objectcolor);		// Color Change
 	void Collide(float duration);
 	void HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestObjCollision& theCollision);
+
 	void Render();
 	void RenderOBBBox();
 

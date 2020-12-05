@@ -35,22 +35,16 @@ void CDoor::Setup(string folder, string file)
 	{
 		for (int i = 0; i < m_vecTextures.size(); i++)
 		{
-			string filePath;
-			filePath = string(folder) + "/cubeworld_texture.tga";
 			if (m_vecTextures[i] == NULL)
-				// g_pFileLoadManager->FileLoad_Texture(folder, "cubeworld_texture.tga", m_vecTextures[i]);
-				D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &m_vecTextures[i]);
+				g_pFileLoadManager->FileLoad_Texture(folder, "cubeworld_texture.tga", m_vecTextures[i]);
 		}
 	}
 	else
 	{
 		for (int i = 0; i < m_vecTextures.size(); i++)
 		{
-			string filePath;
-			filePath = string(folder) + "/cubeworld_metal.tga";
 			if (m_vecTextures[i] == NULL)
-				// g_pFileLoadManager->FileLoad_Texture(folder, "cubeworld_metal.tga", m_vecTextures[i]);
-				D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &m_vecTextures[i]);
+				g_pFileLoadManager->FileLoad_Texture(folder, "cubeworld_metal.tga", m_vecTextures[i]);
 		}
 	}
 	delete xfile;
