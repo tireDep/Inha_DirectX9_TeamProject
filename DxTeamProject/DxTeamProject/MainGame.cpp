@@ -131,7 +131,7 @@ void CMainGame::Setup()
 
 	////--Gimmick
 	m_pChanger = new Color_changer;
-	m_pChanger->Setup("Resource/XFile/Gimmick/Switch", "Weight_switch.X"); //"Resource/XFile/Gimmick/ColorChanger","Color_changer.X"
+	m_pChanger->Setup("Resource/XFile/Gimmick/ColorChanger", "Color_changer.X"); //Resource/XFile/Gimmick/ColorChanger", "Color_changer.X
 
 	m_pGimmick_Door[0] = new CDoor;
 	m_pGimmick_Door[0]->Setup("Resource/XFile/Gimmick/Door", "door_frame.X");
@@ -310,7 +310,7 @@ void CMainGame::Update()
 	if (m_pGimmick_RotationBoard)
 		m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
 	
-	/*if(m_pChanger)
+	if (m_pChanger)
 		m_pChanger->Update();
 
 
@@ -321,15 +321,15 @@ void CMainGame::Update()
 			if (m_pChanger->RayCheck(*m_pMeshTile[i]) == true);
 			{
 
-				m_pMeshTile[i]->SetColor(m_pChanger->GetColor());
+				m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere2);
 
 			}
 			if (m_pChanger->RayCheck(*m_pMeshTile[i]) == false)
 			{
-				m_pMeshTile[i]->SetColor(m_pChanger->GetColor());
+				m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere2);
 			}
 		}
-	}*/
+	}
 }
 
 
