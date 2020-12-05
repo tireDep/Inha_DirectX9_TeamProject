@@ -101,7 +101,7 @@ Material cw_tower_defense_mat {
  0.000000;0.000000;0.000000;;
 
  TextureFilename {
-  "cubeworld_texture.tga";
+  "tower_defense_texture.tga";
  }
 }
 

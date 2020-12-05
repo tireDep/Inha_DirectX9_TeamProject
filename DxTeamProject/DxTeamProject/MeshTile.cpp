@@ -55,13 +55,8 @@ void MeshTile::Render()
 	D3DXMatrixIdentity(&matWorld);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	
-
-
 	g_pD3DDevice->SetMaterial(&m_stMtlSphere);
 	
-	
-	
-
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	m_pMesh->DrawSubset(0);
 }
