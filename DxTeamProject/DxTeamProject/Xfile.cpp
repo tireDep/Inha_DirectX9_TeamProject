@@ -102,7 +102,7 @@ void CXfile::Render(D3DXVECTOR3 eye)
 
 		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{
-			g_pD3DDevice->SetMaterial(m_vecMtrls[i]);
+			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 			
 			if(m_vecTextures[i] != 0)
 				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);

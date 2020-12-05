@@ -182,7 +182,7 @@ bool CFileLoadManager::FileLoad_XFile(string szFolder, string szFile, ST_XFile* 
 		for (int i = 0; i < setXFile->nMtrlNum; i++)
 		{
 			mtrls[i].MatD3D.Ambient = mtrls[i].MatD3D.Diffuse;
-			setXFile->vecMtrl.push_back(&mtrls[i].MatD3D);
+			setXFile->vecMtrl.push_back(mtrls[i].MatD3D);
 
 			if (mtrls[i].pTextureFilename != NULL)
 			{

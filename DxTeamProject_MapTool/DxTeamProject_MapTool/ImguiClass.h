@@ -3,7 +3,13 @@
 class CImguiClass
 {
 private:
-	enum class LoadType { eNull, eMap, eBackground, eAutumnTree, eSummerTree, eWinterTree, eObject };
+	enum class LoadType 
+	{ 
+		eNull, eMap, 
+		eBackground, eAutumnTree, eSummerTree, eWinterTree, eInvisibleWall,
+		eObject, 
+		eGimmik, eBreakWall, eDoor, eRotateBoard, eColorChanger
+	};
 	enum class ColorType { eNull, eGray, eBlack, eWhite, eRed, eBlue, eGreen, eYellow };
 
 	bool m_isReset;
@@ -15,7 +21,7 @@ private:
 	int m_FileLoadIndex;
 	LoadType m_PreLoadType;
 	LoadType m_NowLoadType;
-	LoadType m_TreeType;
+	LoadType m_SubType;
 
 	vector<ColorType> m_vecColor;
 	ColorType m_PrecolorType;

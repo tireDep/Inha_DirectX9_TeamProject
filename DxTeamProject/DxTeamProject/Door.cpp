@@ -38,6 +38,7 @@ void CDoor::Setup(string folder, string file)
 			string filePath;
 			filePath = string(folder) + "/cubeworld_texture.tga";
 			if (m_vecTextures[i] == NULL)
+				// g_pFileLoadManager->FileLoad_Texture(folder, "cubeworld_texture.tga", m_vecTextures[i]);
 				D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &m_vecTextures[i]);
 		}
 	}
@@ -48,6 +49,7 @@ void CDoor::Setup(string folder, string file)
 			string filePath;
 			filePath = string(folder) + "/cubeworld_metal.tga";
 			if (m_vecTextures[i] == NULL)
+				// g_pFileLoadManager->FileLoad_Texture(folder, "cubeworld_metal.tga", m_vecTextures[i]);
 				D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &m_vecTextures[i]);
 		}
 	}
@@ -78,7 +80,7 @@ void CDoor::Render()
 		{
 			if (m_vecTextures[i] != 0)
 				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
-			g_pD3DDevice->SetMaterial(m_vecMtrls[i]);
+			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 		}
 		m_pMesh->DrawSubset(0);
 		g_pD3DDevice->SetTexture(0, NULL);

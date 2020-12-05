@@ -32,11 +32,7 @@ void CImguiClass::SetVecItem()
 	{
 		tempVec.push_back("Box");			tempObjType.push_back(eBox);
 		tempVec.push_back("Sphere");		tempObjType.push_back(eSphere);
-#if _DEBUG
 		tempVec.push_back("Cylinder");		tempObjType.push_back(eCylinder);
-#else
-#endif
-		// >> todo : item 추가
 	}
 	else if (m_NowLoadType == LoadType::eBackground)
 	{
@@ -47,7 +43,7 @@ void CImguiClass::SetVecItem()
 		tempVec.push_back("Tree05");
 		tempVec.push_back("Tree06");
 
-		if (m_TreeType == LoadType::eAutumnTree)
+		if (m_SubType == LoadType::eAutumnTree)
 		{
 			tempObjType.push_back(eATree);
 			tempObjType.push_back(eATree);
@@ -56,7 +52,7 @@ void CImguiClass::SetVecItem()
 			tempObjType.push_back(eATree);
 			tempObjType.push_back(eATree);
 		}
-		else if (m_TreeType == LoadType::eSummerTree)
+		else if (m_SubType == LoadType::eSummerTree)
 		{
 			tempObjType.push_back(eSTree);
 			tempObjType.push_back(eSTree);
@@ -65,7 +61,7 @@ void CImguiClass::SetVecItem()
 			tempObjType.push_back(eSTree);
 			tempObjType.push_back(eSTree);
 		}
-		else if (m_TreeType == LoadType::eWinterTree)
+		else if (m_SubType == LoadType::eWinterTree)
 		{
 			tempObjType.push_back(eWTree);
 			tempObjType.push_back(eWTree);
@@ -74,7 +70,20 @@ void CImguiClass::SetVecItem()
 			tempObjType.push_back(eWTree);
 			tempObjType.push_back(eWTree);
 		}
-		// >> todo : item 추가
+		else if (m_SubType == LoadType::eInvisibleWall)
+		{
+			tempVec.clear();
+			tempVec.push_back("InvisibleWall");
+			tempObjType.push_back(eInvisibleWall);
+		}
+	}
+	else if (m_NowLoadType == LoadType::eGimmik)
+	{
+		tempVec.push_back("Door");				tempObjType.push_back(eG_Door);
+		tempVec.push_back("BreakWall");			tempObjType.push_back(eG_BreakWall);
+		tempVec.push_back("RotateBoard");		tempObjType.push_back(eG_RotateBoard);
+		tempVec.push_back("ColorChanger");		tempObjType.push_back(eG_ColorChanger);
+		tempVec.push_back("Switch");			tempObjType.push_back(eG_Switch);
 	}
 	
 	m_vecItem = tempVec;
@@ -97,7 +106,7 @@ CImguiClass::CImguiClass() :
 	m_PrecolorType = ColorType::eNull;
 	m_NowcolorType = ColorType::eGray;
 
-	m_TreeType = LoadType::eAutumnTree;
+	m_SubType = LoadType::eAutumnTree;
 	
 	m_vecColor.push_back(ColorType::eGray);
 	m_vecColor.push_back(ColorType::eBlack);
@@ -200,16 +209,16 @@ void CImguiClass::Update()
 				ImGui::EndMenu();
 			}
 
-			if (ImGui::BeginMenu("Edit"))
-			{
-				// if (ImGui::MenuItem("Undo", "CTRL+Z")) {}
-				// if (ImGui::MenuItem("Redo", "CTRL+Y", false, false)) {}
-				// ImGui::Separator();
-				// if (ImGui::MenuItem("Cut", "CTRL+X")) {}
-				// if (ImGui::MenuItem("Copy", "CTRL+C")) {}
-				// if (ImGui::MenuItem("Paste", "CTRL+V")) {}
-				ImGui::EndMenu();
-			}
+			//if (ImGui::BeginMenu("Edit"))
+			//{
+			//	// if (ImGui::MenuItem("Undo", "CTRL+Z")) {}
+			//	// if (ImGui::MenuItem("Redo", "CTRL+Y", false, false)) {}
+			//	// ImGui::Separator();
+			//	// if (ImGui::MenuItem("Cut", "CTRL+X")) {}
+			//	// if (ImGui::MenuItem("Copy", "CTRL+C")) {}
+			//	// if (ImGui::MenuItem("Paste", "CTRL+V")) {}
+			//	ImGui::EndMenu();
+			//}
 			ImGui::EndMainMenuBar();
 		}
 
@@ -239,7 +248,7 @@ void CImguiClass::Update()
 		// D3DXCreateTextureFromFileA(g_pD3DDevice, "Resource/Test.png", &temp);
 		// static ImTextureID test = temp;
 
-		ImGui::Begin(" ");
+		// ImGui::Begin(" ");
 
 		/*for (int i = 0; i < 5 ; i++)
 		{
@@ -263,7 +272,7 @@ void CImguiClass::Update()
 			ImGui::SameLine();
 			ImGui::PopID();
 		}*/
-		ImGui::End();
+		// ImGui::End();
 	} // << : Controller
 
 	{
@@ -337,10 +346,17 @@ void CImguiClass::Update()
 		ImGui::Begin("File Loader");
 
 		if (ImGui::RadioButton("MapTile", m_NowLoadType == LoadType::eMap)) { m_NowLoadType = LoadType::eMap; m_FileLoadIndex = -1; }
-		ImGui::SameLine(); 
-		if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
+		ImGui::SameLine(); if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
+
 		if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = -1; }
-		// todo : Background
+		ImGui::SameLine();  if (ImGui::RadioButton("Gimmik", m_NowLoadType == LoadType::eGimmik)) { m_NowLoadType = LoadType::eGimmik; m_FileLoadIndex = -1; }
+
+		// if (ImGui::RadioButton("Item", m_NowLoadType == LoadType::eItem)) { m_NowLoadType = LoadType::eItem; m_FileLoadIndex = -1; }
+		// ImGui::SameLine();  if (ImGui::RadioButton("EventTrigger", m_NowLoadType == LoadType::eTrigger)) { m_NowLoadType = LoadType::eTrigger; m_FileLoadIndex = -1; }
+		// >> todo
+
+		ImGui::Separator();
+
 		if (m_NowLoadType != m_PreLoadType && m_NowLoadType != LoadType::eBackground)
 		{
 			SetVecItem();
@@ -348,10 +364,12 @@ void CImguiClass::Update()
 		}
 		else if (m_NowLoadType == LoadType::eBackground)
 		{
-			ImGui::Separator();
-			if (ImGui::RadioButton("AutumnTree", m_TreeType == LoadType::eAutumnTree)) { m_TreeType = LoadType::eAutumnTree; m_FileLoadIndex = -1; }
-			ImGui::SameLine(); if (ImGui::RadioButton("SummerTree", m_TreeType == LoadType::eSummerTree)) { m_TreeType = LoadType::eSummerTree; m_FileLoadIndex = -1; }
-			if (ImGui::RadioButton("WinterTree", m_TreeType == LoadType::eWinterTree)) { m_TreeType = LoadType::eWinterTree; m_FileLoadIndex = -1; }
+			// >> 배경 나무들은 세부 선택 존재
+			if (ImGui::RadioButton("AutumnTree", m_SubType == LoadType::eAutumnTree)) { m_SubType = LoadType::eAutumnTree; m_FileLoadIndex = -1; }
+			ImGui::SameLine(); if (ImGui::RadioButton("SummerTree", m_SubType == LoadType::eSummerTree)) { m_SubType = LoadType::eSummerTree; m_FileLoadIndex = -1; }
+			
+			if (ImGui::RadioButton("WinterTree", m_SubType == LoadType::eWinterTree)) { m_SubType = LoadType::eWinterTree; m_FileLoadIndex = -1; }
+			ImGui::SameLine(); if (ImGui::RadioButton("InvisibleWall", m_SubType == LoadType::eInvisibleWall)) { m_SubType = LoadType::eInvisibleWall; m_FileLoadIndex = -1; }
 
 			SetVecItem();
 			m_PreLoadType = m_NowLoadType;
