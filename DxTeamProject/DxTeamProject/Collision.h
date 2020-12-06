@@ -1,4 +1,5 @@
 #pragma once
+#include "Contact.h"
 
 class IntersectionTests;
 class CollisionDetector;
@@ -72,7 +73,7 @@ struct CollisionData
 		contactsLeft -= count;
 		contactCount += count;
 
-		//contacts += count;
+		contacts += count;
 	}
 };
 

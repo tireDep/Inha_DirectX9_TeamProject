@@ -29,10 +29,17 @@ CObjectManager::~CObjectManager()
 	SafeDelete(m_thread);
 }
 
-void CObjectManager::GenerateContacts()
-{
-
-}
+//void CObjectManager::GenerateContacts()
+//{
+//	CollisionPlane plane;
+//	plane.direction = D3DXVECTOR3(0, 1, 0);
+//	plane.offset = 0;
+//	cData.reset(maxContacts);
+//	cData.friction = 0.9f;
+//	cData.restitution = 0.6f;
+//	cData.tolerance = 0.1f;
+//
+//}
 
 void CObjectManager::AddObject(CObject * pObject)
 {

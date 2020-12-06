@@ -13,9 +13,8 @@ class CPSOBB;
 class COBB;
 class CTestObjCollision;
 // Collide
-class Contact;
-class CollisionData;
-class ContactResolver;
+#include "Contact.h"
+#include "Collision.h"
 
 #define		g_pObjectManager CObjectManager::GetInstance()
 
@@ -41,7 +40,7 @@ private:
 	//Contact contacts[maxContacts];
 	//CollisionData cData;
 	//ContactResolver resolver;
-	void GenerateContacts();
+	//void GenerateContacts();
 public:
 	void AddObject(CObject* pObject);
 	void RemoveObject(CObject* pObject);
