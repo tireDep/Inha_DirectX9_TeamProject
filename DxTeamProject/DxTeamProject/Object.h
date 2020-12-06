@@ -29,23 +29,27 @@ protected:
 	Synthesize_Pass_by_Ref(D3DXMATRIXA16, m_matWorld, matWorld);
 
 	// force
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vForceAccum, ForceAccum);
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vForceVector, ForceVector);
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vForceLocation, ForceLocation);
+	Synthesize(D3DXVECTOR3, m_vForceAccum, ForceAccum);
+	Synthesize(D3DXVECTOR3, m_vForceVector, ForceVector);
+	Synthesize(D3DXVECTOR3, m_vForceLocation, ForceLocation);
+	Synthesize(float, m_fMotion, Motion);
+	bool m_isAwake;
+	Synthesize(bool, m_canSleep, Sleep);
 
 	// linear
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vPosition, Position);	// center position
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vLinearVelocity, LinearVelocity); // velocity
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vLinearAcceleration, LinearAcceleration); // acceleration
+	Synthesize(D3DXVECTOR3, m_vPosition, Position);	// center position
+	Synthesize(D3DXVECTOR3, m_vLinearVelocity, LinearVelocity); // velocity
+	Synthesize(D3DXVECTOR3, m_vLinearAcceleration, LinearAcceleration); // acceleration
 	Synthesize(float, m_fDamping, Damping);	// floating point error
 	Synthesize(float, m_fLinearDrag, Drag);	// linear drag
+	Synthesize(D3DXVECTOR3, m_vLastFrameAcceleration, LastFrameAcceleration);
 
 	// rotation
 	CTestAngleSet m_stOrientation; // Orientation
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vAngularVelocity, AngularVelocity); // Angular Velocity
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vAngularAcceleration, AngularAcceleration);	// Angular Accerleration
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vRotationInertia, RotationInertia);	// Rotation Inertia;
-	Synthesize_Pass_by_Ref(D3DXVECTOR3, m_vTorque, Torque);	// Torque;
+	Synthesize(D3DXVECTOR3, m_vAngularVelocity, AngularVelocity); // Angular Velocity
+	Synthesize(D3DXVECTOR3, m_vAngularAcceleration, AngularAcceleration);	// Angular Accerleration
+	Synthesize(D3DXVECTOR3, m_vRotationInertia, RotationInertia);	// Rotation Inertia;
+	Synthesize(D3DXVECTOR3, m_vTorque, Torque);	// Torque;
 
 	// collision
 	Synthesize(float, m_fBoundingSphere, BoundingSphere);	// collision radius
@@ -109,6 +113,10 @@ public:
 	virtual void RunPhysics(float duration) = 0;
 	virtual bool hasIntersected(CObject * otherobject) = 0;
 	virtual void CollisionOtherObject(CObject * otherobject) = 0;
+	virtual bool GetAwake() const;
+	virtual void SetAwake(const bool awake = true);
+	virtual void SetOrientation(CTestAngleSet Orientation);
+	virtual CTestAngleSet GetOrientation();
 
 	static void CreateObject(const ST_MapData& mapData);
 

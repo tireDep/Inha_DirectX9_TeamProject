@@ -201,6 +201,37 @@ bool CObject::hasFiniteMass() const
 	return m_finverseMass >= 0.0f;
 }
 
+bool CObject::GetAwake() const
+{
+	return m_isAwake;
+}
+
+void CObject::SetAwake(const bool awake)
+{
+	// 0.3 = sleepEpsilon
+	if (awake) 
+	{
+		m_isAwake = true;
+		m_fMotion = 0.3 * 2.0f;
+	}
+	else
+	{
+		m_isAwake = false;
+		m_vLinearVelocity.x = m_vLinearVelocity.y = m_vLinearVelocity.z = 0.0f;
+		m_vAngularVelocity.x = m_vAngularVelocity.y = m_vAngularVelocity.z = 0.0f;
+	}
+}
+
+void CObject::SetOrientation(CTestAngleSet Orientation)
+{
+	m_stOrientation = Orientation;
+}
+
+CTestAngleSet CObject::GetOrientation()
+{
+	return m_stOrientation;
+}
+
 void CObject::CreateObject(const ST_MapData & mapData)
 {
 	switch (mapData.objType)
