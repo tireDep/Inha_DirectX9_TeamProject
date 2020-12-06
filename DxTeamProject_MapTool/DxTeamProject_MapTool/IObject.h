@@ -49,6 +49,7 @@ public:
 	virtual void Release();
 
 	virtual void Setup() = 0;
+	virtual void Setup(ST_MapData setData) = 0;
 	virtual void Setup_OBB_Box();
 
 	virtual void Update() = 0;

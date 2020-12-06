@@ -1,6 +1,7 @@
 #pragma once
 #include "IObject.h"
 #include "Ray.h"
+
 class CTile : public IObject
 {
 public:

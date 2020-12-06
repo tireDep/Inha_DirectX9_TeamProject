@@ -12,7 +12,7 @@ private:
 		// >> 버전차이
 #endif // DEBUG
 		eObject, 
-		eGimmik, eBreakWall, eDoor, eRotateBoard, eColorChanger
+		eGimmick, eBreakWall, eDoor, eRotateBoard, eColorChanger
 	};
 	enum class ColorType { eNull, eGray, eBlack, eWhite, eRed, eBlue, eGreen, eYellow };
 
@@ -32,15 +32,22 @@ private:
 	ColorType m_NowcolorType;
 
 	void SetVecItem();
+	void SetObjectColor();
 
 public:
 	static int m_nowSelectindex;
 	static int m_prevSelectIndex;
+
 	CImguiClass();
 	~CImguiClass();
 
 	void Setup();
+
 	void Update();
+	void Update_MenuTitleBar();
+	void Update_Hiearachy();
+	void Update_FileLoader();
+	void Update_Inspector();
 
 	void SetFrameEnd();
 	void Render();
