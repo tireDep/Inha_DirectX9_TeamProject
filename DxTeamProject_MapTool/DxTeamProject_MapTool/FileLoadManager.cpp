@@ -149,7 +149,11 @@ void CFileLoadManager::ReadMapData(string fileName)
 			}
 
 			else if (readData == "# Object_End")
+			{
+				// todo
+				// 기믹, 이벤트 트리거 등 오브젝트 타입에 따라 파싱 추가
 				IObject::CreateObject(mapData);
+			}
 
 			else if (strstr(readData.c_str(), "# Section"))
 				loopCnt++;
@@ -298,6 +302,9 @@ void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
 
 	file << "# Color" << endl;
 	file << mapData.dxColor.r << endl << mapData.dxColor.g << endl << mapData.dxColor.b << endl << mapData.dxColor.a << endl;
+
+	// todo
+	// 기믹, 이벤트 트리거 등 오브젝트 타입에 따라 파싱 추가
 
 	file << "# Object_End" << endl << endl;
 }

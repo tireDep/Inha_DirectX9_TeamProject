@@ -5,6 +5,7 @@
 #include "Cylinder.h"
 #include "Tile.h"
 #include "Background.h"
+#include "Gimmick.h"
 
 int IObject::m_nRefCnt = 0;
 
@@ -360,15 +361,13 @@ void IObject::CreateObject(const ObjectType objType, int index)
 
 #endif // _DEBUG
 
-
-	case eGimmik:
+	case eG_RotationBoard:
 	case eG_BreakWall:
 	case eG_Door:
 	case eG_ColorChanger:
-	case eG_RotateBoard:
 	case eG_Switch:
 	{
-		cout << "todo something" << endl;
+		CGimmick::CreateGimmick(objType);
 	}
 		break;
 
@@ -421,14 +420,13 @@ void IObject::CreateObject(const ST_MapData& mapData)
 	}
 		break;
 
-	case eGimmik:
+	case eG_RotationBoard:
 	case eG_BreakWall:
 	case eG_Door:
 	case eG_ColorChanger:
-	case eG_RotateBoard:
 	case eG_Switch:
 	{
-		cout << "todo something" << endl;
+		CGimmick::CreateGimmick_SaveData(mapData);
 	}
 	break;
 

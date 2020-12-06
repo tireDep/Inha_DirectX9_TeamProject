@@ -4,6 +4,10 @@
 
 #include "stdafx.h"
 #include "IObject.h"
+
+#include "Gimmick.h"
+#include "RotationBoard.h"
+
 #include "ImguiClass.h"
 
 int CImguiClass::m_nowSelectindex = -1;
@@ -46,52 +50,86 @@ void CImguiClass::SetVecItem()
 
 		if (m_SubType == LoadType::eAutumnTree)
 		{
-			tempObjType.push_back(eATree);
-			tempObjType.push_back(eATree);
-			tempObjType.push_back(eATree);
-			tempObjType.push_back(eATree);
-			tempObjType.push_back(eATree);
-			tempObjType.push_back(eATree);
+			for (int i = 0; i < tempVec.size(); i++)
+				tempObjType.push_back(eATree);
 		}
 		else if (m_SubType == LoadType::eSummerTree)
 		{
-			tempObjType.push_back(eSTree);
-			tempObjType.push_back(eSTree);
-			tempObjType.push_back(eSTree);
-			tempObjType.push_back(eSTree);
-			tempObjType.push_back(eSTree);
-			tempObjType.push_back(eSTree);
+			for (int i = 0; i < tempVec.size(); i++)
+				tempObjType.push_back(eSTree);
 		}
 		else if (m_SubType == LoadType::eWinterTree)
 		{
-			tempObjType.push_back(eWTree);
-			tempObjType.push_back(eWTree);
-			tempObjType.push_back(eWTree);
-			tempObjType.push_back(eWTree);
-			tempObjType.push_back(eWTree);
-			tempObjType.push_back(eWTree);
+			for (int i = 0; i < tempVec.size(); i++)
+				tempObjType.push_back(eWTree);
 		}
 #ifdef _DEBUG
 		else if (m_SubType == LoadType::eInvisibleWall)
 		{
 			tempVec.clear();
-			tempVec.push_back("InvisibleWall");
-			tempObjType.push_back(eInvisibleWall);
+			tempVec.push_back("InvisibleWall"); tempObjType.push_back(eInvisibleWall);
 		}
 #endif // _DEBUG
 
 	}
-	else if (m_NowLoadType == LoadType::eGimmik)
+	else if (m_NowLoadType == LoadType::eGimmick)
 	{
-		tempVec.push_back("Door");				tempObjType.push_back(eG_Door);
+		tempVec.push_back("RotationBoard");		tempObjType.push_back(eG_RotationBoard);
 		tempVec.push_back("BreakWall");			tempObjType.push_back(eG_BreakWall);
-		tempVec.push_back("RotateBoard");		tempObjType.push_back(eG_RotateBoard);
+		tempVec.push_back("Door");				tempObjType.push_back(eG_Door);
 		tempVec.push_back("ColorChanger");		tempObjType.push_back(eG_ColorChanger);
 		tempVec.push_back("Switch");			tempObjType.push_back(eG_Switch);
 	}
 	
 	m_vecItem = tempVec;
 	m_vecObjType = tempObjType;
+}
+
+void CImguiClass::SetObjectColor()
+{
+	{
+		ImGui::Text("Set Color");
+		string charName[8] = { "Gray", "Black", "White", "Red", "Blue", "Green", "Yellow" };
+		for (int i = 0; i < m_vecColor.size(); i++)
+		{
+			if (ImGui::RadioButton(charName[i].c_str(), m_NowcolorType == m_vecColor[i]))
+			{
+				m_NowcolorType = m_vecColor[i];
+
+				D3DXCOLOR color;
+				switch (m_NowcolorType)
+				{
+				case ColorType::eGray:
+					color = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+					break;
+				case ColorType::eBlack:
+					color = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
+					break;
+				case ColorType::eWhite:
+					color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+					break;
+				case ColorType::eRed:
+					color = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+					break;
+				case ColorType::eBlue:
+					color = D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f);
+					break;
+				case ColorType::eGreen:
+					color = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
+					break;
+				case ColorType::eYellow:
+					color = D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f);
+					break;
+				}
+				g_pObjectManager->GetIObject(m_nowSelectindex).SetColor(color);
+			}
+
+			if (i != 2 && i != m_vecColor.size() - 1)
+				ImGui::SameLine();
+
+		} // << : for
+		ImGui::Separator();
+	} // << : if
 }
 
 CImguiClass::CImguiClass() :
@@ -677,7 +715,7 @@ void CImguiClass::Update_FileLoader()
 	ImGui::SameLine(); if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
 
 	if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = -1; }
-	ImGui::SameLine();  if (ImGui::RadioButton("Gimmik", m_NowLoadType == LoadType::eGimmik)) { m_NowLoadType = LoadType::eGimmik; m_FileLoadIndex = -1; }
+	ImGui::SameLine();  if (ImGui::RadioButton("Gimmick", m_NowLoadType == LoadType::eGimmick)) { m_NowLoadType = LoadType::eGimmick; m_FileLoadIndex = -1; }
 
 	// if (ImGui::RadioButton("Item", m_NowLoadType == LoadType::eItem)) { m_NowLoadType = LoadType::eItem; m_FileLoadIndex = -1; }
 	// ImGui::SameLine();  if (ImGui::RadioButton("EventTrigger", m_NowLoadType == LoadType::eTrigger)) { m_NowLoadType = LoadType::eTrigger; m_FileLoadIndex = -1; }
@@ -784,8 +822,11 @@ void CImguiClass::Update_Inspector()
 			D3DXVECTOR3 vScale = g_pObjectManager->GetIObject(m_nowSelectindex).GetScale();
 			if (ImGui::InputFloat3("Scale", vScale))
 			{
-				if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere
-					|| g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCylinder)
+				ObjectType tempType = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType();
+
+				if (tempType == eSphere || tempType == eCylinder
+				 || tempType == eG_RotationBoard || tempType == eG_BreakWall || tempType == eG_Door
+				 || tempType == eG_ColorChanger || tempType == eG_Switch)
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetDiffScale(vScale);
 				else
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetScale(vScale);
@@ -801,53 +842,42 @@ void CImguiClass::Update_Inspector()
 
 			ImGui::Separator();
 
-			// >> object만 색 지정 가능
+			// >> 선택된 오브젝트에 따라 인스펙터 변경
 			if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eBox
 				|| g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere
 				|| g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCylinder)
 			{
-				ImGui::Text("Set Color");
-				string charName[8] = { "Gray", "Black", "White", "Red", "Blue", "Green", "Yellow" };
-				for (int i = 0; i < m_vecColor.size(); i++)
-				{
-					if (ImGui::RadioButton(charName[i].c_str(), m_NowcolorType == m_vecColor[i]))
-					{
-						m_NowcolorType = m_vecColor[i];
+				// >> object만 색 지정 가능
+				SetObjectColor();
+			}
+			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_RotationBoard)
+			{
+				// >> 회전판자 기믹
+				CRotationBoard* temp = dynamic_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 
-						D3DXCOLOR color;
-						switch (m_NowcolorType)
-						{
-						case ColorType::eGray:
-							color = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
-							break;
-						case ColorType::eBlack:
-							color = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
-							break;
-						case ColorType::eWhite:
-							color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-							break;
-						case ColorType::eRed:
-							color = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-							break;
-						case ColorType::eBlue:
-							color = D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f);
-							break;
-						case ColorType::eGreen:
-							color = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
-							break;
-						case ColorType::eYellow:
-							color = D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f);
-							break;
-						}
-						g_pObjectManager->GetIObject(m_nowSelectindex).SetColor(color);
+				ImGui::Text("RotationAxial");
+				static int pushIndex = 0;
+				string charName[3] = { "Rot_X", "Rot_Y", "Rot_Z" };
+				for (int i = 0; i < 3; i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str(), pushIndex == i))
+					{
+						pushIndex = i;
+						temp->SetRotationAxialIndex(pushIndex);
 					}
 
-					if (i != 2 && i != m_vecColor.size() - 1)
-						ImGui::SameLine();
-
+					if (i + 1 != 3) ImGui::SameLine();
 				} // << : for
+
 				ImGui::Separator();
-			} // << : if
+
+				float fSpeed = temp->GetRotationSpeed();
+				if(ImGui::InputFloat("RoationSpeed", &fSpeed))
+					temp->SetRotationSpeed(fSpeed);
+				
+				ImGui::Separator();
+
+			} // << : Rotation Board
 
 		} // << : if (m_nowSelectindex >= 0)
 

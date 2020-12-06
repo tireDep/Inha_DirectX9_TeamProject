@@ -46,6 +46,9 @@
     <Filter Include="OBB">
       <UniqueIdentifier>{a28edb30-d7a0-4878-b650-8fdd7d5cf27f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Gimmick">
+      <UniqueIdentifier>{8b321869-a60a-47ca-a531-6e6f29863968}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imconfig.h">
@@ -131,6 +134,12 @@
     <ClInclude Include="OBB.h">
       <Filter>OBB</Filter>
     </ClInclude>
+    <ClInclude Include="Gimmick.h">
+      <Filter>Object\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="RotationBoard.h">
+      <Filter>Object\Gimmick</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui.cpp">
@@ -208,6 +217,12 @@
     </ClCompile>
     <ClCompile Include="OBB.cpp">
       <Filter>OBB</Filter>
+    </ClCompile>
+    <ClCompile Include="Gimmick.cpp">
+      <Filter>Object\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="RotationBoard.cpp">
+      <Filter>Object\Gimmick</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

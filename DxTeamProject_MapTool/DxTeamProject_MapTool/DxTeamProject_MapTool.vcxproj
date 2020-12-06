@@ -157,6 +157,7 @@
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="FileLoadManager.h" />
+    <ClInclude Include="Gimmick.h" />
     <ClInclude Include="Gizmo.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="imconfig.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="RotationBoard.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="stdafx.h" />
@@ -188,6 +190,7 @@
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="FileLoadManager.cpp" />
+    <ClCompile Include="Gimmick.cpp" />
     <ClCompile Include="Gizmo.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="imgui.cpp" />
@@ -204,6 +207,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RotationBoard.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="toolMain.cpp" />
