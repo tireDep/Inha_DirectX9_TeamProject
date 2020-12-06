@@ -42,17 +42,17 @@ CObjectManager::~CObjectManager()
 //
 //}
 
-void CObjectManager::AddObject(CObject * pObject)
+void CObjectManager::AddObject(CObject * cObject)
 {
-	m_vecObject.push_back(pObject);
+	m_vecObject.push_back(cObject);
 }
 
-void CObjectManager::RemoveObject(CObject * pObject)
+void CObjectManager::RemoveObject(CObject * cObject)
 {
 	vector<CObject*>::iterator it;
 	for (it = m_vecObject.begin(); it != m_vecObject.end();)
 	{
-		if (*it == pObject)
+		if (*it == cObject)
 		{
 			CObject* temp = *it;
 			it = m_vecObject.erase(it);
@@ -64,17 +64,17 @@ void CObjectManager::RemoveObject(CObject * pObject)
 	}
 }
 
-void CObjectManager::AddObject(IObject * pObject)
+void CObjectManager::AddObject(IObject * iObject)
 {
-	m_vecIObject.push_back(pObject);
+	m_vecIObject.push_back(iObject);
 }
 
-void CObjectManager::RemoveObject(IObject * pObject)
+void CObjectManager::RemoveObject(IObject * iObject)
 {
 	vector<IObject*>::iterator it;
 	for (it = m_vecIObject.begin(); it != m_vecIObject.end();)
 	{
-		if (*it == pObject)
+		if (*it == iObject)
 		{
 			IObject* temp = *it;
 			it = m_vecIObject.erase(it);
@@ -108,16 +108,6 @@ void CObjectManager::RemoveObject(PObject * pObject)
 	}
 }
 
-void CObjectManager::SetScale(float scale)
-{
-	m_vScale = scale;
-}
-
-float CObjectManager::GetScale()
-{
-   return m_vScale;
-}
-
 void CObjectManager::AddOBBbox(CPSOBB * OBBBox)
 {
 	m_vecOBBBox.push_back(OBBBox);
@@ -138,6 +128,16 @@ void CObjectManager::RemoveObject(CPSOBB * OBBBox)
 		else
 			it++;
 	}
+}
+
+void CObjectManager::SetScale(float scale)
+{
+	m_vScale = scale;
+}
+
+float CObjectManager::GetScale()
+{
+   return m_vScale;
 }
 
 void CObjectManager::AddMap()
@@ -262,26 +262,26 @@ void CObjectManager::Update(float duration)
 		m_vecObject[i]->Update(duration);
 }
 
-void CObjectManager::Update(float duration, CHeight* pMap)
-{
-	for (int i = 0; i < m_vecObject.size(); i++)
-		m_vecObject[i]->Update(duration , pMap);
-}
+//void CObjectManager::Update(float duration, CHeight* pMap)
+//{
+//	for (int i = 0; i < m_vecObject.size(); i++)
+//		m_vecObject[i]->Update(duration , pMap);
+//}
 
-void CObjectManager::Update3D(float duration)
-{
-	for (int i = 0; i < m_vecObject.size(); i++)
-		m_vecObject[i]->Update3D(duration);
-}
+//void CObjectManager::Update3D(float duration)
+//{
+//	for (int i = 0; i < m_vecObject.size(); i++)
+//		m_vecObject[i]->Update3D(duration);
+//}
 
-void CObjectManager::UpdateLand(float duration)
-{
-	for (int i = 0; i < m_vecObject.size(); i++)
-	{
-		m_vecObject[i]->UpdateLand(duration);
-		m_vecObject[i]->Update3D(duration);
-	}
-}
+//void CObjectManager::UpdateLand(float duration)
+//{
+//	for (int i = 0; i < m_vecObject.size(); i++)
+//	{
+//		m_vecObject[i]->UpdateLand(duration);
+//		m_vecObject[i]->Update3D(duration);
+//	}
+//}
 
 void CObjectManager::UpdateCollide(float duration)
 {
@@ -319,7 +319,7 @@ void CObjectManager::Collide(float duration)
 					theCollision.CalculateReactions();
 					break;
 				case Collision_Status::COLLISION_OVERLAPPING:
-					HandleOverlapping(duration, hittee, hitter, theCollision);
+//					HandleOverlapping(duration, hittee, hitter, theCollision);
 					break;
 				case Collision_Status::COLLISION_NONE:
 					break;
@@ -330,103 +330,103 @@ void CObjectManager::Collide(float duration)
 	}
 }
 
-void CObjectManager::HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestObjCollision & theCollision)
-{
-	float changeInTime = timeIncrement;
-
-	Collision_Status collisionOccured = Collision_Status::COLLISION_OVERLAPPING;
-	for (bool done = false; (!done) && (!CloseToZero(changeInTime));)
-	{
-		switch (collisionOccured)
-		{
-			case Collision_Status::COLLISION_OVERLAPPING:
-				{
-					CObject* firstObject;
-					CObject* secondObject;
-					firstObject = m_vecObject[firstobject];
-					secondObject = m_vecObject[secondobject];
-
-					D3DXVECTOR3 tempVector = firstObject->GetAngularVelocity();
-					tempVector *= -1;
-					firstObject->SetAngularVelocity(tempVector);
-					tempVector = firstObject->GetLinearVelocity();
-					tempVector *= -1;
-					firstObject->SetLinearVelocity(tempVector);
-					firstObject->SetForceVector(firstObject->GetForceVector() * -1);
-
-					tempVector = secondObject->GetAngularVelocity();
-					tempVector *= -1;
-					secondObject->SetAngularVelocity(tempVector);
-					tempVector = secondObject->GetLinearVelocity();
-					tempVector *= -1;
-					secondObject->SetLinearVelocity(tempVector);
-					secondObject->SetForceVector(secondObject->GetForceVector() * -1);
-
-					firstObject->Update(changeInTime);
-					secondObject->Update(changeInTime);
-
-					changeInTime /= 2;
-
-					tempVector = firstObject->GetAngularVelocity();
-					tempVector *= -1;
-					firstObject->SetAngularVelocity(tempVector);
-					tempVector = firstObject->GetLinearVelocity();
-					tempVector *= -1;
-					firstObject->SetLinearVelocity(tempVector);
-					firstObject->SetForceVector(firstObject->GetForceVector() * -1);
-
-					tempVector = secondObject->GetAngularVelocity();
-					tempVector *= -1;
-					secondObject->SetAngularVelocity(tempVector);
-					tempVector = secondObject->GetLinearVelocity();
-					tempVector *= -1;
-					secondObject->SetLinearVelocity(tempVector);
-					secondObject->SetForceVector(secondObject->GetForceVector() * -1);
-
-					firstObject->Update(changeInTime);
-					secondObject->Update(changeInTime);
-
-					m_vecObject[firstobject] = firstObject;
-					m_vecObject[secondobject] = secondObject;
-					collisionOccured = theCollision.CollisionOccurred();
-				}
-				break;
-			case Collision_Status::COLLISION_TOUCHING:
-				theCollision.CalculateReactions();
-				done = true;
-				break;
-			case Collision_Status::COLLISION_NONE:
-				m_vecObject[firstobject]->Update(changeInTime);
-				m_vecObject[secondobject]->Update(changeInTime);
-				collisionOccured = theCollision.CollisionOccurred();
-				break;
-			default:
-				break;
-		}	// << : switch
-	}	// << : for
-	if (CloseToZero(changeInTime))
-	{
-		theCollision.CalculateReactions();
-		m_vecObject[firstobject]->Update(changeInTime);
-		m_vecObject[secondobject]->Update(changeInTime);
-	}
-}
+//void CObjectManager::HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestObjCollision & theCollision)
+//{
+//	float changeInTime = timeIncrement;
+//
+//	Collision_Status collisionOccured = Collision_Status::COLLISION_OVERLAPPING;
+//	for (bool done = false; (!done) && (!CloseToZero(changeInTime));)
+//	{
+//		switch (collisionOccured)
+//		{
+//			case Collision_Status::COLLISION_OVERLAPPING:
+//				{
+//					CObject* firstObject;
+//					CObject* secondObject;
+//					firstObject = m_vecObject[firstobject];
+//					secondObject = m_vecObject[secondobject];
+//
+//					D3DXVECTOR3 tempVector = firstObject->GetAngularVelocity();
+//					tempVector *= -1;
+//					firstObject->SetAngularVelocity(tempVector);
+//					tempVector = firstObject->GetLinearVelocity();
+//					tempVector *= -1;
+//					firstObject->SetLinearVelocity(tempVector);
+//					firstObject->SetForceVector(firstObject->GetForceVector() * -1);
+//
+//					tempVector = secondObject->GetAngularVelocity();
+//					tempVector *= -1;
+//					secondObject->SetAngularVelocity(tempVector);
+//					tempVector = secondObject->GetLinearVelocity();
+//					tempVector *= -1;
+//					secondObject->SetLinearVelocity(tempVector);
+//					secondObject->SetForceVector(secondObject->GetForceVector() * -1);
+//
+//					firstObject->Update(changeInTime);
+//					secondObject->Update(changeInTime);
+//
+//					changeInTime /= 2;
+//
+//					tempVector = firstObject->GetAngularVelocity();
+//					tempVector *= -1;
+//					firstObject->SetAngularVelocity(tempVector);
+//					tempVector = firstObject->GetLinearVelocity();
+//					tempVector *= -1;
+//					firstObject->SetLinearVelocity(tempVector);
+//					firstObject->SetForceVector(firstObject->GetForceVector() * -1);
+//
+//					tempVector = secondObject->GetAngularVelocity();
+//					tempVector *= -1;
+//					secondObject->SetAngularVelocity(tempVector);
+//					tempVector = secondObject->GetLinearVelocity();
+//					tempVector *= -1;
+//					secondObject->SetLinearVelocity(tempVector);
+//					secondObject->SetForceVector(secondObject->GetForceVector() * -1);
+//
+//					firstObject->Update(changeInTime);
+//					secondObject->Update(changeInTime);
+//
+//					m_vecObject[firstobject] = firstObject;
+//					m_vecObject[secondobject] = secondObject;
+//					collisionOccured = theCollision.CollisionOccurred();
+//				}
+//				break;
+//			case Collision_Status::COLLISION_TOUCHING:
+//				theCollision.CalculateReactions();
+//				done = true;
+//				break;
+//			case Collision_Status::COLLISION_NONE:
+//				m_vecObject[firstobject]->Update(changeInTime);
+//				m_vecObject[secondobject]->Update(changeInTime);
+//				collisionOccured = theCollision.CollisionOccurred();
+//				break;
+//			default:
+//				break;
+//		}	// << : switch
+//	}	// << : for
+//	if (CloseToZero(changeInTime))
+//	{
+//		theCollision.CalculateReactions();
+//		m_vecObject[firstobject]->Update(changeInTime);
+//		m_vecObject[secondobject]->Update(changeInTime);
+//	}
+//}
 
 void CObjectManager::Update()
 {
-	for (int hittee = 0; hittee < m_vecObject.size(); hittee++)
+	for (int hittee = 0; hittee < m_vecPObject.size(); hittee++)
 	{
-		for (int hitter = 0; hitter < m_vecObject.size(); hitter++)
+		for (int hitter = 0; hitter < m_vecPObject.size(); hitter++)
 		{
 			if (hittee >= hitter)
 				continue;
-			m_vecObject[hittee]->CollisionOtherObject(m_vecObject[hitter]);
+			m_vecPObject[hittee]->CollisionOtherObject(m_vecPObject[hitter]);
 		}
 	}
-	for (int i = 0; i < m_vecIObject.size(); i++)
-	{
-		m_vecIObject[i]->Update();
-	}
+	//for (int i = 0; i < m_vecIObject.size(); i++)
+	//{
+	//	m_vecIObject[i]->Update();
+	//}
 }
 
 vector<CObject*> CObjectManager::GetVecObject()
@@ -464,13 +464,13 @@ void CObjectManager::Render()
 		m_vecIObject[i]->Render();
     }
 
-	//for (int i = 0; i < m_vecObject.size(); i++)
-	//{
-	//	m_vecObject[i]->Render();
-	//}
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		m_vecObject[i]->Render();
+	}
 
-	for (int i = 0; i < m_vecPObject.size(); i++)
-		m_vecPObject[i]->Render();
+	//for (int i = 0; i < m_vecPObject.size(); i++)
+	//	m_vecPObject[i]->Render();
 
 	//for (int i = 0; i < m_OBB.size(); i++)
 	//{
@@ -484,12 +484,16 @@ void CObjectManager::RenderOBBBox()
 	{
 		m_vecOBBBox[i]->Render();
 	}
-	
 }
 
 vector<IObject*> CObjectManager::GetVecIObject()
 {
 	return m_vecIObject;
+}
+
+vector<PObject*> CObjectManager::GetVecPObejct()
+{
+	return m_vecPObject;
 }
 
 COBB* CObjectManager::GetTileOBB()

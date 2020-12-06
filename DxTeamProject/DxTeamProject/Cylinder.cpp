@@ -20,9 +20,9 @@ void CCylinder::Setup()
 		m_fBoundingSphere = m_fRadius;
 	else
 		m_fBoundingSphere = m_fHeight / 2.0f;
-	m_vRotationInertia.x = (GetMass() * (m_fHeight * m_fHeight + 3 * m_fRadius * m_fRadius)) / 12.0f;
-	m_vRotationInertia.y = GetMass() * m_fRadius * m_fRadius / 2.0f;
-	m_vRotationInertia.z = (GetMass() * (m_fHeight * m_fHeight + 3 * m_fRadius * m_fRadius)) / 12.0f;
+	m_vInverseRotationInertia.x = 12.0f / (GetMass() * (m_fHeight * m_fHeight + 3 * m_fRadius * m_fRadius));
+	m_vInverseRotationInertia.y = 2.0f / (GetMass() * m_fRadius * m_fRadius);
+	m_vInverseRotationInertia.z = 12.0f / (GetMass() * (m_fHeight * m_fHeight + 3 * m_fRadius * m_fRadius));
 }
 
 void CCylinder::Setup(const ST_MapData & mapData)

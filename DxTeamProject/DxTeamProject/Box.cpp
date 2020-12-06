@@ -22,9 +22,9 @@ void CBox::Setup()
 	m_fBoundingSphere = maxLength;
 
 	// modify? 12.0f -> 48.0f?
-	m_vRotationInertia.x = (GetMass() * (m_fHeight * m_fHeight + m_fDepth  * m_fDepth)) / 12.0f;
-	m_vRotationInertia.y = (GetMass() * (m_fWidth  * m_fWidth + m_fDepth  * m_fDepth)) / 12.0f;
-	m_vRotationInertia.z = (GetMass() * (m_fWidth  * m_fWidth + m_fHeight * m_fHeight)) / 12.0f;
+	m_vInverseRotationInertia.x = 12.0f / (GetMass() * (m_fHeight * m_fHeight + m_fDepth  * m_fDepth));
+	m_vInverseRotationInertia.y = 12.0f / (GetMass() * (m_fWidth  * m_fWidth  + m_fDepth  * m_fDepth));
+	m_vInverseRotationInertia.z = 12.0f / (GetMass() * (m_fWidth  * m_fWidth  + m_fHeight * m_fHeight));
 }
 
 void CBox::Setup(const ST_MapData & mapData)

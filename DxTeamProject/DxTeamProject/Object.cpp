@@ -14,23 +14,24 @@ CObject::CObject()
 	//, m_pShader(NULL)
 	//, m_isClicked(false)
 	//, m_isPicked(false)
-	, m_fBoundingSphere(0.5f)
-	, m_finverseMass(10.0f)
-	, m_fDamping(0.999f)
-	, m_vPosition(0, 0, 0)
-	, m_vLinearVelocity(0, 0, 0)
-	, m_vLinearAcceleration(0, 0, 0)
-	, m_fElasticity(1.0f)
-	, m_isForceApplied(false)
-	, m_fLinearDrag(0.995f)
-	, m_vForceVector(0, 0, 0)
-	, m_vForceLocation(0, 0, 0)
-	, m_vForceAccum(0, 0, 0)
-	, m_vAngularVelocity(0, 0, 0)
-	, m_vAngularAcceleration(0, 0, 0)
-	, m_vRotationInertia(0, 0, 0)
-	, m_vTorque(0, 0, 0)
 	//, m_tmpColor(Color::NONE)
+	/// Physics
+	//, m_fBoundingSphere(0.5f)
+	//, m_finverseMass(10.0f)
+	//, m_fDamping(0.999f)
+	//, m_vPosition(0, 0, 0)
+	//, m_vLinearVelocity(0, 0, 0)
+	//, m_vLinearAcceleration(0, 0, 0)
+	//, m_fElasticity(1.0f)
+	//, m_isForceApplied(false)
+	//, m_fLinearDrag(0.995f)
+	//, m_vForceVector(0, 0, 0)
+	//, m_vForceLocation(0, 0, 0)
+	//, m_vForceAccum(0, 0, 0)
+	//, m_vAngularVelocity(0, 0, 0)
+	//, m_vAngularAcceleration(0, 0, 0)
+	//, m_vRotationInertia(0, 0, 0)
+	//, m_vTorque(0, 0, 0)
 {
 	CObject::m_nRefCount += 1;
 	g_pObjectManager->AddObject(this);
@@ -190,54 +191,6 @@ void CObject::Release()
 	CObject::m_nRefCount -= 1;
 }
 
-void CObject::SetMass(const float mass)
-{
-	assert(mass != 0);
-	m_finverseMass = ((float)1.0) / mass;
-}
-
-float CObject::GetMass() const
-{
-	if (m_finverseMass == 0) { return FLT_MAX; }
-	else { return ((float)1.0) / m_finverseMass; }
-}
-
-bool CObject::hasFiniteMass() const
-{
-	return m_finverseMass >= 0.0f;
-}
-
-bool CObject::GetAwake() const
-{
-	return m_isAwake;
-}
-
-void CObject::SetAwake(const bool awake)
-{
-	// 0.3 = sleepEpsilon
-	if (awake) 
-	{
-		m_isAwake = true;
-		m_fMotion = 0.3 * 2.0f;
-	}
-	else
-	{
-		m_isAwake = false;
-		m_vLinearVelocity.x = m_vLinearVelocity.y = m_vLinearVelocity.z = 0.0f;
-		m_vAngularVelocity.x = m_vAngularVelocity.y = m_vAngularVelocity.z = 0.0f;
-	}
-}
-
-void CObject::SetOrientation(CTestAngleSet Orientation)
-{
-	m_stOrientation = Orientation;
-}
-
-CTestAngleSet CObject::GetOrientation()
-{
-	return m_stOrientation;
-}
-
 void CObject::CreateObject(const ST_MapData & mapData)
 {
 	switch (mapData.objType)
@@ -270,22 +223,55 @@ void CObject::CreateObject(const ST_MapData & mapData)
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
 	}
-		break;
+	break;
 
 	}
 }
 
-void CObject::UpdateLand(float duration)
+/// Physics
+//void CObject::SetMass(const float mass)
+//{
+//	assert(mass != 0);
+//	m_finverseMass = ((float)1.0) / mass;
+//}
+//float CObject::GetMass() const
+//{
+//	if (m_finverseMass == 0) { return FLT_MAX; }
+//	else { return ((float)1.0) / m_finverseMass; }
+//}
+//
+//bool CObject::hasFiniteMass() const
+//{
+//	return m_finverseMass >= 0.0f;
+//}
+//
+//void CObject::SetOrientation(CTestAngleSet Orientation)
+//{
+//	m_stOrientation = Orientation;
+//}
+//
+//CTestAngleSet CObject::GetOrientation()
+//{
+//	return m_stOrientation;
+//}
+
+bool CObject::GetAwake() const
 {
-	float distance = GetPosition().y - GetBoundingSphere();
-	if (CloseToZero(distance) || distance < 0.0f)
+	return m_isAwake;
+}
+
+void CObject::SetAwake(const bool awake)
+{
+	// 0.3 = sleepEpsilon
+	if (awake) 
 	{
-		D3DXVECTOR3 tmp = m_vLinearVelocity;
-		tmp.y = -tmp.y * m_fElasticity;
-		m_vLinearVelocity = tmp;
+		m_isAwake = true;
+		m_fMotion = 0.3 * 2.0f;
 	}
-	//if (distance < -GetBoundingSphere())
-	//{
-	//	m_vPosition.y = 0.5f;
-	//}
+	else
+	{
+		m_isAwake = false;
+		//m_vLinearVelocity.x = m_vLinearVelocity.y = m_vLinearVelocity.z = 0.0f;
+		//m_vAngularVelocity.x = m_vAngularVelocity.y = m_vAngularVelocity.z = 0.0f;
+	}
 }

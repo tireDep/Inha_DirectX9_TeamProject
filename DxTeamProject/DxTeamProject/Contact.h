@@ -1,5 +1,5 @@
 #pragma once
-#include "RigidBody.h"
+#include "PObject.h"
 
 class ContactResolver;
 
@@ -7,13 +7,13 @@ class Contact
 {
 	friend class ContactResolver;
 public:
-	CObject* object[2];
+	PObject* object[2];
 	float friction;
 	float restitution;
 	D3DXVECTOR3 contactPoint;
 	D3DXVECTOR3 contactNormal;
 	float penetration;
-	void setObjectData(CObject* one, CObject* two, float friction, float restitution);
+	void setObjectData(PObject* one, PObject* two, float friction, float restitution);
 	Contact();
 	~Contact();
 protected:
@@ -28,7 +28,7 @@ protected:
 
 	void matchAwakeState();
 	D3DXVECTOR3 calculateLocalVelocity(unsigned bodyIndex, float duration);
-	void applyImpulse(const D3DXVECTOR3 &impulse, CRigidBody *body, D3DXVECTOR3 *velocityChange, D3DXVECTOR3 *rotationChange);
+	//void applyImpulse(const D3DXVECTOR3 &impulse, CRigidBody *body, D3DXVECTOR3 *velocityChange, D3DXVECTOR3 *rotationChange);
 	void applyVelocityChange(D3DXVECTOR3 velocityChange[2], D3DXVECTOR3 rotationChange[2]);
 	void applyPositionChange(D3DXVECTOR3 linearChange[2], D3DXVECTOR3 angularChange[2], float penetration);
 	D3DXVECTOR3 calculateFrictionlessImpulse(D3DXMATRIXA16 *inverseInertiaTensor);
