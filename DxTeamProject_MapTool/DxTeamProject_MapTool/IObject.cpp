@@ -182,11 +182,13 @@ void IObject::Render()
 
 void IObject::Render_OBB_Box()
 {
+#ifdef _DEBUG
 	if (m_pOBB)
 	{
 		m_pOBB->Update(&GetmatWorld());
 		m_pOBB->Render();
 	}
+#endif // _DEBUG
 }
 
 D3DXMATRIXA16 IObject::GetmatWorld()
@@ -336,6 +338,7 @@ void IObject::CreateObject(const ObjectType objType, int index)
 	}
 	break;
 
+#ifdef _DEBUG
 	case eInvisibleWall:
 	{
 		ST_MapData mapData;
@@ -354,6 +357,9 @@ void IObject::CreateObject(const ObjectType objType, int index)
 		background->Setup(mapData);
 	}
 		break;
+
+#endif // _DEBUG
+
 
 	case eGimmik:
 	case eG_BreakWall:
@@ -406,7 +412,9 @@ void IObject::CreateObject(const ST_MapData& mapData)
 	case eATree:
 	case eSTree:
 	case eWTree:
+#ifdef _DEBUG
 	case eInvisibleWall:
+#endif // _DEBUG
 	{
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
