@@ -1,18 +1,17 @@
 #pragma once
 #include "PObject.h"
 
-class CSphere : public PObject
+class CCylinder : public PObject
 {
 public:
-	CSphere();
-	~CSphere();
+	CCylinder();
+	~CCylinder();
 protected:
 	Synthesize(float, m_fRadius, Radius);
+	Synthesize(float, m_fHeight, Height);
 public:
 	void Setup();
 	void Setup(const ST_MapData & mapData);
-
-	void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos);
 
 	string GetName();
 };

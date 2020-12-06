@@ -1,26 +1,31 @@
 #include "stdafx.h"
-#include "Sphere.h"
+#include "Cylinder.h"
 
-CSphere::CSphere() 
+CCylinder::CCylinder()
 	: m_fRadius(0.5f)
+	, m_fHeight(1.0f)
 {
-	m_strName = string("Sphere") + to_string(m_nRefCount);
+	m_strName = string("Cylinder") + to_string(m_nRefCount);
 }
 
-CSphere::~CSphere()
+CCylinder::~CCylinder()
 {
 }
 
-void CSphere::Setup()
+void CCylinder::Setup()
 {
-	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pMesh, NULL);
-	m_fBoundingSphere = m_fRadius;
-	m_vRotationInertia.x = 2 * GetMass() * m_fRadius * m_fRadius / 5.0f;
-	m_vRotationInertia.y = 2 * GetMass() * m_fRadius * m_fRadius / 5.0f;
-	m_vRotationInertia.z = 2 * GetMass() * m_fRadius * m_fRadius / 5.0f;
+	D3DXCreateCylinder(g_pD3DDevice, m_fRadius, m_fRadius, m_fHeight, 10, 10, &m_pMesh, NULL);
+
+	if (m_fRadius >= m_fHeight / 2.0f)
+		m_fBoundingSphere = m_fRadius;
+	else
+		m_fBoundingSphere = m_fHeight / 2.0f;
+	m_vRotationInertia.x = (GetMass() * (m_fHeight * m_fHeight + 3 * m_fRadius * m_fRadius)) / 12.0f;
+	m_vRotationInertia.y = GetMass() * m_fRadius * m_fRadius / 2.0f;
+	m_vRotationInertia.z = (GetMass() * (m_fHeight * m_fHeight + 3 * m_fRadius * m_fRadius)) / 12.0f;
 }
 
-void CSphere::Setup(const ST_MapData & mapData)
+void CCylinder::Setup(const ST_MapData & mapData)
 {
 	m_strObjName = mapData.strObjName;
 
@@ -36,10 +41,11 @@ void CSphere::Setup(const ST_MapData & mapData)
 	m_vPosition = mapData.vTranslate;
 
 	m_Color = mapData.dxColor;
+	// color change
 	this->ChangeObjectColor();
 
 	m_fRadius = vScale.x;
-	m_fRadius = vScale.y;
+	m_fHeight = vScale.y;
 	m_fRadius = vScale.z;
 
 	Setup();
@@ -63,22 +69,7 @@ void CSphere::Setup(const ST_MapData & mapData)
 	m_matWorld = matS * matR * matT;
 }
 
-void CSphere::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
-{
-	if (D3DXSphereBoundProbe(&m_vPosition, m_fRadius, &ray.GetOrigin(), &ray.GetDirection()) == true)
-	{
-		m_isPicked = true;
-		m_outLineColor = playerColor;
-	}
-	else
-	{
-		m_isPicked = false;
-	}
-	vecVPos.push_back(m_vPosition);
-	vecIsPick.push_back(m_isPicked);
-}
-
-string CSphere::GetName()
+string CCylinder::GetName()
 {
 	return m_strName;
 }

@@ -145,9 +145,6 @@
     <ClCompile Include="Cube.cpp">
       <Filter>...TrashCan</Filter>
     </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>...TrashCan</Filter>
-    </ClCompile>
     <ClCompile Include="PSCylinder.cpp">
       <Filter>Object</Filter>
     </ClCompile>
@@ -220,6 +217,10 @@
       <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="PObject.cpp" />
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Cylinder.cpp" />
+    <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -391,9 +392,6 @@
     <ClInclude Include="Cube.h">
       <Filter>...TrashCan</Filter>
     </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>...TrashCan</Filter>
-    </ClInclude>
     <ClInclude Include="PSCylinder.h">
       <Filter>Object</Filter>
     </ClInclude>
@@ -465,6 +463,10 @@
       <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="PObject.h" />
+    <ClInclude Include="Box.h" />
+    <ClInclude Include="Cylinder.h" />
+    <ClInclude Include="Sphere.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

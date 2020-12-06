@@ -36,11 +36,17 @@ private:
 public:
 	static int m_nowSelectindex;
 	static int m_prevSelectIndex;
+
 	CImguiClass();
 	~CImguiClass();
 
 	void Setup();
+
 	void Update();
+	void Update_MenuTitleBar();
+	void Update_Hiearachy();
+	void Update_FileLoader();
+	void Update_Inspector();
 
 	void SetFrameEnd();
 	void Render();

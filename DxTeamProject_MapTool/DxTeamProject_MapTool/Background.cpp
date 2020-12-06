@@ -45,14 +45,14 @@ void CBackground::Setup(ST_MapData setData)
 	}
 	else
 	{
+		m_vTranslate.y = 0.5f;
 		D3DXCreateBox(g_pD3DDevice, m_vScale.x, m_vScale.y, m_vScale.z, &m_pMesh, NULL);
 		
-		D3DMATERIAL9 mtrl;
-		m_vecMtrls.push_back(mtrl);
-
 		m_pMtrl.Ambient = D3DXCOLOR(0.0f, 1.0f, 1.0f, 0.5f);
 		m_pMtrl.Diffuse = D3DXCOLOR(0.0f, 1.0f, 1.0f, 0.5f);
 		m_pMtrl.Specular = D3DXCOLOR(0.0f, 1.0f, 1.0f, 0.5f);
+
+		m_vecMtrls.push_back(m_pMtrl);
 	}
 
 	IObject::Setup_OBB_Box();
@@ -91,15 +91,7 @@ void CBackground::Render()
 	{
 		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{
-#ifdef _DEBUG
-			if (m_ObjectType == ObjectType::eInvisibleWall)
-				g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-			else
-				g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-#else
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
-#endif // _DEBUG
-
 			m_pMesh->DrawSubset(i);
 		}
 	}
