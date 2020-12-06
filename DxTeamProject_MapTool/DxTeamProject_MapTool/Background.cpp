@@ -54,11 +54,12 @@ void CBackground::Setup(ST_MapData setData)
 		m_pMtrl.Diffuse = D3DXCOLOR(0.0f, 1.0f, 1.0f, 0.5f);
 		m_pMtrl.Specular = D3DXCOLOR(0.0f, 1.0f, 1.0f, 0.5f);
 	}
+
+	IObject::Setup_OBB_Box();
 }
 
 void CBackground::Update()
 {
-
 }
 
 void CBackground::Update(CRay * ray)
@@ -68,38 +69,15 @@ void CBackground::Update(CRay * ray)
 
 void CBackground::Render()
 {
-	D3DXMATRIXA16 matWorld, matS, matR, matT;
-	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	IObject::Render_OBB_Box();
 
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(m_vRotate.x);
-	v.y = D3DXToRadian(m_vRotate.y);
-	v.z = D3DXToRadian(m_vRotate.z);
-	
-	D3DXMATRIXA16 matX, matY, matZ;
-	D3DXMatrixIdentity(&matX);
-	D3DXMatrixIdentity(&matY);
-	D3DXMatrixIdentity(&matZ);
-
-	D3DXMatrixRotationX(&matX, v.x);
-	D3DXMatrixRotationY(&matY, v.y);
-	D3DXMatrixRotationZ(&matZ, v.z);
-
-	matR = matX * matY * matZ;
-
-	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
-	matWorld = matS * matR * matT;
-
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &GetmatWorld());
 
 	if (m_pMesh == NULL)
 		return;
 
 	if (m_ObjectType == ObjectType::eInvisibleWall)
-	{
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-		// g_pD3DDevice->SetRenderState(D3DRS_DIFFUSEMATERIALSOURCE, D3DMCS_MATERIAL);
-	}
 	else
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
@@ -120,7 +98,7 @@ void CBackground::Render()
 	}
 	else
 	{
-		SetShader(matWorld);
+		SetShader(GetmatWorld());
 		IObject::Render();
 	}
 

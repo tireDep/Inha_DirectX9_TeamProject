@@ -41,40 +41,16 @@ void CObject::Update()
 
 void CObject::Render()
 {
+	IObject::Render_OBB_Box();
+
 	m_pMtrl.Ambient = m_dxColor;
 	m_pMtrl.Specular = m_dxColor;
 	m_pMtrl.Diffuse = m_dxColor;
 
 	g_pD3DDevice->SetMaterial(&m_pMtrl);
 	g_pD3DDevice->SetTexture(0, NULL);
-
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-
-	D3DXMATRIXA16 matWorld, matS, matR, matT;
-	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(m_vRotate.x);
-	v.y = D3DXToRadian(m_vRotate.y);
-	v.z = D3DXToRadian(m_vRotate.z);
-
-	// D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z); 
-
-	D3DXMATRIXA16 matX, matY, matZ;
-	D3DXMatrixIdentity(&matX);
-	D3DXMatrixIdentity(&matY);
-	D3DXMatrixIdentity(&matZ);
-
-	D3DXMatrixRotationX(&matX, v.x);
-	D3DXMatrixRotationY(&matY, v.y);
-	D3DXMatrixRotationZ(&matZ, v.z);
-
-	matR = matX * matY * matZ;
-
-	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
-	matWorld = matS * matR * matT;
-
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &GetmatWorld());
 
 	if (m_pMesh == NULL)
 		return;
@@ -83,7 +59,7 @@ void CObject::Render()
 		m_pMesh->DrawSubset(0);
 	else
 	{
-		SetShader(matWorld);
+		SetShader(GetmatWorld());
 		// m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(m_dxColor));
 		// m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(m_dxColor));
 		IObject::Render();

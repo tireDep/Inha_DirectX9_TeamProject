@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Ray.h"
+#include "OBB.h"
 
 class IObject
 {
@@ -37,6 +38,8 @@ protected:
 	LPD3DXEFFECT m_pShader;
 	bool isLoad;
 
+	COBB* m_pOBB;
+
 	IObject();
 
 	void SetShader(const D3DXMATRIXA16& setMatWorld);
@@ -46,12 +49,16 @@ public:
 	virtual void Release();
 
 	virtual void Setup() = 0;
+	virtual void Setup_OBB_Box();
+
 	virtual void Update() = 0;
 	// ray
 	virtual void Update(CRay * ray);
 	virtual void Render();
+	virtual void Render_OBB_Box();
 
 	virtual void SetDiffScale(D3DXVECTOR3 set) = 0;
+	virtual D3DXMATRIXA16 GetmatWorld();
 
 	static void SetRefCnt(int set);
 	static void CreateObject(const ObjectType objType, int index);

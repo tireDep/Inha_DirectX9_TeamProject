@@ -170,6 +170,7 @@
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="IObject.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="OBB.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Ray.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="IObject.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="OBB.cpp" />
     <ClCompile Include="originMain.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />

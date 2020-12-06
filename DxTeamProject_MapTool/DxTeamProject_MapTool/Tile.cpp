@@ -36,6 +36,8 @@ void CTile::Setup(ST_MapData setData)
 	m_numMtrls = xfile->nMtrlNum;
 
 	delete xfile;
+
+	IObject::Setup_OBB_Box();
 }
 
 void CTile::Update()
@@ -49,33 +51,10 @@ void CTile::Update(CRay * ray)
 
 void CTile::Render()
 {
+	IObject::Render_OBB_Box();
+
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-
-	D3DXMATRIXA16 matWorld, matS, matR, matT;
-	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(m_vRotate.x);
-	v.y = D3DXToRadian(m_vRotate.y);
-	v.z = D3DXToRadian(m_vRotate.z);
-
-	// D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
-	
-	D3DXMATRIXA16 matX, matY, matZ;
-	D3DXMatrixIdentity(&matX);
-	D3DXMatrixIdentity(&matY);
-	D3DXMatrixIdentity(&matZ);
-
-	D3DXMatrixRotationX(&matX, v.x);
-	D3DXMatrixRotationY(&matY, v.y);
-	D3DXMatrixRotationZ(&matZ, v.z);
-
-	matR = matX * matY * matZ;
-
-	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
-	matWorld = matS * matR * matT;
-
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &GetmatWorld());
 	
 	if (m_pMesh == NULL)
 		return;
@@ -97,7 +76,7 @@ void CTile::Render()
 	}
 	else
 	{
-		SetShader(matWorld);
+		SetShader(GetmatWorld());
 		IObject::Render();
 	}
 

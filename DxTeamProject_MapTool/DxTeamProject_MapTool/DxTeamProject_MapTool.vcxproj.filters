@@ -125,6 +125,9 @@
     <ClInclude Include="Light.h">
       <Filter>Light</Filter>
     </ClInclude>
+    <ClInclude Include="OBB.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui.cpp">
@@ -199,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>Light</Filter>
+    </ClCompile>
+    <ClCompile Include="OBB.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

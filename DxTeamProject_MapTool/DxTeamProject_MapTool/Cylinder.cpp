@@ -17,10 +17,10 @@ CCylinder::~CCylinder()
 
 void CCylinder::Setup()
 {
-	CObject::Setup();
 	m_vScale = D3DXVECTOR3(0.5f, 0.5f, 1.0f);
 	m_vTranslate = D3DXVECTOR3(0.0f, 0.5f, 0.0f);
 	D3DXCreateCylinder(g_pD3DDevice, m_vScale.x, m_vScale.y, m_vScale.z, 10, 10, &m_pMesh, NULL);
+	IObject::Setup_OBB_Box();
 }
 
 void CCylinder::Setup(ST_MapData setData)
@@ -28,6 +28,7 @@ void CCylinder::Setup(ST_MapData setData)
 	CObject::Setup(setData);
 	D3DXCreateCylinder(g_pD3DDevice, fBasicRadius, fBasicRadius, fBasicHeight, 10, 10, &m_pMesh, NULL);
 	// >> 월드매트릭스로 크기, 회전, 위치가 변경되므로 기본값으로 세팅
+	IObject::Setup_OBB_Box();
 }
 
 void CCylinder::Update()

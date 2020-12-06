@@ -15,10 +15,10 @@ CSphere::~CSphere()
 
 void CSphere::Setup()
 {
-	CObject::Setup();
 	m_vScale = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
 	m_vTranslate = D3DXVECTOR3(0.0f, 0.25f, 0.0f);
 	D3DXCreateSphere(g_pD3DDevice, m_vScale.x, 10, 10, &m_pMesh, NULL);
+	IObject::Setup_OBB_Box();
 }
 
 void CSphere::Setup(ST_MapData setData)
@@ -26,6 +26,7 @@ void CSphere::Setup(ST_MapData setData)
 	CObject::Setup(setData);
 	D3DXCreateSphere(g_pD3DDevice, fBasicRadius, 10, 10, &m_pMesh, NULL);
 	// >> 월드매트릭스로 크기, 회전, 위치가 변경되므로 기본값으로 세팅
+	IObject::Setup_OBB_Box();
 }
 
 void CSphere::Update()
@@ -35,24 +36,6 @@ void CSphere::Update()
 void CSphere::Update(CRay * ray)
 {
 	IObject::Update(ray);
-// #ifdef _DEBUG
-// 	D3DXVECTOR3* pVertices;
-// 
-// 	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
-// 	D3DXVECTOR3 center;
-// 	center = m_vTranslate;
-// 	float radius;
-// 	radius = m_vScale.x;
-// 	if (D3DXSphereBoundProbe(&center, radius, &ray->GetOrigin(), &ray->GetDirection()) == true)
-// 	{
-// 		cout << "picked" << endl;
-// 	}
-// 	else
-// 	{
-// 
-// 	}
-// 	m_pMesh->UnlockVertexBuffer();
-// #endif // _DEBUG
 }
 
 void CSphere::Render()
