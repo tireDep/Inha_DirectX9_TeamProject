@@ -315,8 +315,10 @@ int CCharacter::Update(vector<PObject*> ObjectPosition)
 	{
 		if (ObjectPosition[i]->GetPosition().x - m_vPosition.x < 1.0f
 			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z < 1.0f
-			&& ObjectPosition[i]->GetPosition().x - m_vPosition.x> -1.0f
-			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z > -1.0f)
+			&& ObjectPosition[i]->GetPosition().x - m_vPosition.x > -1.0f
+			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z > -1.0f
+			&& ObjectPosition[i]->GetPosition().y - m_vPosition.y <  1.0f
+			&& ObjectPosition[i]->GetPosition().y - m_vPosition.y > -1.0f)
 		{
 			//m_nGrabAbleObeject = i;
 			return i;

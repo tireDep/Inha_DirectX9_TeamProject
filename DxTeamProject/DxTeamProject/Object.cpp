@@ -5,6 +5,9 @@
 #include "PSCylinder.h"
 #include "Background.h"
 #include "Ray.h"
+#include "Box.h"
+#include "Sphere.h"
+#include "Cylinder.h"
 
 int CObject::m_nRefCount = 0;
 
@@ -197,21 +200,27 @@ void CObject::CreateObject(const ST_MapData & mapData)
 	{
 	case eBox:
 	{
-		CPSBox* box = new CPSBox;
+		//CPSBox* box = new CPSBox;
+		//box->Setup(mapData);
+		CBox* box = new CBox;
 		box->Setup(mapData);
 	}
 	break;
 
 	case eSphere:
 	{
-		CPSphere* sphere = new CPSphere;
+		//CPSphere* sphere = new CPSphere;
+		//sphere->Setup(mapData);
+		CSphere* sphere = new CSphere;
 		sphere->Setup(mapData);
 	}
 	break;
 
 	case eCylinder:
 	{
-		CPSCylinder* cylinder = new CPSCylinder;
+		//CPSCylinder* cylinder = new CPSCylinder;
+		//cylinder->Setup(mapData);
+		CCylinder* cylinder = new CCylinder;
 		cylinder->Setup(mapData);
 	}
 	break;
