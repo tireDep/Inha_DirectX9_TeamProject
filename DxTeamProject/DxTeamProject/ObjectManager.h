@@ -12,6 +12,8 @@ class CRay;
 class CPSOBB;
 class COBB;
 class CTestObjCollision;
+class PObject;
+
 // Collide
 #include "Contact.h"
 #include "Collision.h"
@@ -25,7 +27,8 @@ private:
 	vector<CObject *> m_vecObject;
 	vector<IObject *> m_vecIObject;
 	vector<CPSOBB *> m_vecOBBBox;
-	
+	vector<PObject*> m_vecPObject;
+
 	// >> mapTest
 	float m_vScale;
 	multimap<vector<IObject*>, bool> m_mapObject;
@@ -47,6 +50,9 @@ public:
 
 	void AddObject(IObject* pObject);
 	void RemoveObject(IObject* pObject);
+
+	void AddObject(PObject* pObject);
+	void RemoveObject(PObject* pObject);
 
 	void AddTileOBB(COBB* OBBbox);
 	void SetScale(float scale);

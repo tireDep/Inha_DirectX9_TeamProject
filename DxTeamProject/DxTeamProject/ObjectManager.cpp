@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Object.h"
 #include "IObject.h"
+#include "PObject.h"
 #include "PSOBB.h"
 #include "ObjectManager.h"
 #include "CHeight.h"
@@ -77,6 +78,28 @@ void CObjectManager::RemoveObject(IObject * pObject)
 		{
 			IObject* temp = *it;
 			it = m_vecIObject.erase(it);
+			delete temp;
+			return;
+		}
+		else
+			it++;
+	}
+}
+
+void CObjectManager::AddObject(PObject * pObject)
+{
+	m_vecPObject.push_back(pObject);
+}
+
+void CObjectManager::RemoveObject(PObject * pObject)
+{
+	vector<PObject*>::iterator it;
+	for (it = m_vecPObject.begin(); it != m_vecPObject.end();)
+	{
+		if (*it == pObject)
+		{
+			PObject* temp = *it;
+			it = m_vecPObject.erase(it);
 			delete temp;
 			return;
 		}
@@ -269,9 +292,13 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 {
 	vector<bool> vecIsPick;
 	vector<D3DXVECTOR3> vecVPos;
-	for (int i = 0; i < m_vecObject.size(); i++)
+	//for (int i = 0; i < m_vecObject.size(); i++)
+	//{
+	//	m_vecObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
+	//}
+	for (int i = 0; i < m_vecPObject.size(); i++)
 	{
-		m_vecObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
+		m_vecPObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
 	}
 	Update_PickCheck(vecIsPick, vecVPos);
 }
@@ -437,15 +464,18 @@ void CObjectManager::Render()
 		m_vecIObject[i]->Render();
     }
 
-	for (int i = 0; i < m_vecObject.size(); i++)
-	{
-		m_vecObject[i]->Render();
-	}
+	//for (int i = 0; i < m_vecObject.size(); i++)
+	//{
+	//	m_vecObject[i]->Render();
+	//}
 
-	for (int i = 0; i < m_OBB.size(); i++)
-	{
-		m_OBB[i]->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
-	}
+	for (int i = 0; i < m_vecPObject.size(); i++)
+		m_vecPObject[i]->Render();
+
+	//for (int i = 0; i < m_OBB.size(); i++)
+	//{
+	//	m_OBB[i]->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
+	//}
 }
 
 void CObjectManager::RenderOBBBox()
@@ -469,9 +499,25 @@ COBB* CObjectManager::GetTileOBB()
 }
 
 void CObjectManager::Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos)
+//{
+//	int index = 0;
+//	for (int i = 1; i < m_vecObject.size(); i++)
+//	{
+//		if (vecIsPick[i] == false)
+//			continue;
+//		else
+//		{
+//			if (vecVPos[index].x >= vecVPos[i].x || vecVPos[index].y >= vecVPos[i].y || vecVPos[index].z >= vecVPos[i].z)
+//			{
+//				m_vecObject[index]->SetPickState(false);
+//				index = i;
+//			}
+//		} // >> : else
+//	} // >> : for
+//}
 {
 	int index = 0;
-	for (int i = 1; i < m_vecObject.size(); i++)
+	for (int i = 1; i < m_vecPObject.size(); i++)
 	{
 		if (vecIsPick[i] == false)
 			continue;
@@ -479,7 +525,7 @@ void CObjectManager::Update_PickCheck(const vector<bool>& vecIsPick, const vecto
 		{
 			if (vecVPos[index].x >= vecVPos[i].x || vecVPos[index].y >= vecVPos[i].y || vecVPos[index].z >= vecVPos[i].z)
 			{
-				m_vecObject[index]->SetPickState(false);
+				m_vecPObject[index]->SetPickState(false);
 				index = i;
 			}
 		} // >> : else
