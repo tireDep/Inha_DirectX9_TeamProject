@@ -75,11 +75,14 @@ void CBackground::Render()
 
 	if (m_pMesh == NULL)
 		return;
-
+#ifdef _DEBUG
 	if (m_ObjectType == ObjectType::eInvisibleWall)
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	else
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+#else
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+#endif // _DEBUG
 
 	if(m_pTexture)
 		g_pD3DDevice->SetTexture(0, m_pTexture);
@@ -88,10 +91,14 @@ void CBackground::Render()
 	{
 		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{
+#ifdef _DEBUG
 			if (m_ObjectType == ObjectType::eInvisibleWall)
-				g_pD3DDevice->SetMaterial(&m_pMtrl);
+				g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 			else
-				g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+				g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+#else
+			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+#endif // _DEBUG
 
 			m_pMesh->DrawSubset(i);
 		}
