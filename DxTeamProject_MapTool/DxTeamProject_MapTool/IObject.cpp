@@ -145,7 +145,6 @@ void IObject::Update(CRay * ray)
 			// 광선 교차
 			// t를 계산하여 선에서 교차점이 어디있는지 알아낼 수 있음
 			// D3DXVECTOR3 result = ray->GetOrigin() + ray->GetDirection() * t;
-			// cout << result.x << ", " << result.y << ", " << result.z << endl;
 
 			m_isPick = true;
 			return;

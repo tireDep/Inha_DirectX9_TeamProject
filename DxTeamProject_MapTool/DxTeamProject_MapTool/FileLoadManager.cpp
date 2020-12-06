@@ -541,8 +541,6 @@ bool CFileLoadManager::FileLoad_Shader(string szFolder, string szFile, LPD3DXEFF
 
 	setShader = m_mapShader[filePath];
 
-	cout << m_mapShader.size() << endl;
-
 	return true;
 }
 

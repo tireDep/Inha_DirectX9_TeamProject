@@ -58,7 +58,6 @@ void CObjectManager::Update(CRay * ray)
 	// - 같은 선상에 있는 모든 오브젝트가 피킹 되기 때문에
 	//   레이 위치와 가장 가까운 오브젝트 판별한 후 나머지 false
 	int index = 0;
-
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
 		if (m_vecObject[i]->GetPick() == true)
@@ -68,11 +67,16 @@ void CObjectManager::Update(CRay * ray)
 		}
 	}
 
+	D3DXVECTOR3 rayOrigin = ray->GetOrigin();
 	for (int i = index + 1; i < m_vecObject.size(); i++)
 	{
 		if (m_vecObject[i]->GetPick() == true)
 		{
-			if ((ray->GetOrigin() - m_vecObject[index]->GetTranslate()) > (ray->GetOrigin() - m_vecObject[i]->GetTranslate()))
+			// >> 벡터 길이 계산
+			float checkA = D3DXVec3Length( &(rayOrigin - m_vecObject[index]->GetTranslate()) );
+			float checkB = D3DXVec3Length( &(rayOrigin - m_vecObject[i]->GetTranslate()) );
+
+			if(checkA > checkB)
 			{
 				m_vecObject[index]->SetPick(false);
 				index = i;

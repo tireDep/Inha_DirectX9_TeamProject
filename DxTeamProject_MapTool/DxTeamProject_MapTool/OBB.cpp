@@ -42,8 +42,8 @@ void COBB::Setup(IObject* object)
 		vecVertex.push_back(D3DXVECTOR3(m_vOriCenterPos.x + m_fAxisHalfLen[0], m_vOriCenterPos.y - m_fAxisHalfLen[1], m_vOriCenterPos.z + m_fAxisHalfLen[2]));
 
 		vector<DWORD> vecIndex;
-	{
-	// OBB Box
+		// OBB Box Triangle Point
+		{
 		// front
 		vecIndex.push_back(7);
 		vecIndex.push_back(6);
@@ -102,9 +102,9 @@ void COBB::Setup(IObject* object)
 			m_vecVertex.push_back(vecVertex[vecIndex[i]]);
 	}
 
-	vecIndex.clear();
-	{
+		vecIndex.clear();
 		// OBB Box Line
+		{
 			// front
 			vecIndex.push_back(0);
 			vecIndex.push_back(1);

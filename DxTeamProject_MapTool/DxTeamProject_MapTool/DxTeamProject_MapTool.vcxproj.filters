@@ -43,6 +43,9 @@
     <Filter Include="Light">
       <UniqueIdentifier>{44727541-c243-4a48-8b15-0c294f9a06f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OBB">
+      <UniqueIdentifier>{a28edb30-d7a0-4878-b650-8fdd7d5cf27f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imconfig.h">
@@ -126,7 +129,7 @@
       <Filter>Light</Filter>
     </ClInclude>
     <ClInclude Include="OBB.h">
-      <Filter>Source</Filter>
+      <Filter>OBB</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -204,7 +207,7 @@
       <Filter>Light</Filter>
     </ClCompile>
     <ClCompile Include="OBB.cpp">
-      <Filter>Source</Filter>
+      <Filter>OBB</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
