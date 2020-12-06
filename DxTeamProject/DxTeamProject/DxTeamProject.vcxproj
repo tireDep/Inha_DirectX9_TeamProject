@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="AllocateHierarchy.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Box.h" />
     <ClInclude Include="BreakeableWall.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="Colorchanger.h" />
     <ClInclude Include="Contact.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="Cylinder.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="DxTeamProject.h" />
@@ -200,6 +202,7 @@
     <ClInclude Include="PhysicsObjectManager.h" />
     <ClInclude Include="PhysicsPlayer.h" />
     <ClInclude Include="PhysicsSphere.h" />
+    <ClInclude Include="PObject.h" />
     <ClInclude Include="PSBox.h" />
     <ClInclude Include="PSCylinder.h" />
     <ClInclude Include="PSOBB.h" />
@@ -234,6 +237,7 @@
   <ItemGroup>
     <ClCompile Include="AllocateHierarchy.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Box.cpp" />
     <ClCompile Include="BreakeableWall.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -243,6 +247,7 @@
     <ClCompile Include="Colorchanger.cpp" />
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DxTeamProject.cpp" />
@@ -280,6 +285,7 @@
     <ClCompile Include="PhysicsObjectManager.cpp" />
     <ClCompile Include="PhysicsPlayer.cpp" />
     <ClCompile Include="PhysicsSphere.cpp" />
+    <ClCompile Include="PObject.cpp" />
     <ClCompile Include="PSBox.cpp" />
     <ClCompile Include="PSCylinder.cpp" />
     <ClCompile Include="PSOBB.cpp" />

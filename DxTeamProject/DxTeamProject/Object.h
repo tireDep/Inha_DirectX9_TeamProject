@@ -8,26 +8,27 @@ enum ObjectType;
 struct ST_MapData;
 struct ST_EVENT;
 
-const static D3DXVECTOR3 GRAVITY(0, -9.8f, 0);
+//const static D3DXVECTOR3 GRAVITY(0, -9.8f, 0);
 
 class CObject : public IListener
 {
 protected:
 	static int    m_nRefCount;
-
-	bool		  m_isPicked;
-	bool		  m_isClicked;
-	D3DXCOLOR	  m_outLineColor;
-	LPD3DXEFFECT  m_pShader;
-
-	bool LoadAssets();
-	void SetShader(const D3DXMATRIXA16& setMatWorld);
-
-	// physics
-	Synthesize(bool, m_isForceApplied, ForceApplied);
-	Synthesize(float, m_finverseMass, InverseMass);	// mass
 	Synthesize_Pass_by_Ref(D3DXMATRIXA16, m_matWorld, matWorld);
 
+	/// Color
+	//bool		  m_isPicked;
+	//bool		  m_isClicked;
+	//D3DXCOLOR	  m_outLineColor;
+	//LPD3DXEFFECT  m_pShader;
+	//bool LoadAssets();
+	//void SetShader(const D3DXMATRIXA16& setMatWorld);
+	//Synthesize(D3DXCOLOR, m_Color, DxColor);
+	//Color		  m_tmpColor;
+
+	/// physics
+	Synthesize(bool, m_isForceApplied, ForceApplied);
+	Synthesize(float, m_finverseMass, InverseMass);	// mass
 	// force
 	Synthesize(D3DXVECTOR3, m_vForceAccum, ForceAccum);
 	Synthesize(D3DXVECTOR3, m_vForceVector, ForceVector);
@@ -35,7 +36,6 @@ protected:
 	Synthesize(float, m_fMotion, Motion);
 	bool m_isAwake;
 	Synthesize(bool, m_canSleep, Sleep);
-
 	// linear
 	Synthesize(D3DXVECTOR3, m_vPosition, Position);	// center position
 	Synthesize(D3DXVECTOR3, m_vLinearVelocity, LinearVelocity); // velocity
@@ -43,14 +43,12 @@ protected:
 	Synthesize(float, m_fDamping, Damping);	// floating point error
 	Synthesize(float, m_fLinearDrag, Drag);	// linear drag
 	Synthesize(D3DXVECTOR3, m_vLastFrameAcceleration, LastFrameAcceleration);
-
 	// rotation
 	CTestAngleSet m_stOrientation; // Orientation
 	Synthesize(D3DXVECTOR3, m_vAngularVelocity, AngularVelocity); // Angular Velocity
 	Synthesize(D3DXVECTOR3, m_vAngularAcceleration, AngularAcceleration);	// Angular Accerleration
 	Synthesize(D3DXVECTOR3, m_vRotationInertia, RotationInertia);	// Rotation Inertia;
 	Synthesize(D3DXVECTOR3, m_vTorque, Torque);	// Torque;
-
 	// collision
 	Synthesize(float, m_fBoundingSphere, BoundingSphere);	// collision radius
 	Synthesize(float, m_fElasticity, Elasticity); // elasticity
@@ -79,28 +77,26 @@ protected:
 	// Synthesize(D3DXVECTOR3, m_vRotate, Rotate);
 	// Synthesize(D3DXVECTOR3, m_vTranslate, Translate);
 
-	Synthesize(D3DXCOLOR, m_Color, DxColor);
-
-
-	// tmp Color change
-	Color		  m_tmpColor;
 	CObject();
 public:
 	virtual ~CObject();
 	virtual void Release();
 
 	virtual void Setup() = 0;
+	static void CreateObject(const ST_MapData& mapData);
 	virtual void Update(float duration) = 0;
 	virtual void Update3D(float duration) = 0;
 	virtual void Update(float duration , CHeight* pMap) = 0;
 	virtual void UpdateLand(float duration);
 	virtual void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos) = 0;
 	virtual void Render() = 0;
-	virtual void SetPickState(bool set) = 0;
-	virtual void OutlineRender();
 
 	virtual string GetName() { return string(); }
-	virtual void ReceiveEvent(ST_EVENT eventMsg);
+	/// Color
+	//virtual void ReceiveEvent(ST_EVENT eventMsg);
+	//virtual void OutlineRender();
+	//virtual void SetPickState(bool set) = 0;
+	//virtual void ChangeObjectColor();
 
 	// physics
 	virtual void SetMass(const float mass);
@@ -118,8 +114,4 @@ public:
 	virtual void SetOrientation(CTestAngleSet Orientation);
 	virtual CTestAngleSet GetOrientation();
 
-	static void CreateObject(const ST_MapData& mapData);
-
-	// color change
-	virtual void ChangeObjectColor();
 };

@@ -7,8 +7,8 @@ CBackground::CBackground()
 	// OBB Test
 	: m_pOBB(NULL)
 {
-	m_isPicked = false;
-	m_isClicked = false;
+	//m_isPicked = false;
+	//m_isClicked = false;
 
 	m_strName = string("Background") + to_string(m_nRefCount);
 }
@@ -23,7 +23,7 @@ void CBackground::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsP
 {
 	// >> ≈Õ¡¸ πÊ¡ˆ
 	vecVPos.push_back(D3DXVECTOR3(0, 0, 0));
-	vecIsPick.push_back(m_isPicked);
+//	vecIsPick.push_back(m_isPicked);
 }
 
 void CBackground::Setup(ST_MapData setData)

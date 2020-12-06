@@ -29,6 +29,11 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 
+#include "PObject.h"
+#include "Box.h"
+#include "Sphere.h"
+#include "Cylinder.h"
+
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
 
@@ -154,8 +159,8 @@ void CMainGame::Setup()
 	//}
 	for (int i = 0; i < 1; i++)
 	{
-		CPSBox* box = new CPSBox();
-		box->Setup(D3DXVECTOR3(-5, 3.5, 2 * i + 3));
+		CBox* box = new CBox();
+		box->Setup();
 	}
 	//for (int i = 0; i < 8; i++)
 	//{
@@ -298,9 +303,9 @@ void CMainGame::Update()
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
 	
-	g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
+	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
 	//g_pObjectManager->UpdateCollide(g_pTimeManager->GetElapsedTime());			// new Collision
-	g_pObjectManager->Update();													// Collision
+	//g_pObjectManager->Update();													// Collision
 	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
 
 	// Gimmick
