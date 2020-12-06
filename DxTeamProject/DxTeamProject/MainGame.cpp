@@ -159,8 +159,12 @@ void CMainGame::Setup()
 	//}
 	for (int i = 0; i < 1; i++)
 	{
-		CBox* box = new CBox();
-		box->Setup();
+		//CBox* box = new CBox();
+		//box->Setup();
+		//CSphere* sphere = new CSphere();
+		//sphere->Setup();
+		CCylinder* cylinder = new CCylinder();
+		cylinder->Setup();
 	}
 	//for (int i = 0; i < 8; i++)
 	//{
@@ -249,16 +253,16 @@ void CMainGame::Update()
 			break;
 		}
 		// grab
-		if (m_pCharacter->Update(g_pObjectManager->GetVecObject()) != -1)
+		if (m_pCharacter->Update(g_pObjectManager->GetVecPObejct()) != -1)
 		{
 			m_pText->SetisGrabstate(true);
 			D3DXVECTOR3 v;
-			v = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition() - m_pCharacter->GetPosition();
+			v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct())]->GetPosition() - m_pCharacter->GetPosition();
 			//v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
 			//v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
 			//v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
 			D3DXVec3Normalize(&v, &v);
-			g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->SetPusingForce(v);
+			g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct())]->SetPusingForce(v);
 		}
 		else
 		{
@@ -302,7 +306,9 @@ void CMainGame::Update()
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
-	
+	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	g_pObjectManager->Update();
+
 	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
 	//g_pObjectManager->UpdateCollide(g_pTimeManager->GetElapsedTime());			// new Collision
 	//g_pObjectManager->Update();													// Collision

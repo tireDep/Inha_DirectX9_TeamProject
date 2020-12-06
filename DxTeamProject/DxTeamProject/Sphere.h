@@ -14,5 +14,10 @@ public:
 
 	void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos);
 
+	virtual void AddForce(const D3DXVECTOR3 & force) {};
+	virtual void ClearAccumulator() {};
+	virtual void Integrate(float duration) {};
+	virtual void RunPhysics(float duration) {};
+
 	string GetName();
 };

@@ -5,6 +5,8 @@
 // Ray y check
 #include "MeshTile.h"
 #include "IObject.h"
+#include "PObject.h"
+
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
 	, m_vPosition(0, 0.0f, 0)
@@ -307,7 +309,7 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
 
 }
 
-int CCharacter::Update(vector<CObject*> ObjectPosition)
+int CCharacter::Update(vector<PObject*> ObjectPosition)
 {
 	for (int i = 0; i < ObjectPosition.size(); ++i)
 	{

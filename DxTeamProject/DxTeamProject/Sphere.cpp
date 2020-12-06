@@ -15,9 +15,9 @@ void CSphere::Setup()
 {
 	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pMesh, NULL);
 	m_fBoundingSphere = m_fRadius;
-	m_vRotationInertia.x = 2 * GetMass() * m_fRadius * m_fRadius / 5.0f;
-	m_vRotationInertia.y = 2 * GetMass() * m_fRadius * m_fRadius / 5.0f;
-	m_vRotationInertia.z = 2 * GetMass() * m_fRadius * m_fRadius / 5.0f;
+	m_vInverseRotationInertia.x = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
+	m_vInverseRotationInertia.y = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
+	m_vInverseRotationInertia.z = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
 }
 
 void CSphere::Setup(const ST_MapData & mapData)

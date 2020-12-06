@@ -64,20 +64,21 @@ public:
 	void Destroy();
 
 	void Update();										// Collision
-	void Update(float duration);						// 2D Physics
-	void Update(float duration , CHeight* pMap);		// 3D Physics
-	void Update3D(float duration);
-	void UpdateLand(float duration);					// Land
+	void Update(float duration);						// Physics
+	//void Update(float duration , CHeight* pMap);		// 3D Physics
+	//void Update3D(float duration);
+	//void UpdateLand(float duration);					// Land
 	void UpdateCollide(float duration);
 	void Update(CRay ray, D3DXCOLOR& objectcolor);		// Color Change
 	void Collide(float duration);
-	void HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestObjCollision& theCollision);
+	//void HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestObjCollision& theCollision);
 
 	void Render();
 	void RenderOBBBox();
 
 	vector<CObject *> GetVecObject();
 	vector<IObject *> GetVecIObject();
+	vector<PObject *> GetVecPObejct();
 
 	COBB* GetTileOBB();
 	vector<COBB*> m_OBB;
