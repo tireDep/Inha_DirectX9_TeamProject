@@ -8,14 +8,24 @@ class CUI;
 class CText;
 class CCharacter;
 class CLight;
-class CGridMap;
-// class CFrustum;
+class COrb;
+class CSkydome;
 /// 이 아래는 지울 수도 있는 선언
 class CHeight;
 class CXfile;
 class CColliderObject;
 class CSkinnedMesh;
+// Ray y check
+class MeshTile;
 /// 릴리즈 버전을 위한 주석처리
+
+//Gimmick
+class Color_changer;
+class CDoor;
+class CBreakableWall;
+class RotationBoard;
+class CSwitch;
+
 //class CSoundManager;
 class CMainGame
 {
@@ -28,11 +38,20 @@ private:
 	CLight*		m_pLight;
 	CFrustum	m_pPrevFrustum;
 	CFrustum	m_pNowFrustum;
-	CGridMap*	m_GridMap;
+
+	COrb*		m_pOrb;
 	CSkinnedMesh* m_pSkinnedMesh;
+
+	CSkydome* m_pSkydome;
 	/// 이 아래는 지울 수도 있는 선언
-	CXfile*		m_Xfile;
 	CHeight* m_pHeightMap;
+	// Ray y check
+	vector<MeshTile*> m_pMeshTile;
+	//Gimmick;
+	Color_changer* m_pChanger;
+	CDoor* m_pGimmick_Door[2];
+	RotationBoard* m_pGimmick_RotationBoard;
+	CSwitch* m_pGimmick_Switch;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 public:
@@ -43,5 +62,4 @@ public:
 	void Setup();
 	void Update();
 	void Render();
-	/// 릴리즈 버전을 위한 주석처리
 };

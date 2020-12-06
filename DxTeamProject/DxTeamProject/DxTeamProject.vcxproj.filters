@@ -67,12 +67,8 @@
     <ClCompile Include="IListener.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Object.cpp">
       <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="RigidBody.cpp">
-      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
     </ClCompile>
     <ClCompile Include="ParticleContact.cpp">
       <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
@@ -102,9 +98,6 @@
       <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClCompile>
     <ClCompile Include="ForceGenerator.cpp">
-      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
-    </ClCompile>
-    <ClCompile Include="World.cpp">
       <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
     </ClCompile>
     <ClCompile Include="Gravity.cpp">
@@ -161,15 +154,72 @@
     <ClCompile Include="PSBox.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="PSphere.cpp" />
     <ClCompile Include="SkinnedMesh.cpp">
       <Filter>SkinnedMesh</Filter>
     </ClCompile>
     <ClCompile Include="AllocateHierarchy.cpp">
       <Filter>SkinnedMesh</Filter>
     </ClCompile>
-    <ClCompile Include="PSOBB.cpp" />
-    <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Background.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Orb.cpp">
+      <Filter>Orb</Filter>
+    </ClCompile>
+    <ClCompile Include="TestAngleSet.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCollision.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TestForce.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRigidBody.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Physics\cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Physics\cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="Contact.cpp">
+      <Filter>Physics\cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="Skydome.cpp" />
+    <ClCompile Include="PSphere.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PSOBB.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshTile.cpp">
+      <Filter>Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="ReleaseTimer.cpp">
+      <Filter>...TrashCan</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Gimmick\KT</Filter>
+    </ClCompile>
+    <ClCompile Include="BreakeableWall.cpp">
+      <Filter>Gimmick\KT</Filter>
+    </ClCompile>
+    <ClCompile Include="RotationBoard.cpp">
+      <Filter>Gimmick\KT</Filter>
+    </ClCompile>
+    <ClCompile Include="Switch.cpp">
+      <Filter>Gimmick\HW</Filter>
+    </ClCompile>
+    <ClCompile Include="Colorchanger.cpp">
+      <Filter>Gimmick\MJ</Filter>
+    </ClCompile>
+    <ClCompile Include="TestObjCollision.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -266,9 +316,6 @@
     <ClInclude Include="Object.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="RigidBody.h">
-      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
-    </ClInclude>
     <ClInclude Include="ParticleContact.h">
       <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClInclude>
@@ -297,9 +344,6 @@
       <Filter>...TrashCan\Physics\Physics_Particle\Collider</Filter>
     </ClInclude>
     <ClInclude Include="ForceGenerator.h">
-      <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
-    </ClInclude>
-    <ClInclude Include="World.h">
       <Filter>...TrashCan\Physics\Physics_Rigidbody</Filter>
     </ClInclude>
     <ClInclude Include="Gravity.h">
@@ -356,15 +400,71 @@
     <ClInclude Include="PSBox.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="PSphere.h" />
     <ClInclude Include="SkinnedMesh.h">
       <Filter>SkinnedMesh</Filter>
     </ClInclude>
     <ClInclude Include="AllocateHierarchy.h">
       <Filter>SkinnedMesh</Filter>
     </ClInclude>
-    <ClInclude Include="PSOBB.h" />
-    <ClInclude Include="Background.h" />
+    <ClInclude Include="Background.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Orb.h">
+      <Filter>Orb</Filter>
+    </ClInclude>
+    <ClInclude Include="TestAngleSet.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCollision.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TestForce.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRigidBody.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Physics\cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Physics\cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="Contact.h">
+      <Filter>Physics\cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="Skydome.h" />
+    <ClInclude Include="PSphere.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PSOBB.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshTile.h">
+      <Filter>Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="ReleaseTimer.h">
+      <Filter>...TrashCan</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Gimmick\KT</Filter>
+    </ClInclude>
+    <ClInclude Include="BreakeableWall.h">
+      <Filter>Gimmick\KT</Filter>
+    </ClInclude>
+    <ClInclude Include="RotationBoard.h">
+      <Filter>Gimmick\KT</Filter>
+    </ClInclude>
+    <ClInclude Include="Switch.h">
+      <Filter>Gimmick\HW</Filter>
+    </ClInclude>
+    <ClInclude Include="Colorchanger.h">
+      <Filter>Gimmick\MJ</Filter>
+    </ClInclude>
+    <ClInclude Include="TestObjCollision.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -473,6 +573,27 @@
     </Filter>
     <Filter Include="SkinnedMesh">
       <UniqueIdentifier>{8b7bbd42-1924-48c4-91af-f7fa2e255a85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Orb">
+      <UniqueIdentifier>{844e52ae-e656-4c99-8f75-56c9ecc26fe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{a71dbcd1-0566-48ba-ab36-adfff846e2f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\cyclone">
+      <UniqueIdentifier>{00e05eae-24f5-4dfb-9fc3-f0105fd54c0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gimmick">
+      <UniqueIdentifier>{160a779f-9356-4325-b722-a130a8535a68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gimmick\KT">
+      <UniqueIdentifier>{16e41f8f-ec5b-46a9-8ea9-379ce0d70cd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gimmick\HW">
+      <UniqueIdentifier>{96ee8b91-2a5b-4739-9acb-e90d036b2c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gimmick\MJ">
+      <UniqueIdentifier>{20582d70-2b5f-4577-b83a-7e923e967f07}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

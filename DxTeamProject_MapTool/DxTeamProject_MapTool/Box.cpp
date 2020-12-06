@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Box.h"
 
+#define fBasicScale 1.0f
+
 CBox::CBox()
 {
 	m_strObjName = string("Box") + to_string(m_nRefCnt);
@@ -9,20 +11,20 @@ CBox::CBox()
 
 CBox::~CBox()
 {
-	SafeRelease(m_pMesh);
-	SafeRelease(m_pTexture);
 }
 
 void CBox::Setup()
 {
-	CObject::Setup();
 	D3DXCreateBox(g_pD3DDevice, m_vScale.x, m_vScale.y, m_vScale.z, &m_pMesh, NULL);
+	IObject::Setup_OBB_Box();
 }
 
 void CBox::Setup(ST_MapData setData)
 {
 	CObject::Setup(setData);
-	Setup();
+	D3DXCreateBox(g_pD3DDevice, fBasicScale, fBasicScale, fBasicScale, &m_pMesh, NULL);
+	// >> 월드매트릭스로 크기, 회전, 위치가 변경되므로 기본값으로 세팅
+	IObject::Setup_OBB_Box();
 }
 
 void CBox::Update()
@@ -31,24 +33,7 @@ void CBox::Update()
 
 void CBox::Update(CRay * ray)
 {
-#ifdef _DEBUG
-	D3DXVECTOR3* pVertices;
-
-	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
-	D3DXVECTOR3 m_vMin, m_vMax;
-	D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
-	// later.. rotation add
-	m_vMin += m_vTranslate;				m_vMax += m_vTranslate;
-
-	if (D3DXBoxBoundProbe(&m_vMin, &m_vMax, &ray->GetOrigin(), &ray->GetDirection()) == true)
-	{
-		cout << "Picked" << endl;
-	}
-	else
-	{
-	}
-	m_pMesh->UnlockVertexBuffer();
-#endif // _DEBUG
+	IObject::Update(ray);
 }
 
 void CBox::Render()

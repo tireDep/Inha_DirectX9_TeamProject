@@ -13,7 +13,7 @@ protected:
 	Synthesize_Add_Ref(ID3DXBuffer*, m_adjBuffer, AdjBuffer);
 
 	Synthesize(DWORD, m_numMtrls, NumMtrl);
-	Synthesize(vector<D3DMATERIAL9*>, m_vecMtrls, VecMtrls);
+	Synthesize(vector<D3DMATERIAL9>, m_vecMtrls, VecMtrls);
 	Synthesize(vector<IDirect3DTexture9*>, m_vecTextures, VecTexture);
 
 	Synthesize(string, m_strObjName, ObjectName);
@@ -27,7 +27,7 @@ protected:
 	Synthesize(D3DXVECTOR3, m_vScale, Scale);
 	Synthesize(D3DXVECTOR3, m_vRotate, Rotate);
 	Synthesize(D3DXVECTOR3, m_vTranslate, Translate);
-
+	
 	IObject();
 
 public:

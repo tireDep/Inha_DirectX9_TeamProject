@@ -2,12 +2,17 @@
 
 struct ST_XFile;
 struct ST_MapData;
+struct ST_Sprite;
 
 #define g_pFileLoadManager CFileLoadManager::GetInstance()
 
 class CFileLoadManager
 {
 private:
+	map<string, LPDIRECT3DTEXTURE9> m_mapTexture; // >> TextureManager Âü°í
+	map<string, LPD3DXEFFECT> m_mapShader;
+	map<string, ST_Sprite> m_mapSprite;
+
 	CFileLoadManager() { }
 	LPD3DXEFFECT LoadShader(const string fileName);
 
@@ -30,6 +35,8 @@ public:
 	bool FileLoad_Sprite(string szFolder, string szFile, D3DXIMAGE_INFO& imageInfo, LPDIRECT3DTEXTURE9& lpTexture);
 	bool FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT& setShader);
 
-	bool FileLoad_MapData();
+	bool FileLoad_MapData(string szFolder, string szFile);
+
+	void Destroy();
 };
 

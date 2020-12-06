@@ -68,9 +68,6 @@ void CFrustum::Update()
 						&m_vecWorldVertex[2],
 						&m_vecWorldVertex[6],
 						&m_vecWorldVertex[7]);
-
-	m_vLeftUpPos = D3DXVECTOR3(m_vecPlane[0].a, m_vecPlane[0].b, m_vecPlane[0].c);
-	m_vRightDownPos = D3DXVECTOR3(m_vecPlane[5].a, m_vecPlane[5].b, m_vecPlane[5].c);
 }
 
 bool CFrustum::IsInFrustum(D3DXVECTOR3 pos)
@@ -87,8 +84,8 @@ bool CFrustum::IsInFrustum(D3DXVECTOR3 pos)
 
 bool CFrustum::IsUpdateCheck(CFrustum const & prevFrustum)
 {	
-	float range = 0.5f;
-	float wheelRange = 0.5f;
+	float range = 0.1f;
+	float wheelRange = 0.1f;
 	for (int i = 0; i < m_vecPlane.size(); i++)
 	{
 		if (abs(this->m_vecPlane[i].a - prevFrustum.m_vecPlane[i].a - 0.0001f) >= range)
@@ -105,6 +102,17 @@ bool CFrustum::IsUpdateCheck(CFrustum const & prevFrustum)
 		if (abs(this->m_vecPlane[i].d - prevFrustum.m_vecPlane[i].d - 0.0001f) >= wheelRange)
 			return false;
 		// >> Zoom
+	}
+
+	return true;
+}
+
+bool CFrustum::IsInFrustum(D3DXVECTOR3 pos, float radius)
+{
+	for each(D3DXPLANE p in m_vecPlane)
+	{
+		if (D3DXPlaneDotCoord(&p, &pos) > radius)
+			return false;
 	}
 
 	return true;

@@ -3,6 +3,7 @@
 
 struct ST_XFile;
 struct ST_MapData;
+struct ST_Sprite;
 
 #define g_pFileLoadManager CFileLoadManager::GetInstance()
 
@@ -15,11 +16,21 @@ private:
 	float m_fAddNumZ;
 	float m_fLimitNumX;
 
+	map<string, LPDIRECT3DTEXTURE9> m_mapTexture;
+	// >> Texture Manager 참고
+	// - 매번 생성하면 메모리 문제 있어서 한 번 로드 후 그 텍스쳐 반환
+
+	map<string, LPD3DXEFFECT> m_mapShader;
+	map<string, ST_Sprite> m_mapSprite;
+
 	bool CheckDataName(TCHAR* openFileName, string& realName);
 	void ReadMapData(string fileName);
 	void SaveMapData(string fileName);
 
+	ST_MapData SetSaveData(int index);
+	void DoFileSave(ofstream& saveFile, ofstream& mapFile, int index);
 	void FileSave(ofstream& file, const ST_MapData& mapData);
+	void FileSave_Section(ofstream& file);
 
 	LPD3DXEFFECT LoadShader(const string fileName);
 
@@ -35,5 +46,10 @@ public:
 	bool FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT& setShader);
 
 	void SetIndexNumZero();
+	void SetIndexNumPrev();
+
+	// D3DXVECTOR3 GetSelectCenterPos(D3DXVECTOR3 vSelect);
+
+	void Destroy();
 };
 

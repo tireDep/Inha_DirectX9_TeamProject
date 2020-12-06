@@ -2,6 +2,8 @@
 #include "IListener.h"
 
 class COBB;
+class CRay;
+class MeshTile;
 
 class CCharacter : public IListener
 {
@@ -15,16 +17,21 @@ protected:
 	D3DXMATRIXA16			m_matWorld;
 	D3DXCOLOR				m_color;
 	bool					m_isCollided;
+	bool					m_isOBB;
+	
 	// grab
 	int						m_nGrabAbleObeject;
+	// Ray y check
+	CRay					m_Ray;
 public:
 	virtual ~CCharacter(void);
 	virtual void Setup();
+	virtual void Update(D3DXVECTOR3 cameradirection);
 	virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
 	int Update(vector<CObject*> ObjectPosition);
 	virtual void DoRotation(const float& radian);
 	virtual void DoMove(const float& velocity);
-	virtual void Render();
+	virtual void Render(D3DCOLOR c);
 
 	virtual D3DXVECTOR3& GetPosition();
 	virtual D3DXMATRIXA16* GetTransform();
@@ -37,7 +44,12 @@ public:
 	virtual bool Collider(bool isCollided);
 	COBB* m_pOBB;
 	COBB* GetOBB();
+	void SetBool(bool istrue);
+	
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	virtual string GetName();
+
+	// Ray y check
+	virtual void UpdateRayYCheck(MeshTile & meshtile);
 };

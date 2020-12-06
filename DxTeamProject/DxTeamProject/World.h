@@ -1,17 +1,27 @@
 #pragma once
-
-class CRigidBody;
+#include "RigidBody.h"
+#include "Contact.h"
 
 class CWorld
 {
 public:
 	typedef vector<CRigidBody*> RigidBodies;
-	CWorld();
-	~CWorld();
-protected:
-	RigidBodies m_vecBodies;
+private:
+	bool calculateIterations;
+	ContactResolver resolver;
+	RigidBodies m_vecRigidBody;
+	struct ContactGenRegistration
+	{
+		ContactGenerator *gen;
+		ContactGenRegistration *next;
+	};
+	ContactGenRegistration *firstContactGen;
+	Contact *contacts;
+	unsigned maxContacts;
 public:
+	CWorld(unsigned maxContacts, unsigned iteration = 0);
+	~CWorld();
 	void startFrame();
-	void runPhysics(float duration);
-	void integrate(float duration);
+	unsigned generateContacts();
+	void RunPhysics(float duration);
 };

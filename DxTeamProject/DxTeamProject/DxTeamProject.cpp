@@ -8,9 +8,7 @@
 #include "DeviceManager.h"
 CMainGame *g_pMainGame;
 
-HWND g_hWnd, g_hMenuWnd;
-int g_nDlgWidth, g_nDlgHeight;
-void Setup_RigidBody();
+HWND g_hWnd;
 
 #define MAX_LOADSTRING 100
 
@@ -51,11 +49,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	g_pMainGame = new CMainGame;
 	g_pMainGame->Setup();
 
-	Setup_RigidBody();
     MSG msg;
 
 	while (true)
 	{
+		ReleaseTimer::Reset();
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
 			if (msg.message == WM_QUIT)
@@ -79,19 +77,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		SafeDelete(g_pMainGame);
 
     return (int) msg.wParam;
-}
-
-void Setup_RigidBody()
-{
-	char string[10];
-	sprintf(string, "%.4f", 0.0000f);
-	SetDlgItemTextA(g_hMenuWnd, IDC_EDIT_MASS, string);
-
-	sprintf(string, "%.4f", 0.0000f);
-	SetDlgItemTextA(g_hMenuWnd, IDC_EDIT_DRAG, string);
-
-	sprintf(string, "%.4f", 0.0000f);
-	SetDlgItemTextA(g_hMenuWnd, IDC_EDIT_ADRAG, string);
 }
 
 //

@@ -9,8 +9,6 @@ CBackground::CBackground()
 
 CBackground::~CBackground()
 {
-	SafeRelease(m_pMesh);
-	SafeRelease(m_pTexture);
 }
 
 void CBackground::Setup()
@@ -28,73 +26,87 @@ void CBackground::Setup(ST_MapData setData)
 	m_vRotate = setData.vRotate;
 	m_vTranslate = setData.vTranslate;
 
-	ST_XFile* xfile = new ST_XFile;
+	if (m_strXFile != "")
+	{
+		ST_XFile* xfile = new ST_XFile;
 
-	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
+		g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
 
-	if (m_strTxtFile != "")
-		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+		if (m_strTxtFile != "")
+			g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
 
-	m_pMesh = xfile->pMesh;
-	m_adjBuffer = xfile->adjBuffer;
-	m_vecMtrls = xfile->vecMtrl;
-	m_vecTextures = xfile->vecTextrure;
-	m_numMtrls = xfile->nMtrlNum;
+		m_pMesh = xfile->pMesh;
+		m_adjBuffer = xfile->adjBuffer;
+		m_vecMtrls = xfile->vecMtrl;
+		m_vecTextures = xfile->vecTextrure;
+		m_numMtrls = xfile->nMtrlNum;
 
-	delete xfile;
+		delete xfile;
+	}
+	else
+	{
+		D3DXCreateBox(g_pD3DDevice, m_vScale.x, m_vScale.y, m_vScale.z, &m_pMesh, NULL);
+		
+		D3DMATERIAL9 mtrl;
+		m_vecMtrls.push_back(mtrl);
+
+		m_pMtrl.Ambient = D3DXCOLOR(0.0f, 1.0f, 1.0f, 0.5f);
+		m_pMtrl.Diffuse = D3DXCOLOR(0.0f, 1.0f, 1.0f, 0.5f);
+		m_pMtrl.Specular = D3DXCOLOR(0.0f, 1.0f, 1.0f, 0.5f);
+	}
+
+	IObject::Setup_OBB_Box();
 }
 
 void CBackground::Update()
 {
-
 }
 
 void CBackground::Update(CRay * ray)
 {
-
+	IObject::Update(ray);
 }
 
 void CBackground::Render()
 {
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	IObject::Render_OBB_Box();
 
-	D3DXMATRIXA16 matWorld, matS, matR, matT;
-	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(m_vRotate.x);
-	v.y = D3DXToRadian(m_vRotate.y);
-	v.z = D3DXToRadian(m_vRotate.z);
-
-	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
-
-	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
-	matWorld = matS * matR * matT;
-
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
-
-	// if(m_pMtrl!=NULL)
-	// 	g_pD3DDevice->SetMaterial(&m_pMtrl);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &GetmatWorld());
 
 	if (m_pMesh == NULL)
 		return;
+#ifdef _DEBUG
+	if (m_ObjectType == ObjectType::eInvisibleWall)
+		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	else
+		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+#else
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+#endif // _DEBUG
 
-	g_pD3DDevice->SetTexture(0, m_pTexture);
+	if(m_pTexture)
+		g_pD3DDevice->SetTexture(0, m_pTexture);
 
-	for (int i = 0; i < m_vecMtrls.size(); i++)
+	if (!m_isPick && !m_isClick || !m_pShader)
 	{
-		g_pD3DDevice->SetMaterial(m_vecMtrls[i]);
+		for (int i = 0; i < m_vecMtrls.size(); i++)
+		{
+#ifdef _DEBUG
+			if (m_ObjectType == ObjectType::eInvisibleWall)
+				g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+			else
+				g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+#else
+			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+#endif // _DEBUG
 
-		//if (m_vecTextures[i] != 0)
-		//	g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
-
-		//else if (m_pTexture != NULL)
-		//{
-		//	g_pD3DDevice->SetTexture(0, m_pTexture);
-		//}
-		//// >> 텍스처 매치 안되있을 때
-
-		m_pMesh->DrawSubset(i);
+			m_pMesh->DrawSubset(i);
+		}
+	}
+	else
+	{
+		SetShader(GetmatWorld());
+		IObject::Render();
 	}
 
 	g_pD3DDevice->SetTexture(0, NULL);

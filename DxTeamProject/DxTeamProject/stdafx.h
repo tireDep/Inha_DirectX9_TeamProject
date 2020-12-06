@@ -142,6 +142,13 @@ struct ST_PNT_VERTEX
 	enum { FVF = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 };
 };
 
+struct ST_PT_VERTEX
+{
+	D3DXVECTOR3	p;
+	D3DXVECTOR2	t;
+	enum { FVF = D3DFVF_XYZ | D3DFVF_TEX1 };
+};
+
 enum class EventType : int
 {
 	eInputEvent, eSceneChangeEvent, eColorChangeEvent, eChangedColorEvent
@@ -183,7 +190,7 @@ struct ST_XFile
 	ID3DXBuffer* mtrlBuffer;
 
 	DWORD nMtrlNum;
-	vector<D3DMATERIAL9*> vecMtrl;
+	vector<D3DMATERIAL9> vecMtrl;
 	vector<IDirect3DTexture9*> vecTextrure;
 };
 
@@ -212,6 +219,12 @@ struct ST_MapData
 	D3DXCOLOR dxColor;
 };
 
+struct ST_Sprite
+{
+	D3DXIMAGE_INFO imageInfo;
+	LPDIRECT3DTEXTURE9 lpTexture;
+};
+
 #define GRAY    D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f)
 #define BLACK	D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f)
 #define WHITE	D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)
@@ -219,3 +232,12 @@ struct ST_MapData
 #define BLUE	D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f)
 #define GREEN	D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f)
 #define YELLOW	D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f)
+
+// Physical close to zero
+inline bool CloseToZero(float testValue)
+{
+	bool answer = (testValue >= -0.000001f) && (testValue <= 0.000001f) ? true : false;
+	return answer;
+}
+
+#include "ReleaseTimer.h"

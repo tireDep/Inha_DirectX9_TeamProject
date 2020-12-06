@@ -1,16 +1,17 @@
 #include "stdafx.h"
 #include "Tile.h"
-
+#include "OBB.h"
 CTile::CTile()
 {
 	m_pMesh = NULL;
 	m_pTexture = NULL;
+	
+	D3DXMatrixIdentity(&m_matWorld);
+	D3DXMatrixIdentity(&matWorld);
 }
 
 CTile::~CTile()
 {
-	SafeRelease(m_pMesh);
-	SafeRelease(m_pTexture);
 }
 
 void CTile::Setup(ST_MapData setData)
@@ -20,7 +21,7 @@ void CTile::Setup(ST_MapData setData)
 	m_strXFile = setData.strXFilePath;
 	m_strTxtFile = setData.strTxtPath;
 	m_ObjectType = setData.objType;
-	m_vScale = setData.vScale;
+	m_vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
 	m_vRotate = setData.vRotate;
 	m_vTranslate = setData.vTranslate;
 
@@ -51,27 +52,58 @@ void CTile::Setup(ST_MapData setData)
 
 	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
 	m_matWorld = matS * matR * matT;
+	matWorld =  matT;
+	D3DXVECTOR3 *pVertices;
+	
+
+	
+
+	for (int i = 0; i < m_vecMtrls.size(); ++i)
+	{
+		m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+		D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(),
+			m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+		m_pMesh->UnlockVertexBuffer();
+		
+	}
+	
+	for (int i = 0; i < m_vecMtrls.size(); ++i)
+		m_pOBB.push_back(new COBB);
+	
+	for (int i = 0; i < m_pOBB.size(); ++i)
+	{
+		m_pOBB[i]->SetupTile(m_vMin, m_vMax, m_vMax * m_vScale.y, m_vScale.x, m_vScale.z);
+		g_pObjectManager->AddTileOBB(m_pOBB[i]);
+		g_pObjectManager->SetScale(m_vMax.y);
+		
+	}
 }
 
 void CTile::Update()
 {
+
+	
+
+	for (int i = 0; i < m_pOBB.size(); ++i)
+	if (m_pOBB[i])
+		m_pOBB[i]->Update(&m_matWorld);
+
 }
 
 void CTile::Render()
 {
+	//if (m_pOBB)
+	//	m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
 
-
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-
-	// if(m_pMtrl!=NULL)
-	// 	g_pD3DDevice->SetMaterial(&m_pMtrl);
 
 	if (m_pMesh == NULL)
 		return;
 
 	for (int i = 0; i < m_vecMtrls.size(); i++)
 	{
-		g_pD3DDevice->SetMaterial(m_vecMtrls[i]);
+		//g_pD3DDevice->SetMaterial(m_vecMtrls[i]);
 
 		if (m_vecTextures[i] != 0)
 			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);

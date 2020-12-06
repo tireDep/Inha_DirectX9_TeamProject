@@ -25,6 +25,7 @@ CToolMain::~CToolMain()
 	m_pImgui->Destroy();
 	SafeDelete(m_pImgui);
 
+	g_pFileLoadManager->Destroy();
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 }
@@ -55,27 +56,18 @@ void CToolMain::Setup()
 void CToolMain::Update()
 {
 //#ifdef _DEBUG
-	m_pCube->Update();
+	// m_pCube->Update();
 //#endif
 	m_pCamera->Update();
 
 	g_pObjectManager->Update();
-	// ray
-	if(m_pRay)
-		g_pObjectManager->Update(m_pRay);
-
+	
 	m_pImgui->Update();
-
-
 }
 
 void CToolMain::Render()
 {
 	m_pImgui->SetFrameEnd();
-	
-	//g_pD3DDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
-	//g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-	//g_pD3DDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
 
 	g_pD3DDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DXCOLOR(0.5, 0.5, 0.5, 1.0), 1.0f, 0);
 
@@ -87,11 +79,19 @@ void CToolMain::Render()
 		g_pObjectManager->Render();
 
 //#ifdef _DEBUG
-		if (m_pCube)
-			m_pCube->Render();
+		// if (m_pCube)
+		// 	m_pCube->Render();
 //#endif
 
+		g_pD3DDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
+		g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+		g_pD3DDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
+
 		m_pImgui->Render(); // UI
+
+		g_pD3DDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
+		g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+		g_pD3DDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, TRUE);
 
 		g_pD3DDevice->EndScene();
 	}
@@ -106,20 +106,48 @@ void CToolMain::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	m_pCamera->WndProc(hWnd, msg, wParam, lParam);
 
-	switch (msg)	
+	switch (msg)
 	{
-		case WM_LBUTTONDOWN:
-			{
-				CRay r = CRay::RayAtWorldSpace(LOWORD(lParam), HIWORD(lParam));
-				m_pRay->SetOrigin(r.GetOrigin());
-				m_pRay->SetDirection(r.GetDirection());
-			}
-			break;
+	case WM_LBUTTONDOWN:
+		{
+			CRay r = CRay::RayAtWorldSpace(LOWORD(lParam), HIWORD(lParam));
+			m_pRay->SetOrigin(r.GetOrigin());
+			m_pRay->SetDirection(r.GetDirection());
 
-		case WM_KEYDOWN:
-			if (wParam == VK_DELETE)
-				g_pObjectManager->RemoveClickedObj();
-			break;
+			// ray
+			if (m_pRay)
+				g_pObjectManager->Update(m_pRay);
+		}
+	break;
+
+	case WM_RBUTTONDOWN:
+		CImguiClass::m_nowSelectindex = -1;
+		CImguiClass::m_prevSelectIndex = 0;
+		m_pRay->SetOrigin(D3DXVECTOR3(9999, 9999, 9999));
+		m_pRay->SetDirection(D3DXVECTOR3(0, 0, 0));
+		g_pObjectManager->SetSelectFalse();
+		break;
+
+	case WM_KEYDOWN:
+		if (wParam == VK_DELETE)
+		{
+			g_pObjectManager->RemoveClickedObj();
+			g_pFileLoadManager->SetIndexNumPrev();
+			CImguiClass::m_nowSelectindex = -1;
+			CImguiClass::m_prevSelectIndex = 0;
+		}
+
+		if (wParam == 'F')
+		{
+			int index = g_pObjectManager->GetSelectIndex();
+			if (index != -1)
+			{
+				// D3DXVECTOR3 center = g_pFileLoadManager->GetSelectCenterPos(g_pObjectManager->GetIObject(index).GetTranslate());
+				// m_pCamera->SetCameraPos(center);
+				m_pCamera->SetCameraPos(g_pObjectManager->GetIObject(index).GetTranslate());
+			}
+		}
+		break;
 	}
 }
 

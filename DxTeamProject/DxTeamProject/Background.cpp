@@ -77,6 +77,7 @@ void CBackground::Setup(ST_MapData setData)
 
 void CBackground::Render()
 {
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 
 	// if(m_pMtrl!=NULL)
@@ -87,7 +88,7 @@ void CBackground::Render()
 
 	for (int i = 0; i < m_vecMtrls.size(); i++)
 	{
-		g_pD3DDevice->SetMaterial(m_vecMtrls[i]);
+		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
 		if (m_vecTextures[i] != 0)
 			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
