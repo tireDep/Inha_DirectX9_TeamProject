@@ -260,6 +260,8 @@ void CObjectManager::Update(float duration)
 {
 	for (int i = 0; i < m_vecObject.size(); i++)
 		m_vecObject[i]->Update(duration);
+	//GenerateContacts();
+	//resolver.resolveContacts(cData.contactArray, cData.contactCount, duration);
 }
 
 //void CObjectManager::Update(float duration, CHeight* pMap)
@@ -274,18 +276,13 @@ void CObjectManager::Update(float duration)
 //		m_vecObject[i]->Update3D(duration);
 //}
 
-//void CObjectManager::UpdateLand(float duration)
-//{
-//	for (int i = 0; i < m_vecObject.size(); i++)
-//	{
-//		m_vecObject[i]->UpdateLand(duration);
-//		m_vecObject[i]->Update3D(duration);
-//	}
-//}
-
-void CObjectManager::UpdateCollide(float duration)
+void CObjectManager::UpdateLand(float duration)
 {
-	CObjectManager::Collide(duration);
+	for (int i = 0; i < m_vecPObject.size(); i++)
+	{
+		m_vecPObject[i]->UpdateLand(duration);
+		m_vecPObject[i]->Update(duration);
+	}
 }
 
 void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
@@ -301,6 +298,14 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 		m_vecPObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
 	}
 	Update_PickCheck(vecIsPick, vecVPos);
+}
+
+void CObjectManager::GenerateContacts()
+{
+	for (int i = 0; i < m_vecPObject.size(); i++)
+	{
+		m_vecPObject[i]->GenerateContacts();
+	}
 }
 
 void CObjectManager::Collide(float duration)
@@ -420,7 +425,8 @@ void CObjectManager::Update()
 		{
 			if (hittee >= hitter)
 				continue;
-			m_vecPObject[hittee]->CollisionOtherObject(m_vecPObject[hitter]);
+			//m_vecPObject[hittee]->CollisionOtherObject(m_vecPObject[hitter]);
+			m_vecPObject[hittee]->Collision3D(m_vecPObject[hitter]);
 		}
 	}
 	//for (int i = 0; i < m_vecIObject.size(); i++)
