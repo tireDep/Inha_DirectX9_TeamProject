@@ -581,7 +581,6 @@ void CFileLoadManager::Destroy()
 	{
 		SafeRelease(it.second);
 	}
-
 	m_mapTexture.clear();
 
 
@@ -589,8 +588,13 @@ void CFileLoadManager::Destroy()
 	{
 		SafeRelease(it.second);
 	}
-
 	m_mapShader.clear();
+
+	for each(auto it in m_mapSprite)
+	{
+		SafeRelease(it.second.lpTexture);
+	}
+	m_mapSprite.clear();
 }
 
 //D3DXVECTOR3 CFileLoadManager::GetSelectCenterPos(D3DXVECTOR3 vSelect)

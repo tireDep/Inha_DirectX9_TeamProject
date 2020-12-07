@@ -131,7 +131,7 @@ Material _10_-_Default {
  0.000000;0.000000;0.000000;;
 
  TextureFilename {
-  "UmbrellaMaterial_Base_Color.png";
+  "Umbrella_Blue.png";
  }
 }
 

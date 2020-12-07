@@ -8,7 +8,7 @@ private:
 		eNull, eMap, 
 		eBackground, eAutumnTree, eSummerTree, eWinterTree, eColorTree,
 #ifdef _DEBUG
-		eInvisibleWall,
+		eSomethingElse, eBall, eChair, eUmbrella, eSnowman, eInvisibleWall,
 		// >> 버전차이
 #endif // DEBUG
 		eObject, 
