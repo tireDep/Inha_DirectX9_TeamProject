@@ -26,11 +26,11 @@ void CImguiClass::SetVecItem()
 		tempVec.push_back("Rock02"); tempObjType.push_back(eTile05);
 		tempVec.push_back("Sand01"); tempObjType.push_back(eTile06);
 		tempVec.push_back("Sand02"); tempObjType.push_back(eTile07);
-		tempVec.push_back("Yellow"); tempObjType.push_back(eTile12);
-		tempVec.push_back("Water01"); tempObjType.push_back(eTile08);
-		tempVec.push_back("Water02"); tempObjType.push_back(eTile09);
-		tempVec.push_back("Water03"); tempObjType.push_back(eTile10);
-		tempVec.push_back("Water04"); tempObjType.push_back(eTile11);
+		tempVec.push_back("Yellow"); tempObjType.push_back(eTile08);
+		tempVec.push_back("Water01"); tempObjType.push_back(eTile09);
+		tempVec.push_back("Water02"); tempObjType.push_back(eTile10);
+		tempVec.push_back("Water03"); tempObjType.push_back(eTile11);
+		tempVec.push_back("Water04"); tempObjType.push_back(eTile12);
 		tempVec.push_back("Ocean"); tempObjType.push_back(eTile13);
 	}
 	else if (m_NowLoadType == LoadType::eObject)
@@ -837,8 +837,43 @@ void CImguiClass::Update_Inspector()
 				g_pObjectManager->GetIObject(m_nowSelectindex).SetRotate(vRot);
 
 			D3DXVECTOR3 vTrans = g_pObjectManager->GetIObject(m_nowSelectindex).GetTranslate();
+			D3DXVECTOR3 temp = vTrans;
 			if (ImGui::InputFloat3("Translate", vTrans))
+			{
+				// >> 격자에 맞춰 이동(체스 느낌)
+				if (temp.x != vTrans.x)
+				{
+					temp.x = floor(vTrans.x);
+					temp.x = temp.x <= 0 ? temp.x + 0.5f : temp.x - 0.5f;
+				}
+
+				if (temp.y != vTrans.y)
+				{
+					if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eSphere
+					 && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eCylinder
+					 && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eBox)
+						temp.y = floor(vTrans.y);
+					else
+						temp.y = vTrans.y;
+					// >> 오브젝트는 크기 변경에 따라 값이 변동되기 때문에 일단 제외
+
+					// // >> 구, 실린더는 보정 값 적용?
+					// if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere)
+					// 	temp.y += 0.25f;
+					// 
+					// if(g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCylinder)
+					// 	temp.y += 0.5f;
+				}
+				
+				if (temp.z != vTrans.z)
+				{
+					temp.z = floor(vTrans.z);
+					temp.z = temp.z <= 0 ? temp.z + 0.5f : temp.z - 0.5f;
+				}
+
+				vTrans = temp;
 				g_pObjectManager->GetIObject(m_nowSelectindex).SetTranslate(vTrans);
+			}
 
 			ImGui::Separator();
 
