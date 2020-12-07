@@ -90,7 +90,7 @@ enum ObjectType
 #ifdef _DEBUG
 	eTile01, eTile02, eTile03, eTile04, eTile05, eTile06,
 	eTile07, eTile08, eTile09, eTile10, eTile11, eTile12, eTile13,
-	eBackObj, eATree, eSTree, eWTree, eInvisibleWall,
+	/* eBackObj, */ eATree, eSTree, eWTree, eInvisibleWall, eCTree,
 	eBox, eSphere, eCylinder,
 	/* eGimmick, */ eG_RotationBoard, eG_BreakWall, eG_Door, eG_ColorChanger, eG_Switch,
 	eNull
@@ -99,7 +99,7 @@ enum ObjectType
 	eTile07, eTile08, eTile09, eTile10, eTile11, eTile12, eTile13,
 	eBackObj, eATree, eSTree, eWTree,
 	eBox, eSphere, eCylinder,
-	eGimmik, eG_RotateBoard, eG_BreakWall, eG_ColorChanger, eG_Door, eG_Switch,
+	eGimmik, eG_RotationBoard, eG_BreakWall, eG_ColorChanger, eG_Door, eG_Switch,
 	eNull
 #endif // _Debug
 };

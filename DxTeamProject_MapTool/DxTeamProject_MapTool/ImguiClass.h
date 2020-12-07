@@ -6,7 +6,7 @@ private:
 	enum class LoadType 
 	{ 
 		eNull, eMap, 
-		eBackground, eAutumnTree, eSummerTree, eWinterTree, 
+		eBackground, eAutumnTree, eSummerTree, eWinterTree, eColorTree,
 #ifdef _DEBUG
 		eInvisibleWall,
 		// >> 버전차이

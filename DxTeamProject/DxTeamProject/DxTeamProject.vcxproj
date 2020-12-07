@@ -163,6 +163,7 @@
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="Door.h" />
+    <ClInclude Include="Dragon.h" />
     <ClInclude Include="DxTeamProject.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="FileLoadManager.h" />
@@ -252,6 +253,7 @@
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="Door.cpp" />
+    <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="DxTeamProject.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FileLoadManager.cpp" />

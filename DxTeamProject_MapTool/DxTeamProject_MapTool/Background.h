@@ -18,5 +18,7 @@ public:
 	virtual void Render();
 
 	virtual void SetDiffScale(D3DXVECTOR3 set);
+	virtual int GetTextureIndex();
+	virtual void SetTexture(int index);
 };
 

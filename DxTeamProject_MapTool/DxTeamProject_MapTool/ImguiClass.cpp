@@ -5,6 +5,8 @@
 #include "stdafx.h"
 #include "IObject.h"
 
+#include "Background.h"
+
 #include "Gimmick.h"
 #include "RotationBoard.h"
 
@@ -62,6 +64,19 @@ void CImguiClass::SetVecItem()
 		{
 			for (int i = 0; i < tempVec.size(); i++)
 				tempObjType.push_back(eWTree);
+		}
+		else if (m_SubType == LoadType::eColorTree)
+		{
+			tempVec.clear();
+			tempVec.push_back("Tree01");
+			tempVec.push_back("Tree02");
+			tempVec.push_back("Bush01");
+			tempVec.push_back("Bush02");
+			tempVec.push_back("Shrub01");
+			tempVec.push_back("Shrub02");
+
+			for (int i = 0; i < tempVec.size(); i++)
+				tempObjType.push_back(eCTree);
 		}
 #ifdef _DEBUG
 		else if (m_SubType == LoadType::eInvisibleWall)
@@ -272,321 +287,11 @@ void CImguiClass::Update()
 
 #else
 	g_pObjectManager->CheckSameName();
-	
-	{ // >> : Menu Title Bar
-		if (ImGui::BeginMainMenuBar())
-		{
-			if (ImGui::BeginMenu("File"))
-			{
-				if (ImGui::MenuItem("Open", " ")) { g_pFileLoadManager->FileLoad_OpenMapData(); }
-				if (ImGui::MenuItem("Save", " ")) { g_pFileLoadManager->FileLoad_SaveMapData(); }
-	
-				ImGui::Separator();
-	
-				if (ImGui::MenuItem("Reset", " "))
-					m_isReset = true;
-	
-				ImGui::EndMenu();
-			}
-			ImGui::EndMainMenuBar();
-		}
-	
-		if (m_isReset)
-		{
-			ImGui::Begin("ResetWindow", &m_isReset);
-			ImGui::Text("Reset?");
-	
-			if (ImGui::Button("Yes"))
-			{
-				g_pObjectManager->Destroy();
-				m_isReset = false;
-			}
-	
-			ImGui::SameLine();
-			if (ImGui::Button("No"))
-				m_isReset = false;
-	
-			ImGui::End();
-		}
-	
-	} // << : Menu Title Bar
-	
-	{
-		ImGui::Begin("Hiearachy");
-	
-		vector<IObject *> vecObj = g_pObjectManager->GetVecObject();
-		bool isClick = false;
-		int checkIndex = -1;
-		int vecSize = g_pObjectManager->GetVecObject().size();
-		if (vecSize > 0)
-		{
-			for (int i = 0; i < vecObj.size(); i++)
-			{
-				if (vecObj[i]->GetPick())
-				{
-					checkIndex = i;
-					break;
-					// todo : ray 판정 수정
-					// 같은 라인의 맨 앞에 저장 된 것이 선택 됨
-				}
-			} // << : check pick object
-	
-			if (checkIndex == -1)
-			{
-				for (int i = 0; i < vecObj.size(); i++)
-				{
-					isClick = vecObj[i]->GetClick();
-					if (ImGui::Selectable(vecObj[i]->GetObjectName().c_str(), &isClick))
-					{
-						CImguiClass::m_nowSelectindex = i;
-						vecObj[i]->SetClick(isClick);
-						vecObj[i]->SetPick(true);
-					}
-				}
-	
-			} // << : if_pick not exist
-			else
-			{
-				for (int i = 0; i < vecObj.size(); i++)
-				{
-					if (i == checkIndex)
-					{
-						CImguiClass::m_nowSelectindex = i;
-						ImGui::Selectable(vecObj[i]->GetObjectName().c_str(), true);
-						vecObj[i]->SetClick(true);
-						vecObj[i]->SetPick(true);
-					}
-					else
-						ImGui::Selectable(vecObj[i]->GetObjectName().c_str(), false);
-				} // << : for
-	
-			} // << : else_Pick exist
-	
-			for (int i = 0; i < vecObj.size(); i++)
-			{
-				if (i != CImguiClass::m_nowSelectindex)
-				{
-					vecObj[i]->SetClick(false);
-					vecObj[i]->SetPick(false);
-				}
-			} // << : for
-	
-		} // << : if_objectVector size is not zero
-	
-	
-		  // >> todo : 오브젝트 정렬 필요?(이름순)
-		ImGui::End();
-	}
-	
-	
-	{ // >> : FileLoad
-		ImGui::Begin("File Loader");
-	
-		if (ImGui::RadioButton("MapTile", m_NowLoadType == LoadType::eMap)) { m_NowLoadType = LoadType::eMap; m_FileLoadIndex = -1; }
-		ImGui::SameLine(); if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
-	
-		if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = -1; }
 
-#ifdef _DEBUG
-		ImGui::SameLine();  if (ImGui::RadioButton("Gimmik", m_NowLoadType == LoadType::eGimmik)) { m_NowLoadType = LoadType::eGimmik; m_FileLoadIndex = -1; }
-#endif // _DEBUG
-	
-		// if (ImGui::RadioButton("Item", m_NowLoadType == LoadType::eItem)) { m_NowLoadType = LoadType::eItem; m_FileLoadIndex = -1; }
-		// ImGui::SameLine();  if (ImGui::RadioButton("EventTrigger", m_NowLoadType == LoadType::eTrigger)) { m_NowLoadType = LoadType::eTrigger; m_FileLoadIndex = -1; }
-		// >> todo
-	
-		ImGui::Separator();
-	
-		if (m_NowLoadType != m_PreLoadType && m_NowLoadType != LoadType::eBackground)
-		{
-			SetVecItem();
-			m_PreLoadType = m_NowLoadType;
-		}
-		else if (m_NowLoadType == LoadType::eBackground)
-		{
-			// >> 배경 나무들은 세부 선택 존재
-			if (ImGui::RadioButton("AutumnTree", m_SubType == LoadType::eAutumnTree)) { m_SubType = LoadType::eAutumnTree; m_FileLoadIndex = -1; }
-			ImGui::SameLine(); if (ImGui::RadioButton("SummerTree", m_SubType == LoadType::eSummerTree)) { m_SubType = LoadType::eSummerTree; m_FileLoadIndex = -1; }
-	
-			if (ImGui::RadioButton("WinterTree", m_SubType == LoadType::eWinterTree)) { m_SubType = LoadType::eWinterTree; m_FileLoadIndex = -1; }
-#ifdef _DEBUG
-			ImGui::SameLine(); if (ImGui::RadioButton("InvisibleWall", m_SubType == LoadType::eInvisibleWall)) { m_SubType = LoadType::eInvisibleWall; m_FileLoadIndex = -1; }
-			// >> 구 버전 클라에서 box로 인식됨
-#endif
-	
-			SetVecItem();
-			m_PreLoadType = m_NowLoadType;
-		}
-	
-		// << combo
-		if (m_FileLoadIndex == -1)
-			m_showItem = " ";
-		else
-			m_showItem = m_vecItem[m_FileLoadIndex].c_str();
-	
-		if (ImGui::BeginCombo(" ", m_showItem.c_str()))
-		{
-			for (int n = 0; n < m_vecItem.size(); n++)
-			{
-				const bool is_selected = (m_FileLoadIndex == n);
-				if (ImGui::Selectable(m_vecItem[n].c_str(), is_selected))
-					m_FileLoadIndex = n;
-	
-				if (is_selected)
-					ImGui::SetItemDefaultFocus(); // focus
-			}
-			ImGui::EndCombo();
-		}
-		// << combo
-	
-		ImGui::SameLine();
-		if (ImGui::Button("Load") && m_FileLoadIndex != -1)
-		{
-			IObject::CreateObject(m_vecObjType[m_FileLoadIndex], m_FileLoadIndex);
-		}
-	
-		ImGui::Separator();
-	
-		ImGui::End();
-	} // << : FileLoad
-	
-	{
-		ImGui::Begin("Inspector");
-	
-		bool isCheck = false;
-		int vecSize = g_pObjectManager->GetVecSize();
-		for (int i = 0; i < vecSize; i++)
-		{
-			if (g_pObjectManager->GetIObject(i).GetClick() || g_pObjectManager->GetIObject(i).GetPick())
-				isCheck = true;
-		}
-		// >> : 선택된 것이 없으면 인스펙터 창 뜨지 않음
-	
-		if (m_prevSelectIndex == m_nowSelectindex && isCheck)
-		{
-			if (m_nowSelectindex >= 0)
-			{
-				char name[1024] = "\0";
-				int strLength = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjectName().length();
-				for (int i = 0; i < strLength; i++)
-				{
-					name[i] = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjectName()[i];
-				}
-				name[strLength] = '\0';
-	
-				bool isCheck = false;
-				if (ImGui::InputText("Name", name, 1024))
-					isCheck = true;
-	
-				if (isCheck)
-				{
-					bool isSame = false;
-					int vecSize = g_pObjectManager->GetVecSize();
-					for (int i = 0; i < vecSize; i++)
-					{
-						if (strcmp(g_pObjectManager->GetIObject(i).GetObjectName().c_str(), name) == 0)
-							isSame = true;
-					}
-	
-					if (!isSame) g_pObjectManager->GetIObject(m_nowSelectindex).SetObjectName(name);
-				}
-	
-				ImGui::Separator();
-	
-				D3DXVECTOR3 vScale = g_pObjectManager->GetIObject(m_nowSelectindex).GetScale();
-				if (ImGui::InputFloat3("Scale", vScale))
-				{
-					if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere
-						|| g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCylinder)
-						g_pObjectManager->GetIObject(m_nowSelectindex).SetDiffScale(vScale);
-					else
-						g_pObjectManager->GetIObject(m_nowSelectindex).SetScale(vScale);
-				}
-	
-				D3DXVECTOR3 vRot = g_pObjectManager->GetIObject(m_nowSelectindex).GetRotate();
-				if (ImGui::InputFloat3("Rotate", vRot))
-					g_pObjectManager->GetIObject(m_nowSelectindex).SetRotate(vRot);
-	
-				D3DXVECTOR3 vTrans = g_pObjectManager->GetIObject(m_nowSelectindex).GetTranslate();
-				if (ImGui::InputFloat3("Translate", vTrans))
-					g_pObjectManager->GetIObject(m_nowSelectindex).SetTranslate(vTrans);
-	
-				ImGui::Separator();
-	
-				// >> object만 색 지정 가능
-				if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eBox
-					|| g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere
-					|| g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCylinder)
-				{
-					ImGui::Text("Set Color");
-					string charName[8] = { "Gray", "Black", "White", "Red", "Blue", "Green", "Yellow" };
-					for (int i = 0; i < m_vecColor.size(); i++)
-					{
-						if (ImGui::RadioButton(charName[i].c_str(), m_NowcolorType == m_vecColor[i]))
-						{
-							m_NowcolorType = m_vecColor[i];
-	
-							D3DXCOLOR color;
-							switch (m_NowcolorType)
-							{
-							case ColorType::eGray:
-								color = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
-								break;
-							case ColorType::eBlack:
-								color = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
-								break;
-							case ColorType::eWhite:
-								color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-								break;
-							case ColorType::eRed:
-								color = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-								break;
-							case ColorType::eBlue:
-								color = D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f);
-								break;
-							case ColorType::eGreen:
-								color = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
-								break;
-							case ColorType::eYellow:
-								color = D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f);
-								break;
-							}
-							g_pObjectManager->GetIObject(m_nowSelectindex).SetColor(color);
-						}
-	
-						if (i != 2 && i != m_vecColor.size() - 1)
-							ImGui::SameLine();
-	
-					} // << : for
-					ImGui::Separator();
-				} // << : if
-	
-			} // << : if (m_nowSelectindex >= 0)
-	
-		} // << : if (m_prevSelectIndex == m_nowSelectindex)
-		else
-		{
-			m_prevSelectIndex = m_nowSelectindex;
-			if (g_pObjectManager->GetVecSize() != 0 && m_nowSelectindex >= 0)
-			{
-				D3DXCOLOR temp = g_pObjectManager->GetIObject(CImguiClass::m_nowSelectindex).GetColor();
-	
-				if (temp == D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f))		m_NowcolorType = ColorType::eGray;
-				else if (temp == D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f)) m_NowcolorType = ColorType::eBlack;
-				else if (temp == D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f)) m_NowcolorType = ColorType::eWhite;
-				else if (temp == D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f)) m_NowcolorType = ColorType::eRed;
-				else if (temp == D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f)) m_NowcolorType = ColorType::eGreen;
-				else if (temp == D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f)) m_NowcolorType = ColorType::eBlue;
-				else if (temp == D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f)) m_NowcolorType = ColorType::eYellow;
-			}
-			//else
-			//	m_NowcolorType = ColorType::eGray;
-		}
-	
-		ImGui::End();
-	
-		//if
-	}
+	Update_MenuTitleBar();
+	Update_Hiearachy();
+	Update_FileLoader();
+	Update_Inspector();
 #endif // _DEBUG
 }
 
@@ -747,7 +452,10 @@ void CImguiClass::Update_FileLoader()
 	ImGui::SameLine(); if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
 
 	if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = -1; }
+
+#ifdef _DEBUG
 	ImGui::SameLine();  if (ImGui::RadioButton("Gimmick", m_NowLoadType == LoadType::eGimmick)) { m_NowLoadType = LoadType::eGimmick; m_FileLoadIndex = -1; }
+#endif // _DEBUG
 
 	// if (ImGui::RadioButton("Item", m_NowLoadType == LoadType::eItem)) { m_NowLoadType = LoadType::eItem; m_FileLoadIndex = -1; }
 	// ImGui::SameLine();  if (ImGui::RadioButton("EventTrigger", m_NowLoadType == LoadType::eTrigger)) { m_NowLoadType = LoadType::eTrigger; m_FileLoadIndex = -1; }
@@ -767,7 +475,12 @@ void CImguiClass::Update_FileLoader()
 		ImGui::SameLine(); if (ImGui::RadioButton("SummerTree", m_SubType == LoadType::eSummerTree)) { m_SubType = LoadType::eSummerTree; m_FileLoadIndex = -1; }
 
 		if (ImGui::RadioButton("WinterTree", m_SubType == LoadType::eWinterTree)) { m_SubType = LoadType::eWinterTree; m_FileLoadIndex = -1; }
-		ImGui::SameLine(); if (ImGui::RadioButton("InvisibleWall", m_SubType == LoadType::eInvisibleWall)) { m_SubType = LoadType::eInvisibleWall; m_FileLoadIndex = -1; }
+		ImGui::SameLine(); if (ImGui::RadioButton("ColorTree", m_SubType == LoadType::eColorTree)) { m_SubType = LoadType::eColorTree; m_FileLoadIndex = -1; }
+
+#ifdef _DEBUG
+		if (ImGui::RadioButton("InvisibleWall", m_SubType == LoadType::eInvisibleWall)) { m_SubType = LoadType::eInvisibleWall; m_FileLoadIndex = -1; }
+#endif // _DEBUG
+
 
 		SetVecItem();
 		m_PreLoadType = m_NowLoadType;
@@ -910,6 +623,8 @@ void CImguiClass::Update_Inspector()
 			ImGui::Separator();
 
 			// >> 선택된 오브젝트에 따라 인스펙터 변경
+
+			// >> 물리 적용 오브젝트 : 색상 선택
 			if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eBox
 				|| g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere
 				|| g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCylinder)
@@ -917,9 +632,31 @@ void CImguiClass::Update_Inspector()
 				// >> object만 색 지정 가능
 				SetObjectColor();
 			}
+
+			// >> 색상 나무 : 텍스쳐 선택
+			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCTree)
+			{
+				CBackground* temp = dynamic_cast<CBackground*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+
+				ImGui::Text("Texture");
+				static int pushIndex = 0;
+				pushIndex = temp->GetTextureIndex();
+				string charName[4] = { "Blue", "Green", "Yellow", "Red" };
+				for (int i = 0; i < 4; i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str(), pushIndex == i))
+					{
+						pushIndex = i;
+						temp->SetTexture(pushIndex);
+					}
+				} // << : for
+
+				ImGui::Separator();
+			}
+			
+			// >> 회전판자 기믹 : 기믹 관련 변수 설정
 			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_RotationBoard)
 			{
-				// >> 회전판자 기믹
 				CRotationBoard* temp = dynamic_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 
 				ImGui::Text("RotationAxial");

@@ -287,7 +287,7 @@ void IObject::CreateObject(const ObjectType objType, int index)
 		mapData.objType = objType;
 
 		mapData.strObjName = string("AutumnTree") + to_string(m_nRefCnt + 1);
-		mapData.strFolderPath = "Resource/XFile/Background";
+		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "autumn_texture.png";
 
 		mapData.strXFilePath = string("AutumnTree_0") + to_string(index + 1) + ".X";
@@ -308,7 +308,7 @@ void IObject::CreateObject(const ObjectType objType, int index)
 		mapData.objType = objType;
 
 		mapData.strObjName = string("SummerTree") + to_string(m_nRefCnt + 1);
-		mapData.strFolderPath = "Resource/XFile/Background";
+		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "summer_texture.png";
 
 		mapData.strXFilePath = string("SummerTree_0") + to_string(index + 1) + ".X";
@@ -329,7 +329,7 @@ void IObject::CreateObject(const ObjectType objType, int index)
 		mapData.objType = objType;
 
 		mapData.strObjName = string("WinterTree") + to_string(m_nRefCnt + 1);
-		mapData.strFolderPath = "Resource/XFile/Background";
+		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "winter_texture.png";
 
 		mapData.strXFilePath = string("WinterTree_0") + to_string(index + 1) + ".X";
@@ -338,6 +338,26 @@ void IObject::CreateObject(const ObjectType objType, int index)
 		background->Setup(mapData);
 	}
 	break;
+
+	case eCTree:
+	{
+		ST_MapData mapData;
+		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
+
+		mapData.objType = objType;
+
+		mapData.strObjName = string("ColorTree") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/ColorTree";
+		mapData.strTxtPath = "TreesBlue.png";
+
+		mapData.strXFilePath = string("Tree_0") + to_string(index + 1) + ".X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+		break;
 
 #ifdef _DEBUG
 	case eInvisibleWall:
@@ -411,6 +431,7 @@ void IObject::CreateObject(const ST_MapData& mapData)
 	case eATree:
 	case eSTree:
 	case eWTree:
+	case eCTree:
 #ifdef _DEBUG
 	case eInvisibleWall:
 #endif // _DEBUG
