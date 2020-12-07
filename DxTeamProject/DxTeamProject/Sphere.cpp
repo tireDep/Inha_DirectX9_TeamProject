@@ -31,6 +31,8 @@ void CSphere::Setup()
 
 void CSphere::Setup(const ST_MapData & mapData)
 {
+	Setup();
+
 	m_strObjName = mapData.strObjName;
 
 	m_strFolder = mapData.strFolderPath;
@@ -50,8 +52,6 @@ void CSphere::Setup(const ST_MapData & mapData)
 	m_fRadius = vScale.x;
 	m_fRadius = vScale.y;
 	m_fRadius = vScale.z;
-
-	Setup();
 
 	// ============================================================
 

@@ -40,6 +40,8 @@ void CBox::Setup()
 
 void CBox::Setup(const ST_MapData & mapData)
 {
+	Setup();
+
 	m_strObjName = mapData.strObjName;
 
 	m_strFolder = mapData.strFolderPath;
@@ -60,8 +62,6 @@ void CBox::Setup(const ST_MapData & mapData)
 	m_fWidth = vScale.x;
 	m_fHeight = vScale.y;
 	m_fDepth = vScale.z;
-
-	Setup();
 
 	// ============================================================
 
