@@ -225,8 +225,8 @@ void PObject::Update(float duration)
 	if (m_finverseMass <= 0.0f) return;
 	assert(duration > 0.0f);
 	
-	//m_vLinearAcceleration = (linearforce + GRAVITY) * m_finverseMass;
-	m_vLinearAcceleration = (linearforce) * m_finverseMass;
+	m_vLinearAcceleration = (linearforce + GRAVITY) * m_finverseMass;
+	//m_vLinearAcceleration = (linearforce) * m_finverseMass;
 	m_vLinearVelocity += (m_vLinearAcceleration * duration);
 	m_vLinearVelocity *= powf(m_fDamping, duration);
 	m_vLinearVelocity *= m_fLinearDrag;
@@ -376,6 +376,67 @@ void PObject::CollisionOtherObject(PObject * otherobject)
 
 		this->SetLinearVelocity(collisionV1);
 		otherobject->SetLinearVelocity(collisionV2);
+	}
+}
+
+void PObject::Collision3D(PObject * otherobject)
+{
+	static D3DXVECTOR3 direction;
+	static D3DXVECTOR3 warpVector;
+	static const float fix = 1.1f;
+	static float distance;
+	static float overlapInterval;
+
+	if (hasIntersected(otherobject))
+	{
+		direction = this->GetPosition() - otherobject->GetPosition();
+		distance = sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
+		overlapInterval = 2 * otherobject->GetBoundingSphere() - distance;
+		warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetBoundingSphere() - overlapInterval));
+
+		if (D3DXVec3LengthSq(&otherobject->GetLinearVelocity()) >= D3DXVec3LengthSq(&this->GetLinearVelocity()))
+		{
+			otherobject->Collision3D(this);
+			return;
+		}
+		else
+		{
+			D3DXVECTOR3 p;
+			p = this->GetPosition() + warpVector;
+			this->SetPosition(p);
+			D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+		}
+
+		float v1, v2;
+		D3DXVec3Normalize(&direction, &direction);
+		v1 = D3DXVec3Dot(&this->GetLinearVelocity(), &direction);
+		v2 = D3DXVec3Dot(&otherobject->GetLinearVelocity(), &direction);
+
+		float elasticity = (this->GetElasticity() + otherobject->GetElasticity()) / 2;
+
+		float finalv1, finalv2;
+		finalv1 = (((this->GetMass() - (elasticity * otherobject->GetMass()))*v1) + ((1 + elasticity)*otherobject->GetMass()*v2))
+			/ (this->GetMass() + otherobject->GetMass());
+		finalv2 = (((otherobject->GetMass() - (elasticity * this->GetMass()))*v2) + ((1 + elasticity)*this->GetMass()*v1))
+			/ (this->GetMass() + otherobject->GetMass());
+
+		D3DXVECTOR3 collisionV1, collisionV2;
+		collisionV1 = this->GetLinearVelocity() + (finalv1 - v1) * direction;
+		collisionV2 = otherobject->GetLinearVelocity() + (finalv2 - v2) * direction;
+
+		this->SetLinearVelocity(collisionV1);
+		otherobject->SetLinearVelocity(collisionV2);
+	}
+}
+
+void PObject::UpdateLand(float duration)
+{
+	float distance = GetPosition().y - GetBoundingSphere();
+	if (CloseToZero(distance) || distance < 0.0f)
+	{
+		D3DXVECTOR3 tmp = m_vLinearVelocity;
+		tmp.y = -tmp.y * m_fElasticity;
+		m_vLinearVelocity = tmp;
 	}
 }
 

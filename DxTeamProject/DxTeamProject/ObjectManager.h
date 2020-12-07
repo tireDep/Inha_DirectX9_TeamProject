@@ -38,12 +38,11 @@ private:
 	bool m_isThreadRun;
 	bool m_IsIn;
 
-	// collide
+	//collide
 	//const static unsigned maxContacts = 256;
 	//Contact contacts[maxContacts];
 	//CollisionData cData;
 	//ContactResolver resolver;
-	//void GenerateContacts();
 public:
 	void AddObject(CObject* pObject);
 	void RemoveObject(CObject* pObject);
@@ -63,14 +62,14 @@ public:
 
 	void Destroy();
 
+	void Update(CRay ray, D3DXCOLOR& objectcolor);		// Color Change
 	void Update();										// Collision
+	void UpdateLand(float duration);					// Land
 	void Update(float duration);						// Physics
 	//void Update(float duration , CHeight* pMap);		// 3D Physics
 	//void Update3D(float duration);
-	//void UpdateLand(float duration);					// Land
-	void UpdateCollide(float duration);
-	void Update(CRay ray, D3DXCOLOR& objectcolor);		// Color Change
 	void Collide(float duration);
+	void GenerateContacts();
 	//void HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestObjCollision& theCollision);
 
 	void Render();
