@@ -25,6 +25,7 @@ class CDoor;
 class CBreakableWall;
 class RotationBoard;
 class CSwitch;
+class CBook;
 
 //class CSoundManager;
 class CMainGame
@@ -54,6 +55,7 @@ private:
 	CSwitch* m_pGimmick_Switch;
 	CBreakableWall* m_pGimmick_BreakableWall[2];
 
+	CBook* m_pBook;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 public:

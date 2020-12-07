@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="AllocateHierarchy.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Book.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="BreakableWall.h" />
     <ClInclude Include="Camera.h" />
@@ -237,6 +238,7 @@
   <ItemGroup>
     <ClCompile Include="AllocateHierarchy.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Book.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="BreakableWall.cpp" />
     <ClCompile Include="Camera.cpp" />
