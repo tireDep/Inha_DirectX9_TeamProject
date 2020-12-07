@@ -135,7 +135,8 @@ void CImguiClass::SetObjectColor()
 CImguiClass::CImguiClass() :
 	m_isReset(false),
 	m_FileLoadIndex(-1),
-	m_showItem("\0")
+	m_showItem("\0"),
+	m_pMesh(NULL)
 {
  	m_PreLoadType = LoadType::eNull;
  	m_NowLoadType = LoadType::eMap;
@@ -156,6 +157,7 @@ CImguiClass::CImguiClass() :
 
 CImguiClass::~CImguiClass()
 {
+	SafeRelease(m_pMesh);
 }
 
 void CImguiClass::Setup()
@@ -605,6 +607,36 @@ void CImguiClass::Update_MenuTitleBar()
 			ImGui::EndMenu();
 		}
 
+		// >> testLoad
+		if (ImGui::BeginMenu("TestLoad"))
+		{
+			if (ImGui::MenuItem("ModelLoad", " ")) 
+			{
+				ST_XFile* temp = new ST_XFile;
+				g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Test", "Model.X", temp);
+
+				m_pMesh = temp->pMesh;
+				m_adjBuffer = temp->adjBuffer;
+				m_vecMtrls = temp->vecMtrl;
+				m_vecTextures = temp->vecTextrure;
+				m_numMtrls = temp->nMtrlNum;
+
+				delete temp;
+			}
+
+			if (ImGui::MenuItem("ModelDelete", " "))
+			{
+				SafeRelease(m_pMesh);
+				m_adjBuffer->Release();
+				m_vecMtrls.clear();
+				m_vecTextures.clear();
+				m_numMtrls = 0;
+			}
+
+			ImGui::EndMenu();
+		}
+		// << testLoad
+
 		//if (ImGui::BeginMenu("Edit"))
 		//{
 		//	// if (ImGui::MenuItem("Undo", "CTRL+Z")) {}
@@ -946,6 +978,26 @@ void CImguiClass::SetFrameEnd()
 
 void CImguiClass::Render()
 {
+	// >> testLoad
+	D3DXMATRIXA16 matWorld;
+	D3DXMatrixIdentity(&matWorld);
+	matWorld._41 = 0.5f; matWorld._43 = 0.5f;
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+	for (int i = 0; i < m_vecMtrls.size(); i++)
+	{
+		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+
+		if (m_vecTextures[i] != 0)
+			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+
+		if(m_pMesh)
+			m_pMesh->DrawSubset(i);
+	}
+	g_pD3DDevice->SetTexture(0, NULL);
+	// << testLoad
+
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 }
