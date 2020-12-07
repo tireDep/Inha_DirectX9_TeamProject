@@ -99,7 +99,7 @@ enum ObjectType
 	eTile07, eTile08, eTile09, eTile10, eTile11, eTile12, eTile13,
 	eBackObj, eATree, eSTree, eWTree,
 	eBox, eSphere, eCylinder,
-	eGimmik, eG_RotateBoard, eG_BreakWall, eG_ColorChanger, eG_Door, eG_Switch,
+	eGimmik, eG_RotationBoard, eG_BreakWall, eG_ColorChanger, eG_Door, eG_Switch,
 	eNull
 #endif // _Debug
 };
