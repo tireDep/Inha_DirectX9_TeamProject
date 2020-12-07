@@ -21,7 +21,7 @@ void CGimmick::SetDiffScale(D3DXVECTOR3 set)
 		m_vScale = D3DXVECTOR3(set.z, set.z, set.z);
 }
 
-void CGimmick::CreateGimmick(const ObjectType objType)
+void CGimmick::CreateGimmick(const ObjectType& objType)
 {
 	switch (objType)
 	{
@@ -39,6 +39,9 @@ void CGimmick::CreateGimmick(const ObjectType objType)
 		mapData.strTxtPath = "board.png";
 
 		mapData.strXFilePath = string("Rotation_board") + string(".X");
+
+		mapData.gimmickData.roationSpeed = 0.0f;
+		mapData.gimmickData.roationAxialIndex = 0;
 
 		CRotationBoard* rotationBoard = new CRotationBoard;
 		rotationBoard->Setup(mapData);
@@ -59,7 +62,7 @@ void CGimmick::CreateGimmick(const ObjectType objType)
 	} // << switch
 }
 
-void CGimmick::CreateGimmick_SaveData(const ST_MapData & mapData)
+void CGimmick::CreateGimmick_SaveData(ST_MapData & mapData)
 {
 	switch (mapData.objType)
 	{

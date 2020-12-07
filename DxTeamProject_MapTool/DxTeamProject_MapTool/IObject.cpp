@@ -224,7 +224,7 @@ void IObject::SetRefCnt(int set)
 	IObject::m_nRefCnt = set;
 }
 
-void IObject::CreateObject(const ObjectType objType, int index)
+void IObject::CreateObject(const ObjectType& objType, int index)
 {
 	// >> FileLoader 积己
 	
@@ -405,7 +405,7 @@ void IObject::CreateObject(const ObjectType objType, int index)
 	} // << : switch
 }
 
-void IObject::CreateObject(const ST_MapData& mapData)
+void IObject::CreateObject(ST_MapData& mapData)
 {
 	// >> SaveLoad 颇老 积己
 	switch (mapData.objType)

@@ -599,13 +599,16 @@ void CImguiClass::Update_Inspector()
 
 				if (temp.y != vTrans.y)
 				{
-					if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eSphere
-					 && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eCylinder
-					 && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eBox)
-						temp.y = floor(vTrans.y);
-					else
-						temp.y = vTrans.y;
-					// >> 오브젝트는 크기 변경에 따라 값이 변동되기 때문에 일단 제외
+					temp.y = vTrans.y;
+					// >> 오브젝트 별 적용이 달라서 임시 적용
+
+					// if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eSphere
+					//  && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eCylinder
+					//  && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eBox)
+					// 	temp.y = floor(vTrans.y);
+					// else
+					// 	temp.y = vTrans.y;
+					// // >> 오브젝트는 크기 변경에 따라 값이 변동되기 때문에 일단 제외
 
 					// // >> 구, 실린더는 보정 값 적용?
 					// if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere)
