@@ -78,7 +78,7 @@ void CBox::Setup(const ST_MapData & mapData)
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	m_matWorld = matS * matR * matT;
 	
-	//
+	// tmp
 	collisionbox.m_pObject = this;
 	collisionbox.halfSize.x = m_fWidth;
 	collisionbox.halfSize.y = m_fHeight;
