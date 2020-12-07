@@ -38,7 +38,7 @@ private:
 	// Need Map tool
 
 	// Size : Use m_vScale
-	// Rotation_axial : enum class
+	// Rotation_axial : enum class RotationAxial
 	// Rotation_Speed : m_fRotationSpeed
 	// State - Stop : RotationAxial::None
 

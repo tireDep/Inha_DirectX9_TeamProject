@@ -94,7 +94,6 @@ Material cube_mat {
  10.000000;
  0.000000;0.000000;0.000000;;
  0.000000;0.000000;0.000000;;
-
 }
 
 Frame door_frame_wood_single_LOD_setup {

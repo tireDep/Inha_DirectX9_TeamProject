@@ -10,7 +10,7 @@ protected:
 	Synthesize(float, m_fWidth, Width);
 	Synthesize(float, m_fHeight, Height);
 	Synthesize(float, m_fDepth, Depth);
-	const static unsigned maxContacts = 256;
+	const static unsigned maxContacts = 32;
 	Contact contacts[maxContacts];
 	CollisionBox collisionbox;
 	CollisionData cData;

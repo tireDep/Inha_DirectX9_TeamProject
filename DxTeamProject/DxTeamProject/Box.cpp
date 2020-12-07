@@ -121,6 +121,7 @@ void CBox::Update(float duration)
 	D3DXMatrixTranslation(&totalTransaltion, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 
 	// Need to modify
+	//m_vTorque = angularforce * 10000000.0f;
 	m_vTorque = angularforce;
 
 	m_vAngularAcceleration.x = m_vTorque.x * m_vInverseRotationInertia.x;
@@ -130,7 +131,7 @@ void CBox::Update(float duration)
 	m_vAngularVelocity += m_vAngularAcceleration * duration;
 	m_vAngularVelocity *= powf(m_fDamping, duration);
 	// tmp Test... Need to AngularDrag
-	m_vAngularVelocity *= 0.999f;
+	m_vAngularVelocity *= 0.995f;
 	if (CloseToZero(m_vAngularVelocity.x) && CloseToZero(m_vAngularVelocity.y) && CloseToZero(m_vAngularVelocity.z))
 	{
 		m_vAngularVelocity.x = m_vAngularVelocity.y = m_vAngularVelocity.z = 0.0f;
@@ -151,6 +152,7 @@ void CBox::Update(float duration)
 
 	D3DXMatrixMultiply(&m_matWorld, &totalRotation, &totalTransaltion);
 
+	//cout << m_vPosition.x << ' ' << m_vPosition.y << ' ' << m_vPosition.z << endl;
 	// 
 	collisionbox.calculateInternals();
 	GenerateContacts();
@@ -160,8 +162,8 @@ void CBox::Update(float duration)
 void CBox::GenerateContacts()
 {
 	CollisionPlane plane;
-	plane.direction = D3DXVECTOR3(-1, 1, 0);
-	plane.offset = 2;
+	plane.direction = D3DXVECTOR3(0, 1, 0);
+	plane.offset = 0;
 
 	cData.reset(maxContacts);
 	cData.friction = 0.9f;

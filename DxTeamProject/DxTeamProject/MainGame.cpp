@@ -114,7 +114,7 @@ void CMainGame::Setup()
 {
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "TEST3.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "TEST3.dat");
 	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
@@ -179,9 +179,9 @@ void CMainGame::Setup()
 	//{
 	//m_pSphere = new CSphere();
 	//m_pSphere->Setup();
-
-	//	CBox* box = new CBox();
-	//	box->Setup();
+	///
+	m_pBox = new CBox();
+	m_pBox->Setup();
 	//	//CSphere* sphere = new CSphere();
 	//	//sphere->Setup();
 	//	//CCylinder* cylinder = new CCylinder();
@@ -330,8 +330,8 @@ void CMainGame::Update()
 	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());
 	////g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
 	//g_pObjectManager->Update();
-
-	//m_pSphere->Update(g_pTimeManager->GetElapsedTime());
+	///
+	m_pBox->Update(g_pTimeManager->GetElapsedTime());
 	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
 	//g_pObjectManager->UpdateCollide(g_pTimeManager->GetElapsedTime());			// new Collision
 	//g_pObjectManager->Update();													// Collision
