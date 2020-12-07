@@ -29,6 +29,8 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 
+#include "Book.h"
+
 #include "PObject.h"
 #include "Box.h"
 #include "Sphere.h"
@@ -53,7 +55,9 @@ CMainGame::CMainGame() :
 	, m_pMeshTile(NULL),
 	// Gimmick
 	m_pGimmick_RotationBoard(NULL),
-	m_pGimmick_Switch(NULL)
+	m_pGimmick_Switch(NULL),
+	//
+	m_pBook(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
@@ -77,6 +81,8 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pGimmick_Switch);
 	SafeDelete(m_pGimmick_BreakableWall[0]);
 	SafeDelete(m_pGimmick_BreakableWall[1]);
+	//
+	SafeDelete(m_pBook);
 
 	g_pFileLoadManager->Destroy();
 	
@@ -108,7 +114,7 @@ void CMainGame::Setup()
 {
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "createmap2.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "TEST3.dat");
 	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
@@ -160,21 +166,27 @@ void CMainGame::Setup()
 	m_pGimmick_BreakableWall[1] = new CBreakableWall;
 	m_pGimmick_BreakableWall[1]->Setup("Resource/XFile/Gimmick/BreakableWall", "brick.X");
 
+
+	m_pBook = new CBook;
+	m_pBook->Setup();
 	/// 이 아래는 지울 수도 있는 선언
 	//for (int i = 0; i < 8; i++)
 	//{
 	//	CPSphere* Sphere = new CPSphere();
 	//	Sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
 	//}
-	for (int i = 0; i < 1; i++)
-	{
-		//CBox* box = new CBox();
-		//box->Setup();
-		//CSphere* sphere = new CSphere();
-		//sphere->Setup();
-		CCylinder* cylinder = new CCylinder();
-		cylinder->Setup();
-	}
+	//for (int i = 0; i < 1; i++)
+	//{
+	//m_pSphere = new CSphere();
+	//m_pSphere->Setup();
+
+	//	CBox* box = new CBox();
+	//	box->Setup();
+	//	//CSphere* sphere = new CSphere();
+	//	//sphere->Setup();
+	//	//CCylinder* cylinder = new CCylinder();
+	//	//cylinder->Setup();
+	//}
 	//for (int i = 0; i < 8; i++)
 	//{
 	//	CPSCylinder* cylinder = new CPSCylinder();
@@ -314,10 +326,12 @@ void CMainGame::Update()
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
-	g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
-	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
-	g_pObjectManager->Update();
+	//g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
+	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());
+	////g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	//g_pObjectManager->Update();
 
+	//m_pSphere->Update(g_pTimeManager->GetElapsedTime());
 	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
 	//g_pObjectManager->UpdateCollide(g_pTimeManager->GetElapsedTime());			// new Collision
 	//g_pObjectManager->Update();													// Collision
@@ -436,6 +450,10 @@ void CMainGame::Render()
 		m_pGimmick_BreakableWall[0]->Render();
 	if (m_pGimmick_BreakableWall[1]) 
 		m_pGimmick_BreakableWall[1]->Render();
+//
+
+	if (m_pBook)
+		m_pBook->Render();
 
 	if (g_gameManager->GetUImode())
 	{

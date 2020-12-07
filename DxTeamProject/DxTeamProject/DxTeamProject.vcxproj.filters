@@ -221,6 +221,7 @@
     <ClCompile Include="BreakableWall.cpp">
       <Filter>Gimmick\KT</Filter>
     </ClCompile>
+    <ClCompile Include="Book.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -467,6 +468,7 @@
     <ClInclude Include="BreakableWall.h">
       <Filter>Gimmick\KT</Filter>
     </ClInclude>
+    <ClInclude Include="Book.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
