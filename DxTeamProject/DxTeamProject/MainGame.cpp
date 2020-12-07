@@ -29,12 +29,13 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 
-#include "Book.h"
-
 #include "PObject.h"
 #include "Box.h"
 #include "Sphere.h"
 #include "Cylinder.h"
+
+#include "Book.h"
+#include "Dragon.h"
 
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
@@ -57,7 +58,8 @@ CMainGame::CMainGame() :
 	m_pGimmick_RotationBoard(NULL),
 	m_pGimmick_Switch(NULL),
 	//
-	m_pBook(NULL)
+	m_pBook(NULL),
+	m_pDragon(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
@@ -83,6 +85,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pGimmick_BreakableWall[1]);
 	//
 	SafeDelete(m_pBook);
+	SafeDelete(m_pDragon);
 
 	g_pFileLoadManager->Destroy();
 	
@@ -169,6 +172,10 @@ void CMainGame::Setup()
 
 	m_pBook = new CBook;
 	m_pBook->Setup();
+
+	m_pDragon = new CDragon;
+	m_pDragon->Setup();
+
 	/// 이 아래는 지울 수도 있는 선언
 	//for (int i = 0; i < 8; i++)
 	//{
@@ -245,26 +252,32 @@ void CMainGame::Update()
 		{
 		case Pick::Red:
 			m_pCharacter->SetColor(RED);
+			m_pDragon->Update(RED);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Yellow:
 			m_pCharacter->SetColor(YELLOW);
+			m_pDragon->Update(YELLOW);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Green:
 			m_pCharacter->SetColor(GREEN);
+			m_pDragon->Update(GREEN);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Blue:
 			m_pCharacter->SetColor(BLUE);
+			m_pDragon->Update(BLUE);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Black:
 			m_pCharacter->SetColor(BLACK);
+			m_pDragon->Update(BLACK);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::White:
 			m_pCharacter->SetColor(WHITE);
+			m_pDragon->Update(WHITE);
 			m_pUI->SetPickColor();
 			break;
 		default:
@@ -449,6 +462,9 @@ void CMainGame::Render()
 
 	if (m_pBook)
 		m_pBook->Render();
+
+	if (m_pDragon)
+		m_pDragon->Render();
 
 	if (g_gameManager->GetUImode())
 	{
