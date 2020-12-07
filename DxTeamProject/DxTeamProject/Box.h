@@ -10,18 +10,18 @@ protected:
 	Synthesize(float, m_fWidth, Width);
 	Synthesize(float, m_fHeight, Height);
 	Synthesize(float, m_fDepth, Depth);
-	const static unsigned maxContacts = 256;
-	Contact contacts[maxContacts];
-	CollisionBox collisionbox;
-	CollisionData cData;
-	ContactResolver resolver;
+	//const static unsigned maxContacts = 32;
+	//Contact contacts[maxContacts];
+	//CollisionBox collisionbox;
+	//CollisionData cData;
+	//ContactResolver resolver;
 public:
 	void Setup();
 	void Setup(const ST_MapData & mapData);
 
-	void Update(float duration);
-	virtual void GenerateContacts();
-	void CollideUpdate(float duration);
+	//void Update(float duration);
+	//virtual void GenerateContacts();
+	//void CollideUpdate(float duration);
 	//virtual void Update(float duration) {};
 	//virtual void Update3D(float duration) {}
 	//virtual void Update(float duration, CHeight* pMap) {};

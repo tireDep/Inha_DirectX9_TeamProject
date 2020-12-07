@@ -29,11 +29,12 @@ void CBreakableWall::Setup(string folder, string file)
 	m_vecTextures = xfile->vecTextrure;
 	m_numMtrls = xfile->nMtrlNum;
 
-	//for (int i = 0; i < m_vecTextures.size(); i++)
-	//{
-	//	if (m_vecTextures[i] == NULL)
-	//		g_pFileLoadManager->FileLoad_Texture(folder, "cubeworld_texture.tga", m_vecTextures[i]);
-	//}
+	// Test
+	for (int i = 0; i < m_vecTextures.size(); i++)
+	{
+		if (m_vecTextures[i] == NULL)
+			g_pFileLoadManager->FileLoad_Texture(folder, "cubeworld_glow.tga", m_vecTextures[i]);
+	}
 
 	delete xfile;
 }
@@ -49,9 +50,12 @@ void CBreakableWall::Render()
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
 		// Test
-		D3DXMATRIXA16 matWorld;
+		D3DXMATRIXA16 matT, matS, matWorld;
 		D3DXMatrixIdentity(&matWorld);
-		D3DXMatrixTranslation(&matWorld, -25, 0, -2);
+		 
+		D3DXMatrixTranslation(&matT, -25, 0, -5);
+		D3DXMatrixScaling(&matS, 0.1f, 0.1f, 0.1f);
+		matWorld = matS * matT;
 
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 		if (m_pMesh == NULL)
@@ -61,8 +65,9 @@ void CBreakableWall::Render()
 			if (m_vecTextures[i] != 0)
 				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+			m_pMesh->DrawSubset(i);
 		}
-		m_pMesh->DrawSubset(0);
+		//m_pMesh->DrawSubset(0);
 		g_pD3DDevice->SetTexture(0, NULL);
 	}
 }
