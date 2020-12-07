@@ -117,7 +117,7 @@ void CMainGame::Setup()
 {
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "TEST3.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "TEST4.dat");
 	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
@@ -177,30 +177,10 @@ void CMainGame::Setup()
 	m_pDragon->Setup();
 
 	/// 이 아래는 지울 수도 있는 선언
-	//for (int i = 0; i < 8; i++)
-	//{
-	//	CPSphere* Sphere = new CPSphere();
-	//	Sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
-	//}
-	//for (int i = 0; i < 1; i++)
-	//{
 	//m_pSphere = new CSphere();
 	//m_pSphere->Setup();
-	///
-	m_pBox = new CBox();
-	m_pBox->Setup();
-	//	//CSphere* sphere = new CSphere();
-	//	//sphere->Setup();
-	//	//CCylinder* cylinder = new CCylinder();
-	//	//cylinder->Setup();
-	//}
-	//for (int i = 0; i < 8; i++)
-	//{
-	//	CPSCylinder* cylinder = new CPSCylinder();
-	//	cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 25));
-	//}
-	//m_pHeightMap = new CHeight;
-	//m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
+	//m_pBox = new CBox();
+	//m_pBox->Setup();
 
 	//m_pSkinnedMesh = new CSkinnedMesh;
 	//m_pSkinnedMesh->SetUp("Resource/XFile/Character", "1slot Cha.X");
@@ -250,7 +230,6 @@ void CMainGame::Update()
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
-	
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
@@ -339,12 +318,12 @@ void CMainGame::Update()
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
-	//g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
-	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());
-	////g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
-	//g_pObjectManager->Update();
+	g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
+	g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());
+	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	g_pObjectManager->Update();
 	///
-	m_pBox->Update(g_pTimeManager->GetElapsedTime());
+	//m_pBox->Update(g_pTimeManager->GetElapsedTime());
 	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
 	//g_pObjectManager->UpdateCollide(g_pTimeManager->GetElapsedTime());			// new Collision
 	//g_pObjectManager->Update();													// Collision
@@ -384,7 +363,6 @@ void CMainGame::Update()
 		}
 	}
 }
-
 
 void CMainGame::Render()
 {
