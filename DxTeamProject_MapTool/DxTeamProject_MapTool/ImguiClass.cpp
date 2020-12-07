@@ -19,19 +19,19 @@ void CImguiClass::SetVecItem()
 	vector<ObjectType> tempObjType;
 	if (m_NowLoadType == LoadType::eMap)
 	{
-		tempVec.push_back("Tile01"); tempObjType.push_back(eTile01);
-		tempVec.push_back("Tile02"); tempObjType.push_back(eTile02);
-		tempVec.push_back("Tile03"); tempObjType.push_back(eTile03);
-		tempVec.push_back("Tile04"); tempObjType.push_back(eTile04);
-		tempVec.push_back("Tile05"); tempObjType.push_back(eTile05);
-		tempVec.push_back("Tile06"); tempObjType.push_back(eTile06);
-		tempVec.push_back("Tile07"); tempObjType.push_back(eTile07);
-		tempVec.push_back("Tile08"); tempObjType.push_back(eTile08);
-		tempVec.push_back("Tile09"); tempObjType.push_back(eTile09);
-		tempVec.push_back("Tile10"); tempObjType.push_back(eTile10);
-		tempVec.push_back("Tile11"); tempObjType.push_back(eTile11);
-		tempVec.push_back("Tile12"); tempObjType.push_back(eTile12);
-		tempVec.push_back("Tile13"); tempObjType.push_back(eTile13);
+		tempVec.push_back("Grass"); tempObjType.push_back(eTile01);
+		tempVec.push_back("Ground01"); tempObjType.push_back(eTile02);
+		tempVec.push_back("Ground02"); tempObjType.push_back(eTile03);
+		tempVec.push_back("Rock01"); tempObjType.push_back(eTile04);
+		tempVec.push_back("Rock02"); tempObjType.push_back(eTile05);
+		tempVec.push_back("Sand01"); tempObjType.push_back(eTile06);
+		tempVec.push_back("Sand02"); tempObjType.push_back(eTile07);
+		tempVec.push_back("Yellow"); tempObjType.push_back(eTile08);
+		tempVec.push_back("Water01"); tempObjType.push_back(eTile09);
+		tempVec.push_back("Water02"); tempObjType.push_back(eTile10);
+		tempVec.push_back("Water03"); tempObjType.push_back(eTile11);
+		tempVec.push_back("Water04"); tempObjType.push_back(eTile12);
+		tempVec.push_back("Ocean"); tempObjType.push_back(eTile13);
 	}
 	else if (m_NowLoadType == LoadType::eObject)
 	{
@@ -135,7 +135,8 @@ void CImguiClass::SetObjectColor()
 CImguiClass::CImguiClass() :
 	m_isReset(false),
 	m_FileLoadIndex(-1),
-	m_showItem("\0")
+	m_showItem("\0"),
+	m_pMesh(NULL)
 {
  	m_PreLoadType = LoadType::eNull;
  	m_NowLoadType = LoadType::eMap;
@@ -156,6 +157,7 @@ CImguiClass::CImguiClass() :
 
 CImguiClass::~CImguiClass()
 {
+	SafeRelease(m_pMesh);
 }
 
 void CImguiClass::Setup()
@@ -605,6 +607,36 @@ void CImguiClass::Update_MenuTitleBar()
 			ImGui::EndMenu();
 		}
 
+		// >> testLoad
+		if (ImGui::BeginMenu("TestLoad"))
+		{
+			if (ImGui::MenuItem("ModelLoad", " ")) 
+			{
+				ST_XFile* temp = new ST_XFile;
+				g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Test", "Model.X", temp);
+
+				m_pMesh = temp->pMesh;
+				m_adjBuffer = temp->adjBuffer;
+				m_vecMtrls = temp->vecMtrl;
+				m_vecTextures = temp->vecTextrure;
+				m_numMtrls = temp->nMtrlNum;
+
+				delete temp;
+			}
+
+			if (ImGui::MenuItem("ModelDelete", " "))
+			{
+				SafeRelease(m_pMesh);
+				m_adjBuffer->Release();
+				m_vecMtrls.clear();
+				m_vecTextures.clear();
+				m_numMtrls = 0;
+			}
+
+			ImGui::EndMenu();
+		}
+		// << testLoad
+
 		//if (ImGui::BeginMenu("Edit"))
 		//{
 		//	// if (ImGui::MenuItem("Undo", "CTRL+Z")) {}
@@ -837,8 +869,43 @@ void CImguiClass::Update_Inspector()
 				g_pObjectManager->GetIObject(m_nowSelectindex).SetRotate(vRot);
 
 			D3DXVECTOR3 vTrans = g_pObjectManager->GetIObject(m_nowSelectindex).GetTranslate();
+			D3DXVECTOR3 temp = vTrans;
 			if (ImGui::InputFloat3("Translate", vTrans))
+			{
+				// >> 격자에 맞춰 이동(체스 느낌)
+				if (temp.x != vTrans.x)
+				{
+					temp.x = floor(vTrans.x);
+					temp.x = temp.x <= 0 ? temp.x + 0.5f : temp.x - 0.5f;
+				}
+
+				if (temp.y != vTrans.y)
+				{
+					if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eSphere
+					 && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eCylinder
+					 && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eBox)
+						temp.y = floor(vTrans.y);
+					else
+						temp.y = vTrans.y;
+					// >> 오브젝트는 크기 변경에 따라 값이 변동되기 때문에 일단 제외
+
+					// // >> 구, 실린더는 보정 값 적용?
+					// if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere)
+					// 	temp.y += 0.25f;
+					// 
+					// if(g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCylinder)
+					// 	temp.y += 0.5f;
+				}
+				
+				if (temp.z != vTrans.z)
+				{
+					temp.z = floor(vTrans.z);
+					temp.z = temp.z <= 0 ? temp.z + 0.5f : temp.z - 0.5f;
+				}
+
+				vTrans = temp;
 				g_pObjectManager->GetIObject(m_nowSelectindex).SetTranslate(vTrans);
+			}
 
 			ImGui::Separator();
 
@@ -911,6 +978,26 @@ void CImguiClass::SetFrameEnd()
 
 void CImguiClass::Render()
 {
+	// >> testLoad
+	D3DXMATRIXA16 matWorld;
+	D3DXMatrixIdentity(&matWorld);
+	matWorld._41 = 0.5f; matWorld._43 = 0.5f;
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+	for (int i = 0; i < m_vecMtrls.size(); i++)
+	{
+		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+
+		if (m_vecTextures[i] != 0)
+			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+
+		if(m_pMesh)
+			m_pMesh->DrawSubset(i);
+	}
+	g_pD3DDevice->SetTexture(0, NULL);
+	// << testLoad
+
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 }

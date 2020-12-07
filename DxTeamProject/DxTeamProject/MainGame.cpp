@@ -29,6 +29,8 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 
+#include "Book.h"
+
 #include "PObject.h"
 #include "Box.h"
 #include "Sphere.h"
@@ -53,7 +55,9 @@ CMainGame::CMainGame() :
 	, m_pMeshTile(NULL),
 	// Gimmick
 	m_pGimmick_RotationBoard(NULL),
-	m_pGimmick_Switch(NULL)
+	m_pGimmick_Switch(NULL),
+	//
+	m_pBook(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
@@ -77,6 +81,8 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pGimmick_Switch);
 	SafeDelete(m_pGimmick_BreakableWall[0]);
 	SafeDelete(m_pGimmick_BreakableWall[1]);
+	//
+	SafeDelete(m_pBook);
 
 	g_pFileLoadManager->Destroy();
 	
@@ -160,6 +166,9 @@ void CMainGame::Setup()
 	m_pGimmick_BreakableWall[1] = new CBreakableWall;
 	m_pGimmick_BreakableWall[1]->Setup("Resource/XFile/Gimmick/BreakableWall", "brick.X");
 
+
+	m_pBook = new CBook;
+	m_pBook->Setup();
 	/// 이 아래는 지울 수도 있는 선언
 	//for (int i = 0; i < 8; i++)
 	//{
@@ -441,6 +450,10 @@ void CMainGame::Render()
 		m_pGimmick_BreakableWall[0]->Render();
 	if (m_pGimmick_BreakableWall[1]) 
 		m_pGimmick_BreakableWall[1]->Render();
+//
+
+	if (m_pBook)
+		m_pBook->Render();
 
 	if (g_gameManager->GetUImode())
 	{

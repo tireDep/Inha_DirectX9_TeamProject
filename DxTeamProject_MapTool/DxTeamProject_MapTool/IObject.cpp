@@ -21,7 +21,7 @@ IObject::IObject() :
 	m_ObjectType(ObjectType::eNull),
 	m_vScale(0,0,0),
 	m_vRotate(0,0,0),
-	m_vTranslate(0,0,0),
+	m_vTranslate(1.0f,0,1.0f),
 	m_isClick(false),
 	m_isPick(false),
 	m_dxColor(0.5, 0.5, 0.5, 1),
@@ -233,9 +233,9 @@ void IObject::CreateObject(const ObjectType objType, int index)
 	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
 	{
 		ST_MapData mapData;
-		mapData.vScale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
+		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
 		// >> todo : translate 현 위치 중앙으로 받아오기
 
 		mapData.objType = objType;
@@ -279,9 +279,9 @@ void IObject::CreateObject(const ObjectType objType, int index)
 	case eATree:
 	{
 		ST_MapData mapData;
-		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
+		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
 		// >> todo : translate 현 위치 중앙으로 받아오기
 
 		mapData.objType = objType;
@@ -300,9 +300,9 @@ void IObject::CreateObject(const ObjectType objType, int index)
 	case eSTree:
 	{
 		ST_MapData mapData;
-		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
+		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
 		// >> todo : translate 현 위치 중앙으로 받아오기
 
 		mapData.objType = objType;
@@ -321,9 +321,9 @@ void IObject::CreateObject(const ObjectType objType, int index)
 	case eWTree:
 	{
 		ST_MapData mapData;
-		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
+		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
 		// >> todo : translate 현 위치 중앙으로 받아오기
 
 		mapData.objType = objType;
@@ -345,7 +345,7 @@ void IObject::CreateObject(const ObjectType objType, int index)
 		ST_MapData mapData;
 		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
 
 		mapData.objType = objType;
 

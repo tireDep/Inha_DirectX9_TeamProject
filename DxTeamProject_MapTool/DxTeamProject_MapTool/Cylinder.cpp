@@ -18,7 +18,7 @@ CCylinder::~CCylinder()
 void CCylinder::Setup()
 {
 	m_vScale = D3DXVECTOR3(0.5f, 0.5f, 1.0f);
-	m_vTranslate = D3DXVECTOR3(0.0f, 0.5f, 0.0f);
+	m_vTranslate = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
 	D3DXCreateCylinder(g_pD3DDevice, m_vScale.x, m_vScale.y, m_vScale.z, 10, 10, &m_pMesh, NULL);
 	IObject::Setup_OBB_Box();
 }

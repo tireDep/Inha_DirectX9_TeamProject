@@ -25,6 +25,7 @@ class CDoor;
 class CBreakableWall;
 class RotationBoard;
 class CSwitch;
+class CBook;
 
 //class CSoundManager;
 class CBox;
@@ -60,6 +61,7 @@ private:
 	// tmp
 	CBox* m_pBox;
 	CSphere* m_pSphere;
+	CBook* m_pBook;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 public:
