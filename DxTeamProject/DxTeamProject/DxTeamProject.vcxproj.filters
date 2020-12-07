@@ -222,6 +222,7 @@
       <Filter>Gimmick\KT</Filter>
     </ClCompile>
     <ClCompile Include="Book.cpp" />
+    <ClCompile Include="Dragon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -469,6 +470,7 @@
       <Filter>Gimmick\KT</Filter>
     </ClInclude>
     <ClInclude Include="Book.h" />
+    <ClInclude Include="Dragon.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

@@ -26,6 +26,7 @@ class CBreakableWall;
 class RotationBoard;
 class CSwitch;
 class CBook;
+class CDragon;
 
 //class CSoundManager;
 class CBox;
@@ -62,6 +63,7 @@ private:
 	CBox* m_pBox;
 	CSphere* m_pSphere;
 	CBook* m_pBook;
+	CDragon* m_pDragon;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 public:
