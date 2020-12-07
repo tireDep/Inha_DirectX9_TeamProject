@@ -107,3 +107,39 @@ void CBackground::Render()
 void CBackground::SetDiffScale(D3DXVECTOR3 set)
 {
 }
+
+int CBackground::GetTextureIndex()
+{
+	if (m_strTxtFile == "TreesBlue.png")
+		return 0;
+	if (m_strTxtFile == "TreesGreen.png")
+		return 1;
+	if (m_strTxtFile == "TreesYellow.png")
+		return 2;
+	if (m_strTxtFile == "TreesRed.png")
+		return 3;
+}
+
+void CBackground::SetTexture(int index)
+{
+	if (index == 0)
+	{
+		m_strTxtFile = "TreesBlue.png";
+		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+	}
+	else if (index == 1)
+	{
+		m_strTxtFile = "TreesGreen.png";
+		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+	}
+	else if (index == 2)
+	{
+		m_strTxtFile = "TreesYellow.png";
+		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+	}
+	else if (index == 3)
+	{
+		m_strTxtFile = "TreesRed.png";
+		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+	}
+}

@@ -5,6 +5,8 @@
 #include "stdafx.h"
 #include "IObject.h"
 
+#include "Background.h"
+
 #include "Gimmick.h"
 #include "RotationBoard.h"
 
@@ -62,6 +64,19 @@ void CImguiClass::SetVecItem()
 		{
 			for (int i = 0; i < tempVec.size(); i++)
 				tempObjType.push_back(eWTree);
+		}
+		else if (m_SubType == LoadType::eColorTree)
+		{
+			tempVec.clear();
+			tempVec.push_back("Tree01");
+			tempVec.push_back("Tree02");
+			tempVec.push_back("Bush01");
+			tempVec.push_back("Bush02");
+			tempVec.push_back("Shrub01");
+			tempVec.push_back("Shrub02");
+
+			for (int i = 0; i < tempVec.size(); i++)
+				tempObjType.push_back(eCTree);
 		}
 #ifdef _DEBUG
 		else if (m_SubType == LoadType::eInvisibleWall)
@@ -460,8 +475,10 @@ void CImguiClass::Update_FileLoader()
 		ImGui::SameLine(); if (ImGui::RadioButton("SummerTree", m_SubType == LoadType::eSummerTree)) { m_SubType = LoadType::eSummerTree; m_FileLoadIndex = -1; }
 
 		if (ImGui::RadioButton("WinterTree", m_SubType == LoadType::eWinterTree)) { m_SubType = LoadType::eWinterTree; m_FileLoadIndex = -1; }
+		ImGui::SameLine(); if (ImGui::RadioButton("ColorTree", m_SubType == LoadType::eColorTree)) { m_SubType = LoadType::eColorTree; m_FileLoadIndex = -1; }
+
 #ifdef _DEBUG
-		ImGui::SameLine(); if (ImGui::RadioButton("InvisibleWall", m_SubType == LoadType::eInvisibleWall)) { m_SubType = LoadType::eInvisibleWall; m_FileLoadIndex = -1; }
+		if (ImGui::RadioButton("InvisibleWall", m_SubType == LoadType::eInvisibleWall)) { m_SubType = LoadType::eInvisibleWall; m_FileLoadIndex = -1; }
 #endif // _DEBUG
 
 
@@ -606,6 +623,8 @@ void CImguiClass::Update_Inspector()
 			ImGui::Separator();
 
 			// >> 선택된 오브젝트에 따라 인스펙터 변경
+
+			// >> 물리 적용 오브젝트 : 색상 선택
 			if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eBox
 				|| g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere
 				|| g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCylinder)
@@ -613,9 +632,31 @@ void CImguiClass::Update_Inspector()
 				// >> object만 색 지정 가능
 				SetObjectColor();
 			}
+
+			// >> 색상 나무 : 텍스쳐 선택
+			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCTree)
+			{
+				CBackground* temp = dynamic_cast<CBackground*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+
+				ImGui::Text("Texture");
+				static int pushIndex = 0;
+				pushIndex = temp->GetTextureIndex();
+				string charName[4] = { "Blue", "Green", "Yellow", "Red" };
+				for (int i = 0; i < 4; i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str(), pushIndex == i))
+					{
+						pushIndex = i;
+						temp->SetTexture(pushIndex);
+					}
+				} // << : for
+
+				ImGui::Separator();
+			}
+			
+			// >> 회전판자 기믹 : 기믹 관련 변수 설정
 			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_RotationBoard)
 			{
-				// >> 회전판자 기믹
 				CRotationBoard* temp = dynamic_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 
 				ImGui::Text("RotationAxial");
