@@ -150,7 +150,7 @@
     <ClInclude Include="AllocateHierarchy.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Box.h" />
-    <ClInclude Include="BreakeableWall.h" />
+    <ClInclude Include="BreakableWall.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CHeight.h" />
@@ -238,7 +238,7 @@
     <ClCompile Include="AllocateHierarchy.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Box.cpp" />
-    <ClCompile Include="BreakeableWall.cpp" />
+    <ClCompile Include="BreakableWall.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CHeight.cpp" />

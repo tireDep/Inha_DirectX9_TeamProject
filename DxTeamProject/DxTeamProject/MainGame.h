@@ -52,6 +52,8 @@ private:
 	CDoor* m_pGimmick_Door[2];
 	RotationBoard* m_pGimmick_RotationBoard;
 	CSwitch* m_pGimmick_Switch;
+	CBreakableWall* m_pGimmick_BreakableWall[2];
+
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 public:

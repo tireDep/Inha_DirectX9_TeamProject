@@ -25,7 +25,7 @@
 //Gimmick
 #include "Colorchanger.h"
 #include "Door.h"
-#include "BreakeableWall.h"
+#include "BreakableWall.h"
 #include "RotationBoard.h"
 #include "Switch.h"
 
@@ -59,6 +59,8 @@ CMainGame::CMainGame() :
 {
 	m_pGimmick_Door[0] = NULL;
 	m_pGimmick_Door[1] = NULL;
+	m_pGimmick_BreakableWall[0] = NULL;
+	m_pGimmick_BreakableWall[1] = NULL;
 }
 
 CMainGame::~CMainGame()
@@ -73,6 +75,8 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pGimmick_Door[1]);
 	SafeDelete(m_pGimmick_RotationBoard);
 	SafeDelete(m_pGimmick_Switch);
+	SafeDelete(m_pGimmick_BreakableWall[0]);
+	SafeDelete(m_pGimmick_BreakableWall[1]);
 
 	g_pFileLoadManager->Destroy();
 	
@@ -150,6 +154,11 @@ void CMainGame::Setup()
 
 	m_pGimmick_Switch = new CSwitch;
 	m_pGimmick_Switch->Setup("Resource/XFile/Gimmick/Switch", "Weight_switch.X");
+
+	m_pGimmick_BreakableWall[0] = new CBreakableWall;
+	m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "standard_wall.X");
+	m_pGimmick_BreakableWall[1] = new CBreakableWall;
+	m_pGimmick_BreakableWall[1]->Setup("Resource/XFile/Gimmick/BreakableWall", "brick.X");
 
 	/// 이 아래는 지울 수도 있는 선언
 	//for (int i = 0; i < 8; i++)
@@ -326,6 +335,10 @@ void CMainGame::Update()
 	if (m_pChanger)
 		m_pChanger->Update();
 
+	if (m_pGimmick_BreakableWall[0])
+		m_pGimmick_BreakableWall[0]->Update();
+	if (m_pGimmick_BreakableWall[1])
+		m_pGimmick_BreakableWall[1]->Update();
 
 	for (int i = 0; i < m_pMeshTile.size(); ++i)
 	{
@@ -419,7 +432,10 @@ void CMainGame::Render()
 		m_pGimmick_Switch->Render();
 	if (m_pChanger)
 		m_pChanger->Render();
-
+	if (m_pGimmick_BreakableWall[0])
+		m_pGimmick_BreakableWall[0]->Render();
+	if (m_pGimmick_BreakableWall[1]) 
+		m_pGimmick_BreakableWall[1]->Render();
 
 	if (g_gameManager->GetUImode())
 	{
