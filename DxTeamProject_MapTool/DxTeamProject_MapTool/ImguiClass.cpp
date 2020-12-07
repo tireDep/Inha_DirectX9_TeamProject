@@ -19,19 +19,19 @@ void CImguiClass::SetVecItem()
 	vector<ObjectType> tempObjType;
 	if (m_NowLoadType == LoadType::eMap)
 	{
-		tempVec.push_back("Tile01"); tempObjType.push_back(eTile01);
-		tempVec.push_back("Tile02"); tempObjType.push_back(eTile02);
-		tempVec.push_back("Tile03"); tempObjType.push_back(eTile03);
-		tempVec.push_back("Tile04"); tempObjType.push_back(eTile04);
-		tempVec.push_back("Tile05"); tempObjType.push_back(eTile05);
-		tempVec.push_back("Tile06"); tempObjType.push_back(eTile06);
-		tempVec.push_back("Tile07"); tempObjType.push_back(eTile07);
-		tempVec.push_back("Tile08"); tempObjType.push_back(eTile08);
-		tempVec.push_back("Tile09"); tempObjType.push_back(eTile09);
-		tempVec.push_back("Tile10"); tempObjType.push_back(eTile10);
-		tempVec.push_back("Tile11"); tempObjType.push_back(eTile11);
-		tempVec.push_back("Tile12"); tempObjType.push_back(eTile12);
-		tempVec.push_back("Tile13"); tempObjType.push_back(eTile13);
+		tempVec.push_back("Grass"); tempObjType.push_back(eTile01);
+		tempVec.push_back("Ground01"); tempObjType.push_back(eTile02);
+		tempVec.push_back("Ground02"); tempObjType.push_back(eTile03);
+		tempVec.push_back("Rock01"); tempObjType.push_back(eTile04);
+		tempVec.push_back("Rock02"); tempObjType.push_back(eTile05);
+		tempVec.push_back("Sand01"); tempObjType.push_back(eTile06);
+		tempVec.push_back("Sand02"); tempObjType.push_back(eTile07);
+		tempVec.push_back("Yellow"); tempObjType.push_back(eTile12);
+		tempVec.push_back("Water01"); tempObjType.push_back(eTile08);
+		tempVec.push_back("Water02"); tempObjType.push_back(eTile09);
+		tempVec.push_back("Water03"); tempObjType.push_back(eTile10);
+		tempVec.push_back("Water04"); tempObjType.push_back(eTile11);
+		tempVec.push_back("Ocean"); tempObjType.push_back(eTile13);
 	}
 	else if (m_NowLoadType == LoadType::eObject)
 	{
