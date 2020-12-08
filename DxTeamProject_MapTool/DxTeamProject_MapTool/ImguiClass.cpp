@@ -519,7 +519,13 @@ void CImguiClass::Update_FileLoader()
 	ImGui::SameLine();
 	if (ImGui::Button("Load") && m_FileLoadIndex != -1)
 	{
+		g_pObjectManager->SetSelectAllFalse();
+
 		IObject::CreateObject(m_vecObjType[m_FileLoadIndex], m_FileLoadIndex);
+
+		//int index = g_pObjectManager->GetVecSize() - 1;
+		//g_pObjectManager->GetIObject(index).SetClick(true);
+		//g_pObjectManager->GetIObject(index).SetPick(true);
 	}
 
 	ImGui::Separator();

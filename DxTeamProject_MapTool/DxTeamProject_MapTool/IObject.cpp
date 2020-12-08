@@ -22,8 +22,8 @@ IObject::IObject() :
 	m_vScale(0,0,0),
 	m_vRotate(0,0,0),
 	m_vTranslate(1.0f,0,1.0f),
-	m_isClick(false),
-	m_isPick(false),
+	m_isClick(true),
+	m_isPick(true),
 	m_dxColor(0.5, 0.5, 0.5, 1),
 	m_pOBB(NULL)
 {

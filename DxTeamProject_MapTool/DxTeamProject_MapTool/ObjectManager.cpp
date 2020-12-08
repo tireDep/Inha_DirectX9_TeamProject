@@ -95,10 +95,14 @@ void CObjectManager::Render()
 
 void CObjectManager::RemoveClickedObj()
 {
+	int preIndex = 0;
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
 		if (m_vecObject[i]->GetClick())
+		{
+			preIndex = i - 1;
 			RemoveObject(m_vecObject[i]);
+		}
 	}
 
 	if (m_vecObject.size() == 0)
@@ -106,6 +110,21 @@ void CObjectManager::RemoveClickedObj()
 		IObject::SetRefCnt(0);
 		m_sameNum = 0;
 		g_pFileLoadManager->SetIndexNumZero();
+	}
+	else
+	{
+		SetSelectAllFalse();
+		if (preIndex == -1)
+		{
+			m_vecObject[0]->SetClick(true);
+			m_vecObject[0]->SetPick(true);
+		}
+		else
+		{
+			m_vecObject[preIndex]->SetClick(true);
+			m_vecObject[preIndex]->SetPick(true);
+		}
+		
 	}
 }
 
@@ -139,7 +158,7 @@ int CObjectManager::GetVecSize()
 	return m_vecObject.size();
 }
 
-void CObjectManager::SetSelectFalse()
+void CObjectManager::SetSelectAllFalse()
 {
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{

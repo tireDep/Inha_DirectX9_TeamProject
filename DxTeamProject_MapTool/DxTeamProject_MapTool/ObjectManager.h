@@ -29,7 +29,7 @@ public:
 	IObject& GetIObject(int index);
 	int GetVecSize();
 
-	void SetSelectFalse();
+	void SetSelectAllFalse();
 	int GetSelectIndex();
 };
 

@@ -125,7 +125,7 @@ void CToolMain::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		CImguiClass::m_prevSelectIndex = 0;
 		m_pRay->SetOrigin(D3DXVECTOR3(9999, 9999, 9999));
 		m_pRay->SetDirection(D3DXVECTOR3(0, 0, 0));
-		g_pObjectManager->SetSelectFalse();
+		g_pObjectManager->SetSelectAllFalse();
 		break;
 
 	case WM_KEYDOWN:
