@@ -47,7 +47,7 @@ void CDragon::Setup()
 		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
 		return;
 	}
-	g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_17(white).png", m_pTexture);
+	//g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_17(white).png", m_pTexture);
 
 	m_pMesh = xfile->pMesh;
 	m_adjBuffer = xfile->adjBuffer;
@@ -66,11 +66,10 @@ void CDragon::Render()
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
 
-	D3DXMATRIXA16 matS, matR, matT;
+	D3DXMATRIXA16 matS, matT;
 	D3DXMatrixScaling(&matS, 0.3f, 0.3f, 0.3f);
-	D3DXMatrixRotationX(&matR, 5);
 	D3DXMatrixTranslation(&matT, 8, 3, 0);
-	matWorld = matS* matR * matT;
+	matWorld = matS * matT;
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 	if (m_pMesh == NULL)

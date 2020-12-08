@@ -168,7 +168,7 @@ void CMainGame::Setup()
 	// m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
 
 	m_pGimmick_Switch = new CSwitch;
-	m_pGimmick_Switch->Setup("Resource/XFile/Gimmick/Switch", "Weight_switch.X");
+	m_pGimmick_Switch->Setup("Resource/XFile/Gimmick/Switch", "Force_switch.X");
 
 	m_pGimmick_BreakableWall[0] = new CBreakableWall;
 	m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "standard_wall.X");
@@ -203,10 +203,10 @@ void CMainGame::Setup()
 
 	// Ray y check
 
-	for (int i = 0; i < 6; ++i)
+	for (int i = 0; i < 5; ++i)
 	{
 		m_pMeshTile.push_back(new MeshTile);
-		m_pMeshTile[i]->Setup(0, i - 2.5 , -10);
+		m_pMeshTile[i]->Setup( 0 , i -  1.5f  , i - 10);
 	}
 
 	//m_pMeshTile = new MeshTile;
@@ -361,11 +361,14 @@ void CMainGame::Update()
 			m_pChanger->SetHitLength(m_pChanger->GetPos().z - m_pMeshTile[i]->GetPos().z);
 			m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere2);
 			
+			break;
 		}
-		else
+		else 
 		{
+		
 			m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere);
 			m_pChanger->SetHitLength(50);
+		
 		}
 	}
 	if (m_pGimmick_BreakableWall[0])
