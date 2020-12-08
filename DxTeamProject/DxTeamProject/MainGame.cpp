@@ -202,8 +202,8 @@ void CMainGame::Setup()
 	//m_pHeightMap = new CHeight;
 	//m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
 
-	//m_pSkinnedMesh = new CSkinnedMesh;
-	//m_pSkinnedMesh->SetUp("Resource/XFile/Character", "1slot Cha.X");
+	m_pSkinnedMesh = new CSkinnedMesh;
+	m_pSkinnedMesh->SetUp("Resource/XFile/Character", "Character.X");
 
 	g_pEventManager->AddListener(g_gameManager);
 	g_pEventManager->AddListener(m_pCamera);
@@ -240,8 +240,8 @@ void CMainGame::Update()
 	if (m_pCamera)
 		m_pCamera->Update();
 
-	//if (m_pSkinnedMesh)
-	//	m_pSkinnedMesh->Update();
+	if (m_pSkinnedMesh)
+		m_pSkinnedMesh->Update();
 
 	//if(m_pOrb)
 	//	m_pOrb->Update();
@@ -351,10 +351,10 @@ void CMainGame::Update()
 	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
 
 	// Gimmick
-	if (m_pGimmick_Door[0])
-		m_pGimmick_Door[0]->Update();
-	if (m_pGimmick_Door[1])
-		m_pGimmick_Door[1]->Update();
+	//if (m_pGimmick_Door[0])
+	//	m_pGimmick_Door[0]->Update();
+	//if (m_pGimmick_Door[1])
+	//	m_pGimmick_Door[1]->Update();
 
 	if (m_pGimmick_RotationBoard)
 		m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
@@ -418,8 +418,8 @@ void CMainGame::Render()
 
 	g_pObjectManager->Render();
 
-	 //if (m_pSkinnedMesh)
-	 //	m_pSkinnedMesh->Render(NULL);
+	 if (m_pSkinnedMesh)
+	 	m_pSkinnedMesh->Render(NULL);
 
 	//if (m_pHeightMap)
 	//	m_pHeightMap->Render();
@@ -449,10 +449,10 @@ void CMainGame::Render()
 	//	m_pMeshTile->Render();
 
 	// Gimmick
-	if (m_pGimmick_Door[0])
-		m_pGimmick_Door[0]->Render();
-	if (m_pGimmick_Door[1])
-		m_pGimmick_Door[1]->Render();
+	//if (m_pGimmick_Door[0])
+	//	m_pGimmick_Door[0]->Render();
+	//if (m_pGimmick_Door[1])
+	//	m_pGimmick_Door[1]->Render();
 	if (m_pGimmick_RotationBoard)
 		m_pGimmick_RotationBoard->Render();
 	if (m_pGimmick_Switch)
