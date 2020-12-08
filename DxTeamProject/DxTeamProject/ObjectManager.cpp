@@ -423,10 +423,10 @@ void CObjectManager::Update()
 			m_vecPObject[hittee]->CollisionOtherObject(m_vecPObject[hitter]);
 		}
 	}
-	//for (int i = 0; i < m_vecIObject.size(); i++)
-	//{
-	//	m_vecIObject[i]->Update();
-	//}
+	for (int i = 0; i < m_vecIObject.size(); i++)
+	{
+		m_vecIObject[i]->Update();
+	}
 }
 
 vector<CObject*> CObjectManager::GetVecObject()

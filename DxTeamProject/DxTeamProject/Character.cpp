@@ -278,24 +278,27 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
 	//	m_vPosition.y = g_pObjectManager->m_vecIObject[3]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[3]->GetTranslate().y + 0.5;
 	//	cout << 3 << endl;
 	//}
-	//
+	
 
 	float height = m_vPosition.y;
 
-	for (int i = 0; i < g_pObjectManager->m_OBB.size(); ++i)
-	{
-		if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[i]) == true)
+	
+		for (int i = 0; i < g_pObjectManager->m_OBB.size(); ++i)
 		{
-			m_vPosition.y = g_pObjectManager->m_vecIObject[i]->GetScale().y *
-				g_pObjectManager->GetScale() +
-				g_pObjectManager->m_vecIObject[i]->GetTranslate().y + 0.5;
-		}
-		else
-		{
-			//m_vPosition.y -= 0.001f;
+			if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[i]) == true)
+			{
+				m_vPosition.y = g_pObjectManager->m_vecIObject[i]->GetScale().y *
+					g_pObjectManager->GetScale() +
+					g_pObjectManager->m_vecIObject[i]->GetTranslate().y + 0.5;
+			}
+			else
+			{
+				m_vPosition.y -= 0.001f;
+			}
+
 		}
 	
-	}
+	
 
 	
 	if (pMap)

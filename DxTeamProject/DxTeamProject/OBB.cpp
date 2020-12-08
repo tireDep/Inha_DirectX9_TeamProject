@@ -256,6 +256,80 @@ void COBB::SetupTile(D3DXVECTOR3& xfileMin, D3DXVECTOR3& xfileMax , D3DXVECTOR3 
 
 }
 
+void COBB::SetupMesh(D3DXVECTOR3 & vMin2, D3DXVECTOR3 & vMax2 , float cubesize)
+{
+	D3DXVECTOR3 vMax = vMin2;
+	D3DXVECTOR3 vMin = vMax2;
+
+	m_OriCenterPos = (vMin + vMax) / 2.0f;
+
+	m_vOriAxisDir[0] = D3DXVECTOR3(1, 0, 0);
+	m_vOriAxisDir[1] = D3DXVECTOR3(0, 1, 0);
+	m_vOriAxisDir[2] = D3DXVECTOR3(0, 0, 1);
+
+	m_fAxisLen[0] = fabs(vMax.x - vMin.x);
+	m_fAxisLen[1] = fabs(vMax.y - vMin.y);
+	m_fAxisLen[2] = fabs(vMax.z - vMin.z);
+
+	m_fAxisHalfLen[0] = m_fAxisLen[0] / 2.0f;
+	m_fAxisHalfLen[1] = m_fAxisLen[1] / 2.0f;
+	m_fAxisHalfLen[2] = m_fAxisLen[2] / 2.0f;
+
+	vector<D3DXVECTOR3> vecVertex;
+
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], -cubesize /2, -m_fAxisHalfLen[2])); // 0
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], cubesize / 2, -m_fAxisHalfLen[2])); //1
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], cubesize / 2, -m_fAxisHalfLen[2])); //2
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], -cubesize / 2, -m_fAxisHalfLen[2])); // 3
+
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], -cubesize / 2, m_fAxisHalfLen[2])); //4 
+	vecVertex.push_back(D3DXVECTOR3(-m_fAxisHalfLen[0], cubesize / 2, m_fAxisHalfLen[2])); // 5
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], cubesize / 2, m_fAxisHalfLen[2])); //6
+	vecVertex.push_back(D3DXVECTOR3(m_fAxisHalfLen[0], -cubesize / 2, m_fAxisHalfLen[2])); //7
+
+	vector<DWORD> vecIndex;
+	//앞면
+	vecIndex.push_back(0);
+	vecIndex.push_back(1);
+	vecIndex.push_back(1);
+	vecIndex.push_back(2);
+	vecIndex.push_back(2);
+	vecIndex.push_back(3);
+	vecIndex.push_back(3);
+	vecIndex.push_back(0);
+
+	//뒷면
+	vecIndex.push_back(4);
+	vecIndex.push_back(5);
+	vecIndex.push_back(5);
+	vecIndex.push_back(6);
+	vecIndex.push_back(6);
+	vecIndex.push_back(7);
+	vecIndex.push_back(7);
+	vecIndex.push_back(4);
+
+	////왼면
+	vecIndex.push_back(0);
+	vecIndex.push_back(4);
+	vecIndex.push_back(1);
+	vecIndex.push_back(5);
+
+
+	////오른면
+	vecIndex.push_back(2);
+	vecIndex.push_back(6);
+	vecIndex.push_back(3);
+	vecIndex.push_back(7);
+
+	m_vecVertex.resize(vecIndex.size());
+
+	for (unsigned int i = 0; i < vecIndex.size(); ++i)
+	{
+		m_vecVertex[i].p = vecVertex[vecIndex[i]];
+	}
+	D3DXMatrixIdentity(&m_matWorldTM);
+}
+
 bool COBB::IsCollision(COBB* pOBB1, COBB* pOBB2)
 {
 	// 중심						 m_OriCenterPos

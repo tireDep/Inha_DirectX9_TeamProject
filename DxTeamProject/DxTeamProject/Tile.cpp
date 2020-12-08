@@ -52,19 +52,15 @@ void CTile::Setup(ST_MapData setData)
 
 	D3DXMatrixTranslation(&matT, m_vTranslate.x, m_vTranslate.y, m_vTranslate.z);
 	m_matWorld = matS * matR * matT;
-	matWorld =  matT;
+	matWorld = matT;
 	D3DXVECTOR3 *pVertices;
 	
-
-	
-
 	for (int i = 0; i < m_vecMtrls.size(); ++i)
 	{
 		m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
 		D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(),
 			m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
-		m_pMesh->UnlockVertexBuffer();
-		
+		m_pMesh->UnlockVertexBuffer();	
 	}
 	
 	for (int i = 0; i < m_vecMtrls.size(); ++i)
@@ -82,8 +78,6 @@ void CTile::Setup(ST_MapData setData)
 void CTile::Update()
 {
 
-	
-
 	for (int i = 0; i < m_pOBB.size(); ++i)
 	if (m_pOBB[i])
 		m_pOBB[i]->Update(&m_matWorld);
@@ -92,8 +86,9 @@ void CTile::Update()
 
 void CTile::Render()
 {
-	//if (m_pOBB)
-	//	m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
+	for (int i = 0; i < m_pOBB.size(); ++i)
+	if (m_pOBB[i])
+	m_pOBB[i]->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
 
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
