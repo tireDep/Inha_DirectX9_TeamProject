@@ -62,6 +62,8 @@ public:
 	virtual void SetPusingForce(D3DXVECTOR3 forcedirection);
 	virtual bool hasIntersected(PObject * otherobject);
 	virtual void CollisionOtherObject(PObject * otherobject);
+	virtual void Collision3D(PObject * otherobject);
+	virtual void UpdateLand(float duration);
 
 	// Delete
 	//virtual void Update3D(float duration) = 0;
@@ -72,4 +74,7 @@ public:
 	virtual void RunPhysics(float duration) = 0;
 
 	virtual void Render();
+
+	// collide
+	virtual void GenerateContacts() { };
 };

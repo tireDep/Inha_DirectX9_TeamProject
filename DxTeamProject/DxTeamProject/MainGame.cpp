@@ -29,12 +29,13 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 
-#include "Book.h"
-
 #include "PObject.h"
 #include "Box.h"
 #include "Sphere.h"
 #include "Cylinder.h"
+
+#include "Book.h"
+#include "Dragon.h"
 
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
@@ -57,7 +58,8 @@ CMainGame::CMainGame() :
 	m_pGimmick_RotationBoard(NULL),
 	m_pGimmick_Switch(NULL),
 	//
-	m_pBook(NULL)
+	m_pBook(NULL),
+	m_pDragon(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
@@ -83,6 +85,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pGimmick_BreakableWall[1]);
 	//
 	SafeDelete(m_pBook);
+	SafeDelete(m_pDragon);
 
 	g_pFileLoadManager->Destroy();
 	
@@ -112,9 +115,15 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
+
 	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123456.dat");
+
+#ifdef _DEBUG
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "createmap2.dat");
+#else
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+#endif // DEBUG
 	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
@@ -169,28 +178,15 @@ void CMainGame::Setup()
 
 	m_pBook = new CBook;
 	m_pBook->Setup();
+
+	m_pDragon = new CDragon;
+	m_pDragon->Setup();
+
 	/// 이 아래는 지울 수도 있는 선언
-	//for (int i = 0; i < 8; i++)
-	//{
-	//	CPSphere* Sphere = new CPSphere();
-	//	Sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
-	//}
-	for (int i = 0; i < 1; i++)
-	{
-		//CBox* box = new CBox();
-		//box->Setup();
-		//CSphere* sphere = new CSphere();
-		//sphere->Setup();
-		CCylinder* cylinder = new CCylinder();
-		cylinder->Setup();
-	}
-	//for (int i = 0; i < 8; i++)
-	//{
-	//	CPSCylinder* cylinder = new CPSCylinder();
-	//	cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 25));
-	//}
-	//m_pHeightMap = new CHeight;
-	//m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
+	//m_pSphere = new CSphere();
+	//m_pSphere->Setup();
+	//m_pBox = new CBox();
+	//m_pBox->Setup();
 
 	//m_pSkinnedMesh = new CSkinnedMesh;
 	//m_pSkinnedMesh->SetUp("Resource/XFile/Character", "1slot Cha.X");
@@ -242,31 +238,36 @@ void CMainGame::Update()
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
-	
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
 			m_pCharacter->SetColor(RED);
+			m_pDragon->Update(RED);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Yellow:
 			m_pCharacter->SetColor(YELLOW);
+			m_pDragon->Update(YELLOW);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Green:
 			m_pCharacter->SetColor(GREEN);
+			m_pDragon->Update(GREEN);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Blue:
 			m_pCharacter->SetColor(BLUE);
+			m_pDragon->Update(BLUE);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Black:
 			m_pCharacter->SetColor(BLACK);
+			m_pDragon->Update(BLACK);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::White:
 			m_pCharacter->SetColor(WHITE);
+			m_pDragon->Update(WHITE);
 			m_pUI->SetPickColor();
 			break;
 		default:
@@ -326,9 +327,11 @@ void CMainGame::Update()
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
-	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());
+	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
 	g_pObjectManager->Update();
-
+	///
+	//m_pBox->Update(g_pTimeManager->GetElapsedTime());
 	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
 	//g_pObjectManager->UpdateCollide(g_pTimeManager->GetElapsedTime());			// new Collision
 	//g_pObjectManager->Update();													// Collision
@@ -336,9 +339,9 @@ void CMainGame::Update()
 
 	// Gimmick
 	if (m_pGimmick_Door[0])
-		m_pGimmick_Door[0]->Update();
+		m_pGimmick_Door[0]->Update(g_pTimeManager->GetElapsedTime());
 	if (m_pGimmick_Door[1])
-		m_pGimmick_Door[1]->Update();
+		m_pGimmick_Door[1]->Update(g_pTimeManager->GetElapsedTime());
 
 	if (m_pGimmick_RotationBoard)
 		m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
@@ -370,7 +373,6 @@ void CMainGame::Update()
 
 	
 }
-
 
 void CMainGame::Render()
 {
@@ -453,6 +455,9 @@ void CMainGame::Render()
 
 	if (m_pBook)
 		m_pBook->Render();
+
+	if (m_pDragon)
+		m_pDragon->Render();
 
 	if (g_gameManager->GetUImode())
 	{

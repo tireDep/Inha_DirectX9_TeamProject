@@ -31,5 +31,6 @@ public:
 	// virtual void SetDiffScale(D3DXVECTOR3 set);
 
 	virtual void SetRotationAxialIndex(int index);
+	virtual int GetRotationAxialIndex();
 };
 

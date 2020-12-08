@@ -30,6 +30,16 @@ void CRotationBoard::Setup(ST_MapData setData)
 	m_vRotate = setData.vRotate;
 	m_vTranslate = setData.vTranslate;
 
+	m_fRotationSpeed = setData.gimmickData.roationSpeed;
+	if (setData.gimmickData.roationAxialIndex == 0)
+		m_rotationAxial = RotationAxial::Rotation_X; 
+	else if (setData.gimmickData.roationAxialIndex == 1)
+		m_rotationAxial = RotationAxial::Rotation_Y;
+	else if (setData.gimmickData.roationAxialIndex == 2)
+		m_rotationAxial = RotationAxial::Rotation_Z;
+	else if (setData.gimmickData.roationAxialIndex == 3)
+		m_rotationAxial = RotationAxial::NONE;
+
 	ST_XFile* xfile = new ST_XFile;
 
 	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
@@ -118,4 +128,16 @@ void CRotationBoard::SetRotationAxialIndex(int index)
 		m_rotationAxial = RotationAxial::Rotation_Y;
 	else if (index == 2)
 		m_rotationAxial = RotationAxial::Rotation_Z;
+}
+
+int CRotationBoard::GetRotationAxialIndex()
+{
+	if (m_rotationAxial == RotationAxial::Rotation_X)
+		return 0;
+	else if (m_rotationAxial == RotationAxial::Rotation_Y)
+		return 1;
+	else if (m_rotationAxial == RotationAxial::Rotation_Z)
+		return 2;
+	else if (m_rotationAxial == RotationAxial::NONE)
+		return 3;
 }

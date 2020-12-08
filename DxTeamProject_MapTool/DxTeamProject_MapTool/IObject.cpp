@@ -224,22 +224,23 @@ void IObject::SetRefCnt(int set)
 	IObject::m_nRefCnt = set;
 }
 
-void IObject::CreateObject(const ObjectType objType, int index)
+void IObject::CreateObject(const ObjectType& objType, int index)
 {
 	// >> FileLoader 생성
+	
+	ST_MapData mapData;
+	mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+	mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
+	// >> todo : translate 현 위치 중앙으로 받아오기
+
+	mapData.objType = objType;
+
 	switch (objType)
 	{
 	case eTile01: case eTile02:	case eTile03: case eTile04: case eTile05: case eTile06:
 	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
 	{
-		ST_MapData mapData;
-		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
-		// >> todo : translate 현 위치 중앙으로 받아오기
-
-		mapData.objType = objType;
-
 		mapData.strObjName = string("Tile") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Tile";
 		mapData.strTxtPath = "Texture_01.png";
@@ -278,16 +279,8 @@ void IObject::CreateObject(const ObjectType objType, int index)
 
 	case eATree:
 	{
-		ST_MapData mapData;
-		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
-		// >> todo : translate 현 위치 중앙으로 받아오기
-
-		mapData.objType = objType;
-
 		mapData.strObjName = string("AutumnTree") + to_string(m_nRefCnt + 1);
-		mapData.strFolderPath = "Resource/XFile/Background";
+		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "autumn_texture.png";
 
 		mapData.strXFilePath = string("AutumnTree_0") + to_string(index + 1) + ".X";
@@ -299,16 +292,8 @@ void IObject::CreateObject(const ObjectType objType, int index)
 
 	case eSTree:
 	{
-		ST_MapData mapData;
-		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
-		// >> todo : translate 현 위치 중앙으로 받아오기
-
-		mapData.objType = objType;
-
 		mapData.strObjName = string("SummerTree") + to_string(m_nRefCnt + 1);
-		mapData.strFolderPath = "Resource/XFile/Background";
+		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "summer_texture.png";
 
 		mapData.strXFilePath = string("SummerTree_0") + to_string(index + 1) + ".X";
@@ -320,16 +305,8 @@ void IObject::CreateObject(const ObjectType objType, int index)
 
 	case eWTree:
 	{
-		ST_MapData mapData;
-		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
-		// >> todo : translate 현 위치 중앙으로 받아오기
-
-		mapData.objType = objType;
-
 		mapData.strObjName = string("WinterTree") + to_string(m_nRefCnt + 1);
-		mapData.strFolderPath = "Resource/XFile/Background";
+		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "winter_texture.png";
 
 		mapData.strXFilePath = string("WinterTree_0") + to_string(index + 1) + ".X";
@@ -339,16 +316,70 @@ void IObject::CreateObject(const ObjectType objType, int index)
 	}
 	break;
 
+	case eCTree:
+	{
+		mapData.strObjName = string("ColorTree") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/ColorTree";
+		mapData.strTxtPath = "TreesBlue.png";
+
+		mapData.strXFilePath = string("Tree_0") + to_string(index + 1) + ".X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+		break;
+
+	case eBall:
+	{
+		mapData.strObjName = string("BeachBall") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/Else";
+		mapData.strTxtPath = "BeachBall_Base_Color.png";
+		mapData.strXFilePath = "ball.X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+		break;
+
+	case eChair:
+	{
+		mapData.strObjName = string("Chair") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/Else";
+		mapData.strTxtPath = "";
+		mapData.strXFilePath = "blue_chair.X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+	break;
+
+	case eUmbrella:
+	{
+		mapData.strObjName = string("Umbrella") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/Else";
+		mapData.strTxtPath = "Umbrella_Blue.png";
+		mapData.strXFilePath = "Umbrella.X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+	break;
+
+	case eSnowman:
+	{
+		mapData.strObjName = string("Snowman") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/Else";
+		mapData.strTxtPath = "Snowman.png";
+		mapData.strXFilePath = "Snowman.X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+	break;
+
 #ifdef _DEBUG
 	case eInvisibleWall:
 	{
-		ST_MapData mapData;
-		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
-
-		mapData.objType = objType;
-
 		mapData.strObjName = string("InvisibleWall") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "";
 		mapData.strTxtPath = "";
@@ -358,8 +389,7 @@ void IObject::CreateObject(const ObjectType objType, int index)
 		background->Setup(mapData);
 	}
 		break;
-
-#endif // _DEBUG
+ #endif // _DEBUG
 
 	case eG_RotationBoard:
 	case eG_BreakWall:
@@ -374,7 +404,7 @@ void IObject::CreateObject(const ObjectType objType, int index)
 	} // << : switch
 }
 
-void IObject::CreateObject(const ST_MapData& mapData)
+void IObject::CreateObject(ST_MapData& mapData)
 {
 	// >> SaveLoad 파일 생성
 	switch (mapData.objType)
@@ -411,9 +441,14 @@ void IObject::CreateObject(const ST_MapData& mapData)
 	case eATree:
 	case eSTree:
 	case eWTree:
-#ifdef _DEBUG
+	case eCTree:
+// #ifdef _DEBUG
+	case eBall:
+	case eChair:
+	case eUmbrella:
+	case eSnowman:
 	case eInvisibleWall:
-#endif // _DEBUG
+// #endif // _DEBUG
 	{
 		CBackground* background = new CBackground;
 		background->Setup(mapData);

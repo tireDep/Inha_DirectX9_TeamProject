@@ -21,7 +21,7 @@ public:
 
 	virtual void SetDiffScale(D3DXVECTOR3 set);
 
-	static void CreateGimmick(const ObjectType objType);
-	static void CreateGimmick_SaveData(const ST_MapData& mapData);
+	static void CreateGimmick(const ObjectType& objType);
+	static void CreateGimmick_SaveData(ST_MapData& mapData);
 };
 
