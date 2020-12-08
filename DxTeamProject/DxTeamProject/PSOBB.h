@@ -21,5 +21,6 @@ public:
 	void Setup(CObject & object);
 	void Update(D3DXMATRIXA16* pmatWorld);
 	static bool IsCollision(CPSOBB * pOBB1, CPSOBB* pOBB2);
+	bool IsCollision(CPSOBB * otherOBB);
 	void Render();
 };

@@ -14,4 +14,7 @@ public:
 	virtual void Update(float duration) = 0;
 	virtual void Render() = 0;
 	virtual string GetName() { return m_strName; }
+
+	// OBB TEST
+	virtual CPSOBB* GetOBB() { return m_pOBB; }
 };

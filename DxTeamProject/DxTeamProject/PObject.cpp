@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PObject.h"
+#include "PSOBB.h"
 
 PObject::PObject()
 	: m_pShader(NULL)
@@ -238,7 +239,8 @@ void PObject::Update(float duration)
 	D3DXMatrixTranslation(&totalTransaltion, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	
 	// Need to modify
-	m_vTorque = angularforce * 10000000.0f;
+	//m_vTorque = angularforce * 10000000.0f;
+	m_vTorque = angularforce;
 	
 	m_vAngularAcceleration.x = m_vTorque.x * m_vInverseRotationInertia.x;
 	m_vAngularAcceleration.y = m_vTorque.y * m_vInverseRotationInertia.y;

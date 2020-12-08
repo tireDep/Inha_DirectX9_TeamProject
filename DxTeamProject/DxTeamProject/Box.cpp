@@ -3,6 +3,8 @@
 #include "Sphere.h"
 #include "Cylinder.h"
 #include "IObject.h"
+#include "Gimmick.h"
+#include "PSOBB.h"
 
 CBox::CBox()
 	: m_fWidth(1.0f)
@@ -88,6 +90,12 @@ void CBox::Setup(const ST_MapData & mapData)
 	//collisionbox.halfSize.y = m_fHeight;
 	//collisionbox.halfSize.z = m_fDepth;
 	//collisionbox.calculateInternals();
+
+	// OBB TEST
+	m_pOBB = new CPSOBB;
+	m_pOBB->Setup(*this);
+	g_pObjectManager->AddOBBbox(m_pOBB);
+	g_pObjectManager->AddBox(this);
 }
 //void CBox::Update(float duration)
 //{
@@ -184,6 +192,13 @@ string CBox::GetName()
 	return m_strName;
 }
 
+void CBox::Update(float duration)
+{
+	PObject::Update(duration);
+	// OBB TEST
+	m_pOBB->Update(&m_matWorld);
+}
+
 bool CBox::hasIntersected(CSphere & otherSphere)
 {
 	D3DXVECTOR3 center = otherSphere.GetPosition();
@@ -235,5 +250,22 @@ bool CBox::hasIntersected(CCylinder & otherCylinder)
 
 bool CBox::hasIntersected(IObject & otherIObject)
 {
+	return false;
+}
+
+// GIMMICK TEST
+bool CBox::hasIntersected(CGimmick * otherIObject)
+{
+	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
+	{
+		cout << "In" << endl;
+		this->SetLinearVelocity(-1 * this->GetLinearVelocity());
+		return true;
+	}
+	//if (CPSOBB::IsCollision(this->m_pOBB, otherIObject->GetOBB()))
+	//{
+	//	cout << "In" << endl;
+	//	this->SetLinearVelocity(-1 * this->GetLinearVelocity());
+	//}
 	return false;
 }

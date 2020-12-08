@@ -155,9 +155,6 @@
       <Filter>Physics\cyclone</Filter>
     </ClCompile>
     <ClCompile Include="Skydome.cpp" />
-    <ClCompile Include="PSOBB.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="MeshTile.cpp">
       <Filter>Object\IObject\Gimmick</Filter>
     </ClCompile>
@@ -235,6 +232,9 @@
     </ClCompile>
     <ClCompile Include="Cylinder.cpp">
       <Filter>Object\PObject\Cylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="PSOBB.cpp">
+      <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -417,9 +417,6 @@
       <Filter>Physics\cyclone</Filter>
     </ClInclude>
     <ClInclude Include="Skydome.h" />
-    <ClInclude Include="PSOBB.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="MeshTile.h">
       <Filter>Object\IObject\Gimmick</Filter>
     </ClInclude>
@@ -496,6 +493,9 @@
     </ClInclude>
     <ClInclude Include="Cylinder.h">
       <Filter>Object\PObject\Cylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="PSOBB.h">
+      <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

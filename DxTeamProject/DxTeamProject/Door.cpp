@@ -57,6 +57,11 @@ void CDoor::Setup(string folder, string file)
 	//	}
 	//}
 	delete xfile;
+
+	/// Later IObject inheritance...
+	//m_pOBB = new CPSOBB;
+	//m_pOBB->Setup(*this);
+	//g_pObjectManager->AddOBBbox(m_pOBB);
 }
 
 void CDoor::Update(float duration)
@@ -111,6 +116,10 @@ void CDoor::Update(float duration, bool isSwitchOn)
 		IsOpen = false;
 		Update(duration);
 	}
+
+	/// Later IObject inheritance...
+	//m_matWorld = m_matS * m_matRotGimmick * m_matT;
+	//m_pOBB->Update(&m_matWorld);
 }
 
 void CDoor::Render()

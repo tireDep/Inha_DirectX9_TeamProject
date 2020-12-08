@@ -75,6 +75,12 @@ void CRotationBoard::Setup(ST_MapData setData)
 
 	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
 	//m_matWorld = matS * matR * matT;
+
+	// OBB TEST
+	m_pOBB = new CPSOBB;
+	m_pOBB->Setup(*this);
+	g_pObjectManager->AddOBBbox(m_pOBB);
+	g_pObjectManager->AddGimmick(this);
 }
 
 //void RotationBoard::Setup(string folder, string file)
@@ -123,6 +129,9 @@ void CRotationBoard::Update(float duration)
 	default:
 		break;
 	}
+	
+	m_matWorld = m_matS * m_matRotGimmick * m_matT;
+	m_pOBB->Update(&m_matWorld);
 }
 
 void CRotationBoard::Render()
@@ -135,6 +144,8 @@ void CRotationBoard::Render()
 		//D3DXMATRIXA16 matS, matT;
 		//D3DXMatrixScaling(&matS, 0.03f, 0.03f, 0.03f);
 		//D3DXMatrixTranslation(&matT, -25, 0, 0);
+		
+		// need to Modify... Roation
 		m_matR = m_matRotGimmick;
 		m_matWorld = m_matS * m_matR * m_matT;
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);

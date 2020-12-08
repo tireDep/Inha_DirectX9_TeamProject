@@ -40,6 +40,9 @@ protected:
 
 	Synthesize(float, m_fBoundingSphere, BoundingSphere);	// collision radius
 	Synthesize(float, m_fElasticity, Elasticity); // elasticity
+
+	// OBB TEST
+	CPSOBB* m_pOBB;
 public:
 	PObject();
 	~PObject();

@@ -1,9 +1,11 @@
 #pragma once
 #include "PObject.h"
+#include "PSOBB.h"
 
 class CSphere;
 class CCylinder;
 class IObject;
+class CGimmick;
 
 class CBox : public PObject
 {
@@ -14,6 +16,7 @@ protected:
 	Synthesize(float, m_fWidth, Width);
 	Synthesize(float, m_fHeight, Height);
 	Synthesize(float, m_fDepth, Depth);
+
 	/// Collide
 	//const static unsigned maxContacts = 32;
 	//Contact contacts[maxContacts];
@@ -24,10 +27,15 @@ public:
 	void Setup();
 	void Setup(const ST_MapData & mapData);
 	string GetName();
+	void Update(float duration);
 	bool hasIntersected(CSphere & otherSphere);
 	bool hasIntersected(CBox & otherBox);
 	bool hasIntersected(CCylinder & otherCylinder);
 	bool hasIntersected(IObject & otherIObject);
+	bool hasIntersected(CGimmick * otherIObject);
+	
+	// OBB TEST
+	CPSOBB* getOBB() { return m_pOBB; }
 	//void Update(float duration);
 	//virtual void GenerateContacts();
 	//void CollideUpdate(float duration);

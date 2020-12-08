@@ -7,6 +7,9 @@
 #include "CHeight.h"
 #include "OBB.h"
 #include "TestObjCollision.h"
+// OBB TEST
+#include "Gimmick.h"
+#include "Box.h"
 // collide
 #include "Contact.h"
 
@@ -128,6 +131,33 @@ void CObjectManager::RemoveObject(CPSOBB * OBBBox)
 		else
 			it++;
 	}
+}
+
+void CObjectManager::AddGimmick(CGimmick * Gimmick)
+{
+	m_vecGimmick.push_back(Gimmick);
+}
+
+void CObjectManager::RemoveObject(CGimmick * Gimmick)
+{
+	vector<CGimmick*>::iterator it;
+	for (it = m_vecGimmick.begin(); it != m_vecGimmick.end();)
+	{
+		if (*it == Gimmick)
+		{
+			CGimmick* temp = *it;
+			it = m_vecGimmick.erase(it);
+			delete temp;
+			return;
+		}
+		else
+			it++;
+	}
+}
+
+void CObjectManager::AddBox(CBox * Box)
+{
+	m_vecBox.push_back(Box);
 }
 
 void CObjectManager::SetScale(float scale)
@@ -431,6 +461,12 @@ void CObjectManager::Update()
 			m_vecPObject[hittee]->Collision3D(m_vecPObject[hitter]);
 		}
 	}
+	// OBB TEST
+	for (int i = 0; i < m_vecBox.size(); i++)
+		for (int j = 0; j < m_vecGimmick.size(); j++)
+		{
+			m_vecBox[i]->hasIntersected(m_vecGimmick[j]);
+		}
 	//for (int i = 0; i < m_vecIObject.size(); i++)
 	//{
 	//	m_vecIObject[i]->Update();
@@ -445,6 +481,11 @@ vector<CObject*> CObjectManager::GetVecObject()
 void CObjectManager::AddTileOBB(COBB* OBBbox)
 {
 	m_OBB.push_back(OBBbox);
+}
+
+void CObjectManager::CollideOBBTEST()
+{
+	
 }
 
 void CObjectManager::Render()

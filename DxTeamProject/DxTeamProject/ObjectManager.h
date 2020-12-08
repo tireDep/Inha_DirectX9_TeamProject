@@ -13,6 +13,8 @@ class CPSOBB;
 class COBB;
 class CTestObjCollision;
 class PObject;
+class CGimmick;
+class CBox;
 
 // Collide
 #include "Contact.h"
@@ -28,6 +30,10 @@ private:
 	vector<IObject *> m_vecIObject;
 	vector<CPSOBB *> m_vecOBBBox;
 	vector<PObject*> m_vecPObject;
+
+	// OBB TEST
+	vector<CGimmick*> m_vecGimmick;
+	vector<CBox*> m_vecBox;
 
 	// >> mapTest
 	float m_vScale;
@@ -59,6 +65,10 @@ public:
 	
 	void AddOBBbox(CPSOBB* OBBBox);
 	void RemoveObject(CPSOBB* OBBBox);
+	// OBB TEST
+	void AddGimmick(CGimmick* Gimmick);
+	void RemoveObject(CGimmick* Gimmick);
+	void AddBox(CBox* Box);
 
 	void Destroy();
 
@@ -71,6 +81,8 @@ public:
 	//void Collide(float duration);
 	//void GenerateContacts();
 	//void HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestObjCollision& theCollision);
+	// OBB TEST
+	void CollideOBBTEST();
 
 	void Render();
 	void RenderOBBBox();
