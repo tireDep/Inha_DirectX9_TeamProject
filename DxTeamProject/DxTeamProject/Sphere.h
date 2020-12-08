@@ -8,6 +8,7 @@ public:
 	~CSphere();
 protected:
 	Synthesize(float, m_fRadius, Radius);
+	/// Collide
 	//const static unsigned maxContacts = 256;
 	//Contact contacts[maxContacts];
 	//CollisionSphere collisionsphere;
@@ -16,17 +17,15 @@ protected:
 public:
 	void Setup();
 	void Setup(const ST_MapData & mapData);
-
 	//void Update(float duration);
+	void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos);
+	string GetName();
+
+	/// Collide
 	//virtual void GenerateContacts();
 	//void CollideUpdate(float duration);
-
-	void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos);
-
-	virtual void AddForce(const D3DXVECTOR3 & force) {};
-	virtual void ClearAccumulator() {};
-	virtual void Integrate(float duration) {};
-	virtual void RunPhysics(float duration) {};
-
-	string GetName();
+	//virtual void AddForce(const D3DXVECTOR3 & force) {};
+	//virtual void ClearAccumulator() {};
+	//virtual void Integrate(float duration) {};
+	//virtual void RunPhysics(float duration) {};
 };

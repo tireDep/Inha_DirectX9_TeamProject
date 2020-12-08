@@ -302,40 +302,40 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 	Update_PickCheck(vecIsPick, vecVPos);
 }
 
-void CObjectManager::GenerateContacts()
-{
-	for (int i = 0; i < m_vecPObject.size(); i++)
-	{
-		m_vecPObject[i]->GenerateContacts();
-	}
-}
+//void CObjectManager::GenerateContacts()
+//{
+//	for (int i = 0; i < m_vecPObject.size(); i++)
+//	{
+//		m_vecPObject[i]->GenerateContacts();
+//	}
+//}
 
-void CObjectManager::Collide(float duration)
-{
-	for (int hittee = 0; hittee < m_vecObject.size(); hittee++)
-	{
-		for (int hitter = 0; hitter < m_vecObject.size(); hitter++)
-		{
-			if (hittee >= hitter)
-				continue;
-			CTestObjCollision theCollision(m_vecObject[hittee], m_vecObject[hitter]);
-			Collision_Status collisionOccurred = theCollision.CollisionOccurred();
-			switch (collisionOccurred)
-			{
-				case Collision_Status::COLLISION_TOUCHING:
-					theCollision.CalculateReactions();
-					break;
-				case Collision_Status::COLLISION_OVERLAPPING:
-//					HandleOverlapping(duration, hittee, hitter, theCollision);
-					break;
-				case Collision_Status::COLLISION_NONE:
-					break;
-				default:
-					break;
-			}
-		}
-	}
-}
+//void CObjectManager::Collide(float duration)
+//{
+//	for (int hittee = 0; hittee < m_vecObject.size(); hittee++)
+//	{
+//		for (int hitter = 0; hitter < m_vecObject.size(); hitter++)
+//		{
+//			if (hittee >= hitter)
+//				continue;
+//			CTestObjCollision theCollision(m_vecObject[hittee], m_vecObject[hitter]);
+//			Collision_Status collisionOccurred = theCollision.CollisionOccurred();
+//			switch (collisionOccurred)
+//			{
+//				case Collision_Status::COLLISION_TOUCHING:
+//					theCollision.CalculateReactions();
+//					break;
+//				case Collision_Status::COLLISION_OVERLAPPING:
+////					HandleOverlapping(duration, hittee, hitter, theCollision);
+//					break;
+//				case Collision_Status::COLLISION_NONE:
+//					break;
+//				default:
+//					break;
+//			}
+//		}
+//	}
+//}
 
 //void CObjectManager::HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestObjCollision & theCollision)
 //{

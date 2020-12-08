@@ -148,21 +148,6 @@
     <ClCompile Include="Orb.cpp">
       <Filter>Orb</Filter>
     </ClCompile>
-    <ClCompile Include="TestAngleSet.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="TestCollision.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="TestForce.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="TestRigidBody.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="World.cpp">
-      <Filter>Physics\cyclone</Filter>
-    </ClCompile>
     <ClCompile Include="RigidBody.cpp">
       <Filter>Physics\cyclone</Filter>
     </ClCompile>
@@ -192,9 +177,6 @@
     <ClCompile Include="Colorchanger.cpp">
       <Filter>Object\IObject\Gimmick\MJ</Filter>
     </ClCompile>
-    <ClCompile Include="TestObjCollision.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
     <ClCompile Include="BreakableWall.cpp">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClCompile>
@@ -218,23 +200,41 @@
     <ClCompile Include="IObject.cpp">
       <Filter>Object\IObject</Filter>
     </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Object\PObject</Filter>
-    </ClCompile>
     <ClCompile Include="PObject.cpp">
       <Filter>Object\PObject</Filter>
     </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Object\PObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Cylinder.cpp">
-      <Filter>Object\PObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>...TrashCan\Physics</Filter>
-    </ClCompile>
     <ClCompile Include="Gimmick.cpp">
       <Filter>Object\IObject\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TestAngleSet.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCollision.cpp">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TestForce.cpp">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TestObjCollision.cpp">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="TestRigidBody.cpp">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Physics\cyclone</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Object\PObject\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Object\PObject\Sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="Cylinder.cpp">
+      <Filter>Object\PObject\Cylinder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -410,21 +410,6 @@
     <ClInclude Include="Orb.h">
       <Filter>Orb</Filter>
     </ClInclude>
-    <ClInclude Include="TestAngleSet.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="TestCollision.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="TestForce.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="TestRigidBody.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Physics\cyclone</Filter>
-    </ClInclude>
     <ClInclude Include="RigidBody.h">
       <Filter>Physics\cyclone</Filter>
     </ClInclude>
@@ -453,9 +438,6 @@
     <ClInclude Include="Colorchanger.h">
       <Filter>Object\IObject\Gimmick\MJ</Filter>
     </ClInclude>
-    <ClInclude Include="TestObjCollision.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
     <ClInclude Include="BreakableWall.h">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClInclude>
@@ -479,23 +461,41 @@
     <ClInclude Include="IObject.h">
       <Filter>Object\IObject</Filter>
     </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>Object\PObject</Filter>
-    </ClInclude>
     <ClInclude Include="PObject.h">
       <Filter>Object\PObject</Filter>
     </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Object\PObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Cylinder.h">
-      <Filter>Object\PObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>...TrashCan\Physics</Filter>
-    </ClInclude>
     <ClInclude Include="Gimmick.h">
       <Filter>Object\IObject\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TestAngleSet.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCollision.h">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TestForce.h">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TestObjCollision.h">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRigidBody.h">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Physics\cyclone</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Object\PObject\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Object\PObject\Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="Cylinder.h">
+      <Filter>Object\PObject\Cylinder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -635,6 +635,15 @@
     </Filter>
     <Filter Include="Object\PObject">
       <UniqueIdentifier>{4b290806-0933-438b-a00a-8f9d672e0afd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\PObject\Box">
+      <UniqueIdentifier>{da61f593-880a-489f-9bf0-7512b41e05ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\PObject\Sphere">
+      <UniqueIdentifier>{1653a841-07af-4f7a-a419-054b9ef0c0e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\PObject\Cylinder">
+      <UniqueIdentifier>{9389d931-ad98-4062-8288-90086b353f59}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -69,13 +69,13 @@ public:
 	// Delete
 	//virtual void Update3D(float duration) = 0;
 	//virtual void Update(float duration, CHeight* pMap) = 0;
-	virtual void AddForce(const D3DXVECTOR3 & force) = 0;
-	virtual void ClearAccumulator() = 0;
-	virtual void Integrate(float duration) = 0;
-	virtual void RunPhysics(float duration) = 0;
+	//virtual void AddForce(const D3DXVECTOR3 & force) = 0;
+	//virtual void ClearAccumulator() = 0;
+	//virtual void Integrate(float duration) = 0;
+	//virtual void RunPhysics(float duration) = 0;
 
 	virtual void Render();
 
 	// collide
-	virtual void GenerateContacts() { };
+	//virtual void GenerateContacts() { };
 };

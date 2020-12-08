@@ -205,9 +205,6 @@ void PObject::ChangeObjectColor()
 
 void PObject::Update(float duration)
 {
-	//Integrate(duration);
-	//CalculateInternals();
-
 	D3DXVECTOR3 linearforce, angularforce;
 	if (m_isForceApplied)
 	{
@@ -222,8 +219,8 @@ void PObject::Update(float duration)
 		angularforce = D3DXVECTOR3(0, 0, 0);
 	}
 	
-	/*if (m_finverseMass <= 0.0f) return;
-	assert(duration > 0.0f);*/
+	if (m_finverseMass <= 0.0f) return;
+	assert(duration > 0.0f);
 	
 	m_vLinearAcceleration = (linearforce + GRAVITY) * m_finverseMass;
 	//m_vLinearAcceleration = (linearforce) * m_finverseMass;

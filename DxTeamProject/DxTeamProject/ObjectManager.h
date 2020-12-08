@@ -68,8 +68,8 @@ public:
 	void Update(float duration);						// Physics
 	//void Update(float duration , CHeight* pMap);		// 3D Physics
 	//void Update3D(float duration);
-	void Collide(float duration);
-	void GenerateContacts();
+	//void Collide(float duration);
+	//void GenerateContacts();
 	//void HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestObjCollision& theCollision);
 
 	void Render();

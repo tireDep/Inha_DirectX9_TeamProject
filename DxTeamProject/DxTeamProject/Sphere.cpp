@@ -21,7 +21,7 @@ void CSphere::Setup()
 	m_vInverseRotationInertia.y = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
 	m_vInverseRotationInertia.z = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
 
-	// Collide
+	/// Collide
 	//m_vPosition.y = 15;
 	//D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	//collisionsphere.m_pObject = this;
@@ -142,7 +142,6 @@ void CSphere::Setup(const ST_MapData & mapData)
 //	GenerateContacts();
 //	CollideUpdate(duration);
 //}
-
 //void CSphere::GenerateContacts()
 //{
 //	CollisionPlane plane;

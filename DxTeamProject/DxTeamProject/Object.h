@@ -79,7 +79,6 @@ public:
 	virtual void Render() = 0;
 
 	virtual string GetName() { return string(); }
-	//static void CreateObject(const ST_MapData& mapData);
 	/// Color
 	//virtual void ReceiveEvent(ST_EVENT eventMsg);
 	//virtual void OutlineRender();
