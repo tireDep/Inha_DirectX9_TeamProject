@@ -6,7 +6,7 @@ CDoor::CDoor()
 	, m_adjBuffer(NULL)
 	, m_numMtrls(0)
 	, m_fOpeningAngle(D3DX_PI/2.0f)
-	, IsOpen(false)
+	, IsOpen(true)
 	, m_fRotAngle(0.0f)
 	, m_fRotationSpeed(1.0f)
 {
@@ -35,27 +35,45 @@ void CDoor::Setup(string folder, string file)
 	m_numMtrls = xfile->nMtrlNum;
 
 	//g_pFileLoadManager->FileLoad_Texture(folder, file, m_pTexture);
-	if (m_vecTextures.size() > 1)
+	for (int i = 0; i < m_vecTextures.size(); i++)
 	{
-		for (int i = 0; i < m_vecTextures.size(); i++)
-		{
-			if (m_vecTextures[i] == NULL)
-				g_pFileLoadManager->FileLoad_Texture(folder, "cubeworld_texture.tga", m_vecTextures[i]);
-		}
+		if (m_vecTextures[i] == NULL)
+			g_pFileLoadManager->FileLoad_Texture(folder, "cubeworld_texture.tga", m_vecTextures[i]);
 	}
-	else
-	{
-		for (int i = 0; i < m_vecTextures.size(); i++)
-		{
-			if (m_vecTextures[i] == NULL)
-				g_pFileLoadManager->FileLoad_Texture(folder, "cubeworld_metal.tga", m_vecTextures[i]);
-		}
-	}
+	//if (m_vecTextures.size() > 1)
+	//{
+	//	for (int i = 0; i < m_vecTextures.size(); i++)
+	//	{
+	//		if (m_vecTextures[i] == NULL)
+	//			g_pFileLoadManager->FileLoad_Texture(folder, "cubeworld_texture.tga", m_vecTextures[i]);
+	//	}
+	//}
+	//else
+	//{
+	//	for (int i = 0; i < m_vecTextures.size(); i++)
+	//	{
+	//		if (m_vecTextures[i] == NULL)
+	//			g_pFileLoadManager->FileLoad_Texture(folder, "cubeworld_metal.tga", m_vecTextures[i]);
+	//	}
+	//}
 	delete xfile;
 }
 
 void CDoor::Update(float duration)
 {
+	// tmp Test
+	static int tmpCount = 0;
+	tmpCount++;
+	if (tmpCount >= 10000)
+	{
+		IsOpen = false;
+		if (tmpCount >= 20000)
+		{
+			IsOpen = true;
+			tmpCount = 0;
+		}
+	}
+
 	// tmp
 	//if (g_gameManager->getOrb())
 	//	IsOpen = true;
@@ -100,15 +118,30 @@ void CDoor::Render()
 	if (g_pD3DDevice)
 	{
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-		D3DXMATRIXA16 matWorld;
-		D3DXMatrixIdentity(&matWorld);
-
-		D3DXMATRIXA16 matS, matT;
-		D3DXMatrixScaling(&matS, 0.03f, 0.03f, 0.03f);
-		D3DXMatrixTranslation(&matT, -25, 0, 0);
-		matWorld = matS * m_matRotGimmick * matT;
-
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+		//D3DXMATRIXA16 matWorld;
+		//D3DXMatrixIdentity(&matWorld);
+		//D3DXMATRIXA16 matS, matT;
+		//D3DXMatrixScaling(&matS, 0.03f, 0.03f, 0.03f);
+		//D3DXMatrixTranslation(&matT, -25, 0, 0);
+		//matWorld = matS * m_matRotGimmick * matT;
+		//matWorld = matS * matT;
+		//matWorld = m_matRotGimmick * matT;
+		if (m_vecTextures.size() == 1)
+		{
+			D3DXMATRIXA16 matWorld, matT;
+			D3DXMatrixIdentity(&matWorld);
+			D3DXMatrixTranslation(&matT, -25, 0, 0);
+			matWorld = matT;
+			g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+		}
+		else
+		{
+			D3DXMATRIXA16 matWorld, matT;
+			D3DXMatrixIdentity(&matWorld);
+			D3DXMatrixTranslation(&matT, -25, 0, 0);
+			matWorld = m_matRotGimmick * matT;
+			g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+		}
 		if (m_pMesh == NULL)
 			return;
 		for (int i = 0; i < m_vecMtrls.size(); i++)
@@ -116,9 +149,9 @@ void CDoor::Render()
 			if (m_vecTextures[i] != 0)
 				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
-			//m_pMesh->DrawSubset(i);
+			m_pMesh->DrawSubset(i);
 		}
-		m_pMesh->DrawSubset(0);
+		//m_pMesh->DrawSubset(0);
 		g_pD3DDevice->SetTexture(0, NULL);
 	}
 }
