@@ -1,6 +1,10 @@
 #pragma once
 #include "PObject.h"
 
+class CSphere;
+class CCylinder;
+class IObject;
+
 class CBox : public PObject
 {
 public:
@@ -10,6 +14,7 @@ protected:
 	Synthesize(float, m_fWidth, Width);
 	Synthesize(float, m_fHeight, Height);
 	Synthesize(float, m_fDepth, Depth);
+	/// Collide
 	//const static unsigned maxContacts = 32;
 	//Contact contacts[maxContacts];
 	//CollisionBox collisionbox;
@@ -18,7 +23,11 @@ protected:
 public:
 	void Setup();
 	void Setup(const ST_MapData & mapData);
-
+	string GetName();
+	bool hasIntersected(CSphere & otherSphere);
+	bool hasIntersected(CBox & otherBox);
+	bool hasIntersected(CCylinder & otherCylinder);
+	bool hasIntersected(IObject & otherIObject);
 	//void Update(float duration);
 	//virtual void GenerateContacts();
 	//void CollideUpdate(float duration);
@@ -26,12 +35,10 @@ public:
 	//virtual void Update3D(float duration) {}
 	//virtual void Update(float duration, CHeight* pMap) {};
 	//virtual void SetPusingForce(D3DXVECTOR3 forcedirection) {};
-	virtual void AddForce(const D3DXVECTOR3 & force) {};
-	virtual void ClearAccumulator() {};
-	virtual void Integrate(float duration) {};
-	virtual void RunPhysics(float duration) {};
+	//virtual void AddForce(const D3DXVECTOR3 & force) {};
+	//virtual void ClearAccumulator() {};
+	//virtual void Integrate(float duration) {};
+	//virtual void RunPhysics(float duration) {};
 	//virtual bool hasIntersected(CObject * otherobject) { return true; }
 	//virtual void CollisionOtherObject(CObject * otherobject) {};
-
-	string GetName();
 };

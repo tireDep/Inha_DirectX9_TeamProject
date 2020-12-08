@@ -339,10 +339,7 @@ void CMainGame::Update()
 
 	// Gimmick
 	if (m_pGimmick_Door[0])
-	{
 		m_pGimmick_Door[0]->Update(g_pTimeManager->GetElapsedTime());
-	}
-		
 	if (m_pGimmick_Door[1])
 		m_pGimmick_Door[1]->Update(g_pTimeManager->GetElapsedTime());
 
