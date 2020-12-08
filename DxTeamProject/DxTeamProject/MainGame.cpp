@@ -115,9 +115,15 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+
+	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123456.dat");
+
+#ifdef _DEBUG
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest.dat");
 	// >> mapData
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "TEST3.dat");
+#else
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+#endif // DEBUG
 	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
@@ -158,8 +164,8 @@ void CMainGame::Setup()
 	m_pGimmick_Door[1] = new CDoor;
 	m_pGimmick_Door[1]->Setup("Resource/XFile/Gimmick/Door", "door_right.X");
 
-	m_pGimmick_RotationBoard = new RotationBoard;
-	m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
+	// m_pGimmick_RotationBoard = new RotationBoard;
+	// m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
 
 	m_pGimmick_Switch = new CSwitch;
 	m_pGimmick_Switch->Setup("Resource/XFile/Gimmick/Switch", "Weight_switch.X");
@@ -177,33 +183,13 @@ void CMainGame::Setup()
 	m_pDragon->Setup();
 
 	/// 이 아래는 지울 수도 있는 선언
-	//for (int i = 0; i < 8; i++)
-	//{
-	//	CPSphere* Sphere = new CPSphere();
-	//	Sphere->Setup(D3DXVECTOR3(5, 0.5f, 2 * i + 3));
-	//}
-	//for (int i = 0; i < 1; i++)
-	//{
 	//m_pSphere = new CSphere();
 	//m_pSphere->Setup();
-	///
-	m_pBox = new CBox();
-	m_pBox->Setup();
-	//	//CSphere* sphere = new CSphere();
-	//	//sphere->Setup();
-	//	//CCylinder* cylinder = new CCylinder();
-	//	//cylinder->Setup();
-	//}
-	//for (int i = 0; i < 8; i++)
-	//{
-	//	CPSCylinder* cylinder = new CPSCylinder();
-	//	cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 25));
-	//}
-	//m_pHeightMap = new CHeight;
-	//m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
+	//m_pBox = new CBox();
+	//m_pBox->Setup();
 
-	m_pSkinnedMesh = new CSkinnedMesh;
-	m_pSkinnedMesh->SetUp("Resource/XFile/Character", "Character.X");
+	//m_pSkinnedMesh = new CSkinnedMesh;
+	//m_pSkinnedMesh->SetUp("Resource/XFile/Character", "1slot Cha.X");
 
 	g_pEventManager->AddListener(g_gameManager);
 	g_pEventManager->AddListener(m_pCamera);
@@ -220,7 +206,7 @@ void CMainGame::Setup()
 	for (int i = 0; i < 6; ++i)
 	{
 		m_pMeshTile.push_back(new MeshTile);
-		m_pMeshTile[i]->Setup(10, i - 2.5 , 0);
+		m_pMeshTile[i]->Setup(0, i - 2.5 , -10);
 	}
 
 	//m_pMeshTile = new MeshTile;
@@ -240,8 +226,10 @@ void CMainGame::Update()
 	if (m_pCamera)
 		m_pCamera->Update();
 
-	if (m_pSkinnedMesh)
-		m_pSkinnedMesh->Update();
+	
+
+	//if (m_pSkinnedMesh)
+	//	m_pSkinnedMesh->Update();
 
 	//if(m_pOrb)
 	//	m_pOrb->Update();
@@ -250,7 +238,6 @@ void CMainGame::Update()
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
-	
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
@@ -339,52 +326,55 @@ void CMainGame::Update()
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
-	//g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
-	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());
-	////g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
-	//g_pObjectManager->Update();
+	g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
+	g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());
+	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	g_pObjectManager->Update();
 	///
-	m_pBox->Update(g_pTimeManager->GetElapsedTime());
+	//m_pBox->Update(g_pTimeManager->GetElapsedTime());
 	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
 	//g_pObjectManager->UpdateCollide(g_pTimeManager->GetElapsedTime());			// new Collision
 	//g_pObjectManager->Update();													// Collision
 	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
 
 	// Gimmick
-	//if (m_pGimmick_Door[0])
-	//	m_pGimmick_Door[0]->Update();
-	//if (m_pGimmick_Door[1])
-	//	m_pGimmick_Door[1]->Update();
+	if (m_pGimmick_Door[0])
+		m_pGimmick_Door[0]->Update(g_pTimeManager->GetElapsedTime());
+	if (m_pGimmick_Door[1])
+		m_pGimmick_Door[1]->Update(g_pTimeManager->GetElapsedTime());
 
-	if (m_pGimmick_RotationBoard)
-		m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
+	//if (m_pGimmick_RotationBoard)
+	//	m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
 	
 	if (m_pChanger)
 		m_pChanger->Update();
 
+
+	for(int i =0 ; i < m_pMeshTile.size(); ++i)
+	if (m_pMeshTile[i])
+		m_pMeshTile[i]->Update();
+
+	for (int i = 0; i < m_pMeshTile.size(); ++i)
+	{
+		if (COBB::IsCollision(m_pChanger->GetOBB(), m_pMeshTile[i]->GetOBB()) == true)
+		{
+			m_pChanger->SetHitLength(m_pChanger->GetPos().z - m_pMeshTile[i]->GetPos().z);
+			m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere2);
+			
+		}
+		else
+		{
+			m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere);
+			m_pChanger->SetHitLength(50);
+		}
+	}
 	if (m_pGimmick_BreakableWall[0])
 		m_pGimmick_BreakableWall[0]->Update();
 	if (m_pGimmick_BreakableWall[1])
 		m_pGimmick_BreakableWall[1]->Update();
 
-	for (int i = 0; i < m_pMeshTile.size(); ++i)
-	{
-		if (m_pChanger)
-		{
-			if (m_pChanger->RayCheck(*m_pMeshTile[i]) == true);
-			{
-
-				m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere2);
-
-			}
-			if (m_pChanger->RayCheck(*m_pMeshTile[i]) == false)
-			{
-				m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere2);
-			}
-		}
-	}
+	
 }
-
 
 void CMainGame::Render()
 {
@@ -418,8 +408,8 @@ void CMainGame::Render()
 
 	g_pObjectManager->Render();
 
-	 if (m_pSkinnedMesh)
-	 	m_pSkinnedMesh->Render(NULL);
+	 //if (m_pSkinnedMesh)
+	 //	m_pSkinnedMesh->Render(NULL);
 
 	//if (m_pHeightMap)
 	//	m_pHeightMap->Render();
@@ -449,12 +439,12 @@ void CMainGame::Render()
 	//	m_pMeshTile->Render();
 
 	// Gimmick
-	//if (m_pGimmick_Door[0])
-	//	m_pGimmick_Door[0]->Render();
-	//if (m_pGimmick_Door[1])
-	//	m_pGimmick_Door[1]->Render();
-	if (m_pGimmick_RotationBoard)
-		m_pGimmick_RotationBoard->Render();
+	if (m_pGimmick_Door[0])
+		m_pGimmick_Door[0]->Render();
+	if (m_pGimmick_Door[1])
+		m_pGimmick_Door[1]->Render();
+	//if (m_pGimmick_RotationBoard)
+	//	m_pGimmick_RotationBoard->Render();
 	if (m_pGimmick_Switch)
 		m_pGimmick_Switch->Render();
 	if (m_pChanger)

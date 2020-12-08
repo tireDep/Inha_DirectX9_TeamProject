@@ -234,6 +234,9 @@ void CCharacter::Setup()
 	v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
 
+	for (int i = 0; i < m_vecVertex.size(); i++)
+		m_vecVertex[i].p += D3DXVECTOR3(0, 0.5f, 0);
+
 	m_pOBB = new COBB;
 	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
 
@@ -248,66 +251,129 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 	m_vDirection = cameradirection;
 }
 
-void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
-{
-	m_vDirection = cameradirection;
-	//D3DXMATRIXA16 matWorldOBB;
-	//matWorldOBB = m_matWorld;
-	//matWorldOBB._42 -= 0.5f;
-	//if (m_pOBB)
-	//	m_pOBB->Update(&matWorldOBB);
-	
-	
-	//if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[0]) == 1)
-	//{
-	//	m_vPosition.y = g_pObjectManager->m_vecIObject[0]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[0]->GetTranslate().y + 0.5;
-	//	cout << 0 << endl;
-	//}
-	//else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[1]) == 1)
-	//{
-	//	m_vPosition.y = g_pObjectManager->m_vecIObject[1]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[1]->GetTranslate().y + 0.5;
-	//	cout << 1 << endl;
-	//}
-	//else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[2]) == 1)
-	//{
-	//	m_vPosition.y = g_pObjectManager->m_vecIObject[2]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[2]->GetTranslate().y + 0.5;
-	//	cout << 2 << endl;
-	//}
-	//else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[3]) == 1)
-	//{
-	//	m_vPosition.y = g_pObjectManager->m_vecIObject[3]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[3]->GetTranslate().y + 0.5;
-	//	cout << 3 << endl;
-	//}
-	//
-
-	float height = m_vPosition.y;
-
-	for (int i = 0; i < g_pObjectManager->m_OBB.size(); ++i)
-	{
-		if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[i]) == true)
-		{
-			m_vPosition.y = g_pObjectManager->m_vecIObject[i]->GetScale().y *
-				g_pObjectManager->GetScale() +
-				g_pObjectManager->m_vecIObject[i]->GetTranslate().y + 0.5;
-		}
-		else
-		{
-			//m_vPosition.y -= 0.001f;
-		}
-	
-	}
-
-	
-	if (pMap)
-	{
-		pMap->GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	}
-
-	if (m_pOBB)
-		m_pOBB->Update(&m_matWorld);
-
-
-}
+//void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
+//{
+//	m_vDirection = cameradirection;
+//	//D3DXMATRIXA16 matWorldOBB;
+//	//matWorldOBB = m_matWorld;
+//	//matWorldOBB._42 -= 0.5f;
+//	//if (m_pOBB)
+//	//	m_pOBB->Update(&matWorldOBB);
+//	
+//	
+//	//if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[0]) == 1)
+//	//{
+//	//	m_vPosition.y = g_pObjectManager->m_vecIObject[0]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[0]->GetTranslate().y + 0.5;
+//	//	cout << 0 << endl;
+//	//}
+//	//else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[1]) == 1)
+//	//{
+//	//	m_vPosition.y = g_pObjectManager->m_vecIObject[1]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[1]->GetTranslate().y + 0.5;
+//	//	cout << 1 << endl;
+//	//}
+//	//else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[2]) == 1)
+//	//{
+//	//	m_vPosition.y = g_pObjectManager->m_vecIObject[2]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[2]->GetTranslate().y + 0.5;
+//	//	cout << 2 << endl;
+//	//}
+//	//else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[3]) == 1)
+//	//{
+//	//	m_vPosition.y = g_pObjectManager->m_vecIObject[3]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[3]->GetTranslate().y + 0.5;
+//	//	cout << 3 << endl;
+//	//}
+//	//
+//
+//	float height = m_vPosition.y;
+//
+//	for (int i = 0; i < g_pObjectManager->m_OBB.size(); ++i)
+//	{
+//		if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[i]) == true)
+//		{
+//			m_vPosition.y = g_pObjectManager->m_vecIObject[i]->GetScale().y *
+//				g_pObjectManager->GetScale() +
+//				g_pObjectManager->m_vecIObject[i]->GetTranslate().y + 0.5;
+//		}
+//		else
+//		{
+//			//m_vPosition.y -= 0.001f;
+//		}
+//	
+//	}
+//
+//	
+//	if (pMap)
+//	{
+//		pMap->GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
+//	}
+//
+//	if (m_pOBB)
+//		m_pOBB->Update(&m_matWorld);
+//
+//
+//}
+//void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
+//{
+//	m_vDirection = cameradirection;
+//	//D3DXMATRIXA16 matWorldOBB;
+//	//matWorldOBB = m_matWorld;
+//	//matWorldOBB._42 -= 0.5f;
+//	//if (m_pOBB)
+//	//	m_pOBB->Update(&matWorldOBB);
+//	
+//	
+//	//if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[0]) == 1)
+//	//{
+//	//	m_vPosition.y = g_pObjectManager->m_vecIObject[0]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[0]->GetTranslate().y + 0.5;
+//	//	cout << 0 << endl;
+//	//}
+//	//else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[1]) == 1)
+//	//{
+//	//	m_vPosition.y = g_pObjectManager->m_vecIObject[1]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[1]->GetTranslate().y + 0.5;
+//	//	cout << 1 << endl;
+//	//}
+//	//else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[2]) == 1)
+//	//{
+//	//	m_vPosition.y = g_pObjectManager->m_vecIObject[2]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[2]->GetTranslate().y + 0.5;
+//	//	cout << 2 << endl;
+//	//}
+//	//else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[3]) == 1)
+//	//{
+//	//	m_vPosition.y = g_pObjectManager->m_vecIObject[3]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[3]->GetTranslate().y + 0.5;
+//	//	cout << 3 << endl;
+//	//}
+//	
+//
+//	float height = m_vPosition.y;
+//
+//	
+//		for (int i = 0; i < g_pObjectManager->m_OBB.size(); ++i)
+//		{
+//			if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[i]) == true)
+//			{
+//				m_vPosition.y = g_pObjectManager->m_vecIObject[i]->GetScale().y *
+//					g_pObjectManager->GetScale() +
+//					g_pObjectManager->m_vecIObject[i]->GetTranslate().y + 0.5;
+//			}
+//			else
+//			{
+//				m_vPosition.y -= 0.001f;
+//			}
+//
+//		}
+//	
+//	
+//
+//	
+//	if (pMap)
+//	{
+//		pMap->GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
+//	}
+//
+//	if (m_pOBB)
+//		m_pOBB->Update(&m_matWorld);
+//
+//
+//}
 
 int CCharacter::Update(vector<PObject*> ObjectPosition)
 {

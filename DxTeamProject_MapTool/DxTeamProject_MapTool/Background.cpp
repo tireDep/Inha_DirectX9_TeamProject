@@ -41,6 +41,12 @@ void CBackground::Setup(ST_MapData setData)
 		m_vecTextures = xfile->vecTextrure;
 		m_numMtrls = xfile->nMtrlNum;
 
+		if (m_vecTextures[0] == NULL)
+		{
+			m_vecTextures.clear();
+			m_vecTextures.push_back(m_pTexture);
+		}
+
 		delete xfile;
 	}
 	else
@@ -75,23 +81,29 @@ void CBackground::Render()
 
 	if (m_pMesh == NULL)
 		return;
-#ifdef _DEBUG
+// #ifdef _DEBUG
 	if (m_ObjectType == ObjectType::eInvisibleWall)
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	else
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-#else
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-#endif // _DEBUG
-
-	if(m_pTexture)
-		g_pD3DDevice->SetTexture(0, m_pTexture);
+// #else
+// 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+// #endif // _DEBUG
 
 	if (!m_isPick && !m_isClick || !m_pShader)
 	{
 		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+
+// #ifdef _DEBUG
+			if (m_ObjectType != ObjectType::eInvisibleWall)
+// #endif // _DEBUG
+			{
+				if(m_vecTextures[i] != NULL)
+					g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+			}
+
 			m_pMesh->DrawSubset(i);
 		}
 	}
@@ -110,36 +122,56 @@ void CBackground::SetDiffScale(D3DXVECTOR3 set)
 
 int CBackground::GetTextureIndex()
 {
-	if (m_strTxtFile == "TreesBlue.png")
-		return 0;
-	if (m_strTxtFile == "TreesGreen.png")
-		return 1;
-	if (m_strTxtFile == "TreesYellow.png")
-		return 2;
-	if (m_strTxtFile == "TreesRed.png")
-		return 3;
+	if (m_ObjectType == ObjectType::eCTree)
+	{
+		if (m_strTxtFile == "TreesBlue.png")
+			return 0;
+		if (m_strTxtFile == "TreesGreen.png")
+			return 1;
+		if (m_strTxtFile == "TreesYellow.png")
+			return 2;
+		if (m_strTxtFile == "TreesRed.png")
+			return 3;
+	}
+	else if (m_ObjectType == ObjectType::eUmbrella)
+	{
+		if (m_strTxtFile == "Umbrella_Blue.png")
+			return 0;
+		if (m_strTxtFile == "Umbrella_BlueRed.png")
+			return 1;
+		if (m_strTxtFile == "Umbrella_Red.png")
+			return 2;
+		if (m_strTxtFile == "Umbrella_White.png")
+			return 3;
+	}
 }
 
 void CBackground::SetTexture(int index)
 {
-	if (index == 0)
+	if (m_ObjectType == ObjectType::eCTree)
 	{
-		m_strTxtFile = "TreesBlue.png";
-		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+		if (index == 0)
+			m_strTxtFile = "TreesBlue.png";
+		else if (index == 1)
+			m_strTxtFile = "TreesGreen.png";
+		else if (index == 2)
+			m_strTxtFile = "TreesYellow.png";
+		else if (index == 3)
+			m_strTxtFile = "TreesRed.png";
 	}
-	else if (index == 1)
+	else if (m_ObjectType == ObjectType::eUmbrella)
 	{
-		m_strTxtFile = "TreesGreen.png";
-		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+		if (index == 0)
+			m_strTxtFile = "Umbrella_Blue.png";
+		else if (index == 1)
+			m_strTxtFile = "Umbrella_BlueRed.png";
+		else if (index == 2)
+			m_strTxtFile = "Umbrella_Red.png";
+		else if (index == 3)
+			m_strTxtFile = "Umbrella_White.png";
 	}
-	else if (index == 2)
-	{
-		m_strTxtFile = "TreesYellow.png";
-		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
-	}
-	else if (index == 3)
-	{
-		m_strTxtFile = "TreesRed.png";
-		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
-	}
+
+	g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+	m_vecTextures.clear();
+	m_vecTextures.push_back(m_pTexture);
 }

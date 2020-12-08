@@ -78,13 +78,20 @@ void CImguiClass::SetVecItem()
 			for (int i = 0; i < tempVec.size(); i++)
 				tempObjType.push_back(eCTree);
 		}
-#ifdef _DEBUG
-		else if (m_SubType == LoadType::eInvisibleWall)
+
+		else if (m_SubType == LoadType::eSomethingElse)
 		{
 			tempVec.clear();
+			tempVec.push_back("BeachBall"); tempObjType.push_back(eBall);
+			tempVec.push_back("Chair"); tempObjType.push_back(eChair);
+			tempVec.push_back("Umbrella"); tempObjType.push_back(eUmbrella);
+			tempVec.push_back("Snowman"); tempObjType.push_back(eSnowman);
+
+#ifdef _DEBUG
 			tempVec.push_back("InvisibleWall"); tempObjType.push_back(eInvisibleWall);
-		}
 #endif // _DEBUG
+		}
+
 
 	}
 	else if (m_NowLoadType == LoadType::eGimmick)
@@ -478,7 +485,9 @@ void CImguiClass::Update_FileLoader()
 		ImGui::SameLine(); if (ImGui::RadioButton("ColorTree", m_SubType == LoadType::eColorTree)) { m_SubType = LoadType::eColorTree; m_FileLoadIndex = -1; }
 
 #ifdef _DEBUG
-		if (ImGui::RadioButton("InvisibleWall", m_SubType == LoadType::eInvisibleWall)) { m_SubType = LoadType::eInvisibleWall; m_FileLoadIndex = -1; }
+		if (ImGui::RadioButton("SomethingElse", m_SubType == LoadType::eSomethingElse)) { m_SubType = LoadType::eSomethingElse; m_FileLoadIndex = -1; }
+#else
+		if (ImGui::RadioButton("SomethingElse", m_SubType == LoadType::eSomethingElse)) { m_SubType = LoadType::eSomethingElse; m_FileLoadIndex = -1; }
 #endif // _DEBUG
 
 
@@ -594,13 +603,16 @@ void CImguiClass::Update_Inspector()
 
 				if (temp.y != vTrans.y)
 				{
-					if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eSphere
-					 && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eCylinder
-					 && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eBox)
-						temp.y = floor(vTrans.y);
-					else
-						temp.y = vTrans.y;
-					// >> 오브젝트는 크기 변경에 따라 값이 변동되기 때문에 일단 제외
+					temp.y = vTrans.y;
+					// >> 오브젝트 별 적용이 달라서 임시 적용
+
+					// if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eSphere
+					//  && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eCylinder
+					//  && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eBox)
+					// 	temp.y = floor(vTrans.y);
+					// else
+					// 	temp.y = vTrans.y;
+					// // >> 오브젝트는 크기 변경에 따라 값이 변동되기 때문에 일단 제외
 
 					// // >> 구, 실린더는 보정 값 적용?
 					// if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere)
@@ -633,7 +645,29 @@ void CImguiClass::Update_Inspector()
 				SetObjectColor();
 			}
 
+			// >> 배경 관련
 			// >> 색상 나무 : 텍스쳐 선택
+			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eUmbrella)
+			{
+				CBackground* temp = dynamic_cast<CBackground*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+
+				ImGui::Text("Texture");
+				static int pushIndex = 0;
+				pushIndex = temp->GetTextureIndex();
+				string charName[4] = { "Blue", "BlueRed", "Red", "White" };
+				for (int i = 0; i < 4; i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str(), pushIndex == i))
+					{
+						pushIndex = i;
+						temp->SetTexture(pushIndex);
+					}
+				} // << : for
+
+				ImGui::Separator();
+			}
+
+			// >> 파라솔 : 텍스쳐 선택
 			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCTree)
 			{
 				CBackground* temp = dynamic_cast<CBackground*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
@@ -654,6 +688,7 @@ void CImguiClass::Update_Inspector()
 				ImGui::Separator();
 			}
 			
+			// >> 기믹 관련
 			// >> 회전판자 기믹 : 기믹 관련 변수 설정
 			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_RotationBoard)
 			{

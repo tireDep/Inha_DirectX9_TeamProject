@@ -214,34 +214,34 @@ void CObjectManager::UpdateNewMap(CFrustum * frustum)
 
 void CObjectManager::Thread_CalcNewMap()
 {
-	EnterCriticalSection(&m_cs);
-	bool check = false;
-	multimap<vector<IObject*>, bool>::iterator it;
-	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
-	{
-		check = false;
+	//EnterCriticalSection(&m_cs);
+	//bool check = false;
+	//multimap<vector<IObject*>, bool>::iterator it;
+	//for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+	//{
+	//	check = false;
 
-		for (int i = 0; i < it->first.size(); i++)
-		{
-			float radius = 0;
-			radius = it->first[0]->GetScale().x > it->first[0]->GetScale().y ? it->first[0]->GetScale().x : it->first[0]->GetScale().y;
-			radius = radius > it->first[0]->GetScale().z ? radius : it->first[0]->GetScale().z;
+	//	for (int i = 0; i < it->first.size(); i++)
+	//	{
+	//		float radius = 0;
+	//		radius = it->first[0]->GetScale().x > it->first[0]->GetScale().y ? it->first[0]->GetScale().x : it->first[0]->GetScale().y;
+	//		radius = radius > it->first[0]->GetScale().z ? radius : it->first[0]->GetScale().z;
 
-			if (m_frustum->IsInFrustum(it->first[i]->GetTranslate(), radius))
-			{
-				it->second = true;
-				check = true;
-				// >> todo
-				// 판정 주변 인덱스 true, 아니면 false 처리
-				// 맵 세로, 가로 크기 알아야 함
-				// 3*3 정도 판정?
-			}
-		}
+	//		if (m_frustum->IsInFrustum(it->first[i]->GetTranslate(), radius))
+	//		{
+	//			it->second = true;
+	//			check = true;
+	//			// >> todo
+	//			// 판정 주변 인덱스 true, 아니면 false 처리
+	//			// 맵 세로, 가로 크기 알아야 함
+	//			// 3*3 정도 판정?
+	//		}
+	//	}
 
-		if (!check)
-			it->second = false;
-	}
-	LeaveCriticalSection(&m_cs);
+	//	if (!check)
+	//		it->second = false;
+	//}
+	//LeaveCriticalSection(&m_cs);
 }
 
 void CObjectManager::Destroy()
@@ -258,8 +258,10 @@ void CObjectManager::Destroy()
 
 void CObjectManager::Update(float duration)
 {
-	for (int i = 0; i < m_vecObject.size(); i++)
-		m_vecObject[i]->Update(duration);
+	for (int i = 0; i < m_vecIObject.size(); i++)
+		m_vecIObject[i]->Update(duration);
+	//for (int i = 0; i < m_vecObject.size(); i++)
+	//	m_vecObject[i]->Update(duration);
 	//GenerateContacts();
 	//resolver.resolveContacts(cData.contactArray, cData.contactCount, duration);
 }

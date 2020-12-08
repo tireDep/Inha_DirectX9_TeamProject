@@ -1,13 +1,12 @@
 #include "stdafx.h"
 #include "Object.h"
-#include "PSBox.h"
-#include "PSphere.h"
-#include "PSCylinder.h"
-#include "Background.h"
 #include "Ray.h"
 #include "Box.h"
 #include "Sphere.h"
 #include "Cylinder.h"
+#include "Background.h"
+#include "Tile.h"
+#include "Gimmick.h"
 
 int CObject::m_nRefCount = 0;
 
@@ -200,40 +199,42 @@ void CObject::CreateObject(const ST_MapData & mapData)
 	{
 	case eBox:
 	{
-		//CPSBox* box = new CPSBox;
-		//box->Setup(mapData);
 		CBox* box = new CBox;
 		box->Setup(mapData);
 	}
 	break;
-
 	case eSphere:
 	{
-		//CPSphere* sphere = new CPSphere;
-		//sphere->Setup(mapData);
 		CSphere* sphere = new CSphere;
 		sphere->Setup(mapData);
 	}
 	break;
-
 	case eCylinder:
 	{
-		//CPSCylinder* cylinder = new CPSCylinder;
-		//cylinder->Setup(mapData);
 		CCylinder* cylinder = new CCylinder;
 		cylinder->Setup(mapData);
 	}
 	break;
-
-	case eATree:
-	case eSTree:
-	case eWTree:
+	case eATree:	case eSTree:	case eWTree:	case eCTree:
+	case eBall:		case eChair:	case eUmbrella:	case eSnowman:
+	case eInvisibleWall:
 	{
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
 	}
 	break;
-
+	case eTile01: case eTile02:	case eTile03: case eTile04: case eTile05: case eTile06:
+	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
+	{
+		CTile* tile = new CTile;
+		tile->Setup(mapData);
+	}
+	break;
+	case eG_RotationBoard:	case eG_BreakWall:	case eG_Door:	case eG_ColorChanger:	case eG_Switch:
+	{
+		CGimmick::Setup(mapData);
+	}
+		break;
 	}
 }
 
@@ -263,24 +264,23 @@ void CObject::CreateObject(const ST_MapData & mapData)
 //{
 //	return m_stOrientation;
 //}
-
-bool CObject::GetAwake() const
-{
-	return m_isAwake;
-}
-
-void CObject::SetAwake(const bool awake)
-{
-	// 0.3 = sleepEpsilon
-	if (awake) 
-	{
-		m_isAwake = true;
-		m_fMotion = 0.3 * 2.0f;
-	}
-	else
-	{
-		m_isAwake = false;
-		//m_vLinearVelocity.x = m_vLinearVelocity.y = m_vLinearVelocity.z = 0.0f;
-		//m_vAngularVelocity.x = m_vAngularVelocity.y = m_vAngularVelocity.z = 0.0f;
-	}
-}
+//bool CObject::GetAwake() const
+//{
+//	return m_isAwake;
+//}
+//
+//void CObject::SetAwake(const bool awake)
+//{
+//	// 0.3 = sleepEpsilon
+//	if (awake) 
+//	{
+//		m_isAwake = true;
+//		m_fMotion = 0.3 * 2.0f;
+//	}
+//	else
+//	{
+//		m_isAwake = false;
+//		//m_vLinearVelocity.x = m_vLinearVelocity.y = m_vLinearVelocity.z = 0.0f;
+//		//m_vAngularVelocity.x = m_vAngularVelocity.y = m_vAngularVelocity.z = 0.0f;
+//	}
+//}
