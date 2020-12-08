@@ -19,12 +19,12 @@ CBackground::~CBackground()
 	SafeDelete(m_pOBB);
 }
 
-void CBackground::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
-{
-	// >> 터짐 방지
-	vecVPos.push_back(D3DXVECTOR3(0, 0, 0));
-//	vecIsPick.push_back(m_isPicked);
-}
+//void CBackground::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
+//{
+//	// >> 터짐 방지
+//	vecVPos.push_back(D3DXVECTOR3(0, 0, 0));
+////	vecIsPick.push_back(m_isPicked);
+//}
 
 void CBackground::Setup(ST_MapData setData)
 {

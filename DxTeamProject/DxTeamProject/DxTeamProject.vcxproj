@@ -176,6 +176,7 @@
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="Frustum.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Gimmick.h" />
     <ClInclude Include="Gravity.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridMap.h" />
@@ -261,6 +262,7 @@
     <ClCompile Include="ForceGenerator.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Gimmick.cpp" />
     <ClCompile Include="Gravity.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridMap.cpp" />

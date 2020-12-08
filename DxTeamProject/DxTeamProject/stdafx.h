@@ -205,6 +205,14 @@ enum ObjectType
 	eNull
 };
 
+struct ST_Gimmick
+{
+	bool isData;
+	float roationSpeed;
+	int roationAxialIndex;
+	// >> rotation Board
+};
+
 struct ST_MapData
 {
 	string strFolderPath;
@@ -219,6 +227,8 @@ struct ST_MapData
 	D3DXVECTOR3 vTranslate;
 
 	D3DXCOLOR dxColor;
+
+	ST_Gimmick gimmickData;
 };
 
 struct ST_Sprite

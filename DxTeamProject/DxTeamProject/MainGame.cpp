@@ -119,7 +119,7 @@ void CMainGame::Setup()
 	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123456.dat");
 
 #ifdef _DEBUG
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest.dat");
 	// >> mapData
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
@@ -164,8 +164,8 @@ void CMainGame::Setup()
 	m_pGimmick_Door[1] = new CDoor;
 	m_pGimmick_Door[1]->Setup("Resource/XFile/Gimmick/Door", "door_right.X");
 
-	m_pGimmick_RotationBoard = new RotationBoard;
-	m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
+	// m_pGimmick_RotationBoard = new RotationBoard;
+	// m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
 
 	m_pGimmick_Switch = new CSwitch;
 	m_pGimmick_Switch->Setup("Resource/XFile/Gimmick/Switch", "Weight_switch.X");
@@ -188,8 +188,8 @@ void CMainGame::Setup()
 	//m_pBox = new CBox();
 	//m_pBox->Setup();
 
-	//m_pSkinnedMesh = new CSkinnedMesh;
-	//m_pSkinnedMesh->SetUp("Resource/XFile/Character", "1slot Cha.X");
+	m_pSkinnedMesh = new CSkinnedMesh;
+	m_pSkinnedMesh->SetUp("Resource/XFile/Character", "Character.X");
 
 	g_pEventManager->AddListener(g_gameManager);
 	g_pEventManager->AddListener(m_pCamera);
@@ -228,8 +228,8 @@ void CMainGame::Update()
 
 	
 
-	//if (m_pSkinnedMesh)
-	//	m_pSkinnedMesh->Update();
+	if (m_pSkinnedMesh)
+		m_pSkinnedMesh->Update();
 
 	//if(m_pOrb)
 	//	m_pOrb->Update();
@@ -328,7 +328,7 @@ void CMainGame::Update()
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
 	g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());
-	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
 	g_pObjectManager->Update();
 	///
 	//m_pBox->Update(g_pTimeManager->GetElapsedTime());
@@ -339,12 +339,15 @@ void CMainGame::Update()
 
 	// Gimmick
 	if (m_pGimmick_Door[0])
+	{
 		m_pGimmick_Door[0]->Update(g_pTimeManager->GetElapsedTime());
+	}
+		
 	if (m_pGimmick_Door[1])
 		m_pGimmick_Door[1]->Update(g_pTimeManager->GetElapsedTime());
 
-	if (m_pGimmick_RotationBoard)
-		m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
+	//if (m_pGimmick_RotationBoard)
+	//	m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
 	
 	if (m_pChanger)
 		m_pChanger->Update();
@@ -411,8 +414,8 @@ void CMainGame::Render()
 
 	g_pObjectManager->Render();
 
-	 //if (m_pSkinnedMesh)
-	 //	m_pSkinnedMesh->Render(NULL);
+	 if (m_pSkinnedMesh)
+	 	m_pSkinnedMesh->Render(NULL);
 
 	//if (m_pHeightMap)
 	//	m_pHeightMap->Render();
@@ -446,8 +449,8 @@ void CMainGame::Render()
 		m_pGimmick_Door[0]->Render();
 	if (m_pGimmick_Door[1])
 		m_pGimmick_Door[1]->Render();
-	if (m_pGimmick_RotationBoard)
-		m_pGimmick_RotationBoard->Render();
+	//if (m_pGimmick_RotationBoard)
+	//	m_pGimmick_RotationBoard->Render();
 	if (m_pGimmick_Switch)
 		m_pGimmick_Switch->Render();
 	if (m_pChanger)
