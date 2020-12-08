@@ -85,11 +85,43 @@ void CTile::Setup(ST_MapData setData)
 //	//if (m_pOBB[i])
 //	//	m_pOBB[i]->Update(&m_matWorld);
 //}
+//	matWorld = matT;
+//	D3DXVECTOR3 *pVertices;
+//	
+//	for (int i = 0; i < m_vecMtrls.size(); ++i)
+//	{
+//		m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+//		D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(),
+//			m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+//		m_pMesh->UnlockVertexBuffer();	
+//	}
+//	
+//	for (int i = 0; i < m_vecMtrls.size(); ++i)
+//		m_pOBB.push_back(new COBB);
+//	
+//	for (int i = 0; i < m_pOBB.size(); ++i)
+//	{
+//		m_pOBB[i]->SetupTile(m_vMin, m_vMax, m_vMax * m_vScale.y, m_vScale.x, m_vScale.z);
+//		g_pObjectManager->AddTileOBB(m_pOBB[i]);
+//		g_pObjectManager->SetScale(m_vMax.y);
+//		
+//	}
+//}
+
+//void CTile::Update(float duration)
+//{
+//
+//	//for (int i = 0; i < m_pOBB.size(); ++i)
+//	//if (m_pOBB[i])
+//	//	m_pOBB[i]->Update(&m_matWorld);
+//
+//}
 
 void CTile::Render()
 {
-	//if (m_pOBB)
-	//	m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
+	//for (int i = 0; i < m_pOBB.size(); ++i)
+	//if (m_pOBB[i])
+	//m_pOBB[i]->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
 
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);

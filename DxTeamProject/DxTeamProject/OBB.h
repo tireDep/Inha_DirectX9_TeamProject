@@ -19,6 +19,7 @@ public:
 	void SetUpXFile(D3DXVECTOR3 &vMin, D3DXVECTOR3 &vMax);
 	void Update(D3DXMATRIXA16 *pmatWorld);
 	void SetupTile(D3DXVECTOR3& vMin, D3DXVECTOR3& vMax, D3DXVECTOR3 xfileY ,float x, float z);
-	static bool IsCollision(COBB * pOBB1, COBB* pOBB2);
+	void SetupMesh(D3DXVECTOR3 &vMin, D3DXVECTOR3 &vMax ,float cubesize);
+	static bool IsCollision(COBB * pOBB1, COBB* pOBB);
 	void OBBBOX_RENDER(D3DXCOLOR c);
 };

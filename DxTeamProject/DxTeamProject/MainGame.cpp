@@ -115,6 +115,9 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
+
+	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123456.dat");
+
 #ifdef _DEBUG
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
@@ -203,7 +206,7 @@ void CMainGame::Setup()
 	for (int i = 0; i < 6; ++i)
 	{
 		m_pMeshTile.push_back(new MeshTile);
-		m_pMeshTile[i]->Setup(10, i - 2.5 , 0);
+		m_pMeshTile[i]->Setup(0, i - 2.5 , -10);
 	}
 
 	//m_pMeshTile = new MeshTile;
@@ -222,6 +225,8 @@ void CMainGame::Update()
 
 	if (m_pCamera)
 		m_pCamera->Update();
+
+	
 
 	//if (m_pSkinnedMesh)
 	//	m_pSkinnedMesh->Update();
@@ -344,27 +349,29 @@ void CMainGame::Update()
 	if (m_pChanger)
 		m_pChanger->Update();
 
+
+	for(int i =0 ; i < m_pMeshTile.size(); ++i)
+	if (m_pMeshTile[i])
+		m_pMeshTile[i]->Update();
+
+	for (int i = 0; i < m_pMeshTile.size(); ++i)
+	{
+		if (COBB::IsCollision(m_pChanger->GetOBB(), m_pMeshTile[i]->GetOBB()) == true)
+		{
+			m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere2);
+			
+		}
+		else
+		{
+			m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere);
+		}
+	}
 	if (m_pGimmick_BreakableWall[0])
 		m_pGimmick_BreakableWall[0]->Update();
 	if (m_pGimmick_BreakableWall[1])
 		m_pGimmick_BreakableWall[1]->Update();
 
-	for (int i = 0; i < m_pMeshTile.size(); ++i)
-	{
-		if (m_pChanger)
-		{
-			if (m_pChanger->RayCheck(*m_pMeshTile[i]) == true);
-			{
-
-				m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere2);
-
-			}
-			if (m_pChanger->RayCheck(*m_pMeshTile[i]) == false)
-			{
-				m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere2);
-			}
-		}
-	}
+	
 }
 
 void CMainGame::Render()
