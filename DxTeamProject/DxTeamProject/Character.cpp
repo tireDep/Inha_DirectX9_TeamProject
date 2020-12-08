@@ -234,6 +234,9 @@ void CCharacter::Setup()
 	v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
 
+	for (int i = 0; i < m_vecVertex.size(); i++)
+		m_vecVertex[i].p += D3DXVECTOR3(0, 0.5f, 0);
+
 	m_pOBB = new COBB;
 	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
 
