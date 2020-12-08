@@ -188,8 +188,8 @@ void CMainGame::Setup()
 	//m_pBox = new CBox();
 	//m_pBox->Setup();
 
-	//m_pSkinnedMesh = new CSkinnedMesh;
-	//m_pSkinnedMesh->SetUp("Resource/XFile/Character", "1slot Cha.X");
+	m_pSkinnedMesh = new CSkinnedMesh;
+	m_pSkinnedMesh->SetUp("Resource/XFile/Character", "Character.X");
 
 	g_pEventManager->AddListener(g_gameManager);
 	g_pEventManager->AddListener(m_pCamera);
@@ -228,8 +228,8 @@ void CMainGame::Update()
 
 	
 
-	//if (m_pSkinnedMesh)
-	//	m_pSkinnedMesh->Update();
+	if (m_pSkinnedMesh)
+		m_pSkinnedMesh->Update();
 
 	//if(m_pOrb)
 	//	m_pOrb->Update();
@@ -411,8 +411,8 @@ void CMainGame::Render()
 
 	g_pObjectManager->Render();
 
-	 //if (m_pSkinnedMesh)
-	 //	m_pSkinnedMesh->Render(NULL);
+	 if (m_pSkinnedMesh)
+	 	m_pSkinnedMesh->Render(NULL);
 
 	//if (m_pHeightMap)
 	//	m_pHeightMap->Render();
