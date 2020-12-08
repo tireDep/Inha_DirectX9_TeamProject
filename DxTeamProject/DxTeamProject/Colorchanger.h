@@ -24,6 +24,8 @@ private:
 	bool istrue;
 	COBB* m_pOBB;
 	D3DXVECTOR3 m_vMin, m_vMax;
+	// KT
+	float m_fHitLength;
 public:
 	D3DMATERIAL9 m_stMtlSphere2 , m_stMtlSphere;
 
@@ -35,6 +37,7 @@ public:
 	D3DXVECTOR3 GetPos() { return m_position; }
 	D3DXVECTOR3 GetScale() { return m_scale; }
 	
-
+	// KT
+	void SetHitLength(float HitLength);
 };
 

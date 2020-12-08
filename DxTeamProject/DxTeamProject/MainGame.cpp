@@ -358,12 +358,14 @@ void CMainGame::Update()
 	{
 		if (COBB::IsCollision(m_pChanger->GetOBB(), m_pMeshTile[i]->GetOBB()) == true)
 		{
+			m_pChanger->SetHitLength(m_pChanger->GetPos().z - m_pMeshTile[i]->GetPos().z);
 			m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere2);
 			
 		}
 		else
 		{
 			m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere);
+			m_pChanger->SetHitLength(50);
 		}
 	}
 	if (m_pGimmick_BreakableWall[0])

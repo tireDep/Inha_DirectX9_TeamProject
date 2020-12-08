@@ -11,6 +11,7 @@ Color_changer::Color_changer()
 	, m_pMeshBeam(NULL)
 	,length(0)
 	, size(1)
+	, m_fHitLength(1)
 {
 	ZeroMemory(&m_stMtlSphere2, sizeof(D3DMATERIAL9));
 	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
@@ -99,7 +100,11 @@ void Color_changer::Update()
 	m_scale = D3DXVECTOR3(0.3f, 0.3f, 1);
 	D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_scale.z);
 
-	D3DXMatrixTranslation(&matT, m_position.x, m_position.y + 1.5f, m_position.z - length / 2);
+	//D3DXMatrixTranslation(&matT, m_position.x, m_position.y + 1.5f, m_position.z - length / 2);
+	//KT
+	
+	D3DXMatrixTranslation(&matT, m_position.x, m_position.y + 1.5f, m_position.z - m_fHitLength/2.0);
+	D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_fHitLength / length);
 	BeamWorld = matS * matT * matR;
 	m_pOBB->Update(&BeamWorld);
 	
@@ -176,4 +181,9 @@ bool Color_changer::RayCheck(MeshTile& meshtile)
 
 	}
 
+}
+
+void Color_changer::SetHitLength(float HitLength)
+{
+	m_fHitLength = HitLength;
 }
