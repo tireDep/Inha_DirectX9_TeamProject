@@ -168,7 +168,7 @@ void CMainGame::Setup()
 	// m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
 
 	m_pGimmick_Switch = new CSwitch;
-	m_pGimmick_Switch->Setup("Resource/XFile/Gimmick/Switch", "Weight_switch.X");
+	m_pGimmick_Switch->Setup("Resource/XFile/Gimmick/Switch", "Force_switch.X");
 
 	m_pGimmick_BreakableWall[0] = new CBreakableWall;
 	m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "standard_wall.X");
