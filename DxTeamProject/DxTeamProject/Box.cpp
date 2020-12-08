@@ -86,7 +86,6 @@ void CBox::Setup(const ST_MapData & mapData)
 	//collisionbox.halfSize.z = m_fDepth;
 	//collisionbox.calculateInternals();
 }
-
 //void CBox::Update(float duration)
 //{
 //	D3DXVECTOR3 linearforce, angularforce;
@@ -158,7 +157,6 @@ void CBox::Setup(const ST_MapData & mapData)
 //	//GenerateContacts();
 //	//CollideUpdate(duration);
 //}
-
 //void CBox::GenerateContacts()
 //{
 //	CollisionPlane plane;

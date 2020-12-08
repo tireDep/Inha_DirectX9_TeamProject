@@ -1,24 +1,22 @@
 #pragma once
 #include "IObject.h"
 
-
-class COBB;
 class CTile : public IObject
 {
 private:
-	vector<COBB*> m_pOBB;
-	D3DXVECTOR3 m_vMin;
-	D3DXVECTOR3 m_vMax;
-	D3DXMATRIXA16 matWorld;
+	//vector<COBB*> m_pOBB;
+	//D3DXVECTOR3 m_vMin;
+	//D3DXVECTOR3 m_vMax;
+	//D3DXMATRIXA16 matWorld;
 public:
 	CTile();
 	~CTile();
 
 	void Setup() { }
 	void Setup(ST_MapData setData);
-	void Update();
+	void Update(float duration) { };
 	void Render();
-	
-	D3DXVECTOR3 GetScale() { return m_vScale; }
-};
+	virtual string GetName() { return m_strName; }
 
+	//D3DXVECTOR3 GetScale() { return m_vScale; }
+};

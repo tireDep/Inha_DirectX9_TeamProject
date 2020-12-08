@@ -104,41 +104,41 @@ D3DXVECTOR3 Contact::calculateLocalVelocity(unsigned bodyIndex, float duration)
 
 void Contact::calculateDesiredDeltaVelocity(float duration)
 {
-	const static float velocityLimit = (float)0.25f;
+	//const static float velocityLimit = (float)0.25f;
 
-	float velocityFromAcc = 0;
+	//float velocityFromAcc = 0;
 
-	if (object[0]->GetAwake())
-	{
-		D3DXVECTOR3 tmp = object[0]->GetLastFrameAcceleration() * duration;
-		velocityFromAcc = velocityFromAcc + D3DXVec3Dot(&tmp, &contactNormal);
-	}
-	if (object[1] && object[1]->GetAwake())
-	{
-		D3DXVECTOR3 tmp = object[1]->GetLastFrameAcceleration() * duration;
-		velocityFromAcc = velocityFromAcc - D3DXVec3Dot(&tmp, &contactNormal);
-	}
+	//if (object[0]->GetAwake())
+	//{
+	//	D3DXVECTOR3 tmp = object[0]->GetLastFrameAcceleration() * duration;
+	//	velocityFromAcc = velocityFromAcc + D3DXVec3Dot(&tmp, &contactNormal);
+	//}
+	//if (object[1] && object[1]->GetAwake())
+	//{
+	//	D3DXVECTOR3 tmp = object[1]->GetLastFrameAcceleration() * duration;
+	//	velocityFromAcc = velocityFromAcc - D3DXVec3Dot(&tmp, &contactNormal);
+	//}
 
-	float thisRestitution = restitution;
-	if (fabsf(contactVelocity.x) < velocityLimit)
-	{
-		thisRestitution = (float)0.0f;
-	}
-	desiredDeltaVelocity = -contactVelocity.x - thisRestitution * (contactVelocity.x - velocityFromAcc);
+	//float thisRestitution = restitution;
+	//if (fabsf(contactVelocity.x) < velocityLimit)
+	//{
+	//	thisRestitution = (float)0.0f;
+	//}
+	//desiredDeltaVelocity = -contactVelocity.x - thisRestitution * (contactVelocity.x - velocityFromAcc);
 }
 
 void Contact::matchAwakeState()
 {
-	if (!object[1]) return;
+	//if (!object[1]) return;
 
-	bool body0awake = object[0]->GetAwake();
-	bool body1awake = object[1]->GetAwake();
+	//bool body0awake = object[0]->GetAwake();
+	//bool body1awake = object[1]->GetAwake();
 
-	if (body0awake ^ body1awake)
-	{
-		if (body0awake)	object[1]->SetAwake();
-		else object[0]->SetAwake();
-	}
+	//if (body0awake ^ body1awake)
+	//{
+	//	if (body0awake)	object[1]->SetAwake();
+	//	else object[0]->SetAwake();
+	//}
 }
 
 //void Contact::applyImpulse(const D3DXVECTOR3 & impulse, CRigidBody * body, D3DXVECTOR3 * velocityChange, D3DXVECTOR3 * rotationChange)

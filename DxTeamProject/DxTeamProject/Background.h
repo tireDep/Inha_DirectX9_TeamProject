@@ -12,7 +12,7 @@ public:
 
 	virtual void Setup() { };
 	virtual void Update(float duration) { };
-	virtual void Update(float duration, CHeight* pMap) { };
+//	virtual void Update(float duration, CHeight* pMap) { };
 	virtual void Update3D(float duration) { };
 	virtual void UpdateLand(float duration) { };
 	virtual void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos);

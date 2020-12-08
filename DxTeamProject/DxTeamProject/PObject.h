@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "TestAngleSet.h"
 
 const static D3DXVECTOR3 GRAVITY(0, -9.8f, 0);
 
