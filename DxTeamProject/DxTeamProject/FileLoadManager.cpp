@@ -141,8 +141,24 @@ void CFileLoadManager::LoadData(string path)
 				mapData.dxColor.a = atof(readData.c_str());
 			}
 
+			else if (strstr(readData.c_str(),  "# GimmickData"))
+				continue;
+
+			else if (strstr(readData.c_str(), "# RotationSpeed"))
+			{
+				getline(file, readData);
+				mapData.gimmickData.roationSpeed = atof(readData.c_str());
+			}
+
+			else if (strstr(readData.c_str(), "# RotationAxialIndex"))
+			{
+				getline(file, readData);
+				mapData.gimmickData.roationAxialIndex = atoi(readData.c_str());
+			}
+
+
 			else if (strstr(readData.c_str(), "# Object_End"))
-				IObject::CreateObject(mapData);
+				CObject::CreateObject(mapData);
 
 			// >> mapTest
 			else if (strstr(readData.c_str(), "# Section"))

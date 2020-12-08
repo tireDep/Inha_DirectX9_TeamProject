@@ -136,29 +136,14 @@
     <ClCompile Include="CHeight.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="IObject.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Object\Tile</Filter>
-    </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>...TrashCan</Filter>
-    </ClCompile>
-    <ClCompile Include="PSCylinder.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="PSBox.cpp">
-      <Filter>Object</Filter>
+      <Filter>Object\IObject\Tile</Filter>
     </ClCompile>
     <ClCompile Include="SkinnedMesh.cpp">
       <Filter>SkinnedMesh</Filter>
     </ClCompile>
     <ClCompile Include="AllocateHierarchy.cpp">
       <Filter>SkinnedMesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Background.cpp">
-      <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="Orb.cpp">
       <Filter>Orb</Filter>
@@ -185,44 +170,72 @@
       <Filter>Physics\cyclone</Filter>
     </ClCompile>
     <ClCompile Include="Skydome.cpp" />
-    <ClCompile Include="PSphere.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="PSOBB.cpp">
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="MeshTile.cpp">
-      <Filter>Gimmick</Filter>
+      <Filter>Object\IObject\Gimmick</Filter>
     </ClCompile>
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="ReleaseTimer.cpp">
       <Filter>...TrashCan</Filter>
     </ClCompile>
     <ClCompile Include="Door.cpp">
-      <Filter>Gimmick\KT</Filter>
+      <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClCompile>
     <ClCompile Include="RotationBoard.cpp">
-      <Filter>Gimmick\KT</Filter>
+      <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClCompile>
     <ClCompile Include="Switch.cpp">
-      <Filter>Gimmick\HW</Filter>
+      <Filter>Object\IObject\Gimmick\HW</Filter>
     </ClCompile>
     <ClCompile Include="Colorchanger.cpp">
-      <Filter>Gimmick\MJ</Filter>
+      <Filter>Object\IObject\Gimmick\MJ</Filter>
     </ClCompile>
     <ClCompile Include="TestObjCollision.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="PObject.cpp" />
-    <ClCompile Include="Box.cpp" />
-    <ClCompile Include="Cylinder.cpp" />
-    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="BreakableWall.cpp">
-      <Filter>Gimmick\KT</Filter>
+      <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClCompile>
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="Dragon.cpp" />
+    <ClCompile Include="Cube.cpp">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PSBox.cpp">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PSCylinder.cpp">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PSphere.cpp">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Object\IObject\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="IObject.cpp">
+      <Filter>Object\IObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Object\PObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PObject.cpp">
+      <Filter>Object\PObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Object\PObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Cylinder.cpp">
+      <Filter>Object\PObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Gimmick.cpp">
+      <Filter>Object\IObject\Gimmick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -385,29 +398,14 @@
     <ClInclude Include="CHeight.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="IObject.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>Object\Tile</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>...TrashCan</Filter>
-    </ClInclude>
-    <ClInclude Include="PSCylinder.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="PSBox.h">
-      <Filter>Object</Filter>
+      <Filter>Object\IObject\Tile</Filter>
     </ClInclude>
     <ClInclude Include="SkinnedMesh.h">
       <Filter>SkinnedMesh</Filter>
     </ClInclude>
     <ClInclude Include="AllocateHierarchy.h">
       <Filter>SkinnedMesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Background.h">
-      <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Orb.h">
       <Filter>Orb</Filter>
@@ -434,43 +432,71 @@
       <Filter>Physics\cyclone</Filter>
     </ClInclude>
     <ClInclude Include="Skydome.h" />
-    <ClInclude Include="PSphere.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="PSOBB.h">
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="MeshTile.h">
-      <Filter>Gimmick</Filter>
+      <Filter>Object\IObject\Gimmick</Filter>
     </ClInclude>
     <ClInclude Include="ReleaseTimer.h">
       <Filter>...TrashCan</Filter>
     </ClInclude>
     <ClInclude Include="Door.h">
-      <Filter>Gimmick\KT</Filter>
+      <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClInclude>
     <ClInclude Include="RotationBoard.h">
-      <Filter>Gimmick\KT</Filter>
+      <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClInclude>
     <ClInclude Include="Switch.h">
-      <Filter>Gimmick\HW</Filter>
+      <Filter>Object\IObject\Gimmick\HW</Filter>
     </ClInclude>
     <ClInclude Include="Colorchanger.h">
-      <Filter>Gimmick\MJ</Filter>
+      <Filter>Object\IObject\Gimmick\MJ</Filter>
     </ClInclude>
     <ClInclude Include="TestObjCollision.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h" />
-    <ClInclude Include="PObject.h" />
-    <ClInclude Include="Box.h" />
-    <ClInclude Include="Cylinder.h" />
-    <ClInclude Include="Sphere.h" />
     <ClInclude Include="BreakableWall.h">
-      <Filter>Gimmick\KT</Filter>
+      <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClInclude>
     <ClInclude Include="Book.h" />
     <ClInclude Include="Dragon.h" />
+    <ClInclude Include="Cube.h">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PSBox.h">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PSCylinder.h">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PSphere.h">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Object\IObject\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="IObject.h">
+      <Filter>Object\IObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Object\PObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PObject.h">
+      <Filter>Object\PObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Object\PObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Cylinder.h">
+      <Filter>Object\PObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>...TrashCan\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Gimmick.h">
+      <Filter>Object\IObject\Gimmick</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -535,9 +561,6 @@
     <Filter Include="Xfile">
       <UniqueIdentifier>{ac0d07fd-91b0-4b6a-aaec-5117f95bdd34}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Tile">
-      <UniqueIdentifier>{5becf119-4d39-4d39-a36b-44ee9bbd76bc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="...TrashCan">
       <UniqueIdentifier>{ca5cac3f-681d-4e19-823a-36efbbf714fa}</UniqueIdentifier>
     </Filter>
@@ -589,17 +612,29 @@
     <Filter Include="Physics\cyclone">
       <UniqueIdentifier>{00e05eae-24f5-4dfb-9fc3-f0105fd54c0e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Gimmick">
+    <Filter Include="Object\IObject">
+      <UniqueIdentifier>{7cc9c122-b989-43f0-8e50-c350f175cde7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\IObject\Tile">
+      <UniqueIdentifier>{5becf119-4d39-4d39-a36b-44ee9bbd76bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\IObject\Gimmick">
       <UniqueIdentifier>{160a779f-9356-4325-b722-a130a8535a68}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Gimmick\KT">
+    <Filter Include="Object\IObject\Gimmick\KT">
       <UniqueIdentifier>{16e41f8f-ec5b-46a9-8ea9-379ce0d70cd3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Gimmick\HW">
+    <Filter Include="Object\IObject\Gimmick\HW">
       <UniqueIdentifier>{96ee8b91-2a5b-4739-9acb-e90d036b2c18}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Gimmick\MJ">
+    <Filter Include="Object\IObject\Gimmick\MJ">
       <UniqueIdentifier>{20582d70-2b5f-4577-b83a-7e923e967f07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\IObject\Background">
+      <UniqueIdentifier>{a49bcd63-58f5-415e-9448-81b2e3b9ea33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\PObject">
+      <UniqueIdentifier>{4b290806-0933-438b-a00a-8f9d672e0afd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,7 @@
 #include "Cylinder.h"
 #include "Background.h"
 #include "Tile.h"
+#include "Gimmick.h"
 
 int CObject::m_nRefCount = 0;
 
@@ -229,6 +230,11 @@ void CObject::CreateObject(const ST_MapData & mapData)
 		tile->Setup(mapData);
 	}
 	break;
+	case eG_RotationBoard:	case eG_BreakWall:	case eG_Door:	case eG_ColorChanger:	case eG_Switch:
+	{
+		CGimmick::Setup(mapData);
+	}
+		break;
 	}
 }
 

@@ -164,8 +164,8 @@ void CMainGame::Setup()
 	m_pGimmick_Door[1] = new CDoor;
 	m_pGimmick_Door[1]->Setup("Resource/XFile/Gimmick/Door", "door_right.X");
 
-	m_pGimmick_RotationBoard = new RotationBoard;
-	m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
+	// m_pGimmick_RotationBoard = new RotationBoard;
+	// m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
 
 	m_pGimmick_Switch = new CSwitch;
 	m_pGimmick_Switch->Setup("Resource/XFile/Gimmick/Switch", "Weight_switch.X");
@@ -328,7 +328,7 @@ void CMainGame::Update()
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
 	g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());
-	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
 	g_pObjectManager->Update();
 	///
 	//m_pBox->Update(g_pTimeManager->GetElapsedTime());
@@ -343,8 +343,8 @@ void CMainGame::Update()
 	if (m_pGimmick_Door[1])
 		m_pGimmick_Door[1]->Update(g_pTimeManager->GetElapsedTime());
 
-	if (m_pGimmick_RotationBoard)
-		m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
+	//if (m_pGimmick_RotationBoard)
+	//	m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
 	
 	if (m_pChanger)
 		m_pChanger->Update();
@@ -443,8 +443,8 @@ void CMainGame::Render()
 		m_pGimmick_Door[0]->Render();
 	if (m_pGimmick_Door[1])
 		m_pGimmick_Door[1]->Render();
-	if (m_pGimmick_RotationBoard)
-		m_pGimmick_RotationBoard->Render();
+	//if (m_pGimmick_RotationBoard)
+	//	m_pGimmick_RotationBoard->Render();
 	if (m_pGimmick_Switch)
 		m_pGimmick_Switch->Render();
 	if (m_pChanger)

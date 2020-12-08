@@ -258,8 +258,10 @@ void CObjectManager::Destroy()
 
 void CObjectManager::Update(float duration)
 {
-	for (int i = 0; i < m_vecObject.size(); i++)
-		m_vecObject[i]->Update(duration);
+	for (int i = 0; i < m_vecIObject.size(); i++)
+		m_vecIObject[i]->Update(duration);
+	//for (int i = 0; i < m_vecObject.size(); i++)
+	//	m_vecObject[i]->Update(duration);
 	//GenerateContacts();
 	//resolver.resolveContacts(cData.contactArray, cData.contactCount, duration);
 }
