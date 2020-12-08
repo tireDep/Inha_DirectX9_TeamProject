@@ -12,6 +12,11 @@ private:
 	LPDIRECT3DTEXTURE9 m_pTexture;
 	ST_XFile* xfile = new ST_XFile;
 
+	// >> testRotationMove
+	D3DXVECTOR3 m_position;
+	bool m_isTrue;
+	// << testRotationMove
+
 public:
 	CDragon();
 	~CDragon();
