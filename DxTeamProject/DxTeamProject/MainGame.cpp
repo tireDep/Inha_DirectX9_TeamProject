@@ -6,16 +6,36 @@
 #include "UI.h"
 #include "Text.h"
 #include "Character.h"
+#include "Orb.h"
 #include "Ray.h"
 #include "Light.h"
 #include "GridMap.h"
 #include "PSphere.h"
 #include "PSBox.h"
 #include "PSCylinder.h"
+#include "TestAngleSet.h"
 #include "SkinnedMesh.h"
+#include "Skydome.h"
 /// 이 아래는 지울 수도 있는 선언
-#include "Xfile.h"
 #include "CHeight.h"
+// Ray y check
+#include "MeshTile.h"
+#include "OBB.h"
+#include "Tile.h"
+//Gimmick
+#include "Colorchanger.h"
+#include "Door.h"
+#include "BreakableWall.h"
+#include "RotationBoard.h"
+#include "Switch.h"
+
+#include "PObject.h"
+#include "Box.h"
+#include "Sphere.h"
+#include "Cylinder.h"
+
+#include "Book.h"
+#include "Dragon.h"
 
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
@@ -26,15 +46,27 @@ CMainGame::CMainGame() :
 	m_pText(NULL),
 	m_pCharacter(NULL),
 	m_pLight(NULL),
-	m_GridMap(NULL),
+	m_pOrb(NULL),
+	// m_GridMap(NULL),
 	/// 이 아래는 지울 수도 있는 선언
-	m_Xfile(NULL),
+	m_pSkydome(NULL),
 	m_pHeightMap(NULL),
 	m_pSkinnedMesh(NULL)
+	// Ray y check
+	, m_pMeshTile(NULL),
+	// Gimmick
+	m_pGimmick_RotationBoard(NULL),
+	m_pGimmick_Switch(NULL),
+	//
+	m_pBook(NULL),
+	m_pDragon(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
-
+	m_pGimmick_Door[0] = NULL;
+	m_pGimmick_Door[1] = NULL;
+	m_pGimmick_BreakableWall[0] = NULL;
+	m_pGimmick_BreakableWall[1] = NULL;
 }
 
 CMainGame::~CMainGame()
@@ -43,13 +75,28 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pUI);
 	SafeDelete(m_pText);
 	SafeDelete(m_pLight);
-	SafeDelete(m_GridMap);
+	SafeDelete(m_pSkydome);
+	// Gimmick
+	SafeDelete(m_pGimmick_Door[0]);
+	SafeDelete(m_pGimmick_Door[1]);
+	SafeDelete(m_pGimmick_RotationBoard);
+	SafeDelete(m_pGimmick_Switch);
+	SafeDelete(m_pGimmick_BreakableWall[0]);
+	SafeDelete(m_pGimmick_BreakableWall[1]);
+	//
+	SafeDelete(m_pBook);
+	SafeDelete(m_pDragon);
+
+	g_pFileLoadManager->Destroy();
+	
 	/// 이 아래는 지울 수도 있는 선언
-	SafeDelete(m_Xfile);
 	SafeDelete(m_pHeightMap);
 	SafeDelete(m_pSkinnedMesh);
+
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
+	// Ray y check
+	
 	/// 릴리즈 버전을 위한 주석처리
 	//SafeDelete(m_pSm);
 }
@@ -68,14 +115,19 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
-	g_pFileLoadManager->FileLoad_MapData();
-
+#ifdef _DEBUG
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	// >> mapData
+#else
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+#endif // DEBUG
+	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
 
 	m_pCharacter = new CCharacter;
 	m_pCharacter->Setup();
-
+	
 	m_pText = new CText;
 	m_pText->Setup();
 
@@ -85,38 +137,56 @@ void CMainGame::Setup()
 	m_pCamera = new CCamera;
 	m_pCamera->Setup(&m_pCharacter->GetPosition());
 
+	//m_pOrb = new COrb;
+	//m_pOrb->Setup();
+
 	m_pLight = new CLight;
 	m_pLight->Setup();
 	//m_pLight->Setup(D3DXVECTOR3(1, 0, 0)); // sun light vector
 
-	m_GridMap = new CGridMap;
-	m_GridMap->Setup();
-	m_pPrevFrustum.Setup();
-	m_pNowFrustum.Setup();
+	// m_pPrevFrustum.Setup();
+	// m_pNowFrustum.Setup();
+
+	//m_pSkydome = new CSkydome;
+	//m_pSkydome->Setup("Resource/XFile/Sky", "skydome.X");
+
+	////--Gimmick
+	m_pChanger = new Color_changer;
+
+	m_pChanger->Setup("Resource/XFile/Gimmick/ColorChanger", "Color_changer.X"); //Resource/XFile/Gimmick/ColorChanger", "Color_changer.X
+
+	
+	m_pGimmick_Door[0] = new CDoor;
+	m_pGimmick_Door[0]->Setup("Resource/XFile/Gimmick/Door", "door_frame.X");
+	m_pGimmick_Door[1] = new CDoor;
+	m_pGimmick_Door[1]->Setup("Resource/XFile/Gimmick/Door", "door_right.X");
+
+	m_pGimmick_RotationBoard = new RotationBoard;
+	m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
+
+	m_pGimmick_Switch = new CSwitch;
+	m_pGimmick_Switch->Setup("Resource/XFile/Gimmick/Switch", "Weight_switch.X");
+
+	m_pGimmick_BreakableWall[0] = new CBreakableWall;
+	m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "standard_wall.X");
+	m_pGimmick_BreakableWall[1] = new CBreakableWall;
+	m_pGimmick_BreakableWall[1]->Setup("Resource/XFile/Gimmick/BreakableWall", "brick.X");
+
+
+	m_pBook = new CBook;
+	m_pBook->Setup();
+
+	m_pDragon = new CDragon;
+	m_pDragon->Setup();
 
 	/// 이 아래는 지울 수도 있는 선언
-	for (int i = 0; i < 8; i++)
-	{
-		CPSphere* Sphere = new CPSphere();
-		Sphere->Setup(D3DXVECTOR3(25, 0.5f, 2 * i + 3));
-	}
-	for (int i = 0; i < 8; i++)
-	{
-		CPSBox* box = new CPSBox();
-		box->Setup(D3DXVECTOR3(-25, 0.5, 2 * i + 3));
-	}
-	for (int i = 0; i < 8; i++)
-	{
-		CPSCylinder* cylinder = new CPSCylinder();
-		cylinder->Setup(D3DXVECTOR3(2 * i - 7, 0.5, 25));
-	}
-	//m_pHeightMap = new CHeight;
-	//m_pHeightMap->Setup("HeightMapData", "HeightMap.raw");
-	m_Xfile = new CXfile;
-	m_Xfile->Setup();
+	//m_pSphere = new CSphere();
+	//m_pSphere->Setup();
+	//m_pBox = new CBox();
+	//m_pBox->Setup();
 
-	m_pSkinnedMesh = new CSkinnedMesh;
-	m_pSkinnedMesh->SetUp("Resource/XFile/Character", "character_test.X");
+	//m_pSkinnedMesh = new CSkinnedMesh;
+	//m_pSkinnedMesh->SetUp("Resource/XFile/Character", "1slot Cha.X");
 
 	g_pEventManager->AddListener(g_gameManager);
 	g_pEventManager->AddListener(m_pCamera);
@@ -127,6 +197,18 @@ void CMainGame::Setup()
 	{
 		g_pEventManager->AddListener(g_pObjectManager->GetVecObject()[i]);
 	}
+
+	// Ray y check
+
+	for (int i = 0; i < 6; ++i)
+	{
+		m_pMeshTile.push_back(new MeshTile);
+		m_pMeshTile[i]->Setup(10, i - 2.5 , 0);
+	}
+
+	//m_pMeshTile = new MeshTile;
+	//m_pMeshTile->Setup();
+
 
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm = new CSoundManager;
@@ -141,65 +223,98 @@ void CMainGame::Update()
 	if (m_pCamera)
 		m_pCamera->Update();
 
-	if (m_pSkinnedMesh)
-		m_pSkinnedMesh->Update();
+	//if (m_pSkinnedMesh)
+	//	m_pSkinnedMesh->Update();
+
+	//if(m_pOrb)
+	//	m_pOrb->Update();
 
 	if (m_pCharacter)
 	{
-		m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
+		m_pCharacter->Update(m_pCamera->GetCameraDirection());
+		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
 			m_pCharacter->SetColor(RED);
+			m_pDragon->Update(RED);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Yellow:
 			m_pCharacter->SetColor(YELLOW);
+			m_pDragon->Update(YELLOW);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Green:
 			m_pCharacter->SetColor(GREEN);
+			m_pDragon->Update(GREEN);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Blue:
 			m_pCharacter->SetColor(BLUE);
+			m_pDragon->Update(BLUE);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Black:
 			m_pCharacter->SetColor(BLACK);
+			m_pDragon->Update(BLACK);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::White:
 			m_pCharacter->SetColor(WHITE);
+			m_pDragon->Update(WHITE);
 			m_pUI->SetPickColor();
 			break;
 		default:
 			break;
 		}
 		// grab
-		if (m_pCharacter->Update(g_pObjectManager->GetVecObject()) != -1)
+		if (m_pCharacter->Update(g_pObjectManager->GetVecPObejct()) != -1)
 		{
 			m_pText->SetisGrabstate(true);
 			D3DXVECTOR3 v;
-			v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
-			v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
-			v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
+			v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct())]->GetPosition() - m_pCharacter->GetPosition();
+			//v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
+			//v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
+			//v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
 			D3DXVec3Normalize(&v, &v);
-			g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->SetPusingForce(v);
+			g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct())]->SetPusingForce(v);
 		}
 		else
 		{
 			m_pText->SetisGrabstate(false);
 		}
+		// Ray y check
+		/*m_pCharacter->UpdateRayYCheck(*m_pMeshTile);*/
 	}
+
+	 //if (g_gameManager->GetGridMapMode())
+	 //{
+	 //	m_pPrevFrustum = m_pNowFrustum;
+	 //	m_pNowFrustum.Update();
+	 //	if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum))
+	 //	{
+	 //		m_GridMap->CalcNewMap(&m_pNowFrustum);
+	 //	}
+	 //}
 
 	if (g_gameManager->GetGridMapMode())
 	{
 		m_pPrevFrustum = m_pNowFrustum;
 		m_pNowFrustum.Update();
-		if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum))
+
+		static D3DXVECTOR3 lastPlayerPos = D3DXVECTOR3(0, 0, 0);
+		D3DXVECTOR3 tempPos = m_pCharacter->GetPosition();
+		float posCheck = 0.5f;
+
+		// >> todo : 판정 변경
+		if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum) 
+		 || fabs(lastPlayerPos.x - tempPos.x) >= posCheck 
+		 || fabs(lastPlayerPos.y - tempPos.y) >= posCheck 
+		 || fabs(lastPlayerPos.z - tempPos.z) >= posCheck)
 		{
-			m_GridMap->CalcNewMap(&m_pNowFrustum);
+			lastPlayerPos = tempPos;
+			g_pObjectManager->UpdateNewMap(&m_pNowFrustum);
 		}
 	}
 
@@ -207,31 +322,49 @@ void CMainGame::Update()
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
-	g_pObjectManager->Update();													// Collision
-	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());					// 2D Physics
+	g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());
+	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
+	g_pObjectManager->Update();
+	///
+	//m_pBox->Update(g_pTimeManager->GetElapsedTime());
+	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
+	//g_pObjectManager->UpdateCollide(g_pTimeManager->GetElapsedTime());			// new Collision
+	//g_pObjectManager->Update();													// Collision
 	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
 
-	/// 릴리즈 버전을 위한 주석처리
-	// 민종씨 코드
-	//static int count = 0;
-	//static float gravity = -0.98;
-	//static float plane = 1.5;
-	//if (m_pWall[0]->Gravity(*m_pSphere1) == true) //땅에 부딪혔을때
-	//{
-	//	//cout << m_pWall[4]->Gravity(*m_pSphere1) << endl;
-	//	m_pWall[0]->hitBy(*m_pSphere1);
-	//	plane -= 0.3f;
-	//	//cout << count++ << endl;
-	//}
-	//else // 떠있을때 중력을 줌
-	//{
-	//	if (m_pSphere1->getCenter().y > plane)
-	//	{
-	//		m_pSphere1->setPower(0, gravity, 0);
-	//		//cout << m_pSphere1->getCenter().y << endl;
-	//	}
-	//}
-	//	m_pSphere1->Update(g_pTimeManager->GetElapsedTime());
+	// Gimmick
+	if (m_pGimmick_Door[0])
+		m_pGimmick_Door[0]->Update(g_pTimeManager->GetElapsedTime());
+	if (m_pGimmick_Door[1])
+		m_pGimmick_Door[1]->Update(g_pTimeManager->GetElapsedTime());
+
+	if (m_pGimmick_RotationBoard)
+		m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
+	
+	if (m_pChanger)
+		m_pChanger->Update();
+
+	if (m_pGimmick_BreakableWall[0])
+		m_pGimmick_BreakableWall[0]->Update();
+	if (m_pGimmick_BreakableWall[1])
+		m_pGimmick_BreakableWall[1]->Update();
+
+	for (int i = 0; i < m_pMeshTile.size(); ++i)
+	{
+		if (m_pChanger)
+		{
+			if (m_pChanger->RayCheck(*m_pMeshTile[i]) == true);
+			{
+
+				m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere2);
+
+			}
+			if (m_pChanger->RayCheck(*m_pMeshTile[i]) == false)
+			{
+				m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere2);
+			}
+		}
+	}
 }
 
 void CMainGame::Render()
@@ -246,24 +379,28 @@ void CMainGame::Render()
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150, 150, 150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 
+	//if (m_pSkydome)
+	//	m_pSkydome->Render(m_pCamera->GetCameraEye());
+
 	if (m_pGrid)
 		m_pGrid->Render();
+	
+
+	D3DCOLOR c = D3DCOLOR_XRGB(255, 0, 0);
 
 	if (m_pCharacter)
-		m_pCharacter->Render();
+		m_pCharacter->Render(c);
+
+	//if (m_pOrb)
+	//{
+	//	m_pOrb->SetBillbord();
+	//	m_pOrb->Render();
+	//}
 
 	g_pObjectManager->Render();
 
-	if (g_gameManager->GetGridMapMode())
-	{
-		m_GridMap->Render();
-	}
-
-	 if (m_pSkinnedMesh)
-	 	m_pSkinnedMesh->Render(NULL);
-
-	if (m_Xfile)
-		m_Xfile->Render(m_pCamera->GetCameraEye());
+	 //if (m_pSkinnedMesh)
+	 //	m_pSkinnedMesh->Render(NULL);
 
 	//if (m_pHeightMap)
 	//	m_pHeightMap->Render();
@@ -283,23 +420,38 @@ void CMainGame::Render()
 	if (m_pText->GetisGrabstate())
 		m_pText->RenderGrab();
 
-	/// 릴리즈 버전을 위한 주석처리
-	//if (m_pParticleWorld)
-	//	m_pParticleWorld->Render();
-	/// tmp Physics
-	//g_pPhysicsObjectManager->Render();
-	//if (m_pSphere1)
-	//	m_pSphere1->Render();
-	//if (m_pSphere2)
-	//	m_pSphere2->Render();
-	//if (&m_pWall)
-	//	m_pWall[0]->draw();
-	//if (&m_pWall)
-	//	m_pWall[0]->draw();
-	//if (&m_pWall)
-	//	m_pWall[2]->draw();
-	//if (&m_pWall)
-	//	m_pWall[3]->draw();
+	// Ray y check
+
+
+	for(int i =0; i < m_pMeshTile.size(); ++i)
+		m_pMeshTile[i]->Render();
+
+	//if (m_pMeshTile)
+	//	m_pMeshTile->Render();
+
+	// Gimmick
+	if (m_pGimmick_Door[0])
+		m_pGimmick_Door[0]->Render();
+	if (m_pGimmick_Door[1])
+		m_pGimmick_Door[1]->Render();
+	if (m_pGimmick_RotationBoard)
+		m_pGimmick_RotationBoard->Render();
+	if (m_pGimmick_Switch)
+		m_pGimmick_Switch->Render();
+	if (m_pChanger)
+		m_pChanger->Render();
+	if (m_pGimmick_BreakableWall[0])
+		m_pGimmick_BreakableWall[0]->Render();
+	if (m_pGimmick_BreakableWall[1]) 
+		m_pGimmick_BreakableWall[1]->Render();
+//
+
+	if (m_pBook)
+		m_pBook->Render();
+
+	if (m_pDragon)
+		m_pDragon->Render();
+
 	if (g_gameManager->GetUImode())
 	{
 		if (m_pUI)

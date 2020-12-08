@@ -91,6 +91,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,6 +122,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,6 +157,7 @@
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="FileLoadManager.h" />
+    <ClInclude Include="Gimmick.h" />
     <ClInclude Include="Gizmo.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="imconfig.h" />
@@ -168,9 +171,11 @@
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="IObject.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="OBB.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="RotationBoard.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="stdafx.h" />
@@ -185,6 +190,7 @@
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="FileLoadManager.cpp" />
+    <ClCompile Include="Gimmick.cpp" />
     <ClCompile Include="Gizmo.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="imgui.cpp" />
@@ -196,10 +202,12 @@
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="IObject.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="OBB.cpp" />
     <ClCompile Include="originMain.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RotationBoard.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="toolMain.cpp" />

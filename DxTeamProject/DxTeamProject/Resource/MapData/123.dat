@@ -1,0 +1,122 @@
+# Object_Start
+# ObjectName
+Tile1
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_06.X
+# TxtPath
+Texture_01.png
+# ObjectType
+5
+# Scale
+0.4
+0.01
+0.4
+# Rotate
+0
+0
+0
+# Translate
+0
+0
+0
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile2
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_10.X
+# TxtPath
+Texture_01.png
+# ObjectType
+9
+# Scale
+0.4
+0.05
+0.2
+# Rotate
+0
+0
+0
+# Translate
+0
+0
+6
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile3
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_10.X
+# TxtPath
+Texture_01.png
+# ObjectType
+9
+# Scale
+0.4
+0.05
+0.15
+# Rotate
+0
+0
+0
+# Translate
+0
+3.5
+8
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile4
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_10.X
+# TxtPath
+Texture_01.png
+# ObjectType
+9
+# Scale
+0.4
+0.05
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0
+7
+10
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Section =======================================
+

@@ -1,32 +1,55 @@
 #include "stdafx.h"
 #include "World.h"
-#include "RigidBody.h"
 
-CWorld::CWorld()
+CWorld::CWorld(unsigned maxContacts, unsigned iteration)
+	: resolver(NULL)
+	, firstContactGen(NULL)
+	, maxContacts(maxContacts)
 {
+	contacts = new Contact[maxContacts];
+	calculateIterations = (iteration == 0);
 }
 
 CWorld::~CWorld()
 {
+	delete[] contacts;
 }
 
 void CWorld::startFrame()
 {
-	for (RigidBodies::iterator b = m_vecBodies.begin(); b != m_vecBodies.end(); b++)
+	for (RigidBodies::iterator it = m_vecRigidBody.begin(); it != m_vecRigidBody.end(); it++)
 	{
-		(*b)->clearAccumulators();
-		(*b)->calculateDeriveDate();
+		(*it)->clearAccumulators();
+		(*it)->calculateDerivedData();
 	}
 }
 
-void CWorld::integrate(float duration)
+unsigned CWorld::generateContacts()
 {
-	for (RigidBodies::iterator b = m_vecBodies.begin(); b != m_vecBodies.end(); b++)
+	unsigned limit = maxContacts;
+	Contact *nextContact = contacts;
+
+	ContactGenRegistration *reg = firstContactGen;
+	while (reg)
 	{
-		(*b)->integrate(duration);
+		unsigned used = reg->gen->addContact(nextContact, limit);
+		limit -= used;
+		nextContact += used;
+
+		if (limit <= 0) break;
+		reg = reg->next;
 	}
+	return maxContacts - limit;
 }
 
-void CWorld::runPhysics(float duration)
+void CWorld::RunPhysics(float duration)
 {
+	for (RigidBodies::iterator it = m_vecRigidBody.begin(); it != m_vecRigidBody.end(); it++)
+	{
+		(*it)->integrate(duration);
+	}
+	unsigned usedContacts = generateContacts();
+	if (calculateIterations)
+		resolver.setIterations(usedContacts * 4);
+	resolver.resolveContacts(contacts, usedContacts, duration);
 }

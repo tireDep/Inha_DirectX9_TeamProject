@@ -3,10 +3,13 @@
 #include <fstream>
 #include "stdafx.h"
 #include "IObject.h"
+#include "RotationBoard.h"
 #include "FileLoadManager.h"
 
 #define StrFilePath(path, folder, file) { path = string(folder) + "/" + string(file); }
 #define ErrMessageBox(msg, type) { MessageBoxA(g_hWnd, string(msg).c_str(), string(type).c_str(), MB_OK); }
+
+#define nGridSize 30
 
 LPD3DXEFFECT CFileLoadManager::LoadShader(const string fileName)
 {
@@ -44,8 +47,19 @@ void CFileLoadManager::ReadMapData(string fileName)
 	ifstream mapFile;
 	mapFile.open(fileName.c_str(), ios::in | ios::binary);
 
+	int loopCnt = 0;
 	if (mapFile.is_open())
 	{
+		if(m_fNowX == -nGridSize && g_pObjectManager->GetVecObject().size() != 0)
+			m_fNowX += m_fAddNumX * 2; // object exist && first load
+		else if (m_fNowX < m_fLimitNumX)
+			m_fNowX += m_fAddNumX;	// first load, load
+		else
+		{
+			m_fNowZ += m_fAddNumZ;
+			m_fNowX = 0;
+		}
+
 		ST_MapData mapData;
 		string readData;
 
@@ -130,29 +144,52 @@ void CFileLoadManager::ReadMapData(string fileName)
 
 				getline(mapFile, readData);
 				mapData.dxColor.b = atof(readData.c_str());
-				
+
 				getline(mapFile, readData);
 				mapData.dxColor.a = atof(readData.c_str());
 			}
 
+			else if (readData == "# GimmickData")
+				continue;
+
+			else if (readData == "# RotationSpeed")
+			{
+				getline(mapFile, readData);
+				mapData.gimmickData.roationSpeed = atof(readData.c_str());
+			}
+			else if (readData == "# RotationAxialIndex")
+			{
+				getline(mapFile, readData);
+				mapData.gimmickData.roationAxialIndex = atoi(readData.c_str());
+			}
+
 			else if (readData == "# Object_End")
+			{
+				// todo
+				// 기믹, 이벤트 트리거 등 오브젝트 타입에 따라 파싱 추가
+
 				IObject::CreateObject(mapData);
+			}
+
+			else if (strstr(readData.c_str(), "# Section"))
+				loopCnt++;
 		}
 	}
 
 	mapFile.close();
 
-	cout << m_fNowX << ", " << m_fNowZ << endl;
-	cout << m_fAddNumX << ", " << m_fAddNumZ << ", " << m_fLimitNumX << endl;
-	if (m_fNowX < m_fLimitNumX)
-		m_fNowX += m_fAddNumX;
-	else
+	
+	for (int i = 1; i < loopCnt; i++)		
 	{
-		m_fNowZ += m_fAddNumZ;
-		m_fNowX = 0;
+		// >> 한 파일에 여러 맵이 있을 경우 인덱스 계산
+		if (m_fNowX < m_fLimitNumX)
+			m_fNowX += m_fAddNumX;
+		else
+		{
+			m_fNowZ += m_fAddNumZ;
+			m_fNowX = 0;
+		}
 	}
-
-	cout << m_fNowX << ", " << m_fNowZ << endl;
 }
 
 void CFileLoadManager::SaveMapData(string fileName)
@@ -160,58 +197,105 @@ void CFileLoadManager::SaveMapData(string fileName)
 	ofstream saveFile;
 	saveFile.open(fileName.c_str(), ios::out | ios::binary);
 
-	// >> todo : 파일 분리(구역별)?
 	ofstream mapFile;
 	mapFile.open("mapData.dat", ios::out | ios::binary);
 
-	ofstream objFile;
-	objFile.open("objData.dat", ios::out | ios::binary);
+	if (!mapFile.is_open() || !saveFile.is_open())
+		return;
 
-	if (mapFile.is_open() && objFile.is_open() && saveFile.is_open())
+	int saveNum = 0;
+	float halfGridNum = nGridSize * 0.5f;
+	float addNum = 1.5f; // 그리드 범위 밖 여유 판정
+
+	float minNumX = -halfGridNum - addNum, maxNumX = halfGridNum + addNum;
+	float minNumZ = -halfGridNum - addNum, maxNumZ = halfGridNum + addNum;
+	int maxIndex = g_pObjectManager->GetVecSize();
+
+	int preNum = 0;
+	int checkNum = 0;
+	while (saveNum < maxIndex)
 	{
-		vector<IObject *> vecObject = g_pObjectManager->GetVecObject();
-		ST_MapData mapData;
-
-		for (int i = 0; i < vecObject.size(); i++)
+		preNum = saveNum;
+		for (int i = 0; i < maxIndex; i++)
 		{
-			mapData.strObjName = vecObject[i]->GetObjectName();
-
-			mapData.strFolderPath = vecObject[i]->GetFolderPath();
-			mapData.strXFilePath = vecObject[i]->GetXFilePath();
-			mapData.strTxtPath = vecObject[i]->GetXTxtPath();
-
-			mapData.objType = vecObject[i]->GetObjType();
-			mapData.vScale = vecObject[i]->GetScale();
-			mapData.vRotate = vecObject[i]->GetRotate();
-			mapData.vTranslate = vecObject[i]->GetTranslate();
-
-			mapData.dxColor = vecObject[i]->GetColor();
-
-			FileSave(saveFile, mapData);
-
-			switch (mapData.objType)
+			D3DXVECTOR3 vPos = g_pObjectManager->GetIObject(i).GetTranslate();
+			if (minNumX <= vPos.x && vPos.x <= maxNumX && minNumZ <= vPos.z && vPos.z <= maxNumZ)
 			{
-			case eBox:
-			case eSphere:
-			case eCylinder:
-			case eATree:
-			case eSTree:
-			case eWTree:
-				FileSave(objFile, mapData);
-				break;
+				DoFileSave(saveFile, mapFile, i);
+				saveNum++;
+			}
+		}
 
-			default:
-				FileSave(mapFile, mapData);
-				break;
-			} // << : switch
+		if (preNum == saveNum)
+			checkNum++;
 
-		} // << : for
-		saveFile.close();
-		objFile.close();
-		mapFile.close();
+		if (checkNum >= 9999)
+		{
+			// << 무한루프 처리
+			ErrMessageBox("파일저장에러, 그리드 범위 확인", "ERROR");
+			break;
+		}
 
-	} // << : if
+		// >> Next map set
+		if (minNumX < m_fLimitNumX)
+		{
+			minNumX += m_fAddNumX;
+			maxNumX += m_fAddNumX;
+		}
+		else
+		{
+			minNumX = -halfGridNum;
+			maxNumX = halfGridNum;
+			minNumZ += m_fAddNumZ;
+			maxNumZ += m_fAddNumZ;
+		}
 
+		// << Next map set
+		FileSave_Section(saveFile);
+		FileSave_Section(mapFile);
+
+	} // >> : while
+
+	saveFile.close();
+	mapFile.close();
+}
+
+ST_MapData CFileLoadManager::SetSaveData(int index)
+{
+	IObject& vecObject = g_pObjectManager->GetIObject(index);
+	ST_MapData mapData;
+
+	mapData.strObjName = vecObject.GetObjectName();
+
+	mapData.strFolderPath = vecObject.GetFolderPath();
+	mapData.strXFilePath = vecObject.GetXFilePath();
+	mapData.strTxtPath = vecObject.GetXTxtPath();
+
+	mapData.objType = vecObject.GetObjType();
+	mapData.vScale = vecObject.GetScale();
+	mapData.vRotate = vecObject.GetRotate();
+	mapData.vTranslate = vecObject.GetTranslate();
+
+	mapData.dxColor = vecObject.GetColor();
+
+	if (mapData.objType == eG_RotationBoard)
+	{
+		CRotationBoard* temp = dynamic_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(index));
+		mapData.gimmickData.isData = true;
+		mapData.gimmickData.roationSpeed = temp->GetRotationSpeed();
+		mapData.gimmickData.roationAxialIndex = temp->GetRotationAxialIndex();
+	}
+	else
+		mapData.gimmickData.isData = false;
+
+	return mapData;
+}
+
+void CFileLoadManager::DoFileSave(ofstream & saveFile, ofstream & mapFile, int index)
+{
+	ST_MapData mapData = SetSaveData(index);
+	FileSave(saveFile, mapData);
+	FileSave(mapFile, mapData);
 }
 
 void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
@@ -245,7 +329,28 @@ void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
 	file << "# Color" << endl;
 	file << mapData.dxColor.r << endl << mapData.dxColor.g << endl << mapData.dxColor.b << endl << mapData.dxColor.a << endl;
 
+	// todo
+	// 기믹, 이벤트 트리거 등 오브젝트 타입에 따라 파싱 추가
+	if (mapData.gimmickData.isData == true)
+	{
+		file << "# GimmickData" << endl;
+		if(mapData.objType == ObjectType::eG_RotationBoard)
+		{
+			file << "# RotationSpeed" << endl;
+			file << mapData.gimmickData.roationSpeed << endl;
+			
+			file << "# RotationAxialIndex" << endl;
+			file << mapData.gimmickData.roationAxialIndex << endl;
+		}
+	}
+
+
 	file << "# Object_End" << endl << endl;
+}
+
+void CFileLoadManager::FileSave_Section(ofstream & file)
+{
+	file << "# Section =======================================" << endl << endl;
 }
 
 bool CFileLoadManager::CheckDataName(TCHAR * openFileName, string& realName)
@@ -280,10 +385,10 @@ bool CFileLoadManager::CheckDataName(TCHAR * openFileName, string& realName)
 
 void CFileLoadManager::Setup()
 {
-	m_fNowX = 0;
+	m_fNowX = -nGridSize;
 	m_fNowZ = 0;
-	m_fAddNumX = 30;
-	m_fAddNumZ = -30;
+	m_fAddNumX = nGridSize;
+	m_fAddNumZ = -nGridSize;
 	// >> default set
 
 	m_fLimitNumX = 0;
@@ -390,15 +495,14 @@ bool CFileLoadManager::FileLoad_XFile(string szFolder, string szFile, ST_XFile* 
 		for (int i = 0; i < setXFile->nMtrlNum; i++)
 		{
 			mtrls[i].MatD3D.Ambient = mtrls[i].MatD3D.Diffuse;
-			setXFile->vecMtrl.push_back(&mtrls[i].MatD3D);
+			setXFile->vecMtrl.push_back(mtrls[i].MatD3D);
 
 			if (mtrls[i].pTextureFilename != NULL)
 			{
 				IDirect3DTexture9* tex = 0;
 
 				string txtFilePath = string(szFolder) + ("/") + string(mtrls[i].pTextureFilename);
-				D3DXCreateTextureFromFileA(g_pD3DDevice, txtFilePath.c_str(), &tex);
-
+				FileLoad_Texture(szFolder, mtrls[i].pTextureFilename, tex);
 				setXFile->vecTextrure.push_back(tex);
 			}
 			else
@@ -416,12 +520,16 @@ bool CFileLoadManager::FileLoad_Texture(string szFolder, string szFile, LPDIRECT
 	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
 
-	if (D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &setTexture))
+	if (m_mapTexture.find(filePath) == m_mapTexture.end())
 	{
-		ErrMessageBox("Texture Load Error", "ERROR");
-		return false;
+		if (D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &m_mapTexture[filePath.c_str()]))
+		{
+			ErrMessageBox("Texture Load Error", "ERROR");
+			return false;
+		}
 	}
 
+	setTexture = m_mapTexture[filePath];
 	return true;
 }
 
@@ -430,41 +538,118 @@ bool CFileLoadManager::FileLoad_Sprite(string szFolder, string szFile, D3DXIMAGE
 	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
 
-	if (D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		filePath.c_str(),
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT,
-		0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED, D3DX_FILTER_NONE
-		, D3DX_DEFAULT, 0, &imageInfo, NULL, &lpTexture))
+	if (m_mapSprite.find(filePath) == m_mapSprite.end())
 	{
-		ErrMessageBox("Sprite Load Error", "ERROR");
-		return false;
+		if (D3DXCreateTextureFromFileExA(g_pD3DDevice,
+			filePath.c_str(),
+			D3DX_DEFAULT_NONPOW2,
+			D3DX_DEFAULT_NONPOW2,
+			D3DX_DEFAULT,
+			0,
+			D3DFMT_UNKNOWN,
+			D3DPOOL_MANAGED, D3DX_FILTER_NONE
+			, D3DX_DEFAULT, 0, &imageInfo, NULL, &lpTexture))
+		{
+			ErrMessageBox("Sprite Load Error", "ERROR");
+			return false;
+		}
+
+		ST_Sprite spriteInfo;
+		spriteInfo.imageInfo = imageInfo;
+		spriteInfo.lpTexture = lpTexture;
+
+		m_mapSprite[filePath] = spriteInfo;
 	}
+
+	imageInfo = m_mapSprite[filePath].imageInfo;
+	lpTexture = m_mapSprite[filePath].lpTexture;
 
 	return true;
 }
 
 bool CFileLoadManager::FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT & setShader)
 {
-	string filePath;;
+	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
 
-	setShader = LoadShader(filePath);
-
-	if (!setShader)
+	if (m_mapShader.find(filePath) == m_mapShader.end())
 	{
-		ErrMessageBox("Shader Load Fail", "Error");
-		return false;
+		setShader = LoadShader(filePath);
+
+		if (!setShader)
+		{
+			ErrMessageBox("Shader Load Fail", "Error");
+			return false;
+		}
+
+		m_mapShader[filePath] = setShader;
 	}
+
+	setShader = m_mapShader[filePath];
 
 	return true;
 }
 
 void CFileLoadManager::SetIndexNumZero()
 {
-	m_fNowX = 0;
+	m_fNowX = -nGridSize;
 	m_fNowZ = 0;
 }
+
+void CFileLoadManager::SetIndexNumPrev()
+{
+	if (m_fNowX == -nGridSize && m_fNowZ == 0)
+		return;
+
+	bool isCheck = false;
+	if (m_fNowX == -nGridSize)
+	{
+		m_fNowX = m_fLimitNumX;
+		isCheck = true;
+	}
+	else
+		m_fNowX -= m_fAddNumX;
+
+	if (isCheck)
+		m_fNowZ -= m_fAddNumZ;
+}
+
+void CFileLoadManager::Destroy()
+{
+	for each(auto it in m_mapTexture)
+	{
+		SafeRelease(it.second);
+	}
+	m_mapTexture.clear();
+
+
+	for each(auto it in m_mapShader)
+	{
+		SafeRelease(it.second);
+	}
+	m_mapShader.clear();
+
+	for each(auto it in m_mapSprite)
+	{
+		SafeRelease(it.second.lpTexture);
+	}
+	m_mapSprite.clear();
+}
+
+//D3DXVECTOR3 CFileLoadManager::GetSelectCenterPos(D3DXVECTOR3 vSelect)
+//{
+//	m_fNowX = -nGridSize;
+//	m_fNowZ = 0;
+//	m_fAddNumX = nGridSize;
+//	m_fAddNumZ = -nGridSize;
+//
+//	for (int i = 0; i >= m_fNowZ; i -= nGridSize)
+//	{
+//		for (int j = -nGridSize; j <= m_fLimitNumX; j += nGridSize)
+//		{
+//			if ((vSelect.x <= j && vSelect.x >= j + nGridSize) 
+//			 && (vSelect.z >= i && vSelect.z <= i - nGridSize))
+//				return D3DXVECTOR3((j + nGridSize)*0.5f, 0.5f, (i - nGridSize) * 0.5f);
+//		}
+//	}
+//}

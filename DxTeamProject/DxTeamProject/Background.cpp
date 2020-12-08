@@ -7,8 +7,8 @@ CBackground::CBackground()
 	// OBB Test
 	: m_pOBB(NULL)
 {
-	m_isPicked = false;
-	m_isClicked = false;
+	//m_isPicked = false;
+	//m_isClicked = false;
 
 	m_strName = string("Background") + to_string(m_nRefCount);
 }
@@ -23,7 +23,7 @@ void CBackground::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsP
 {
 	// >> ÅÍÁü ¹æÁö
 	vecVPos.push_back(D3DXVECTOR3(0, 0, 0));
-	vecIsPick.push_back(m_isPicked);
+//	vecIsPick.push_back(m_isPicked);
 }
 
 void CBackground::Setup(ST_MapData setData)
@@ -77,6 +77,7 @@ void CBackground::Setup(ST_MapData setData)
 
 void CBackground::Render()
 {
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 
 	// if(m_pMtrl!=NULL)
@@ -87,7 +88,7 @@ void CBackground::Render()
 
 	for (int i = 0; i < m_vecMtrls.size(); i++)
 	{
-		g_pD3DDevice->SetMaterial(m_vecMtrls[i]);
+		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
 		if (m_vecTextures[i] != 0)
 			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);

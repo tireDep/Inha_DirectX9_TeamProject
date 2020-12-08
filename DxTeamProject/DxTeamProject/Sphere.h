@@ -1,23 +1,32 @@
 #pragma once
-#include "Object.h"
+#include "PObject.h"
 
-class CSphere : public CObject
+class CSphere : public PObject
 {
-private:
-	float				m_fRadius;
-	D3DXVECTOR3			m_vCenter;
-	LPD3DXMESH			m_pMeshSphere;
-	D3DMATERIAL9		m_stMtlSphere;
 public:
 	CSphere();
-	CSphere(float radius, D3DXVECTOR3 center);
 	~CSphere();
-
+protected:
+	Synthesize(float, m_fRadius, Radius);
+	//const static unsigned maxContacts = 256;
+	//Contact contacts[maxContacts];
+	//CollisionSphere collisionsphere;
+	//CollisionData cData;
+	//ContactResolver resolver;
+public:
 	void Setup();
-	void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos);
-	void Render();
-	void SetPickState(bool set);
+	void Setup(const ST_MapData & mapData);
 
-	virtual string GetName();
-	virtual void ReceiveEvent(ST_EVENT eventMsg);
+	//void Update(float duration);
+	//virtual void GenerateContacts();
+	//void CollideUpdate(float duration);
+
+	void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos);
+
+	virtual void AddForce(const D3DXVECTOR3 & force) {};
+	virtual void ClearAccumulator() {};
+	virtual void Integrate(float duration) {};
+	virtual void RunPhysics(float duration) {};
+
+	string GetName();
 };

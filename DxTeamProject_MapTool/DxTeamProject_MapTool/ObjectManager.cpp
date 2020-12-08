@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "IObject.h"
 #include "ObjectManager.h"
+#include "ImguiClass.h"
 #include "Ray.h"
 
 void CObjectManager::AddObject(IObject * pObject)
@@ -38,7 +39,8 @@ void CObjectManager::Destroy()
 	IObject::SetRefCnt(0);
 	m_sameNum = 0;
 	g_pFileLoadManager->SetIndexNumZero();
-
+	CImguiClass::m_nowSelectindex = -1;
+	CImguiClass::m_nowSelectindex = 0;
 }
 
 void CObjectManager::Update()
@@ -48,9 +50,41 @@ void CObjectManager::Update()
 }
 
 void CObjectManager::Update(CRay * ray)
-{
+{	
 	for (int i = 0; i < m_vecObject.size(); i++)
 		m_vecObject[i]->Update(ray);
+
+	// >> 피킹 오브젝트 판별
+	// - 같은 선상에 있는 모든 오브젝트가 피킹 되기 때문에
+	//   레이 위치와 가장 가까운 오브젝트 판별한 후 나머지 false
+	int index = 0;
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		if (m_vecObject[i]->GetPick() == true)
+		{
+			index = i;
+			break;
+		}
+	}
+
+	D3DXVECTOR3 rayOrigin = ray->GetOrigin();
+	for (int i = index + 1; i < m_vecObject.size(); i++)
+	{
+		if (m_vecObject[i]->GetPick() == true)
+		{
+			// >> 벡터 길이 계산
+			float checkA = D3DXVec3Length( &(rayOrigin - m_vecObject[index]->GetTranslate()) );
+			float checkB = D3DXVec3Length( &(rayOrigin - m_vecObject[i]->GetTranslate()) );
+
+			if(checkA > checkB)
+			{
+				m_vecObject[index]->SetPick(false);
+				index = i;
+			}	
+		} // << : if
+
+	} // << : for
+	// << 피킹 오브젝트 판별
 }
 
 void CObjectManager::Render()
@@ -93,4 +127,34 @@ void CObjectManager::CheckSameName()
 vector<IObject*> CObjectManager::GetVecObject()
 {
 	return m_vecObject;
+}
+
+IObject & CObjectManager::GetIObject(int index)
+{
+	return *m_vecObject[index];
+}
+
+int CObjectManager::GetVecSize()
+{
+	return m_vecObject.size();
+}
+
+void CObjectManager::SetSelectFalse()
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		m_vecObject[i]->SetClick(false);
+		m_vecObject[i]->SetPick(false);
+	}
+}
+
+int CObjectManager::GetSelectIndex()
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		if (m_vecObject[i]->GetClick() || m_vecObject[i]->GetPick())
+			return i;
+	}
+
+	return -1;
 }

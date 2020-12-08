@@ -1,0 +1,332 @@
+# Object_Start
+# ObjectName
+Tile1
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.4
+0.001
+0.4
+# Rotate
+0
+0
+0
+# Translate
+0
+0
+0
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile3
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.01
+0.03
+0.4
+# Rotate
+0
+0
+0
+# Translate
+15.4
+0
+0
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile4
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.4
+0.03
+0.01
+# Rotate
+0
+0
+0
+# Translate
+0
+0
+-15.4
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile4(0)
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.01
+0.03
+0.4
+# Rotate
+0
+0
+0
+# Translate
+-15.4
+0
+0
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile5
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.4
+0.03
+0.01
+# Rotate
+0
+0
+0
+# Translate
+0
+0
+15.4
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+SummerTree13
+# FolderPath
+Resource/XFile/Background
+# FilePath
+SummerTree_05.X
+# TxtPath
+summer_texture.png
+# ObjectType
+15
+# Scale
+0.02
+0.02
+0.02
+# Rotate
+0
+0
+0
+# Translate
+7
+0
+7
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+AutumnTree14
+# FolderPath
+Resource/XFile/Background
+# FilePath
+AutumnTree_04.X
+# TxtPath
+autumn_texture.png
+# ObjectType
+14
+# Scale
+0.03
+0.03
+0.03
+# Rotate
+0
+0
+0
+# Translate
+-7
+0
+-7
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Cylinder15
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+19
+# Scale
+2
+2
+1
+# Rotate
+0
+90
+0
+# Translate
+0
+5
+-7
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Sphere16
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+18
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+7
+1
+0
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Box17
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+17
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+-7
+0
+0
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Sphere18
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+18
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+7
+10
+-7
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Section =======================================
+

@@ -10,7 +10,8 @@ CCamera::CCamera() :
 	m_pvTarget(NULL),
 	m_fCameraDistance(10.0f),
 	m_isLButtonDown(false),
-	m_vCamRotAngle(0, 0, 0)
+	m_vCamRotAngle(0, 0, 0),
+	m_vNowTarget(0, 0, 0)
 {
 	m_ptPrevMouse = { 0,0 };
 }
@@ -22,8 +23,6 @@ CCamera::~CCamera()
 void CCamera::Setup(D3DXVECTOR3 * pvTarget)
 {
 	m_pvTarget = pvTarget;
-
-	
 
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
@@ -37,9 +36,6 @@ void CCamera::Setup(D3DXVECTOR3 * pvTarget)
 
 void CCamera::Update()
 {
-	RECT rc;
-	GetClientRect(g_hWnd, &rc);
-
 	D3DXMATRIXA16 matR, matRX, matRY;
 	D3DXMatrixRotationX(&matRX, m_vCamRotAngle.x);
 	D3DXMatrixRotationY(&matRY, m_vCamRotAngle.y);
@@ -59,6 +55,13 @@ void CCamera::Update()
 	g_pD3DDevice->SetTransform(D3DTS_VIEW, &matView);
 }
 
+void CCamera::SetCameraPos(D3DXVECTOR3 pvTarget)
+{
+	m_vNowTarget = pvTarget;
+	m_pvTarget = &m_vNowTarget;
+	m_pvTarget->y = 0.5f;
+}
+
 void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
@@ -73,12 +76,6 @@ void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		m_isLButtonDown = false;
 		break;
 
-	case WM_RBUTTONDOWN:
-	{
-		//CRay r = CRay::RayAtWorldSpace(LOWORD(lParam), HIWORD(lParam));
-
-		break;
-	}
 	case WM_MOUSEMOVE:
 		if (m_isLButtonDown)
 		{
@@ -106,7 +103,6 @@ void CCamera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		m_fCameraDistance -= (GET_WHEEL_DELTA_WPARAM(wParam) / 30.0f);
 		if (m_fCameraDistance < 10 + 0.0001f)
 			m_fCameraDistance = 10.0f;
-
 		break;
 	}
 }

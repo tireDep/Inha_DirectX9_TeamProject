@@ -2,11 +2,17 @@
 #include "Character.h"
 #include "OBB.h"
 #include "CHeight.h"
+// Ray y check
+#include "MeshTile.h"
+#include "IObject.h"
+#include "PObject.h"
+
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
 	, m_vPosition(0, 0.0f, 0)
 	, m_pOBB(NULL)
 	, m_isCollided(false)
+	// Ray y check
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
@@ -17,6 +23,13 @@ COBB* CCharacter::GetOBB()
 {
 	return m_pOBB;
 }
+
+void CCharacter::SetBool(bool istrue)
+{
+	
+	m_isOBB = istrue;
+}
+
 
 void CCharacter::SetColor(D3DXCOLOR c)
 {
@@ -136,6 +149,29 @@ string CCharacter::GetName()
 	return m_strName;
 }
 
+// Ray y check
+void CCharacter::UpdateRayYCheck(MeshTile & meshtile)
+{
+	//BOOL Hit = false;
+	//DWORD FaceIndex;
+	//float U, V;
+	//float Dist;
+	//D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 10, 0);
+	////rayOrigin.x -= meshtile.GetMatWorld()._41;
+	////rayOrigin.y -= meshtile.GetMatWorld()._42;
+	////rayOrigin.z -= meshtile.GetMatWorld()._43;
+	//m_Ray.SetOrigin(rayOrigin);
+	//D3DXIntersect(meshtile.GetMesh(), &m_Ray.GetOrigin(), &m_Ray.GetDirection(), 
+	//	&Hit, &FaceIndex, &U, &V, &Dist, NULL, NULL);
+	//if (Hit)
+	//	m_vPosition.y = (m_Ray.GetOrigin().y - Dist) + 0.5f;
+	//	//m_vPosition.y = (m_Ray.GetOrigin().y - Dist + meshtile.GetMatWorld()._42) + 0.5f;
+	//else
+	//	m_vPosition.y = 0.5f;
+
+	
+}
+
 CCharacter::~CCharacter()
 {
 }
@@ -198,8 +234,21 @@ void CCharacter::Setup()
 	v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
 
+	for (int i = 0; i < m_vecVertex.size(); i++)
+		m_vecVertex[i].p += D3DXVECTOR3(0, 0.5f, 0);
+
 	m_pOBB = new COBB;
 	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
+
+	// Ray y check
+	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 10, 0);
+	m_Ray.SetOrigin(rayOrigin);
+	m_Ray.SetDirection(D3DXVECTOR3(0, -1, 0));
+}
+
+void CCharacter::Update(D3DXVECTOR3 cameradirection)
+{
+	m_vDirection = cameradirection;
 }
 
 void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
@@ -210,6 +259,48 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
 	//matWorldOBB._42 -= 0.5f;
 	//if (m_pOBB)
 	//	m_pOBB->Update(&matWorldOBB);
+	
+	
+	//if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[0]) == 1)
+	//{
+	//	m_vPosition.y = g_pObjectManager->m_vecIObject[0]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[0]->GetTranslate().y + 0.5;
+	//	cout << 0 << endl;
+	//}
+	//else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[1]) == 1)
+	//{
+	//	m_vPosition.y = g_pObjectManager->m_vecIObject[1]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[1]->GetTranslate().y + 0.5;
+	//	cout << 1 << endl;
+	//}
+	//else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[2]) == 1)
+	//{
+	//	m_vPosition.y = g_pObjectManager->m_vecIObject[2]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[2]->GetTranslate().y + 0.5;
+	//	cout << 2 << endl;
+	//}
+	//else if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[3]) == 1)
+	//{
+	//	m_vPosition.y = g_pObjectManager->m_vecIObject[3]->GetScale().y *g_pObjectManager->GetScale() + g_pObjectManager->m_vecIObject[3]->GetTranslate().y + 0.5;
+	//	cout << 3 << endl;
+	//}
+	//
+
+	float height = m_vPosition.y;
+
+	for (int i = 0; i < g_pObjectManager->m_OBB.size(); ++i)
+	{
+		if (COBB::IsCollision(GetOBB(), g_pObjectManager->m_OBB[i]) == true)
+		{
+			m_vPosition.y = g_pObjectManager->m_vecIObject[i]->GetScale().y *
+				g_pObjectManager->GetScale() +
+				g_pObjectManager->m_vecIObject[i]->GetTranslate().y + 0.5;
+		}
+		else
+		{
+			//m_vPosition.y -= 0.001f;
+		}
+	
+	}
+
+	
 	if (pMap)
 	{
 		pMap->GetHeight(m_vPosition.x, m_vPosition.y, m_vPosition.z);
@@ -217,16 +308,20 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
 
 	if (m_pOBB)
 		m_pOBB->Update(&m_matWorld);
+
+
 }
 
-int CCharacter::Update(vector<CObject*> ObjectPosition)
+int CCharacter::Update(vector<PObject*> ObjectPosition)
 {
 	for (int i = 0; i < ObjectPosition.size(); ++i)
 	{
 		if (ObjectPosition[i]->GetPosition().x - m_vPosition.x < 1.0f
 			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z < 1.0f
-			&& ObjectPosition[i]->GetPosition().x - m_vPosition.x> -1.0f
-			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z > -1.0f)
+			&& ObjectPosition[i]->GetPosition().x - m_vPosition.x > -1.0f
+			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z > -1.0f
+			&& ObjectPosition[i]->GetPosition().y - m_vPosition.y <  1.0f
+			&& ObjectPosition[i]->GetPosition().y - m_vPosition.y > -1.0f)
 		{
 			//m_nGrabAbleObeject = i;
 			return i;
@@ -264,13 +359,13 @@ void CCharacter::DoMove(const float& velocity)
 	m_vPosition = m_vPosition + (m_vDirection * velocity);
 }
 
-void CCharacter::Render()
+void CCharacter::Render(D3DCOLOR d)
 {
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
 		m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PC_VERTEX));
-	D3DCOLOR c = BLACK;
+	D3DCOLOR c = d;
 	m_pOBB->OBBBOX_RENDER(c);
 }
 

@@ -41,13 +41,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -79,6 +79,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -89,6 +91,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -115,6 +118,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -145,12 +149,21 @@
   <ItemGroup>
     <ClInclude Include="AllocateHierarchy.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Book.h" />
+    <ClInclude Include="Box.h" />
+    <ClInclude Include="BreakableWall.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CHeight.h" />
     <ClInclude Include="ColliderObject.h" />
+    <ClInclude Include="Collision.h" />
+    <ClInclude Include="Colorchanger.h" />
+    <ClInclude Include="Contact.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="Cylinder.h" />
     <ClInclude Include="DeviceManager.h" />
+    <ClInclude Include="Door.h" />
+    <ClInclude Include="Dragon.h" />
     <ClInclude Include="DxTeamProject.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="FileLoadManager.h" />
@@ -172,9 +185,11 @@
     <ClInclude Include="IObject.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="MeshTile.h" />
     <ClInclude Include="OBB.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="Orb.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleContact.h" />
     <ClInclude Include="ParticleContactGenerator.h" />
@@ -189,20 +204,30 @@
     <ClInclude Include="PhysicsObjectManager.h" />
     <ClInclude Include="PhysicsPlayer.h" />
     <ClInclude Include="PhysicsSphere.h" />
+    <ClInclude Include="PObject.h" />
     <ClInclude Include="PSBox.h" />
     <ClInclude Include="PSCylinder.h" />
     <ClInclude Include="PSOBB.h" />
     <ClInclude Include="PSphere.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="ReleaseTimer.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="RotationBoard.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SkinnedMesh.h" />
+    <ClInclude Include="Skydome.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Switch.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TestAngleSet.h" />
+    <ClInclude Include="TestCollision.h" />
+    <ClInclude Include="TestForce.h" />
+    <ClInclude Include="TestObjCollision.h" />
+    <ClInclude Include="TestRigidBody.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TimeManager.h" />
@@ -214,12 +239,21 @@
   <ItemGroup>
     <ClCompile Include="AllocateHierarchy.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Book.cpp" />
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="BreakableWall.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CHeight.cpp" />
     <ClCompile Include="ColliderObject.cpp" />
+    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Colorchanger.cpp" />
+    <ClCompile Include="Contact.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
+    <ClCompile Include="Door.cpp" />
+    <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="DxTeamProject.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="FileLoadManager.cpp" />
@@ -236,9 +270,11 @@
     <ClCompile Include="IObject.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="MeshTile.cpp" />
     <ClCompile Include="OBB.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="Orb.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleContact.cpp" />
     <ClCompile Include="ParticleContactGenerator.cpp" />
@@ -253,14 +289,18 @@
     <ClCompile Include="PhysicsObjectManager.cpp" />
     <ClCompile Include="PhysicsPlayer.cpp" />
     <ClCompile Include="PhysicsSphere.cpp" />
+    <ClCompile Include="PObject.cpp" />
     <ClCompile Include="PSBox.cpp" />
     <ClCompile Include="PSCylinder.cpp" />
     <ClCompile Include="PSOBB.cpp" />
     <ClCompile Include="PSphere.cpp" />
     <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="ReleaseTimer.cpp" />
     <ClCompile Include="RigidBody.cpp" />
+    <ClCompile Include="RotationBoard.cpp" />
     <ClCompile Include="SkinnedMesh.cpp" />
+    <ClCompile Include="Skydome.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -269,6 +309,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Switch.cpp" />
+    <ClCompile Include="TestAngleSet.cpp" />
+    <ClCompile Include="TestCollision.cpp" />
+    <ClCompile Include="TestForce.cpp" />
+    <ClCompile Include="TestObjCollision.cpp" />
+    <ClCompile Include="TestRigidBody.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TimeManager.cpp" />
