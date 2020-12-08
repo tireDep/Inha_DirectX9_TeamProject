@@ -19,11 +19,13 @@ private:
 	D3DXMATRIXA16 matS, matT , matR;
 	D3DXVECTOR3 m_position , m_scale;
 	LPD3DXMESH m_pMeshBeam;
-	float size;
+	
 	float length;
 	bool istrue;
 	COBB* m_pOBB;
+
 	D3DXVECTOR3 m_vMin, m_vMax;
+
 	// KT
 	float m_fHitLength;
 public:

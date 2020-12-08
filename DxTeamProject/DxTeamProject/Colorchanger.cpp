@@ -10,8 +10,8 @@ Color_changer::Color_changer()
 	, istrue(false)
 	, m_pMeshBeam(NULL)
 	,length(0)
-	, size(1)
-	, m_fHitLength(1)
+	, m_fHitLength(50)
+
 {
 	ZeroMemory(&m_stMtlSphere2, sizeof(D3DMATERIAL9));
 	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
@@ -51,6 +51,7 @@ void Color_changer::Setup(string folder, string file)
 
 	
 	}
+
 	// COLORCHANGER
 	ST_XFile* xfile = new ST_XFile;
 
@@ -95,37 +96,32 @@ void Color_changer::Update()
 			istrue = false;
 	}
 
-
-	D3DXMatrixRotationY(&matR, 0);
-	m_scale = D3DXVECTOR3(0.3f, 0.3f, 1);
-	D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_scale.z);
-
-	//D3DXMatrixTranslation(&matT, m_position.x, m_position.y + 1.5f, m_position.z - length / 2);
-	//KT
 	
-	D3DXMatrixTranslation(&matT, m_position.x, m_position.y + 1.5f, m_position.z - m_fHitLength/2.0);
-	D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_fHitLength / length);
-	BeamWorld = matS * matT * matR;
+	
 	m_pOBB->Update(&BeamWorld);
-	
+
+
 }
 
 void Color_changer::Render()
 {
 
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);	
-	
-
 	//Beam
-	
 	{
-		
+	
+		D3DXMatrixRotationY(&matR, 0);// D3DXToRadian(angle)
+		m_scale = D3DXVECTOR3(0.3f, 0.3f, 1);
+		D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_scale.z);
+
+		D3DXMatrixTranslation(&matT, m_position.x, m_position.y + 1.5f, m_position.z - m_fHitLength / 2.0);
+		D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_fHitLength / length);
+		BeamWorld = matS * matT * matR;
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &BeamWorld);
 		if (m_pOBB)
 			m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
-		//m_pMeshBeam->DrawSubset(0);
+
 	}
-	
 	// 컬러체인저
 	{
 		D3DXMatrixRotationY(&matR, 0);
