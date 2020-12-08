@@ -218,7 +218,7 @@ Cylinder15
 # TxtPath
 
 # ObjectType
-19
+25
 # Scale
 2
 2
@@ -248,7 +248,7 @@ Sphere16
 # TxtPath
 
 # ObjectType
-18
+24
 # Scale
 2
 2
@@ -278,7 +278,7 @@ Box17
 # TxtPath
 
 # ObjectType
-17
+23
 # Scale
 2
 2
@@ -308,7 +308,7 @@ Sphere18
 # TxtPath
 
 # ObjectType
-18
+24
 # Scale
 2
 2

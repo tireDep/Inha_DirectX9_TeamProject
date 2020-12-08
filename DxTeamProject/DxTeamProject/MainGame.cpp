@@ -115,9 +115,9 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "TEST4.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "createmap2.dat");
 	
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
