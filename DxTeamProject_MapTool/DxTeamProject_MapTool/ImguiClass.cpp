@@ -78,7 +78,7 @@ void CImguiClass::SetVecItem()
 			for (int i = 0; i < tempVec.size(); i++)
 				tempObjType.push_back(eCTree);
 		}
-#ifdef _DEBUG
+
 		else if (m_SubType == LoadType::eSomethingElse)
 		{
 			tempVec.clear();
@@ -87,9 +87,11 @@ void CImguiClass::SetVecItem()
 			tempVec.push_back("Umbrella"); tempObjType.push_back(eUmbrella);
 			tempVec.push_back("Snowman"); tempObjType.push_back(eSnowman);
 
+#ifdef _DEBUG
 			tempVec.push_back("InvisibleWall"); tempObjType.push_back(eInvisibleWall);
-		}
 #endif // _DEBUG
+		}
+
 
 	}
 	else if (m_NowLoadType == LoadType::eGimmick)
@@ -483,6 +485,8 @@ void CImguiClass::Update_FileLoader()
 		ImGui::SameLine(); if (ImGui::RadioButton("ColorTree", m_SubType == LoadType::eColorTree)) { m_SubType = LoadType::eColorTree; m_FileLoadIndex = -1; }
 
 #ifdef _DEBUG
+		if (ImGui::RadioButton("SomethingElse", m_SubType == LoadType::eSomethingElse)) { m_SubType = LoadType::eSomethingElse; m_FileLoadIndex = -1; }
+#else
 		if (ImGui::RadioButton("SomethingElse", m_SubType == LoadType::eSomethingElse)) { m_SubType = LoadType::eSomethingElse; m_FileLoadIndex = -1; }
 #endif // _DEBUG
 

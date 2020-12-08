@@ -201,7 +201,7 @@ enum ObjectType
 	/* eBackObj, */ eATree, eSTree, eWTree, eCTree,
 	eSomethingElse, eBall, eChair, eUmbrella, eSnowman, eInvisibleWall,
 	eBox, eSphere, eCylinder,
-	/* eGimmick, */ eG_RotationBoard, eG_BreakWall, eG_Door, eG_ColorChanger, eG_Switch,
+	/* eGimmick, */ eG_RotationBoard, eG_BreakWall, eG_ColorChanger, eG_Door, eG_Switch,
 	eNull
 };
 

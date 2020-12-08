@@ -10,6 +10,8 @@ private:
 #ifdef _DEBUG
 		eSomethingElse, eBall, eChair, eUmbrella, eSnowman, eInvisibleWall,
 		// >> 버전차이
+#else
+		eSomethingElse, eBall, eChair, eUmbrella, eSnowman, eInvisibleWall,
 #endif // DEBUG
 		eObject, 
 		eGimmick, eBreakWall, eDoor, eRotateBoard, eColorChanger

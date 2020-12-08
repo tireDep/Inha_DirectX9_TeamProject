@@ -329,7 +329,6 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	}
 		break;
 
-#ifdef _DEBUG
 	case eBall:
 	{
 		mapData.strObjName = string("BeachBall") + to_string(m_nRefCnt + 1);
@@ -378,6 +377,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	}
 	break;
 
+#ifdef _DEBUG
 	case eInvisibleWall:
 	{
 		mapData.strObjName = string("InvisibleWall") + to_string(m_nRefCnt + 1);
@@ -389,8 +389,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 		background->Setup(mapData);
 	}
 		break;
-
-#endif // _DEBUG
+ #endif // _DEBUG
 
 	case eG_RotationBoard:
 	case eG_BreakWall:
@@ -443,13 +442,13 @@ void IObject::CreateObject(ST_MapData& mapData)
 	case eSTree:
 	case eWTree:
 	case eCTree:
-#ifdef _DEBUG
+// #ifdef _DEBUG
 	case eBall:
 	case eChair:
 	case eUmbrella:
 	case eSnowman:
 	case eInvisibleWall:
-#endif // _DEBUG
+// #endif // _DEBUG
 	{
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
