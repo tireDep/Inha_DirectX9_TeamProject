@@ -43,6 +43,8 @@ void CSphere::Setup(const ST_MapData & mapData)
 
 	D3DXVECTOR3 vScale, vRotate;
 	vScale = mapData.vScale;
+	// JW ADD...
+	m_vScale = vScale;
 	vRotate = mapData.vRotate;
 	m_vPosition = mapData.vTranslate;
 

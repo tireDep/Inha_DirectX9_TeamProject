@@ -36,6 +36,8 @@ void CBackground::Setup(ST_MapData setData)
 
 	D3DXVECTOR3 vScale, vRotate, vTranslate;
 	vScale = setData.vScale;
+	// JW ADD...
+	m_vScale = vScale;
 	vRotate = setData.vRotate;
 	vTranslate = setData.vTranslate;
 

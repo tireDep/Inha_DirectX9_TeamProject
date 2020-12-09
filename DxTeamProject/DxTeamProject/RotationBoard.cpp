@@ -35,6 +35,8 @@ void CRotationBoard::Setup(ST_MapData setData)
 	D3DXVECTOR3 vScale, vRotate, vTranslate;
 
 	vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
+	// JW ADD...
+	m_vScale = vScale;
 	vRotate = setData.vRotate;
 	vTranslate = setData.vTranslate;
 
