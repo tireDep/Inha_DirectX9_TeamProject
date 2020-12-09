@@ -1,6 +1,8 @@
 #pragma once
 #include "AllocateHierarchy.h"
 
+class CPSOBB;
+
 class CSkinnedMesh
 {
 protected:
@@ -22,8 +24,8 @@ protected:
 	Synthesize(D3DXVECTOR3, m_vMax, Max);
 	// << hitBox_OBB
 
+	CPSOBB* m_pOBB;
 	D3DXMATRIXA16 m_matworldTM;
-
 public:
 	CSkinnedMesh();
 	~CSkinnedMesh();

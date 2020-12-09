@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SkinnedMesh.h"
 #include "AllocateHierarchy.h"
-
+#include "PSOBB.h"
 
 CSkinnedMesh::CSkinnedMesh() :
 	m_pRoot(NULL),
@@ -38,6 +38,10 @@ void CSkinnedMesh::SetUp(char * szFolder, char * szFile)
 		&m_pAniController);
 
 	SetUpBoneMatrixPtrs(m_pRoot);
+
+	m_pOBB = new CPSOBB;
+	m_pOBB->Setup(ah);
+	g_pObjectManager->AddOBBbox(m_pOBB);
 
 	LPD3DXANIMATIONSET pAniSet = NULL;
 	m_pAniController->GetAnimationSet(3, &pAniSet);
@@ -80,6 +84,7 @@ void CSkinnedMesh::Update()
 		Update(m_pRoot, NULL);
 		UpdateSkinnedMesh(m_pRoot);
 		Update((ST_BONE*)m_pRoot, &m_matworldTM); // 캐릭터 이동
+		m_pOBB->Update(&m_matworldTM);
 	}
 }
 
@@ -94,6 +99,28 @@ void CSkinnedMesh::Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent)
 	if (pParent)
 	{
 		pBone->CombinedTransformationMatrix *= ((ST_BONE*)pParent)->CombinedTransformationMatrix;
+		
+		//if (pBone->pMeshContainer->MeshData.pMesh)
+		//{
+		//	D3DXVECTOR3 vMin(0, 0, 0), vMax(0, 0, 0);
+		//	LPVOID pV = NULL;
+		//	pBone->pMeshContainer->MeshData.pMesh->LockVertexBuffer(0, &pV);
+
+		//	D3DXComputeBoundingBox((D3DXVECTOR3*)pV,
+		//		pBone->pMeshContainer->MeshData.pMesh->GetNumVertices(),
+		//		D3DXGetFVFVertexSize(pBone->pMeshContainer->MeshData.pMesh->GetFVF()),
+		//		&vMin,
+		//		&vMax);
+		//	D3DXVec3TransformCoord(&m_vMin, &m_vMin, &pBone->CombinedTransformationMatrix);
+		//	D3DXVec3TransformCoord(&m_vMax, &m_vMax, &pBone->CombinedTransformationMatrix);
+		//	D3DXVec3TransformCoord(&vMin, &vMin, &pBone->CombinedTransformationMatrix);
+		//	D3DXVec3TransformCoord(&vMax, &vMax, &pBone->CombinedTransformationMatrix);
+		//	D3DXVec3Minimize(&m_vMin, &m_vMin, &vMin);
+		//	D3DXVec3Maximize(&m_vMax, &m_vMax, &vMax);
+
+		//	pBone->pMeshContainer->MeshData.pMesh->UnlockVertexBuffer();
+		//}
+		//m_pOBB->Update(&pBone->CombinedTransformationMatrix);
 	}
 
 	if (pFrame->pFrameFirstChild)
@@ -214,6 +241,39 @@ void CSkinnedMesh::UpdateSkinnedMesh(LPD3DXFRAME pFrame)
 
 		pBoneMesh->pSkinInfo->UpdateSkinnedMesh(
 			pBoneMesh->pCurrentBoneMatrices, NULL, src, dest);
+
+		// 1. 새로 생성. 값 이상함
+		//D3DXVECTOR3 vMin(0, 0, 0), vMax(0, 0, 0);
+		//LPVOID pV = NULL;
+		//D3DXComputeBoundingBox((D3DXVECTOR3*)pV,
+		//	pBoneMesh->MeshData.pMesh->GetNumVertices(),
+		//	D3DXGetFVFVertexSize(pBoneMesh->MeshData.pMesh->GetFVF()),
+		//	&vMin,
+		//	&vMax);
+		//// 바운딩 박스의 최소, 최대 구해짐
+
+		//D3DXVec3Minimize(&m_vMin, &m_vMin, &vMin);
+		//D3DXVec3Maximize(&m_vMax, &m_vMax, &vMax);
+
+		// 2. 옮기고 비교
+		//D3DXVECTOR3 vMin(0, 0, 0), vMax(0, 0, 0);
+		//LPVOID pV = NULL;
+		//pBoneMesh->MeshData.pMesh->LockVertexBuffer(0, &pV);
+		//D3DXComputeBoundingBox((D3DXVECTOR3*)pV,
+		//		pBoneMesh->MeshData.pMesh->GetNumVertices(),
+		//		D3DXGetFVFVertexSize(pBoneMesh->MeshData.pMesh->GetFVF()),
+		//		&vMin,
+		//		&vMax);
+		//D3DXVec3TransformCoord(&m_vMin, &m_vMin, pBoneMesh->pCurrentBoneMatrices);
+		//D3DXVec3TransformCoord(&m_vMax, &m_vMax, pBoneMesh->pCurrentBoneMatrices);
+		//D3DXVec3TransformCoord(&vMin, &vMin, pBoneMesh->pCurrentBoneMatrices);
+		//D3DXVec3TransformCoord(&vMax, &vMax, pBoneMesh->pCurrentBoneMatrices);
+		//D3DXVec3Minimize(&m_vMin, &m_vMin, &vMin);
+		//D3DXVec3Maximize(&m_vMax, &m_vMax, &vMax);
+		//pBoneMesh->MeshData.pMesh->UnlockVertexBuffer();
+		
+		// 3. OBB 행렬 업데이트
+		//m_pOBB->Update(pBoneMesh->pCurrentBoneMatrices);
 
 		pBoneMesh->MeshData.pMesh->UnlockVertexBuffer();
 		pBoneMesh->pOriginMesh->UnlockVertexBuffer();

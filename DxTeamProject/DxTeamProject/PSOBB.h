@@ -1,5 +1,7 @@
 #pragma once
 
+class CAllocateHierarchy;
+
 class CPSOBB
 {
 public:
@@ -20,10 +22,11 @@ private:
 	//float m_fAxisLen[3];		
 public:
 	void Setup(CObject & object);
+	void Setup(CAllocateHierarchy & ah);
 	void Update(D3DXMATRIXA16* pmatWorld);
 	static bool IsCollision(CPSOBB * pOBB1, CPSOBB* pOBB2);
 	bool IsCollision(CPSOBB * otherOBB);
 	void Render();
-
+	void Render(D3DXMATRIXA16* pmatWorld);
 	D3DXVECTOR3 GetCenter() { return m_vCenterPos; }
 };
