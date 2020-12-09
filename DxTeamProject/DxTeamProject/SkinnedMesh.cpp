@@ -41,18 +41,17 @@ void CSkinnedMesh::SetUp(char * szFolder, char * szFile)
 
 	LPD3DXANIMATIONSET pAniSet = NULL;
 	m_pAniController->GetAnimationSet(3, &pAniSet);
-	SetNowPlayMaxTime(pAniSet);
 	SafeRelease(pAniSet);
 }
 
 void CSkinnedMesh::Update()
 {
 	m_passedTime += g_pTimeManager->GetElapsedTime();
-	if (m_maxPlayTime <= m_passedTime + m_fBlendTime && strstr(m_sNowPlayAni.c_str(), "Attack"))
-	{
-		// 블랜딩 시간 추가
-		SetAnimationIndexBlend(4);
-	}
+	//if (m_maxPlayTime <= m_passedTime + m_fBlendTime && strstr(m_sNowPlayAni.c_str(), "Attack"))
+	//{
+	//	// 블랜딩 시간 추가
+	//	SetAnimationIndexBlend(4);
+	//}
 	
 	if (m_isAniBlend)
 	{
@@ -73,10 +72,15 @@ void CSkinnedMesh::Update()
 			// 시간이 지나갈 수록 더 가까운 쪽의 애니메이션이 실행됨
 		}
 	}
-
-	m_pAniController->AdvanceTime(g_pTimeManager->GetElapsedTime(), NULL);
-	Update(m_pRoot, NULL);
-	UpdateSkinnedMesh(m_pRoot);
+	if (m_pAniController)
+		m_pAniController->AdvanceTime(g_pTimeManager->GetElapsedTime(), NULL);
+	
+	if (m_pRoot)
+	{
+		Update(m_pRoot, NULL);
+		UpdateSkinnedMesh(m_pRoot);
+		Update((ST_BONE*)m_pRoot, &m_matworldTM); // 캐릭터 이동
+	}
 }
 
 void CSkinnedMesh::Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent)
@@ -103,6 +107,26 @@ void CSkinnedMesh::Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent)
 	}
 }
 
+void CSkinnedMesh::Update(ST_BONE * pCurrent, D3DXMATRIXA16 * pMatParent)
+{
+	if (pCurrent == NULL)
+		pCurrent = (ST_BONE*)m_pRoot;
+
+	pCurrent->CombinedTransformationMatrix = pCurrent->TransformationMatrix;
+
+	if (pMatParent)
+	{
+		pCurrent->CombinedTransformationMatrix =
+			pCurrent->CombinedTransformationMatrix * (*pMatParent);
+	}
+
+	if (pCurrent->pFrameSibling)
+		Update((ST_BONE*)pCurrent->pFrameSibling, pMatParent);
+
+	if (pCurrent->pFrameFirstChild)
+		Update((ST_BONE*)pCurrent->pFrameFirstChild, &(pCurrent->CombinedTransformationMatrix));
+}
+
 void CSkinnedMesh::Render(LPD3DXFRAME pFrame)
 {
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
@@ -117,7 +141,6 @@ void CSkinnedMesh::Render(LPD3DXFRAME pFrame)
 		ST_BONE_MESH* pBoneMesh = (ST_BONE_MESH*)pBone->pMeshContainer;
 		if (pBoneMesh->MeshData.pMesh)
 		{
-			// D3DXMatrixScaling(&pBone->CombinedTransformationMatrix, 10, 10, 10);
 			g_pD3DDevice->SetTransform(D3DTS_WORLD, &pBone->CombinedTransformationMatrix);
 
 			for (size_t i = 0; i < pBoneMesh->vecMtl.size(); i++)
@@ -249,16 +272,14 @@ void CSkinnedMesh::SetAnimationIndexBlend(int nIndex)
 	m_pAniController->SetTrackWeight(1, 1.0f);
 	// << 가중치
 
-	SetNowPlayMaxTime(pNextAniSet);
 	m_passedTime = 0.0f;
 
 	SafeRelease(pPrevAniSet);
 	SafeRelease(pNextAniSet);
 }
 
-void CSkinnedMesh::SetNowPlayMaxTime(LPD3DXANIMATIONSET aniInfo)
+void CSkinnedMesh::SetTransform(D3DXMATRIXA16 * pmat)
 {
-//	m_maxPlayTime = aniInfo->GetPeriod();
-//	m_sNowPlayAni = aniInfo->GetName();
+	m_matworldTM = *pmat;
 }
 

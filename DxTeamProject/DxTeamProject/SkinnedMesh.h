@@ -22,6 +22,8 @@ protected:
 	Synthesize(D3DXVECTOR3, m_vMax, Max);
 	// << hitBox_OBB
 
+	D3DXMATRIXA16 m_matworldTM;
+
 public:
 	CSkinnedMesh();
 	~CSkinnedMesh();
@@ -29,14 +31,14 @@ public:
 	void SetUp(char* szFolder, char* szFile);
 	void Update();
 	void Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent);
+	void Update(ST_BONE* pCurrent, D3DXMATRIXA16* pMatParent);
 	void Render(LPD3DXFRAME pFrame);
 	void SetUpBoneMatrixPtrs(LPD3DXFRAME pFrame);
 	void UpdateSkinnedMesh(LPD3DXFRAME pFrame);
 
-	void SetAnimationIndex(int nIndex);
-	void SetAnimationIndexBlend(int nIndex);
+	void SetAnimationIndex(int nIndex); // 애니메이션
+	void SetAnimationIndexBlend(int nIndex); //  애니메이션 블렌드
 
-	void SetNowPlayMaxTime(LPD3DXANIMATIONSET aniInfo);
-
+	void SetTransform(D3DXMATRIXA16 * pmat); // << 월드 매트릭스 설정
 };
 

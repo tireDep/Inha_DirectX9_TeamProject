@@ -11,7 +11,7 @@
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
 	, m_vPosition(0, 0.0f, 0)
-	, m_pOBB(NULL)
+	// , m_pOBB(NULL)
 	, m_isCollided(false)
 	,m_Character(NULL)
 	// Ray y check
@@ -21,22 +21,21 @@ CCharacter::CCharacter()
 	m_strName = "Character";
 }
 
-COBB* CCharacter::GetOBB()
-{
-	return m_pOBB;
-}
-
-void CCharacter::SetBool(bool istrue)
-{
-	
-	m_isOBB = istrue;
-}
-
+//COBB* CCharacter::GetOBB()
+//{
+//	// return m_pOBB;
+//}
+//
+//void CCharacter::SetBool(bool istrue)
+//{
+//	
+//	m_isOBB = istrue;
+//}
 
 void CCharacter::SetColor(D3DXCOLOR c)
 {
-	for (int i = 12; i <= 17; i++)
-		m_vecVertex[i].c = c;
+	// for (int i = 12; i <= 17; i++)
+	// 	m_vecVertex[i].c = c;
 	m_color = c;
 }
 
@@ -47,6 +46,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 #else
 	float speed = 0.003f;
 #endif
+	// float duration = *(float*) eventMsg.ptrMessage;
+	// speed *= duration;
 	float rotation = -1.0f;
 
 	if (!g_gameManager->GetUImode())
@@ -170,77 +171,76 @@ void CCharacter::UpdateRayYCheck(MeshTile & meshtile)
 	//	//m_vPosition.y = (m_Ray.GetOrigin().y - Dist + meshtile.GetMatWorld()._42) + 0.5f;
 	//else
 	//	m_vPosition.y = 0.5f;
-
-	
 }
 
 CCharacter::~CCharacter()
 {
+	SafeDelete(m_Character);
 }
 
 void CCharacter::Setup()
 {
-	ST_PC_VERTEX v;
-	float cubeSize = 0.5f;
-
-	// : front
-	v.c = RED; // Ä³¸¯ÅÍ ÈÄ¸é »¡°­
-	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-
-	// : back 
-	v.c = BLUE; // Ä³¸¯ÅÍ Á¤¸é ÆÄ¶û
-	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-
-	// : top 
-	v.c = D3DCOLOR_XRGB(127, 127, 127); // Ä³¸¯ÅÍ ¶Ñ²±(º¯È­)
-	v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-
-	// : left
-	v.c = WHITE; // Ä³¸¯ÅÍ ¿Þ¸é(Èò)
-	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-
-	// : right 
-	v.c = BLACK; // Ä³¸¯ÅÍ ¿À¸¥¸é(Èæ)
-	v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-
-	// : bottom
-	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-
-	for (int i = 0; i < m_vecVertex.size(); i++)
-		m_vecVertex[i].p += D3DXVECTOR3(0, 0.5f, 0);
-
-	m_pOBB = new COBB;
-	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
+	//ST_PC_VERTEX v;
+	//float cubeSize = 0.5f;
+	//
+	//// : front
+	//v.c = RED; // Ä³¸¯ÅÍ ÈÄ¸é »¡°­
+	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//
+	//// : back 
+	//v.c = BLUE; // Ä³¸¯ÅÍ Á¤¸é ÆÄ¶û
+	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//
+	//// : top 
+	//v.c = D3DCOLOR_XRGB(127, 127, 127); // Ä³¸¯ÅÍ ¶Ñ²±(º¯È­)
+	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//
+	//// : left
+	//v.c = WHITE; // Ä³¸¯ÅÍ ¿Þ¸é(Èò)
+	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//
+	//// : right 
+	//v.c = BLACK; // Ä³¸¯ÅÍ ¿À¸¥¸é(Èæ)
+	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//
+	//// : bottom
+	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
+	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
+	//
+	//for (int i = 0; i < m_vecVertex.size(); i++)
+	//	m_vecVertex[i].p += D3DXVECTOR3(0, 0.5f, 0);
+	//
+	// m_pOBB = new COBB;
+	// m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
 
 	m_Character = new CSkinnedMesh;
 	m_Character->SetUp("Resource/XFile/Character", "Character.X");
@@ -396,7 +396,15 @@ int CCharacter::Update(vector<PObject*> ObjectPosition)
 		}
 	}
 	//m_nGrabAbleObeject = -1;
-	m_Character->Update();
+
+	// >> skinnedMesh
+	if (m_Character)
+	{
+		m_Character->Update();
+		m_Character->SetTransform(&m_matWorld);
+	}
+	// << skinnedMesh
+
 	return -1;
 }
 
@@ -430,13 +438,17 @@ void CCharacter::DoMove(const float& velocity)
 
 void CCharacter::Render(D3DCOLOR d)
 {
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
-		m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PC_VERTEX));
-	D3DCOLOR c = d;
-	m_pOBB->OBBBOX_RENDER(c);
-	m_Character->Render(NULL);
+	// g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	// g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
+	// g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
+	// 	m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PC_VERTEX));
+	// D3DCOLOR c = d;
+	// m_pOBB->OBBBOX_RENDER(c);
+
+	if (m_Character)
+	{
+		m_Character->Render(NULL);
+	}
 }
 
 D3DXVECTOR3& CCharacter::GetPosition()

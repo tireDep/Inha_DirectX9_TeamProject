@@ -48,6 +48,9 @@ void CEventManager::Update()
 	ST_EVENT msg;
 	msg.eventType = EventType::eInputEvent;
 
+	// float duration = g_pTimeManager->GetElapsedTime();
+	// msg.ptrMessage = &duration;
+
 	if (pushW && pushA)
 		msg.playerInput = PlayerInputType::eLeftUp;
 	else if (pushW && pushD)
