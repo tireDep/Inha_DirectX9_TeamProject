@@ -4,6 +4,7 @@
 class COBB;
 class CRay;
 class MeshTile;
+class CSkinnedMesh;
 
 class CCharacter : public IListener
 {
@@ -18,7 +19,7 @@ protected:
 	D3DXCOLOR				m_color;
 	bool					m_isCollided;
 	bool					m_isOBB;
-	
+	CSkinnedMesh*			m_Character;
 	// grab
 	int						m_nGrabAbleObeject;
 	// Ray y check
