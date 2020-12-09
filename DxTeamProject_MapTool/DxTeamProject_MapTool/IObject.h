@@ -62,6 +62,7 @@ public:
 	virtual D3DXMATRIXA16 GetmatWorld();
 
 	static void SetRefCnt(int set);
+	static int GetRefCnt();
 	static void CreateObject(const ObjectType& objType, int index);
 	static void CreateObject(ST_MapData& mapData);
 };

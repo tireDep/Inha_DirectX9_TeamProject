@@ -10,6 +10,8 @@ class CLight;
 class CToolMain
 {
 private:
+	bool m_isPushCtrl;
+
 	CGrid* m_pGrid;
 	CCube* m_pCube;
 	CCamera* m_pCamera;

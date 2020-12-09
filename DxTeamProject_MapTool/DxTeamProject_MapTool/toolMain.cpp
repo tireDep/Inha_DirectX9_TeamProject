@@ -10,7 +10,8 @@
 
 CToolMain::CToolMain() : 
 	m_pRay(NULL),
-	m_pLight(NULL)
+	m_pLight(NULL),
+	m_isPushCtrl(false)
 {
 }
 
@@ -55,9 +56,16 @@ void CToolMain::Setup()
 
 void CToolMain::Update()
 {
-//#ifdef _DEBUG
-	// m_pCube->Update();
-//#endif
+	if (GetAsyncKeyState(VK_CONTROL) & 0x8000 && m_isPushCtrl)
+	{
+		if (GetKeyState(0x44) & 0x8000)
+		{
+			m_isPushCtrl = false;
+			g_pObjectManager->CopyObject();
+		} // << : if_D
+
+	} // << : if
+
 	m_pCamera->Update();
 
 	g_pObjectManager->Update();
@@ -129,6 +137,9 @@ void CToolMain::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		break;
 
 	case WM_KEYDOWN:
+		if (wParam == VK_CONTROL)
+			m_isPushCtrl = true;
+
 		if (wParam == VK_DELETE)
 		{
 			g_pObjectManager->RemoveClickedObj();
@@ -147,6 +158,15 @@ void CToolMain::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				m_pCamera->SetCameraPos(g_pObjectManager->GetIObject(index).GetTranslate());
 			}
 		}
+		break;
+
+	case WM_KEYUP:
+		if (wParam == VK_CONTROL)
+			m_isPushCtrl = false;
+
+		if (wParam == 0x44)
+			m_isPushCtrl = true;
+
 		break;
 	}
 }

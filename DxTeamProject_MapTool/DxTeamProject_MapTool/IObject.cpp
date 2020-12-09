@@ -224,6 +224,11 @@ void IObject::SetRefCnt(int set)
 	IObject::m_nRefCnt = set;
 }
 
+int IObject::GetRefCnt()
+{
+	return m_nRefCnt;
+}
+
 void IObject::CreateObject(const ObjectType& objType, int index)
 {
 	// >> FileLoader »ý¼º

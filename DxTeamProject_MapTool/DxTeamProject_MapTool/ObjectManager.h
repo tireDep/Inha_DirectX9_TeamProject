@@ -31,5 +31,7 @@ public:
 
 	void SetSelectAllFalse();
 	int GetSelectIndex();
+
+	void CopyObject();
 };
 
