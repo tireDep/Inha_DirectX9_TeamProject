@@ -45,7 +45,6 @@ private:
 	CFrustum	m_pNowFrustum;
 
 	COrb*		m_pOrb;
-	CSkinnedMesh* m_pSkinnedMesh;
 
 	CSkydome* m_pSkydome;
 	/// 이 아래는 지울 수도 있는 선언

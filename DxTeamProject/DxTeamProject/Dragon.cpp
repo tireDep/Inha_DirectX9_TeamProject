@@ -42,14 +42,13 @@ void CDragon::Update(D3DXCOLOR color)
 
 void CDragon::Setup()
 {
-	//ST_XFile* xfile = new ST_XFile;
 
 	if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Crayon", "crayon.X", xfile))
 	{
 		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
 		return;
 	}
-	g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_17(white).png", m_pTexture);
+	g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "default_T_Dragon_30(new).png", m_pTexture);
 
 	m_pMesh = xfile->pMesh;
 	m_adjBuffer = xfile->adjBuffer;
