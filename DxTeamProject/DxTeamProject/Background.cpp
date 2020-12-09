@@ -5,7 +5,7 @@
 
 CBackground::CBackground()
 	// OBB Test
-	: m_pOBB(NULL)
+	//: m_pOBB(NULL)
 {
 	//m_isPicked = false;
 	//m_isClicked = false;
@@ -16,7 +16,7 @@ CBackground::CBackground()
 CBackground::~CBackground()
 {
 	// OBB Test
-	SafeDelete(m_pOBB);
+	//SafeDelete(m_pOBB);
 }
 
 //void CBackground::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
@@ -36,6 +36,8 @@ void CBackground::Setup(ST_MapData setData)
 
 	D3DXVECTOR3 vScale, vRotate, vTranslate;
 	vScale = setData.vScale;
+	// JW ADD...
+	m_vScale = vScale;
 	vRotate = setData.vRotate;
 	vTranslate = setData.vTranslate;
 

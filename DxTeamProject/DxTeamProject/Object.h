@@ -30,6 +30,7 @@ protected:
 
 	Synthesize(ObjectType, m_ObjectType, ObjType);
 
+	Synthesize(D3DXVECTOR3, m_vScale, Scale);
 	/// Color
 	//bool		  m_isPicked;
 	//bool		  m_isClicked;

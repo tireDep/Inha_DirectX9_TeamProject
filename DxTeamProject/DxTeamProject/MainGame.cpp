@@ -33,6 +33,7 @@
 #include "Box.h"
 #include "Sphere.h"
 #include "Cylinder.h"
+#include "PSOBB.h"
 
 #include "Book.h"
 #include "Dragon.h"
@@ -119,7 +120,7 @@ void CMainGame::Setup()
 	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123456.dat");
 
 #ifdef _DEBUG
-	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "OBBTEST.dat");
+	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "OBBBackgroundTest.dat");
 	// >> mapData
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
@@ -279,6 +280,7 @@ void CMainGame::Update()
 			m_pText->SetisGrabstate(true);
 			D3DXVECTOR3 v;
 			v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct())]->GetPosition() - m_pCharacter->GetPosition();
+			v.y -= 0.5f;
 			//v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
 			//v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
 			//v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
@@ -375,8 +377,6 @@ void CMainGame::Update()
 		m_pGimmick_BreakableWall[0]->Update();
 	if (m_pGimmick_BreakableWall[1])
 		m_pGimmick_BreakableWall[1]->Update();
-
-	
 }
 
 void CMainGame::Render()

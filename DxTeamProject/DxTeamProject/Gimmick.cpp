@@ -2,13 +2,13 @@
 #include "Gimmick.h"
 #include "RotationBoard.h"
 CGimmick::CGimmick()
-	: m_pOBB(NULL)
+	//: m_pOBB(NULL)
 {
 }
 
 CGimmick::~CGimmick()
 {
-	SafeDelete(m_pOBB)
+	//SafeDelete(m_pOBB)
 }
 
 void CGimmick::Setup(ST_MapData setData)

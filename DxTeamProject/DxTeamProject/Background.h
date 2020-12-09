@@ -2,7 +2,7 @@
 #include "IObject.h"
 
 // KT OBB
-class CPSOBB;
+//class CPSOBB;
 
 class CBackground : public IObject
 {
@@ -12,7 +12,7 @@ public:
 
 	virtual void Setup() { };
 	virtual void Setup(const ST_MapData setData);
-	virtual void Update(float duration) { };
+	virtual void Update(float duration) { m_pOBB->Update(&m_matWorld);	};
 	virtual void Render();
 	virtual string GetName() { return m_strName; }
 
@@ -34,6 +34,6 @@ public:
 	//virtual bool hasIntersected(CObject * otherobject) { return bool(); };
 	//virtual void CollisionOtherObject(CObject * otherobject) { };
 
-	// KT OBB
-	CPSOBB* m_pOBB;
+	//// KT OBB
+	//CPSOBB* m_pOBB;
 };

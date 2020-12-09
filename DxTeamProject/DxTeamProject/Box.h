@@ -31,11 +31,11 @@ public:
 	bool hasIntersected(CSphere & otherSphere);
 	bool hasIntersected(CBox & otherBox);
 	bool hasIntersected(CCylinder & otherCylinder);
-	bool hasIntersected(IObject & otherIObject);
+	bool hasIntersected(IObject * otherIObject);
 	bool hasIntersected(CGimmick * otherIObject);
 	
 	// OBB TEST
-	CPSOBB* getOBB() { return m_pOBB; }
+	CPSOBB* GetOBB() { return m_pOBB; }
 	//void Update(float duration);
 	//virtual void GenerateContacts();
 	//void CollideUpdate(float duration);
