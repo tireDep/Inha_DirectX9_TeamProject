@@ -250,8 +250,22 @@ bool CBox::hasIntersected(CCylinder & otherCylinder)
 	return false;
 }
 
-bool CBox::hasIntersected(IObject & otherIObject)
+bool CBox::hasIntersected(IObject * otherIObject)
 {
+	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
+	{
+		//cout << "In" << endl;
+		D3DXVECTOR3 v;
+		v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
+		//v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct())]->GetPosition() - m_pCharacter->GetPosition();
+		//v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
+		//v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
+		//v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
+		D3DXVec3Normalize(&v, &v);
+		this->SetPusingForce(v);
+		//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
+		return true;
+	}
 	return false;
 }
 
@@ -272,10 +286,5 @@ bool CBox::hasIntersected(CGimmick * otherIObject)
 		//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
 		return true;
 	}
-	//if (CPSOBB::IsCollision(this->m_pOBB, otherIObject->GetOBB()))
-	//{
-	//	cout << "In" << endl;
-	//	this->SetLinearVelocity(-1 * this->GetLinearVelocity());
-	//}
 	return false;
 }

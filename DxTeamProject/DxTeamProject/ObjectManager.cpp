@@ -462,10 +462,15 @@ void CObjectManager::Update()
 		}
 	}
 	// OBB TEST
+	//for (int i = 0; i < m_vecBox.size(); i++)
+	//	for (int j = 0; j < m_vecGimmick.size(); j++)
+	//	{
+	//		m_vecBox[i]->hasIntersected(m_vecGimmick[j]);
+	//	}
 	for (int i = 0; i < m_vecBox.size(); i++)
-		for (int j = 0; j < m_vecGimmick.size(); j++)
+		for (int j = 0; j < m_vecIObject.size(); j++)
 		{
-			m_vecBox[i]->hasIntersected(m_vecGimmick[j]);
+			m_vecBox[i]->hasIntersected(m_vecIObject[j]);
 		}
 	//for (int i = 0; i < m_vecIObject.size(); i++)
 	//{

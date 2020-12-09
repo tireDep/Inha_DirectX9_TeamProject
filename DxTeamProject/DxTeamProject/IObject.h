@@ -1,6 +1,9 @@
 #pragma once
 #include "Object.h"
 #include "OBB.h"
+// OBB TEST
+#include "PSOBB.h"
+
 class IObject : public CObject
 {
 protected:
@@ -22,8 +25,11 @@ protected:
 	//Synthesize(D3DXVECTOR3, m_vRotate, Rotate);
 	//Synthesize(D3DXVECTOR3, m_vTranslate, Translate);
 	
-	COBB* m_pOBB;
+	//COBB* m_pOBB;
 	IObject();
+
+	// OBB TEST
+	CPSOBB* m_pOBB;
 public:
 	virtual ~IObject();
 	virtual void Release();
@@ -34,5 +40,6 @@ public:
 	virtual void Render() = 0;
 	virtual string GetName() { return string(); }
 
+	virtual CPSOBB* GetOBB() { return m_pOBB; }
 	//static void CreateObject(const ST_MapData& mapData);
 };

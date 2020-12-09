@@ -120,7 +120,7 @@ void CMainGame::Setup()
 	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123456.dat");
 
 #ifdef _DEBUG
-	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "OBBTEST.dat");
+	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "OBBBackgroundTest.dat");
 	// >> mapData
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
