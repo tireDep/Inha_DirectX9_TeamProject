@@ -38,6 +38,7 @@
 #include "Book.h"
 #include "Dragon.h"
 
+#include "MovingCube.h"
 /// 릴리즈 버전을 위한 주석처리
 //#include "SoundManager.h"
 
@@ -141,6 +142,8 @@ void CMainGame::Setup()
 	m_pCamera = new CCamera;
 	m_pCamera->Setup(&m_pCharacter->GetPosition());
 
+	m_pMovingCube = new MovingCube;
+	m_pMovingCube->Setup("Resource/XFile/Gimmick/MovingCube", "moving_cube.X");
 	//m_pOrb = new COrb;
 	//m_pOrb->Setup();
 
@@ -156,7 +159,6 @@ void CMainGame::Setup()
 
 	////--Gimmick
 	m_pChanger = new Color_changer;
-
 	m_pChanger->Setup("Resource/XFile/Gimmick/ColorChanger", "Color_changer.X"); //Resource/XFile/Gimmick/ColorChanger", "Color_changer.X
 
 	
@@ -204,12 +206,19 @@ void CMainGame::Setup()
 
 	// Ray y check
 
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 8; ++i)
 	{
 		m_pMeshTile.push_back(new MeshTile);
-		m_pMeshTile[i]->Setup( 0 , i -  1.5f  , i - 10);
+	
 	}
-
+	m_pMeshTile[0]->Setup(0, 1.5, 10);
+	m_pMeshTile[1]->Setup(0, 1.5, -10);
+	m_pMeshTile[2]->Setup(10, 1.5, 0);
+	m_pMeshTile[3]->Setup(-10, 1.5, 0);
+	m_pMeshTile[4]->Setup(10, 1.5, -10);
+	m_pMeshTile[5]->Setup(-10, 1.5, 10);
+	m_pMeshTile[6]->Setup(10, 1.5, 10);
+	m_pMeshTile[7]->Setup(-10, 1.5, -10);
 	//m_pMeshTile = new MeshTile;
 	//m_pMeshTile->Setup();
 
@@ -351,6 +360,8 @@ void CMainGame::Update()
 	if (m_pChanger)
 		m_pChanger->Update();
 
+	if (m_pMovingCube)
+		m_pMovingCube->Update();
 
 	for(int i =0 ; i < m_pMeshTile.size(); ++i)
 	if (m_pMeshTile[i])
@@ -360,15 +371,16 @@ void CMainGame::Update()
 	{
 		if (COBB::IsCollision(m_pChanger->GetOBB(), m_pMeshTile[i]->GetOBB()) == true)
 		{
-			m_pChanger->SetHitLength(m_pChanger->GetPos().z - m_pMeshTile[i]->GetPos().z);
-			m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere2);
 			
+			D3DXVECTOR3 tmp = m_pChanger->GetPos() - m_pMeshTile[i]->GetPos();
+			m_pChanger->SetHitLength(D3DXVec3Length(&tmp));
+			m_pMeshTile[i]->SetColor(m_pChanger->m_stMtl);
+
 			break;
 		}
 		else 
 		{
-		
-			m_pMeshTile[i]->SetColor(m_pChanger->m_stMtlSphere);
+	
 			m_pChanger->SetHitLength(50);
 		
 		}
@@ -434,6 +446,8 @@ void CMainGame::Render()
 
 	// Ray y check
 
+	if(m_pMovingCube)
+		m_pMovingCube->Render();
 
 	for(int i =0; i < m_pMeshTile.size(); ++i)
 		m_pMeshTile[i]->Render();

@@ -18,7 +18,7 @@ class CSkinnedMesh;
 // Ray y check
 class MeshTile;
 /// 릴리즈 버전을 위한 주석처리
-
+class MovingCube;
 //Gimmick
 class Color_changer;
 class CDoor;
@@ -64,6 +64,7 @@ private:
 	CSphere* m_pSphere;
 	CBook* m_pBook;
 	CDragon* m_pDragon;
+	MovingCube* m_pMovingCube;
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 public:

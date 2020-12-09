@@ -332,177 +332,134 @@ void COBB::SetupMesh(D3DXVECTOR3 & vMin2, D3DXVECTOR3 & vMax2 , float cubesize)
 
 bool COBB::IsCollision(COBB* pOBB1, COBB* pOBB2)
 {
-	// 중심						 m_OriCenterPos
-	// 축						 m_vOriAxisDir[3]
-	// 중심에서 OBB면까지의 거리 m_fAxisHalfLen[3]
-
-	float C[3][3];		// C[i][j] = D3DXVec3Dot(pOBB1->m_vOriAxisDir[i], pOBB2->m_vOriAxisDir[j])
-	float absC[3][3];	// absC[i][j] = abs(C[i][j])
-	float d[3];			// d[i] = D3DXVec3Dot(pOBB2->m_OriCenterPos - pOBB1->m_OriCenterPos, pOBB1->m_vOriAxisDir[i])
-
-						// 구간 반경과 구간 중심점 사이의 거리
+	float cos[3][3];
+	float absCos[3][3];
+	float dist[3];
 	float r0, r1, r;
-	int i;
-
-	// 상자의 축들 사이각들의 cosine을 위한 cutoff
-	const float cutoff = 0.999999;
+	const float cutOff = 0.999999f;
 	bool existsParallelPair = false;
 
-	// d를 편하게 계산하기 위해 pOBB2->m_OriCenterPos - pOBB1->m_OriCenterPos 미리 계산
-	D3DXVECTOR3 diff = pOBB2->m_vCenterPos - pOBB1->m_vCenterPos;
+	D3DXVECTOR3 D = pOBB2->m_vCenterPos - pOBB1->m_vCenterPos;
 
-	// --------------------------------------------------------------------------------------------------------- //
-	// 축 C0 + t * A0
+	// >> 특이 케이스
+	for (int a = 0; a < 3; a++)
 	{
-		for (i = 0; i < 3; i++)
+		for (int b = 0; b < 3; b++)
 		{
-			C[0][i] = D3DXVec3Dot(&pOBB1->m_vOriAxisDir[0], &pOBB2->m_vOriAxisDir[i]);
-			absC[0][i] = abs(C[0][i]);
-			if (absC[0][i] > cutoff)
-				existsParallelPair = true;
-		}
-		d[0] = D3DXVec3Dot(&diff, &pOBB1->m_vOriAxisDir[0]);
-		r = abs(d[0]);
-		r0 = pOBB1->m_fAxisHalfLen[0];
-		r1 = pOBB2->m_fAxisHalfLen[0] * absC[0][0] + pOBB2->m_fAxisHalfLen[1] * absC[0][1] + pOBB2->m_fAxisHalfLen[2] * absC[0][2];
+			cos[a][b] = D3DXVec3Dot(&pOBB1->m_vAxisDir[a], &pOBB2->m_vAxisDir[b]);
+			// 두 벡터가 이루는 각을 통해서
+			// 0보다 작으면 90도 보다 큼
+			// 0보다 크면 90도 보다 작음
+
+			absCos[a][b] = abs(cos[a][b]);
+
+			if (absCos[a][b] > cutOff)
+				existsParallelPair = true;	// 직각 or 그 이상
+
+		} // : for_b
+
+		dist[a] = D3DXVec3Dot(&pOBB1->m_vAxisDir[a], &D);
+		r = abs(dist[a]);
+
+		r0 = pOBB1->m_fAxisHalfLen[a];
+		r1 = pOBB2->m_fAxisHalfLen[0] * absCos[a][0] +
+			pOBB2->m_fAxisHalfLen[1] * absCos[a][1] +
+			pOBB2->m_fAxisHalfLen[2] * absCos[a][2];
+
 		if (r > r0 + r1)
 			return false;
-	}
-	// 축 C0 + t * A1
+
+	}	// : for_a
+
+
+	for (int b = 0; b < 3; b++)
 	{
-		for (i = 0; i < 3; i++)
-		{
-			C[1][i] = D3DXVec3Dot(&pOBB1->m_vOriAxisDir[1], &pOBB2->m_vOriAxisDir[i]);
-			absC[1][i] = abs(C[1][i]);
-			if (absC[1][i] > cutoff)
-				existsParallelPair = true;
-		}
-		d[1] = D3DXVec3Dot(&diff, &pOBB1->m_vOriAxisDir[1]);
-		r = abs(d[1]);
-		r0 = pOBB1->m_fAxisHalfLen[1];
-		r1 = pOBB2->m_fAxisHalfLen[0] * absC[1][0] + pOBB2->m_fAxisHalfLen[1] * absC[1][1] + pOBB2->m_fAxisHalfLen[2] * absC[1][2];
+		r = abs(D3DXVec3Dot(&pOBB2->m_vAxisDir[b], &D));
+
+		r0 = pOBB1->m_fAxisHalfLen[0] * absCos[0][b] +
+			pOBB1->m_fAxisHalfLen[1] * absCos[1][b] +
+			pOBB1->m_fAxisHalfLen[2] * absCos[2][b];
+		r1 = pOBB2->m_fAxisHalfLen[b];
+
 		if (r > r0 + r1)
 			return false;
 	}
-	// 축 C0 + t * A2
-	{
-		for (i = 0; i < 3; i++)
-		{
-			C[2][i] = D3DXVec3Dot(&pOBB1->m_vOriAxisDir[2], &pOBB2->m_vOriAxisDir[i]);
-			absC[2][i] = abs(C[2][i]);
-			if (absC[2][i] > cutoff)
-				existsParallelPair = true;
-		}
-		d[2] = D3DXVec3Dot(&diff, &pOBB1->m_vOriAxisDir[2]);
-		r = abs(d[2]);
-		r0 = pOBB1->m_fAxisHalfLen[2];
-		r1 = pOBB2->m_fAxisHalfLen[0] * absC[2][0] + pOBB2->m_fAxisHalfLen[1] * absC[2][1] + pOBB2->m_fAxisHalfLen[2] * absC[2][2];
-		if (r > r0 + r1)
-			return false;
-	}
-	// --------------------------------------------------------------------------------------------------------- //
-	// 축 C0 + t * B0
-	{
-		r = abs(D3DXVec3Dot(&diff, &pOBB2->m_vOriAxisDir[0]));
-		r0 = pOBB1->m_fAxisHalfLen[0] * absC[0][0] + pOBB1->m_fAxisHalfLen[1] * absC[1][0] + pOBB1->m_fAxisHalfLen[2] * absC[2][0];
-		r1 = pOBB2->m_fAxisHalfLen[0];
-		if (r > r0 + r1)
-			return false;
-	}
-	// 축 C0 + t * B1
-	{
-		r = abs(D3DXVec3Dot(&diff, &pOBB2->m_vOriAxisDir[1]));
-		r0 = pOBB1->m_fAxisHalfLen[0] * absC[0][1] + pOBB1->m_fAxisHalfLen[1] * absC[1][1] + pOBB1->m_fAxisHalfLen[2] * absC[2][1];
-		r1 = pOBB2->m_fAxisHalfLen[1];
-		if (r > r0 + r1)
-			return false;
-	}
-	// 축 C0 + t * B2
-	{
-		r = abs(D3DXVec3Dot(&diff, &pOBB2->m_vOriAxisDir[2]));
-		r0 = pOBB1->m_fAxisHalfLen[0] * absC[0][2] + pOBB1->m_fAxisHalfLen[1] * absC[1][2] + pOBB1->m_fAxisHalfLen[2] * absC[2][2];
-		r1 = pOBB2->m_fAxisHalfLen[2];
-		if (r > r0 + r1)
-			return false;
-	}
+
 	if (existsParallelPair)
 		return true;
-	// --------------------------------------------------------------------------------------------------------- //
-	// 축C0 + t * A0 × B0
-	{
-		r = abs(d[2] * C[1][0] - d[1] * C[2][0]);
-		r0 = pOBB1->m_fAxisHalfLen[1] * absC[2][0] + pOBB1->m_fAxisHalfLen[2] * absC[1][0];
-		r1 = pOBB2->m_fAxisHalfLen[1] * absC[0][2] + pOBB2->m_fAxisHalfLen[2] * absC[0][1];
-		if (r > r0 + r1)
-			return false;
-	}
-	// 축C0 + t * A0 × B1
-	{
-		r = abs(d[2] * C[1][1] - d[1] * C[2][1]);
-		r0 = pOBB1->m_fAxisHalfLen[1] * absC[2][1] + pOBB1->m_fAxisHalfLen[2] * absC[1][1];
-		r1 = pOBB2->m_fAxisHalfLen[0] * absC[0][2] + pOBB2->m_fAxisHalfLen[2] * absC[0][0];
-		if (r > r0 + r1)
-			return false;
-	}
-	// 축C0 + t * A0 × B2
-	{
-		r = abs(d[2] * C[1][2] - d[1] * C[2][2]);
-		r0 = pOBB1->m_fAxisHalfLen[1] * absC[2][2] + pOBB1->m_fAxisHalfLen[2] * absC[1][2];
-		r1 = pOBB2->m_fAxisHalfLen[0] * absC[0][1] + pOBB2->m_fAxisHalfLen[1] * absC[0][0];
-		if (r > r0 + r1)
-			return false;
-	}
-	// --------------------------------------------------------------------------------------------------------- //
-	// 축C0 + t * A1 × B0
-	{
-		r = abs(d[0] * C[2][0] - d[2] * C[0][0]);
-		r0 = pOBB1->m_fAxisHalfLen[0] * absC[2][0] + pOBB1->m_fAxisHalfLen[2] * absC[0][0];
-		r1 = pOBB2->m_fAxisHalfLen[1] * absC[1][2] + pOBB2->m_fAxisHalfLen[2] * absC[1][1];
-		if (r > r0 + r1)
-			return false;
-	}
-	// 축C0 + t * A1 × B1
-	{
-		r = abs(d[0] * C[2][1] - d[2] * C[0][1]);
-		r0 = pOBB1->m_fAxisHalfLen[0] * absC[2][1] + pOBB1->m_fAxisHalfLen[2] * absC[0][1];
-		r1 = pOBB2->m_fAxisHalfLen[0] * absC[1][2] + pOBB2->m_fAxisHalfLen[2] * absC[1][0];
-		if (r > r0 + r1)
-			return false;
-	}
-	// 축C0 + t * A1 × B2
-	{
-		r = abs(d[0] * C[2][2] - d[2] * C[0][2]);
-		r0 = pOBB1->m_fAxisHalfLen[0] * absC[2][2] + pOBB1->m_fAxisHalfLen[2] * absC[0][2];
-		r1 = pOBB2->m_fAxisHalfLen[0] * absC[1][1] + pOBB2->m_fAxisHalfLen[1] * absC[1][0];
-		if (r > r0 + r1)
-			return false;
-	}
-	// --------------------------------------------------------------------------------------------------------- //
-	// 축C0 + t * A2 × B0
-	{
-		r = abs(d[1] * C[0][0] - d[0] * C[1][0]);
-		r0 = pOBB1->m_fAxisHalfLen[0] * absC[1][0] + pOBB1->m_fAxisHalfLen[1] * absC[0][0];
-		r1 = pOBB2->m_fAxisHalfLen[1] * absC[2][2] + pOBB2->m_fAxisHalfLen[2] * absC[2][1];
-		if (r > r0 + r1)
-			return false;
-	}
-	// 축C0 + t * A2 × B1
-	{
-		r = abs(d[1] * C[0][1] - d[0] * C[1][1]);
-		r0 = pOBB1->m_fAxisHalfLen[0] * absC[1][1] + pOBB1->m_fAxisHalfLen[1] * absC[0][1];
-		r1 = pOBB2->m_fAxisHalfLen[0] * absC[2][2] + pOBB2->m_fAxisHalfLen[2] * absC[2][0];
-		if (r > r0 + r1)
-			return false;
-	}
-	// 축C0 + t * A2 × B2
-	{
-		r = abs(d[1] * C[0][2] - d[0] * C[1][2]);
-		r0 = pOBB1->m_fAxisHalfLen[0] * absC[1][2] + pOBB1->m_fAxisHalfLen[1] * absC[0][2];
-		r1 = pOBB2->m_fAxisHalfLen[0] * absC[2][1] + pOBB2->m_fAxisHalfLen[1] * absC[2][0];
-		if (r > r0 + r1)
-			return false;
-	}
-	return true;
+	// << 특이 케이스
+
+	// >> 보편적인 케이스
+	// 0 : x축
+	r = abs(dist[0] * cos[2][0] - dist[2] * cos[0][0]);
+	r0 = pOBB1->m_fAxisHalfLen[0] * absCos[2][0] +
+		pOBB1->m_fAxisHalfLen[2] * absCos[0][0];
+	r1 = pOBB2->m_fAxisHalfLen[1] * absCos[1][2] +
+		pOBB2->m_fAxisHalfLen[2] * absCos[1][1];
+	if (r > r0 + r1) return false;
+
+	r = abs(dist[0] * cos[2][1] - dist[2] * cos[0][1]);
+	r0 = pOBB1->m_fAxisHalfLen[0] * absCos[2][1] +
+		pOBB1->m_fAxisHalfLen[2] * absCos[0][1];
+	r1 = pOBB2->m_fAxisHalfLen[0] * absCos[1][2] +
+		pOBB2->m_fAxisHalfLen[2] * absCos[1][0];
+	if (r > r0 + r1) return false;
+
+	r = abs(dist[0] * cos[2][2] - dist[2] * cos[0][2]);
+	r0 = pOBB1->m_fAxisHalfLen[0] * absCos[2][2] +
+		pOBB1->m_fAxisHalfLen[2] * absCos[0][2];
+	r1 = pOBB2->m_fAxisHalfLen[0] * absCos[1][1] +
+		pOBB2->m_fAxisHalfLen[1] * absCos[1][0];
+	if (r > r0 + r1) return false;
+
+	// ----------------------------------------------------
+	// 1 : y축
+	r = abs(dist[1] * cos[0][0] - dist[0] * cos[1][0]);
+	r0 = pOBB1->m_fAxisHalfLen[0] * absCos[1][0] +
+		pOBB1->m_fAxisHalfLen[1] * absCos[0][0];
+	r1 = pOBB2->m_fAxisHalfLen[1] * absCos[2][2] +
+		pOBB2->m_fAxisHalfLen[2] * absCos[2][1];
+	if (r > r0 + r1) return false;
+
+	r = abs(dist[1] * cos[0][1] - dist[0] * cos[1][1]);
+	r0 = pOBB1->m_fAxisHalfLen[0] * absCos[1][1] +
+		pOBB1->m_fAxisHalfLen[1] * absCos[0][1];
+	r1 = pOBB2->m_fAxisHalfLen[0] * absCos[2][2] +
+		pOBB2->m_fAxisHalfLen[2] * absCos[2][0];
+	if (r > r0 + r1) return false;
+
+	r = abs(dist[1] * cos[0][2] - dist[0] * cos[1][2]);
+	r0 = pOBB1->m_fAxisHalfLen[0] * absCos[1][2] +
+		pOBB1->m_fAxisHalfLen[1] * absCos[0][2];
+	r1 = pOBB2->m_fAxisHalfLen[0] * absCos[2][1] +
+		pOBB2->m_fAxisHalfLen[1] * absCos[2][0];
+	if (r > r0 + r1) return false;
+
+	// ----------------------------------------------------
+	// 2 : z축
+	r = abs(dist[2] * cos[1][0] - dist[1] * cos[2][0]);
+	r0 = pOBB1->m_fAxisHalfLen[1] * absCos[2][0] +
+		pOBB1->m_fAxisHalfLen[2] * absCos[1][0];
+	r1 = pOBB2->m_fAxisHalfLen[1] * absCos[0][2] +
+		pOBB2->m_fAxisHalfLen[2] * absCos[0][1];
+	if (r > r0 + r1) return false;
+
+	r = abs(dist[2] * cos[1][1] - dist[1] * cos[2][1]);
+	r0 = pOBB1->m_fAxisHalfLen[1] * absCos[2][1] +
+		pOBB1->m_fAxisHalfLen[2] * absCos[1][1];
+	r1 = pOBB2->m_fAxisHalfLen[0] * absCos[0][2] +
+		pOBB2->m_fAxisHalfLen[2] * absCos[0][0];
+	if (r > r0 + r1) return false;
+
+	r = abs(dist[2] * cos[1][2] - dist[1] * cos[2][2]);
+	r0 = pOBB1->m_fAxisHalfLen[1] * absCos[2][2] +
+		pOBB1->m_fAxisHalfLen[2] * absCos[1][2];
+	r1 = pOBB2->m_fAxisHalfLen[0] * absCos[0][1] +
+		pOBB2->m_fAxisHalfLen[1] * absCos[0][0];
+	if (r > r0 + r1) return false;
+	// << 보편적인 케이스
+
+	return true; // 충돌이 일어나지 않음
 }
 
 void COBB::OBBBOX_RENDER(D3DXCOLOR c)

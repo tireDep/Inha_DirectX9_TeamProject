@@ -9,6 +9,7 @@ public:
 	~MeshTile();
 private:
 	D3DXMATRIXA16	m_matS, m_matT, m_matWorld , obbWorld;
+
 	D3DXVECTOR3 m_pos;
 	LPD3DXMESH		m_pMesh;
 	D3DMATERIAL9	m_stMtlSphere , m_stMtlSphere2;

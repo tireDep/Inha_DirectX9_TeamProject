@@ -7,20 +7,17 @@ Color_changer::Color_changer()
 	, m_adjBuffer(NULL)
 	, m_numMtrls(0)
 	, m_position(0, 0, 0)
-	, istrue(false)
 	, m_pMeshBeam(NULL)
-	,length(0)
+	, length(0)
 	, m_fHitLength(50)
-
+	, angle(0)
+	, m_scale(0.5, 0.5, 1)
 {
-	ZeroMemory(&m_stMtlSphere2, sizeof(D3DMATERIAL9));
-	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
-	m_stMtlSphere2.Ambient = GREEN;
-	m_stMtlSphere2.Diffuse = GREEN;
-	m_stMtlSphere2.Specular = GREEN;
-	m_stMtlSphere.Ambient = RED;
-	m_stMtlSphere.Diffuse = RED;
-	m_stMtlSphere.Specular = RED;
+	ZeroMemory(&m_stMtl, sizeof(D3DMATERIAL9));
+	
+	m_stMtl.Ambient = RED;
+	m_stMtl.Diffuse = RED;
+	m_stMtl.Specular = RED;
 }
 
 Color_changer::~Color_changer()
@@ -82,7 +79,7 @@ void Color_changer::Setup(string folder, string file)
 
 void Color_changer::Update()
 {
-	if (istrue == false)
+	/*if (istrue == false)
 	{
 		m_position.y += 0.001f;
 		if (m_position.y > 5)
@@ -94,40 +91,37 @@ void Color_changer::Update()
 		m_position.y -= 0.001f;
 		if (m_position.y < -5)
 			istrue = false;
-	}
+	}*/
 
+	angle += 0.01;
+	D3DXMatrixRotationY(&matR, D3DXToRadian(angle));// D3DXToRadian(angle)
+
+	D3DXMatrixTranslation(&matT, m_position.x, m_position.y + 1.5f, m_position.z - m_fHitLength / 2.0);
+	D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_fHitLength / length);
+	BeamWorld = matS * matT * matR;
 	
 	
 	m_pOBB->Update(&BeamWorld);
-
-
 }
 
 void Color_changer::Render()
 {
 
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);	
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);	
 	//Beam
 	{
-	
-		D3DXMatrixRotationY(&matR, 0);// D3DXToRadian(angle)
-		m_scale = D3DXVECTOR3(0.3f, 0.3f, 1);
-		D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_scale.z);
-
-		D3DXMatrixTranslation(&matT, m_position.x, m_position.y + 1.5f, m_position.z - m_fHitLength / 2.0);
-		D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_fHitLength / length);
-		BeamWorld = matS * matT * matR;
+		
+		
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &BeamWorld);
-		if (m_pOBB)
-			m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
-
+		g_pD3DDevice->SetMaterial(&m_stMtl);
+		m_pMeshBeam->DrawSubset(0);
 	}
 	// 컬러체인저
 	{
-		D3DXMatrixRotationY(&matR, 0);
+		D3DXMatrixRotationY(&matR, D3DXToRadian(angle));
 		D3DXMatrixScaling(&matS, 0.3f, 0.3f, 0.3f);
 		D3DXMatrixTranslation(&matT, m_position.x, m_position.y, m_position.z);
-		matWorld = matS * matT * matR;
+		matWorld = matS * matR * matT;
 
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 
@@ -162,21 +156,26 @@ bool Color_changer::RayCheck(MeshTile& meshtile)
 		&Hit, &FaceIndex, &U, &V, &Dist, NULL, NULL);
 	if (Hit)
 	{
-		m_stMtlSphere2.Ambient = YELLOW;
+		/*m_stMtlSphere2.Ambient = YELLOW;
 		m_stMtlSphere2.Diffuse = YELLOW;
-		m_stMtlSphere2.Specular = YELLOW;
+		m_stMtlSphere2.Specular = YELLOW;*/
 		
 		return true;
 	}
 	else
 	{
-		m_stMtlSphere2.Ambient = RED;
+		/*m_stMtlSphere2.Ambient = RED;
 		m_stMtlSphere2.Diffuse = RED;
-		m_stMtlSphere2.Specular = RED;
+		m_stMtlSphere2.Specular = RED;*/
 		return false;
 
 	}
 
+}
+
+void Color_changer::SetColor(D3DXCOLOR color)
+{
+	c = color;
 }
 
 void Color_changer::SetHitLength(float HitLength)
