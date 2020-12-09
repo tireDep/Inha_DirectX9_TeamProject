@@ -6,12 +6,14 @@
 #include "MeshTile.h"
 #include "IObject.h"
 #include "PObject.h"
+#include "SkinnedMesh.h"
 
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
 	, m_vPosition(0, 0.0f, 0)
 	, m_pOBB(NULL)
 	, m_isCollided(false)
+	,m_Character(NULL)
 	// Ray y check
 {
 	D3DXMatrixIdentity(&m_matWorld);
@@ -240,6 +242,9 @@ void CCharacter::Setup()
 	m_pOBB = new COBB;
 	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
 
+	m_Character = new CSkinnedMesh;
+	m_Character->SetUp("Resource/XFile/Character", "Character.X");
+
 	// Ray y check
 	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 10, 0);
 	m_Ray.SetOrigin(rayOrigin);
@@ -391,6 +396,7 @@ int CCharacter::Update(vector<PObject*> ObjectPosition)
 		}
 	}
 	//m_nGrabAbleObeject = -1;
+	m_Character->Update();
 	return -1;
 }
 
@@ -430,6 +436,7 @@ void CCharacter::Render(D3DCOLOR d)
 		m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PC_VERTEX));
 	D3DCOLOR c = d;
 	m_pOBB->OBBBOX_RENDER(c);
+	m_Character->Render(NULL);
 }
 
 D3DXVECTOR3& CCharacter::GetPosition()

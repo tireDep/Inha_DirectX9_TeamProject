@@ -97,7 +97,7 @@ Material _01_-_Default {
  0.000000;0.000000;0.000000;;
 
  TextureFilename {
-  "T_Dragon_17(white).png";
+  "default_T_Dragon_30(new).png";
  }
 }
 
