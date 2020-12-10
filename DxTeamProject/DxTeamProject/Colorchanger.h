@@ -13,6 +13,7 @@ private:
 	
 
 	D3DXMATRIXA16 matWorld , BeamWorld; //장치월드 , 빔월드
+	D3DXMATRIXA16 m_matS, m_matR, m_matT;
 	D3DXMATRIXA16 matS, matT , matR;
 	D3DXVECTOR3 m_position , m_scale; //빔포지션 , 빔 크기 
 

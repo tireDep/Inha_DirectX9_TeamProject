@@ -499,7 +499,6 @@ bool COBB::IsCollision(COBB * pOBB1, COBB * pOBB2)
 
 bool COBB::IsCollision(COBB * otherOBB)
 {
-
 	float cos[3][3];
 	float absCos[3][3];
 	float dist[3];
@@ -640,4 +639,3 @@ void COBB::Render()
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_LINELIST, m_vOBBLineVertex.size() / 2, &m_vOBBLineVertex[0], sizeof(ST_PC_VERTEX));
 }
-

@@ -36,7 +36,7 @@ void CBook::Setup()
 
 	/*m_pOBB = new CPSOBB;
 	m_pOBB->Setup(*this);*/
-	g_pObjectManager->AddOBBbox(m_pOBB);
+	//g_pObjectManager->AddOBBbox(m_pOBB);
 }
 
 void CBook::Setup(ST_MapData setData)

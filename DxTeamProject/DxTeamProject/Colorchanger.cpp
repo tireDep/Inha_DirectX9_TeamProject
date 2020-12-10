@@ -70,6 +70,7 @@ void Color_changer::Setup(string folder, string file)
 	}
 	delete xfile;
 
+	//m_matWorld = m_matS * m_matR * m_matT;
 	m_pOBB = new COBB;
 	m_pOBB->Setup(*this);
 	g_pObjectManager->AddOBBbox(m_pOBB);
@@ -119,7 +120,7 @@ void Color_changer::Render()
 	// 컬러체인저
 	{
 		D3DXMatrixRotationY(&matR, D3DXToRadian(angle));
-		D3DXMatrixScaling(&matS, 0.3f, 0.3f, 0.3f);
+		D3DXMatrixScaling(&matS, 1.0f, 1.0f, 1.0f);
 		D3DXMatrixTranslation(&matT, m_position.x, m_position.y, m_position.z);
 		matWorld = matS * matR * matT;
 
