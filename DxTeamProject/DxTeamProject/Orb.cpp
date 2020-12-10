@@ -6,11 +6,13 @@ COrb::COrb() :
 	m_Uv_x(0),
 	m_Uv_y(0.2)
 {
+	D3DXMatrixIdentity(&m_matWorld);
 }
 
 
 COrb::~COrb()
 {
+
 }
 
 void COrb::Setup()
@@ -31,14 +33,14 @@ void COrb::Setup()
 void COrb::Render()
 {
 	D3DMATERIAL9 temp;
-	//D3DXMATRIXA16 matworld, matT;
+	/*D3DXMATRIXA16 matworld, matT;
 
-	//D3DXMatrixTranslation(&matT, 5, 0, 5);
+	D3DXMatrixTranslation(&matT, 5, 0, 5);
 
-	//matworld = matT;
+	matworld = matT;
 
-	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &matworld);
-
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matworld);
+*/
 	ZeroMemory(&temp,sizeof( D3DMATERIAL9));
 	temp.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f);
 	temp.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f);
@@ -86,20 +88,35 @@ void COrb::Update()
 
 void COrb::SetBillbord()
 {
-	D3DXMATRIXA16 matBillBoard, matView,matWorld;
-	D3DXMatrixIdentity(&matBillBoard);
-	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
-	// view 매트릭스를 구해서 y축 회전
-	matBillBoard._11 = matView._11;
-	matBillBoard._13 = matView._13;
-	matBillBoard._31 = matView._31;
-	matBillBoard._33 = matView._33;
+	//D3DXMATRIXA16 matBillBoard, matView,matWorld;
+	//D3DXMatrixIdentity(&matBillBoard);
+	//g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+	//// view 매트릭스를 구해서 y축 회전
+	//matBillBoard._11 = matView._11;
+	//matBillBoard._13 = matView._13;
+	//matBillBoard._31 = matView._31;
+	//matBillBoard._33 = matView._33;
+	//D3DXMATRIXA16 matR,matT2;
+	//D3DXMatrixIdentity(&matR);
+	//D3DXMatrixIdentity(&matT2);
+	//D3DXMatrixTranslation(&matR, 1, 0, 0);
+	//D3DXMatrixTranslation(&matT2, 10, 0, 0);
+	//matBillBoard *= matR;
+	//D3DXMatrixInverse(&matBillBoard, NULL, &matBillBoard);
+	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &matBillBoard);
 
-	D3DXMATRIXA16 matR,matT2;
-	D3DXMatrixIdentity(&matR);
-	D3DXMatrixIdentity(&matT2);
-	D3DXMatrixTranslation(&matR, 1, 0, 0);
-	matBillBoard *= matR;
-	D3DXMatrixInverse(&matBillBoard, NULL, &matBillBoard);
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matBillBoard);
+	D3DXMATRIXA16 mView, mInvView;
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &mView);
+
+
+	mView._41 = 0;
+	mView._42 = 0;
+	mView._43 = 0;
+
+	D3DXMatrixInverse(&mInvView, 0, &mView);
+	mInvView._41 = m_matWorld._41 + 5.0f;
+	mInvView._42 = m_matWorld._42 + 2.0f;
+	mInvView._43 = m_matWorld._43 + 10.0f;
+
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &mInvView);
 }

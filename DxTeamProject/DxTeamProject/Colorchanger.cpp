@@ -20,7 +20,8 @@ Color_changer::Color_changer()
 
 Color_changer::~Color_changer()
 {
-	
+	SafeDelete(m_BeamOBB);
+	SafeRelease(m_pMeshBeam);
 
 }
 
