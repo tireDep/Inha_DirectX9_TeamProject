@@ -158,8 +158,8 @@ void CRotationBoard::Render()
 			if (m_vecTextures[i] != 0)
 				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+			m_pMesh->DrawSubset(i);
 		}
-		m_pMesh->DrawSubset(0);
 		g_pD3DDevice->SetTexture(0, NULL);
 	}
 }

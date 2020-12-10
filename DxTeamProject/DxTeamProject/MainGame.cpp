@@ -119,7 +119,7 @@ void CMainGame::Setup()
 	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123456.dat");
 
 #ifdef _DEBUG
-	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "OBBBackgroundTest.dat");
+	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Gtest.dat");
 	// >> mapData
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
@@ -394,8 +394,15 @@ void CMainGame::Update()
 	if (m_pGimmick_BreakableWall[1])
 		m_pGimmick_BreakableWall[1]->Update();
 
+
 	//if (m_pGimmick_Switch)
 	//	m_pGimmick_Switch->Update();
+
+	if (m_pBook)
+		m_pBook->Update(g_pTimeManager->GetElapsedTime());
+	if (m_pGimmick_Switch)
+		m_pGimmick_Switch->Update();
+
 }
 
 void CMainGame::Render()

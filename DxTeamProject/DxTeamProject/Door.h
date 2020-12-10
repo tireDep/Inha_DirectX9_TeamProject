@@ -37,7 +37,9 @@ private:
 	// Required_object : IsOpen(true, false)
 		// Update(float, bool)
 		// bool : switch ON/OFF
-		
+	
+	Synthesize(ObjectType, m_ObjectType, ObjType);
+
 	float m_fOpeningAngle;
 	bool IsOpen;
 

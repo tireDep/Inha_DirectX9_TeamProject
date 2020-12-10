@@ -76,7 +76,7 @@ void CSwitch::Update()
 	D3DXMatrixTranslation(&matT, m_position.x, m_position.y, m_position.z);
 	collWorld = matS *matT;
 
-	m_pOBB->Update(&collWorld);
+	//m_pOBB->Update(&collWorld);
 	
 }
 

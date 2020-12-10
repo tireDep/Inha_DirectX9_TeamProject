@@ -3,6 +3,8 @@
 
 #define g_gameManager CGameManager::GetInstance()
 
+const static int ITEMCOUNT = 10;
+
 class CGameManager : public IListener 
 {
 private:
@@ -19,6 +21,9 @@ private:
 
 	CGameManager();
 
+	// Orb Item
+	bool Orb[6] = { false };
+	bool Item[ITEMCOUNT] = { false };
 public:
 	static CGameManager* GetInstance();
 	virtual ~CGameManager() { }
@@ -34,4 +39,9 @@ public:
 	// >> 맵 완료시 삭제
 	bool GetGridMapMode();
 	// << 맵 완료시 삭제
+
+	void SetOrb(int index);
+	bool GetOrb(int index);
+	void SetItem(int index);
+	bool GetItem(int index);
 };
