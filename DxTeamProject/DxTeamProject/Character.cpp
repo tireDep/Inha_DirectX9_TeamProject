@@ -382,8 +382,8 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 
 int CCharacter::Update(vector<PObject*> ObjectPosition)
 {
-	if (m_pOBB)
-		m_pOBB->Update(&m_matWorld);
+	//if (m_pOBB)
+	//	m_pOBB->Update(&m_matWorld);
 	for (int i = 0; i < ObjectPosition.size(); ++i)
 	{
 		if (ObjectPosition[i]->GetPosition().x - m_vPosition.x < 1.0f
