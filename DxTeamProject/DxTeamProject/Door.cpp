@@ -177,30 +177,30 @@ void CDoor::Render()
 	if (g_pD3DDevice)
 	{
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-		//D3DXMATRIXA16 matWorld;
-		//D3DXMatrixIdentity(&matWorld);
-		//D3DXMATRIXA16 matS, matT;
-		//D3DXMatrixScaling(&matS, 0.03f, 0.03f, 0.03f);
-		//D3DXMatrixTranslation(&matT, -25, 0, 0);
-		//matWorld = matS * m_matRotGimmick * matT;
-		//matWorld = matS * matT;
-		//matWorld = m_matRotGimmick * matT;
-		/// Frame
-		// if (m_ObjectType == eG_Door_Frame)
-		//{
-		//	m_matWorld = m_matS * m_matT;
-		//	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-		//}
-		/// Right
-		//else if(m_ObjectType == eG_Door_Right)
-		//{
-		//	m_matWorld = m_matS * m_matRotGimmick * m_matT;
-		//	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-		//}
+		D3DXMATRIXA16 matWorld;
+		D3DXMatrixIdentity(&matWorld);
+		D3DXMATRIXA16 matS, matT;
+		D3DXMatrixScaling(&matS, 0.03f, 0.03f, 0.03f);
+		D3DXMatrixTranslation(&matT, -25, 0, 0);
+		matWorld = matS * m_matRotGimmick * matT;
+		matWorld = matS * matT;
+		matWorld = m_matRotGimmick * matT;
+		
+		 if (m_ObjectType == eG_DoorFrame)
+		{
+			m_matWorld = m_matS * m_matT;
+			g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+		}
+		else if(m_ObjectType == eG_Door)
+		{
+			m_matWorld = m_matS * m_matRotGimmick * m_matT;
+			g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+		}
 		//else
 		//{
 		//	return;
 		//}
+
 		if (m_pMesh == NULL)
 			return;
 		//m_matWorld = m_matS * m_matRotGimmick * m_matT;
@@ -209,6 +209,9 @@ void CDoor::Render()
 		{
 			if (m_vecTextures[i] != 0)
 				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+			else
+				g_pD3DDevice->SetTexture(0, m_pTexture);
+
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 			m_pMesh->DrawSubset(i);
 		}

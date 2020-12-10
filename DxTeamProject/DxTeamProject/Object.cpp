@@ -231,7 +231,8 @@ void CObject::CreateObject(const ST_MapData & mapData)
 		tile->Setup(mapData);
 	}
 	break;
-	case eG_RotationBoard:	case eG_BreakWall:	case eG_Door:	case eG_ColorChanger:	case eG_Switch:
+	case eG_RotationBoard:	case eG_BreakWall:	case eG_DoorFrame: case eG_Door:	
+	case eG_ColorChanger:	case eG_Switch:
 	{
 		CGimmick::Setup(mapData);
 	}
