@@ -169,8 +169,8 @@ void CMainGame::Setup()
 	// m_pGimmick_RotationBoard = new RotationBoard;
 	// m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
 
-	//m_pGimmick_Switch = new CSwitch;
-	//m_pGimmick_Switch->Setup("Resource/XFile/Gimmick/Switch", "Force_switch.X");
+	m_pGimmick_Switch = new CSwitch;
+	m_pGimmick_Switch->Setup("Resource/XFile/Gimmick/Switch", "Force_switch.X");
 
 	m_pGimmick_BreakableWall[0] = new CBreakableWall;
 	m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "standard_wall.X");
@@ -241,7 +241,7 @@ void CMainGame::Update()
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
-		m_pDragon->DoRotation(m_pCharacter->Getrotation(), m_pCamera->GetCameraDirection());
+		//m_pDragon->DoRotation(m_pCharacter->Getrotation(), m_pCamera->GetCameraDirection());
 		m_pDragon->Update(m_pCharacter->GetPosition());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		switch (m_pUI->GetPickColor())
@@ -473,8 +473,8 @@ void CMainGame::Render()
 		m_pGimmick_Door[1]->Render();
 	//if (m_pGimmick_RotationBoard)
 	//	m_pGimmick_RotationBoard->Render();
-	//if (m_pGimmick_Switch)
-	//	m_pGimmick_Switch->Render();
+	if (m_pGimmick_Switch)
+		m_pGimmick_Switch->Render();
 	if (m_pChanger)
 		m_pChanger->Render();
 	if (m_pGimmick_BreakableWall[0])

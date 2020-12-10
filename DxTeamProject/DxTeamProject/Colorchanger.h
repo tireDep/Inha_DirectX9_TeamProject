@@ -12,9 +12,9 @@ private:
 	 LPD3DXMESH m_pMeshBeam; //빔 메쉬.
 	
 
-	D3DXMATRIXA16 matWorld , BeamWorld; //장치월드 , 빔월드
-	D3DXMATRIXA16 m_matS, m_matR, m_matT;
-	D3DXMATRIXA16 matS, matT , matR;
+	D3DXMATRIXA16  BeamWorld; //장치월드 , 빔월드
+	D3DXMATRIXA16 m_matS, m_matR, m_matT; 
+	D3DXMATRIXA16 matS, matT , matR;  // 지금 쓰여지고있는것 .
 	D3DXVECTOR3  m_scale; //빔포지션 , 빔 크기 
 
 	float angle; //장치 , 빔 앵글 조절.
