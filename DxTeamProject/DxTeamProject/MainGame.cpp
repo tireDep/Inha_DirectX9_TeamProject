@@ -376,10 +376,23 @@ void CMainGame::Update()
 		
 		}
 	}
+
+	if(COBB::IsCollision(m_pMovingCube->GetOBB(), m_pGimmick_Switch->GetOBB()) == true)
+	{
+		m_pGimmick_Switch->SetBool(true);
+	}
+	else
+	{
+		m_pGimmick_Switch->SetBool(false);
+	}
+
 	if (m_pGimmick_BreakableWall[0])
 		m_pGimmick_BreakableWall[0]->Update();
 	if (m_pGimmick_BreakableWall[1])
 		m_pGimmick_BreakableWall[1]->Update();
+
+	if (m_pGimmick_Switch)
+		m_pGimmick_Switch->Update();
 }
 
 void CMainGame::Render()

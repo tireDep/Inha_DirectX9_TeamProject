@@ -236,7 +236,9 @@
     <ClCompile Include="PSOBB.cpp">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClCompile>
-    <ClCompile Include="MovingCube.cpp" />
+    <ClCompile Include="MovingCube.cpp">
+      <Filter>Object\IObject\Gimmick\MJ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -498,7 +500,9 @@
     <ClInclude Include="PSOBB.h">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClInclude>
-    <ClInclude Include="MovingCube.h" />
+    <ClInclude Include="MovingCube.h">
+      <Filter>Object\IObject\Gimmick\MJ</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
