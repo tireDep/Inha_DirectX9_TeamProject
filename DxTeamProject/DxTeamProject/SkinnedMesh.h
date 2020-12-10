@@ -42,5 +42,7 @@ public:
 	void SetAnimationIndexBlend(int nIndex); //  애니메이션 블렌드
 
 	void SetTransform(D3DXMATRIXA16 * pmat); // << 월드 매트릭스 설정
+
+	CPSOBB* GetOBB() { return m_pOBB; }
 };
 

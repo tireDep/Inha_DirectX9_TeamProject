@@ -1,21 +1,22 @@
 #pragma once
+#include "IObject.h"
 
-class CBook
+class CSkinnedMesh;
+
+class CBook : public IObject
 {
 private:
-	Synthesize_Add_Ref(ID3DXMesh*, m_pMesh, Mesh);
-	Synthesize_Add_Ref(ID3DXBuffer*, m_adjBuffer, AdjBuffer);
+	static int m_nCount;
+	float m_fRotationSpeed;
+	float m_fRotAngle;
 
-	Synthesize(DWORD, m_numMtrls, NumMtrl);
-	Synthesize(vector<D3DMATERIAL9>, m_vecMtrls, VecMtrls);
-	Synthesize(vector<IDirect3DTexture9*>, m_vecTextures, VecTexture);
-
-	LPDIRECT3DTEXTURE9 m_pTexture;
-
+	D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRot;
 public:
 	CBook();
 	~CBook();
-	void Update();
 	void Setup();
+	void Setup(ST_MapData setData);
+	void Update(float duration);
+	bool hasIntersected(CSkinnedMesh * Character);
 	void Render();
 };

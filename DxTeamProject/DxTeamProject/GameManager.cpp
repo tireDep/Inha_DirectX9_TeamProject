@@ -37,6 +37,26 @@ bool CGameManager::GetGridMapMode()
 	return m_isGridMap;
 }
 
+void CGameManager::SetOrb(int index)
+{
+	Orb[index] = true;
+}
+
+bool CGameManager::GetOrb(int index)
+{
+	return Orb[index];
+}
+
+void CGameManager::SetItem(int index)
+{
+	Item[index] = !Item[index];
+}
+
+bool CGameManager::GetItem(int index)
+{
+	return Item[index];
+}
+
 void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 {
 	RECT rc;

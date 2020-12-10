@@ -135,22 +135,23 @@ void CDoor::Render()
 		//matWorld = matS * m_matRotGimmick * matT;
 		//matWorld = matS * matT;
 		//matWorld = m_matRotGimmick * matT;
-		if (m_vecTextures.size() == 1)
-		{
-			D3DXMATRIXA16 matWorld, matT;
-			D3DXMatrixIdentity(&matWorld);
-			D3DXMatrixTranslation(&matT, -25, 0, 0);
-			matWorld = matT;
-			g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
-		}
-		else
-		{
-			D3DXMATRIXA16 matWorld, matT;
-			D3DXMatrixIdentity(&matWorld);
-			D3DXMatrixTranslation(&matT, -25, 0, 0);
-			matWorld = m_matRotGimmick * matT;
-			g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
-		}
+		//if (m_vecTextures.size() == 1)
+		//{
+		//	D3DXMATRIXA16 matWorld, matT;
+		//	D3DXMatrixIdentity(&matWorld);
+		//	D3DXMatrixTranslation(&matT, -25, 0, 0);
+		//	matWorld = matT;
+		//	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+		//}
+		//else
+		//{
+		D3DXMATRIXA16 matWorld, matT;
+		D3DXMatrixIdentity(&matWorld);
+		//D3DXMatrixTranslation(&matT, -25, 0, 0);
+		//matWorld = m_matRotGimmick * matT;
+		matWorld = m_matRotGimmick;
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+		//}
 		if (m_pMesh == NULL)
 			return;
 		for (int i = 0; i < m_vecMtrls.size(); i++)
