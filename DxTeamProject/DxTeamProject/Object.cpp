@@ -217,7 +217,7 @@ void CObject::CreateObject(const ST_MapData & mapData)
 	break;
 	case eATree:	case eSTree:	case eWTree:	case eCTree:
 	case eBall:		case eChair:	case eUmbrella:	case eSnowman:
-	case eInvisibleWall:
+	case eFlower:	case eInvisibleWall:
 	{
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
