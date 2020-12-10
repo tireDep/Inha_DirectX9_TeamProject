@@ -45,6 +45,14 @@ CObjectManager::~CObjectManager()
 //
 //}
 
+COBB * CObjectManager::GetvecOBB()
+{
+	 for (int i = 0; i < m_vecBox.size(); ++i)
+		return	m_vecBox[i]->GetOBB();
+
+	 
+}
+
 void CObjectManager::AddObject(CObject * cObject)
 {
 	m_vecObject.push_back(cObject);

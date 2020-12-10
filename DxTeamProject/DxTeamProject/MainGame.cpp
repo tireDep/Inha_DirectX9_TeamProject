@@ -119,7 +119,7 @@ void CMainGame::Setup()
 	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123456.dat");
 
 #ifdef _DEBUG
-	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Gtest.dat");
+	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "OBBBackgroundTest.dat");
 	// >> mapData
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
@@ -357,16 +357,15 @@ void CMainGame::Update()
 	if (m_pMovingCube)
 		m_pMovingCube->Update();
 
-	/*for(int i =0 ; i < m_pMeshTile.size(); ++i)
+	for(int i =0 ; i < m_pMeshTile.size(); ++i)
 	if (m_pMeshTile[i])
-		m_pMeshTile[i]->Update();*/
+		m_pMeshTile[i]->Update();
 
-	/*for (int i = 0; i < m_pMeshTile.size(); ++i)
+	for (int i = 0; i < m_pMeshTile.size(); ++i)
 	{
-		if (COBB::IsCollision(m_pChanger->GetOBB(), m_pMeshTile[i]->GetOBB()) == true)
+		if (COBB::IsCollision(m_pChanger->m_BeamOBB, m_pMeshTile[i]->GetOBB()) == true)
 		{
-			
-			D3DXVECTOR3 tmp = m_pChanger->GetPos() - m_pMeshTile[i]->GetPos();
+			D3DXVECTOR3 tmp = m_pChanger->m_position - m_pMeshTile[i]->GetPos();
 			m_pChanger->SetHitLength(D3DXVec3Length(&tmp));
 			m_pMeshTile[i]->SetColor(m_pChanger->m_stMtl);
 
@@ -374,20 +373,22 @@ void CMainGame::Update()
 		}
 		else 
 		{
-	
 			m_pChanger->SetHitLength(50);
 		
 		}
 	}
+	if (m_pGimmick_Switch)
+		m_pGimmick_Switch->Update();
 
-	if(COBB::IsCollision(m_pMovingCube->GetOBB(), m_pGimmick_Switch->GetOBB()) == true)
+
+	if (COBB::IsCollision(g_pObjectManager->GetvecOBB(), m_pGimmick_Switch->GetOBB2()) == true)
 	{
 		m_pGimmick_Switch->SetBool(true);
 	}
 	else
 	{
 		m_pGimmick_Switch->SetBool(false);
-	}*/
+	}
 
 	if (m_pGimmick_BreakableWall[0])
 		m_pGimmick_BreakableWall[0]->Update();
@@ -395,13 +396,10 @@ void CMainGame::Update()
 		m_pGimmick_BreakableWall[1]->Update();
 
 
-	//if (m_pGimmick_Switch)
-	//	m_pGimmick_Switch->Update();
 
 	if (m_pBook)
 		m_pBook->Update(g_pTimeManager->GetElapsedTime());
-	if (m_pGimmick_Switch)
-		m_pGimmick_Switch->Update();
+
 
 }
 
@@ -446,7 +444,7 @@ void CMainGame::Render()
 		{
 			m_pText->RenderFPS(g_pTimeManager->GetFPS());
 			m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
-			g_pObjectManager->RenderOBBBox();
+			//g_pObjectManager->RenderOBBBox();
 			//m_pText->RenderBoxPosition(m_pSphere1->getCenter());
 			//m_pText->RenderGrab(g_pObjectManager->GetVecObject(), m_pCharacter->GetPosition());
 		}

@@ -145,6 +145,9 @@
     <ClCompile Include="AllocateHierarchy.cpp">
       <Filter>SkinnedMesh</Filter>
     </ClCompile>
+    <ClCompile Include="Orb.cpp">
+      <Filter>Orb</Filter>
+    </ClCompile>
     <ClCompile Include="RigidBody.cpp">
       <Filter>Physics\cyclone</Filter>
     </ClCompile>
@@ -174,6 +177,7 @@
     <ClCompile Include="BreakableWall.cpp">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClCompile>
+    <ClCompile Include="Book.cpp" />
     <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="Cube.cpp">
       <Filter>...TrashCan\Physics</Filter>
@@ -232,12 +236,6 @@
     <ClCompile Include="PSOBB.cpp">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClCompile>
-    <ClCompile Include="MovingCube.cpp" />
-    <ClCompile Include="Book.cpp">
-      <Filter>Object\IObject\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Orb.cpp">
-      <Filter>Object\IObject\Item</Filter>
     <ClCompile Include="MovingCube.cpp">
       <Filter>Object\IObject\Gimmick\MJ</Filter>
     </ClCompile>
@@ -412,6 +410,9 @@
     <ClInclude Include="AllocateHierarchy.h">
       <Filter>SkinnedMesh</Filter>
     </ClInclude>
+    <ClInclude Include="Orb.h">
+      <Filter>Orb</Filter>
+    </ClInclude>
     <ClInclude Include="RigidBody.h">
       <Filter>Physics\cyclone</Filter>
     </ClInclude>
@@ -440,6 +441,7 @@
     <ClInclude Include="BreakableWall.h">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClInclude>
+    <ClInclude Include="Book.h" />
     <ClInclude Include="Dragon.h" />
     <ClInclude Include="Cube.h">
       <Filter>...TrashCan\Physics</Filter>
@@ -498,12 +500,6 @@
     <ClInclude Include="PSOBB.h">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClInclude>
-    <ClInclude Include="MovingCube.h" />
-    <ClInclude Include="Book.h">
-      <Filter>Object\IObject\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Orb.h">
-      <Filter>Object\IObject\Item</Filter>
     <ClInclude Include="MovingCube.h">
       <Filter>Object\IObject\Gimmick\MJ</Filter>
     </ClInclude>
@@ -613,6 +609,9 @@
     <Filter Include="SkinnedMesh">
       <UniqueIdentifier>{8b7bbd42-1924-48c4-91af-f7fa2e255a85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Orb">
+      <UniqueIdentifier>{844e52ae-e656-4c99-8f75-56c9ecc26fe7}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Physics">
       <UniqueIdentifier>{a71dbcd1-0566-48ba-ab36-adfff846e2f0}</UniqueIdentifier>
     </Filter>
@@ -651,9 +650,6 @@
     </Filter>
     <Filter Include="Object\PObject\Cylinder">
       <UniqueIdentifier>{9389d931-ad98-4062-8288-90086b353f59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\IObject\Item">
-      <UniqueIdentifier>{a6d6953f-eac0-4f97-b946-0a41d2ce9894}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

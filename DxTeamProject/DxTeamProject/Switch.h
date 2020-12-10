@@ -1,24 +1,22 @@
 #pragma once
-
+#include "Gimmick.h"
 class COBB;
 
-class CSwitch
+class CSwitch : public CGimmick
 {
 private:
 	D3DXMATRIXA16 matS, matT, matWorld , collWorld;
 	D3DXVECTOR3 m_position, m_scale;
-	Synthesize_Add_Ref(ID3DXMesh*, m_pMesh, Mesh);
-	Synthesize_Add_Ref(ID3DXBuffer*, m_adjBuffer, AdjBuffer);
+
 
 	
 	//----- 충돌
 	LPD3DXMESH m_pBox; // CreateBox
-	COBB* m_pOBB;
+	COBB* m_pColl; //충돌박스
+	
 	D3DXVECTOR3 m_vMin, m_vMax;
 
-	Synthesize(DWORD, m_numMtrls, NumMtrl);
-	Synthesize(vector<D3DMATERIAL9>, m_vecMtrls, VecMtrls);
-	Synthesize(vector<IDirect3DTexture9*>, m_vecTextures, VecTexture);
+
 public:
 
 	//잠깐
@@ -29,9 +27,9 @@ public:
 	void Setup(string folder, string file);
 	void Update();
 	void Render();
-
+	void Update(float duration) { };
 	void SetBool(bool set) { istrue = set; }
-
-	COBB* GetOBB() { return m_pOBB; }
+	
+	COBB* GetOBB2() { return m_pColl; }
 };
 
