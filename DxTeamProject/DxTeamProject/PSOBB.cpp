@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PSOBB.h"
+#include "AllocateHierarchy.h"
 
 CPSOBB::CPSOBB() : 
 	m_vCenterPos(0,0,0),
@@ -90,6 +91,85 @@ void CPSOBB::Setup(CObject & object)
 	D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &m_matWorld);
 
 	object.GetMesh()->UnlockVertexBuffer();
+}
+
+void CPSOBB::Setup(CAllocateHierarchy & ah)
+{
+	//m_matWorld = D3DXMATRIXA16(
+	//	5.161628, 0.000000, 0.000000, 0.000000, 
+	//	0.000000, 5.161628, 0.000000, 0.000000, 
+	//	0.000000, 0.000000, 5.161628, 0.000000, 
+	//	0.003480, 0.304418, 5.063910, 1.000000);
+	
+	D3DXVECTOR3 m_vMin = ah.GetMin();
+	D3DXVECTOR3 m_vMax = ah.GetMax();
+
+	m_vOriCenterPos = (m_vMin + m_vMax) / 2.0f;
+	m_vOriAxisDir[0] = D3DXVECTOR3(1, 0, 0);
+	m_vOriAxisDir[1] = D3DXVECTOR3(0, 1, 0);
+	m_vOriAxisDir[2] = D3DXVECTOR3(0, 0, 1);
+	m_fAxisHalfLen[0] = fabsf(m_vMax.x - m_vMin.x) / 2.0f;
+	m_fAxisHalfLen[1] = fabsf(m_vMax.y - m_vMin.y) / 2.0f;
+	m_fAxisHalfLen[2] = fabsf(m_vMax.z - m_vMin.z) / 2.0f;
+
+	// OBB BOX LINE 
+	{
+		vector<D3DXVECTOR3> vecVertex;
+		vecVertex.push_back(D3DXVECTOR3(m_vOriCenterPos.x - m_fAxisHalfLen[0], m_vOriCenterPos.y - m_fAxisHalfLen[1], m_vOriCenterPos.z - m_fAxisHalfLen[2]));
+		vecVertex.push_back(D3DXVECTOR3(m_vOriCenterPos.x - m_fAxisHalfLen[0], m_vOriCenterPos.y + m_fAxisHalfLen[1], m_vOriCenterPos.z - m_fAxisHalfLen[2]));
+		vecVertex.push_back(D3DXVECTOR3(m_vOriCenterPos.x + m_fAxisHalfLen[0], m_vOriCenterPos.y + m_fAxisHalfLen[1], m_vOriCenterPos.z - m_fAxisHalfLen[2]));
+		vecVertex.push_back(D3DXVECTOR3(m_vOriCenterPos.x + m_fAxisHalfLen[0], m_vOriCenterPos.y - m_fAxisHalfLen[1], m_vOriCenterPos.z - m_fAxisHalfLen[2]));
+		vecVertex.push_back(D3DXVECTOR3(m_vOriCenterPos.x - m_fAxisHalfLen[0], m_vOriCenterPos.y - m_fAxisHalfLen[1], m_vOriCenterPos.z + m_fAxisHalfLen[2]));
+		vecVertex.push_back(D3DXVECTOR3(m_vOriCenterPos.x - m_fAxisHalfLen[0], m_vOriCenterPos.y + m_fAxisHalfLen[1], m_vOriCenterPos.z + m_fAxisHalfLen[2]));
+		vecVertex.push_back(D3DXVECTOR3(m_vOriCenterPos.x + m_fAxisHalfLen[0], m_vOriCenterPos.y + m_fAxisHalfLen[1], m_vOriCenterPos.z + m_fAxisHalfLen[2]));
+		vecVertex.push_back(D3DXVECTOR3(m_vOriCenterPos.x + m_fAxisHalfLen[0], m_vOriCenterPos.y - m_fAxisHalfLen[1], m_vOriCenterPos.z + m_fAxisHalfLen[2]));
+
+		vector<DWORD> vecIndex;
+		// front
+		vecIndex.push_back(0);
+		vecIndex.push_back(1);
+		vecIndex.push_back(1);
+		vecIndex.push_back(2);
+		vecIndex.push_back(2);
+		vecIndex.push_back(3);
+		vecIndex.push_back(3);
+		vecIndex.push_back(0);
+		// back
+		vecIndex.push_back(4);
+		vecIndex.push_back(5);
+		vecIndex.push_back(5);
+		vecIndex.push_back(6);
+		vecIndex.push_back(6);
+		vecIndex.push_back(7);
+		vecIndex.push_back(7);
+		vecIndex.push_back(4);
+		// left
+		vecIndex.push_back(1);
+		vecIndex.push_back(5);
+		vecIndex.push_back(0);
+		vecIndex.push_back(4);
+		// right
+		vecIndex.push_back(2);
+		vecIndex.push_back(6);
+		vecIndex.push_back(3);
+		vecIndex.push_back(7);
+
+		m_vOBBLineVertex.resize(vecIndex.size());
+		for (int i = 0; i < vecIndex.size(); i++)
+		{
+			m_vOBBLineVertex[i].p = vecVertex[vecIndex[i]];
+			m_vOBBLineVertex[i].c = RED;
+		}
+	}
+
+	//m_fAxisHalfLen[0] *= object.GetScale().x;
+	//m_fAxisHalfLen[1] *= object.GetScale().y;
+	//m_fAxisHalfLen[2] *= object.GetScale().z;
+
+	// Check OriCenterPos, OriAxisDir
+	for (int i = 0; i < 3; ++i)
+		D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &m_matWorld);
+	D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &m_matWorld);
 }
 
 void CPSOBB::Update(D3DXMATRIXA16 * pmatWorld)
@@ -555,6 +635,15 @@ void CPSOBB::Render()
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
+	g_pD3DDevice->DrawPrimitiveUP(D3DPT_LINELIST, m_vOBBLineVertex.size() / 2, &m_vOBBLineVertex[0], sizeof(ST_PC_VERTEX));
+}
+
+void CPSOBB::Render(D3DXMATRIXA16 * pmatWorld)
+{
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	g_pD3DDevice->SetTexture(0, NULL);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, pmatWorld);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_LINELIST, m_vOBBLineVertex.size() / 2, &m_vOBBLineVertex[0], sizeof(ST_PC_VERTEX));
 }

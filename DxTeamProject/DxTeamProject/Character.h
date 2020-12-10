@@ -11,7 +11,7 @@ class CCharacter : public IListener
 public:
 	CCharacter();
 protected:
-	vector<ST_PC_VERTEX>	m_vecVertex;
+//	vector<ST_PC_VERTEX>	m_vecVertex;
 	D3DXVECTOR3				m_vDirection;
 	D3DXVECTOR3				m_vPosition;
 	D3DXMATRIXA16			m_matRotY;
@@ -43,9 +43,9 @@ public:
 	// tmp Collision Test
 	// setup erase
 	virtual bool Collider(bool isCollided);
-	COBB* m_pOBB;
-	COBB* GetOBB();
-	void SetBool(bool istrue);
+	// COBB* m_pOBB;
+	// COBB* GetOBB();
+	// void SetBool(bool istrue);
 	
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
