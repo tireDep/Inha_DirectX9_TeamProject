@@ -7,12 +7,15 @@ CSwitch::CSwitch()
 	, m_position(10,0.5f,0)
 	, istrue(false)
 	, m_pColl(NULL)
+	, m_pBox(NULL)
 {
 	D3DXMatrixIdentity(&matWorld);
 }
 
 CSwitch::~CSwitch()
 {
+	SafeRelease(m_pBox);
+	SafeDelete(m_pColl);
 }
 
 void CSwitch::Setup()

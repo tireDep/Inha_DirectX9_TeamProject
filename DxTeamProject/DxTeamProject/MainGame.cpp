@@ -455,9 +455,9 @@ void CMainGame::Render()
 
 	// Ray y check
 
-	if(m_pMovingCube)
+	/*if(m_pMovingCube)
 		m_pMovingCube->Render();
-
+*/
 	for(int i =0; i < m_pMeshTile.size(); ++i)
 		m_pMeshTile[i]->Render();
 
@@ -465,16 +465,20 @@ void CMainGame::Render()
 	//	m_pMeshTile->Render();
 
 	// Gimmick
-	if (m_pGimmick_Door[0])
-		m_pGimmick_Door[0]->Render();
-	if (m_pGimmick_Door[1])
-		m_pGimmick_Door[1]->Render();
+	//if (m_pGimmick_Door[0])
+	//	m_pGimmick_Door[0]->Render();
+	//if (m_pGimmick_Door[1])
+	//	m_pGimmick_Door[1]->Render();
 	//if (m_pGimmick_RotationBoard)
 	//	m_pGimmick_RotationBoard->Render();
 	// if (m_pGimmick_Switch)
 	// 	m_pGimmick_Switch->Render();
 	if (m_pChanger)
 		m_pChanger->Render();
+	/*if (m_pGimmick_Switch)
+		m_pGimmick_Switch->Render();*/
+	/*if (m_pChanger)
+		m_pChanger->Render();*/
 	if (m_pGimmick_BreakableWall[0])
 		m_pGimmick_BreakableWall[0]->Render();
 	if (m_pGimmick_BreakableWall[1]) 
