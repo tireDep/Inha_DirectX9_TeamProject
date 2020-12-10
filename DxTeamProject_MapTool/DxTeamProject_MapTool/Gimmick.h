@@ -21,6 +21,9 @@ public:
 
 	virtual void SetDiffScale(D3DXVECTOR3 set);
 
+	virtual int GetTextureIndex() { return int(); }
+	virtual void SetTexture(int index) { }
+
 	static void CreateGimmick(const ObjectType& objType);
 	static void CreateGimmick_SaveData(ST_MapData& mapData);
 };

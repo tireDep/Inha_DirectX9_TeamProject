@@ -9,6 +9,7 @@
 
 #include "Gimmick.h"
 #include "RotationBoard.h"
+#include "Switch.h"
 
 #include "ImguiClass.h"
 
@@ -610,8 +611,13 @@ void CImguiClass::Update_Inspector()
 				// >> 격자에 맞춰 이동(체스 느낌)
 				if (temp.x != vTrans.x)
 				{
-					temp.x = floor(vTrans.x);
-					temp.x = temp.x <= 0 ? temp.x + 0.5f : temp.x - 0.5f;
+					if (vTrans.x == 0)
+						temp.x = 0;
+					else
+					{
+						temp.x = floor(vTrans.x);
+						temp.x = temp.x <= 0 ? temp.x + 0.5f : temp.x - 0.5f;
+					}
 				}
 
 				if (temp.y != vTrans.y)
@@ -637,8 +643,13 @@ void CImguiClass::Update_Inspector()
 				
 				if (temp.z != vTrans.z)
 				{
-					temp.z = floor(vTrans.z);
-					temp.z = temp.z <= 0 ? temp.z + 0.5f : temp.z - 0.5f;
+					if (vTrans.z == 0)
+						temp.z = 0;
+					else
+					{
+						temp.z = floor(vTrans.z);
+						temp.z = temp.z <= 0 ? temp.z + 0.5f : temp.z - 0.5f;
+					}
 				}
 
 				vTrans = temp;
@@ -730,6 +741,27 @@ void CImguiClass::Update_Inspector()
 				ImGui::Separator();
 
 			} // << : Rotation Board
+
+			// >> 스위치 기믹 : 텍스쳐 선택, 조건 선택
+			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_Switch)
+			{
+				CSwitch* temp = dynamic_cast<CSwitch*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+
+				ImGui::Text("Texture");
+				static int pushIndex = 0;
+				pushIndex = temp->GetTextureIndex();
+				string charName[4] = { "Glow", "Metal", "Rough", "Texture" };
+				for (int i = 0; i < 4; i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str(), pushIndex == i))
+					{
+						pushIndex = i;
+						temp->SetTexture(pushIndex);
+					}
+				} // << : for
+
+				ImGui::Separator();
+			}
 
 		} // << : if (m_nowSelectindex >= 0)
 

@@ -16,6 +16,9 @@ public:
 	virtual void Update() { }
 	virtual void Render();
 
+	virtual void SetTexture(int index);
+	virtual int GetTextureIndex();
+
 	virtual void SetConditionType();
 	virtual void SetCondition();
 };

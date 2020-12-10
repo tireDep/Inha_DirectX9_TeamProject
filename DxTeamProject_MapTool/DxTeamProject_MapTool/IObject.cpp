@@ -234,7 +234,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	// >> FileLoader 생성
 	
 	ST_MapData mapData;
-	mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+	mapData.vScale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
 	mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
 	// >> todo : translate 현 위치 중앙으로 받아오기
@@ -284,6 +284,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eATree:
 	{
+		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
 		mapData.strObjName = string("AutumnTree") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "autumn_texture.png";
@@ -297,6 +298,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eSTree:
 	{
+		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
 		mapData.strObjName = string("SummerTree") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "summer_texture.png";
@@ -310,6 +312,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eWTree:
 	{
+		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
 		mapData.strObjName = string("WinterTree") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "winter_texture.png";

@@ -27,7 +27,7 @@ void CGimmick::CreateGimmick(const ObjectType& objType)
 	ST_MapData mapData;
 	mapData.vScale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
 	mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
 
 	mapData.objType = objType;
 

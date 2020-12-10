@@ -6,7 +6,7 @@ Resource/XFile/Gimmick/Switch
 # FilePath
 Force_switch.X
 # TxtPath
-cubeworld_texture.tga
+cubeworld_metal.tga
 # ObjectType
 31
 # Scale
@@ -20,7 +20,7 @@ cubeworld_texture.tga
 # Translate
 9.5
 0
-0
+9.5
 # Color
 0.5
 0.5

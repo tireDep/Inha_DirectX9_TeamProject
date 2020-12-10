@@ -41,8 +41,16 @@ void CBackground::Setup(ST_MapData setData)
 		m_vecTextures = xfile->vecTextrure;
 		m_numMtrls = xfile->nMtrlNum;
 
-		if (m_vecTextures[0] == NULL)
+		int check = 0;
+		for (int i = 0; i < m_vecTextures.size(); i++)
 		{
+			if (m_vecTextures[i] == NULL)
+				check++;
+		}
+
+		if (check == m_vecTextures.size())
+		{
+			// >> 텍스쳐 로드 정보 x 일 때
 			m_vecTextures.clear();
 			m_vecTextures.push_back(m_pTexture);
 		}
