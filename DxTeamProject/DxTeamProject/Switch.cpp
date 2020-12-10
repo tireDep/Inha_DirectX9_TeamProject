@@ -20,7 +20,6 @@ CSwitch::~CSwitch()
 
 void CSwitch::Setup(string folder, string file)
 {
-
 	{
 
 		D3DXCreateBox(g_pD3DDevice, 2.5, 0.3f, 2.5, &m_pBox, NULL);
@@ -60,9 +59,6 @@ void CSwitch::Setup(string folder, string file)
 				D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &m_vecTextures[i]);
 		}
 	}
-
-	
-
 	delete xfile;
 
 	m_pOBB = new COBB;
@@ -88,16 +84,12 @@ void CSwitch::Update()
 
 void CSwitch::Render()
 {
-	
-	
-
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	
 	{
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &collWorld);
 		m_pColl->Render();
 	}
-
 
 	{
 		D3DXMatrixIdentity(&matWorld);
@@ -119,7 +111,6 @@ void CSwitch::Render()
 			else
 				m_pMesh->DrawSubset(0);
 		}
-
 		g_pD3DDevice->SetTexture(0, NULL);
 	}
 	

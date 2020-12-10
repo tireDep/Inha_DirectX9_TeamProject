@@ -236,8 +236,17 @@
     <ClCompile Include="PSOBB.cpp">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="MovingCube.cpp">
       <Filter>Object\IObject\Gimmick\MJ</Filter>
+=======
+    <ClCompile Include="MovingCube.cpp" />
+    <ClCompile Include="Book.cpp">
+      <Filter>Object\IObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Orb.cpp">
+      <Filter>Object\IObject\Item</Filter>
+>>>>>>> 2fab40b15215ae7e86cd9ec716cb0e047cd7e2b3
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -500,8 +509,17 @@
     <ClInclude Include="PSOBB.h">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="MovingCube.h">
       <Filter>Object\IObject\Gimmick\MJ</Filter>
+=======
+    <ClInclude Include="MovingCube.h" />
+    <ClInclude Include="Book.h">
+      <Filter>Object\IObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Orb.h">
+      <Filter>Object\IObject\Item</Filter>
+>>>>>>> 2fab40b15215ae7e86cd9ec716cb0e047cd7e2b3
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

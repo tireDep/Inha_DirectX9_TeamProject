@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Dragon.h"
+#include "Character.h"
 
 
 CDragon::CDragon() :
@@ -7,7 +8,9 @@ CDragon::CDragon() :
 	m_adjBuffer(NULL),
 	m_numMtrls(0),
 	m_isTrue(false),
-	m_position(0,3,0)
+	m_vPosition(0, 0, 0),
+	Drangon_y(4.5f),
+	m_vDrangonPos(0, 0, 0)
 {
 }
 
@@ -18,26 +21,27 @@ CDragon::~CDragon()
 	SafeRelease(m_adjBuffer);
 }
 
-void CDragon::Update(D3DXCOLOR color)
+void CDragon::Update(D3DXVECTOR3 pos)
 {
-	if(color == RED)
-		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_01(red).png", m_pTexture);
+	m_vPosition = pos;
 
-	if (color == YELLOW)
-		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_08(yellow).png", m_pTexture);
+	//m_DrangonPos.y = m_position.y + Drangon_y;
 
-	if (color == GREEN)
-		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_04(green).png", m_pTexture);
+	// >> testRotation
+	if (m_isTrue == false)
+	{
+		m_vDrangonPos.y += 0.0005f;
+		if (m_vDrangonPos.y >= 1.0f)
+			m_isTrue = true;
 
-	if (color == BLUE)
-		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_16(blue).png", m_pTexture);
-
-	if (color == BLACK)
-		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_05(black).png", m_pTexture);
-
-	if (color == WHITE)
-		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_17(white).png", m_pTexture);
-
+	}
+	else if (m_isTrue == true)
+	{
+		m_vDrangonPos.y -= 0.0005f;
+		if (m_vDrangonPos.y <= 0.0f)
+			m_isTrue = false;
+	}
+	m_vPosition.y += Drangon_y+ m_vDrangonPos.y;
 }
 
 void CDragon::Setup()
@@ -56,6 +60,7 @@ void CDragon::Setup()
 	m_vecTextures = xfile->vecTextrure;
 	m_numMtrls = xfile->nMtrlNum;
 
+
 	
 	delete xfile;
 
@@ -64,21 +69,20 @@ void CDragon::Setup()
 void CDragon::Render()
 {
 	// >> testRotation
-	if (m_isTrue == false)
-	{
-		m_position.y += 0.0005f;
-		if (m_position.y >= 4)
-			m_isTrue = true;
+	//if (m_isTrue == false)
+	//{
+	//	m_DrangonPos.y += 0.0005f;
+	//	if (m_DrangonPos.y >= 5.5f)
+	//		m_isTrue = true;
 
-	}
-	else if (m_isTrue == true)
-	{
-		m_position.y -= 0.0005f;
-		if (m_position.y <= 3)
-			m_isTrue = false;
-	}
+	//}
+	//else if (m_isTrue == true)
+	//{
+	//	m_DrangonPos.y -= 0.0005f;
+	//	if (m_DrangonPos.y <= 4.5f)
+	//		m_isTrue = false;
+	//}
 	// << testRotation
-
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
@@ -86,7 +90,7 @@ void CDragon::Render()
 	D3DXMATRIXA16 matS, matT;
 	D3DXMatrixScaling(&matS, 0.7f, 0.7f, 0.7f);
 	// D3DXMatrixTranslation(&matT, 0, 5, 0);
-	D3DXMatrixTranslation(&matT, 1, m_position.y, 1);
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	matWorld = matS * matT;
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
@@ -104,4 +108,26 @@ void CDragon::Render()
 		m_pMesh->DrawSubset(i);
 	}
 	g_pD3DDevice->SetTexture(0, NULL);
+}
+
+void CDragon::ChangeColor(D3DXCOLOR color)
+{
+	if (color == RED)
+		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_01(red).png", m_pTexture);
+
+	if (color == YELLOW)
+		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_08(yellow).png", m_pTexture);
+
+	if (color == GREEN)
+		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_04(green).png", m_pTexture);
+
+	if (color == BLUE)
+		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_16(blue).png", m_pTexture);
+
+	if (color == BLACK)
+		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_05(black).png", m_pTexture);
+
+	if (color == WHITE)
+		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_17(white).png", m_pTexture);
+
 }
