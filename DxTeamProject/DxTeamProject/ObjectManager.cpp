@@ -1,11 +1,14 @@
 #include "stdafx.h"
+
+#include "ObjectManager.h"
 #include "Object.h"
 #include "IObject.h"
 #include "PObject.h"
-#include "ObjectManager.h"
 #include "OBB.h"
 #include "Gimmick.h"
+#include "Sphere.h"
 #include "Box.h"
+#include "Cylinder.h"
 // collide
 //#include "Contact.h"
 
@@ -218,8 +221,9 @@ void CObjectManager::UpdateLand(float duration)
 	}
 }
 
-void CObjectManager::Update()
+void CObjectManager::Collide()
 {
+	// Need To modify...
 	for (int hittee = 0; hittee < m_vecPObject.size(); hittee++)
 	{
 		for (int hitter = 0; hitter < m_vecPObject.size(); hitter++)
@@ -228,6 +232,64 @@ void CObjectManager::Update()
 				continue;
 			//m_vecPObject[hittee]->CollisionOtherObject(m_vecPObject[hitter]);
 			m_vecPObject[hittee]->Collision3D(m_vecPObject[hitter]);
+		}
+	}
+
+	/// Sphere
+	for (int SphereIndex = 0; SphereIndex < m_vecSphere.size(); SphereIndex++)
+	{
+		// Sphere to Other PObject
+		for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
+		{
+
+		}
+		// Sphere to Gimmick
+		for (int GimmickIndex = 0; GimmickIndex < m_vecGimmick.size(); GimmickIndex++)
+		{
+
+		}
+		// Sphere to IObject... Subtract Gimmick
+		for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
+		{
+
+		}
+	}
+	/// Box
+	for (int BoxIndex = 0; BoxIndex < m_vecBox.size(); BoxIndex++)
+	{
+		// Box to Other PObject... Subtract Sphere		m_vecBox.size() + m_vecCylinder.size()?
+		for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
+		{
+
+		}
+		// Box to Gimmick
+		for (int GimmickIndex = 0; GimmickIndex < m_vecGimmick.size(); GimmickIndex++)
+		{
+
+		}
+		// Box to IObject... Subtract Gimmick
+		for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
+		{
+
+		}
+	}
+	/// Cylinder
+	for (int CylinderIndex = 0; CylinderIndex < m_vecCylinder.size(); CylinderIndex++)
+	{
+		// Cylinder to Other PObject... Subtract Sphere, Box	m_vecCylinder.size()?
+		for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
+		{
+
+		}
+		// Cylinder to Gimmick
+		for (int GimmickIndex = 0; GimmickIndex < m_vecGimmick.size(); GimmickIndex++)
+		{
+
+		}
+		// Cylinder to IObject... Subtract Gimmick
+		for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
+		{
+
 		}
 	}
 

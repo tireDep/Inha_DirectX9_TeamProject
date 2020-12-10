@@ -1,4 +1,6 @@
 #include "stdafx.h"
+#include "IObject.h"
+#include "Gimmick.h"
 #include "Cylinder.h"
 
 CCylinder::CCylinder()
@@ -20,6 +22,7 @@ void CCylinder::Setup()
 		m_fBoundingSphere = m_fRadius;
 	else
 		m_fBoundingSphere = m_fHeight / 2.0f;
+
 	//m_vInverseRotationInertia.x = 12.0f / (GetMass() * (m_fHeight * m_fHeight + 3 * m_fRadius * m_fRadius));
 	//m_vInverseRotationInertia.y = 2.0f / (GetMass() * m_fRadius * m_fRadius);
 	//m_vInverseRotationInertia.z = 12.0f / (GetMass() * (m_fHeight * m_fHeight + 3 * m_fRadius * m_fRadius));
@@ -69,6 +72,28 @@ void CCylinder::Setup(const ST_MapData & mapData)
 
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	m_matWorld = matS * matR * matT;
+}
+
+void CCylinder::Update(float duration)
+{
+	PObject::Update(duration);
+	// OBB TEST
+	m_pOBB->Update(&m_matWorld);
+}
+
+bool CCylinder::hasIntersected(CCylinder * otherCylinder)
+{
+	return false;
+}
+
+bool CCylinder::hasIntersected(CGimmick * otherIObject)
+{
+	return false;
+}
+
+bool CCylinder::hasIntersected(IObject * otherIObject)
+{
+	return false;
 }
 
 string CCylinder::GetName()

@@ -317,10 +317,10 @@ void CMainGame::Update()
 	RECT rc;
 	GetClientRect(g_hWnd, &rc);
 	CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
-	g_pObjectManager->Update(ray, m_pCharacter->GetColor());					// Color Change
-	g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());
-	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());
-	g_pObjectManager->Update();
+	g_pObjectManager->Update(ray, m_pCharacter->GetColor());		// Color Change
+	g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());	// PObject Physics
+	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());		// IObject(Gimmick) Physics
+	g_pObjectManager->Collide();									// Collide
 	///
 	//m_pBox->Update(g_pTimeManager->GetElapsedTime());
 	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
@@ -403,7 +403,6 @@ void CMainGame::Render()
 	if (m_pGrid)
 		m_pGrid->Render();
 	
-
 	D3DCOLOR c = D3DCOLOR_XRGB(255, 0, 0);
 
 	if (m_pCharacter)

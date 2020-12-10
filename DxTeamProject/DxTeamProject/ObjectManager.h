@@ -13,7 +13,9 @@ class PObject;
 class IObject;
 class COBB;
 class CGimmick;
+class CSphere;
 class CBox;
+class CCylinder;
 
 // Collide
 //#include "Contact.h"
@@ -30,9 +32,11 @@ private:
 	vector<PObject*>	m_vecPObject;
 	vector<IObject *>	m_vecIObject;
 	vector<COBB *>		m_vecOBBBox;
-	// Integration IObject...?
+	// Integration... 
 	vector<CGimmick*>	m_vecGimmick;
+	vector<CSphere*>	m_vecSphere;
 	vector<CBox*>		m_vecBox;
+	vector<CCylinder*>  m_vecCylinder;
 
 	// >> mapTest
 	float m_vScale;
@@ -48,12 +52,14 @@ private:
 	//CollisionData cData;
 	//ContactResolver resolver;
 public:
-	void AddObject(CObject* Object)		{ m_vecObject.push_back(Object); }
-	void AddObject(PObject* pObject)	{ m_vecPObject.push_back(pObject); }
-	void AddObject(IObject* iObject)	{ m_vecIObject.push_back(iObject); }
-	void AddOBBbox(COBB* OBBBox)		{ m_vecOBBBox.push_back(OBBBox); }
-	void AddGimmick(CGimmick* Gimmick)	{ m_vecGimmick.push_back(Gimmick); }
-	void AddBox(CBox* Box)				{ m_vecBox.push_back(Box); }
+	void AddObject(CObject* Object)			{ m_vecObject.push_back(Object); }
+	void AddObject(PObject* pObject)		{ m_vecPObject.push_back(pObject); }
+	void AddObject(IObject* iObject)		{ m_vecIObject.push_back(iObject); }
+	void AddOBBbox(COBB* OBBBox)			{ m_vecOBBBox.push_back(OBBBox); }
+	void AddGimmick(CGimmick* Gimmick)		{ m_vecGimmick.push_back(Gimmick); }
+	void AddSphere(CSphere* Sphere)			{ m_vecSphere.push_back(Sphere); }
+	void AddBox(CBox* Box)					{ m_vecBox.push_back(Box); }
+	void AddCylinder(CCylinder* Cylinder)	{ m_vecCylinder.push_back(Cylinder); }
 
 	void RemoveObject(CObject* Object);
 	void RemoveObject(PObject* pObject);
@@ -66,9 +72,9 @@ public:
 	vector<IObject *> GetVecIObject()	{ return m_vecIObject; }
 
 	void Update(CRay ray, D3DXCOLOR& objectcolor);		// Color Change
-	void Update(float duration);						// Physics
-	void Update();										// Collision
-	void UpdateLand(float duration);					// Land
+	void UpdateLand(float duration);					// PObject Physics
+	void Update(float duration);						// IObject(Gimmick) Physics		// Integration...
+	void Collide();										// Collision			
 
 	void Render();
 	void RenderOBBBox();
