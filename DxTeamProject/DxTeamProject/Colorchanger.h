@@ -20,7 +20,7 @@ private:
 
 	float length; // 빔 길이 조절.
 	
-	
+	D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRot;
 
 	D3DXCOLOR c; 
 	D3DXVECTOR3 m_vMin, m_vMax;
@@ -31,7 +31,10 @@ public:
 	D3DMATERIAL9 m_stMtl;
 	D3DXVECTOR3 m_position;
 	COBB *m_BeamOBB;
-	void Setup(string folder, string file); // x파일
+	
+	void Setup(); // x파일
+	void Setup(ST_MapData setData);
+
 	void Update();
 	void Render();
 

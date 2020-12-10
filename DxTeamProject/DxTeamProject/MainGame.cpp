@@ -143,8 +143,8 @@ void CMainGame::Setup()
 	m_pMovingCube = new MovingCube;
 	m_pMovingCube->Setup("Resource/XFile/Gimmick/MovingCube", "moving_cube.X");
 
-	//m_pOrb = new COrb;
-	//m_pOrb->Setup();
+	m_pOrb = new COrb;
+	m_pOrb->Setup();
 
 	m_pLight = new CLight;
 	m_pLight->Setup();
@@ -158,7 +158,7 @@ void CMainGame::Setup()
 
 	////--Gimmick
 	m_pChanger = new Color_changer;
-	m_pChanger->Setup("Resource/XFile/Gimmick/ColorChanger", "Color_changer.X"); //Resource/XFile/Gimmick/ColorChanger", "Color_changer.X
+	m_pChanger->Setup(); //Resource/XFile/Gimmick/ColorChanger", "Color_changer.X
 
 	
 	m_pGimmick_Door[0] = new CDoor;
@@ -235,8 +235,8 @@ void CMainGame::Update()
 		m_pCamera->Update();
 
 
-	//if(m_pOrb)
-	//	m_pOrb->Update();
+	if(m_pOrb)
+		m_pOrb->Update();
 
 	if (m_pCharacter)
 	{
@@ -428,13 +428,13 @@ void CMainGame::Render()
 	if (m_pCharacter)
 		m_pCharacter->Render(c);
 
-	//if (m_pOrb)
-	//{
-	//	m_pOrb->SetBillbord();
-	//	m_pOrb->Render();
-	//}
+	if (m_pOrb)
+	{
+		m_pOrb->SetBillbord();
+		m_pOrb->Render();
+	}
 
-	g_pObjectManager->Render();
+	//g_pObjectManager->Render();
 
 	//if (m_pHeightMap)
 	//	m_pHeightMap->Render();
@@ -482,8 +482,8 @@ void CMainGame::Render()
 		m_pGimmick_BreakableWall[1]->Render();
 //
 
-	if (m_pBook)
-		m_pBook->Render();
+	//if (m_pBook)
+	//	m_pBook->Render();
 
 	if (m_pDragon)
 		m_pDragon->Render();

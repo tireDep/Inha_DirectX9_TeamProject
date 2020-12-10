@@ -31,6 +31,14 @@ void COrb::Setup()
 void COrb::Render()
 {
 	D3DMATERIAL9 temp;
+	//D3DXMATRIXA16 matworld, matT;
+
+	//D3DXMatrixTranslation(&matT, 5, 0, 5);
+
+	//matworld = matT;
+
+	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &matworld);
+
 	ZeroMemory(&temp,sizeof( D3DMATERIAL9));
 	temp.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f);
 	temp.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f);
@@ -78,7 +86,7 @@ void COrb::Update()
 
 void COrb::SetBillbord()
 {
-	D3DXMATRIXA16 matBillBoard, matView;
+	D3DXMATRIXA16 matBillBoard, matView,matWorld;
 	D3DXMatrixIdentity(&matBillBoard);
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
 	// view 매트릭스를 구해서 y축 회전
@@ -87,11 +95,11 @@ void COrb::SetBillbord()
 	matBillBoard._31 = matView._31;
 	matBillBoard._33 = matView._33;
 
-	D3DXMATRIXA16 matT;
-	D3DXMatrixIdentity(&matT);
-	D3DXMatrixTranslation(&matT, 1, 0, 0);
-	matBillBoard *= matT;
-
+	D3DXMATRIXA16 matR,matT2;
+	D3DXMatrixIdentity(&matR);
+	D3DXMatrixIdentity(&matT2);
+	D3DXMatrixTranslation(&matR, 1, 0, 0);
+	matBillBoard *= matR;
 	D3DXMatrixInverse(&matBillBoard, NULL, &matBillBoard);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matBillBoard);
 }
