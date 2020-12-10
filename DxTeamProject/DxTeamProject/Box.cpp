@@ -4,7 +4,6 @@
 #include "Cylinder.h"
 #include "IObject.h"
 #include "Gimmick.h"
-#include "PSOBB.h"
 
 CBox::CBox()
 	: m_fWidth(1.0f)
@@ -29,9 +28,9 @@ void CBox::Setup()
 	m_fBoundingSphere = maxLength / 2.0f;
 
 	// modify? 12.0f -> 48.0f?
-	m_vInverseRotationInertia.x = 12.0f / (GetMass() * (m_fHeight * m_fHeight + m_fDepth  * m_fDepth));
-	m_vInverseRotationInertia.y = 12.0f / (GetMass() * (m_fWidth  * m_fWidth  + m_fDepth  * m_fDepth));
-	m_vInverseRotationInertia.z = 12.0f / (GetMass() * (m_fWidth  * m_fWidth  + m_fHeight * m_fHeight));
+	//m_vInverseRotationInertia.x = 12.0f / (GetMass() * (m_fHeight * m_fHeight + m_fDepth  * m_fDepth));
+	//m_vInverseRotationInertia.y = 12.0f / (GetMass() * (m_fWidth  * m_fWidth  + m_fDepth  * m_fDepth));
+	//m_vInverseRotationInertia.z = 12.0f / (GetMass() * (m_fWidth  * m_fWidth  + m_fHeight * m_fHeight));
 
 	// Collide
 	//m_vPosition.x = -2;
@@ -240,13 +239,17 @@ bool CBox::hasIntersected(CSphere & otherSphere)
 	return true;
 }
 
-bool CBox::hasIntersected(CBox & otherBox)
+bool CBox::hasIntersected(CBox * otherBox)
 {
+	if (this->m_pOBB->IsCollision(otherBox->GetOBB()))
+		return true;
 	return false;
 }
 
-bool CBox::hasIntersected(CCylinder & otherCylinder)
+bool CBox::hasIntersected(CCylinder * otherCylinder)
 {
+	if (this->m_pOBB->IsCollision(otherCylinder->GetOBB()))
+		return true;
 	return false;
 }
 
@@ -254,13 +257,8 @@ bool CBox::hasIntersected(IObject * otherIObject)
 {
 	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
 	{
-		//cout << "In" << endl;
 		D3DXVECTOR3 v;
 		v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
-		//v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct())]->GetPosition() - m_pCharacter->GetPosition();
-		//v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
-		//v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
-		//v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
 		D3DXVec3Normalize(&v, &v);
 		this->SetPusingForce(v);
 		//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
@@ -269,18 +267,12 @@ bool CBox::hasIntersected(IObject * otherIObject)
 	return false;
 }
 
-// GIMMICK TEST
 bool CBox::hasIntersected(CGimmick * otherIObject)
 {
 	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
 	{
-		//cout << "In" << endl;
 		D3DXVECTOR3 v;
 		v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
-		//v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct())]->GetPosition() - m_pCharacter->GetPosition();
-		//v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
-		//v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
-		//v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
 		D3DXVec3Normalize(&v, &v);
 		this->SetPusingForce(v);
 		//this->SetLinearVelocity(-1 * this->GetLinearVelocity());

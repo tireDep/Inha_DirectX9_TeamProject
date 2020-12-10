@@ -197,6 +197,7 @@ void CObject::CreateObject(const ST_MapData & mapData)
 {
 	switch (mapData.objType)
 	{
+		// Pobject? like Gimmick...
 	case eBox:
 	{
 		CBox* box = new CBox;

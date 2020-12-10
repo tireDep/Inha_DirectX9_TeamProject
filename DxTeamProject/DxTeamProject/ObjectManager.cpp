@@ -2,16 +2,12 @@
 #include "Object.h"
 #include "IObject.h"
 #include "PObject.h"
-#include "PSOBB.h"
 #include "ObjectManager.h"
-#include "CHeight.h"
 #include "OBB.h"
-#include "TestObjCollision.h"
-// OBB TEST
 #include "Gimmick.h"
 #include "Box.h"
 // collide
-#include "Contact.h"
+//#include "Contact.h"
 
 CObjectManager::CObjectManager() : 
 	m_frustum(NULL),
@@ -33,37 +29,12 @@ CObjectManager::~CObjectManager()
 	SafeDelete(m_thread);
 }
 
-//void CObjectManager::GenerateContacts()
-//{
-//	CollisionPlane plane;
-//	plane.direction = D3DXVECTOR3(0, 1, 0);
-//	plane.offset = 0;
-//	cData.reset(maxContacts);
-//	cData.friction = 0.9f;
-//	cData.restitution = 0.6f;
-//	cData.tolerance = 0.1f;
-//
-//}
-
-COBB * CObjectManager::GetvecOBB()
-{
-	 for (int i = 0; i < m_vecBox.size(); ++i)
-		return	m_vecBox[i]->GetOBB();
-
-	 
-}
-
-void CObjectManager::AddObject(CObject * cObject)
-{
-	m_vecObject.push_back(cObject);
-}
-
-void CObjectManager::RemoveObject(CObject * cObject)
+void CObjectManager::RemoveObject(CObject * Object)
 {
 	vector<CObject*>::iterator it;
 	for (it = m_vecObject.begin(); it != m_vecObject.end();)
 	{
-		if (*it == cObject)
+		if (*it == Object)
 		{
 			CObject* temp = *it;
 			it = m_vecObject.erase(it);
@@ -74,34 +45,6 @@ void CObjectManager::RemoveObject(CObject * cObject)
 			it++;
 	}
 }
-
-void CObjectManager::AddObject(IObject * iObject)
-{
-	m_vecIObject.push_back(iObject);
-}
-
-void CObjectManager::RemoveObject(IObject * iObject)
-{
-	vector<IObject*>::iterator it;
-	for (it = m_vecIObject.begin(); it != m_vecIObject.end();)
-	{
-		if (*it == iObject)
-		{
-			IObject* temp = *it;
-			it = m_vecIObject.erase(it);
-			delete temp;
-			return;
-		}
-		else
-			it++;
-	}
-}
-
-void CObjectManager::AddObject(PObject * pObject)
-{
-	m_vecPObject.push_back(pObject);
-}
-
 void CObjectManager::RemoveObject(PObject * pObject)
 {
 	vector<PObject*>::iterator it;
@@ -118,12 +61,22 @@ void CObjectManager::RemoveObject(PObject * pObject)
 			it++;
 	}
 }
-
-void CObjectManager::AddOBBbox(COBB * OBBBox)
+void CObjectManager::RemoveObject(IObject * iObject)
 {
-	m_vecOBBBox.push_back(OBBBox);
+	vector<IObject*>::iterator it;
+	for (it = m_vecIObject.begin(); it != m_vecIObject.end();)
+	{
+		if (*it == iObject)
+		{
+			IObject* temp = *it;
+			it = m_vecIObject.erase(it);
+			delete temp;
+			return;
+		}
+		else
+			it++;
+	}
 }
-
 void CObjectManager::RemoveObject(COBB * OBBBox)
 {
 	vector<COBB*>::iterator it;
@@ -140,12 +93,6 @@ void CObjectManager::RemoveObject(COBB * OBBBox)
 			it++;
 	}
 }
-
-void CObjectManager::AddGimmick(CGimmick * Gimmick)
-{
-	m_vecGimmick.push_back(Gimmick);
-}
-
 void CObjectManager::RemoveObject(CGimmick * Gimmick)
 {
 	vector<CGimmick*>::iterator it;
@@ -163,21 +110,199 @@ void CObjectManager::RemoveObject(CGimmick * Gimmick)
 	}
 }
 
-void CObjectManager::AddBox(CBox * Box)
+/// ADD
+//void CObjectManager::AddObject(CObject * cObject)
+//{
+//	m_vecObject.push_back(cObject);
+//}
+//void CObjectManager::AddObject(PObject * pObject)
+//{
+//	m_vecPObject.push_back(pObject);
+//}
+//void CObjectManager::AddObject(IObject * iObject)
+//{
+//	m_vecIObject.push_back(iObject);
+//}
+//void CObjectManager::AddOBBbox(COBB * OBBBox)
+//{
+//	m_vecOBBBox.push_back(OBBBox);
+//}
+//void CObjectManager::AddGimmick(CGimmick * Gimmick)
+//{
+//	m_vecGimmick.push_back(Gimmick);
+//}
+//void CObjectManager::AddBox(CBox * Box)
+//{
+//	m_vecBox.push_back(Box);
+//}
+/// GET
+//vector<CObject*> CObjectManager::GetVecObject()
+//{
+//	return m_vecObject;
+//}
+//vector<IObject*> CObjectManager::GetVecIObject()
+//{
+//	return m_vecIObject;
+//}
+//
+//vector<PObject*> CObjectManager::GetVecPObejct()
+//{
+//	return m_vecPObject;
+//}
+
+void CObjectManager::Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos)
+//{
+//	int index = 0;
+//	for (int i = 1; i < m_vecObject.size(); i++)
+//	{
+//		if (vecIsPick[i] == false)
+//			continue;
+//		else
+//		{
+//			if (vecVPos[index].x >= vecVPos[i].x || vecVPos[index].y >= vecVPos[i].y || vecVPos[index].z >= vecVPos[i].z)
+//			{
+//				m_vecObject[index]->SetPickState(false);
+//				index = i;
+//			}
+//		} // >> : else
+//	} // >> : for
+//}
 {
-	m_vecBox.push_back(Box);
+	int index = 0;
+	for (int i = 1; i < m_vecPObject.size(); i++)
+	{
+		if (vecIsPick[i] == false)
+			continue;
+		else
+		{
+			if (vecVPos[index].x >= vecVPos[i].x || vecVPos[index].y >= vecVPos[i].y || vecVPos[index].z >= vecVPos[i].z)
+			{
+				m_vecPObject[index]->SetPickState(false);
+				index = i;
+			}
+		} // >> : else
+	} // >> : for
 }
 
-void CObjectManager::SetScale(float scale)
+void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 {
-	m_vScale = scale;
+	vector<bool> vecIsPick;
+	vector<D3DXVECTOR3> vecVPos;
+	//for (int i = 0; i < m_vecObject.size(); i++)
+	//{
+	//	m_vecObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
+	//}
+	for (int i = 0; i < m_vecPObject.size(); i++)
+	{
+		m_vecPObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
+	}
+	Update_PickCheck(vecIsPick, vecVPos);
 }
 
-float CObjectManager::GetScale()
+void CObjectManager::Update(float duration)
 {
-   return m_vScale;
+	for (int i = 0; i < m_vecIObject.size(); i++)
+		m_vecIObject[i]->Update(duration);
+	//for (int i = 0; i < m_vecObject.size(); i++)
+	//	m_vecObject[i]->Update(duration);
+	//GenerateContacts();
+	//resolver.resolveContacts(cData.contactArray, cData.contactCount, duration);
 }
 
+void CObjectManager::UpdateLand(float duration)
+{
+	for (int i = 0; i < m_vecPObject.size(); i++)
+	{
+		m_vecPObject[i]->UpdateLand(duration);
+		m_vecPObject[i]->Update(duration);
+	}
+}
+
+void CObjectManager::Update()
+{
+	for (int hittee = 0; hittee < m_vecPObject.size(); hittee++)
+	{
+		for (int hitter = 0; hitter < m_vecPObject.size(); hitter++)
+		{
+			if (hittee >= hitter)
+				continue;
+			//m_vecPObject[hittee]->CollisionOtherObject(m_vecPObject[hitter]);
+			m_vecPObject[hittee]->Collision3D(m_vecPObject[hitter]);
+		}
+	}
+
+	// OBB TEST
+	//for (int i = 0; i < m_vecBox.size(); i++)
+	//	for (int j = 0; j < m_vecGimmick.size(); j++)
+	//	{
+	//		m_vecBox[i]->hasIntersected(m_vecGimmick[j]);
+	//	}
+	//for (int i = 0; i < m_vecBox.size(); i++)
+	//	for (int j = 0; j < m_vecIObject.size(); j++)
+	//	{
+	//		m_vecBox[i]->hasIntersected(m_vecIObject[j]);
+	//	}
+	//for (int i = 0; i < m_vecIObject.size(); i++)
+	//{
+	//	m_vecIObject[i]->Update();
+	//}
+}
+
+void CObjectManager::Render()
+{
+	// << mapTest
+	if (g_gameManager->GetGridMapMode())
+	{
+		multimap<vector<IObject*>, bool>::iterator it;
+		for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+		{
+			if (it->second == false)
+			{
+				// cout << "notRender" << endl;
+				continue;
+			}
+
+			for (int i = 0; i < it->first.size(); i++)
+				it->first[i]->Render();
+		}
+	}
+	// >> mapTest
+
+	for (int i = 0; i < m_vecObject.size(); i++)
+		m_vecObject[i]->Render();
+
+	//for (int i = 0; i < m_vecIObject.size(); i++)
+	//{
+	//	m_vecIObject[i]->Render();
+	//   }
+	//for (int i = 0; i < m_vecPObject.size(); i++)
+	//	m_vecPObject[i]->Render();
+	//for (int i = 0; i < m_OBB.size(); i++)
+	//{
+	//	m_OBB[i]->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
+	//}
+}
+
+void CObjectManager::RenderOBBBox()
+{
+	for (int i = 0; i < m_vecOBBBox.size(); i++)
+		m_vecOBBBox[i]->Render();
+}
+
+void CObjectManager::Destroy()
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+		m_vecObject[i]->Release();
+
+	// Integration Object?
+	for (int i = 0; i < m_vecIObject.size(); i++)
+		m_vecIObject[i]->Release();
+
+	m_vecObject.clear();
+	m_vecIObject.clear();
+}
+
+// YS CODE... MAP TEST
 void CObjectManager::AddMap()
 {
 	m_mapObject.insert(pair<vector<IObject*>, bool>(m_vecIObject, false));
@@ -242,7 +367,7 @@ void CObjectManager::UpdateNewMap(CFrustum * frustum)
 	}
 	else
 	{
-		if (m_thread->joinable()) 
+		if (m_thread->joinable())
 			m_thread->join();
 
 		m_thread = NULL;
@@ -282,64 +407,47 @@ void CObjectManager::Thread_CalcNewMap()
 	//LeaveCriticalSection(&m_cs);
 }
 
-void CObjectManager::Destroy()
+// MJ Code...
+COBB * CObjectManager::GetvecOBB()
 {
-	for (int i = 0; i < m_vecObject.size(); i++)
-		m_vecObject[i]->Release();
-
-	for (int i = 0; i < m_vecIObject.size(); i++)
-		m_vecIObject[i]->Release();
-
-	m_vecObject.clear();
-	m_vecIObject.clear();
+	for (int i = 0; i < m_vecBox.size(); ++i)
+		return	m_vecBox[i]->GetOBB();
 }
 
-void CObjectManager::Update(float duration)
+void CObjectManager::SetScale(float scale)
 {
-	for (int i = 0; i < m_vecIObject.size(); i++)
-		m_vecIObject[i]->Update(duration);
-	//for (int i = 0; i < m_vecObject.size(); i++)
-	//	m_vecObject[i]->Update(duration);
-	//GenerateContacts();
-	//resolver.resolveContacts(cData.contactArray, cData.contactCount, duration);
+	m_vScale = scale;
 }
 
-//void CObjectManager::Update(float duration, CHeight* pMap)
+float CObjectManager::GetScale()
+{
+	return m_vScale;
+}
+
+void CObjectManager::AddTileOBB(COBB* OBBbox)
+{
+	m_OBB.push_back(OBBbox);
+}
+
+COBB* CObjectManager::GetTileOBB()
+{
+	for(int i =0 ; i < m_OBB.size() ; ++i)
+	 return m_OBB[i];
+}
+
+/// Delete Later...
+//void CObjectManager::GenerateContacts()
 //{
-//	for (int i = 0; i < m_vecObject.size(); i++)
-//		m_vecObject[i]->Update(duration , pMap);
+//	CollisionPlane plane;
+//	plane.direction = D3DXVECTOR3(0, 1, 0);
+//	plane.offset = 0;
+//	cData.reset(maxContacts);
+//	cData.friction = 0.9f;
+//	cData.restitution = 0.6f;
+//	cData.tolerance = 0.1f;
+//
 //}
-
-//void CObjectManager::Update3D(float duration)
-//{
-//	for (int i = 0; i < m_vecObject.size(); i++)
-//		m_vecObject[i]->Update3D(duration);
-//}
-
-void CObjectManager::UpdateLand(float duration)
-{
-	for (int i = 0; i < m_vecPObject.size(); i++)
-	{
-		m_vecPObject[i]->UpdateLand(duration);
-		m_vecPObject[i]->Update(duration);
-	}
-}
-
-void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
-{
-	vector<bool> vecIsPick;
-	vector<D3DXVECTOR3> vecVPos;
-	//for (int i = 0; i < m_vecObject.size(); i++)
-	//{
-	//	m_vecObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
-	//}
-	for (int i = 0; i < m_vecPObject.size(); i++)
-	{
-		m_vecPObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
-	}
-	Update_PickCheck(vecIsPick, vecVPos);
-}
-
+// Collide
 //void CObjectManager::GenerateContacts()
 //{
 //	for (int i = 0; i < m_vecPObject.size(); i++)
@@ -347,7 +455,6 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 //		m_vecPObject[i]->GenerateContacts();
 //	}
 //}
-
 //void CObjectManager::Collide(float duration)
 //{
 //	for (int hittee = 0; hittee < m_vecObject.size(); hittee++)
@@ -374,7 +481,6 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 //		}
 //	}
 //}
-
 //void CObjectManager::HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestObjCollision & theCollision)
 //{
 //	float changeInTime = timeIncrement;
@@ -456,146 +562,13 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 //		m_vecObject[secondobject]->Update(changeInTime);
 //	}
 //}
-
-void CObjectManager::Update()
-{
-	for (int hittee = 0; hittee < m_vecPObject.size(); hittee++)
-	{
-		for (int hitter = 0; hitter < m_vecPObject.size(); hitter++)
-		{
-			if (hittee >= hitter)
-				continue;
-			//m_vecPObject[hittee]->CollisionOtherObject(m_vecPObject[hitter]);
-			m_vecPObject[hittee]->Collision3D(m_vecPObject[hitter]);
-		}
-	}
-
-	// OBB TEST
-	//for (int i = 0; i < m_vecBox.size(); i++)
-	//	for (int j = 0; j < m_vecGimmick.size(); j++)
-	//	{
-	//		m_vecBox[i]->hasIntersected(m_vecGimmick[j]);
-	//	}
-
-	//for (int i = 0; i < m_vecBox.size(); i++)
-	//	for (int j = 0; j < m_vecIObject.size(); j++)
-	//	{
-	//		m_vecBox[i]->hasIntersected(m_vecIObject[j]);
-	//	}
-	//for (int i = 0; i < m_vecIObject.size(); i++)
-	//{
-	//	m_vecIObject[i]->Update();
-	//}
-}
-
-vector<CObject*> CObjectManager::GetVecObject()
-{
-	return m_vecObject;
-}
-
-void CObjectManager::AddTileOBB(COBB* OBBbox)
-{
-	m_OBB.push_back(OBBbox);
-}
-
-void CObjectManager::CollideOBBTEST()
-{
-	
-}
-
-void CObjectManager::Render()
-{
-	// << mapTest
-	if (g_gameManager->GetGridMapMode())
-	{
-		multimap<vector<IObject*>, bool>::iterator it;
-		for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
-		{
-			if (it->second == false)
-			{
-				// cout << "notRender" << endl;
-				continue;
-			}
-
-			for (int i = 0; i < it->first.size(); i++)
-				it->first[i]->Render();
-		}
-	}
-	// >> mapTest
-
-	for (int i = 0; i < m_vecIObject.size(); i++)
-	{
-		m_vecIObject[i]->Render();
-    }
-
-	for (int i = 0; i < m_vecObject.size(); i++)
-	{
-		m_vecObject[i]->Render();
-	}
-
-	//for (int i = 0; i < m_vecPObject.size(); i++)
-	//	m_vecPObject[i]->Render();
-
-	//for (int i = 0; i < m_OBB.size(); i++)
-	//{
-	//	m_OBB[i]->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
-	//}
-}
-
-void CObjectManager::RenderOBBBox()
-{
-	for (int i = 0; i < m_vecOBBBox.size(); i++)
-	{
-		m_vecOBBBox[i]->Render();
-	}
-}
-
-vector<IObject*> CObjectManager::GetVecIObject()
-{
-	return m_vecIObject;
-}
-
-vector<PObject*> CObjectManager::GetVecPObejct()
-{
-	return m_vecPObject;
-}
-
-COBB* CObjectManager::GetTileOBB()
-{
-	for(int i =0 ; i < m_OBB.size() ; ++i)
-	 return m_OBB[i];
-}
-
-void CObjectManager::Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos)
+//void CObjectManager::Update(float duration, CHeight* pMap)
 //{
-//	int index = 0;
-//	for (int i = 1; i < m_vecObject.size(); i++)
-//	{
-//		if (vecIsPick[i] == false)
-//			continue;
-//		else
-//		{
-//			if (vecVPos[index].x >= vecVPos[i].x || vecVPos[index].y >= vecVPos[i].y || vecVPos[index].z >= vecVPos[i].z)
-//			{
-//				m_vecObject[index]->SetPickState(false);
-//				index = i;
-//			}
-//		} // >> : else
-//	} // >> : for
+//	for (int i = 0; i < m_vecObject.size(); i++)
+//		m_vecObject[i]->Update(duration , pMap);
 //}
-{
-	int index = 0;
-	for (int i = 1; i < m_vecPObject.size(); i++)
-	{
-		if (vecIsPick[i] == false)
-			continue;
-		else
-		{
-			if (vecVPos[index].x >= vecVPos[i].x || vecVPos[index].y >= vecVPos[i].y || vecVPos[index].z >= vecVPos[i].z)
-			{
-				m_vecPObject[index]->SetPickState(false);
-				index = i;
-			}
-		} // >> : else
-	} // >> : for
-}
+//void CObjectManager::Update3D(float duration)
+//{
+//	for (int i = 0; i < m_vecObject.size(); i++)
+//		m_vecObject[i]->Update3D(duration);
+//}
