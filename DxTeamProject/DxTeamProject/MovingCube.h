@@ -19,8 +19,6 @@ private:
 	float startpos , endpos; // °Å¸® ?
 	D3DXVECTOR3 m_vPosition;
 
-	
-
 	//D3DXMATRIXA16 matWorld;
 	D3DXMATRIXA16 matS, matT, matR;
 	D3DXVECTOR3 m_vMin, m_vMax;
@@ -30,7 +28,6 @@ public:
 	void Update();
 
 	void Render();
-
 
 	
 };

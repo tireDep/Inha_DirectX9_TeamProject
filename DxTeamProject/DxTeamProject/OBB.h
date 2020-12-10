@@ -16,6 +16,7 @@ private:
 	vector<ST_PC_VERTEX> m_vOBBLineVertex; // OBB Box Line
 	D3DXVECTOR3			 m_vCenterPos;
 	D3DXVECTOR3			 m_vAxisDir[3];
+	float			 m_fAxisLen[3];
 	///
 	//D3DXMATRIXA16 m_matWorldTM;
 
@@ -23,6 +24,7 @@ private:
 public:
 	void Setup(CObject & object);
 	void Setup(CAllocateHierarchy & ah);
+	void SetupMesh(D3DXVECTOR3 &vMin, D3DXVECTOR3 &vMax ,float cubesize);
 	void Update(D3DXMATRIXA16* pmatWorld);
 	static bool IsCollision(COBB * pOBB1, COBB* pOBB2);
 	bool IsCollision(COBB * otherOBB);

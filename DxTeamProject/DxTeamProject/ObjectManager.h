@@ -33,7 +33,7 @@ private:
 
 	// OBB TEST
 	vector<CGimmick*> m_vecGimmick;
-	vector<CBox*> m_vecBox;
+	
 
 	// >> mapTest
 	float m_vScale;
@@ -43,13 +43,15 @@ private:
 	CRITICAL_SECTION m_cs;
 	bool m_isThreadRun;
 	bool m_IsIn;
-
+	vector<CBox*> m_vecBox;
 	//collide
 	//const static unsigned maxContacts = 256;
 	//Contact contacts[maxContacts];
 	//CollisionData cData;
 	//ContactResolver resolver;
 public:
+	COBB* GetvecOBB();
+
 	void AddObject(CObject* pObject);
 	void RemoveObject(CObject* pObject);
 
