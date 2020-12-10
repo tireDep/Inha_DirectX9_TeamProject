@@ -75,8 +75,8 @@ void CColliderObject::Setup(D3DXVECTOR3 position)
 		m_vecVertex[i].isPicked = false;
 	}
 
-	m_pOBB = new COBB;
-	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11],cubeSize);
+	/*m_pOBB = new COBB;
+	m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11],cubeSize);*/
 	m_color = WHITE;
 }
 
@@ -87,8 +87,8 @@ void CColliderObject::Update(D3DXCOLOR c)
 	D3DXMatrixTranslation(&m_matWorldTM, m_vCPosition.x,
 		m_vCPosition.y, m_vCPosition.z);
 
-	if (m_pOBB)
-		m_pOBB->Update(&m_matWorldTM);
+	//if (m_pOBB)
+	//	m_pOBB->Update(&m_matWorldTM);
 
 	for (unsigned int i = 0; i < m_vecVertex.size(); ++i)
 	{
@@ -105,8 +105,8 @@ void CColliderObject::Render()
 	{
 		if (m_vecVertex[i].isPicked == true)
 		{
-			if (m_pOBB)
-				m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
+			/*if (m_pOBB)
+				m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));*/
 
 		}
 	}

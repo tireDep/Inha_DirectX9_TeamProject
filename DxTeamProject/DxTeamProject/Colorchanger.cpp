@@ -3,10 +3,7 @@
 #include "MeshTile.h"
 #include "OBB.h"
 Color_changer::Color_changer()
-	:m_pMesh(NULL)
-	, m_adjBuffer(NULL)
-	, m_numMtrls(0)
-	, m_position(0, 0, 0)
+	:m_position(0, 0, 0)
 	, m_pMeshBeam(NULL)
 	, length(0)
 	, m_fHitLength(50)
@@ -22,10 +19,7 @@ Color_changer::Color_changer()
 
 Color_changer::~Color_changer()
 {
-	SafeDelete(m_pOBB);
-	SafeRelease(m_pMesh);
-	SafeRelease(m_pMeshBeam);
-	SafeRelease(m_adjBuffer);
+
 
 }
 
@@ -43,8 +37,8 @@ void Color_changer::Setup(string folder, string file)
 		D3DXComputeBoundingBox(pVertices, m_pMeshBeam->GetNumVertices(), m_pMeshBeam->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
 		m_pMeshBeam->UnlockVertexBuffer();
 
-		m_pOBB = new COBB;
-		m_pOBB->SetupMesh(m_vMin , m_vMax , 0.5f);
+	/*	m_pOBB = new COBB;
+		m_pOBB->SetUpXFile(m_vMin , m_vMax);*/
 
 	
 	}
@@ -75,6 +69,12 @@ void Color_changer::Setup(string folder, string file)
 		}
 	}
 	delete xfile;
+
+	m_pOBB = new COBB;
+	m_pOBB->Setup(*this);
+	g_pObjectManager->AddOBBbox(m_pOBB);
+	g_pObjectManager->AddGimmick(this);
+
 }
 
 void Color_changer::Update()
@@ -101,7 +101,7 @@ void Color_changer::Update()
 	BeamWorld = matS * matT * matR;
 	
 	
-	m_pOBB->Update(&BeamWorld);
+	//m_pOBB->Update(&BeamWorld);
 }
 
 void Color_changer::Render()
@@ -140,38 +140,38 @@ void Color_changer::Render()
 }
 
 
-
-bool Color_changer::RayCheck(MeshTile& meshtile)
-{
-	BOOL Hit = false;
-	DWORD FaceIndex;
-	float U, V;
-	float Dist;
-	D3DXVECTOR3 rayOrigin = m_position;
-	rayOrigin.x -= meshtile.GetMatWorld()._41;
-	rayOrigin.y -= meshtile.GetMatWorld()._42;
-	rayOrigin.z -= meshtile.GetMatWorld()._43;
-	D3DXVECTOR3 m_direction = D3DXVECTOR3(1, 0, 0);
-	D3DXIntersect(meshtile.GetMesh(), &rayOrigin, &m_direction,
-		&Hit, &FaceIndex, &U, &V, &Dist, NULL, NULL);
-	if (Hit)
-	{
-		/*m_stMtlSphere2.Ambient = YELLOW;
-		m_stMtlSphere2.Diffuse = YELLOW;
-		m_stMtlSphere2.Specular = YELLOW;*/
-		
-		return true;
-	}
-	else
-	{
-		/*m_stMtlSphere2.Ambient = RED;
-		m_stMtlSphere2.Diffuse = RED;
-		m_stMtlSphere2.Specular = RED;*/
-		return false;
-
-	}
-
-}
+//
+//bool Color_changer::RayCheck(MeshTile& meshtile)
+//{
+//	BOOL Hit = false;
+//	DWORD FaceIndex;
+//	float U, V;
+//	float Dist;
+//	D3DXVECTOR3 rayOrigin = m_position;
+//	rayOrigin.x -= meshtile.GetMatWorld()._41;
+//	rayOrigin.y -= meshtile.GetMatWorld()._42;
+//	rayOrigin.z -= meshtile.GetMatWorld()._43;
+//	D3DXVECTOR3 m_direction = D3DXVECTOR3(1, 0, 0);
+//	D3DXIntersect(meshtile.GetMesh(), &rayOrigin, &m_direction,
+//		&Hit, &FaceIndex, &U, &V, &Dist, NULL, NULL);
+//	if (Hit)
+//	{
+//		/*m_stMtlSphere2.Ambient = YELLOW;
+//		m_stMtlSphere2.Diffuse = YELLOW;
+//		m_stMtlSphere2.Specular = YELLOW;*/
+//		
+//		return true;
+//	}
+//	else
+//	{
+//		/*m_stMtlSphere2.Ambient = RED;
+//		m_stMtlSphere2.Diffuse = RED;
+//		m_stMtlSphere2.Specular = RED;*/
+//		return false;
+//
+//	}
+//
+//}
 
 void Color_changer::SetColor(D3DXCOLOR color)
 {

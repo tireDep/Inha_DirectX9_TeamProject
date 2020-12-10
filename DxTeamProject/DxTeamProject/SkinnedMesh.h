@@ -1,7 +1,7 @@
 #pragma once
 #include "AllocateHierarchy.h"
 
-class CPSOBB;
+class COBB;
 
 class CSkinnedMesh
 {
@@ -24,7 +24,7 @@ protected:
 	Synthesize(D3DXVECTOR3, m_vMax, Max);
 	// << hitBox_OBB
 
-	CPSOBB* m_pOBB;
+	COBB* m_pOBB;
 	D3DXMATRIXA16 m_matworldTM;
 public:
 	CSkinnedMesh();
@@ -43,4 +43,5 @@ public:
 
 	void SetTransform(D3DXMATRIXA16 * pmat); // << 월드 매트릭스 설정
 };
+
 

@@ -1,8 +1,6 @@
 #pragma once
 #include "Object.h"
 #include "OBB.h"
-// OBB TEST
-#include "PSOBB.h"
 
 class IObject : public CObject
 {
@@ -29,7 +27,7 @@ protected:
 	IObject();
 
 	// OBB TEST
-	CPSOBB* m_pOBB;
+	COBB* m_pOBB;
 public:
 	virtual ~IObject();
 	virtual void Release();
@@ -40,6 +38,6 @@ public:
 	virtual void Render() = 0;
 	virtual string GetName() { return string(); }
 
-	virtual CPSOBB* GetOBB() { return m_pOBB; }
+	virtual COBB* GetOBB() { return m_pOBB; }
 	//static void CreateObject(const ST_MapData& mapData);
 };

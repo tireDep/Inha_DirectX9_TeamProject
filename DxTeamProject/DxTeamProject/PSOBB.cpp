@@ -639,11 +639,3 @@ void CPSOBB::Render()
 	g_pD3DDevice->DrawPrimitiveUP(D3DPT_LINELIST, m_vOBBLineVertex.size() / 2, &m_vOBBLineVertex[0], sizeof(ST_PC_VERTEX));
 }
 
-void CPSOBB::Render(D3DXMATRIXA16 * pmatWorld)
-{
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-	g_pD3DDevice->SetTexture(0, NULL);
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, pmatWorld);
-	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_LINELIST, m_vOBBLineVertex.size() / 2, &m_vOBBLineVertex[0], sizeof(ST_PC_VERTEX));
-}

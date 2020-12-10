@@ -94,7 +94,7 @@ void CBox::Setup(const ST_MapData & mapData)
 	//collisionbox.calculateInternals();
 
 	// OBB TEST
-	m_pOBB = new CPSOBB;
+	m_pOBB = new COBB;
 	m_pOBB->Setup(*this);
 	g_pObjectManager->AddOBBbox(m_pOBB);
 	g_pObjectManager->AddBox(this);

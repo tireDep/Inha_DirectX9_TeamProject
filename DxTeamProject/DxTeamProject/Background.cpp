@@ -86,7 +86,7 @@ void CBackground::Setup(ST_MapData setData)
 	m_matWorld = matS * matR * matT;
 
 	// OBB Test
-	m_pOBB = new CPSOBB;
+	m_pOBB = new COBB;
 	m_pOBB->Setup(*this);
 	g_pObjectManager->AddOBBbox(m_pOBB);
 }

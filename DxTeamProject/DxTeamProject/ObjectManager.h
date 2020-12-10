@@ -28,7 +28,7 @@ private:
 	SingleTone(CObjectManager);
 	vector<CObject *> m_vecObject;
 	vector<IObject *> m_vecIObject;
-	vector<CPSOBB *> m_vecOBBBox;
+	vector<COBB *> m_vecOBBBox;
 	vector<PObject*> m_vecPObject;
 
 	// OBB TEST
@@ -63,8 +63,8 @@ public:
 	void SetScale(float scale);
 	float GetScale();
 	
-	void AddOBBbox(CPSOBB* OBBBox);
-	void RemoveObject(CPSOBB* OBBBox);
+	void AddOBBbox(COBB* OBBBox);
+	void RemoveObject(COBB* OBBBox);
 	// OBB TEST
 	void AddGimmick(CGimmick* Gimmick);
 	void RemoveObject(CGimmick* Gimmick);

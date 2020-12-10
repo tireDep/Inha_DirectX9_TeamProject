@@ -2,25 +2,20 @@
 #include "MovingCube.h"
 #include "OBB.h"
 
-MovingCube::MovingCube() :m_pMesh(NULL)
-, m_adjBuffer(NULL)
-, m_numMtrls(0)
-, IndexNum(1)
-, m_position(0, 0, 0)
+MovingCube::MovingCube()
+: IndexNum(1)
+, m_vPosition(0, 0, 0)
 , istrue(false)
 , speed(0.005)
 , startpos(0)
 , endpos(8)
-, m_pOBB(NULL)
 {
 }
 
 
 MovingCube::~MovingCube()
 {
-	SafeDelete(m_pOBB);
-	SafeRelease(m_pMesh);
-	SafeRelease(m_adjBuffer);
+	
 }
 
 void MovingCube::Setup(string folder, string file)
@@ -32,8 +27,6 @@ void MovingCube::Setup(string folder, string file)
 		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
 		return;
 	}
-
-	
 
 	m_pMesh = xfile->pMesh;
 	m_adjBuffer = xfile->adjBuffer;
@@ -54,15 +47,16 @@ void MovingCube::Setup(string folder, string file)
 
 	D3DXVECTOR3* pVertices;
 
-
 	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
 	D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
 	m_pMesh->UnlockVertexBuffer();
 
-	m_pOBB = new COBB;
-	m_pOBB->SetUpXFile(m_vMin, m_vMax);
-
 	delete xfile;
+
+	m_pOBB = new COBB;
+	m_pOBB->Setup(*this);
+	g_pObjectManager->AddOBBbox(m_pOBB);
+	g_pObjectManager->AddGimmick(this);
 
 }
 
@@ -70,55 +64,55 @@ void MovingCube::Update()
 {
 	if (IndexNum == 0 && istrue == false)
 	{
-		m_position.y += speed;
-		if (m_position.y > endpos)
+		m_vPosition.y += speed;
+		if (m_vPosition.y > endpos)
 			istrue = true;
 	}
 	else if (IndexNum == 0 && istrue == true)
 	{
-		m_position.y -= speed;
-		if (m_position.y < startpos)
+		m_vPosition.y -= speed;
+		if (m_vPosition.y < startpos)
 			istrue = false;
 	}
 
 	if (IndexNum == 1 && istrue == false)
 	{
-		m_position.x += speed;
-		if (m_position.x > endpos)
+		m_vPosition.x += speed;
+		if (m_vPosition.x > endpos)
 			istrue = true;
 	}
 	else if (IndexNum == 1 && istrue == true)
 	{
-		m_position.x -= speed;
-		if (m_position.x < startpos)
+		m_vPosition.x -= speed;
+		if (m_vPosition.x < startpos)
 			istrue = false;
 	}
 
 
 	if (IndexNum == 2 && istrue == false)
 	{
-		m_position.z += speed;
-		if (m_position.z > endpos)
+		m_vPosition.z += speed;
+		if (m_vPosition.z > endpos)
 			istrue = true;
 	}
 	else if (IndexNum == 2 && istrue == true)
 	{
-		m_position.z -= speed;
-		if (m_position.z < startpos)
+		m_vPosition.z -= speed;
+		if (m_vPosition.z < startpos)
 			istrue = false;
 	}
 
-	m_pOBB->Update(&matWorld);
+	D3DXMatrixRotationY(&matR, 0);
+	D3DXMatrixScaling(&matS, 0.3, 0.3, 0.3);
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	m_matWorld = matS * matR * matT;
+
+	m_pOBB->Update(&m_matWorld);
 }
 
 void MovingCube::Render()
 {
-	D3DXMatrixRotationY(&matR, 0);
-	D3DXMatrixScaling(&matS, 0.3, 0.3, 0.3);
-	D3DXMatrixTranslation(&matT, m_position.x, m_position.y, m_position.z);
-	matWorld = matS * matR * matT;
-
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 
 	if (m_pMesh == NULL)
 		return;
@@ -127,10 +121,9 @@ void MovingCube::Render()
 		if (m_vecTextures[i] != 0)
 			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
 		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+		m_pMesh->DrawSubset(i);
 	}
 
-	m_pMesh->DrawSubset(0);
-	m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 255, 0));
 	g_pD3DDevice->SetTexture(0, NULL);
 
 }
