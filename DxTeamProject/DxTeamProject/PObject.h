@@ -42,7 +42,7 @@ protected:
 	Synthesize(float, m_fElasticity, Elasticity); // elasticity
 
 	// OBB TEST
-	CPSOBB* m_pOBB;
+	COBB* m_pOBB;
 public:
 	PObject();
 	~PObject();

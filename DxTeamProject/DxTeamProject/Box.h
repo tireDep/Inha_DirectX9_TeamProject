@@ -35,7 +35,7 @@ public:
 	bool hasIntersected(CGimmick * otherIObject);
 	
 	// OBB TEST
-	CPSOBB* GetOBB() { return m_pOBB; }
+	COBB* GetOBB() { return m_pOBB; }
 	//void Update(float duration);
 	//virtual void GenerateContacts();
 	//void CollideUpdate(float duration);

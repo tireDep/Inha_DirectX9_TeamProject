@@ -111,19 +111,19 @@ void CObjectManager::RemoveObject(PObject * pObject)
 	}
 }
 
-void CObjectManager::AddOBBbox(CPSOBB * OBBBox)
+void CObjectManager::AddOBBbox(COBB * OBBBox)
 {
 	m_vecOBBBox.push_back(OBBBox);
 }
 
-void CObjectManager::RemoveObject(CPSOBB * OBBBox)
+void CObjectManager::RemoveObject(COBB * OBBBox)
 {
-	vector<CPSOBB*>::iterator it;
+	vector<COBB*>::iterator it;
 	for (it = m_vecOBBBox.begin(); it != m_vecOBBBox.end();)
 	{
 		if (*it == OBBBox)
 		{
-			CPSOBB* temp = *it;
+			COBB* temp = *it;
 			it = m_vecOBBBox.erase(it);
 			delete temp;
 			return;
@@ -461,17 +461,19 @@ void CObjectManager::Update()
 			m_vecPObject[hittee]->Collision3D(m_vecPObject[hitter]);
 		}
 	}
+
 	// OBB TEST
-	//for (int i = 0; i < m_vecBox.size(); i++)
-	//	for (int j = 0; j < m_vecGimmick.size(); j++)
-	//	{
-	//		m_vecBox[i]->hasIntersected(m_vecGimmick[j]);
-	//	}
 	for (int i = 0; i < m_vecBox.size(); i++)
-		for (int j = 0; j < m_vecIObject.size(); j++)
+		for (int j = 0; j < m_vecGimmick.size(); j++)
 		{
- 			m_vecBox[i]->hasIntersected(m_vecIObject[j]);
+			m_vecBox[i]->hasIntersected(m_vecGimmick[j]);
 		}
+
+	//for (int i = 0; i < m_vecBox.size(); i++)
+	//	for (int j = 0; j < m_vecIObject.size(); j++)
+	//	{
+ //			m_vecBox[i]->hasIntersected(m_vecIObject[j]);
+	//	}
 	//for (int i = 0; i < m_vecIObject.size(); i++)
 	//{
 	//	m_vecIObject[i]->Update();

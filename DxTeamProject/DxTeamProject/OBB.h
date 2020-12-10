@@ -1,25 +1,32 @@
 #pragma once
 
+class CAllocateHierarchy;
+
 class COBB
 {
 public:
 	COBB();
 	~COBB();
 private:
-	D3DXVECTOR3 m_OriCenterPos;
-	D3DXVECTOR3 m_vOriAxisDir[3];		//축
-	D3DXVECTOR3 m_vCenterPos;
-	vector<ST_PC_VERTEX> m_vecVertex;
-	D3DXVECTOR3 m_vAxisDir[3];			//방향
-	float m_fAxisLen[3];				//축의 길이
-	float m_fAxisHalfLen[3];
+	// get set later
+	D3DXVECTOR3			 m_vOriCenterPos;		// center
+	D3DXVECTOR3			 m_vOriAxisDir[3];	// axis	
+	float				 m_fAxisHalfLen[3];	// distance of center to OBB surface
+	D3DXMATRIXA16		 m_matWorld;			// matrix
+	vector<ST_PC_VERTEX> m_vOBBLineVertex; // OBB Box Line
+	D3DXVECTOR3			 m_vCenterPos;
+	D3DXVECTOR3			 m_vAxisDir[3];
+	///
+	//D3DXMATRIXA16 m_matWorldTM;
+
+	//float m_fAxisLen[3];		
 public:
-	D3DXMATRIXA16 m_matWorldTM;
-	void SetupCube(ST_PC_VERTEX v1, ST_PC_VERTEX v2,float CubeSize);
-	void SetUpXFile(D3DXVECTOR3 &vMin, D3DXVECTOR3 &vMax);
-	void Update(D3DXMATRIXA16 *pmatWorld);
-	void SetupTile(D3DXVECTOR3& vMin, D3DXVECTOR3& vMax, D3DXVECTOR3 xfileY ,float x, float z);
-	void SetupMesh(D3DXVECTOR3 &vMin, D3DXVECTOR3 &vMax ,float cubesize);
-	static bool IsCollision(COBB * pOBB1, COBB* pOBB);
-	void OBBBOX_RENDER(D3DXCOLOR c);
+	void Setup(CObject & object);
+	void Setup(CAllocateHierarchy & ah);
+	void Update(D3DXMATRIXA16* pmatWorld);
+	static bool IsCollision(COBB * pOBB1, COBB* pOBB2);
+	bool IsCollision(COBB * otherOBB);
+	void Render();
+	void Render(D3DXMATRIXA16* pmatWorld);
+	D3DXVECTOR3 GetCenter() { return m_vCenterPos; }
 };

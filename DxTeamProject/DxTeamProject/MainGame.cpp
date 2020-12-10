@@ -142,6 +142,7 @@ void CMainGame::Setup()
 
 	m_pMovingCube = new MovingCube;
 	m_pMovingCube->Setup("Resource/XFile/Gimmick/MovingCube", "moving_cube.X");
+
 	//m_pOrb = new COrb;
 	//m_pOrb->Setup();
 
@@ -188,6 +189,8 @@ void CMainGame::Setup()
 	//m_pSphere->Setup();
 	//m_pBox = new CBox();
 	//m_pBox->Setup();
+
+	
 
 	g_pEventManager->AddListener(g_gameManager);
 	g_pEventManager->AddListener(m_pCamera);
@@ -355,11 +358,11 @@ void CMainGame::Update()
 	if (m_pMovingCube)
 		m_pMovingCube->Update();
 
-	for(int i =0 ; i < m_pMeshTile.size(); ++i)
+	/*for(int i =0 ; i < m_pMeshTile.size(); ++i)
 	if (m_pMeshTile[i])
-		m_pMeshTile[i]->Update();
+		m_pMeshTile[i]->Update();*/
 
-	for (int i = 0; i < m_pMeshTile.size(); ++i)
+	/*for (int i = 0; i < m_pMeshTile.size(); ++i)
 	{
 		if (COBB::IsCollision(m_pChanger->GetOBB(), m_pMeshTile[i]->GetOBB()) == true)
 		{
@@ -385,17 +388,22 @@ void CMainGame::Update()
 	else
 	{
 		m_pGimmick_Switch->SetBool(false);
-	}
+	}*/
 
 	if (m_pGimmick_BreakableWall[0])
 		m_pGimmick_BreakableWall[0]->Update();
 	if (m_pGimmick_BreakableWall[1])
 		m_pGimmick_BreakableWall[1]->Update();
 
+
+	//if (m_pGimmick_Switch)
+	//	m_pGimmick_Switch->Update();
+
 	if (m_pBook)
 		m_pBook->Update(g_pTimeManager->GetElapsedTime());
 	if (m_pGimmick_Switch)
 		m_pGimmick_Switch->Update();
+
 }
 
 void CMainGame::Render()

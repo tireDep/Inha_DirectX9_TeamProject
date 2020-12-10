@@ -34,8 +34,8 @@ void CSwitch::Setup(string folder, string file)
 		D3DXComputeBoundingBox(pVertices, m_pBox->GetNumVertices(), m_pBox->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
 		m_pBox->UnlockVertexBuffer();
 
-		m_pOBB = new COBB;
-		m_pOBB->SetupMesh(m_vMin, m_vMax, 1);
+		/*m_pOBB = new COBB;
+		m_pOBB->Setup(this);*/
 
 	}
 	ST_XFile* xfile = new ST_XFile;
@@ -72,7 +72,7 @@ void CSwitch::Update()
 	D3DXMatrixTranslation(&matT, m_position.x, m_position.y, m_position.z);
 	collWorld = matS *matT;
 
-	m_pOBB->Update(&collWorld);
+	//m_pOBB->Update(&collWorld);
 	
 }
 
@@ -82,7 +82,7 @@ void CSwitch::Render()
 	
 	{
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &collWorld);
-		m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 255, 0));
+		//m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 255, 0));
 	}
 
 	{

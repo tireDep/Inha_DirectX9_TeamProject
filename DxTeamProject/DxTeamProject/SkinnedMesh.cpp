@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SkinnedMesh.h"
 #include "AllocateHierarchy.h"
-#include "PSOBB.h"
+#include "OBB.h"
 
 CSkinnedMesh::CSkinnedMesh() :
 	m_pRoot(NULL),
@@ -39,7 +39,7 @@ void CSkinnedMesh::SetUp(char * szFolder, char * szFile)
 
 	SetUpBoneMatrixPtrs(m_pRoot);
 
-	m_pOBB = new CPSOBB;
+	m_pOBB = new COBB;
 	m_pOBB->Setup(ah);
 	g_pObjectManager->AddOBBbox(m_pOBB);
 

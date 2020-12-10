@@ -34,8 +34,8 @@ void CBook::Setup()
 
 	delete xfile;
 
-	m_pOBB = new CPSOBB;
-	m_pOBB->Setup(*this);
+	/*m_pOBB = new CPSOBB;
+	m_pOBB->Setup(*this);*/
 	g_pObjectManager->AddOBBbox(m_pOBB);
 }
 
@@ -84,8 +84,8 @@ void CBook::Setup(ST_MapData setData)
 	//m_matWorld = matS * matR * matT;
 
 	// OBB TEST
-	m_pOBB = new CPSOBB;
-	m_pOBB->Setup(*this);
+	//m_pOBB = new CPSOBB;
+	//m_pOBB->Setup(*this);
 	g_pObjectManager->AddOBBbox(m_pOBB);
 }
 
@@ -103,16 +103,17 @@ void CBook::Update(float duration)
 
 	m_matWorld = m_matRot;
 //	m_matWorld = m_matS * m_matRot * m_matT;
-	m_pOBB->Update(&m_matWorld);
+
+	//m_pOBB->Update(&m_matWorld);
 }
 
 bool CBook::hasIntersected(CSkinnedMesh * Character)
 {
-	if (this->m_pOBB->IsCollision(Character->GetOBB()))
+	/*if (this->m_pOBB->IsCollision(Character->GetOBB()))
 	{
 		CObject::Release();
 		return true;
-	}
+	}*/
 	return false;
 }
 

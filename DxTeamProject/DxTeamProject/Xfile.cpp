@@ -67,8 +67,8 @@ void CXfile::Setup()
 	D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
 	m_pMesh->UnlockVertexBuffer();
 
-	m_pOBB = new COBB;
-	m_pOBB->SetUpXFile(m_vMin * 0.01, m_vMax * 0.01);
+	/*m_pOBB = new COBB;
+	m_pOBB->SetUpXFile(m_vMin * 0.01, m_vMax * 0.01);*/
 }
 
 void CXfile::Update()
@@ -80,8 +80,8 @@ void CXfile::Render(D3DXVECTOR3 eye)
 {
 	if (g_pD3DDevice)
 	{
-		if (m_pOBB)
-			m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
+		/*if (m_pOBB)
+			m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));*/
 		
 		D3DXMATRIXA16 matS, matR, matT;
 
