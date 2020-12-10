@@ -9,15 +9,13 @@ protected:
 public:
 	virtual ~CGimmick();
 
-	virtual void Setup() = 0;
-	virtual void Setup(ST_MapData setData) = 0;
-	virtual void Setup_OBB_Box() = 0;
+	virtual void Setup() { }
+	virtual void Setup(ST_MapData setData);
+	virtual void Setup_OBB_Box() { };
 
-	virtual void Update() = 0;
+	virtual void Update() { };
 
-	// virtual void Update(CRay * ray) { IObject::Update(ray); };
-	virtual void Render() = 0;
-	virtual void Render_OBB_Box() { IObject::Render_OBB_Box(); }
+	virtual void Render();
 
 	virtual void SetDiffScale(D3DXVECTOR3 set);
 

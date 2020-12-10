@@ -143,6 +143,9 @@
     <ClInclude Include="Switch.h">
       <Filter>Object\Gimmick</Filter>
     </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Object\Gimmick</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui.cpp">
@@ -228,6 +231,9 @@
       <Filter>Object\Gimmick</Filter>
     </ClCompile>
     <ClCompile Include="Switch.cpp">
+      <Filter>Object\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
       <Filter>Object\Gimmick</Filter>
     </ClCompile>
   </ItemGroup>

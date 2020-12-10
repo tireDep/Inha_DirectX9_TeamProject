@@ -10,6 +10,7 @@
 #include "Gimmick.h"
 #include "RotationBoard.h"
 #include "Switch.h"
+#include "Door.h"
 
 #include "ImguiClass.h"
 
@@ -105,10 +106,11 @@ void CImguiClass::SetVecItem()
 	else if (m_NowLoadType == LoadType::eGimmick)
 	{
 		tempVec.push_back("RotationBoard");		tempObjType.push_back(eG_RotationBoard);
-		tempVec.push_back("BreakWall");			tempObjType.push_back(eG_BreakWall);
-		tempVec.push_back("Door");				tempObjType.push_back(eG_Door);
-		tempVec.push_back("ColorChanger");		tempObjType.push_back(eG_ColorChanger);
 		tempVec.push_back("Switch");			tempObjType.push_back(eG_Switch);
+		tempVec.push_back("Door");				tempObjType.push_back(eG_DoorFrame);
+		tempVec.push_back("ColorChanger");		tempObjType.push_back(eG_ColorChanger);
+		tempVec.push_back("BreakWall");			tempObjType.push_back(eG_BreakWall);
+		tempVec.push_back("MovingCube");		tempObjType.push_back(eG_MovingCube);
 	}
 	
 	m_vecItem = tempVec;
@@ -588,10 +590,9 @@ void CImguiClass::Update_Inspector()
 			ImGui::Separator();
 
 			D3DXVECTOR3 vScale = g_pObjectManager->GetIObject(m_nowSelectindex).GetScale();
+			ObjectType tempType = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType();
 			if (ImGui::InputFloat3("Scale", vScale))
 			{
-				ObjectType tempType = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType();
-
 				switch (tempType)
 				{
 				case eSphere:	case eCylinder:
@@ -600,12 +601,19 @@ void CImguiClass::Update_Inspector()
 				case eSomethingElse:	case eBall:	case eChair:	case eUmbrella:
 				case eSnowman:	case eFlower:	case eInvisibleWall:
 
-				case eG_RotationBoard:	case eG_BreakWall:	case eG_Door:	case eG_ColorChanger:
-				case eG_Switch:	case eG_Razer:	case eG_MovingCube:
+				case eG_RotationBoard:	case eG_BreakWall:	
+				case eG_ColorChanger:	case eG_Switch:		case eG_Razer:		case eG_MovingCube:
 				{
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetDiffScale(vScale);
 				}
 					break;
+
+				case eG_DoorFrame:	case eG_Door:
+				{
+					CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+					temp->SetAnotherScale(vScale);
+				}
+				break;
 
 				default:
 				{
@@ -617,7 +625,15 @@ void CImguiClass::Update_Inspector()
 
 			D3DXVECTOR3 vRot = g_pObjectManager->GetIObject(m_nowSelectindex).GetRotate();
 			if (ImGui::InputFloat3("Rotate", vRot))
-				g_pObjectManager->GetIObject(m_nowSelectindex).SetRotate(vRot);
+			{
+				if (tempType == ObjectType::eG_DoorFrame || tempType == ObjectType::eG_Door)
+				{
+					CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+					temp->SetAnotherRotation(vRot);
+				}
+				else
+					g_pObjectManager->GetIObject(m_nowSelectindex).SetRotate(vRot);
+			}
 
 			D3DXVECTOR3 vTrans = g_pObjectManager->GetIObject(m_nowSelectindex).GetTranslate();
 			D3DXVECTOR3 temp = vTrans;
@@ -668,7 +684,14 @@ void CImguiClass::Update_Inspector()
 				}
 
 				vTrans = temp;
-				g_pObjectManager->GetIObject(m_nowSelectindex).SetTranslate(vTrans);
+
+				if (tempType == ObjectType::eG_DoorFrame || tempType == ObjectType::eG_Door)
+				{
+					CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+					temp->SetAnotherTranslation(vTrans);
+				}
+				else
+					g_pObjectManager->GetIObject(m_nowSelectindex).SetTranslate(vTrans);
 			}
 
 			ImGui::Separator();

@@ -3,6 +3,16 @@
 #include "ObjectManager.h"
 #include "ImguiClass.h"
 #include "Ray.h"
+#include "RotationBoard.h"
+#include "Switch.h"
+#include "Door.h"
+
+void CObjectManager::SetCopyObject(int index)
+{
+	m_vecObject[m_vecObject.size() - 1]->SetScale(m_vecObject[index]->GetScale());
+	m_vecObject[m_vecObject.size() - 1]->SetRotate(m_vecObject[index]->GetRotate());
+	m_vecObject[m_vecObject.size() - 1]->SetTranslate(m_vecObject[index]->GetTranslate());
+}
 
 void CObjectManager::AddObject(IObject * pObject)
 {
@@ -101,7 +111,23 @@ void CObjectManager::RemoveClickedObj()
 		if (m_vecObject[i]->GetClick())
 		{
 			preIndex = i - 1;
-			RemoveObject(m_vecObject[i]);
+
+			// >>  문은 2개가 1세트
+			if (m_vecObject[i]->GetObjType() == ObjectType::eG_DoorFrame)
+			{
+				RemoveObject(m_vecObject[i]);
+				RemoveObject(m_vecObject[i]);
+			}
+
+			else if (m_vecObject[i]->GetObjType() == ObjectType::eG_Door)
+			{
+				RemoveObject(m_vecObject[i - 1]);
+				RemoveObject(m_vecObject[i - 1]);
+				preIndex -= 1;
+			}
+
+			else
+				RemoveObject(m_vecObject[i]);
 		}
 	}
 
@@ -180,15 +206,19 @@ int CObjectManager::GetSelectIndex()
 
 void CObjectManager::CopyObject()
 {
+	int index = 0;
+	bool isCopy = false;
+	ObjectType objType = ObjectType::eNull;
+
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
 		if (m_vecObject[i]->GetPick())
 		{
+			index = i;
 			SetSelectAllFalse();
+			objType = m_vecObject[i]->GetObjType();
 
 			int indexNum = 0;
-			ObjectType objType = m_vecObject[i]->GetObjType();
-
 			if (objType == ObjectType::eATree || objType == ObjectType::eSTree
 			 || objType == ObjectType::eWTree || objType == ObjectType::eCTree
 			 || objType == ObjectType::eFlower)
@@ -198,10 +228,50 @@ void CObjectManager::CopyObject()
 				num = num[num.length() - 3];
 				indexNum = atoi(num.c_str()) - 1;
 			}
+			else if (objType == ObjectType::eG_Door || objType == ObjectType::eG_DoorFrame)
+			{
+				objType = eG_DoorFrame;
+			}
 
 			IObject::CreateObject(objType, indexNum);
-
 			break;
+		} // << : if
+
+	} // << : for
+
+	if (objType != ObjectType::eNull)
+	{
+		SetCopyObject(index);
+
+		// >> 복사한 물체 속성 받아옴
+		switch (objType)
+		{
+		case eBox:	case eSphere:	case eCylinder:
+			m_vecObject[m_vecObject.size() - 1]->SetColor(m_vecObject[index]->GetColor());
+			break;
+
+		case eG_RotationBoard:
+		{
+			CRotationBoard* temp = dynamic_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(m_vecObject.size() - 1));
+			CRotationBoard* temp2 = dynamic_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(index));
+
+			temp->SetRotation_Axial(temp2->GetRotation_Axial());
+			temp->SetRotationSpeed(temp2->GetRotationSpeed());
 		}
-	}
+		break;
+
+		case eG_DoorFrame:	case eG_Door:
+		{
+			CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_vecObject.size() - 1));
+			CDoor* temp2 = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
+			temp->SetAnotherScale(temp->GetScale());
+			temp->SetAnotherRotation(temp->GetRotate());
+			temp->SetAnotherTranslation(temp->GetTranslate());
+		}
+		break;
+
+		} // << : switch
+
+	} // << : if
+	
 }

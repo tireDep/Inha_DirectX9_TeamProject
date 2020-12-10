@@ -9,11 +9,7 @@ public:
 	CSwitch();
 	~CSwitch();
 
-	virtual void Setup() { }
 	virtual void Setup(ST_MapData setData);
-	virtual void Setup_OBB_Box() {}
-
-	virtual void Update() { }
 	virtual void Render();
 
 	virtual void SetTexture(int index);

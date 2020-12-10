@@ -416,7 +416,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eG_RotationBoard:
 	case eG_BreakWall:
-	case eG_Door:
+	case eG_DoorFrame:
 	case eG_ColorChanger:
 	case eG_Switch:
 	{
@@ -479,11 +479,8 @@ void IObject::CreateObject(ST_MapData& mapData)
 	}
 		break;
 
-	case eG_RotationBoard:
-	case eG_BreakWall:
-	case eG_Door:
-	case eG_ColorChanger:
-	case eG_Switch:
+	case eG_RotationBoard:	case eG_BreakWall:		case eG_DoorFrame:		case eG_Door:
+	case eG_ColorChanger:	case eG_Switch:
 	{
 		CGimmick::CreateGimmick_SaveData(mapData);
 	}
