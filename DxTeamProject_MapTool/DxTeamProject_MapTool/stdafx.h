@@ -120,6 +120,10 @@ struct ST_Gimmick
 	float roationSpeed;
 	int roationAxialIndex;
 	// >> rotation Board
+
+	int conditionIndex;
+	int maxMassIndex;
+	// string 
 };
 
 struct ST_MapData

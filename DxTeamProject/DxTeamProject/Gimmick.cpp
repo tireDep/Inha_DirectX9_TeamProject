@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Gimmick.h"
 #include "RotationBoard.h"
+#include "Switch.h"
+
 CGimmick::CGimmick()
 	//: m_pOBB(NULL)
 {
@@ -32,6 +34,10 @@ void CGimmick::Setup(ST_MapData setData)
 			break;
 
 		case eG_Switch:
+		{
+			CSwitch* cSwitch = new CSwitch;
+			cSwitch->Setup(setData);
+		}
 			break;
 	} // << switch
 }

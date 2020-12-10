@@ -179,6 +179,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Switch.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="toolMain.h" />
   </ItemGroup>
@@ -209,6 +210,7 @@
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RotationBoard.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Switch.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="toolMain.cpp" />
   </ItemGroup>

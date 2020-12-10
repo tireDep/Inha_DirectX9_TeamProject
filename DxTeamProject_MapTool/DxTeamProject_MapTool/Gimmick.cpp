@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "RotationBoard.h"
+#include "Switch.h"
 #include "Gimmick.h"
 
 CGimmick::CGimmick()
@@ -23,17 +24,17 @@ void CGimmick::SetDiffScale(D3DXVECTOR3 set)
 
 void CGimmick::CreateGimmick(const ObjectType& objType)
 {
+	ST_MapData mapData;
+	mapData.vScale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
+	mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+
+	mapData.objType = objType;
+
 	switch (objType)
 	{
 	case eG_RotationBoard:
 	{
-		ST_MapData mapData;
-		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-
-		mapData.objType = objType;
-
 		mapData.strObjName = string("RoataionBoard") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Gimmick/RotationBoard";
 		mapData.strTxtPath = "board.png";
@@ -58,6 +59,19 @@ void CGimmick::CreateGimmick(const ObjectType& objType)
 		break;
 
 	case eG_Switch:
+	{
+		mapData.strObjName = string("Switch") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Gimmick/Switch";
+		mapData.strTxtPath = "cubeworld_texture.tga";
+
+		mapData.strXFilePath = string("Force_switch") + string(".X");
+
+		mapData.gimmickData.roationSpeed = 0.0f;
+		mapData.gimmickData.roationAxialIndex = 0;
+
+		CSwitch* cSwitch = new CSwitch;
+		cSwitch->Setup(mapData);
+	}
 		break;
 	} // << switch
 }
@@ -83,6 +97,10 @@ void CGimmick::CreateGimmick_SaveData(ST_MapData & mapData)
 		break;
 
 	case eG_Switch:
+	{
+		CSwitch* cSwitch = new CSwitch;
+		cSwitch->Setup(mapData);
+	}
 		break;
 	} // << switch
 }

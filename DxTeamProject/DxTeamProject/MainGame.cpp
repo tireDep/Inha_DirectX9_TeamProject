@@ -57,7 +57,7 @@ CMainGame::CMainGame() :
 	m_pMeshTile(NULL),
 	// Gimmick
 	m_pGimmick_RotationBoard(NULL),
-	m_pGimmick_Switch(NULL),
+	// m_pGimmick_Switch(NULL),
 	//
 	m_pBook(NULL),
 	m_pDragon(NULL)
@@ -81,7 +81,7 @@ CMainGame::~CMainGame()
 	SafeDelete(m_pGimmick_Door[0]);
 	SafeDelete(m_pGimmick_Door[1]);
 	SafeDelete(m_pGimmick_RotationBoard);
-	SafeDelete(m_pGimmick_Switch);
+	// SafeDelete(m_pGimmick_Switch);
 	SafeDelete(m_pGimmick_BreakableWall[0]);
 	SafeDelete(m_pGimmick_BreakableWall[1]);
 	//
@@ -115,11 +115,9 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
-
 	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "123456.dat");
-
 #ifdef _DEBUG
-	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "OBBBackgroundTest.dat");
+	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
@@ -169,8 +167,8 @@ void CMainGame::Setup()
 	// m_pGimmick_RotationBoard = new RotationBoard;
 	// m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
 
-	m_pGimmick_Switch = new CSwitch;
-	m_pGimmick_Switch->Setup();
+	// m_pGimmick_Switch = new CSwitch;
+	// m_pGimmick_Switch->Setup();
 
 	m_pGimmick_BreakableWall[0] = new CBreakableWall;
 	m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "standard_wall.X");
@@ -379,18 +377,18 @@ void CMainGame::Update()
 		
 		}
 	}
-	if (m_pGimmick_Switch)
-		m_pGimmick_Switch->Update();
-
-
-	if (COBB::IsCollision(g_pObjectManager->GetvecOBB(), m_pGimmick_Switch->GetOBB2()) == true)
-	{
-		m_pGimmick_Switch->SetBool(true);
-	}
-	else
-	{
-		m_pGimmick_Switch->SetBool(false);
-	}
+	// if (m_pGimmick_Switch)
+	// 	m_pGimmick_Switch->Update();
+	// 
+	// 
+	// if (COBB::IsCollision(g_pObjectManager->GetvecOBB(), m_pGimmick_Switch->GetOBB2()) == true)
+	// {
+	// 	m_pGimmick_Switch->SetBool(true);
+	// }
+	// else
+	// {
+	// 	m_pGimmick_Switch->SetBool(false);
+	// }
 
 	if (m_pGimmick_BreakableWall[0])
 		m_pGimmick_BreakableWall[0]->Update();
@@ -435,7 +433,7 @@ void CMainGame::Render()
 		m_pOrb->Render();
 	}
 
-	//g_pObjectManager->Render();
+	g_pObjectManager->Render();
 
 	//if (m_pHeightMap)
 	//	m_pHeightMap->Render();
@@ -473,8 +471,8 @@ void CMainGame::Render()
 		m_pGimmick_Door[1]->Render();
 	//if (m_pGimmick_RotationBoard)
 	//	m_pGimmick_RotationBoard->Render();
-	if (m_pGimmick_Switch)
-		m_pGimmick_Switch->Render();
+	// if (m_pGimmick_Switch)
+	// 	m_pGimmick_Switch->Render();
 	if (m_pChanger)
 		m_pChanger->Render();
 	if (m_pGimmick_BreakableWall[0])

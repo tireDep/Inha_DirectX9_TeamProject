@@ -11,12 +11,9 @@ CSwitch::CSwitch()
 	D3DXMatrixIdentity(&matWorld);
 }
 
-
 CSwitch::~CSwitch()
 {
-	
 }
-
 
 void CSwitch::Setup()
 {
@@ -90,7 +87,10 @@ void CSwitch::Setup(ST_MapData setData)
 	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
 
 	if (m_strTxtFile != "")
+	{
 		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+		// m_vecTextures.push_back(m_pTexture);
+	}
 
 	m_pMesh = xfile->pMesh;
 	m_adjBuffer = xfile->adjBuffer;
@@ -100,18 +100,27 @@ void CSwitch::Setup(ST_MapData setData)
 
 	delete xfile;
 
-	//D3DXMATRIXA16 matS, matR, matT;
-	//D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixIdentity(&matS);
+	D3DXMatrixIdentity(&matR);
+	D3DXMatrixIdentity(&matT);
 
-	//D3DXVECTOR3 v;
-	//v.x = D3DXToRadian(vRotate.x);
-	//v.y = D3DXToRadian(vRotate.y);
-	//v.z = D3DXToRadian(vRotate.z);
+	D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
 
-	//D3DXMatrixRotationYawPitchRoll(&m_matR, v.x, v.y, v.z);
+	D3DXVECTOR3 v;
+	v.x = D3DXToRadian(vRotate.x);
+	v.y = D3DXToRadian(vRotate.y);
+	v.z = D3DXToRadian(vRotate.z);
+	D3DXMatrixRotationYawPitchRoll(&m_matR, v.x, v.y, v.z);
 
-	//D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
-	//m_matWorld = matS * matR * matT;
+	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
+
+	m_matWorld = matS * matR * matT;
+
+	 m_pOBB = new COBB;
+	 m_pOBB->Setup(*this);
+	 g_pObjectManager->AddOBBbox(m_pOBB);
+	 g_pObjectManager->AddGimmick(this);
 
 	//// OBB TEST
 	/*m_pOBB = new COBB;
@@ -122,14 +131,12 @@ void CSwitch::Setup(ST_MapData setData)
 
 void CSwitch::Update()
 {
-	
-	D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_scale.z);
-	D3DXMatrixTranslation(&matT, m_position.x, m_position.y, m_position.z);
-	collWorld = matS *matT;
-
-	m_pColl->Update(&collWorld);
-	m_pOBB->Update(&matWorld);
-	
+	 D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_scale.z);
+	 D3DXMatrixTranslation(&matT, m_position.x, m_position.y, m_position.z);
+	 collWorld = matS *matT;
+	 
+	 m_pColl->Update(&collWorld);
+	 m_pOBB->Update(&m_matWorld);
 }
 
 void CSwitch::Render()
@@ -137,30 +144,37 @@ void CSwitch::Render()
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	
 	{
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &collWorld);
-		m_pColl->Render();
+		// g_pD3DDevice->SetTransform(D3DTS_WORLD, &collWorld);
+		// m_pColl->Render();
 	}
 
 	{
-		D3DXMatrixIdentity(&matWorld);
+	/*	D3DXMatrixIdentity(&matWorld);
 		D3DXMatrixScaling(&matS, 0.3f, 0.3f, 0.3f);
 		D3DXMatrixTranslation(&matT, 10, 0, 0);
-		matWorld = matS * matT;
+		matWorld = matS * matT;*/
 
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
-		m_pOBB->Render();
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &GetmatWorld());
+		// m_pOBB->Render();
+
 		if (m_pMesh == NULL)
 			return;
+
 		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{
 			if (m_vecTextures[i] != 0)
 				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+			else
+				g_pD3DDevice->SetTexture(0, m_pTexture);
+
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+
 			if (istrue == false)
 				m_pMesh->DrawSubset(i);
 			else
 				m_pMesh->DrawSubset(0);
 		}
+
 		g_pD3DDevice->SetTexture(0, NULL);
 	}
 	
