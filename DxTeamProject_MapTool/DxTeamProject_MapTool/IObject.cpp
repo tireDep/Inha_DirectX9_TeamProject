@@ -388,6 +388,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 #ifdef _DEBUG
 	case eFlower:
 	{
+		mapData.vScale = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
 		mapData.strObjName = string("Flower") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "";
@@ -401,6 +402,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eInvisibleWall:
 	{
+		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 		mapData.strObjName = string("InvisibleWall") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "";
 		mapData.strTxtPath = "";

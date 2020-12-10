@@ -592,12 +592,27 @@ void CImguiClass::Update_Inspector()
 			{
 				ObjectType tempType = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType();
 
-				if (tempType == eSphere || tempType == eCylinder
-				 || tempType == eG_RotationBoard || tempType == eG_BreakWall || tempType == eG_Door
-				 || tempType == eG_ColorChanger || tempType == eG_Switch)
+				switch (tempType)
+				{
+				case eSphere:	case eCylinder:
+
+				case eATree:	case eSTree:	case eWTree:	case eCTree:
+				case eSomethingElse:	case eBall:	case eChair:	case eUmbrella:
+				case eSnowman:	case eFlower:	case eInvisibleWall:
+
+				case eG_RotationBoard:	case eG_BreakWall:	case eG_Door:	case eG_ColorChanger:
+				case eG_Switch:	case eG_Razer:	case eG_MovingCube:
+				{
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetDiffScale(vScale);
-				else
+				}
+					break;
+
+				default:
+				{
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetScale(vScale);
+				}
+					break;
+				}
 			}
 
 			D3DXVECTOR3 vRot = g_pObjectManager->GetIObject(m_nowSelectindex).GetRotate();
