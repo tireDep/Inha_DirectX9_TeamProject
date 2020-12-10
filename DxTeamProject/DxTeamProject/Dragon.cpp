@@ -10,8 +10,10 @@ CDragon::CDragon() :
 	m_isTrue(false),
 	m_vPosition(0, 0, 0),
 	Drangon_y(4.5f),
-	m_vDrangonPos(0, 0, 0)
+	m_vDrangonPos(0, 0, 0),
+	m_vDirection(0,0,1)
 {
+	D3DXMatrixIdentity(&m_matRotY);
 }
 
 
@@ -68,21 +70,6 @@ void CDragon::Setup()
 
 void CDragon::Render()
 {
-	// >> testRotation
-	//if (m_isTrue == false)
-	//{
-	//	m_DrangonPos.y += 0.0005f;
-	//	if (m_DrangonPos.y >= 5.5f)
-	//		m_isTrue = true;
-
-	//}
-	//else if (m_isTrue == true)
-	//{
-	//	m_DrangonPos.y -= 0.0005f;
-	//	if (m_DrangonPos.y <= 4.5f)
-	//		m_isTrue = false;
-	//}
-	// << testRotation
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
@@ -91,7 +78,7 @@ void CDragon::Render()
 	D3DXMatrixScaling(&matS, 0.7f, 0.7f, 0.7f);
 	// D3DXMatrixTranslation(&matT, 0, 5, 0);
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	matWorld = matS * matT;
+	matWorld = matS *m_matRotY* matT;
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 
@@ -130,4 +117,26 @@ void CDragon::ChangeColor(D3DXCOLOR color)
 	if (color == WHITE)
 		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_17(white).png", m_pTexture);
 
+}
+
+void CDragon::DoRotation(const float & radian, D3DXVECTOR3 cameradirection)
+{
+	m_vDirection = cameradirection;
+	m_vDirection.y = 0;
+	D3DXMatrixRotationY(&m_matRotY, radian);
+
+	cout << radian << endl;
+
+	D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &m_matRotY);
+	D3DXVec3Normalize(&m_vDirection, &m_vDirection);
+
+	D3DXVECTOR3 tempPos(0, 0, 0);
+	D3DXVECTOR3 tempUp(0, 1, 0);
+	D3DXMatrixLookAtLH(&m_matRotY, &tempPos, &m_vDirection, &tempUp);
+	D3DXMatrixTranspose(&m_matRotY, &m_matRotY);
+}
+
+void CDragon::DirectionSet(D3DXVECTOR3 cameradirection)
+{
+	m_vDirection = cameradirection;
 }

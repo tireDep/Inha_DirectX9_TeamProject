@@ -162,7 +162,7 @@ enum class SceneType : int
 
 enum class PlayerInputType : int
 {
-	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHold, eHoldPush, eHoldPull
+	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHold, eHoldPush, eHoldPull, eJump
 };
 
 struct ST_EVENT
@@ -209,7 +209,8 @@ enum ObjectType
 
 	/* Gimmick, */ 
 	eG_RotationBoard, eG_BreakWall, eG_Door, eG_ColorChanger, eG_Switch,
-
+									// eG_Door_Frame 
+									// eg_Door_Right
 	eNull
 };
 

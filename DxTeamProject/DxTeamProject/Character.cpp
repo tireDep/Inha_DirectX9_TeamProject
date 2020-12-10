@@ -48,7 +48,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 #endif
 	// float duration = *(float*) eventMsg.ptrMessage;
 	// speed *= duration;
-	float rotation = -1.0f;
+	rotation = -1.0f;
 
 	if (!g_gameManager->GetUImode())
 	{
@@ -463,6 +463,11 @@ D3DXVECTOR3& CCharacter::GetPosition()
 D3DXMATRIXA16* CCharacter::GetTransform()
 {
 	return &m_matWorld;
+}
+
+float CCharacter::Getrotation()
+{
+	return rotation;
 }
 
 D3DXCOLOR CCharacter::GetColor()
