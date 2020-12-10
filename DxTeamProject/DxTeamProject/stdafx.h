@@ -162,7 +162,7 @@ enum class SceneType : int
 
 enum class PlayerInputType : int
 {
-	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHold, eHoldPush, eHoldPull
+	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHold, eHoldPush, eHoldPull, eJump
 };
 
 struct ST_EVENT

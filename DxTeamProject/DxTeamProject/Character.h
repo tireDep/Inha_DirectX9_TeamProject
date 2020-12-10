@@ -20,6 +20,8 @@ protected:
 	bool					m_isCollided;
 	bool					m_isOBB;
 	CSkinnedMesh*			m_Character;
+
+	float rotation;
 	// grab
 	int						m_nGrabAbleObeject;
 	// Ray y check
@@ -36,6 +38,7 @@ public:
 
 	virtual D3DXVECTOR3& GetPosition();
 	virtual D3DXMATRIXA16* GetTransform();
+	virtual float Getrotation();
 
 	virtual void SetColor(D3DXCOLOR c);
 	virtual D3DXCOLOR GetColor();
