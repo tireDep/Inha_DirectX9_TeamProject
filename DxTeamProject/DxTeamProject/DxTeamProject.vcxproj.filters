@@ -232,12 +232,14 @@
     <ClCompile Include="PSOBB.cpp">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClCompile>
-    <ClCompile Include="MovingCube.cpp" />
     <ClCompile Include="Book.cpp">
       <Filter>Object\IObject\Item</Filter>
     </ClCompile>
     <ClCompile Include="Orb.cpp">
       <Filter>Object\IObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingCube.cpp">
+      <Filter>Object\IObject\Gimmick\MJ</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -496,12 +498,14 @@
     <ClInclude Include="PSOBB.h">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClInclude>
-    <ClInclude Include="MovingCube.h" />
     <ClInclude Include="Book.h">
       <Filter>Object\IObject\Item</Filter>
     </ClInclude>
     <ClInclude Include="Orb.h">
       <Filter>Object\IObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingCube.h">
+      <Filter>Object\IObject\Gimmick\MJ</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

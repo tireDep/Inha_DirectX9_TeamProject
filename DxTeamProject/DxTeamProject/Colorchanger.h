@@ -13,8 +13,8 @@ private:
 	
 
 	D3DXMATRIXA16  BeamWorld; //장치월드 , 빔월드
-	D3DXMATRIXA16 m_matS, m_matR, m_matT; 
-	D3DXMATRIXA16 matS, matT , matR;  // 지금 쓰여지고있는것 .
+	D3DXMATRIXA16 m_matS, m_matR, m_matT;  //맵 데이터
+	D3DXMATRIXA16 matS, matT , matR;  // 빔
 	D3DXVECTOR3  m_scale; //빔포지션 , 빔 크기 
 
 	float angle; //장치 , 빔 앵글 조절.

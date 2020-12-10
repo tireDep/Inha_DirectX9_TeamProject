@@ -86,8 +86,8 @@ void Color_changer::Setup(ST_MapData setData)
 	
 	D3DXVECTOR3 vScale, vRotate, vTranslate;
 
-	vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
-							 // JW ADD...
+	vScale = setData.vScale; 
+							 
 	m_vScale = vScale;
 	vRotate = setData.vRotate;
 	vTranslate = setData.vTranslate;
@@ -107,16 +107,20 @@ void Color_changer::Setup(ST_MapData setData)
 
 	delete xfile;
 
-	D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
+	D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z); // ¸ãµ¥ÀÌÅÍ Å©±â
 
 	D3DXVECTOR3 v;
 	v.x = D3DXToRadian(vRotate.x);
 	v.y = D3DXToRadian(vRotate.y);
 	v.z = D3DXToRadian(vRotate.z);
 
-	D3DXMatrixRotationYawPitchRoll(&m_matR, v.x, v.y, v.z);
+	D3DXMatrixRotationYawPitchRoll(&m_matR, v.x, v.y, v.z); //¸ãµ¥ÀÌÅÍ
 
-	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
+	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z); //¸ãµ¥ÀÌÅÍ
+
+	//m_matWorld = m_matS * m_matR * m_matT
+
+	//---------------------------------------------------------------------
 
 	D3DXMatrixRotationY(&matR, D3DXToRadian(angle));
 	D3DXMatrixScaling(&matS, 0.3f, 0.3f, 0.3f);
@@ -156,7 +160,7 @@ void Color_changer::Update()
 	BeamWorld = matS * matT * matR;
 	
 	m_BeamOBB->Update(&BeamWorld);
-	//m_pOBB->Update(&BeamWorld);
+	
 }
 
 void Color_changer::Render()

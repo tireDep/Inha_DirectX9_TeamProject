@@ -141,7 +141,7 @@ void CMainGame::Setup()
 	m_pCamera->Setup(&m_pCharacter->GetPosition());
 
 	m_pMovingCube = new MovingCube;
-	m_pMovingCube->Setup("Resource/XFile/Gimmick/MovingCube", "moving_cube.X");
+	m_pMovingCube->Setup();
 
 	m_pOrb = new COrb;
 	m_pOrb->Setup();
@@ -170,7 +170,7 @@ void CMainGame::Setup()
 	// m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
 
 	m_pGimmick_Switch = new CSwitch;
-	m_pGimmick_Switch->Setup("Resource/XFile/Gimmick/Switch", "Force_switch.X");
+	m_pGimmick_Switch->Setup();
 
 	m_pGimmick_BreakableWall[0] = new CBreakableWall;
 	m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "standard_wall.X");
