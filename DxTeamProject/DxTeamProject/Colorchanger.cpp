@@ -9,6 +9,7 @@ Color_changer::Color_changer()
 	, m_fHitLength(50)
 	, angle(0)
 	, m_scale(0.5, 0.5, 1)
+	, m_BeamOBB(NULL)
 {
 	ZeroMemory(&m_stMtl, sizeof(D3DMATERIAL9));
 	
@@ -19,7 +20,7 @@ Color_changer::Color_changer()
 
 Color_changer::~Color_changer()
 {
-
+	
 
 }
 
@@ -37,8 +38,8 @@ void Color_changer::Setup(string folder, string file)
 		D3DXComputeBoundingBox(pVertices, m_pMeshBeam->GetNumVertices(), m_pMeshBeam->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
 		m_pMeshBeam->UnlockVertexBuffer();
 
-	/*	m_pOBB = new COBB;
-		m_pOBB->SetUpXFile(m_vMin , m_vMax);*/
+		m_BeamOBB = new COBB;
+		m_BeamOBB->SetupMesh(m_vMin,m_vMax, 0.5f);
 
 	
 	}
@@ -75,7 +76,7 @@ void Color_changer::Setup(string folder, string file)
 	m_pOBB->Setup(*this);
 	g_pObjectManager->AddOBBbox(m_pOBB);
 	g_pObjectManager->AddGimmick(this);
-
+	
 }
 
 void Color_changer::Update()
@@ -101,7 +102,7 @@ void Color_changer::Update()
 	D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_fHitLength / length);
 	BeamWorld = matS * matT * matR;
 	
-	
+	m_BeamOBB->Update(&BeamWorld);
 	//m_pOBB->Update(&BeamWorld);
 }
 
@@ -115,6 +116,7 @@ void Color_changer::Render()
 		
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &BeamWorld);
 		g_pD3DDevice->SetMaterial(&m_stMtl);
+		m_BeamOBB->Render();
 		m_pMeshBeam->DrawSubset(0);
 	}
 	// 컬러체인저

@@ -15,11 +15,12 @@ private:
 	D3DXMATRIXA16 matWorld , BeamWorld; //장치월드 , 빔월드
 	D3DXMATRIXA16 m_matS, m_matR, m_matT;
 	D3DXMATRIXA16 matS, matT , matR;
-	D3DXVECTOR3 m_position , m_scale; //빔포지션 , 빔 크기 
+	D3DXVECTOR3  m_scale; //빔포지션 , 빔 크기 
 
 	float angle; //장치 , 빔 앵글 조절.
 
 	float length; // 빔 길이 조절.
+	
 	
 
 	D3DXCOLOR c; 
@@ -29,15 +30,16 @@ private:
 	float m_fHitLength;
 public:
 	D3DMATERIAL9 m_stMtl;
-
+	D3DXVECTOR3 m_position;
+	COBB *m_BeamOBB;
 	void Setup(string folder, string file); // x파일
 	void Update();
 	void Render();
-	
+
 	void Update(float duration) { };
 
 	void SetColor(D3DXCOLOR color);
-
+	
 	// KT
 	void SetHitLength(float HitLength); // 빔이 맞았을때 거리 구해줌.
 

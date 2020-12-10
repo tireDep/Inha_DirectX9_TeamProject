@@ -30,8 +30,8 @@ void MeshTile::Setup(float x, float y, float z)
 
 	m_pMesh->UnlockVertexBuffer();
 
-	/*m_pOBB = new COBB;
-	m_pOBB->Setup(this);*/
+	m_pOBB = new COBB;
+	m_pOBB->SetupMesh(m_vMin, m_vMax, 0.5f);
 	
 
 
