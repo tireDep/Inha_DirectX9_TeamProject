@@ -2,6 +2,7 @@
 #include "Gimmick.h"
 #include "RotationBoard.h"
 #include "Switch.h"
+#include "Door.h"
 
 CGimmick::CGimmick()
 	//: m_pOBB(NULL)
@@ -27,7 +28,11 @@ void CGimmick::Setup(ST_MapData setData)
 		case eG_BreakWall:
 			break;
 
-		case eG_Door:
+		case eG_DoorFrame: case eG_Door:
+			{
+				CDoor* door = new CDoor;
+				door->Setup(setData);
+			}
 			break;
 
 		case eG_ColorChanger:

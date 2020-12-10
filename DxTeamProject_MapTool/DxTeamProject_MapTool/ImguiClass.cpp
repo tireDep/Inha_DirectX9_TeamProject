@@ -9,6 +9,8 @@
 
 #include "Gimmick.h"
 #include "RotationBoard.h"
+#include "Switch.h"
+#include "Door.h"
 
 #include "ImguiClass.h"
 
@@ -104,10 +106,11 @@ void CImguiClass::SetVecItem()
 	else if (m_NowLoadType == LoadType::eGimmick)
 	{
 		tempVec.push_back("RotationBoard");		tempObjType.push_back(eG_RotationBoard);
-		tempVec.push_back("BreakWall");			tempObjType.push_back(eG_BreakWall);
-		tempVec.push_back("Door");				tempObjType.push_back(eG_Door);
-		tempVec.push_back("ColorChanger");		tempObjType.push_back(eG_ColorChanger);
 		tempVec.push_back("Switch");			tempObjType.push_back(eG_Switch);
+		tempVec.push_back("Door");				tempObjType.push_back(eG_DoorFrame);
+		tempVec.push_back("ColorChanger");		tempObjType.push_back(eG_ColorChanger);
+		tempVec.push_back("BreakWall");			tempObjType.push_back(eG_BreakWall);
+		tempVec.push_back("MovingCube");		tempObjType.push_back(eG_MovingCube);
 	}
 	
 	m_vecItem = tempVec;
@@ -587,21 +590,50 @@ void CImguiClass::Update_Inspector()
 			ImGui::Separator();
 
 			D3DXVECTOR3 vScale = g_pObjectManager->GetIObject(m_nowSelectindex).GetScale();
+			ObjectType tempType = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType();
 			if (ImGui::InputFloat3("Scale", vScale))
 			{
-				ObjectType tempType = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType();
+				switch (tempType)
+				{
+				case eSphere:	case eCylinder:
 
-				if (tempType == eSphere || tempType == eCylinder
-				 || tempType == eG_RotationBoard || tempType == eG_BreakWall || tempType == eG_Door
-				 || tempType == eG_ColorChanger || tempType == eG_Switch)
+				case eATree:	case eSTree:	case eWTree:	case eCTree:
+				case eSomethingElse:	case eBall:	case eChair:	case eUmbrella:
+				case eSnowman:	case eFlower:	case eInvisibleWall:
+
+				case eG_RotationBoard:	case eG_BreakWall:	
+				case eG_ColorChanger:	case eG_Switch:		case eG_Razer:		case eG_MovingCube:
+				{
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetDiffScale(vScale);
-				else
+				}
+					break;
+
+				case eG_DoorFrame:	case eG_Door:
+				{
+					CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+					temp->SetAnotherScale(vScale);
+				}
+				break;
+
+				default:
+				{
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetScale(vScale);
+				}
+					break;
+				}
 			}
 
 			D3DXVECTOR3 vRot = g_pObjectManager->GetIObject(m_nowSelectindex).GetRotate();
 			if (ImGui::InputFloat3("Rotate", vRot))
-				g_pObjectManager->GetIObject(m_nowSelectindex).SetRotate(vRot);
+			{
+				if (tempType == ObjectType::eG_DoorFrame || tempType == ObjectType::eG_Door)
+				{
+					CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+					temp->SetAnotherRotation(vRot);
+				}
+				else
+					g_pObjectManager->GetIObject(m_nowSelectindex).SetRotate(vRot);
+			}
 
 			D3DXVECTOR3 vTrans = g_pObjectManager->GetIObject(m_nowSelectindex).GetTranslate();
 			D3DXVECTOR3 temp = vTrans;
@@ -610,8 +642,13 @@ void CImguiClass::Update_Inspector()
 				// >> 격자에 맞춰 이동(체스 느낌)
 				if (temp.x != vTrans.x)
 				{
-					temp.x = floor(vTrans.x);
-					temp.x = temp.x <= 0 ? temp.x + 0.5f : temp.x - 0.5f;
+					if (vTrans.x == 0)
+						temp.x = 0;
+					else
+					{
+						temp.x = floor(vTrans.x);
+						temp.x = temp.x <= 0 ? temp.x + 0.5f : temp.x - 0.5f;
+					}
 				}
 
 				if (temp.y != vTrans.y)
@@ -637,12 +674,24 @@ void CImguiClass::Update_Inspector()
 				
 				if (temp.z != vTrans.z)
 				{
-					temp.z = floor(vTrans.z);
-					temp.z = temp.z <= 0 ? temp.z + 0.5f : temp.z - 0.5f;
+					if (vTrans.z == 0)
+						temp.z = 0;
+					else
+					{
+						temp.z = floor(vTrans.z);
+						temp.z = temp.z <= 0 ? temp.z + 0.5f : temp.z - 0.5f;
+					}
 				}
 
 				vTrans = temp;
-				g_pObjectManager->GetIObject(m_nowSelectindex).SetTranslate(vTrans);
+
+				if (tempType == ObjectType::eG_DoorFrame || tempType == ObjectType::eG_Door)
+				{
+					CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+					temp->SetAnotherTranslation(vTrans);
+				}
+				else
+					g_pObjectManager->GetIObject(m_nowSelectindex).SetTranslate(vTrans);
 			}
 
 			ImGui::Separator();
@@ -730,6 +779,27 @@ void CImguiClass::Update_Inspector()
 				ImGui::Separator();
 
 			} // << : Rotation Board
+
+			// >> 스위치 기믹 : 텍스쳐 선택, 조건 선택
+			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_Switch)
+			{
+				CSwitch* temp = dynamic_cast<CSwitch*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+
+				ImGui::Text("Texture");
+				static int pushIndex = 0;
+				pushIndex = temp->GetTextureIndex();
+				string charName[4] = { "Glow", "Metal", "Rough", "Texture" };
+				for (int i = 0; i < 4; i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str(), pushIndex == i))
+					{
+						pushIndex = i;
+						temp->SetTexture(pushIndex);
+					}
+				} // << : for
+
+				ImGui::Separator();
+			}
 
 		} // << : if (m_nowSelectindex >= 0)
 

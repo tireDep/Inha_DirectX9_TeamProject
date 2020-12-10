@@ -41,8 +41,16 @@ void CBackground::Setup(ST_MapData setData)
 		m_vecTextures = xfile->vecTextrure;
 		m_numMtrls = xfile->nMtrlNum;
 
-		if (m_vecTextures[0] == NULL)
+		int check = 0;
+		for (int i = 0; i < m_vecTextures.size(); i++)
 		{
+			if (m_vecTextures[i] == NULL)
+				check++;
+		}
+
+		if (check == m_vecTextures.size())
+		{
+			// >> 텍스쳐 로드 정보 x 일 때
 			m_vecTextures.clear();
 			m_vecTextures.push_back(m_pTexture);
 		}
@@ -113,6 +121,13 @@ void CBackground::Render()
 
 void CBackground::SetDiffScale(D3DXVECTOR3 set)
 {
+	// >> 같은 비율로 크기 변환
+	if (set.x != m_vScale.x)
+		m_vScale = D3DXVECTOR3(set.x, set.x, set.x);
+	else if (set.y != m_vScale.y)
+		m_vScale = D3DXVECTOR3(set.y, set.y, set.y);
+	else if (set.z != m_vScale.z)
+		m_vScale = D3DXVECTOR3(set.z, set.z, set.z);
 }
 
 int CBackground::GetTextureIndex()

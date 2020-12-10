@@ -118,7 +118,7 @@ void CSwitch::Setup(ST_MapData setData)
 
 	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
 
-	m_matWorld = matS * matR * matT;
+	m_matWorld = m_matS * m_matR * m_matT;
 
 	 m_pOBB = new COBB;
 	 m_pOBB->Setup(*this);

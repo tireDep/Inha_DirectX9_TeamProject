@@ -12,6 +12,8 @@ private:
 	vector<IObject *> m_vecObject;
 	int m_sameNum = 0;
 
+	void SetCopyObject(int index);
+
 public:
 	void AddObject(IObject* pObject);
 	void RemoveObject(IObject* pObject);

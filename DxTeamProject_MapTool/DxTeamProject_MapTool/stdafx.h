@@ -100,7 +100,7 @@ enum ObjectType
 	eBox, eSphere, eCylinder,
 
 	/* Gimmick, */
-	eG_RotationBoard, eG_BreakWall, eG_Door, eG_ColorChanger, eG_Switch,
+	eG_RotationBoard, eG_BreakWall, eG_DoorFrame, eG_Door, eG_ColorChanger, eG_Switch, eG_Razer, eG_MovingCube,
 
 	eNull
 #else
