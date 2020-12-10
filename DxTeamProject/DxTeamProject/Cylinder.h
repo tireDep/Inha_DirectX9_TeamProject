@@ -18,5 +18,6 @@ public:
 	//virtual void Integrate(float duration) {};
 	//virtual void RunPhysics(float duration) {};
 
+	COBB* GetOBB() { return m_pOBB; }
 	string GetName();
 };

@@ -1,6 +1,6 @@
 #pragma once
 #include "Object.h"
-#include "TestAngleSet.h"
+//#include "TestAngleSet.h"
 
 const static D3DXVECTOR3 GRAVITY(0, -9.8f, 0);
 
@@ -19,7 +19,7 @@ protected:
 
 	/// Physics
 	Synthesize(float, m_finverseMass, InverseMass);	// mass
-	Synthesize(D3DXVECTOR3, m_vInverseRotationInertia, inverseRotationInertia);	// Rotation Inertia;
+	//Synthesize(D3DXVECTOR3, m_vInverseRotationInertia, inverseRotationInertia);	// Rotation Inertia;
 
 	Synthesize(D3DXVECTOR3, m_vPosition, Position);	// center position
 	Synthesize(D3DXVECTOR3, m_vLinearVelocity, LinearVelocity); // velocity
@@ -28,10 +28,10 @@ protected:
 	Synthesize(float, m_fLinearDrag, Drag);	// linear drag
 	Synthesize(D3DXVECTOR3, m_vLastFrameAcceleration, LastFrameAcceleration); // lastFrameAcceleration
 
-	CTestAngleSet m_stOrientation; // Orientation
-	Synthesize(D3DXVECTOR3, m_vAngularVelocity, AngularVelocity); // Angular Velocity
-	Synthesize(D3DXVECTOR3, m_vAngularAcceleration, AngularAcceleration);	// Angular Accerleration
-	Synthesize(D3DXVECTOR3, m_vTorque, Torque);	// Torque;
+	//CTestAngleSet m_stOrientation; // Orientation
+	//Synthesize(D3DXVECTOR3, m_vAngularVelocity, AngularVelocity); // Angular Velocity
+	//Synthesize(D3DXVECTOR3, m_vAngularAcceleration, AngularAcceleration);	// Angular Accerleration
+	//Synthesize(D3DXVECTOR3, m_vTorque, Torque);	// Torque;
 
 	Synthesize(bool, m_isForceApplied, ForceApplied);
 	Synthesize(D3DXVECTOR3, m_vForceAccum, ForceAccum);
@@ -61,11 +61,11 @@ public:
 	virtual void SetMass(const float mass);
 	virtual float GetMass() const;
 	virtual bool hasFiniteMass() const;
-	virtual void SetOrientation(CTestAngleSet Orientation);
-	virtual CTestAngleSet GetOrientation();
+	//virtual void SetOrientation(CTestAngleSet Orientation);
+	//virtual CTestAngleSet GetOrientation();
 	virtual void SetPusingForce(D3DXVECTOR3 forcedirection);
 	virtual bool hasIntersected(PObject * otherobject);
-	virtual void CollisionOtherObject(PObject * otherobject);
+	//virtual void CollisionOtherObject(PObject * otherobject);
 	virtual void Collision3D(PObject * otherobject);
 	virtual void UpdateLand(float duration);
 
