@@ -1,4 +1,6 @@
 #pragma once
+class COBB;
+
 class MovingCube
 {
 public:
@@ -19,14 +21,19 @@ private:
 	float startpos , endpos; // °Å¸® ?
 	D3DXVECTOR3 m_position;
 
+	COBB* m_pOBB;
+
 	D3DXMATRIXA16 matWorld;
 	D3DXMATRIXA16 matS, matT, matR;
-
+	D3DXVECTOR3 m_vMin, m_vMax;
 public:
 	void Setup(string folder, string file);
 	
 	void Update();
 
 	void Render();
+
+
+	COBB* GetOBB() { return m_pOBB; }
 };
 

@@ -383,6 +383,19 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	break;
 
 #ifdef _DEBUG
+	case eFlower:
+	{
+		mapData.strObjName = string("Flower") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/Else";
+		mapData.strTxtPath = "";
+
+		mapData.strXFilePath = string("Flower_0") + to_string(index + 1) + ".X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+		break;
+
 	case eInvisibleWall:
 	{
 		mapData.strObjName = string("InvisibleWall") + to_string(m_nRefCnt + 1);
@@ -452,6 +465,7 @@ void IObject::CreateObject(ST_MapData& mapData)
 	case eChair:
 	case eUmbrella:
 	case eSnowman:
+	case eFlower:
 	case eInvisibleWall:
 // #endif // _DEBUG
 	{

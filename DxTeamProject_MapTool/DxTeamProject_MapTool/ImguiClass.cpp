@@ -82,6 +82,13 @@ void CImguiClass::SetVecItem()
 		else if (m_SubType == LoadType::eSomethingElse)
 		{
 			tempVec.clear();
+			tempVec.push_back("BlueFlower"); tempObjType.push_back(eFlower);
+			tempVec.push_back("OrangeFlower"); tempObjType.push_back(eFlower);
+			tempVec.push_back("PurpleFlower"); tempObjType.push_back(eFlower);
+			tempVec.push_back("RedFlower"); tempObjType.push_back(eFlower);
+			tempVec.push_back("WhiteFlower"); tempObjType.push_back(eFlower);
+			tempVec.push_back("YellowFlower"); tempObjType.push_back(eFlower);
+
 			tempVec.push_back("BeachBall"); tempObjType.push_back(eBall);
 			tempVec.push_back("Chair"); tempObjType.push_back(eChair);
 			tempVec.push_back("Umbrella"); tempObjType.push_back(eUmbrella);
@@ -756,28 +763,30 @@ void CImguiClass::SetFrameEnd()
 
 void CImguiClass::Render()
 {
+	ImGui::Render();
+	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 	// >> testLoad
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
 	matWorld._41 = 0.5f; matWorld._43 = 0.5f;
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-	g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	for (int i = 0; i < m_vecMtrls.size(); i++)
 	{
 		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
-		if (m_vecTextures[i] != 0)
-			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+		// if (m_vecTextures[i] != 0)
+		// 	g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+		LPDIRECT3DTEXTURE9 temp;
+		//g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Test", "Sprout.png", temp);
+		// g_pD3DDevice->SetTexture(0, temp);
 
 		if(m_pMesh)
 			m_pMesh->DrawSubset(i);
 	}
 	g_pD3DDevice->SetTexture(0, NULL);
 	// << testLoad
-
-	ImGui::Render();
-	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 }
 
 void CImguiClass::ResetDevice()

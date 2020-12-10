@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "MovingCube.h"
-
+#include "OBB.h"
 
 MovingCube::MovingCube() :m_pMesh(NULL)
 , m_adjBuffer(NULL)
@@ -10,13 +10,17 @@ MovingCube::MovingCube() :m_pMesh(NULL)
 , istrue(false)
 , speed(0.005)
 , startpos(0)
-, endpos(5)
+, endpos(8)
+, m_pOBB(NULL)
 {
 }
 
 
 MovingCube::~MovingCube()
 {
+	SafeDelete(m_pOBB);
+	SafeRelease(m_pMesh);
+	SafeRelease(m_adjBuffer);
 }
 
 void MovingCube::Setup(string folder, string file)
@@ -28,6 +32,8 @@ void MovingCube::Setup(string folder, string file)
 		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
 		return;
 	}
+
+	
 
 	m_pMesh = xfile->pMesh;
 	m_adjBuffer = xfile->adjBuffer;
@@ -45,6 +51,17 @@ void MovingCube::Setup(string folder, string file)
 				D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &m_vecTextures[i]);
 		}
 	}
+
+	D3DXVECTOR3* pVertices;
+
+
+	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+	D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+	m_pMesh->UnlockVertexBuffer();
+
+	m_pOBB = new COBB;
+	m_pOBB->SetUpXFile(m_vMin, m_vMax);
+
 	delete xfile;
 
 }
@@ -91,7 +108,7 @@ void MovingCube::Update()
 			istrue = false;
 	}
 
-
+	m_pOBB->Update(&matWorld);
 }
 
 void MovingCube::Render()
@@ -113,6 +130,7 @@ void MovingCube::Render()
 	}
 
 	m_pMesh->DrawSubset(0);
+	m_pOBB->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 255, 0));
 	g_pD3DDevice->SetTexture(0, NULL);
 
 }
