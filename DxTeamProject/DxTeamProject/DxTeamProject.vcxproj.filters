@@ -238,8 +238,6 @@
     </ClCompile>
     <ClCompile Include="Orb.cpp">
       <Filter>Object\IObject\Item</Filter>
-    <ClCompile Include="MovingCube.cpp">
-      <Filter>Object\IObject\Gimmick\MJ</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -504,8 +502,6 @@
     </ClInclude>
     <ClInclude Include="Orb.h">
       <Filter>Object\IObject\Item</Filter>
-    <ClInclude Include="MovingCube.h">
-      <Filter>Object\IObject\Gimmick\MJ</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

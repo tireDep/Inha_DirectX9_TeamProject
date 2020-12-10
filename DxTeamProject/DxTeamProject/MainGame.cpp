@@ -238,37 +238,38 @@ void CMainGame::Update()
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
+		m_pDragon->Update(m_pCharacter->GetPosition());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
 			m_pCharacter->SetColor(RED);
-			m_pDragon->Update(RED);
+			m_pDragon->ChangeColor(RED);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Yellow:
 			m_pCharacter->SetColor(YELLOW);
-			m_pDragon->Update(YELLOW);
+			m_pDragon->ChangeColor(YELLOW);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Green:
 			m_pCharacter->SetColor(GREEN);
-			m_pDragon->Update(GREEN);
+			m_pDragon->ChangeColor(GREEN);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Blue:
 			m_pCharacter->SetColor(BLUE);
-			m_pDragon->Update(BLUE);
+			m_pDragon->ChangeColor(BLUE);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::Black:
 			m_pCharacter->SetColor(BLACK);
-			m_pDragon->Update(BLACK);
+			m_pDragon->ChangeColor(BLACK);
 			m_pUI->SetPickColor();
 			break;
 		case Pick::White:
 			m_pCharacter->SetColor(WHITE);
-			m_pDragon->Update(WHITE);
+			m_pDragon->ChangeColor(WHITE);
 			m_pUI->SetPickColor();
 			break;
 		default:
