@@ -136,14 +136,13 @@ bool CBox::hasIntersected(IObject * otherIObject)
 {
 	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
 	{
-		otherIObject->SetBool(true);
-		return true;
 		
+		return true;
 		
 	}
 	else
 	{
-		otherIObject->SetBool(false);
+
 		return false;
 	
 		

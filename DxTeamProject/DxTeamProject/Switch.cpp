@@ -189,7 +189,7 @@ void CSwitch::Render()
 
 			if (istrue == false)
 			{
-				cout << "충돌없음" << endl;
+				
 				m_pMesh->DrawSubset(i);
 			}
 			else
