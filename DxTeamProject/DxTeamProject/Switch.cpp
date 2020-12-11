@@ -20,7 +20,16 @@ CSwitch::~CSwitch()
 
 void CSwitch::Setup()
 {
-	
+	D3DXCreateBox(g_pD3DDevice, 2.5, 0.3f, 2.5, &m_pBox, NULL);
+
+	D3DXVECTOR3* pVertices;
+
+	m_pBox->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+	D3DXComputeBoundingBox(pVertices, m_pBox->GetNumVertices(), m_pBox->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+	m_pBox->UnlockVertexBuffer();
+
+	m_pColl = new COBB;
+	m_pColl->SetupMesh(m_vMin, m_vMax, 0.3f);
 		
 	ST_XFile* xfile = new ST_XFile;
 
@@ -131,7 +140,7 @@ void CSwitch::Setup(ST_MapData setData)
 }
 
 
-void CSwitch::Update(float duration)
+void CSwitch::Update()
 {
 	D3DXMatrixScaling(&matS, m_scale.x + 0.25f, m_scale.y + 0.3f, m_scale.z + 0.25f);
 	D3DXMatrixTranslation(&matT, m_position.x, m_position.y +0.1f, m_position.z);

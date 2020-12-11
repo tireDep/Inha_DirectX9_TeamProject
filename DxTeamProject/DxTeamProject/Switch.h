@@ -12,7 +12,7 @@ private:
 	
 	//----- 충돌
 	LPD3DXMESH m_pBox; // CreateBox
-	COBB* m_pColl; //충돌박스
+	
 	
 	D3DXVECTOR3 m_vMin, m_vMax;
 
@@ -21,14 +21,14 @@ public:
 
 	//잠깐
 	bool istrue;
-
+	COBB* m_pColl; //충돌박스
 	CSwitch();
 	~CSwitch();
 	void Setup();
 	void Setup(ST_MapData setData);
 	void Update();
 	void Render();
-	void Update(float duration);
+	void Update(float duration) {};
 	void SetBool(bool set) { istrue = set; }
 	
 	COBB* GetOBB2() { return m_pColl; } // 콜리더부분!
