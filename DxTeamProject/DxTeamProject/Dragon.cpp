@@ -120,9 +120,9 @@ void CDragon::ChangeColor(D3DXCOLOR color)
 
 }
 
-void CDragon::DoRotation(D3DXVECTOR3 cameradirection)
+void CDragon::DoRotation()
 {
-	m_vDirection = cameradirection;
+	//m_vDirection = cameradirection;
 	m_vDirection.y = 0;
 	D3DXMatrixRotationY(&m_matRotY, rotation);
 
@@ -149,38 +149,38 @@ void CDragon::ReceiveEvent(ST_EVENT eventMsg)
 {
 	switch (eventMsg.playerInput)
 	{
-	case PlayerInputType::eUp:
+	case PlayerInputType::eDown:
 		rotation = 0.0f;
 		break;
 
-	case PlayerInputType::eLeftUp:
+	case PlayerInputType::eRightDown:
 		rotation = D3DX_PI / 4.0f * -1;
 		break;
 
-	case PlayerInputType::eRightUp:
+	case PlayerInputType::eLeftDown:
 		rotation = D3DX_PI / 4.0f;
 		break;
 
-	case PlayerInputType::eDown:
+	case PlayerInputType::eUp:
 		rotation = D3DX_PI;
 		break;
 
-	case PlayerInputType::eLeftDown:
+	case PlayerInputType::eRightUp:
 		rotation = D3DX_PI + D3DX_PI / 4.0f;
 		break;
 
-	case PlayerInputType::eRightDown:
+	case PlayerInputType::eLeftUp:
 		rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
 		break;
 
-	case PlayerInputType::eLeft:
+	case PlayerInputType::eRight:
 		rotation = -D3DX_PI / 2.0f;
 		break;
 
-	case PlayerInputType::eRight:
+	case PlayerInputType::eLeft:
 		rotation = D3DX_PI / 2.0f;
 		break;
 	}
-
+	DoRotation();
 }
 

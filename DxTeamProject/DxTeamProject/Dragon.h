@@ -36,7 +36,7 @@ public:
 	virtual void Setup();
 	virtual void Render();
 	virtual void ChangeColor(D3DXCOLOR color);
-	virtual void DoRotation(D3DXVECTOR3 cameradirection);
+	virtual void DoRotation();
 	virtual void DirectionSet(D3DXVECTOR3 cameradirection);
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;

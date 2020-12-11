@@ -226,7 +226,7 @@ void CMainGame::Update()
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
-		m_pDragon->DoRotation(m_pCamera->GetCameraDirection());
+		m_pDragon->DirectionSet(m_pCamera->GetCameraDirection());
 		m_pDragon->Update(m_pCharacter->GetPosition());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		/// OBB TEST
