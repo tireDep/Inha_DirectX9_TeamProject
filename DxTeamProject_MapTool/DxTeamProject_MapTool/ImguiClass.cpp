@@ -24,19 +24,21 @@ void CImguiClass::SetVecItem()
 	vector<ObjectType> tempObjType;
 	if (m_NowLoadType == LoadType::eMap)
 	{
-		tempVec.push_back("Grass"); tempObjType.push_back(eTile01);
-		tempVec.push_back("Ground01"); tempObjType.push_back(eTile02);
-		tempVec.push_back("Ground02"); tempObjType.push_back(eTile03);
-		tempVec.push_back("Rock01"); tempObjType.push_back(eTile04);
-		tempVec.push_back("Rock02"); tempObjType.push_back(eTile05);
-		tempVec.push_back("Sand01"); tempObjType.push_back(eTile06);
-		tempVec.push_back("Sand02"); tempObjType.push_back(eTile07);
-		tempVec.push_back("Yellow"); tempObjType.push_back(eTile08);
-		tempVec.push_back("Water01"); tempObjType.push_back(eTile09);
-		tempVec.push_back("Water02"); tempObjType.push_back(eTile10);
-		tempVec.push_back("Water03"); tempObjType.push_back(eTile11);
-		tempVec.push_back("Water04"); tempObjType.push_back(eTile12);
-		tempVec.push_back("Ocean"); tempObjType.push_back(eTile13);
+		tempVec.push_back("Grass");		tempObjType.push_back(eTile01);
+		tempVec.push_back("Ground01");	tempObjType.push_back(eTile02);
+		tempVec.push_back("Ground02");	tempObjType.push_back(eTile03);
+		tempVec.push_back("Rock01");	tempObjType.push_back(eTile04);
+		tempVec.push_back("Rock02");	tempObjType.push_back(eTile05);
+		tempVec.push_back("Sand01");	tempObjType.push_back(eTile06);
+		tempVec.push_back("Sand02");	tempObjType.push_back(eTile07);
+		tempVec.push_back("Yellow");	tempObjType.push_back(eTile08);
+		tempVec.push_back("Water01");	tempObjType.push_back(eTile09);
+		tempVec.push_back("Water02");	tempObjType.push_back(eTile10);
+		tempVec.push_back("Water03");	tempObjType.push_back(eTile11);
+		tempVec.push_back("Water04");	tempObjType.push_back(eTile12);
+		tempVec.push_back("Ocean");		tempObjType.push_back(eTile13);
+
+		tempVec.push_back("Bridge");	tempObjType.push_back(eBridge);
 	}
 	else if (m_NowLoadType == LoadType::eObject)
 	{
@@ -86,18 +88,19 @@ void CImguiClass::SetVecItem()
 		{
 			tempVec.clear();
 #ifdef _DEBUG
-			tempVec.push_back("BlueFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("OrangeFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("PurpleFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("RedFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("WhiteFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("YellowFlower"); tempObjType.push_back(eFlower);
+			tempVec.push_back("BlueFlower");	tempObjType.push_back(eFlower);
+			tempVec.push_back("OrangeFlower");	tempObjType.push_back(eFlower);
+			tempVec.push_back("PurpleFlower");	tempObjType.push_back(eFlower);
+			tempVec.push_back("RedFlower");		tempObjType.push_back(eFlower);
+			tempVec.push_back("WhiteFlower");	tempObjType.push_back(eFlower);
+			tempVec.push_back("YellowFlower");	tempObjType.push_back(eFlower);
+			tempVec.push_back("Sprout");		tempObjType.push_back(eSprout);
 #endif // _DEBUG
 
 			tempVec.push_back("BeachBall"); tempObjType.push_back(eBall);
-			tempVec.push_back("Chair"); tempObjType.push_back(eChair);
-			tempVec.push_back("Umbrella"); tempObjType.push_back(eUmbrella);
-			tempVec.push_back("Snowman"); tempObjType.push_back(eSnowman);
+			tempVec.push_back("Chair");		tempObjType.push_back(eChair);
+			tempVec.push_back("Umbrella");	tempObjType.push_back(eUmbrella);
+			tempVec.push_back("Snowman");	tempObjType.push_back(eSnowman);
 
 #ifdef _DEBUG
 			tempVec.push_back("InvisibleWall"); tempObjType.push_back(eInvisibleWall);
@@ -606,7 +609,7 @@ void CImguiClass::Update_Inspector()
 				case eSomethingElse:	case eBall:	case eChair:	case eUmbrella:
 				case eSnowman:	
 #ifdef _DEBUG
-				case eFlower:	
+				case eFlower:	case eSprout:
 #endif // _DEBUG
 				
 				case eInvisibleWall:
@@ -615,6 +618,8 @@ void CImguiClass::Update_Inspector()
 				case eG_ColorChanger:	case eG_Switch:		
 #ifdef _DEBUG 
 				case eG_MovingCube:
+
+				case eBook:				case eOrb:
 #endif
 				{
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetDiffScale(vScale);

@@ -84,8 +84,8 @@ void CBook::Setup(ST_MapData setData)
 	//m_matWorld = matS * matR * matT;
 
 	// OBB TEST
-	//m_pOBB = new CPSOBB;
-	//m_pOBB->Setup(*this);
+	m_pOBB = new COBB;
+	m_pOBB->Setup(*this);
 	g_pObjectManager->AddOBBbox(m_pOBB);
 }
 

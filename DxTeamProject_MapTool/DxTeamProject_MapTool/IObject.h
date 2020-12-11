@@ -58,7 +58,7 @@ public:
 	virtual void Render();
 	virtual void Render_OBB_Box();
 
-	virtual void SetDiffScale(D3DXVECTOR3 set) = 0;
+	virtual void SetDiffScale(D3DXVECTOR3 set);
 	virtual D3DXMATRIXA16 GetmatWorld();
 
 	static void SetRefCnt(int set);

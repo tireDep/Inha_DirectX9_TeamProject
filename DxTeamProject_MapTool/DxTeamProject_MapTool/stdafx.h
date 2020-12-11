@@ -107,7 +107,7 @@ enum ObjectType
 	eBook, eOrb,
 
 	/* Added */
-	eFlower,
+	eFlower, eSprout, eBridge,
 
 	eNull
 

@@ -193,6 +193,16 @@ void IObject::Render_OBB_Box()
 #endif // _DEBUG
 }
 
+void IObject::SetDiffScale(D3DXVECTOR3 set)
+{
+	if (set.x != m_vScale.x)
+		m_vScale = D3DXVECTOR3(set.x, set.x, set.x);
+	else if (set.y != m_vScale.y)
+		m_vScale = D3DXVECTOR3(set.y, set.y, set.y);
+	else if (set.z != m_vScale.z)
+		m_vScale = D3DXVECTOR3(set.z, set.z, set.z);
+}
+
 D3DXMATRIXA16 IObject::GetmatWorld()
 {
 	D3DXMATRIXA16 matWorld, matS, matR, matT;
@@ -255,6 +265,19 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 			mapData.strXFilePath = string("Tile_") + to_string(objType + 1) + ".X";
 		else
 			mapData.strXFilePath = string("Tile_0") + to_string(objType + 1) + ".X";
+
+		CTile* tile = new CTile;
+		tile->Setup(mapData);
+	}
+		break;
+
+	case eBridge:
+	{
+		mapData.strObjName = string("Bridge") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Tile";
+		mapData.strTxtPath = "Texture_01.png";
+
+		mapData.strXFilePath = string("Bridge.X");
 
 		CTile* tile = new CTile;
 		tile->Setup(mapData);
@@ -401,6 +424,20 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	}
 		break;
 
+	case eSprout:
+	{
+		mapData.vScale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
+		mapData.strObjName = string("Sprout") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/Else";
+		mapData.strTxtPath = "Sprout.png";
+
+		mapData.strXFilePath = string("Sprout.X");
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+		break;
+
 	case eInvisibleWall:
 	{
 		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
@@ -451,6 +488,7 @@ void IObject::CreateObject(ST_MapData& mapData)
 	{
 	case eTile01: case eTile02:	case eTile03: case eTile04: case eTile05: case eTile06:
 	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
+	case eBridge:
 	{
 		CTile* tile = new CTile;
 		tile->Setup(mapData);
@@ -488,6 +526,7 @@ void IObject::CreateObject(ST_MapData& mapData)
 	case eSnowman:
 #ifdef _DEBUG
 	case eFlower:
+	case eSprout:
 #endif // _DEBUG
 	case eInvisibleWall:
 	{

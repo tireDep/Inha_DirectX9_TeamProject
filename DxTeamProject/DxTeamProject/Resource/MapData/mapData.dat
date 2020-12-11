@@ -1,24 +1,24 @@
 # Object_Start
 # ObjectName
-MovingCube1
+Bridge1
 # FolderPath
-Resource/XFile/Gimmick/MovingCube
+Resource/XFile/Tile
 # FilePath
-moving_cube.X
+Bridge.X
 # TxtPath
-moving_cube_1.png
+Texture_01.png
 # ObjectType
-32
+37
 # Scale
-1
-1
-1
+0.1
+0.1
+0.1
 # Rotate
-10
-10
-10
+0
+0
+0
 # Translate
-9.5
+0.5
 0
 0.5
 # Color
@@ -26,15 +26,96 @@ moving_cube_1.png
 0.5
 0.5
 1
-# GimmickData
-# StartPos
-10
-# EndPos
+# Object_End
+
+# Object_Start
+# ObjectName
+Bridge2
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Bridge.X
+# TxtPath
+Texture_01.png
+# ObjectType
+37
+# Scale
+0.1
+0.1
+0.1
+# Rotate
 0
-# Speed
-15
-# DirectionIndex
 0
+0
+# Translate
+3.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Bridge3
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Bridge.X
+# TxtPath
+Texture_01.png
+# ObjectType
+37
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Bridge4
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Bridge.X
+# TxtPath
+Texture_01.png
+# ObjectType
+37
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
 # Object_End
 
 # Section =======================================

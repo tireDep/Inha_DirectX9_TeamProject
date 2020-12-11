@@ -217,9 +217,9 @@ void CObject::CreateObject(const ST_MapData & mapData)
 		cylinder->Setup(mapData);
 	}
 	break;
-	case eATree:	case eSTree:	case eWTree:	case eCTree:
-	case eBall:		case eChair:	case eUmbrella:	case eSnowman:
-	case eFlower:	case eInvisibleWall:
+	case eATree:	case eSTree:			case eWTree:	case eCTree:
+	case eBall:		case eChair:			case eUmbrella:	case eSnowman:
+	case eFlower:	case eInvisibleWall:	case eSprout:
 	{
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
@@ -227,6 +227,7 @@ void CObject::CreateObject(const ST_MapData & mapData)
 	break;
 	case eTile01: case eTile02:	case eTile03: case eTile04: case eTile05: case eTile06:
 	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
+	case eBridge:
 	{
 		CTile* tile = new CTile;
 		tile->Setup(mapData);
