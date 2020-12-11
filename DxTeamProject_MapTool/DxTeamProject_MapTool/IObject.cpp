@@ -417,7 +417,9 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eG_RotationBoard:
 	case eG_BreakWall:
+#ifdef _DEBUG
 	case eG_DoorFrame:
+#endif // _DEBUG
 	case eG_ColorChanger:
 	case eG_Switch:
 	{
@@ -425,6 +427,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	}
 		break;
 
+#ifdef _DEBUG
 	case eBook:
 	{
 		mapData.strObjName = string("Book") + to_string(m_nRefCnt + 1);
@@ -435,6 +438,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 		CBook* background = new CBook;
 		background->Setup(mapData);
 	}
+#endif // _DEBUG
 		break;
 	} // << : switch
 }
@@ -481,7 +485,9 @@ void IObject::CreateObject(ST_MapData& mapData)
 	case eChair:
 	case eUmbrella:
 	case eSnowman:
+#ifdef _DEBUG
 	case eFlower:
+#endif // _DEBUG
 	case eInvisibleWall:
 	{
 		CBackground* background = new CBackground;
@@ -489,19 +495,23 @@ void IObject::CreateObject(ST_MapData& mapData)
 	}
 		break;
 
-	case eG_RotationBoard:	case eG_BreakWall:		case eG_DoorFrame:		case eG_Door:
+	case eG_RotationBoard:	case eG_BreakWall:		
+#ifdef _DEBUG
+	case eG_DoorFrame:		case eG_Door:
+#endif // _DEBUG
 	case eG_ColorChanger:	case eG_Switch:
 	{
 		CGimmick::CreateGimmick_SaveData(mapData);
 	}
 	break;
-
+#ifdef _DEBUG
 	case eBook:
 	{
 		CBook* book = new CBook;
 		book->Setup(mapData);
 	}
-		break;
+	break;
+#endif // _DEBUG
 
 	} // << : switch
 }

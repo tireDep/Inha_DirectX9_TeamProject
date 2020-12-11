@@ -20,16 +20,7 @@ CSwitch::~CSwitch()
 
 void CSwitch::Setup()
 {
-	D3DXCreateBox(g_pD3DDevice, 2.5, 0.3f, 2.5, &m_pBox, NULL);
-
-	D3DXVECTOR3* pVertices;
-
-	m_pBox->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
-	D3DXComputeBoundingBox(pVertices, m_pBox->GetNumVertices(), m_pBox->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
-	m_pBox->UnlockVertexBuffer();
-
-	m_pColl = new COBB;
-	m_pColl->SetupMesh(m_vMin, m_vMax, 0.3f);
+	
 		
 	ST_XFile* xfile = new ST_XFile;
 
@@ -69,6 +60,18 @@ void CSwitch::Setup()
 
 void CSwitch::Setup(ST_MapData setData)
 {
+	D3DXCreateBox(g_pD3DDevice, 2.5, 0.3f, 2.5, &m_pBox, NULL);
+
+	D3DXVECTOR3* pVertices;
+
+	m_pBox->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+	D3DXComputeBoundingBox(pVertices, m_pBox->GetNumVertices(), m_pBox->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+	m_pBox->UnlockVertexBuffer();
+
+	m_pColl = new COBB;
+	m_pColl->SetupMesh(m_vMin, m_vMax, 0.3f);
+
+
 	m_strObjName = setData.strObjName;
 	m_strFolder = setData.strFolderPath;
 	m_strXFile = setData.strXFilePath;
@@ -115,7 +118,8 @@ void CSwitch::Setup(ST_MapData setData)
 	D3DXMatrixRotationYawPitchRoll(&m_matR, v.x, v.y, v.z);
 
 	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
-
+	m_position = vTranslate;
+	m_scale = vScale;
 	m_matWorld = m_matS * m_matR * m_matT;
 
 	 m_pOBB = new COBB;
@@ -123,21 +127,18 @@ void CSwitch::Setup(ST_MapData setData)
 	 g_pObjectManager->AddOBBbox(m_pOBB);
 	 g_pObjectManager->AddGimmick(this);
 
-	//// OBB TEST
-	/*m_pOBB = new COBB;
-	m_pOBB->Setup(*this);
-	g_pObjectManager->AddOBBbox(m_pOBB);*/
+
 }
 
 
-void CSwitch::Update()
+void CSwitch::Update(float duration)
 {
-	 D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_scale.z);
-	 D3DXMatrixTranslation(&matT, m_position.x, m_position.y, m_position.z);
-	 collWorld = matS *matT;
+	D3DXMatrixScaling(&matS, m_scale.x + 0.25f, m_scale.y + 0.3f, m_scale.z + 0.25f);
+	D3DXMatrixTranslation(&matT, m_position.x, m_position.y +0.1f, m_position.z);
+	collWorld = matS *matT;
 	 
-	 m_pColl->Update(&collWorld);
-	 m_pOBB->Update(&m_matWorld);
+	m_pColl->Update(&collWorld); //내부 충돌 
+	m_pOBB->Update(&m_matWorld); //스위치 고유 충돌
 }
 
 void CSwitch::Render()
@@ -145,18 +146,15 @@ void CSwitch::Render()
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	
 	{
-		// g_pD3DDevice->SetTransform(D3DTS_WORLD, &collWorld);
-		// m_pColl->Render();
+		 g_pD3DDevice->SetTransform(D3DTS_WORLD, &collWorld);
+		 m_pColl->Render();
 	}
 
 	{
-	/*	D3DXMatrixIdentity(&matWorld);
-		D3DXMatrixScaling(&matS, 0.3f, 0.3f, 0.3f);
-		D3DXMatrixTranslation(&matT, 10, 0, 0);
-		matWorld = matS * matT;*/
+	
 
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &GetmatWorld());
-		// m_pOBB->Render();
+		
 
 		if (m_pMesh == NULL)
 			return;

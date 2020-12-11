@@ -65,40 +65,40 @@ void CFileLoadManager::ReadMapData(string fileName)
 
 		while (getline(mapFile, readData))
 		{
-			if (readData == "# Object_Start")
+			if (strstr(readData.c_str(), "# Object_Start"))
 				continue;
 
-			else if (readData == "# ObjectName")
+			else if (strstr(readData.c_str(), "# ObjectName"))
 			{
 				getline(mapFile, readData);
 				mapData.strObjName = readData;
 			}
 
-			else if (readData == "# FolderPath")
+			else if (strstr(readData.c_str(), "# FolderPath"))
 			{
 				getline(mapFile, readData);
 				mapData.strFolderPath = readData;
 			}
 
-			else if (readData == "# FilePath")
+			else if (strstr(readData.c_str(), "# FilePath"))
 			{
 				getline(mapFile, readData);
 				mapData.strXFilePath = readData;
 			}
 
-			else if (readData == "# TxtPath")
+			else if (strstr(readData.c_str(), "# TxtPath"))
 			{
 				getline(mapFile, readData);
 				mapData.strTxtPath = readData;
 			}
 
-			else if (readData == "# ObjectType")
+			else if (strstr(readData.c_str(), "# ObjectType"))
 			{
 				getline(mapFile, readData);
 				mapData.objType = (ObjectType)atoi(readData.c_str());
 			}
 
-			else if (readData == "# Scale")
+			else if (strstr(readData.c_str(), "# Scale"))
 			{
 				getline(mapFile, readData);
 				mapData.vScale.x = atof(readData.c_str());
@@ -110,7 +110,7 @@ void CFileLoadManager::ReadMapData(string fileName)
 				mapData.vScale.z = atof(readData.c_str());
 			}
 
-			else if (readData == "# Rotate")
+			else if (strstr(readData.c_str(), "# Rotate"))
 			{
 				getline(mapFile, readData);
 				mapData.vRotate.x = atof(readData.c_str());
@@ -122,7 +122,7 @@ void CFileLoadManager::ReadMapData(string fileName)
 				mapData.vRotate.z = atof(readData.c_str());
 			}
 
-			else if (readData == "# Translate")
+			else if (strstr(readData.c_str(), "# Translate"))
 			{
 				getline(mapFile, readData);
 				mapData.vTranslate.x = atof(readData.c_str()) + m_fNowX;
@@ -134,7 +134,7 @@ void CFileLoadManager::ReadMapData(string fileName)
 				mapData.vTranslate.z = atof(readData.c_str()) + m_fNowZ;
 			}
 
-			else if (readData == "# Color")
+			else if (strstr(readData.c_str(), "# Color"))
 			{
 				getline(mapFile, readData);
 				mapData.dxColor.r = atof(readData.c_str());
@@ -149,21 +149,21 @@ void CFileLoadManager::ReadMapData(string fileName)
 				mapData.dxColor.a = atof(readData.c_str());
 			}
 
-			else if (readData == "# GimmickData")
+			else if (strstr(readData.c_str(), "# GimmickData"))
 				continue;
 
-			else if (readData == "# RotationSpeed")
+			else if (strstr(readData.c_str(), "# RotationSpeed"))
 			{
 				getline(mapFile, readData);
 				mapData.gimmickData.roationSpeed = atof(readData.c_str());
 			}
-			else if (readData == "# RotationAxialIndex")
+			else if (strstr(readData.c_str(), "# RotationAxialIndex"))
 			{
 				getline(mapFile, readData);
 				mapData.gimmickData.roationAxialIndex = atoi(readData.c_str());
 			}
 
-			else if (readData == "# Object_End")
+			else if (strstr(readData.c_str(), "# Object_End"))
 			{
 				// todo
 				// 기믹, 이벤트 트리거 등 오브젝트 타입에 따라 파싱 추가

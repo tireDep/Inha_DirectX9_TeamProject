@@ -13,11 +13,12 @@ int CDoor::GetIndex()
 			break;
 		}
 	}
-
+#ifdef _DEBUG
 	if (this->m_ObjectType == ObjectType::eG_DoorFrame)
 		index += 1;
 	else if (this->m_ObjectType == ObjectType::eG_Door)
 		index -= 1;
+#endif // _DEBUG
 
 	return index;
 }

@@ -113,6 +113,7 @@ void CObjectManager::RemoveClickedObj()
 			preIndex = i - 1;
 
 			// >>  문은 2개가 1세트
+#ifdef _DEBUG
 			if (m_vecObject[i]->GetObjType() == ObjectType::eG_DoorFrame)
 			{
 				RemoveObject(m_vecObject[i]);
@@ -128,6 +129,9 @@ void CObjectManager::RemoveClickedObj()
 
 			else
 				RemoveObject(m_vecObject[i]);
+#else
+			RemoveObject(m_vecObject[i]);
+#endif // _DEBUG
 		}
 	}
 
@@ -220,18 +224,22 @@ void CObjectManager::CopyObject()
 
 			int indexNum = 0;
 			if (objType == ObjectType::eATree || objType == ObjectType::eSTree
-			 || objType == ObjectType::eWTree || objType == ObjectType::eCTree
-			 || objType == ObjectType::eFlower)
+			 || objType == ObjectType::eWTree || objType == ObjectType::eCTree )
+#ifdef _DEBUG
+				|| objType == ObjectType::eFlower)
+#endif // _DEBUG
 			{
 				// >> 인덱스로 받아 오는 파일들은 인덱스 값 필요함
 				string num = m_vecObject[i]->GetXFilePath();
 				num = num[num.length() - 3];
 				indexNum = atoi(num.c_str()) - 1;
 			}
+#ifdef _DEBUG
 			else if (objType == ObjectType::eG_Door || objType == ObjectType::eG_DoorFrame)
 			{
 				objType = eG_DoorFrame;
 			}
+#endif // _DEBUG
 
 			IObject::CreateObject(objType, indexNum);
 			break;
@@ -260,6 +268,7 @@ void CObjectManager::CopyObject()
 		}
 		break;
 
+#ifdef _DEBUG
 		case eG_DoorFrame:	case eG_Door:
 		{
 			CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_vecObject.size() - 1));
@@ -269,6 +278,7 @@ void CObjectManager::CopyObject()
 			temp->SetAnotherTranslation(temp->GetTranslate());
 		}
 		break;
+#endif // _DEBUG
 
 		} // << : switch
 

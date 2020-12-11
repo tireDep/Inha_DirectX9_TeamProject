@@ -84,24 +84,29 @@ void CImguiClass::SetVecItem()
 		else if (m_SubType == LoadType::eSomethingElse)
 		{
 			tempVec.clear();
+#ifdef _DEBUG
 			tempVec.push_back("BlueFlower"); tempObjType.push_back(eFlower);
 			tempVec.push_back("OrangeFlower"); tempObjType.push_back(eFlower);
 			tempVec.push_back("PurpleFlower"); tempObjType.push_back(eFlower);
 			tempVec.push_back("RedFlower"); tempObjType.push_back(eFlower);
 			tempVec.push_back("WhiteFlower"); tempObjType.push_back(eFlower);
 			tempVec.push_back("YellowFlower"); tempObjType.push_back(eFlower);
+#endif // _DEBUG
 
 			tempVec.push_back("BeachBall"); tempObjType.push_back(eBall);
 			tempVec.push_back("Chair"); tempObjType.push_back(eChair);
 			tempVec.push_back("Umbrella"); tempObjType.push_back(eUmbrella);
 			tempVec.push_back("Snowman"); tempObjType.push_back(eSnowman);
 
+#ifdef _DEBUG
 			tempVec.push_back("InvisibleWall"); tempObjType.push_back(eInvisibleWall);
+#endif // _DEBUG
 		}
 
 
 	} // << background
 
+#ifdef _DEBUG
 	else if (m_NowLoadType == LoadType::eGimmick)
 	{
 		tempVec.push_back("RotationBoard");		tempObjType.push_back(eG_RotationBoard);
@@ -117,7 +122,8 @@ void CImguiClass::SetVecItem()
 		tempVec.push_back("Book");	tempObjType.push_back(eBook);
 		tempVec.push_back("Orb");	tempObjType.push_back(eOrb);
 	}
-	
+#endif
+
 	m_vecItem = tempVec;
 	m_vecObjType = tempObjType;
 }
@@ -474,10 +480,12 @@ void CImguiClass::Update_FileLoader()
 	ImGui::SameLine(); if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
 
 	if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = -1; }
+#ifdef _DEBUG
 	ImGui::SameLine();  if (ImGui::RadioButton("Gimmick", m_NowLoadType == LoadType::eGimmick)) { m_NowLoadType = LoadType::eGimmick; m_FileLoadIndex = -1; }
 
 	if (ImGui::RadioButton("Item", m_NowLoadType == LoadType::eItem)) { m_NowLoadType = LoadType::eItem; m_FileLoadIndex = -1; }
 	// ImGui::SameLine();  if (ImGui::RadioButton("EventTrigger", m_NowLoadType == LoadType::eTrigger)) { m_NowLoadType = LoadType::eTrigger; m_FileLoadIndex = -1; }
+#endif // _DEBUG
 
 	ImGui::Separator();
 
@@ -595,21 +603,31 @@ void CImguiClass::Update_Inspector()
 
 				case eATree:	case eSTree:	case eWTree:	case eCTree:
 				case eSomethingElse:	case eBall:	case eChair:	case eUmbrella:
-				case eSnowman:	case eFlower:	case eInvisibleWall:
+				case eSnowman:	
+#ifdef _DEBUG
+				case eFlower:	
+#endif // _DEBUG
+				
+				case eInvisibleWall:
 
 				case eG_RotationBoard:	case eG_BreakWall:	
-				case eG_ColorChanger:	case eG_Switch:		case eG_Razer:		case eG_MovingCube:
+				case eG_ColorChanger:	case eG_Switch:		
+#ifdef _DEBUG 
+				case eG_Razer:		case eG_MovingCube:
+#endif
 				{
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetDiffScale(vScale);
 				}
 					break;
 
+#ifdef _DEBUG
 				case eG_DoorFrame:	case eG_Door:
 				{
 					CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 					temp->SetAnotherScale(vScale);
 				}
 				break;
+#endif // _DEBUG
 
 				default:
 				{
@@ -622,6 +640,7 @@ void CImguiClass::Update_Inspector()
 			D3DXVECTOR3 vRot = g_pObjectManager->GetIObject(m_nowSelectindex).GetRotate();
 			if (ImGui::InputFloat3("Rotate", vRot))
 			{
+#ifdef _DEBUG
 				if (tempType == ObjectType::eG_DoorFrame || tempType == ObjectType::eG_Door)
 				{
 					CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
@@ -629,6 +648,9 @@ void CImguiClass::Update_Inspector()
 				}
 				else
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetRotate(vRot);
+#else
+				g_pObjectManager->GetIObject(m_nowSelectindex).SetRotate(vRot);
+#endif // _DEBUG
 			}
 
 			D3DXVECTOR3 vTrans = g_pObjectManager->GetIObject(m_nowSelectindex).GetTranslate();
@@ -681,6 +703,7 @@ void CImguiClass::Update_Inspector()
 
 				vTrans = temp;
 
+#ifdef _DEBUG
 				if (tempType == ObjectType::eG_DoorFrame || tempType == ObjectType::eG_Door)
 				{
 					CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
@@ -688,6 +711,10 @@ void CImguiClass::Update_Inspector()
 				}
 				else
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetTranslate(vTrans);
+#else
+				g_pObjectManager->GetIObject(m_nowSelectindex).SetTranslate(vTrans);
+#endif // _DEBUG
+
 			}
 
 			ImGui::Separator();
@@ -832,12 +859,15 @@ void CImguiClass::Render()
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 	// >> testLoad
+	
+	g_pD3DDevice->SetRenderState(D3DRS_ZENABLE, true);
+
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
 	matWorld._41 = 0.5f; matWorld._43 = 0.5f;
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	// g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
 	for (int i = 0; i < m_vecMtrls.size(); i++)
 	{
 		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
