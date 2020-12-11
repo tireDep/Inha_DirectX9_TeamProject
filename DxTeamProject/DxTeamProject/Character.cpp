@@ -239,7 +239,7 @@ void CCharacter::Setup()
 	// m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
 
 	m_Character = new CSkinnedMesh;
-	m_Character->SetUp("Resource/XFile/Character", "new_test.X");
+	m_Character->SetUp("Resource/XFile/Character", "Get_up.X");
 
 	// Ray y check
 	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 10, 0);
