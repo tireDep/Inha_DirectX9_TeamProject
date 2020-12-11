@@ -1,0 +1,11 @@
+10 idle
+9 walk
+8 running
+7 jump
+6 fall
+5 push
+4 pull
+3 changeColor
+2 applyColor
+1 Sturn
+0 Getup

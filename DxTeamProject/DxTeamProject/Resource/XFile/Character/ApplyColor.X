@@ -5489,7 +5489,7 @@ AnimTicksPerSecond  {
  4800;
 }
 
-AnimationSet color_apply {
+AnimationSet ApplyColor {
  
 
  Animation {

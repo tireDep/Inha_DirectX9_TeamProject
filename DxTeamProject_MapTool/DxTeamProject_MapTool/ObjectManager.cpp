@@ -224,9 +224,9 @@ void CObjectManager::CopyObject()
 
 			int indexNum = 0;
 			if (objType == ObjectType::eATree || objType == ObjectType::eSTree
-			 || objType == ObjectType::eWTree || objType == ObjectType::eCTree )
-#ifdef _DEBUG
+			 || objType == ObjectType::eWTree || objType == ObjectType::eCTree
 				|| objType == ObjectType::eFlower)
+#ifdef _DEBUG
 #endif // _DEBUG
 			{
 				// >> 인덱스로 받아 오는 파일들은 인덱스 값 필요함

@@ -74,7 +74,10 @@ public:
 	void Update(CRay ray, D3DXCOLOR& objectcolor);		// Color Change
 	void UpdateLand(float duration);					// PObject Physics
 	void Update(float duration);						// IObject(Gimmick) Physics		// Integration...
-	void Collide();										// Collision			
+
+	void Collide(float duration);						// Collision			
+	void CollisionPObject(PObject* one, PObject* two, float duration);
+	void CollisionIObject(PObject* pObject, float duration);
 
 	void Render();
 	void RenderOBBBox();
