@@ -18,6 +18,11 @@ CSwitch::~CSwitch()
 	SafeDelete(m_pColl);
 }
 
+bool CSwitch::GetBool()
+{
+	return istrue;
+}
+
 void CSwitch::Setup()
 {
 	/*D3DXCreateBox(g_pD3DDevice, 2.5, 0.3f, 2.5, &m_pBox, NULL);
@@ -150,6 +155,11 @@ void CSwitch::Update(float duration)
 	m_pOBB->Update(&m_matWorld); //스위치 고유 충돌
 }
 
+void CSwitch::SetBool(bool set)
+{
+	istrue = set;
+}
+
 void CSwitch::Render()
 {
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
@@ -178,9 +188,15 @@ void CSwitch::Render()
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
 			if (istrue == false)
+			{
+				cout << "충돌없음" << endl;
 				m_pMesh->DrawSubset(i);
+			}
 			else
+			{
+				cout << "충돌" << endl;
 				m_pMesh->DrawSubset(0);
+			}
 		}
 
 		g_pD3DDevice->SetTexture(0, NULL);

@@ -6,7 +6,7 @@ class CBackground : public IObject
 public:
 	CBackground();
 	virtual ~CBackground();
-
+	virtual void SetBool(bool set) { };
 	virtual void Setup() { };
 	virtual void Setup(const ST_MapData & mapData);
 	virtual void Update(float duration) { m_pOBB->Update(&m_matWorld);	};

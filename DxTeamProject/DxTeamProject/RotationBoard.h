@@ -21,6 +21,7 @@ private:
 public:
 	CRotationBoard();
 	~CRotationBoard();
+	void SetBool(bool set) {};
 	void Setup(const ST_MapData & mapData);
 	void Update(float duration);
 	void Render();

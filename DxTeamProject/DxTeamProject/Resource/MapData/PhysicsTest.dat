@@ -108,7 +108,7 @@ board.png
 0
 0
 # Translate
-0
+6.5
 0
 9.5
 # Color
@@ -152,6 +152,34 @@ Cylinder5
 0.5
 1
 # Object_End
-
+# Object_Start
+# ObjectName
+Switch1
+# FolderPath
+Resource/XFile/Gimmick/Switch
+# FilePath
+Force_switch.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+32
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
 # Section =======================================
 

@@ -33,7 +33,7 @@ public:
 	virtual void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos) { };
 	virtual void Render() = 0;
 	virtual string GetName() { return string(); }
-
+	virtual void SetBool(bool setup) = 0; //상호작용 
 	virtual COBB* GetOBB() { return m_pOBB; }
 	//static void CreateObject(const ST_MapData& mapData);
 };
