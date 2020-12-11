@@ -29,6 +29,6 @@ public:
 
 	void Render();
 
-	
+	virtual void SetBool(bool set) { }
 };
 
