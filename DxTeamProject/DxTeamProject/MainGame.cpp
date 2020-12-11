@@ -234,7 +234,7 @@ void CMainGame::Update()
 		m_pDragon->Update(m_pCharacter->GetPosition());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		/// OBB TEST
-		m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
+		m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[2]);
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:

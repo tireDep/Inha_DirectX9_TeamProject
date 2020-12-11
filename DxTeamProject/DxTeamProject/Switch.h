@@ -24,12 +24,13 @@ public:
 	COBB* m_pColl; //충돌박스
 	CSwitch();
 	~CSwitch();
+	bool GetBool();
 	void Setup();
 	void Setup(ST_MapData setData);
 	void Update();
 	void Render();
 	void Update(float duration);
-	void SetBool(bool set) { istrue = set; }
+	void SetBool(bool set);
 	
 	COBB* GetOBB2() { return m_pColl; } // 콜리더부분!
 };

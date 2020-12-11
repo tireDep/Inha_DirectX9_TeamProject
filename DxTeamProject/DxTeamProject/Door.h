@@ -19,6 +19,7 @@ private:
 public:
 	CDoor();
 	~CDoor();
+	void SetBool(bool set) {};
 	void Setup(const ST_MapData & mapData);
 	void Update(float duration);
 	void Update(float duration, bool isSwitchOn);
