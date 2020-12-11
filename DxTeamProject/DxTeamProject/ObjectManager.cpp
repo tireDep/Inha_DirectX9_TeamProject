@@ -224,19 +224,19 @@ void CObjectManager::UpdateLand(float duration)
 	}
 }
 
-void CObjectManager::Collide()
+void CObjectManager::Collide(float duration)
 {
 	// Need To modify...
-	for (int hittee = 0; hittee < m_vecPObject.size(); hittee++)
-	{
-		for (int hitter = 0; hitter < m_vecPObject.size(); hitter++)
-		{
-			if (hittee >= hitter)
-				continue;
-			//m_vecPObject[hittee]->CollisionOtherObject(m_vecPObject[hitter]);
-			m_vecPObject[hittee]->Collision3D(m_vecPObject[hitter]);
-		}
-	}
+	//for (int hittee = 0; hittee < m_vecPObject.size(); hittee++)
+	//{
+	//	for (int hitter = 0; hitter < m_vecPObject.size(); hitter++)
+	//	{
+	//		if (hittee >= hitter)
+	//			continue;
+	//		//m_vecPObject[hittee]->CollisionOtherObject(m_vecPObject[hitter]);
+	//		m_vecPObject[hittee]->Collision3D(m_vecPObject[hitter]);
+	//	}
+	//}
 
 	// Need To Modify...
 	///Sphere
@@ -250,19 +250,19 @@ void CObjectManager::Collide()
 				case eSphere:
 					if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CSphere*>(m_vecPObject[PObectIndex])))
 					{
-
+						CollisionPObject(m_vecSphere[SphereIndex], m_vecPObject[PObectIndex], duration);
 					}
 					break;
 				case eBox:
 					if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CBox*>(m_vecPObject[PObectIndex])))
 					{
-
+						CollisionPObject(m_vecSphere[SphereIndex], m_vecPObject[PObectIndex], duration);
 					}
 					break;
 				case eCylinder:
 					if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
 					{
-
+						CollisionPObject(m_vecSphere[SphereIndex], m_vecPObject[PObectIndex], duration);
 					}
 					break;
 				default:
@@ -300,13 +300,13 @@ void CObjectManager::Collide()
 				case eBox:
 					if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CBox*>(m_vecPObject[PObectIndex])))
 					{
-
+						CollisionPObject(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
 					}
 					break;
 				case eCylinder:
 					if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
 					{
-
+						CollisionPObject(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
 					}
 					break;
 				default:
@@ -346,7 +346,7 @@ void CObjectManager::Collide()
 				case eCylinder:
 					if (m_vecCylinder[CylinderIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
 					{
-
+						CollisionPObject(m_vecCylinder[CylinderIndex], m_vecPObject[PObectIndex], duration);
 					}
 					break;
 				default:
@@ -371,6 +371,7 @@ void CObjectManager::Collide()
 			}
 		}
 	}
+
 	// OBB TEST
 	//for (int i = 0; i < m_vecBox.size(); i++)
 	//	for (int j = 0; j < m_vecGimmick.size(); j++)
@@ -386,6 +387,32 @@ void CObjectManager::Collide()
 	//{
 	//	m_vecIObject[i]->Update();
 	//}
+}
+
+void CObjectManager::CollisionPObject(PObject * one, PObject * two, float duration)
+{
+	D3DXVECTOR3 unitNormal = one->GetPosition() - two->GetPosition();
+
+	float v1 = D3DXVec3Dot(&one->GetLinearVelocity(), &unitNormal);
+	float v2 = D3DXVec3Dot(&two->GetLinearVelocity(), &unitNormal);
+
+	float averageE = (one->GetElasticity() + two->GetElasticity()) / 2.0f;
+
+	float finalv1 =	((one->GetMass() - averageE * two->GetMass()) * v1 + (1 + averageE) * two->GetMass() * v2) / (one->GetMass() + two->GetMass());
+	float finalv2 = ((two->GetMass() - averageE * one->GetMass()) * v2 + (1 + averageE) * one->GetMass() * v1) / (one->GetMass() + two->GetMass());
+	
+	one->SetLinearVelocity((((finalv1 - v1) * unitNormal) + one->GetLinearVelocity()));
+	two->SetLinearVelocity((((finalv2 - v2) * unitNormal) + two->GetLinearVelocity()));
+
+	D3DXVECTOR3 acceleration1 = one->GetLinearVelocity() / duration;
+	D3DXVECTOR3 acceleration2 = two->GetLinearVelocity() / duration;
+
+	one->SetForceVector(acceleration1 * one->GetMass());
+	two->SetForceVector(acceleration2 * two->GetMass());
+}
+
+void CObjectManager::CollisionIObject(PObject * pObject, float duration)
+{
 }
 
 void CObjectManager::Render()

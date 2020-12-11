@@ -112,7 +112,7 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
-	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "OBBBackgroundTest.dat");
+	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PhysicsTest.dat");
 #ifdef _DEBUG
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
@@ -322,7 +322,7 @@ void CMainGame::Update()
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());		// Color Change
 	g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());	// PObject Physics
 	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());		// IObject(Gimmick) Physics
-	g_pObjectManager->Collide();									// Collide
+	g_pObjectManager->Collide(g_pTimeManager->GetElapsedTime());	// Collide
 	///
 	//m_pBox->Update(g_pTimeManager->GetElapsedTime());
 	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics

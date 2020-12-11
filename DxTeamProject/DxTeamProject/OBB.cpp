@@ -81,9 +81,9 @@ void COBB::Setup(CObject & object)
 		}
 	}
 
-	m_fAxisHalfLen[0] *= object.GetScale().x;
-	m_fAxisHalfLen[1] *= object.GetScale().y;
-	m_fAxisHalfLen[2] *= object.GetScale().z;
+	//m_fAxisHalfLen[0] *= object.GetScale().x;
+	//m_fAxisHalfLen[1] *= object.GetScale().y;
+	//m_fAxisHalfLen[2] *= object.GetScale().z;
 
 	// Check OriCenterPos, OriAxisDir
 	//for (int i = 0; i < 3; ++i)
@@ -259,7 +259,7 @@ void COBB::Update(D3DXMATRIXA16 * pmatWorld)
 	{
 		D3DXVec3TransformNormal(&m_vAxisDir[i], &m_vOriAxisDir[i], &m_matWorld);
 		// JW ADD...
-		D3DXVec3Normalize(&m_vAxisDir[i], &m_vAxisDir[i]);
+		//D3DXVec3Normalize(&m_vAxisDir[i], &m_vAxisDir[i]);
 	}
 	D3DXVec3TransformCoord(&m_vCenterPos, &m_vOriCenterPos, &m_matWorld);
 }

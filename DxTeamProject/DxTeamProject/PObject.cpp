@@ -39,7 +39,7 @@ void PObject::Update(float duration)
 	if (m_isForceApplied)
 	{
 		if (!hasFiniteMass()) return;
-		linearforce = m_vForceVector * GetMass();
+		linearforce = m_vForceVector * GetInverseMass();
 		//D3DXVec3Cross(&angularforce, &m_vForceLocation, &m_vForceVector);
 		m_isForceApplied = false;
 	}
@@ -64,8 +64,18 @@ void PObject::Update(float duration)
 	else
 		m_vPosition += (m_vLinearVelocity * duration);
 	
-	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	m_vTranslation = m_vPosition;
 
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+	m_matWorld = matS * matR * matT;
+
+	//D3DXMATRIXA16 matT;
+	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	//D3DXMatrixMultiply(&m_matWorld, &m_matWorld, &matT);
+	//D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	/// Rotation
 	//D3DXMATRIXA16 totalTransaltion;
 	//D3DXMatrixTranslation(&totalTransaltion, m_vPosition.x, m_vPosition.y, m_vPosition.z);
@@ -174,6 +184,7 @@ void PObject::UpdateLand(float duration)
 	float distance = GetPosition().y - GetBoundingSphere();
 	if (CloseToZero(distance) || distance < 0.0f)
 	{
+		//m_vPosition.y = -distance;
 		D3DXVECTOR3 tmp = m_vLinearVelocity;
 		tmp.y = -tmp.y * m_fElasticity;
 		m_vLinearVelocity = tmp;
