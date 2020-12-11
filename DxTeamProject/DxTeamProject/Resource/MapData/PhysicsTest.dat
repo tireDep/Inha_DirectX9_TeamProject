@@ -162,19 +162,19 @@ Force_switch.X
 # TxtPath
 cubeworld_texture.tga
 # ObjectType
-32
+31
 # Scale
-0.1
-0.1
-0.1
+0.5
+0.5
+0.5
 # Rotate
 0
 0
 0
 # Translate
-9.5
+9
 0
-9.5
+9
 # Color
 0.5
 0.5

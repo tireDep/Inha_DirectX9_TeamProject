@@ -323,11 +323,16 @@ void CObjectManager::Collide(float duration)
 			{
 				switch (m_vecIObject[IObjectIndex]->GetObjType())
 				{
-					case eG_RotationBoard: case eG_Door: case eG_MovingCube:
-						{
-						
-						}
+					case eG_RotationBoard: 
 						break;
+					case eG_Door:
+						break;
+					case eG_MovingCube:			
+						
+						break;
+					case  eG_Switch:
+						m_vecIObject[IObjectIndex]->SetBool(true);
+						break;	
 					default:
 						break;
 				}
@@ -377,13 +382,11 @@ void CObjectManager::Collide(float duration)
 
 	
 	// OBB TEST
-	for (int i = 0; i < m_vecBox.size(); i++)
-	{
-		for (int j = 0; j < m_vecGimmick.size(); j++)
-		{
-			m_vecBox[i]->hasIntersected(m_vecGimmick[j]);
-		}
-	}
+	
+		
+
+		
+	
 	//for (int i = 0; i < m_vecBox.size(); i++)
 	//	for (int j = 0; j < m_vecIObject.size(); j++)
 	//	{

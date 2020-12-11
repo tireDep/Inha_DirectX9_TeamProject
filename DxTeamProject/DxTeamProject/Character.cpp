@@ -495,11 +495,11 @@ void CCharacter::ColliderOtherObject(IObject * background)
 	{
 		
 		m_isCollided = true;
-		background->SetBool(m_isCollided);
+		
 	}
 	else
 	{
 		m_isCollided = false;
-		background->SetBool(m_isCollided);
+		
 	}
 }
