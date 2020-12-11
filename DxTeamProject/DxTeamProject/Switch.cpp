@@ -20,21 +20,17 @@ CSwitch::~CSwitch()
 
 void CSwitch::Setup()
 {
-	{
+	D3DXCreateBox(g_pD3DDevice, 2.5, 0.3f, 2.5, &m_pBox, NULL);
 
-		D3DXCreateBox(g_pD3DDevice, 2.5, 0.3f, 2.5, &m_pBox, NULL);
+	D3DXVECTOR3* pVertices;
 
-		D3DXVECTOR3* pVertices;
+	m_pBox->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+	D3DXComputeBoundingBox(pVertices, m_pBox->GetNumVertices(), m_pBox->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+	m_pBox->UnlockVertexBuffer();
 
-		m_pBox->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
-		D3DXComputeBoundingBox(pVertices, m_pBox->GetNumVertices(), m_pBox->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
-		m_pBox->UnlockVertexBuffer();
-
-		m_pColl = new COBB;
-		m_pColl->SetupMesh(m_vMin, m_vMax, 0.3f);
+	m_pColl = new COBB;
+	m_pColl->SetupMesh(m_vMin, m_vMax, 0.3f);
 		
-
-	}
 	ST_XFile* xfile = new ST_XFile;
 
 	if (!g_pFileLoadManager->FileLoad_XFile("Resource/XFile/Gimmick/Switch", "Force_switch.X", xfile))
@@ -42,6 +38,8 @@ void CSwitch::Setup()
 		MessageBox(g_hWnd, L"LoadXFile Fail", L"Error", MB_OK);
 		return;
 	}
+
+	g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Gimmick/Switch", "cubeworld_texture.tga", m_pTexture);
 
 	m_pMesh = xfile->pMesh;
 	m_adjBuffer = xfile->adjBuffer;

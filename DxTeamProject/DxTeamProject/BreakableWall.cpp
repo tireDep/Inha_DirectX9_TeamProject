@@ -10,8 +10,8 @@ CBreakableWall::CBreakableWall()
 
 CBreakableWall::~CBreakableWall()
 {
-	SafeRelease(m_pMesh);
-	SafeRelease(m_adjBuffer);
+	// SafeRelease(m_pMesh);
+	// SafeRelease(m_adjBuffer);
 }
 
 void CBreakableWall::Setup(string folder, string file)

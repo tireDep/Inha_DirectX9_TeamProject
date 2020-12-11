@@ -78,7 +78,7 @@ CMainGame::~CMainGame()
 	//SafeDelete(m_pGimmick_Door[0]);
 	//SafeDelete(m_pGimmick_Door[1]);
 	//SafeDelete(m_pGimmick_RotationBoard);
-	// SafeDelete(m_pGimmick_Switch);
+	//SafeDelete(m_pGimmick_Switch); // >> 삭제가 오브젝트 매니저 통해서 되므로 메모리 이중삭제 됨
 	SafeDelete(m_pGimmick_BreakableWall[0]);
 	SafeDelete(m_pGimmick_BreakableWall[1]);
 	//
