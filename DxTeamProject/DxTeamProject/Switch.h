@@ -28,7 +28,7 @@ public:
 	void Setup(ST_MapData setData);
 	void Update();
 	void Render();
-	void Update(float duration) {};
+	void Update(float duration);
 	void SetBool(bool set) { istrue = set; }
 	
 	COBB* GetOBB2() { return m_pColl; } // 콜리더부분!

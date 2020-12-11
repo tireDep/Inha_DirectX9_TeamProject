@@ -20,7 +20,7 @@ CSwitch::~CSwitch()
 
 void CSwitch::Setup()
 {
-	D3DXCreateBox(g_pD3DDevice, 2.5, 0.3f, 2.5, &m_pBox, NULL);
+	/*D3DXCreateBox(g_pD3DDevice, 2.5, 0.3f, 2.5, &m_pBox, NULL);
 
 	D3DXVECTOR3* pVertices;
 
@@ -29,7 +29,7 @@ void CSwitch::Setup()
 	m_pBox->UnlockVertexBuffer();
 
 	m_pColl = new COBB;
-	m_pColl->SetupMesh(m_vMin, m_vMax, 0.3f);
+	m_pColl->SetupMesh(m_vMin, m_vMax, 0.3f);*/
 		
 	ST_XFile* xfile = new ST_XFile;
 
@@ -59,11 +59,7 @@ void CSwitch::Setup()
 	}*/
 	delete xfile;
 
-	m_pOBB = new COBB;
-	m_pOBB->Setup(*this);
-	g_pObjectManager->AddOBBbox(m_pOBB);
-	g_pObjectManager->AddGimmick(this);
-
+	
 
 }
 
@@ -127,10 +123,10 @@ void CSwitch::Setup(ST_MapData setData)
 	D3DXMatrixRotationYawPitchRoll(&m_matR, v.x, v.y, v.z);
 
 	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
+	
+	m_matWorld = m_matS * m_matR * m_matT;
 	m_position = vTranslate;
 	m_scale = vScale;
-	m_matWorld = m_matS * m_matR * m_matT;
-
 	 m_pOBB = new COBB;
 	 m_pOBB->Setup(*this);
 	 g_pObjectManager->AddOBBbox(m_pOBB);
@@ -140,7 +136,7 @@ void CSwitch::Setup(ST_MapData setData)
 }
 
 
-void CSwitch::Update()
+void CSwitch::Update(float duration)
 {
 	D3DXMatrixScaling(&matS, m_scale.x + 0.25f, m_scale.y + 0.3f, m_scale.z + 0.25f);
 	D3DXMatrixTranslation(&matT, m_position.x, m_position.y +0.1f, m_position.z);

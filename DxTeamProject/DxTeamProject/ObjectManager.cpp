@@ -204,8 +204,8 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 
 void CObjectManager::Update(float duration)
 {
-	for (int i = 0; i < m_vecIObject.size(); i++)
-		m_vecIObject[i]->Update(duration);
+	for (int i = 0; i < m_vecGimmick.size(); i++)
+		m_vecGimmick[i]->Update(duration);
 
 
 
@@ -371,6 +371,19 @@ void CObjectManager::Collide()
 			}
 		}
 	}
+
+
+	
+	if (COBB::IsCollision(m_vecGimmick[0]->GetOBB(), m_vecGimmick[0]->GetOBB()))
+	{
+		cout << "hi" << endl;
+	}
+	else
+	{
+		cout << "bye" << endl;
+	}
+	
+
 	// OBB TEST
 	//for (int i = 0; i < m_vecBox.size(); i++)
 	//	for (int j = 0; j < m_vecGimmick.size(); j++)

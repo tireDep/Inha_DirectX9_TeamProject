@@ -70,7 +70,7 @@ public:
 	vector<CObject *> GetVecObject()	{ return m_vecObject; }
 	vector<PObject *> GetVecPObejct()	{ return m_vecPObject; }
 	vector<IObject *> GetVecIObject()	{ return m_vecIObject; }
-
+	vector<CGimmick*> GetVecGimmickObject() { return m_vecGimmick; }
 	void Update(CRay ray, D3DXCOLOR& objectcolor);		// Color Change
 	void UpdateLand(float duration);					// PObject Physics
 	void Update(float duration);						// IObject(Gimmick) Physics		// Integration...
