@@ -180,6 +180,7 @@ void CMainGame::Setup()
 	g_pEventManager->AddListener(g_gameManager);
 	g_pEventManager->AddListener(m_pCamera);
 	g_pEventManager->AddListener(m_pCharacter);
+	g_pEventManager->AddListener(m_pDragon);
 	g_pEventManager->AddListener(m_pUI);
 
 	for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
@@ -225,7 +226,7 @@ void CMainGame::Update()
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
-		//m_pDragon->DoRotation(m_pCharacter->Getrotation(), m_pCamera->GetCameraDirection());
+		m_pDragon->DoRotation(m_pCamera->GetCameraDirection());
 		m_pDragon->Update(m_pCharacter->GetPosition());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		/// OBB TEST

@@ -1,7 +1,9 @@
 #pragma once
+#include "IListener.h"
+
 class CCharacter;
 
-class CDragon
+class CDragon : public IListener
 {
 private:
 	Synthesize_Add_Ref(ID3DXMesh*, m_pMesh, Mesh);
@@ -23,16 +25,21 @@ private:
 
 	bool m_isTrue;
 	float Drangon_y;
+
+	float rotation;
 	// << testRotationMove
 
 public:
 	CDragon();
-	~CDragon();
-	void Update(D3DXVECTOR3 pos);
-	void Setup();
-	void Render();
-	void ChangeColor(D3DXCOLOR color);
-	void DoRotation(const float & radian, D3DXVECTOR3 cameradirection);
-	void DirectionSet(D3DXVECTOR3 cameradirection);
+	virtual ~CDragon(void);
+	virtual void Update(D3DXVECTOR3 pos);
+	virtual void Setup();
+	virtual void Render();
+	virtual void ChangeColor(D3DXCOLOR color);
+	virtual void DoRotation(D3DXVECTOR3 cameradirection);
+	virtual void DirectionSet(D3DXVECTOR3 cameradirection);
+
+	void ReceiveEvent(ST_EVENT eventMsg) override;
+	virtual string GetName();
 };
 

@@ -11,9 +11,11 @@ CDragon::CDragon() :
 	m_vPosition(0, 0, 0),
 	Drangon_y(4.5f),
 	m_vDrangonPos(0, 0, 0),
-	m_vDirection(0,0,1)
+	m_vDirection(0,0,1),
+	rotation(-1.0f)
 {
 	D3DXMatrixIdentity(&m_matRotY);
+	m_strName = "Dragon";
 }
 
 
@@ -76,7 +78,6 @@ void CDragon::Render()
 
 	D3DXMATRIXA16 matS, matT;
 	D3DXMatrixScaling(&matS, 0.7f, 0.7f, 0.7f);
-	// D3DXMatrixTranslation(&matT, 0, 5, 0);
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	matWorld = matS *m_matRotY* matT;
 
@@ -119,13 +120,11 @@ void CDragon::ChangeColor(D3DXCOLOR color)
 
 }
 
-void CDragon::DoRotation(const float & radian, D3DXVECTOR3 cameradirection)
+void CDragon::DoRotation(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
 	m_vDirection.y = 0;
-	D3DXMatrixRotationY(&m_matRotY, radian);
-
-	cout << radian << endl;
+	D3DXMatrixRotationY(&m_matRotY, rotation);
 
 	D3DXVec3TransformNormal(&m_vDirection, &m_vDirection, &m_matRotY);
 	D3DXVec3Normalize(&m_vDirection, &m_vDirection);
@@ -140,3 +139,48 @@ void CDragon::DirectionSet(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
 }
+
+string CDragon::GetName()
+{
+	return m_strName;
+}
+
+void CDragon::ReceiveEvent(ST_EVENT eventMsg)
+{
+	switch (eventMsg.playerInput)
+	{
+	case PlayerInputType::eUp:
+		rotation = 0.0f;
+		break;
+
+	case PlayerInputType::eLeftUp:
+		rotation = D3DX_PI / 4.0f * -1;
+		break;
+
+	case PlayerInputType::eRightUp:
+		rotation = D3DX_PI / 4.0f;
+		break;
+
+	case PlayerInputType::eDown:
+		rotation = D3DX_PI;
+		break;
+
+	case PlayerInputType::eLeftDown:
+		rotation = D3DX_PI + D3DX_PI / 4.0f;
+		break;
+
+	case PlayerInputType::eRightDown:
+		rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
+		break;
+
+	case PlayerInputType::eLeft:
+		rotation = -D3DX_PI / 2.0f;
+		break;
+
+	case PlayerInputType::eRight:
+		rotation = D3DX_PI / 2.0f;
+		break;
+	}
+
+}
+
