@@ -1,6 +1,9 @@
 #pragma once
 #include "PObject.h"
 
+class IObject;
+class CGimmick;
+
 class CCylinder : public PObject
 {
 public:
@@ -12,11 +15,13 @@ protected:
 public:
 	void Setup();
 	void Setup(const ST_MapData & mapData);
+	void Update(float duration);
 
-	//virtual void AddForce(const D3DXVECTOR3 & force) {};
-	//virtual void ClearAccumulator() {};
-	//virtual void Integrate(float duration) {};
-	//virtual void RunPhysics(float duration) {};
+	bool hasIntersected(CCylinder * otherCylinder);
+	bool hasIntersected(CGimmick * otherIObject);
+	bool hasIntersected(IObject * otherIObject);
 
 	string GetName();
+	// OBB TEST
+	COBB* GetOBB() { return m_pOBB; }
 };

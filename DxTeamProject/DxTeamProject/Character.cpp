@@ -48,7 +48,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 #endif
 	// float duration = *(float*) eventMsg.ptrMessage;
 	// speed *= duration;
-	float rotation = -1.0f;
+	rotation = -1.0f;
 
 	if (!g_gameManager->GetUImode())
 	{
@@ -382,8 +382,10 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 
 int CCharacter::Update(vector<PObject*> ObjectPosition)
 {
+
 	//if (m_pOBB)
 	//	m_pOBB->Update(&m_matWorld);
+
 	for (int i = 0; i < ObjectPosition.size(); ++i)
 	{
 		if (ObjectPosition[i]->GetPosition().x - m_vPosition.x < 1.0f
@@ -461,6 +463,11 @@ D3DXVECTOR3& CCharacter::GetPosition()
 D3DXMATRIXA16* CCharacter::GetTransform()
 {
 	return &m_matWorld;
+}
+
+float CCharacter::Getrotation()
+{
+	return rotation;
 }
 
 D3DXCOLOR CCharacter::GetColor()

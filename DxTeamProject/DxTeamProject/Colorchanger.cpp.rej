@@ -1,0 +1,10 @@
+diff a/DxTeamProject/DxTeamProject/Colorchanger.cpp b/DxTeamProject/DxTeamProject/Colorchanger.cpp	(rejected hunks)
+@@ -172,7 +172,7 @@
+ 	// �÷�ü����
+ 	{
+ 		D3DXMatrixRotationY(&matR, D3DXToRadian(angle));
+-		D3DXMatrixScaling(&matS, 1.0f, 1.0f, 1.0f);
++		D3DXMatrixScaling(&matS, 0.3f, 0.3f, 0.3f);
+ 		D3DXMatrixTranslation(&matT, m_position.x, m_position.y, m_position.z);
+ 		m_matWorld = matS * matR * matT;
+ 

@@ -100,7 +100,7 @@ enum ObjectType
 	eBox, eSphere, eCylinder,
 
 	/* Gimmick, */
-	eG_RotationBoard, eG_BreakWall, eG_Door, eG_ColorChanger, eG_Switch,
+	eG_RotationBoard, eG_BreakWall, eG_DoorFrame, eG_Door, eG_ColorChanger, eG_Switch, eG_Razer, eG_MovingCube,
 
 	/* Item */
 	eBook, eOrb,
@@ -124,6 +124,10 @@ struct ST_Gimmick
 	float roationSpeed;
 	int roationAxialIndex;
 	// >> rotation Board
+
+	int conditionIndex;
+	int maxMassIndex;
+	// string 
 };
 
 struct ST_MapData

@@ -1,4 +1,6 @@
 #pragma once
+class CCharacter;
+
 class CDragon
 {
 private:
@@ -13,15 +15,24 @@ private:
 	ST_XFile* xfile = new ST_XFile;
 
 	// >> testRotationMove
-	D3DXVECTOR3 m_position;
+	D3DXVECTOR3 m_vPosition;
+	D3DXVECTOR3 m_vDrangonPos;
+
+	D3DXVECTOR3 m_vDirection;
+	D3DXMATRIXA16 m_matRotY;
+
 	bool m_isTrue;
+	float Drangon_y;
 	// << testRotationMove
 
 public:
 	CDragon();
 	~CDragon();
-	void Update(D3DXCOLOR color);
+	void Update(D3DXVECTOR3 pos);
 	void Setup();
 	void Render();
+	void ChangeColor(D3DXCOLOR color);
+	void DoRotation(const float & radian, D3DXVECTOR3 cameradirection);
+	void DirectionSet(D3DXVECTOR3 cameradirection);
 };
 

@@ -1,10 +1,9 @@
 #include "stdafx.h"
-#include "Box.h"
-#include "Sphere.h"
-#include "Cylinder.h"
 #include "IObject.h"
 #include "Gimmick.h"
-#include "PSOBB.h"
+//#include "Sphere.h"
+#include "Box.h"
+#include "Cylinder.h"
 
 CBox::CBox()
 	: m_fWidth(1.0f)
@@ -29,10 +28,9 @@ void CBox::Setup()
 	m_fBoundingSphere = maxLength / 2.0f;
 
 	// modify? 12.0f -> 48.0f?
-	m_vInverseRotationInertia.x = 12.0f / (GetMass() * (m_fHeight * m_fHeight + m_fDepth  * m_fDepth));
-	m_vInverseRotationInertia.y = 12.0f / (GetMass() * (m_fWidth  * m_fWidth  + m_fDepth  * m_fDepth));
-	m_vInverseRotationInertia.z = 12.0f / (GetMass() * (m_fWidth  * m_fWidth  + m_fHeight * m_fHeight));
-
+	//m_vInverseRotationInertia.x = 12.0f / (GetMass() * (m_fHeight * m_fHeight + m_fDepth  * m_fDepth));
+	//m_vInverseRotationInertia.y = 12.0f / (GetMass() * (m_fWidth  * m_fWidth  + m_fDepth  * m_fDepth));
+	//m_vInverseRotationInertia.z = 12.0f / (GetMass() * (m_fWidth  * m_fWidth  + m_fHeight * m_fHeight));
 	// Collide
 	//m_vPosition.x = -2;
 	//m_vPosition.y = 15;
@@ -94,11 +92,106 @@ void CBox::Setup(const ST_MapData & mapData)
 	//collisionbox.calculateInternals();
 
 	// OBB TEST
-	m_pOBB = new CPSOBB;
+	m_pOBB = new COBB;
 	m_pOBB->Setup(*this);
 	g_pObjectManager->AddOBBbox(m_pOBB);
 	g_pObjectManager->AddBox(this);
 }
+
+void CBox::Update(float duration)
+{
+	PObject::Update(duration);
+	// OBB TEST
+	m_pOBB->Update(&m_matWorld);
+}
+
+//bool CBox::hasIntersected(CSphere & otherSphere)
+//{
+//	D3DXVECTOR3 center = otherSphere.GetPosition();
+//	D3DXMATRIXA16 inverseBoxMatrix;
+//	D3DXMatrixInverse(&inverseBoxMatrix, NULL, &m_matWorld);
+//	D3DXVECTOR3 SphereToBoxCenter;
+//	D3DXVec3TransformCoord(&SphereToBoxCenter, &center, &inverseBoxMatrix);
+//
+//	if (fabsf(SphereToBoxCenter.x) - otherSphere.GetRadius() > m_fWidth / 2.0f ||
+//		fabsf(SphereToBoxCenter.y) - otherSphere.GetRadius() > m_fHeight / 2.0f ||
+//		fabsf(SphereToBoxCenter.z) - otherSphere.GetRadius() > m_fHeight / 2.0f)
+//		return false;
+//
+//	D3DXVECTOR3 closestPt(0, 0, 0);
+//	float dist;
+//
+//	dist = SphereToBoxCenter.x;
+//	if (dist > m_fWidth / 2.0f) dist = m_fWidth / 2.0f;
+//	if (dist < -m_fWidth / 2.0f) dist = -m_fWidth / 2.0f;
+//	closestPt.x = dist;
+//
+//	dist = SphereToBoxCenter.y;
+//	if (dist > m_fHeight / 2.0f) dist = m_fHeight / 2.0f;
+//	if (dist < -m_fHeight / 2.0f) dist = -m_fHeight / 2.0f;
+//	closestPt.y = dist;
+//
+//	dist = SphereToBoxCenter.z;
+//	if (dist > m_fDepth / 2.0f) dist = m_fDepth / 2.0f;
+//	if (dist < -m_fDepth / 2.0f) dist = -m_fDepth / 2.0f;
+//	closestPt.z = dist;
+//
+//	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
+//	dist = D3DXVec3LengthSq(&tmp);
+//	if (dist > otherSphere.GetRadius()*otherSphere.GetRadius())
+//		return false;
+//
+//	return true;
+//}
+
+bool CBox::hasIntersected(CBox * otherBox)
+{
+	if (this->m_pOBB->IsCollision(otherBox->GetOBB()))
+		return true;
+	return false;
+}
+
+bool CBox::hasIntersected(CCylinder * otherCylinder)
+{
+	if (this->m_pOBB->IsCollision(otherCylinder->GetOBB()))
+		return true;
+	return false;
+}
+
+bool CBox::hasIntersected(IObject * otherIObject)
+{
+	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
+	{
+		D3DXVECTOR3 v;
+		v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
+		D3DXVec3Normalize(&v, &v);
+		this->SetPusingForce(v);
+		//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
+		return true;
+	}
+	return false;
+}
+
+bool CBox::hasIntersected(CGimmick * otherIObject)
+{
+	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
+	{
+		D3DXVECTOR3 v;
+		v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
+		D3DXVec3Normalize(&v, &v);
+		this->SetPusingForce(v);
+		//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
+		return true;
+	}
+	return false;
+}
+
+string CBox::GetName()
+{
+	return m_strName;
+}
+
+/// Delete Later...
 //void CBox::Update(float duration)
 //{
 //	D3DXVECTOR3 linearforce, angularforce;
@@ -188,103 +281,3 @@ void CBox::Setup(const ST_MapData & mapData)
 //{
 //	resolver.resolveContacts(cData.contactArray, cData.contactCount, duration);
 //}
-
-string CBox::GetName()
-{
-	return m_strName;
-}
-
-void CBox::Update(float duration)
-{
-	PObject::Update(duration);
-	// OBB TEST
-	m_pOBB->Update(&m_matWorld);
-}
-
-bool CBox::hasIntersected(CSphere & otherSphere)
-{
-	D3DXVECTOR3 center = otherSphere.GetPosition();
-	D3DXMATRIXA16 inverseBoxMatrix;
-	D3DXMatrixInverse(&inverseBoxMatrix, NULL, &m_matWorld);
-	D3DXVECTOR3 SphereToBoxCenter;
-	D3DXVec3TransformCoord(&SphereToBoxCenter, &center, &inverseBoxMatrix);
-
-	if (fabsf(SphereToBoxCenter.x) - otherSphere.GetRadius() > m_fWidth / 2.0f ||
-		fabsf(SphereToBoxCenter.y) - otherSphere.GetRadius() > m_fHeight / 2.0f ||
-		fabsf(SphereToBoxCenter.z) - otherSphere.GetRadius() > m_fHeight / 2.0f)
-		return false;
-
-	D3DXVECTOR3 closestPt(0, 0, 0);
-	float dist;
-
-	dist = SphereToBoxCenter.x;
-	if (dist > m_fWidth / 2.0f) dist = m_fWidth / 2.0f;
-	if (dist < -m_fWidth / 2.0f) dist = -m_fWidth / 2.0f;
-	closestPt.x = dist;
-
-	dist = SphereToBoxCenter.y;
-	if (dist > m_fHeight / 2.0f) dist = m_fHeight / 2.0f;
-	if (dist < -m_fHeight / 2.0f) dist = -m_fHeight / 2.0f;
-	closestPt.y = dist;
-
-	dist = SphereToBoxCenter.z;
-	if (dist > m_fDepth / 2.0f) dist = m_fDepth / 2.0f;
-	if (dist < -m_fDepth / 2.0f) dist = -m_fDepth / 2.0f;
-	closestPt.z = dist;
-
-	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
-	dist = D3DXVec3LengthSq(&tmp);
-	if (dist > otherSphere.GetRadius()*otherSphere.GetRadius())
-		return false;
-
-	return true;
-}
-
-bool CBox::hasIntersected(CBox & otherBox)
-{
-	return false;
-}
-
-bool CBox::hasIntersected(CCylinder & otherCylinder)
-{
-	return false;
-}
-
-bool CBox::hasIntersected(IObject * otherIObject)
-{
-	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
-	{
-		//cout << "In" << endl;
-		D3DXVECTOR3 v;
-		v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
-		//v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct())]->GetPosition() - m_pCharacter->GetPosition();
-		//v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
-		//v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
-		//v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
-		D3DXVec3Normalize(&v, &v);
-		this->SetPusingForce(v);
-		//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
-		return true;
-	}
-	return false;
-}
-
-// GIMMICK TEST
-bool CBox::hasIntersected(CGimmick * otherIObject)
-{
-	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
-	{
-		//cout << "In" << endl;
-		D3DXVECTOR3 v;
-		v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
-		//v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct())]->GetPosition() - m_pCharacter->GetPosition();
-		//v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
-		//v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
-		//v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
-		D3DXVec3Normalize(&v, &v);
-		this->SetPusingForce(v);
-		//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
-		return true;
-	}
-	return false;
-}

@@ -1,9 +1,6 @@
 #pragma once
 #include "IObject.h"
 
-// KT OBB
-//class CPSOBB;
-
 class CBackground : public IObject
 {
 public:
@@ -33,7 +30,4 @@ public:
 	//virtual void RunPhysics(float duration) { };
 	//virtual bool hasIntersected(CObject * otherobject) { return bool(); };
 	//virtual void CollisionOtherObject(CObject * otherobject) { };
-
-	//// KT OBB
-	//CPSOBB* m_pOBB;
 };

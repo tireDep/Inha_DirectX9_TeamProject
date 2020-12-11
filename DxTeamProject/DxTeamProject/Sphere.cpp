@@ -1,5 +1,9 @@
 #include "stdafx.h"
+#include "IObject.h"
+#include "Gimmick.h"
 #include "Sphere.h"
+#include "Box.h"
+#include "Cylinder.h"
 
 CSphere::CSphere() 
 	: m_fRadius(1.0f)
@@ -17,11 +21,11 @@ void CSphere::Setup()
 {
 	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pMesh, NULL);
 	m_fBoundingSphere = m_fRadius;
-	m_vInverseRotationInertia.x = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
-	m_vInverseRotationInertia.y = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
-	m_vInverseRotationInertia.z = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
 
-	/// Collide
+	//m_vInverseRotationInertia.x = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
+	//m_vInverseRotationInertia.y = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
+	//m_vInverseRotationInertia.z = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
+	// Collide
 	//m_vPosition.y = 15;
 	//D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	//collisionsphere.m_pObject = this;
@@ -74,6 +78,57 @@ void CSphere::Setup(const ST_MapData & mapData)
 	m_matWorld = matS * matR * matT;
 }
 
+void CSphere::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
+{
+	if (D3DXSphereBoundProbe(&m_vPosition, m_fRadius, &ray.GetOrigin(), &ray.GetDirection()) == true)
+	{
+		m_isPicked = true;
+		m_outLineColor = playerColor;
+	}
+	else
+	{
+		m_isPicked = false;
+	}
+	vecVPos.push_back(m_vPosition);
+	vecIsPick.push_back(m_isPicked);
+}
+
+bool CSphere::hasIntersected(CSphere * otherSphere)
+{
+	return false;
+}
+
+bool CSphere::hasIntersected(CBox * otherBox)
+{
+	return false;
+}
+
+bool CSphere::hasIntersected(CCylinder * otherCylinder)
+{
+	return false;
+}
+
+bool CSphere::hasIntersected(CGimmick * otherIObject)
+{
+	return false;
+}
+
+bool CSphere::hasIntersected(IObject * otherIObject)
+{
+	return false;
+}
+
+//void CSphere::Update(float duration)
+//{
+//	PObject::Update(duration);
+//}
+
+string CSphere::GetName()
+{
+	return m_strName;
+}
+
+/// Delete Later...
 //void CSphere::Update(float duration)
 //{
 //	D3DXVECTOR3 linearforce, angularforce;
@@ -162,23 +217,3 @@ void CSphere::Setup(const ST_MapData & mapData)
 //{
 //	resolver.resolveContacts(cData.contactArray, cData.contactCount, duration);
 //}
-
-void CSphere::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
-{
-	if (D3DXSphereBoundProbe(&m_vPosition, m_fRadius, &ray.GetOrigin(), &ray.GetDirection()) == true)
-	{
-		m_isPicked = true;
-		m_outLineColor = playerColor;
-	}
-	else
-	{
-		m_isPicked = false;
-	}
-	vecVPos.push_back(m_vPosition);
-	vecIsPick.push_back(m_isPicked);
-}
-
-string CSphere::GetName()
-{
-	return m_strName;
-}

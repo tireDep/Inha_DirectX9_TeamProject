@@ -140,8 +140,11 @@
     <ClInclude Include="RotationBoard.h">
       <Filter>Object\Gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="Book.h">
-      <Filter>Object</Filter>
+    <ClInclude Include="Switch.h">
+      <Filter>Object\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Object\Gimmick</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -227,8 +230,11 @@
     <ClCompile Include="RotationBoard.cpp">
       <Filter>Object\Gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="Book.cpp">
-      <Filter>Object</Filter>
+    <ClCompile Include="Switch.cpp">
+      <Filter>Object\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Object\Gimmick</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -27,7 +27,9 @@ void MeshTile::Setup(float x, float y, float z)
 
 	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pDVertices);
 	D3DXComputeBoundingBox(pDVertices, m_pMesh->GetNumVertices(), m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+
 	m_pMesh->UnlockVertexBuffer();
+
 	m_pOBB = new COBB;
 	m_pOBB->SetupMesh(m_vMin, m_vMax, 0.5f);
 	

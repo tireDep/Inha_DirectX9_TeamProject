@@ -81,25 +81,26 @@ inline void Contact::calculateContactBasis()
 
 D3DXVECTOR3 Contact::calculateLocalVelocity(unsigned bodyIndex, float duration)
 {
-	PObject *thisbody = object[bodyIndex];
+	return D3DXVECTOR3(0, 0, 0);
+	//PObject *thisbody = object[bodyIndex];
 
-	D3DXVECTOR3 velocity;
-	D3DXVec3Cross(&velocity, &thisbody->GetAngularVelocity(), &relativeContactPosition[bodyIndex]);
-	velocity += thisbody->GetLinearVelocity();
+	//D3DXVECTOR3 velocity;
+	//D3DXVec3Cross(&velocity, &thisbody->GetAngularVelocity(), &relativeContactPosition[bodyIndex]);
+	//velocity += thisbody->GetLinearVelocity();
 
-	// modify? calculateContactBasis 77~79 check
-	D3DXVECTOR3 contactVelocity;
-	D3DXVec3TransformCoord(&contactVelocity, &velocity, &contactToWorld);
+	//// modify? calculateContactBasis 77~79 check
+	//D3DXVECTOR3 contactVelocity;
+	//D3DXVec3TransformCoord(&contactVelocity, &velocity, &contactToWorld);
 
-	// modify? calculateContactBasis 77~79 check
-	D3DXVECTOR3 accVelocity = thisbody->GetLastFrameAcceleration() * duration;
-	D3DXVec3TransformCoord(&accVelocity, &accVelocity, &contactToWorld);
+	//// modify? calculateContactBasis 77~79 check
+	//D3DXVECTOR3 accVelocity = thisbody->GetLastFrameAcceleration() * duration;
+	//D3DXVec3TransformCoord(&accVelocity, &accVelocity, &contactToWorld);
 
-	accVelocity.x = 0;
+	//accVelocity.x = 0;
 
-	contactVelocity += accVelocity;
+	//contactVelocity += accVelocity;
 
-	return contactVelocity;
+	//return contactVelocity;
 }
 
 void Contact::calculateDesiredDeltaVelocity(float duration)
@@ -147,145 +148,145 @@ void Contact::matchAwakeState()
 
 void Contact::applyVelocityChange(D3DXVECTOR3 velocityChange[2], D3DXVECTOR3 rotationChange[2])
 {
-	D3DXVECTOR3 inverseRotationInertia[2];
-	inverseRotationInertia[0] = object[0]->GetinverseRotationInertia();
-	if (object[1])
-		inverseRotationInertia[1] = object[1]->GetinverseRotationInertia();
+	////D3DXVECTOR3 inverseRotationInertia[2];
+	////inverseRotationInertia[0] = object[0]->GetinverseRotationInertia();
+	////if (object[1])
+	////	inverseRotationInertia[1] = object[1]->GetinverseRotationInertia();
 
-	D3DXVECTOR3 impulseContact;
-	impulseContact = calculateFrictionImpulse(inverseRotationInertia);
+	////D3DXVECTOR3 impulseContact;
+	////impulseContact = calculateFrictionImpulse(inverseRotationInertia);
 
-	//if (friction == (float)0.0f)
+	////if (friction == (float)0.0f)
+	////{
+	////	impulseContact = calculateFrictionlessImpulse(inverseInertiaTensor);
+	////}
+	////else
+	////{
+	////	impulseContact = calculateFrictionImpulse(inverseInertiaTensor);
+	////}
+
+	//D3DXVECTOR3 impulse;
+	//D3DXVec3TransformCoord(&impulse, &impulseContact, &contactToWorld);
+
+	//D3DXVECTOR3 impulsiveTorque;
+	//D3DXVec3Cross(&impulsiveTorque, &relativeContactPosition[0], &impulse);
+	//
+	//rotationChange[0].x = impulsiveTorque.x * inverseRotationInertia[0].x;
+	//rotationChange[0].y = impulsiveTorque.y * inverseRotationInertia[0].y;
+	//rotationChange[0].z = impulsiveTorque.z * inverseRotationInertia[0].z;
+	//velocityChange[0].x = velocityChange[0].y = velocityChange[0].z = 0.0f;
+	//velocityChange[0] += (impulse * object[0]->GetInverseMass());
+
+	//object[0]->SetLinearVelocity(object[0]->GetLinearVelocity() + velocityChange[0]);
+	//object[0]->SetAngularVelocity(object[0]->GetAngularVelocity() + rotationChange[0]);
+
+	//if (object[1])
 	//{
-	//	impulseContact = calculateFrictionlessImpulse(inverseInertiaTensor);
+	//	D3DXVECTOR3 impulsiveTorque;
+	//	D3DXVec3Cross(&impulsiveTorque, &impulse, &relativeContactPosition[1]);
+
+	//	rotationChange[1].x = impulsiveTorque.x * inverseRotationInertia[1].x;
+	//	rotationChange[1].y = impulsiveTorque.y * inverseRotationInertia[1].y;
+	//	rotationChange[1].z = impulsiveTorque.z * inverseRotationInertia[1].z;
+	//	velocityChange[1].x = velocityChange[1].y = velocityChange[1].z = 0.0f;
+	//	velocityChange[1] += (impulse * -object[1]->GetInverseMass());
+
+	//	object[1]->SetLinearVelocity(object[1]->GetLinearVelocity() + velocityChange[1]);
+	//	object[1]->SetAngularVelocity(object[1]->GetAngularVelocity() + rotationChange[1]);
 	//}
-	//else
-	//{
-	//	impulseContact = calculateFrictionImpulse(inverseInertiaTensor);
-	//}
-
-	D3DXVECTOR3 impulse;
-	D3DXVec3TransformCoord(&impulse, &impulseContact, &contactToWorld);
-
-	D3DXVECTOR3 impulsiveTorque;
-	D3DXVec3Cross(&impulsiveTorque, &relativeContactPosition[0], &impulse);
-	
-	rotationChange[0].x = impulsiveTorque.x * inverseRotationInertia[0].x;
-	rotationChange[0].y = impulsiveTorque.y * inverseRotationInertia[0].y;
-	rotationChange[0].z = impulsiveTorque.z * inverseRotationInertia[0].z;
-	velocityChange[0].x = velocityChange[0].y = velocityChange[0].z = 0.0f;
-	velocityChange[0] += (impulse * object[0]->GetInverseMass());
-
-	object[0]->SetLinearVelocity(object[0]->GetLinearVelocity() + velocityChange[0]);
-	object[0]->SetAngularVelocity(object[0]->GetAngularVelocity() + rotationChange[0]);
-
-	if (object[1])
-	{
-		D3DXVECTOR3 impulsiveTorque;
-		D3DXVec3Cross(&impulsiveTorque, &impulse, &relativeContactPosition[1]);
-
-		rotationChange[1].x = impulsiveTorque.x * inverseRotationInertia[1].x;
-		rotationChange[1].y = impulsiveTorque.y * inverseRotationInertia[1].y;
-		rotationChange[1].z = impulsiveTorque.z * inverseRotationInertia[1].z;
-		velocityChange[1].x = velocityChange[1].y = velocityChange[1].z = 0.0f;
-		velocityChange[1] += (impulse * -object[1]->GetInverseMass());
-
-		object[1]->SetLinearVelocity(object[1]->GetLinearVelocity() + velocityChange[1]);
-		object[1]->SetAngularVelocity(object[1]->GetAngularVelocity() + rotationChange[1]);
-	}
 }
 
 void Contact::applyPositionChange(D3DXVECTOR3 linearChange[2], D3DXVECTOR3 angularChange[2], float penetration)
 {
-	const float angularLimit = (float)0.2f;
-	float angularMove[2];
-	float linearMove[2];
+	//const float angularLimit = (float)0.2f;
+	//float angularMove[2];
+	//float linearMove[2];
 
-	float totalInertia = 0;
-	float linearInertia[2];
-	float angularInertia[2];
+	//float totalInertia = 0;
+	//float linearInertia[2];
+	//float angularInertia[2];
 
-	for (unsigned i = 0; i < 2; i++) if (object[i])
-	{
-		D3DXVECTOR3 inverseRotationInertia;
-		inverseRotationInertia = object[i]->GetinverseRotationInertia();
+	//for (unsigned i = 0; i < 2; i++) if (object[i])
+	//{
+	//	D3DXVECTOR3 inverseRotationInertia;
+	//	inverseRotationInertia = object[i]->GetinverseRotationInertia();
 
-		D3DXVECTOR3 angularInertiaWorld;
-		D3DXVec3Cross(&angularInertiaWorld, &relativeContactPosition[i], &contactNormal);
+	//	D3DXVECTOR3 angularInertiaWorld;
+	//	D3DXVec3Cross(&angularInertiaWorld, &relativeContactPosition[i], &contactNormal);
 
-		angularInertiaWorld.x *= inverseRotationInertia.x;
-		angularInertiaWorld.y *= inverseRotationInertia.y;
-		angularInertiaWorld.z *= inverseRotationInertia.z;
+	//	angularInertiaWorld.x *= inverseRotationInertia.x;
+	//	angularInertiaWorld.y *= inverseRotationInertia.y;
+	//	angularInertiaWorld.z *= inverseRotationInertia.z;
 
-		D3DXVec3Cross(&angularInertiaWorld, &angularInertiaWorld, &relativeContactPosition[i]);
-		angularInertia[i] = D3DXVec3Dot(&angularInertiaWorld, &angularInertiaWorld);
+	//	D3DXVec3Cross(&angularInertiaWorld, &angularInertiaWorld, &relativeContactPosition[i]);
+	//	angularInertia[i] = D3DXVec3Dot(&angularInertiaWorld, &angularInertiaWorld);
 
-		linearInertia[i] = object[i]->GetInverseMass();
+	//	linearInertia[i] = object[i]->GetInverseMass();
 
-		totalInertia += linearInertia[i] + angularInertia[i];
-	}
+	//	totalInertia += linearInertia[i] + angularInertia[i];
+	//}
 
-	for (unsigned i = 0; i < 2; i++) if (object[i])
-	{
-		float sign = (i == 0) ? 1 : -1;
-		angularMove[i] = sign * penetration * (angularInertia[i] / totalInertia);
-		linearMove[i] =	sign * penetration * (linearInertia[i] / totalInertia);
+	//for (unsigned i = 0; i < 2; i++) if (object[i])
+	//{
+	//	float sign = (i == 0) ? 1 : -1;
+	//	angularMove[i] = sign * penetration * (angularInertia[i] / totalInertia);
+	//	linearMove[i] =	sign * penetration * (linearInertia[i] / totalInertia);
 
-		D3DXVECTOR3 projection = relativeContactPosition[i];
-		D3DXVECTOR3 tmp = -relativeContactPosition[i];
-		projection += (contactNormal *	D3DXVec3Dot(&tmp, &contactNormal));
+	//	D3DXVECTOR3 projection = relativeContactPosition[i];
+	//	D3DXVECTOR3 tmp = -relativeContactPosition[i];
+	//	projection += (contactNormal *	D3DXVec3Dot(&tmp, &contactNormal));
 
-		float maxMagnitude = angularLimit * D3DXVec3Length(&projection);
+	//	float maxMagnitude = angularLimit * D3DXVec3Length(&projection);
 
-		if (angularMove[i] < -maxMagnitude)
-		{
-			float totalMove = angularMove[i] + linearMove[i];
-			angularMove[i] = -maxMagnitude;
-			linearMove[i] = totalMove - angularMove[i];
-		}
-		else if (angularMove[i] > maxMagnitude)
-		{
-			float totalMove = angularMove[i] + linearMove[i];
-			angularMove[i] = maxMagnitude;
-			linearMove[i] = totalMove - angularMove[i];
-		}
+	//	if (angularMove[i] < -maxMagnitude)
+	//	{
+	//		float totalMove = angularMove[i] + linearMove[i];
+	//		angularMove[i] = -maxMagnitude;
+	//		linearMove[i] = totalMove - angularMove[i];
+	//	}
+	//	else if (angularMove[i] > maxMagnitude)
+	//	{
+	//		float totalMove = angularMove[i] + linearMove[i];
+	//		angularMove[i] = maxMagnitude;
+	//		linearMove[i] = totalMove - angularMove[i];
+	//	}
 
-		if (angularMove[i] == 0)
-		{
-			angularChange[i].x = angularChange[i].y = angularChange[i].z = 0.0f;
-		}
-		else
-		{
-			D3DXVECTOR3 targetAngularDirection;
-			D3DXVec3Cross(&targetAngularDirection, &relativeContactPosition[i], &contactNormal);
+	//	if (angularMove[i] == 0)
+	//	{
+	//		angularChange[i].x = angularChange[i].y = angularChange[i].z = 0.0f;
+	//	}
+	//	else
+	//	{
+	//		D3DXVECTOR3 targetAngularDirection;
+	//		D3DXVec3Cross(&targetAngularDirection, &relativeContactPosition[i], &contactNormal);
 
-			D3DXVECTOR3 inverseRotationInertia;
+	//		D3DXVECTOR3 inverseRotationInertia;
 
-			inverseRotationInertia = object[i]->GetinverseRotationInertia();
+	//		inverseRotationInertia = object[i]->GetinverseRotationInertia();
 
-			angularChange[i].x = targetAngularDirection.x * inverseRotationInertia.x;
-			angularChange[i].y = targetAngularDirection.y * inverseRotationInertia.y;
-			angularChange[i].z = targetAngularDirection.z * inverseRotationInertia.z;
+	//		angularChange[i].x = targetAngularDirection.x * inverseRotationInertia.x;
+	//		angularChange[i].y = targetAngularDirection.y * inverseRotationInertia.y;
+	//		angularChange[i].z = targetAngularDirection.z * inverseRotationInertia.z;
 
-			angularChange[i] *= (angularMove[i] / angularInertia[i]);
-		}
+	//		angularChange[i] *= (angularMove[i] / angularInertia[i]);
+	//	}
 
-		linearChange[i] = contactNormal * linearMove[i];
+	//	linearChange[i] = contactNormal * linearMove[i];
 
-		D3DXVECTOR3 pos;
-		pos = object[i]->GetPosition();
-		pos += (contactNormal * linearMove[i]);
-		object[i]->SetPosition(pos);
+	//	D3DXVECTOR3 pos;
+	//	pos = object[i]->GetPosition();
+	//	pos += (contactNormal * linearMove[i]);
+	//	object[i]->SetPosition(pos);
 
-		// modify?
-		CTestAngleSet orientation = object[i]->GetOrientation();
-		orientation.setXAngle(orientation.getXAngle() + angularChange[i].x);
-		orientation.setYAngle(orientation.getYAngle() + angularChange[i].y);
-		orientation.setZAngle(orientation.getZAngle() + angularChange[i].z);
-		object[i]->SetOrientation(orientation);
+	//	// modify?
+	//	CTestAngleSet orientation = object[i]->GetOrientation();
+	//	orientation.setXAngle(orientation.getXAngle() + angularChange[i].x);
+	//	orientation.setYAngle(orientation.getYAngle() + angularChange[i].y);
+	//	orientation.setZAngle(orientation.getZAngle() + angularChange[i].z);
+	//	object[i]->SetOrientation(orientation);
 
-		//if (!object[i]->GetAwake()) object[i]->calculateDerivedData();
-	}
+	//	//if (!object[i]->GetAwake()) object[i]->calculateDerivedData();
+	//}
 }
 
 inline D3DXVECTOR3 Contact::calculateFrictionlessImpulse(D3DXMATRIXA16 * inverseInertiaTensor)
