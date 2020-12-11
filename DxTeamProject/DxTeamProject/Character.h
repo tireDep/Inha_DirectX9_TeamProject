@@ -46,6 +46,8 @@ public:
 	// tmp Collision Test
 	// setup erase
 	virtual bool Collider(bool isCollided);
+
+	void ColliderOtherObject(IObject * background);
 	// COBB* m_pOBB;
 	// COBB* GetOBB();
 	// void SetBool(bool istrue);

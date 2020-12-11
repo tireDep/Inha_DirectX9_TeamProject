@@ -43,6 +43,7 @@ public:
 
 	void SetTransform(D3DXMATRIXA16 * pmat); // << 월드 매트릭스 설정
 
+	COBB* GetOBB() { return m_pOBB; }
 	//CPSOBB* GetOBB() { return m_pOBB; }
 };
 

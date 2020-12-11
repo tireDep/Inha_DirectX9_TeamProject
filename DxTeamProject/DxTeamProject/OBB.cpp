@@ -86,9 +86,12 @@ void COBB::Setup(CObject & object)
 	m_fAxisHalfLen[2] *= object.GetScale().z;
 
 	// Check OriCenterPos, OriAxisDir
+	//for (int i = 0; i < 3; ++i)
+	//	D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &m_matWorld);
+	//D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &m_matWorld);
 	for (int i = 0; i < 3; ++i)
-		D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &m_matWorld);
-	D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &m_matWorld);
+		D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &object.GetmatWorld());
+	D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &object.GetmatWorld());
 
 	object.GetMesh()->UnlockVertexBuffer();
 }
@@ -103,8 +106,8 @@ void COBB::Setup(CAllocateHierarchy & ah)
 	D3DXVECTOR3 Upvector = D3DXVECTOR3(0, 1.5, 0);
 	D3DXVECTOR3 m_vMin = ah.GetMin() * 2 + Upvector;
 	D3DXVECTOR3 m_vMax = ah.GetMax() * 2 + Upvector;
-	m_vMin.x = ah.GetMin().x*1.8;		m_vMin.z = ah.GetMin().z * 5;
-	m_vMax.x = ah.GetMax().x*1.8;		m_vMax.z = ah.GetMax().z * 5;
+	m_vMin.x = ah.GetMin().x * 1.8;		m_vMin.z = ah.GetMin().z * 5;
+	m_vMax.x = ah.GetMax().x * 1.8;		m_vMax.z = ah.GetMax().z * 5;
 
 	m_vOriCenterPos = (m_vMin + m_vMax) / 2.0f;
 	m_vOriAxisDir[0] = D3DXVECTOR3(1, 0, 0);
@@ -534,7 +537,6 @@ bool COBB::IsCollision(COBB * otherOBB)
 	bool existsParallelPair = false;
 
 	D3DXVECTOR3 D = otherOBB->m_vCenterPos - this->m_vCenterPos;
-	//return false;
 
 	// >> 특이 케이스
 	for (int a = 0; a < 3; a++)

@@ -16,7 +16,7 @@ public:
 	bool AddListener(IListener* listener);
 	bool RemoveListener(IListener* listener);
 
-	void Update();
+	void Update(float duration);
 	void CheckEvent(ST_EVENT eventMsg);
 };
 

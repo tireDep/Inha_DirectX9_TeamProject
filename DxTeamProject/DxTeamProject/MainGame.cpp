@@ -214,7 +214,7 @@ void CMainGame::Setup()
 void CMainGame::Update()
 {
 	g_pTimeManager->Update();
-	g_pEventManager->Update();
+	g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
 	if (m_pCamera)
 		m_pCamera->Update();
@@ -228,6 +228,8 @@ void CMainGame::Update()
 		//m_pDragon->DoRotation(m_pCharacter->Getrotation(), m_pCamera->GetCameraDirection());
 		m_pDragon->Update(m_pCharacter->GetPosition());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
+		/// OBB TEST
+		m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:

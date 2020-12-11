@@ -13,7 +13,7 @@ CCharacter::CCharacter()
 	, m_vPosition(0, 0.0f, 0)
 	// , m_pOBB(NULL)
 	, m_isCollided(false)
-	,m_Character(NULL)
+	, m_Character(NULL)
 	// Ray y check
 {
 	D3DXMatrixIdentity(&m_matWorld);
@@ -41,13 +41,9 @@ void CCharacter::SetColor(D3DXCOLOR c)
 
 void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 {
-#if _DEBUG
-	float speed = 0.005f;
-#else
-	float speed = 0.003f;
-#endif
 	// float duration = *(float*) eventMsg.ptrMessage;
 	// speed *= duration;
+	float speed = 10.0f * eventMsg.duration;
 	rotation = -1.0f;
 
 	if (!g_gameManager->GetUImode())
@@ -479,4 +475,12 @@ bool CCharacter::Collider(bool isCollided)
 {
 	m_isCollided = isCollided;
 	return m_isCollided;
+}
+
+void CCharacter::ColliderOtherObject(IObject * background)
+{
+	if (m_Character->GetOBB()->IsCollision(background->GetOBB()))
+		m_isCollided = true;
+	else
+		m_isCollided = false;
 }

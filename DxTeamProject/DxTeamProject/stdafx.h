@@ -180,6 +180,8 @@ struct ST_EVENT
 	SceneType setNowScene;
 	// << SceneChange
 
+	float duration;
+
 	void* ptrMessage = NULL;
 };
 

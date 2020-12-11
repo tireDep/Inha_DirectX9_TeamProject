@@ -34,7 +34,7 @@ bool CEventManager::RemoveListener(IListener * listener)
 	return false;
 }
 
-void CEventManager::Update()
+void CEventManager::Update(float duration)
 {
 	bool pushW = GetKeyState('W') & 0x8000;
 	bool pushS = GetKeyState('S') & 0x8000;
@@ -47,6 +47,7 @@ void CEventManager::Update()
 
 	ST_EVENT msg;
 	msg.eventType = EventType::eInputEvent;
+	msg.duration = duration;
 
 	// float duration = g_pTimeManager->GetElapsedTime();
 	// msg.ptrMessage = &duration;
