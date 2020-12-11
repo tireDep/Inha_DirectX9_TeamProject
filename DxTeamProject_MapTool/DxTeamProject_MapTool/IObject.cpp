@@ -5,6 +5,7 @@
 #include "Cylinder.h"
 #include "Tile.h"
 #include "Background.h"
+#include "Book.h"
 #include "Gimmick.h"
 
 int IObject::m_nRefCnt = 0;
@@ -419,6 +420,17 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	}
 		break;
 
+	case eBook:
+	{
+		mapData.strObjName = string("Book") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Book";
+		mapData.strTxtPath = "Bookshelf_diffuse.png";
+		mapData.strXFilePath = "book.X";
+
+		CBook* background = new CBook;
+		background->Setup(mapData);
+	}
+		break;
 	} // << : switch
 }
 
@@ -460,14 +472,12 @@ void IObject::CreateObject(ST_MapData& mapData)
 	case eSTree:
 	case eWTree:
 	case eCTree:
-// #ifdef _DEBUG
 	case eBall:
 	case eChair:
 	case eUmbrella:
 	case eSnowman:
 	case eFlower:
 	case eInvisibleWall:
-// #endif // _DEBUG
 	{
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
@@ -483,6 +493,13 @@ void IObject::CreateObject(ST_MapData& mapData)
 		CGimmick::CreateGimmick_SaveData(mapData);
 	}
 	break;
+
+	case eBook:
+	{
+		CBook* book = new CBook;
+		book->Setup(mapData);
+	}
+		break;
 
 	} // << : switch
 }

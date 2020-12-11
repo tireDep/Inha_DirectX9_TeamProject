@@ -94,13 +94,12 @@ void CImguiClass::SetVecItem()
 			tempVec.push_back("Umbrella"); tempObjType.push_back(eUmbrella);
 			tempVec.push_back("Snowman"); tempObjType.push_back(eSnowman);
 
-#ifdef _DEBUG
 			tempVec.push_back("InvisibleWall"); tempObjType.push_back(eInvisibleWall);
-#endif // _DEBUG
 		}
 
 
-	}
+	} // << background
+
 	else if (m_NowLoadType == LoadType::eGimmick)
 	{
 		tempVec.push_back("RotationBoard");		tempObjType.push_back(eG_RotationBoard);
@@ -108,6 +107,12 @@ void CImguiClass::SetVecItem()
 		tempVec.push_back("Door");				tempObjType.push_back(eG_Door);
 		tempVec.push_back("ColorChanger");		tempObjType.push_back(eG_ColorChanger);
 		tempVec.push_back("Switch");			tempObjType.push_back(eG_Switch);
+	}
+
+	else if (m_NowLoadType == LoadType::eItem)
+	{
+		tempVec.push_back("Book");	tempObjType.push_back(eBook);
+		tempVec.push_back("Orb");	tempObjType.push_back(eOrb);
 	}
 	
 	m_vecItem = tempVec;
@@ -466,14 +471,10 @@ void CImguiClass::Update_FileLoader()
 	ImGui::SameLine(); if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
 
 	if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = -1; }
-
-#ifdef _DEBUG
 	ImGui::SameLine();  if (ImGui::RadioButton("Gimmick", m_NowLoadType == LoadType::eGimmick)) { m_NowLoadType = LoadType::eGimmick; m_FileLoadIndex = -1; }
-#endif // _DEBUG
 
-	// if (ImGui::RadioButton("Item", m_NowLoadType == LoadType::eItem)) { m_NowLoadType = LoadType::eItem; m_FileLoadIndex = -1; }
+	if (ImGui::RadioButton("Item", m_NowLoadType == LoadType::eItem)) { m_NowLoadType = LoadType::eItem; m_FileLoadIndex = -1; }
 	// ImGui::SameLine();  if (ImGui::RadioButton("EventTrigger", m_NowLoadType == LoadType::eTrigger)) { m_NowLoadType = LoadType::eTrigger; m_FileLoadIndex = -1; }
-	// >> todo
 
 	ImGui::Separator();
 
@@ -491,12 +492,7 @@ void CImguiClass::Update_FileLoader()
 		if (ImGui::RadioButton("WinterTree", m_SubType == LoadType::eWinterTree)) { m_SubType = LoadType::eWinterTree; m_FileLoadIndex = -1; }
 		ImGui::SameLine(); if (ImGui::RadioButton("ColorTree", m_SubType == LoadType::eColorTree)) { m_SubType = LoadType::eColorTree; m_FileLoadIndex = -1; }
 
-#ifdef _DEBUG
 		if (ImGui::RadioButton("SomethingElse", m_SubType == LoadType::eSomethingElse)) { m_SubType = LoadType::eSomethingElse; m_FileLoadIndex = -1; }
-#else
-		if (ImGui::RadioButton("SomethingElse", m_SubType == LoadType::eSomethingElse)) { m_SubType = LoadType::eSomethingElse; m_FileLoadIndex = -1; }
-#endif // _DEBUG
-
 
 		SetVecItem();
 		m_PreLoadType = m_NowLoadType;
@@ -592,6 +588,7 @@ void CImguiClass::Update_Inspector()
 				ObjectType tempType = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType();
 
 				if (tempType == eSphere || tempType == eCylinder
+				 || tempType == eBook || tempType == eOrb
 				 || tempType == eG_RotationBoard || tempType == eG_BreakWall || tempType == eG_Door
 				 || tempType == eG_ColorChanger || tempType == eG_Switch)
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetDiffScale(vScale);
@@ -771,16 +768,13 @@ void CImguiClass::Render()
 	matWorld._41 = 0.5f; matWorld._43 = 0.5f;
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	// g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	for (int i = 0; i < m_vecMtrls.size(); i++)
 	{
 		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
-		// if (m_vecTextures[i] != 0)
-		// 	g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
-		LPDIRECT3DTEXTURE9 temp;
-		//g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Test", "Sprout.png", temp);
-		// g_pD3DDevice->SetTexture(0, temp);
+		if (m_vecTextures[i] != 0)
+			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
 
 		if(m_pMesh)
 			m_pMesh->DrawSubset(i);
