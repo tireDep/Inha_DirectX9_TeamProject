@@ -95,12 +95,53 @@ void CSphere::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, 
 
 bool CSphere::hasIntersected(CSphere * otherSphere)
 {
-	return false;
+	if (this == otherSphere)
+		return false;
+
+	D3DXVECTOR3 direction = this->GetPosition() - otherSphere->GetPosition();
+
+	if ((this->GetBoundingSphere() + otherSphere->GetBoundingSphere())*(this->GetBoundingSphere() + otherSphere->GetBoundingSphere()) < D3DXVec3LengthSq(&direction))
+		return false;
+
+	return true;
 }
 
 bool CSphere::hasIntersected(CBox * otherBox)
 {
-	return false;
+	D3DXMATRIXA16 inverseBoxMatrix;
+	D3DXMatrixInverse(&inverseBoxMatrix, NULL, &otherBox->GetmatWorld());
+
+	D3DXVECTOR3 SphereToBoxCenter;
+	D3DXVec3TransformCoord(&SphereToBoxCenter, &m_vPosition, &inverseBoxMatrix);
+
+	if( fabsf(SphereToBoxCenter.x) - GetRadius() > otherBox->GetWidth()  / 2.0f ||
+		fabsf(SphereToBoxCenter.y) - GetRadius() > otherBox->GetHeight() / 2.0f ||
+		fabsf(SphereToBoxCenter.z) - GetRadius() > otherBox->GetDepth()  / 2.0f)
+		return false;
+
+	D3DXVECTOR3 closestPt(0, 0, 0);
+	float dist;
+
+	dist = SphereToBoxCenter.x;
+	if (dist > otherBox->GetWidth() / 2.0f) dist = otherBox->GetWidth() / 2.0f;
+	if (dist < -otherBox->GetWidth() / 2.0f) dist = -otherBox->GetWidth() / 2.0f;
+	closestPt.x = dist;
+
+	dist = SphereToBoxCenter.y;
+	if (dist > otherBox->GetHeight() / 2.0f) dist = otherBox->GetHeight() / 2.0f;
+	if (dist < -otherBox->GetHeight() / 2.0f) dist = -otherBox->GetHeight() / 2.0f;
+	closestPt.y = dist;
+
+	dist = SphereToBoxCenter.z;
+	if (dist > otherBox->GetDepth() / 2.0f) dist = otherBox->GetDepth() / 2.0f;
+	if (dist < -otherBox->GetDepth() / 2.0f) dist = -otherBox->GetDepth() / 2.0f;
+	closestPt.z = dist;
+
+	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
+	dist = D3DXVec3LengthSq(&tmp);
+	if (dist > GetRadius() * GetRadius())
+		return false;
+	return true;
 }
 
 bool CSphere::hasIntersected(CCylinder * otherCylinder)
@@ -108,10 +149,10 @@ bool CSphere::hasIntersected(CCylinder * otherCylinder)
 	return false;
 }
 
-bool CSphere::hasIntersected(CGimmick * otherIObject)
-{
-	return false;
-}
+//bool CSphere::hasIntersected(CGimmick * otherIObject)
+//{
+//	return false;
+//}
 
 bool CSphere::hasIntersected(IObject * otherIObject)
 {

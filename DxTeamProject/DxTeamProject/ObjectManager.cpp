@@ -238,64 +238,139 @@ void CObjectManager::Collide()
 		}
 	}
 
-	/// Sphere
+	// Need To Modify...
+	///Sphere
 	for (int SphereIndex = 0; SphereIndex < m_vecSphere.size(); SphereIndex++)
 	{
 		// Sphere to Other PObject
 		for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
 		{
+			switch (m_vecPObject[PObectIndex]->GetObjType())
+			{
+				case eSphere:
+					if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CSphere*>(m_vecPObject[PObectIndex])))
+					{
 
-		}
-		// Sphere to Gimmick
-		for (int GimmickIndex = 0; GimmickIndex < m_vecGimmick.size(); GimmickIndex++)
-		{
+					}
+					break;
+				case eBox:
+					if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CBox*>(m_vecPObject[PObectIndex])))
+					{
 
+					}
+					break;
+				case eCylinder:
+					if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
+					{
+
+					}
+					break;
+				default:
+					break;
+			}
 		}
-		// Sphere to IObject... Subtract Gimmick
+		// Sphere To IObject
 		for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
 		{
+			if (m_vecSphere[SphereIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
+			{
+				switch (m_vecIObject[IObjectIndex]->GetObjType())
+				{
+					case eG_RotationBoard: case eG_Door: case eG_MovingCube:
+						{
 
+						}
+						break;
+					default:
+						break;
+				}
+			}
 		}
 	}
-	/// Box
+	///Box
 	for (int BoxIndex = 0; BoxIndex < m_vecBox.size(); BoxIndex++)
 	{
-		// Box to Other PObject... Subtract Sphere		m_vecBox.size() + m_vecCylinder.size()?
+		// Box to Other PObject
 		for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
 		{
+			switch (m_vecPObject[PObectIndex]->GetObjType())
+			{
+				case eSphere:
+					break;
+				case eBox:
+					if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CBox*>(m_vecPObject[PObectIndex])))
+					{
 
-		}
-		// Box to Gimmick
-		for (int GimmickIndex = 0; GimmickIndex < m_vecGimmick.size(); GimmickIndex++)
-		{
+					}
+					break;
+				case eCylinder:
+					if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
+					{
 
+					}
+					break;
+				default:
+					break;
+			}
 		}
-		// Box to IObject... Subtract Gimmick
+		// Box To IObject
 		for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
 		{
+			if (m_vecBox[BoxIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
+			{
+				switch (m_vecIObject[IObjectIndex]->GetObjType())
+				{
+					case eG_RotationBoard: case eG_Door: case eG_MovingCube:
+						{
 
+						}
+						break;
+					default:
+						break;
+				}
+			}
 		}
 	}
 	/// Cylinder
 	for (int CylinderIndex = 0; CylinderIndex < m_vecCylinder.size(); CylinderIndex++)
 	{
-		// Cylinder to Other PObject... Subtract Sphere, Box	m_vecCylinder.size()?
+		// Cylinder to Other PObject
 		for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
 		{
+			switch (m_vecPObject[PObectIndex]->GetObjType())
+			{
+				case eSphere:
+					break;
+				case eBox:
+					break;
+				case eCylinder:
+					if (m_vecCylinder[CylinderIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
+					{
 
+					}
+					break;
+				default:
+					break;
+			}
 		}
-		// Cylinder to Gimmick
-		for (int GimmickIndex = 0; GimmickIndex < m_vecGimmick.size(); GimmickIndex++)
-		{
-
-		}
-		// Cylinder to IObject... Subtract Gimmick
+		// Cylinder To IObject
 		for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
 		{
+			if (m_vecCylinder[CylinderIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
+			{
+				switch (m_vecIObject[IObjectIndex]->GetObjType())
+				{
+					case eG_RotationBoard: case eG_Door: case eG_MovingCube:
+						{
 
+						}
+						break;
+					default:
+						break;
+				}
+			}
 		}
 	}
-
 	// OBB TEST
 	//for (int i = 0; i < m_vecBox.size(); i++)
 	//	for (int j = 0; j < m_vecGimmick.size(); j++)
@@ -636,4 +711,35 @@ COBB* CObjectManager::GetTileOBB()
 //{
 //	for (int i = 0; i < m_vecObject.size(); i++)
 //		m_vecObject[i]->Update3D(duration);
+//}
+//for (int BoxIndex = 0; BoxIndex < m_vecBox.size(); BoxIndex++)
+//{
+//	// Box to Other PObject... Subtract Sphere		m_vecBox.size() + m_vecCylinder.size()?
+//	for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
+//	{
+//	}
+//	// Box to Gimmick
+//	for (int GimmickIndex = 0; GimmickIndex < m_vecGimmick.size(); GimmickIndex++)
+//	{
+//	}
+//	// Box to IObject... Subtract Gimmick
+//	for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
+//	{
+//	}
+//}
+/////Cylinder
+//for (int CylinderIndex = 0; CylinderIndex < m_vecCylinder.size(); CylinderIndex++)
+//{
+//	// Cylinder to Other PObject... Subtract Sphere, Box	m_vecCylinder.size()?
+//	for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
+//	{
+//	}
+//	// Cylinder to Gimmick
+//	for (int GimmickIndex = 0; GimmickIndex < m_vecGimmick.size(); GimmickIndex++)
+//	{
+//	}
+//	// Cylinder to IObject... Subtract Gimmick
+//	for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
+//	{
+//	}
 //}

@@ -121,9 +121,6 @@
     <ClCompile Include="FileLoadManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsObjectManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -171,7 +168,6 @@
     <ClCompile Include="BreakableWall.cpp">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClCompile>
-    <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="Cube.cpp">
       <Filter>...TrashCan\PhysicsOld</Filter>
     </ClCompile>
@@ -240,6 +236,12 @@
     </ClCompile>
     <ClCompile Include="PObject.cpp">
       <Filter>Object\PObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Dragon.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -385,9 +387,6 @@
     <ClInclude Include="FileLoadManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsObjectManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -434,7 +433,6 @@
     <ClInclude Include="BreakableWall.h">
       <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClInclude>
-    <ClInclude Include="Dragon.h" />
     <ClInclude Include="Cube.h">
       <Filter>...TrashCan\PhysicsOld</Filter>
     </ClInclude>
@@ -504,6 +502,12 @@
     </ClInclude>
     <ClInclude Include="PObject.h">
       <Filter>Object\PObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Dragon.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

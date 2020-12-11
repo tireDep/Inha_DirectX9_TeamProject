@@ -83,16 +83,22 @@ void CCylinder::Update(float duration)
 
 bool CCylinder::hasIntersected(CCylinder * otherCylinder)
 {
+	if (this->m_pOBB->IsCollision(otherCylinder->GetOBB()))
+		return true;
 	return false;
 }
 
-bool CCylinder::hasIntersected(CGimmick * otherIObject)
-{
-	return false;
-}
+//bool CCylinder::hasIntersected(CGimmick * otherIObject)
+//{
+//	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
+//		return true;
+//	return false;
+//}
 
 bool CCylinder::hasIntersected(IObject * otherIObject)
 {
+	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
+		return true;
 	return false;
 }
 

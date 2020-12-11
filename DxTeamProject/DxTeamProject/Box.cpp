@@ -105,45 +105,6 @@ void CBox::Update(float duration)
 	m_pOBB->Update(&m_matWorld);
 }
 
-//bool CBox::hasIntersected(CSphere & otherSphere)
-//{
-//	D3DXVECTOR3 center = otherSphere.GetPosition();
-//	D3DXMATRIXA16 inverseBoxMatrix;
-//	D3DXMatrixInverse(&inverseBoxMatrix, NULL, &m_matWorld);
-//	D3DXVECTOR3 SphereToBoxCenter;
-//	D3DXVec3TransformCoord(&SphereToBoxCenter, &center, &inverseBoxMatrix);
-//
-//	if (fabsf(SphereToBoxCenter.x) - otherSphere.GetRadius() > m_fWidth / 2.0f ||
-//		fabsf(SphereToBoxCenter.y) - otherSphere.GetRadius() > m_fHeight / 2.0f ||
-//		fabsf(SphereToBoxCenter.z) - otherSphere.GetRadius() > m_fHeight / 2.0f)
-//		return false;
-//
-//	D3DXVECTOR3 closestPt(0, 0, 0);
-//	float dist;
-//
-//	dist = SphereToBoxCenter.x;
-//	if (dist > m_fWidth / 2.0f) dist = m_fWidth / 2.0f;
-//	if (dist < -m_fWidth / 2.0f) dist = -m_fWidth / 2.0f;
-//	closestPt.x = dist;
-//
-//	dist = SphereToBoxCenter.y;
-//	if (dist > m_fHeight / 2.0f) dist = m_fHeight / 2.0f;
-//	if (dist < -m_fHeight / 2.0f) dist = -m_fHeight / 2.0f;
-//	closestPt.y = dist;
-//
-//	dist = SphereToBoxCenter.z;
-//	if (dist > m_fDepth / 2.0f) dist = m_fDepth / 2.0f;
-//	if (dist < -m_fDepth / 2.0f) dist = -m_fDepth / 2.0f;
-//	closestPt.z = dist;
-//
-//	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
-//	dist = D3DXVec3LengthSq(&tmp);
-//	if (dist > otherSphere.GetRadius()*otherSphere.GetRadius())
-//		return false;
-//
-//	return true;
-//}
-
 bool CBox::hasIntersected(CBox * otherBox)
 {
 	if (this->m_pOBB->IsCollision(otherBox->GetOBB()))
@@ -161,30 +122,36 @@ bool CBox::hasIntersected(CCylinder * otherCylinder)
 bool CBox::hasIntersected(IObject * otherIObject)
 {
 	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
-	{
-		D3DXVECTOR3 v;
-		v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
-		D3DXVec3Normalize(&v, &v);
-		this->SetPusingForce(v);
-		//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
 		return true;
-	}
 	return false;
+	//if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
+	//{
+	//	D3DXVECTOR3 v;
+	//	v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
+	//	D3DXVec3Normalize(&v, &v);
+	//	this->SetPusingForce(v);
+	//	//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
+	//	return true;
+	//}
+	//return false;
 }
 
-bool CBox::hasIntersected(CGimmick * otherIObject)
-{
-	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
-	{
-		D3DXVECTOR3 v;
-		v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
-		D3DXVec3Normalize(&v, &v);
-		this->SetPusingForce(v);
-		//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
-		return true;
-	}
-	return false;
-}
+//bool CBox::hasIntersected(CGimmick * otherIObject)
+//{
+//	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
+//		return true;
+//	return false;
+//	//if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
+//	//{
+//	//	D3DXVECTOR3 v;
+//	//	v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
+//	//	D3DXVec3Normalize(&v, &v);
+//	//	this->SetPusingForce(v);
+//	//	//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
+//	//	return true;
+//	//}
+//	//return false;
+//}
 
 string CBox::GetName()
 {
@@ -280,4 +247,42 @@ string CBox::GetName()
 //void CBox::CollideUpdate(float duration)
 //{
 //	resolver.resolveContacts(cData.contactArray, cData.contactCount, duration);
+//}
+//bool CBox::hasIntersected(CSphere & otherSphere)
+//{
+//	D3DXVECTOR3 center = otherSphere.GetPosition();
+//	D3DXMATRIXA16 inverseBoxMatrix;
+//	D3DXMatrixInverse(&inverseBoxMatrix, NULL, &m_matWorld);
+//	D3DXVECTOR3 SphereToBoxCenter;
+//	D3DXVec3TransformCoord(&SphereToBoxCenter, &center, &inverseBoxMatrix);
+//
+//	if (fabsf(SphereToBoxCenter.x) - otherSphere.GetRadius() > m_fWidth / 2.0f ||
+//		fabsf(SphereToBoxCenter.y) - otherSphere.GetRadius() > m_fHeight / 2.0f ||
+//		fabsf(SphereToBoxCenter.z) - otherSphere.GetRadius() > m_fDepth / 2.0f)
+//		return false;
+//
+//	D3DXVECTOR3 closestPt(0, 0, 0);
+//	float dist;
+//
+//	dist = SphereToBoxCenter.x;
+//	if (dist > m_fWidth / 2.0f) dist = m_fWidth / 2.0f;
+//	if (dist < -m_fWidth / 2.0f) dist = -m_fWidth / 2.0f;
+//	closestPt.x = dist;
+//
+//	dist = SphereToBoxCenter.y;
+//	if (dist > m_fHeight / 2.0f) dist = m_fHeight / 2.0f;
+//	if (dist < -m_fHeight / 2.0f) dist = -m_fHeight / 2.0f;
+//	closestPt.y = dist;
+//
+//	dist = SphereToBoxCenter.z;
+//	if (dist > m_fDepth / 2.0f) dist = m_fDepth / 2.0f;
+//	if (dist < -m_fDepth / 2.0f) dist = -m_fDepth / 2.0f;
+//	closestPt.z = dist;
+//
+//	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
+//	dist = D3DXVec3LengthSq(&tmp);
+//	if (dist > otherSphere.GetRadius()*otherSphere.GetRadius())
+//		return false;
+//
+//	return true;
 //}
