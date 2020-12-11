@@ -100,9 +100,11 @@ void COBB::Setup(CAllocateHierarchy & ah)
 	//	0.000000, 5.161628, 0.000000, 0.000000, 
 	//	0.000000, 0.000000, 5.161628, 0.000000, 
 	//	0.003480, 0.304418, 5.063910, 1.000000);
-
-	D3DXVECTOR3 m_vMin = ah.GetMin();
-	D3DXVECTOR3 m_vMax = ah.GetMax();
+	D3DXVECTOR3 Upvector = D3DXVECTOR3(0, 1.5, 0);
+	D3DXVECTOR3 m_vMin = ah.GetMin() * 2 + Upvector;
+	D3DXVECTOR3 m_vMax = ah.GetMax() * 2 + Upvector;
+	m_vMin.x = ah.GetMin().x*1.8;		m_vMin.z = ah.GetMin().z * 5;
+	m_vMax.x = ah.GetMax().x*1.8;		m_vMax.z = ah.GetMax().z * 5;
 
 	m_vOriCenterPos = (m_vMin + m_vMax) / 2.0f;
 	m_vOriAxisDir[0] = D3DXVECTOR3(1, 0, 0);
@@ -250,18 +252,13 @@ void COBB::Update(D3DXMATRIXA16 * pmatWorld)
 {
 	if (pmatWorld)
 		m_matWorld = *pmatWorld;
-	//for (int i = 0; i < 3; i++)
-	//	D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &m_matWorld);
-	//D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &m_matWorld);
 	for (int i = 0; i < 3; i++)
 	{
 		D3DXVec3TransformNormal(&m_vAxisDir[i], &m_vOriAxisDir[i], &m_matWorld);
 		// JW ADD...
 		D3DXVec3Normalize(&m_vAxisDir[i], &m_vAxisDir[i]);
 	}
-
 	D3DXVec3TransformCoord(&m_vCenterPos, &m_vOriCenterPos, &m_matWorld);
-	//cout << m_vCenterPos.x << ", " << m_vCenterPos.y << ", " << m_vCenterPos.z << endl;
 }
 
 bool COBB::IsCollision(COBB * pOBB1, COBB * pOBB2)
