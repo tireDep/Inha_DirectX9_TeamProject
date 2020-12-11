@@ -63,8 +63,8 @@ CMainGame::CMainGame() :
 {
 	//m_pGimmick_Door[0] = NULL;
 	//m_pGimmick_Door[1] = NULL;
-	// m_pGimmick_BreakableWall[0] = NULL;
-	// m_pGimmick_BreakableWall[1] = NULL;
+	m_pGimmick_BreakableWall[0] = NULL;
+	m_pGimmick_BreakableWall[1] = NULL;
 }
 
 CMainGame::~CMainGame()
@@ -170,10 +170,10 @@ void CMainGame::Setup()
 	/* m_pGimmick_Switch = new CSwitch;
 	 m_pGimmick_Switch->Setup();*/
 
-	//m_pGimmick_BreakableWall[0] = new CBreakableWall;
-	//m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "standard_wall.X");
-	//m_pGimmick_BreakableWall[1] = new CBreakableWall;
-	//m_pGimmick_BreakableWall[1]->Setup("Resource/XFile/Gimmick/BreakableWall", "brick.X");
+	m_pGimmick_BreakableWall[0] = new CBreakableWall;
+	m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "Pillar.X");
+	m_pGimmick_BreakableWall[1] = new CBreakableWall;
+	m_pGimmick_BreakableWall[1]->Setup("Resource/XFile/Gimmick/BreakableWall", "brick.X");
 
 	//m_pBook = new CBook;
 	//m_pBook->Setup();
@@ -386,10 +386,10 @@ void CMainGame::Update()
 	//	 cout << 2 << endl;
 	// }
 
-	//if (m_pGimmick_BreakableWall[0])
-	//	m_pGimmick_BreakableWall[0]->Update();
-	//if (m_pGimmick_BreakableWall[1])
-	//	m_pGimmick_BreakableWall[1]->Update();
+	if (m_pGimmick_BreakableWall[0])
+		m_pGimmick_BreakableWall[0]->Update();
+	if (m_pGimmick_BreakableWall[1])
+		m_pGimmick_BreakableWall[1]->Update();
 
 	//if (m_pBook)
 	//	m_pBook->Update(g_pTimeManager->GetElapsedTime());
@@ -469,10 +469,10 @@ void CMainGame::Render()
 
 	/*if (m_pChanger)
 		m_pChanger->Render();*/
-	//if (m_pGimmick_BreakableWall[0])
-	//	m_pGimmick_BreakableWall[0]->Render();
-	//if (m_pGimmick_BreakableWall[1]) 
-	//	m_pGimmick_BreakableWall[1]->Render();
+	if (m_pGimmick_BreakableWall[0])
+		m_pGimmick_BreakableWall[0]->Render();
+	if (m_pGimmick_BreakableWall[1]) 
+		m_pGimmick_BreakableWall[1]->Render();
 //
 
 	//if (m_pBook)

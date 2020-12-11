@@ -9,6 +9,7 @@ private:
 	Synthesize(DWORD, m_numMtrls, NumMtrl);
 	Synthesize(vector<D3DMATERIAL9>, m_vecMtrls, VecMtrls);
 	Synthesize(vector<IDirect3DTexture9*>, m_vecTextures, VecTexture);
+
 public:
 	CBreakableWall();
 	~CBreakableWall();

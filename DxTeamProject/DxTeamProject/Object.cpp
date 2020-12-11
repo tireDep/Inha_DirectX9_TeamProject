@@ -7,6 +7,7 @@
 #include "Background.h"
 #include "Tile.h"
 #include "Gimmick.h"
+#include "Book.h"
 
 int CObject::m_nRefCount = 0;
 
@@ -235,6 +236,12 @@ void CObject::CreateObject(const ST_MapData & mapData)
 	case eG_ColorChanger:	case eG_Switch:		case eG_MovingCube:
 	{
 		CGimmick::Setup(mapData);
+	}
+		break;
+	case eBook:
+	{
+		CBook* tile = new CBook;
+		tile->Setup(mapData);
 	}
 		break;
 	}
