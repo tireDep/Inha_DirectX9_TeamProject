@@ -26,14 +26,14 @@ void CRotationBoard::Setup(const ST_MapData & mapData)
 	m_vRotation = mapData.vRotate;
 	m_vTranslation = mapData.vTranslate;
 
-	m_fRotationSpeed = mapData.gimmickData.roationSpeed;
-	if (mapData.gimmickData.roationAxialIndex == 0)
+	m_fRotationSpeed = mapData.gimmickData.roationSpeed_rotaitonBoard;
+	if (mapData.gimmickData.roationAxialIndex_rotaitonBoard == 0)
 		rotationAxial = RotationAxial::Rotation_X;
-	else if (mapData.gimmickData.roationAxialIndex == 1)
+	else if (mapData.gimmickData.roationAxialIndex_rotaitonBoard == 1)
 		rotationAxial = RotationAxial::Rotation_Y;
-	else if (mapData.gimmickData.roationAxialIndex == 2)
+	else if (mapData.gimmickData.roationAxialIndex_rotaitonBoard == 2)
 		rotationAxial = RotationAxial::Rotation_Z;
-	else if (mapData.gimmickData.roationAxialIndex == 3)
+	else if (mapData.gimmickData.roationAxialIndex_rotaitonBoard == 3)
 		rotationAxial = RotationAxial::NONE;
 
 	ST_XFile* xfile = new ST_XFile;

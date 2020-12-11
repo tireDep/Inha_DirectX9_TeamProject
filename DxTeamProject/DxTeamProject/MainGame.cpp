@@ -118,7 +118,7 @@ void CMainGame::Setup()
 	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PhysicsTest.dat");
 
 #ifdef _DEBUG
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");

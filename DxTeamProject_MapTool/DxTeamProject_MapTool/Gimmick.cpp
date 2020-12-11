@@ -3,6 +3,7 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 #include "Door.h"
+#include "MovingCube.h"
 
 CGimmick::CGimmick()
 {
@@ -105,8 +106,8 @@ void CGimmick::CreateGimmick(const ObjectType& objType)
 
 		mapData.strXFilePath = string("Rotation_board") + string(".X");
 
-		mapData.gimmickData.roationSpeed = 0.0f;
-		mapData.gimmickData.roationAxialIndex = 0;
+		mapData.gimmickData.roationSpeed_rotaitonBoard = 0.0f;
+		mapData.gimmickData.roationAxialIndex_rotaitonBoard = 0;
 
 		CRotationBoard* rotationBoard = new CRotationBoard;
 		rotationBoard->Setup(mapData);
@@ -151,11 +152,29 @@ void CGimmick::CreateGimmick(const ObjectType& objType)
 
 		mapData.strXFilePath = string("Force_switch") + string(".X");
 
-		mapData.gimmickData.roationSpeed = 0.0f;
-		mapData.gimmickData.roationAxialIndex = 0;
+		mapData.gimmickData.roationSpeed_rotaitonBoard = 0.0f;
+		mapData.gimmickData.roationAxialIndex_rotaitonBoard = 0;
 
 		CSwitch* cSwitch = new CSwitch;
 		cSwitch->Setup(mapData);
+	}
+		break;
+
+	case eG_MovingCube:
+	{
+		mapData.strObjName = string("MovingCube") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Gimmick/MovingCube";
+		mapData.strTxtPath = "moving_cube_1.png";
+
+		mapData.strXFilePath = string("moving_cube") + string(".X");
+
+		mapData.gimmickData.startPos_movingCube= 0.0f;
+		mapData.gimmickData.endPos_movingCube = 0.0f;
+		mapData.gimmickData.speed_movingCube = 0.0f;
+		mapData.gimmickData.directionIndex_movingCube = 0;
+
+		CMovingCube* movingCube = new CMovingCube;
+		movingCube->Setup(mapData);
 	}
 		break;
 	} // << switch
@@ -191,6 +210,13 @@ void CGimmick::CreateGimmick_SaveData(ST_MapData & mapData)
 	{
 		CSwitch* cSwitch = new CSwitch;
 		cSwitch->Setup(mapData);
+	}
+		break;
+
+	case eG_MovingCube:
+	{
+		CMovingCube* rotationBoard = new CMovingCube;
+		rotationBoard->Setup(mapData);
 	}
 		break;
 	} // << switch

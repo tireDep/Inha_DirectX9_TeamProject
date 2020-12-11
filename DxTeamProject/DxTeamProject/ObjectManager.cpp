@@ -9,6 +9,7 @@
 #include "Sphere.h"
 #include "Box.h"
 #include "Cylinder.h"
+#include "MovingCube.h"
 // collide
 //#include "Contact.h"
 

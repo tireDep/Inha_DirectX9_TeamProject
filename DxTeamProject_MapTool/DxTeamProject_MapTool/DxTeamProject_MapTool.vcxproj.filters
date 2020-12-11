@@ -146,6 +146,12 @@
     <ClInclude Include="Door.h">
       <Filter>Object\Gimmick</Filter>
     </ClInclude>
+    <ClInclude Include="Book.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingCube.h">
+      <Filter>Object\Gimmick</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui.cpp">
@@ -234,6 +240,12 @@
       <Filter>Object\Gimmick</Filter>
     </ClCompile>
     <ClCompile Include="Door.cpp">
+      <Filter>Object\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Book.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingCube.cpp">
       <Filter>Object\Gimmick</Filter>
     </ClCompile>
   </ItemGroup>

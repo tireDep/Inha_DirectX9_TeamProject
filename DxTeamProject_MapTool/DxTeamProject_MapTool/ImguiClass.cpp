@@ -11,6 +11,7 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 #include "Door.h"
+#include "MovingCube.h"
 
 #include "ImguiClass.h"
 
@@ -112,9 +113,9 @@ void CImguiClass::SetVecItem()
 		tempVec.push_back("RotationBoard");		tempObjType.push_back(eG_RotationBoard);
 		tempVec.push_back("Switch");			tempObjType.push_back(eG_Switch);
 		tempVec.push_back("Door");				tempObjType.push_back(eG_DoorFrame);
+		tempVec.push_back("MovingCube");		tempObjType.push_back(eG_MovingCube);
 		tempVec.push_back("ColorChanger");		tempObjType.push_back(eG_ColorChanger);
 		tempVec.push_back("BreakWall");			tempObjType.push_back(eG_BreakWall);
-		tempVec.push_back("MovingCube");		tempObjType.push_back(eG_MovingCube);
 	}
 
 	else if (m_NowLoadType == LoadType::eItem)
@@ -613,7 +614,7 @@ void CImguiClass::Update_Inspector()
 				case eG_RotationBoard:	case eG_BreakWall:	
 				case eG_ColorChanger:	case eG_Switch:		
 #ifdef _DEBUG 
-				case eG_Razer:		case eG_MovingCube:
+				case eG_MovingCube:
 #endif
 				{
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetDiffScale(vScale);
@@ -822,6 +823,41 @@ void CImguiClass::Update_Inspector()
 				} // << : for
 
 				ImGui::Separator();
+			}
+
+			// >> 무빙 큐브 기믹 : 시작점&끝점, 속도, 방향
+			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_MovingCube)
+			{
+				CMovingCube* temp = dynamic_cast<CMovingCube*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+				ImGui::Text("Direction");
+				static int pushIndex = 0;
+				pushIndex = temp->GetDirection();
+				string charName[3] = { "X", "Y", "Z" };
+				for (int i = 0; i < 3; i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str(), pushIndex == i))
+					{
+						pushIndex = i;
+						temp->SetDirection(pushIndex);
+					}
+				} // << : for
+
+				ImGui::Separator();
+
+				float inputS = temp->GetStartPos();
+				if (ImGui::InputFloat("StartPos", &inputS))
+					temp->SetStartPos(inputS);
+
+				float inputE = temp->GetEndPos();
+				if (ImGui::InputFloat("EndPos", &inputE))
+					temp->SetEndPos(inputE);
+
+				ImGui::Separator();
+
+				float inputSpeed = temp->GetSpeed();
+				if (ImGui::InputFloat("Speed", &inputSpeed))
+					temp->SetSpeed(inputSpeed);
+
 			}
 
 		} // << : if (m_nowSelectindex >= 0)

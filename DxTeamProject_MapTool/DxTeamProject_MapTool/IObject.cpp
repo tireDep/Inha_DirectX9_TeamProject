@@ -422,6 +422,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 #endif // _DEBUG
 	case eG_ColorChanger:
 	case eG_Switch:
+	case eG_MovingCube:
 	{
 		CGimmick::CreateGimmick(objType);
 	}
@@ -500,6 +501,7 @@ void IObject::CreateObject(ST_MapData& mapData)
 	case eG_DoorFrame:		case eG_Door:
 #endif // _DEBUG
 	case eG_ColorChanger:	case eG_Switch:
+	case eG_MovingCube:
 	{
 		CGimmick::CreateGimmick_SaveData(mapData);
 	}
