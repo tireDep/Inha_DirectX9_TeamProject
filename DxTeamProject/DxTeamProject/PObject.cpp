@@ -184,7 +184,7 @@ void PObject::UpdateLand(float duration)
 	float distance = GetPosition().y - GetBoundingSphere();
 	if (CloseToZero(distance) || distance < 0.0f)
 	{
-		//m_vPosition.y = -distance;
+		m_vPosition.y += -distance;
 		D3DXVECTOR3 tmp = m_vLinearVelocity;
 		tmp.y = -tmp.y * m_fElasticity;
 		m_vLinearVelocity = tmp;

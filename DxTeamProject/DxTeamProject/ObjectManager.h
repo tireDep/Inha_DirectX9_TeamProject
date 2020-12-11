@@ -77,7 +77,7 @@ public:
 
 	void Collide(float duration);						// Collision			
 	void CollisionPObject(PObject* one, PObject* two, float duration);
-	void CollisionIObject(PObject* pObject, float duration);
+	void CollisionIObject(PObject* pObject, IObject* iObject, float duration);
 
 	void Render();
 	void RenderOBBBox();
