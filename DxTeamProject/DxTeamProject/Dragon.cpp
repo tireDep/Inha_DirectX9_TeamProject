@@ -12,7 +12,7 @@ CDragon::CDragon() :
 	Drangon_y(4.5f),
 	m_vDrangonPos(0, 0, 0),
 	m_vDirection(0,0,1),
-	rotation(-1.0f)
+	rotation(D3DX_PI)
 {
 	D3DXMatrixIdentity(&m_matRotY);
 	m_strName = "Dragon";
@@ -64,7 +64,7 @@ void CDragon::Setup()
 	m_vecTextures = xfile->vecTextrure;
 	m_numMtrls = xfile->nMtrlNum;
 
-
+	DoRotation();
 	
 	delete xfile;
 
@@ -151,36 +151,44 @@ void CDragon::ReceiveEvent(ST_EVENT eventMsg)
 	{
 	case PlayerInputType::eDown:
 		rotation = 0.0f;
+		DoRotation();
 		break;
 
 	case PlayerInputType::eRightDown:
 		rotation = D3DX_PI / 4.0f * -1;
+		DoRotation();
 		break;
 
 	case PlayerInputType::eLeftDown:
 		rotation = D3DX_PI / 4.0f;
+		DoRotation();
 		break;
 
 	case PlayerInputType::eUp:
 		rotation = D3DX_PI;
+		DoRotation();
 		break;
 
 	case PlayerInputType::eRightUp:
 		rotation = D3DX_PI + D3DX_PI / 4.0f;
+		DoRotation();
 		break;
 
 	case PlayerInputType::eLeftUp:
 		rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
+		DoRotation();
 		break;
 
 	case PlayerInputType::eRight:
 		rotation = -D3DX_PI / 2.0f;
+		DoRotation();
 		break;
 
 	case PlayerInputType::eLeft:
 		rotation = D3DX_PI / 2.0f;
+		DoRotation();
 		break;
+
 	}
-	DoRotation();
 }
 
