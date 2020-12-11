@@ -135,8 +135,8 @@ void CMainGame::Setup()
 	m_pCamera = new CCamera;
 	m_pCamera->Setup(&m_pCharacter->GetPosition());
 
-	//m_pMovingCube = new MovingCube;
-	//m_pMovingCube->Setup();
+	m_pMovingCube = new MovingCube;
+	m_pMovingCube->Setup();
 
 	//m_pOrb = new COrb;
 	//m_pOrb->Setup();
@@ -163,8 +163,8 @@ void CMainGame::Setup()
 	// m_pGimmick_RotationBoard = new RotationBoard;
 	// m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
 
-	// m_pGimmick_Switch = new CSwitch;
-	// m_pGimmick_Switch->Setup();
+	 m_pGimmick_Switch = new CSwitch;
+	 m_pGimmick_Switch->Setup();
 
 	//m_pGimmick_BreakableWall[0] = new CBreakableWall;
 	//m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "standard_wall.X");
@@ -180,6 +180,7 @@ void CMainGame::Setup()
 	g_pEventManager->AddListener(g_gameManager);
 	g_pEventManager->AddListener(m_pCamera);
 	g_pEventManager->AddListener(m_pCharacter);
+	g_pEventManager->AddListener(m_pDragon);
 	g_pEventManager->AddListener(m_pUI);
 
 	for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
@@ -225,7 +226,7 @@ void CMainGame::Update()
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
-		//m_pDragon->DoRotation(m_pCharacter->Getrotation(), m_pCamera->GetCameraDirection());
+		m_pDragon->DirectionSet(m_pCamera->GetCameraDirection());
 		m_pDragon->Update(m_pCharacter->GetPosition());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		/// OBB TEST
@@ -342,8 +343,8 @@ void CMainGame::Update()
 	//if (m_pChanger)
 	//	m_pChanger->Update();
 
-	//if (m_pMovingCube)
-	//	m_pMovingCube->Update();
+	if (m_pMovingCube)
+		m_pMovingCube->Update();
 
 	//for(int i =0 ; i < m_pMeshTile.size(); ++i)
 	//if (m_pMeshTile[i])
@@ -365,18 +366,18 @@ void CMainGame::Update()
 	//	
 	//	}
 	//}
-	// if (m_pGimmick_Switch)
-	// 	m_pGimmick_Switch->Update();
+	 if (m_pGimmick_Switch)
+	 	m_pGimmick_Switch->Update();
 	// 
 	// 
-	// if (COBB::IsCollision(g_pObjectManager->GetvecOBB(), m_pGimmick_Switch->GetOBB2()) == true)
-	// {
-	// 	m_pGimmick_Switch->SetBool(true);
-	// }
-	// else
-	// {
-	// 	m_pGimmick_Switch->SetBool(false);
-	// }
+	 if (COBB::IsCollision(m_pMovingCube->GetOBB(), m_pGimmick_Switch->m_pColl) == true)
+	 {
+		 cout << 1 << endl;
+	 }
+	 else
+	 {
+		 //cout << 2 << endl;
+	 }
 
 	//if (m_pGimmick_BreakableWall[0])
 	//	m_pGimmick_BreakableWall[0]->Update();
@@ -438,9 +439,9 @@ void CMainGame::Render()
 
 	// Ray y check
 
-	/*if(m_pMovingCube)
+	if(m_pMovingCube)
 		m_pMovingCube->Render();
-*/
+
 	//for(int i =0; i < m_pMeshTile.size(); ++i)
 	//	m_pMeshTile[i]->Render();
 
@@ -454,8 +455,8 @@ void CMainGame::Render()
 	//	m_pGimmick_Door[1]->Render();
 	//if (m_pGimmick_RotationBoard)
 	//	m_pGimmick_RotationBoard->Render();
-	// if (m_pGimmick_Switch)
-	// 	m_pGimmick_Switch->Render();
+	 if (m_pGimmick_Switch)
+	 	m_pGimmick_Switch->Render();
 	//if (m_pChanger)
 	//	m_pChanger->Render();
 	/*if (m_pGimmick_Switch)

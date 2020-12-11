@@ -41,10 +41,14 @@ public:
 	void SetAnimationIndex(int nIndex); // 애니메이션
 	void SetAnimationIndexBlend(int nIndex); //  애니메이션 블렌드
 
+	void SetNowPlayMaxTime(LPD3DXANIMATIONSET aniInfo);
+
 	void SetTransform(D3DXMATRIXA16 * pmat); // << 월드 매트릭스 설정
 
 	COBB* GetOBB() { return m_pOBB; }
 	//CPSOBB* GetOBB() { return m_pOBB; }
+
+	bool CheckAnimationEnd();
 };
 
 

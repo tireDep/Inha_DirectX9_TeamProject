@@ -12,7 +12,6 @@ CSkinnedMesh::CSkinnedMesh() :
 	m_passedTime(0.0f),
 	m_maxPlayTime(0.0f)
 {
-
 }
 
 CSkinnedMesh::~CSkinnedMesh()
@@ -50,11 +49,14 @@ void CSkinnedMesh::SetUp(char * szFolder, char * szFile)
 
 void CSkinnedMesh::Update()
 {
+	static int temp = 0;
+
 	m_passedTime += g_pTimeManager->GetElapsedTime();
-	//if (m_maxPlayTime <= m_passedTime + m_fBlendTime && strstr(m_sNowPlayAni.c_str(), "Attack"))
+
+	//if (m_maxPlayTime <= m_passedTime + m_fBlendTime && strstr(pAniSet->GetName(), "Walk"))
 	//{
 	//	// 블랜딩 시간 추가
-	//	SetAnimationIndexBlend(4);
+	//	SetAnimationIndexBlend(temp);
 	//}
 	
 	if (m_isAniBlend)
@@ -331,15 +333,33 @@ void CSkinnedMesh::SetAnimationIndexBlend(int nIndex)
 	m_pAniController->SetTrackWeight(0, 0.0f);
 	m_pAniController->SetTrackWeight(1, 1.0f);
 	// << 가중치
-
+	
+	SetNowPlayMaxTime(pNextAniSet);
 	m_passedTime = 0.0f;
 
 	SafeRelease(pPrevAniSet);
 	SafeRelease(pNextAniSet);
 }
 
+void CSkinnedMesh::SetNowPlayMaxTime(LPD3DXANIMATIONSET aniInfo)
+{
+	m_maxPlayTime = aniInfo->GetPeriod();
+	m_sNowPlayAni = aniInfo->GetName();
+}
+
 void CSkinnedMesh::SetTransform(D3DXMATRIXA16 * pmat)
 {
 	m_matworldTM = *pmat;
+}
+
+bool CSkinnedMesh::CheckAnimationEnd()
+{
+	if (m_maxPlayTime <= m_passedTime + m_fBlendTime)// && strstr(m_sNowPlayAni.c_str(), "ChangeColor "))
+	{
+		// m_passedTime = 0;
+		return true;
+	}
+
+	return false;
 }
 

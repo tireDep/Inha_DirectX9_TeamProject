@@ -5489,7 +5489,7 @@ AnimTicksPerSecond  {
  4800;
 }
 
-AnimationSet idle {
+AnimationSet Idle {
  
 
  Animation {

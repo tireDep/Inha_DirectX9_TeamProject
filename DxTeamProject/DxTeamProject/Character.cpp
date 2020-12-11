@@ -57,6 +57,9 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			msg.ptrMessage = &m_color;
 
 			g_pEventManager->CheckEvent(msg);
+
+			// m_Character->SetAnimationIndexBlend(3);
+			// m_Character->SetAnimationIndexBlend(2);
 			return;
 		}
 
@@ -127,15 +130,22 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 		default:
 			speed = -1.0f;
+			// if(m_Character->CheckAnimationEnd())
+				m_Character->SetAnimationIndex(10);
 			break;
 		}
 
 		if (speed > 0)
 		{
+
+		//	if(m_Character->CheckAnimationEnd())
+				m_Character->SetAnimationIndex(9);
+
 			DoRotation(rotation);
 			DoMove(speed);
 		}
 	}
+
 
 	D3DXMATRIXA16 matT;
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
@@ -239,7 +249,9 @@ void CCharacter::Setup()
 	// m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
 
 	m_Character = new CSkinnedMesh;
-	m_Character->SetUp("Resource/XFile/Character", "Push.X");
+	m_Character->SetUp("Resource/XFile/Character", "AnimationCharacter.X");
+	// m_Character->SetAnimationIndexBlend(8);
+	m_Character->SetAnimationIndex(8);
 
 	// Ray y check
 	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 10, 0);
