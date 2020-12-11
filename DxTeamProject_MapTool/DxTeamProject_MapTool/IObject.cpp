@@ -350,7 +350,15 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eCTree:
 	{
-		mapData.strObjName = string("ColorTree") + to_string(m_nRefCnt + 1);
+		string name;
+		if (index == 0) name = "A_Tree_Blue_016_";
+		else if (index == 1) name = "A_Tree_Blue_020_";
+		else if (index == 2) name = "C_Bush_Blue_070_";
+		else if (index == 3) name = "C_Bush_Blue_071_";
+		else if (index == 4)  name = "D_Shrub_Blue_101_";
+		else if (index == 5) name = "D_Shrub_Blue_102_";
+
+		mapData.strObjName = name + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/ColorTree";
 		mapData.strTxtPath = "TreesBlue.png";
 
@@ -363,7 +371,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eBall:
 	{
-		mapData.strObjName = string("BeachBall") + to_string(m_nRefCnt + 1);
+		mapData.strObjName = string("Ball") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "BeachBall_Base_Color.png";
 		mapData.strXFilePath = "ball.X";
@@ -375,7 +383,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eChair:
 	{
-		mapData.strObjName = string("Chair") + to_string(m_nRefCnt + 1);
+		mapData.strObjName = string("Blue_Chair") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "";
 		mapData.strXFilePath = "blue_chair.X";
@@ -387,7 +395,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eUmbrella:
 	{
-		mapData.strObjName = string("Umbrella") + to_string(m_nRefCnt + 1);
+		mapData.strObjName = string("Umbrella_Blue") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "Umbrella_Blue.png";
 		mapData.strXFilePath = "Umbrella.X";
@@ -413,7 +421,16 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	case eFlower:
 	{
 		mapData.vScale = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
-		mapData.strObjName = string("Flower") + to_string(m_nRefCnt + 1);
+		
+		string name;
+		if (index == 0) name = "_White";
+		else if (index == 1) name = "_Purple";  
+		else if (index == 2) name = "_Red";
+		else if (index == 3) name = "_Orange"; 
+		else if (index == 4)  name = "_Blue"; 
+		else if (index == 5) name = "_Yellow";
+
+		mapData.strObjName = string("Flower") + name + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "";
 

@@ -6,6 +6,8 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 #include "Door.h"
+#include "Switch.h"
+#include "Background.h"
 
 void CObjectManager::SetCopyObject(int index)
 {
@@ -258,6 +260,16 @@ void CObjectManager::CopyObject()
 			m_vecObject[m_vecObject.size() - 1]->SetColor(m_vecObject[index]->GetColor());
 			break;
 
+		case eCTree:
+		case eUmbrella:
+		{
+			CBackground* temp = dynamic_cast<CBackground*> (&g_pObjectManager->GetIObject(m_vecObject.size() - 1));
+			CBackground* temp2 = dynamic_cast<CBackground*> (&g_pObjectManager->GetIObject(index));
+
+			temp->SetTexture(temp2->GetTextureIndex());
+		}
+			break;
+
 		case eG_RotationBoard:
 		{
 			CRotationBoard* temp = dynamic_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(m_vecObject.size() - 1));
@@ -273,11 +285,21 @@ void CObjectManager::CopyObject()
 		{
 			CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_vecObject.size() - 1));
 			CDoor* temp2 = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
-			temp->SetAnotherScale(temp->GetScale());
-			temp->SetAnotherRotation(temp->GetRotate());
-			temp->SetAnotherTranslation(temp->GetTranslate());
+
+			temp->SetAnotherScale(temp2->GetScale());
+			temp->SetAnotherRotation(temp2->GetRotate());
+			temp->SetAnotherTranslation(temp2->GetTranslate());
 		}
 		break;
+
+		case eG_Switch:
+		{
+			CSwitch* temp = dynamic_cast<CSwitch*> (&g_pObjectManager->GetIObject(m_vecObject.size() - 1));
+			CSwitch* temp2 = dynamic_cast<CSwitch*> (&g_pObjectManager->GetIObject(index));
+
+			temp->SetTexture(temp2->GetTextureIndex());
+		}
+			break;
 #endif // _DEBUG
 
 		} // << : switch

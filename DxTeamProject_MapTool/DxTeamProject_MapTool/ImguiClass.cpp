@@ -88,11 +88,11 @@ void CImguiClass::SetVecItem()
 		{
 			tempVec.clear();
 #ifdef _DEBUG
-			tempVec.push_back("BlueFlower");	tempObjType.push_back(eFlower);
-			tempVec.push_back("OrangeFlower");	tempObjType.push_back(eFlower);
+			tempVec.push_back("WhiteFlower");	tempObjType.push_back(eFlower);
 			tempVec.push_back("PurpleFlower");	tempObjType.push_back(eFlower);
 			tempVec.push_back("RedFlower");		tempObjType.push_back(eFlower);
-			tempVec.push_back("WhiteFlower");	tempObjType.push_back(eFlower);
+			tempVec.push_back("OrangeFlower");	tempObjType.push_back(eFlower);
+			tempVec.push_back("BlueFlower");	tempObjType.push_back(eFlower);
 			tempVec.push_back("YellowFlower");	tempObjType.push_back(eFlower);
 			tempVec.push_back("Sprout");		tempObjType.push_back(eSprout);
 #endif // _DEBUG
