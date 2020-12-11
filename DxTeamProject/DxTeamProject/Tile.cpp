@@ -3,33 +3,24 @@
 
 CTile::CTile()
 {
-	m_pMesh = NULL;
-	m_pTexture = NULL;
-	
-	D3DXMatrixIdentity(&m_matWorld);
-	//D3DXMatrixIdentity(&matWorld);
+	m_strName = string("Tile") + to_string(m_nRefCount);
 }
 
 CTile::~CTile()
 {
 }
 
-void CTile::Setup(ST_MapData setData)
+void CTile::Setup(const ST_MapData & mapData)
 {
-	m_strObjName = setData.strObjName;
-	//m_strName = m_strObjName;
-	m_strFolder = setData.strFolderPath;
-	m_strXFile = setData.strXFilePath;
-	m_strTxtFile = setData.strTxtPath;
-	m_ObjectType = setData.objType;
+	m_strObjName = mapData.strObjName;
+	m_strFolder = mapData.strFolderPath;
+	m_strXFile = mapData.strXFilePath;
+	m_strTxtFile = mapData.strTxtPath;
+	m_ObjectType = mapData.objType;
 
-	D3DXVECTOR3 vScale, vRotate, vTranslate;
-
-	vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
-	// JW ADD...
-	m_vScale = vScale;
-	vRotate = setData.vRotate;
-	vTranslate = setData.vTranslate;
+	m_vScale = mapData.vScale;
+	m_vRotation = mapData.vRotate;
+	m_vTranslation = mapData.vTranslate;
 
 	ST_XFile* xfile = new ST_XFile;
 
@@ -47,18 +38,35 @@ void CTile::Setup(ST_MapData setData)
 	delete xfile;
 
 	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixScaling(&matS, vScale.x, vScale.y, vScale.z);
-
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(vRotate.x);
-	v.y = D3DXToRadian(vRotate.y);
-	v.z = D3DXToRadian(vRotate.z);
-
-	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
-
-	D3DXMatrixTranslation(&matT, vTranslate.x, vTranslate.y, vTranslate.z);
+	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
 	m_matWorld = matS * matR * matT;
 
+	// OBB Test
+	m_pOBB = new COBB;
+	m_pOBB->Setup(*this);
+	g_pObjectManager->AddOBBbox(m_pOBB);
+	//m_strObjName = setData.strObjName;
+	//m_strFolder = setData.strFolderPath;
+	//m_strXFile = setData.strXFilePath;
+	//m_strTxtFile = setData.strTxtPath;
+	//m_ObjectType = setData.objType;
+	//D3DXVECTOR3 vScale, vRotate, vTranslate;
+	//vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
+	//// JW ADD...
+	//m_vScale = vScale;
+	//vRotate = setData.vRotate;
+	//vTranslate = setData.vTranslate;
+	//D3DXMATRIXA16 matS, matR, matT;
+	//D3DXMatrixScaling(&matS, vScale.x, vScale.y, vScale.z);
+	//D3DXVECTOR3 v;
+	//v.x = D3DXToRadian(vRotate.x);
+	//v.y = D3DXToRadian(vRotate.y);
+	//v.z = D3DXToRadian(vRotate.z);
+	//D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
+	//D3DXMatrixTranslation(&matT, vTranslate.x, vTranslate.y, vTranslate.z);
+	//m_matWorld = matS * matR * matT;
 	//matWorld =  matT;
 	//D3DXVECTOR3 *pVertices;
 	//for (int i = 0; i < m_vecMtrls.size(); ++i)
@@ -81,6 +89,30 @@ void CTile::Setup(ST_MapData setData)
 	//}
 }
 
+void CTile::Render()
+{
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+
+	if (m_pMesh == NULL)
+		return;
+
+	for (int i = 0; i < m_vecMtrls.size(); i++)
+	{
+		//g_pD3DDevice->SetMaterial(m_vecMtrls[i]);
+		if (m_vecTextures[i] != 0)
+			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+		else if (m_pTexture != NULL)
+		{
+			g_pD3DDevice->SetTexture(0, m_pTexture); 
+			// >> 텍스처 매치 안되있을 때
+		}
+		m_pMesh->DrawSubset(i);
+	}
+	g_pD3DDevice->SetTexture(0, NULL);
+}
+
+/// Delete Later...
 //void CTile::Update(float duration)
 //{
 //	//for (int i = 0; i < m_pOBB.size(); ++i)
@@ -109,7 +141,6 @@ void CTile::Setup(ST_MapData setData)
 //		
 //	}
 //}
-
 //void CTile::Update(float duration)
 //{
 //
@@ -118,31 +149,3 @@ void CTile::Setup(ST_MapData setData)
 //	//	m_pOBB[i]->Update(&m_matWorld);
 //
 //}
-
-void CTile::Render()
-{
-	//for (int i = 0; i < m_pOBB.size(); ++i)
-	//if (m_pOBB[i])
-	//m_pOBB[i]->OBBBOX_RENDER(D3DCOLOR_XRGB(255, 0, 0));
-
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-
-	if (m_pMesh == NULL)
-		return;
-
-	for (int i = 0; i < m_vecMtrls.size(); i++)
-	{
-		//g_pD3DDevice->SetMaterial(m_vecMtrls[i]);
-		if (m_vecTextures[i] != 0)
-			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
-		else if (m_pTexture != NULL)
-		{
-			g_pD3DDevice->SetTexture(0, m_pTexture); 
-			// >> 텍스처 매치 안되있을 때
-		}
-		m_pMesh->DrawSubset(i);
-	}
-
-	g_pD3DDevice->SetTexture(0, NULL);
-}

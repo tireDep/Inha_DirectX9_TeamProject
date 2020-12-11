@@ -20,7 +20,6 @@ CSphere::~CSphere()
 void CSphere::Setup()
 {
 	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pMesh, NULL);
-	m_fBoundingSphere = m_fRadius;
 
 	//m_vInverseRotationInertia.x = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
 	//m_vInverseRotationInertia.y = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
@@ -38,44 +37,41 @@ void CSphere::Setup(const ST_MapData & mapData)
 	Setup();
 
 	m_strObjName = mapData.strObjName;
-
 	m_strFolder = mapData.strFolderPath;
 	m_strXFile = mapData.strXFilePath;
 	m_strTxtFile = mapData.strTxtPath;
-
 	m_ObjectType = mapData.objType;
 
-	D3DXVECTOR3 vScale, vRotate;
-	vScale = mapData.vScale;
-	// JW ADD...
-	m_vScale = vScale;
-	vRotate = mapData.vRotate;
-	m_vPosition = mapData.vTranslate;
+	m_vScale = mapData.vScale;
+	m_vRotation = mapData.vRotate;
+	m_vTranslation = mapData.vTranslate;
+	m_vPosition = m_vTranslation;
 
 	m_Color = mapData.dxColor;
 	this->ChangeObjectColor();
 
-	m_fRadius = vScale.x;
-	m_fRadius = vScale.y;
-	m_fRadius = vScale.z;
-
-	// ============================================================
+	m_fRadius *= m_vScale.x;
+	m_fBoundingSphere = m_fRadius;
 
 	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixScaling(&matS, vScale.x, vScale.y, vScale.z);
-
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(vRotate.x);
-	v.y = D3DXToRadian(vRotate.y);
-	v.z = D3DXToRadian(vRotate.z);
-
-	// D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
-	D3DXMatrixRotationX(&matR, v.x);
-	D3DXMatrixRotationY(&matR, v.y);
-	D3DXMatrixRotationZ(&matR, v.z);
-
-	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
 	m_matWorld = matS * matR * matT;
+
+	g_pObjectManager->AddSphere(this);
+	//D3DXVECTOR3 vScale, vRotate;
+	//vScale = mapData.vScale;
+	// JW ADD...
+	//m_vScale = vScale;
+	//vRotate = mapData.vRotate;
+	//m_vPosition = mapData.vTranslate;
+	//m_fRadius = vScale.x;
+	//m_fRadius = vScale.y;
+	//m_fRadius = vScale.z;
+	//D3DXMatrixRotationX(&matR, v.x);
+	//D3DXMatrixRotationY(&matR, v.y);
+	//D3DXMatrixRotationZ(&matR, v.z);
 }
 
 void CSphere::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)

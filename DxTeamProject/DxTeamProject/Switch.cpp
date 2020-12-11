@@ -54,8 +54,6 @@ void CSwitch::Setup()
 	m_pOBB->Setup(*this);
 	g_pObjectManager->AddOBBbox(m_pOBB);
 	g_pObjectManager->AddGimmick(this);
-
-
 }
 
 void CSwitch::Setup(ST_MapData setData)
@@ -115,7 +113,7 @@ void CSwitch::Setup(ST_MapData setData)
 	v.x = D3DXToRadian(vRotate.x);
 	v.y = D3DXToRadian(vRotate.y);
 	v.z = D3DXToRadian(vRotate.z);
-	D3DXMatrixRotationYawPitchRoll(&m_matR, v.x, v.y, v.z);
+	D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
 
 	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
 	m_position = vTranslate;

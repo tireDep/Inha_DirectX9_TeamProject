@@ -115,7 +115,7 @@ void Color_changer::Setup(ST_MapData setData)
 	v.y = D3DXToRadian(vRotate.y);
 	v.z = D3DXToRadian(vRotate.z);
 
-	D3DXMatrixRotationYawPitchRoll(&m_matR, v.x, v.y, v.z); //∏„µ•¿Ã≈Õ
+	D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z); //∏„µ•¿Ã≈Õ
 
 	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z); //∏„µ•¿Ã≈Õ
 

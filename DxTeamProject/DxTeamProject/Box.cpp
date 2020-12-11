@@ -47,49 +47,62 @@ void CBox::Setup(const ST_MapData & mapData)
 	Setup();
 
 	m_strObjName = mapData.strObjName;
-
 	m_strFolder = mapData.strFolderPath;
 	m_strXFile = mapData.strXFilePath;
 	m_strTxtFile = mapData.strTxtPath;
-
 	m_ObjectType = mapData.objType;
 
-	D3DXVECTOR3 vScale, vRotate;
-	vScale = mapData.vScale;
-	// JW ADD...
-	m_vScale = vScale;
-	vRotate = mapData.vRotate;
-	m_vPosition = mapData.vTranslate;
+	m_vScale = mapData.vScale;
+	m_vRotation = mapData.vRotate;
+	m_vTranslation = mapData.vTranslate;
+	m_vPosition = m_vTranslation;
 
 	m_Color = mapData.dxColor;
-	// color change
 	this->ChangeObjectColor();
 
-	m_fWidth = vScale.x;
-	m_fHeight = vScale.y;
-	m_fDepth = vScale.z;
+	m_fWidth *= m_vScale.x;
+	m_fHeight *= m_vScale.y;
+	m_fDepth *= m_vScale.z;
 
-	// ============================================================
-
-	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixScaling(&matS, vScale.x, vScale.y, vScale.z);
-
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(vRotate.x);
-	v.y = D3DXToRadian(vRotate.y);
-	v.z = D3DXToRadian(vRotate.z);
-
-	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
-
-	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	m_matWorld = matS * matR * matT;
-	
+	//m_strObjName = mapData.strObjName;
+	//m_strFolder = mapData.strFolderPath;
+	//m_strXFile = mapData.strXFilePath;
+	//m_strTxtFile = mapData.strTxtPath;
+	//m_ObjectType = mapData.objType;
+	//D3DXVECTOR3 vScale, vRotate;
+	//vScale = mapData.vScale;
+	//// JW ADD...
+	//m_vScale = vScale;
+	//vRotate = mapData.vRotate;
+	//m_vPosition = mapData.vTranslate;
+	//m_Color = mapData.dxColor;
+	//// color change
+	//this->ChangeObjectColor();
+	//m_fWidth = vScale.x;
+	//m_fHeight = vScale.y;
+	//m_fDepth = vScale.z;
+	//// ============================================================
+	//D3DXMATRIXA16 matS, matR, matT;
+	//D3DXMatrixScaling(&matS, vScale.x, vScale.y, vScale.z);
+	//D3DXVECTOR3 v;
+	//v.x = D3DXToRadian(vRotate.x);
+	//v.y = D3DXToRadian(vRotate.y);
+	//v.z = D3DXToRadian(vRotate.z);
+	//D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
+	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	//m_matWorld = matS * matR * matT;
 	// Collide
 	//collisionbox.m_pObject = this;
 	//collisionbox.halfSize.x = m_fWidth;
 	//collisionbox.halfSize.y = m_fHeight;
 	//collisionbox.halfSize.z = m_fDepth;
 	//collisionbox.calculateInternals();
+
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+	m_matWorld = matS * matR * matT;
 
 	// OBB TEST
 	m_pOBB = new COBB;
