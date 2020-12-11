@@ -31,10 +31,6 @@ void COBB::Setup(CObject & object)
 	m_fAxisHalfLen[1] = fabsf(m_vMax.y - m_vMin.y) / 2.0f;
 	m_fAxisHalfLen[2] = fabsf(m_vMax.z - m_vMin.z) / 2.0f;
 
-	/*m_fAxisHalfLen[0] *= object.GetScale().x;
-	m_fAxisHalfLen[1] *= object.GetScale().y;
-	m_fAxisHalfLen[2] *= object.GetScale().z;*/
-
 	// OBB BOX LINE 
 	{
 		vector<D3DXVECTOR3> vecVertex;

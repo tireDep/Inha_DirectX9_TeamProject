@@ -204,8 +204,10 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 
 void CObjectManager::Update(float duration)
 {
-	for (int i = 0; i < m_vecGimmick.size(); i++)
-		m_vecGimmick[i]->Update(duration);
+	for (int i = 0; i < m_vecIObject.size(); i++)
+		m_vecIObject[i]->Update(duration);
+	//for (int i = 0; i < m_vecGimmick.size(); i++)
+	//	m_vecGimmick[i]->Update(duration);
 
 
 
