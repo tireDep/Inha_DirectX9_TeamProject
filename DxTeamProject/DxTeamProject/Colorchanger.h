@@ -1,33 +1,52 @@
 #pragma once
-class MeshTile;
+#include "Gimmick.h"
+class COBB;
 
-class Color_changer
+class Color_changer : public CGimmick
 {
 public:
 	Color_changer();
 	~Color_changer();
 private:
-	Synthesize_Add_Ref(ID3DXMesh*, m_pMesh, Mesh);
-	Synthesize_Add_Ref(ID3DXBuffer*, m_adjBuffer, AdjBuffer);
 
-	Synthesize(DWORD, m_numMtrls, NumMtrl);
-	Synthesize(vector<D3DMATERIAL9>, m_vecMtrls, VecMtrls);
-	Synthesize(vector<IDirect3DTexture9*>, m_vecTextures, VecTexture);
-	D3DXMATRIXA16 matWorld;
-	D3DXMATRIXA16 matS, matT , matR;
-	D3DXVECTOR3 m_position;
+	 LPD3DXMESH m_pMeshBeam; //빔 메쉬.
 	
-	bool istrue;
-public:
-	D3DMATERIAL9 m_stMtlSphere2;
 
-	void Setup(string folder, string file);
+	D3DXMATRIXA16  BeamWorld; //장치월드 , 빔월드
+	D3DXMATRIXA16 m_matS, m_matR, m_matT;  //맵 데이터
+	D3DXMATRIXA16 matS, matT , matR;  // 빔
+	D3DXVECTOR3  m_scale; //빔포지션 , 빔 크기 
+
+	float angle; //장치 , 빔 앵글 조절.
+
+	float length; // 빔 길이 조절.
+	
+
+	D3DXCOLOR c; 
+	D3DXVECTOR3 m_vMin, m_vMax;
+
+	// KT
+	float m_fHitLength;
+public:
+	D3DMATERIAL9 m_stMtl;
+	D3DXVECTOR3 m_position;
+	COBB *m_BeamOBB;
+	
+	void Setup(); // x파일
+	void Setup(ST_MapData setData);
+
 	void Update();
 	void Render();
 
-	bool RayCheck(MeshTile& meshtile);
-	
-	
+	void Update(float duration) { };
 
+	void SetColor(D3DXCOLOR color);
+	
+	// KT
+	void SetHitLength(float HitLength); // 빔이 맞았을때 거리 구해줌.
+
+
+	//인터섹트
+	
 };
 

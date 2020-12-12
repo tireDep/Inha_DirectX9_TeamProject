@@ -12,7 +12,7 @@ public:
 protected:
 	D3DXMATRIXA16 m_matWorld;
 public:
-	CObject* m_pObject; 
+	PObject* m_pObject; 
 	Collision();
 	~Collision();
 

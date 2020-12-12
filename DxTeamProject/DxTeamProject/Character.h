@@ -4,13 +4,14 @@
 class COBB;
 class CRay;
 class MeshTile;
+class CSkinnedMesh;
 
 class CCharacter : public IListener
 {
 public:
 	CCharacter();
 protected:
-	vector<ST_PC_VERTEX>	m_vecVertex;
+//	vector<ST_PC_VERTEX>	m_vecVertex;
 	D3DXVECTOR3				m_vDirection;
 	D3DXVECTOR3				m_vPosition;
 	D3DXMATRIXA16			m_matRotY;
@@ -18,7 +19,9 @@ protected:
 	D3DXCOLOR				m_color;
 	bool					m_isCollided;
 	bool					m_isOBB;
-	
+	CSkinnedMesh*			m_Character;
+
+	float rotation;
 	// grab
 	int						m_nGrabAbleObeject;
 	// Ray y check
@@ -27,14 +30,15 @@ public:
 	virtual ~CCharacter(void);
 	virtual void Setup();
 	virtual void Update(D3DXVECTOR3 cameradirection);
-	virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
-	int Update(vector<CObject*> ObjectPosition);
+//	virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
+	int Update(vector<PObject*> ObjectPosition);
 	virtual void DoRotation(const float& radian);
 	virtual void DoMove(const float& velocity);
 	virtual void Render(D3DCOLOR c);
 
 	virtual D3DXVECTOR3& GetPosition();
 	virtual D3DXMATRIXA16* GetTransform();
+	virtual float Getrotation();
 
 	virtual void SetColor(D3DXCOLOR c);
 	virtual D3DXCOLOR GetColor();
@@ -42,9 +46,9 @@ public:
 	// tmp Collision Test
 	// setup erase
 	virtual bool Collider(bool isCollided);
-	COBB* m_pOBB;
-	COBB* GetOBB();
-	void SetBool(bool istrue);
+	// COBB* m_pOBB;
+	// COBB* GetOBB();
+	// void SetBool(bool istrue);
 	
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;

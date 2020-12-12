@@ -3,6 +3,7 @@
 #include <fstream>
 #include "stdafx.h"
 #include "IObject.h"
+#include "RotationBoard.h"
 #include "FileLoadManager.h"
 
 #define StrFilePath(path, folder, file) { path = string(folder) + "/" + string(file); }
@@ -148,8 +149,27 @@ void CFileLoadManager::ReadMapData(string fileName)
 				mapData.dxColor.a = atof(readData.c_str());
 			}
 
+			else if (readData == "# GimmickData")
+				continue;
+
+			else if (readData == "# RotationSpeed")
+			{
+				getline(mapFile, readData);
+				mapData.gimmickData.roationSpeed = atof(readData.c_str());
+			}
+			else if (readData == "# RotationAxialIndex")
+			{
+				getline(mapFile, readData);
+				mapData.gimmickData.roationAxialIndex = atoi(readData.c_str());
+			}
+
 			else if (readData == "# Object_End")
+			{
+				// todo
+				// 기믹, 이벤트 트리거 등 오브젝트 타입에 따라 파싱 추가
+
 				IObject::CreateObject(mapData);
+			}
 
 			else if (strstr(readData.c_str(), "# Section"))
 				loopCnt++;
@@ -258,6 +278,16 @@ ST_MapData CFileLoadManager::SetSaveData(int index)
 
 	mapData.dxColor = vecObject.GetColor();
 
+	if (mapData.objType == eG_RotationBoard)
+	{
+		CRotationBoard* temp = dynamic_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(index));
+		mapData.gimmickData.isData = true;
+		mapData.gimmickData.roationSpeed = temp->GetRotationSpeed();
+		mapData.gimmickData.roationAxialIndex = temp->GetRotationAxialIndex();
+	}
+	else
+		mapData.gimmickData.isData = false;
+
 	return mapData;
 }
 
@@ -298,6 +328,22 @@ void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
 
 	file << "# Color" << endl;
 	file << mapData.dxColor.r << endl << mapData.dxColor.g << endl << mapData.dxColor.b << endl << mapData.dxColor.a << endl;
+
+	// todo
+	// 기믹, 이벤트 트리거 등 오브젝트 타입에 따라 파싱 추가
+	if (mapData.gimmickData.isData == true)
+	{
+		file << "# GimmickData" << endl;
+		if(mapData.objType == ObjectType::eG_RotationBoard)
+		{
+			file << "# RotationSpeed" << endl;
+			file << mapData.gimmickData.roationSpeed << endl;
+			
+			file << "# RotationAxialIndex" << endl;
+			file << mapData.gimmickData.roationAxialIndex << endl;
+		}
+	}
+
 
 	file << "# Object_End" << endl << endl;
 }
@@ -574,7 +620,6 @@ void CFileLoadManager::Destroy()
 	{
 		SafeRelease(it.second);
 	}
-
 	m_mapTexture.clear();
 
 
@@ -582,8 +627,13 @@ void CFileLoadManager::Destroy()
 	{
 		SafeRelease(it.second);
 	}
-
 	m_mapShader.clear();
+
+	for each(auto it in m_mapSprite)
+	{
+		SafeRelease(it.second.lpTexture);
+	}
+	m_mapSprite.clear();
 }
 
 //D3DXVECTOR3 CFileLoadManager::GetSelectCenterPos(D3DXVECTOR3 vSelect)

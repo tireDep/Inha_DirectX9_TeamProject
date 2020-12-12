@@ -5,7 +5,7 @@ CObject::CObject()
 {
 	m_vScale = D3DXVECTOR3(1, 1, 1);
 	m_vRotate = D3DXVECTOR3(0, 0, 0);
-	m_vTranslate = D3DXVECTOR3(0, 0.5f, 0);
+	m_vTranslate = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
 
 	m_dxColor = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
 }

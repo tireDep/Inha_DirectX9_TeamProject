@@ -5,6 +5,8 @@
 #include "Cylinder.h"
 #include "Tile.h"
 #include "Background.h"
+#include "Book.h"
+#include "Gimmick.h"
 
 int IObject::m_nRefCnt = 0;
 
@@ -20,9 +22,9 @@ IObject::IObject() :
 	m_ObjectType(ObjectType::eNull),
 	m_vScale(0,0,0),
 	m_vRotate(0,0,0),
-	m_vTranslate(0,0,0),
-	m_isClick(false),
-	m_isPick(false),
+	m_vTranslate(1.0f,0,1.0f),
+	m_isClick(true),
+	m_isPick(true),
 	m_dxColor(0.5, 0.5, 0.5, 1),
 	m_pOBB(NULL)
 {
@@ -223,22 +225,28 @@ void IObject::SetRefCnt(int set)
 	IObject::m_nRefCnt = set;
 }
 
-void IObject::CreateObject(const ObjectType objType, int index)
+int IObject::GetRefCnt()
+{
+	return m_nRefCnt;
+}
+
+void IObject::CreateObject(const ObjectType& objType, int index)
 {
 	// >> FileLoader 생성
+	
+	ST_MapData mapData;
+	mapData.vScale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
+	mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	mapData.vTranslate = D3DXVECTOR3(0.5f, 0.0f, 0.5f);
+	// >> todo : translate 현 위치 중앙으로 받아오기
+
+	mapData.objType = objType;
+
 	switch (objType)
 	{
 	case eTile01: case eTile02:	case eTile03: case eTile04: case eTile05: case eTile06:
 	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
 	{
-		ST_MapData mapData;
-		mapData.vScale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
-		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		// >> todo : translate 현 위치 중앙으로 받아오기
-
-		mapData.objType = objType;
-
 		mapData.strObjName = string("Tile") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Tile";
 		mapData.strTxtPath = "Texture_01.png";
@@ -277,16 +285,9 @@ void IObject::CreateObject(const ObjectType objType, int index)
 
 	case eATree:
 	{
-		ST_MapData mapData;
 		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
-		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		// >> todo : translate 현 위치 중앙으로 받아오기
-
-		mapData.objType = objType;
-
 		mapData.strObjName = string("AutumnTree") + to_string(m_nRefCnt + 1);
-		mapData.strFolderPath = "Resource/XFile/Background";
+		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "autumn_texture.png";
 
 		mapData.strXFilePath = string("AutumnTree_0") + to_string(index + 1) + ".X";
@@ -298,16 +299,9 @@ void IObject::CreateObject(const ObjectType objType, int index)
 
 	case eSTree:
 	{
-		ST_MapData mapData;
 		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
-		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		// >> todo : translate 현 위치 중앙으로 받아오기
-
-		mapData.objType = objType;
-
 		mapData.strObjName = string("SummerTree") + to_string(m_nRefCnt + 1);
-		mapData.strFolderPath = "Resource/XFile/Background";
+		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "summer_texture.png";
 
 		mapData.strXFilePath = string("SummerTree_0") + to_string(index + 1) + ".X";
@@ -319,16 +313,9 @@ void IObject::CreateObject(const ObjectType objType, int index)
 
 	case eWTree:
 	{
-		ST_MapData mapData;
 		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
-		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		// >> todo : translate 현 위치 중앙으로 받아오기
-
-		mapData.objType = objType;
-
 		mapData.strObjName = string("WinterTree") + to_string(m_nRefCnt + 1);
-		mapData.strFolderPath = "Resource/XFile/Background";
+		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "winter_texture.png";
 
 		mapData.strXFilePath = string("WinterTree_0") + to_string(index + 1) + ".X";
@@ -338,16 +325,85 @@ void IObject::CreateObject(const ObjectType objType, int index)
 	}
 	break;
 
+	case eCTree:
+	{
+		mapData.strObjName = string("ColorTree") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/ColorTree";
+		mapData.strTxtPath = "TreesBlue.png";
+
+		mapData.strXFilePath = string("Tree_0") + to_string(index + 1) + ".X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+		break;
+
+	case eBall:
+	{
+		mapData.strObjName = string("BeachBall") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/Else";
+		mapData.strTxtPath = "BeachBall_Base_Color.png";
+		mapData.strXFilePath = "ball.X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+		break;
+
+	case eChair:
+	{
+		mapData.strObjName = string("Chair") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/Else";
+		mapData.strTxtPath = "";
+		mapData.strXFilePath = "blue_chair.X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+	break;
+
+	case eUmbrella:
+	{
+		mapData.strObjName = string("Umbrella") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/Else";
+		mapData.strTxtPath = "Umbrella_Blue.png";
+		mapData.strXFilePath = "Umbrella.X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+	break;
+
+	case eSnowman:
+	{
+		mapData.strObjName = string("Snowman") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/Else";
+		mapData.strTxtPath = "Snowman.png";
+		mapData.strXFilePath = "Snowman.X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+	break;
+
 #ifdef _DEBUG
+	case eFlower:
+	{
+		mapData.vScale = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
+		mapData.strObjName = string("Flower") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/Else";
+		mapData.strTxtPath = "";
+
+		mapData.strXFilePath = string("Flower_0") + to_string(index + 1) + ".X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+		break;
+
 	case eInvisibleWall:
 	{
-		ST_MapData mapData;
 		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
-		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-
-		mapData.objType = objType;
-
 		mapData.strObjName = string("InvisibleWall") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "";
 		mapData.strTxtPath = "";
@@ -357,25 +413,37 @@ void IObject::CreateObject(const ObjectType objType, int index)
 		background->Setup(mapData);
 	}
 		break;
+ #endif // _DEBUG
 
-#endif // _DEBUG
-
-
-	case eGimmik:
+	case eG_RotationBoard:
 	case eG_BreakWall:
-	case eG_Door:
+#ifdef _DEBUG
+	case eG_DoorFrame:
+#endif // _DEBUG
 	case eG_ColorChanger:
-	case eG_RotateBoard:
 	case eG_Switch:
 	{
-		cout << "todo something" << endl;
+		CGimmick::CreateGimmick(objType);
 	}
 		break;
 
+#ifdef _DEBUG
+	case eBook:
+	{
+		mapData.strObjName = string("Book") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Book";
+		mapData.strTxtPath = "Bookshelf_diffuse.png";
+		mapData.strXFilePath = "book.X";
+
+		CBook* background = new CBook;
+		background->Setup(mapData);
+	}
+#endif // _DEBUG
+		break;
 	} // << : switch
 }
 
-void IObject::CreateObject(const ST_MapData& mapData)
+void IObject::CreateObject(ST_MapData& mapData)
 {
 	// >> SaveLoad 파일 생성
 	switch (mapData.objType)
@@ -412,25 +480,38 @@ void IObject::CreateObject(const ST_MapData& mapData)
 	case eATree:
 	case eSTree:
 	case eWTree:
+	case eCTree:
+	case eBall:
+	case eChair:
+	case eUmbrella:
+	case eSnowman:
 #ifdef _DEBUG
-	case eInvisibleWall:
+	case eFlower:
 #endif // _DEBUG
+	case eInvisibleWall:
 	{
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
 	}
 		break;
 
-	case eGimmik:
-	case eG_BreakWall:
-	case eG_Door:
-	case eG_ColorChanger:
-	case eG_RotateBoard:
-	case eG_Switch:
+	case eG_RotationBoard:	case eG_BreakWall:		
+#ifdef _DEBUG
+	case eG_DoorFrame:		case eG_Door:
+#endif // _DEBUG
+	case eG_ColorChanger:	case eG_Switch:
 	{
-		cout << "todo something" << endl;
+		CGimmick::CreateGimmick_SaveData(mapData);
 	}
 	break;
+#ifdef _DEBUG
+	case eBook:
+	{
+		CBook* book = new CBook;
+		book->Setup(mapData);
+	}
+	break;
+#endif // _DEBUG
 
 	} // << : switch
 }

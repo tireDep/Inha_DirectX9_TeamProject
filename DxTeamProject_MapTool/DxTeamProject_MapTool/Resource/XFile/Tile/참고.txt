@@ -1,0 +1,16 @@
+# 파일 순서입니다~~
+# 테스트 파일 적용 시 참고해주세요~~!
+
+Tile01 : Grass
+Tile02 : Ground01
+Tile03 : Ground02
+Tile04 : Rock01
+Tile05 : Rock02
+Tile06 : Sand01
+Tile07 : Sand02
+Tile08 : Yellow
+Tile09 : Water01
+Tile10 : Water02
+Tile11 : Water03
+Tile12 : Water04
+Tile13 : Ocean // Water

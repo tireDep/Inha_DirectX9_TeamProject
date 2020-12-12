@@ -1,0 +1,127 @@
+# Object_Start
+# ObjectName
+RoataionBoard1
+# FolderPath
+Resource/XFile/Gimmick/RotationBoard
+# FilePath
+Rotation_board.X
+# TxtPath
+board.png
+# ObjectType
+26
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# GimmickData
+# RotationSpeed
+1
+# RotationAxialIndex
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Box2
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+23
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0.5
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Sphere3
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+24
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0.25
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Cylinder4
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+25
+# Scale
+0.5
+0.5
+1
+# Rotate
+90
+0
+0
+# Translate
+8.5
+0.5
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Section =======================================
+

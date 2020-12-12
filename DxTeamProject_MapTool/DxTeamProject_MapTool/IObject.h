@@ -49,6 +49,7 @@ public:
 	virtual void Release();
 
 	virtual void Setup() = 0;
+	virtual void Setup(ST_MapData setData) = 0;
 	virtual void Setup_OBB_Box();
 
 	virtual void Update() = 0;
@@ -61,7 +62,8 @@ public:
 	virtual D3DXMATRIXA16 GetmatWorld();
 
 	static void SetRefCnt(int set);
-	static void CreateObject(const ObjectType objType, int index);
-	static void CreateObject(const ST_MapData& mapData);
+	static int GetRefCnt();
+	static void CreateObject(const ObjectType& objType, int index);
+	static void CreateObject(ST_MapData& mapData);
 };
 
