@@ -143,7 +143,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 					m_Character->SetAnimationIndex(10); // Idle
 				speed = -1.0f;
 			break;
-
+		case PlayerInputType::eJump:
+			break;
 		default:
 			speed = -1.0f;
 			if(m_Character->CheckAnimationEnd())
