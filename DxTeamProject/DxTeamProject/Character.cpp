@@ -58,14 +58,15 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 			g_pEventManager->CheckEvent(msg);
 
-			// m_Character->SetAnimationIndexBlend(3);
-			// m_Character->SetAnimationIndexBlend(2);
+			m_Character->SetAnimationIndexBlend(3); // >> ChangeColor
 			return;
 		}
 
 		if (eventMsg.eventType == EventType::eChangedColorEvent)
 		{
 			eventMsg.playerInput = PlayerInputType::eUp;
+			speed = 1.0f;
+			// >> 속도 음수 방지
 		}
 
 		switch (eventMsg.playerInput)
@@ -102,48 +103,68 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			rotation = D3DX_PI / 2.0f;
 			break;
 
+		// todo : 점프 구현
+		case PlayerInputType::eJump:
+			if (m_Character->CheckAnimationEnd())
+				m_Character->SetAnimationIndex(7); // Push
+			break;
+
 			// todo : 잡기 구현
 		case PlayerInputType::eHold:
 			if (m_nGrabAbleObeject != -1)
 			{
-
+				if (m_Character->CheckAnimationEnd())
+					m_Character->SetAnimationIndex(5); // Push
 			}
 			else
+				if (m_Character->CheckAnimationEnd())
+					m_Character->SetAnimationIndex(10); // Idle
 				speed = -1.0f;
 			break;
 		case PlayerInputType::eHoldPush:
 			if (m_nGrabAbleObeject != -1)
 			{
-
+				if (m_Character->CheckAnimationEnd())
+					m_Character->SetAnimationIndex(5); // Push
 			}
 			else
+				if (m_Character->CheckAnimationEnd())
+					m_Character->SetAnimationIndex(10); // Idle
 				speed = -1.0f;
 			break;
 		case PlayerInputType::eHoldPull:
 			if (m_nGrabAbleObeject != -1)
 			{
-
+				if (m_Character->CheckAnimationEnd())
+					m_Character->SetAnimationIndex(4); // Pull
 			}
 			else
+				if (m_Character->CheckAnimationEnd())
+					m_Character->SetAnimationIndex(10); // Idle
 				speed = -1.0f;
 			break;
 		case PlayerInputType::eJump:
 			break;
 		default:
 			speed = -1.0f;
-			// if(m_Character->CheckAnimationEnd())
-				m_Character->SetAnimationIndex(10);
+			if(m_Character->CheckAnimationEnd())
+				m_Character->SetAnimationIndex(10); // Idle
 			break;
 		}
 
 		if (speed > 0)
 		{
+			if(m_Character->CheckAnimationEnd())
+			{
+				// >> 애니메이션 재생 중 이동 하지 않음
+				// >> 색상 변경, 점프?
+				m_Character->SetAnimationIndex(9); // Walk
 
-		//	if(m_Character->CheckAnimationEnd())
-				m_Character->SetAnimationIndex(9);
+				// >> todo : 속도 변화 감지해서 달리기 추가
 
-			DoRotation(rotation);
-			DoMove(speed);
+				DoRotation(rotation);
+				DoMove(speed);
+			}
 		}
 	}
 
@@ -252,7 +273,7 @@ void CCharacter::Setup()
 	m_Character = new CSkinnedMesh;
 	m_Character->SetUp("Resource/XFile/Character", "AnimationCharacter.X");
 	// m_Character->SetAnimationIndexBlend(8);
-	m_Character->SetAnimationIndex(8);
+	m_Character->SetAnimationIndex(10);
 
 	// Ray y check
 	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 10, 0);
@@ -389,7 +410,7 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 //
 //}
 
-int CCharacter::Update(vector<PObject*> ObjectPosition)
+int CCharacter::Update(vector<PObject*> ObjectPosition, float duration)
 {
 
 	//if (m_pOBB)
@@ -413,7 +434,7 @@ int CCharacter::Update(vector<PObject*> ObjectPosition)
 	// >> skinnedMesh
 	if (m_Character)
 	{
-		m_Character->Update();
+		m_Character->Update(duration);
 		m_Character->SetTransform(&m_matWorld);
 	}
 	// << skinnedMesh

@@ -151,7 +151,7 @@ struct ST_PT_VERTEX
 
 enum class EventType : int
 {
-	eInputEvent, eSceneChangeEvent, eColorChangeEvent, eChangedColorEvent
+	eInputEvent, eSceneChangeEvent, eColorChangeEvent, eChangedColorEvent, eColorEffect
 };
 
 enum class SceneType : int
