@@ -480,28 +480,61 @@ void CObjectManager::Collide(float duration)
 	//	m_vecIObject[i]->Update();
 	//}
 }
-
 void CObjectManager::CollisionPObject(PObject * one, PObject * two, float duration)
 {
-	D3DXVECTOR3 unitNormal = one->GetPosition() - two->GetPosition();
+	D3DXVECTOR3 contactNormal = one->GetPosition() - two->GetPosition();
+	float penetration = fabs(D3DXVec3Length(&contactNormal)) - one->GetBoundingSphere() - two->GetBoundingSphere();
 
-	float v1 = D3DXVec3Dot(&one->GetVelocity(), &unitNormal);
-	float v2 = D3DXVec3Dot(&two->GetVelocity(), &unitNormal);
+	D3DXVECTOR3 relativeVelocity = one->GetVelocity() - two->GetVelocity();
+	float separatinVelocity = D3DXVec3Dot(&relativeVelocity, &contactNormal);
+	if (separatinVelocity > 0) return;			// Need Modify? 1 = Elasticity
+	float newSepVelocity = -separatinVelocity * 1;
 
-	float averageE = (one->GetElasticity() + two->GetElasticity()) / 2.0f;
+	D3DXVECTOR3 accCausedVelocity = one->GetAcceleration() - two->GetAcceleration();
+	float accCausedSepVelocity = D3DXVec3Dot(&accCausedVelocity, &contactNormal) * duration;
+	if (accCausedSepVelocity < 0)
+	{					  // Need Modify? 1 = Elasticity
+		newSepVelocity += (1 * accCausedSepVelocity);
+		if (newSepVelocity < 0) newSepVelocity = 0.0f;
+	}
 
-	float finalv1 =	((one->GetMass() - averageE * two->GetMass()) * v1 + (1 + averageE) * two->GetMass() * v2) / (one->GetMass() + two->GetMass());
-	float finalv2 = ((two->GetMass() - averageE * one->GetMass()) * v2 + (1 + averageE) * one->GetMass() * v1) / (one->GetMass() + two->GetMass());
-	
-	one->SetVelocity((((finalv1 - v1) * unitNormal) + one->GetVelocity()));
-	two->SetVelocity((((finalv2 - v2) * unitNormal) + two->GetVelocity()));
+	float deltaVelocity = newSepVelocity - separatinVelocity;
+	float totalInverseMass = one->GetInverseMass() + two->GetInverseMass();
+	if (totalInverseMass <= 0) return;
 
-	D3DXVECTOR3 acceleration1 = one->GetVelocity() / duration;
-	D3DXVECTOR3 acceleration2 = two->GetVelocity() / duration;
+	float impulse = deltaVelocity / totalInverseMass;
+	D3DXVECTOR3 impulsePerIMass = contactNormal * impulse;
 
-	one->SetForceVector(acceleration1 * one->GetMass());
-	two->SetForceVector(acceleration2 * two->GetMass());
+	one->SetVelocity(one->GetVelocity() + impulsePerIMass * one->GetInverseMass());
+	two->SetVelocity(two->GetVelocity() + impulsePerIMass * -two->GetInverseMass());
+
+	if (penetration <= 0) return;
+	D3DXVECTOR3 movePerIMass = contactNormal * (penetration / totalInverseMass);
+	one->SetPosition(one->GetPosition() + movePerIMass * one->GetInverseMass());
+	two->SetPosition(two->GetPosition() + movePerIMass * -two->GetInverseMass());
 }
+
+//void CObjectManager::CollisionPObject(PObject * one, PObject * two, float duration)
+//{
+//	D3DXVECTOR3 unitNormal = one->GetPosition() - two->GetPosition();
+//
+//	float v1 = D3DXVec3Dot(&one->GetVelocity(), &unitNormal);
+//	float v2 = D3DXVec3Dot(&two->GetVelocity(), &unitNormal);
+//
+//	float averageE = (one->GetElasticity() + two->GetElasticity()) / 2.0f;
+//
+//	float finalv1 =	((one->GetMass() - averageE * two->GetMass()) * v1 + (1 + averageE) * two->GetMass() * v2) / (one->GetMass() + two->GetMass());
+//	float finalv2 = ((two->GetMass() - averageE * one->GetMass()) * v2 + (1 + averageE) * one->GetMass() * v1) / (one->GetMass() + two->GetMass());
+//	
+//	one->SetVelocity((((finalv1 - v1) * unitNormal) + one->GetVelocity()));
+//	two->SetVelocity((((finalv2 - v2) * unitNormal) + two->GetVelocity()));
+//
+//	D3DXVECTOR3 acceleration1 = one->GetVelocity() / duration;
+//	D3DXVECTOR3 acceleration2 = two->GetVelocity() / duration;
+//
+//	one->SetForceVector(acceleration1 * one->GetMass());
+//	two->SetForceVector(acceleration2 * two->GetMass());
+//}
 
 void CObjectManager::CollisionIObject(PObject* pObject, IObject* iObject, float duration)
 {
