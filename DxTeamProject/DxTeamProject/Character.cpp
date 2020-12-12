@@ -13,11 +13,15 @@ CCharacter::CCharacter()
 	, m_vPosition(0, 0.0f, 0)
 	// , m_pOBB(NULL)
 	, m_isCollided(false)
+	, m_jump(false)
+	, jumpis(false)
+	, jumping(false)
 	, m_Character(NULL)
 	// Ray y check
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
+	D3DXMatrixIdentity(&matT);
 	m_strName = "Character";
 }
 
@@ -105,10 +109,16 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 		// todo : 점프 구현
 		case PlayerInputType::eJump:
-			if (m_Character->CheckAnimationEnd())
-				m_Character->SetAnimationIndex(7); // Push
+			if (!jumping)
+			{
+				m_jump = true;
+				if (m_Character->CheckAnimationEnd())
+				{
+					m_Character->SetAnimationIndex(7); // Push
+				}
+			}
+			speed = -1.0f;
 			break;
-
 			// todo : 잡기 구현
 		case PlayerInputType::eHold:
 			if (m_nGrabAbleObeject != -1)
@@ -143,8 +153,6 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 					m_Character->SetAnimationIndex(10); // Idle
 				speed = -1.0f;
 			break;
-		case PlayerInputType::eJump:
-			break;
 		default:
 			speed = -1.0f;
 			if(m_Character->CheckAnimationEnd())
@@ -169,10 +177,10 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 	}
 
 
-	D3DXMATRIXA16 matT;
-	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	//D3DXMATRIXA16 matT;
+	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 
-	m_matWorld = m_matRotY * matT;
+	//m_matWorld = m_matRotY * matT;
 }
 
 string CCharacter::GetName()
@@ -284,6 +292,30 @@ void CCharacter::Setup()
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
+
+		if (m_jump)
+		{
+			jumping = true;
+			if (m_vPosition.y <= 3.f)
+			{
+				m_vPosition.y += 0.005f;
+				if (m_vPosition.y >= 3.f)
+				{
+					jumpis = true;
+					m_jump = false;
+				}
+			}
+		}
+		if (jumpis == true)
+		{
+			m_vPosition.y -= 0.005f;
+			if (m_vPosition.y <= 0)
+			{
+				jumpis = false;
+				jumping = false;
+			}
+		}
+	
 }
 
 //void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
@@ -483,6 +515,9 @@ void CCharacter::Render(D3DCOLOR d)
 	{
 		m_Character->Render(NULL);
 	}
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+
+	m_matWorld = m_matRotY * matT;
 }
 
 D3DXVECTOR3& CCharacter::GetPosition()

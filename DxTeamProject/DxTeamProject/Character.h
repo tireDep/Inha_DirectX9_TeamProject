@@ -16,9 +16,13 @@ protected:
 	D3DXVECTOR3				m_vPosition;
 	D3DXMATRIXA16			m_matRotY;
 	D3DXMATRIXA16			m_matWorld;
+	D3DXMATRIXA16			matT;
 	D3DXCOLOR				m_color;
 	bool					m_isCollided;
 	bool					m_isOBB;
+	bool					m_jump;
+	bool					jumpis;
+	bool					jumping;
 	CSkinnedMesh*			m_Character;
 
 	float rotation;
