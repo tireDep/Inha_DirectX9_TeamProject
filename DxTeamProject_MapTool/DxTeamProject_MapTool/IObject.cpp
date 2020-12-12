@@ -257,7 +257,21 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	case eTile01: case eTile02:	case eTile03: case eTile04: case eTile05: case eTile06:
 	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
 	{
-		mapData.strObjName = string("Tile") + to_string(m_nRefCnt + 1);
+
+		if(objType == eTile01)			mapData.strObjName = string("Tile_01_Grass") + to_string(m_nRefCnt + 1);
+		else if (objType == eTile02)	mapData.strObjName = string("Tile_02_Ground") + to_string(m_nRefCnt + 1);
+		else if (objType == eTile03)	mapData.strObjName = string("Tile_04_Ground2_") + to_string(m_nRefCnt + 1);
+		else if (objType == eTile04)	mapData.strObjName = string("Tile_05_Rock") + to_string(m_nRefCnt + 1);
+		else if (objType == eTile05)	mapData.strObjName = string("Tile_07_Rock2_") + to_string(m_nRefCnt + 1);
+		else if (objType == eTile06)	mapData.strObjName = string("Tile_11_Sand") + to_string(m_nRefCnt + 1);
+		else if (objType == eTile07)	mapData.strObjName = string("Tile_12_Sand2") + to_string(m_nRefCnt + 1);
+		else if (objType == eTile08)	mapData.strObjName = string("Tile_13_Water") + to_string(m_nRefCnt + 1);
+		else if (objType == eTile09)	mapData.strObjName = string("Tile_14_Water2_") + to_string(m_nRefCnt + 1);
+		else if (objType == eTile10)	mapData.strObjName = string("Tile_15_Water3_") + to_string(m_nRefCnt + 1);
+		else if (objType == eTile11)	mapData.strObjName = string("Tile_16_Water4_") + to_string(m_nRefCnt + 1);
+		else if (objType == eTile12)	mapData.strObjName = string("Tile_17_Yellow") + to_string(m_nRefCnt + 1);
+		else if (objType == eTile13)	mapData.strObjName = string("Tile_Ocean") + to_string(m_nRefCnt + 1);
+
 		mapData.strFolderPath = "Resource/XFile/Tile";
 		mapData.strTxtPath = "Texture_01.png";
 
@@ -309,7 +323,14 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	case eATree:
 	{
 		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
-		mapData.strObjName = string("AutumnTree") + to_string(m_nRefCnt + 1);
+
+		if(index == 0)			mapData.strObjName = string("Autumn_Tree_01_") + to_string(m_nRefCnt + 1);
+		else if (index == 1)	mapData.strObjName = string("Autumn_Tree_02_") + to_string(m_nRefCnt + 1);
+		else if (index == 2)	mapData.strObjName = string("Autumn_Tree_03_") + to_string(m_nRefCnt + 1);
+		else if (index == 3)	mapData.strObjName = string("Autumn_Tree_04_") + to_string(m_nRefCnt + 1);
+		else if (index == 4)	mapData.strObjName = string("Autumn_Ctree_07_") + to_string(m_nRefCnt + 1);
+		else if (index == 5)	mapData.strObjName = string("Autumn_Tree_08_") + to_string(m_nRefCnt + 1);
+		
 		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "autumn_texture.png";
 
@@ -323,7 +344,14 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	case eSTree:
 	{
 		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
-		mapData.strObjName = string("SummerTree") + to_string(m_nRefCnt + 1);
+
+		if (index == 0)			mapData.strObjName = string("Summer_Tree_01_") + to_string(m_nRefCnt + 1);
+		else if (index == 1)	mapData.strObjName = string("Summer_Tree_02_") + to_string(m_nRefCnt + 1);
+		else if (index == 2)	mapData.strObjName = string("Summer_Tree_03_") + to_string(m_nRefCnt + 1);
+		else if (index == 3)	mapData.strObjName = string("Summer_Tree_04_") + to_string(m_nRefCnt + 1);
+		else if (index == 4)	mapData.strObjName = string("Summer_Ctree_07_") + to_string(m_nRefCnt + 1);
+		else if (index == 5)	mapData.strObjName = string("Summer_Tree_08_") + to_string(m_nRefCnt + 1);
+
 		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "summer_texture.png";
 
@@ -337,7 +365,14 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	case eWTree:
 	{
 		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
-		mapData.strObjName = string("WinterTree") + to_string(m_nRefCnt + 1);
+		
+		if (index == 0)			mapData.strObjName = string("Winter_Tree_01_") + to_string(m_nRefCnt + 1);
+		else if (index == 1)	mapData.strObjName = string("Winter_Tree_02_") + to_string(m_nRefCnt + 1);
+		else if (index == 2)	mapData.strObjName = string("Winter_Tree_03_") + to_string(m_nRefCnt + 1);
+		else if (index == 3)	mapData.strObjName = string("Winter_Tree_04_") + to_string(m_nRefCnt + 1);
+		else if (index == 4)	mapData.strObjName = string("Winter_Ctree_07_") + to_string(m_nRefCnt + 1);
+		else if (index == 5)	mapData.strObjName = string("Winter_Tree_08_") + to_string(m_nRefCnt + 1);
+
 		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "winter_texture.png";
 
