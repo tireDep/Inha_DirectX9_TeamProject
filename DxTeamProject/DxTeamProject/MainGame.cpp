@@ -121,7 +121,7 @@ void CMainGame::Setup()
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
 #else
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 #endif // DEBUG
 	
 	m_pGrid = new CGrid;
