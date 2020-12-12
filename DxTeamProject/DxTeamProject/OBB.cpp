@@ -81,19 +81,19 @@ void COBB::Setup(CObject & object)
 		}
 	}
 
-
+	// JW ADD...
 	m_fAxisHalfLen[0] *= object.GetScale().x;
 	m_fAxisHalfLen[1] *= object.GetScale().y;
 	m_fAxisHalfLen[2] *= object.GetScale().z;
 
 
 	// Check OriCenterPos, OriAxisDir
-	//for (int i = 0; i < 3; ++i)
-	//	D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &m_matWorld);
-	//D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &m_matWorld);
 	for (int i = 0; i < 3; ++i)
-		D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &object.GetmatWorld());
-	D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &object.GetmatWorld());
+		D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &m_matWorld);
+	D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &m_matWorld);
+	//for (int i = 0; i < 3; ++i)
+	//	D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &object.GetmatWorld());
+	//D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &object.GetmatWorld());
 
 	object.GetMesh()->UnlockVertexBuffer();
 }
