@@ -176,9 +176,11 @@ void CDragon::ReceiveEvent(ST_EVENT eventMsg)
 	{
 		if (eventMsg.eventType == EventType::eChangedColorEvent)
 		{
-			eventMsg.playerInput = PlayerInputType::eUp;
 			m_color = *(D3DXCOLOR*)eventMsg.ptrMessage;
 			m_isEffect = true;
+
+			rotation = D3DX_PI;
+			DoRotation();
 		}	// << : eChangedColorEvent
 
 		if (eventMsg.eventType == EventType::eInputEvent)
