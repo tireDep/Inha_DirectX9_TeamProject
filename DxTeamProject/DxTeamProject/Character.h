@@ -21,6 +21,8 @@ protected:
 	bool					m_isCollided;
 	bool					m_isOBB;
 	bool					m_jump;
+	bool					jumpis;
+	bool					jumping;
 	CSkinnedMesh*			m_Character;
 
 	float rotation;

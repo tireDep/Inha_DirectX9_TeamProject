@@ -14,6 +14,8 @@ CCharacter::CCharacter()
 	// , m_pOBB(NULL)
 	, m_isCollided(false)
 	, m_jump(false)
+	, jumpis(false)
+	, jumping(false)
 	, m_Character(NULL)
 	// Ray y check
 {
@@ -107,20 +109,16 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 		// todo : 점프 구현
 		case PlayerInputType::eJump:
+			if (!jumping)
 			{
 				m_jump = true;
 				if (m_Character->CheckAnimationEnd())
 				{
 					m_Character->SetAnimationIndex(7); // Push
 				}
-
-				//if (m_vPosition.y > 3)
-				//{
-				//	m_jump = false;
-				//	m_vPosition.y -= 0.05;
-				//}
-				break;
 			}
+			speed = -1.0f;
+			break;
 			// todo : 잡기 구현
 		case PlayerInputType::eHold:
 			if (m_nGrabAbleObeject != -1)
@@ -294,25 +292,30 @@ void CCharacter::Setup()
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
-	bool jumpis = false;
-	if (m_jump)
-	{
-		if (m_vPosition.y < 3)
+
+		if (m_jump)
 		{
-			m_vPosition.y += 0.005f;
-			if (m_vPosition.y == 3)
+			jumping = true;
+			if (m_vPosition.y <= 3.f)
 			{
-				jumpis == true;
-				m_jump = false;
+				m_vPosition.y += 0.005f;
+				if (m_vPosition.y >= 3.f)
+				{
+					jumpis = true;
+					m_jump = false;
+				}
 			}
 		}
-	}
-	if (jumpis == true || m_vPosition.y >= 3)
-	{
-		m_vPosition.y -= 0.005f;
-		//if (m_vPosition.y == 0)
-	}
-
+		if (jumpis == true)
+		{
+			m_vPosition.y -= 0.005f;
+			if (m_vPosition.y <= 0)
+			{
+				jumpis = false;
+				jumping = false;
+			}
+		}
+	
 }
 
 //void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
