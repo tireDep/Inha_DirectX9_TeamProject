@@ -96,7 +96,7 @@ bool CSphere::hasIntersected(CSphere * otherSphere)
 
 	D3DXVECTOR3 direction = this->GetPosition() - otherSphere->GetPosition();
 
-	if ((this->GetBoundingSphere() + otherSphere->GetBoundingSphere())*(this->GetBoundingSphere() + otherSphere->GetBoundingSphere()) < D3DXVec3LengthSq(&direction))
+	if ((this->GetBoundingSphere() + otherSphere->GetBoundingSphere()) * (this->GetBoundingSphere() + otherSphere->GetBoundingSphere()) < D3DXVec3LengthSq(&direction))
 		return false;
 
 	return true;
