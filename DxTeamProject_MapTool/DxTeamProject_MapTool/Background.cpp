@@ -89,14 +89,11 @@ void CBackground::Render()
 
 	if (m_pMesh == NULL)
 		return;
-#ifdef _DEBUG
+
 	if (m_ObjectType == ObjectType::eInvisibleWall || m_ObjectType == ObjectType::eFlower)
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	else
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-#else
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-#endif // _DEBUG
 
 	if (!m_isPick && !m_isClick || !m_pShader)
 	{
@@ -104,9 +101,7 @@ void CBackground::Render()
 		{
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
-#ifdef _DEBUG
 			if (m_ObjectType != ObjectType::eInvisibleWall && m_ObjectType != ObjectType::eFlower)
-#endif // _DEBUG
 			{
 				if(m_vecTextures[i] != NULL)
 					g_pD3DDevice->SetTexture(0, m_vecTextures[i]);

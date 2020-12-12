@@ -528,7 +528,7 @@ autumn_texture.png
 0
 0
 # Translate
-14.5
+13.5
 0
 12.5
 # Color
@@ -558,7 +558,7 @@ autumn_texture.png
 0
 0
 # Translate
-13.5
+14.5
 0
 12.5
 # Color
@@ -2058,7 +2058,7 @@ Snowman.png
 0
 0
 # Translate
-5.5
+4.5
 0
 -4.5
 # Color
@@ -2088,7 +2088,7 @@ InvisibleWall72
 0
 0
 # Translate
-4.5
+3.5
 0.5
 -4.5
 # Color
@@ -2170,6 +2170,36 @@ moving_cube_1.png
 0
 # DirectionIndex
 0
+# Object_End
+
+# Object_Start
+# ObjectName
+Umbrella_Blue73
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Umbrella.X
+# TxtPath
+Umbrella_Blue.png
+# ObjectType
+20
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+5.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
 # Object_End
 
 # Section =======================================
