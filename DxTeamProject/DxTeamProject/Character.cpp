@@ -127,7 +127,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			else
 				speed = -1.0f;
 			break;
-
+		case PlayerInputType::eJump:
+			break;
 		default:
 			speed = -1.0f;
 			// if(m_Character->CheckAnimationEnd())
