@@ -152,7 +152,46 @@ bool CSphere::hasIntersected(CCylinder * otherCylinder)
 
 bool CSphere::hasIntersected(IObject * otherIObject)
 {
-	return false;
+	//D3DXMATRIXA16 inverseBoxMatrix;
+	//// Need To Modify... OBB's WorldMatrix
+	//D3DXMatrixInverse(&inverseBoxMatrix, NULL, &otherIObject->GetmatWorld());
+	D3DXMATRIXA16 inverseBoxMatrix;
+	D3DXMatrixIdentity(&inverseBoxMatrix);
+	inverseBoxMatrix._41 = otherIObject->GetmatWorld()._41;
+	inverseBoxMatrix._42 = otherIObject->GetmatWorld()._42;
+	inverseBoxMatrix._43 = otherIObject->GetmatWorld()._43;
+
+	D3DXVECTOR3 SphereToBoxCenter;
+	D3DXVec3TransformCoord(&SphereToBoxCenter, &m_vPosition, &inverseBoxMatrix);
+													
+	if ((fabsf(SphereToBoxCenter.x) - GetRadius()) > otherIObject->GetOBB()->GetOBBWidth()  ||
+		(fabsf(SphereToBoxCenter.y) - GetRadius()) > otherIObject->GetOBB()->GetOBBHeight() ||
+		(fabsf(SphereToBoxCenter.z) - GetRadius()) > otherIObject->GetOBB()->GetOBBDepth())
+		return false;
+
+	D3DXVECTOR3 closestPt(0, 0, 0);
+	float dist;
+
+	dist = SphereToBoxCenter.x;
+	if (dist > otherIObject->GetOBB()->GetOBBWidth()) dist = otherIObject->GetOBB()->GetOBBWidth();
+	if (dist < -otherIObject->GetOBB()->GetOBBWidth()) dist = -otherIObject->GetOBB()->GetOBBWidth();
+	closestPt.x = dist;
+
+	dist = SphereToBoxCenter.y;
+	if (dist >  otherIObject->GetOBB()->GetOBBHeight()) dist =  otherIObject->GetOBB()->GetOBBHeight();
+	if (dist < -otherIObject->GetOBB()->GetOBBHeight()) dist = -otherIObject->GetOBB()->GetOBBHeight();
+	closestPt.y = dist;
+
+	dist = SphereToBoxCenter.z;
+	if (dist >  otherIObject->GetOBB()->GetOBBDepth()) dist =  otherIObject->GetOBB()->GetOBBDepth();
+	if (dist < -otherIObject->GetOBB()->GetOBBDepth()) dist = -otherIObject->GetOBB()->GetOBBDepth();
+	closestPt.z = dist;
+
+	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
+	dist = D3DXVec3LengthSq(&tmp);
+	if (dist > GetRadius() * GetRadius())
+		return false;
+	return true;
 }
 
 //void CSphere::Update(float duration)
