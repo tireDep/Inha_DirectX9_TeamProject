@@ -6,7 +6,7 @@ class CTile : public IObject
 public:
 	CTile();
 	~CTile();
-
+	void SetBool(bool set) { };
 	void Setup() { };
 	void Setup(const ST_MapData & mapData);
 	void Update(float duration) { m_pOBB->Update(&m_matWorld); };

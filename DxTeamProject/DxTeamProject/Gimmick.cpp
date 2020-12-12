@@ -3,6 +3,7 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 #include "Door.h"
+#include "MovingCube.h"
 
 CGimmick::CGimmick()
 {
@@ -40,6 +41,13 @@ void CGimmick::Setup(const ST_MapData & mapData)
 		{
 			CSwitch* cSwitch = new CSwitch;
 			cSwitch->Setup(mapData);
+		}
+			break;
+
+		case eG_MovingCube:
+		{
+			CMovingCube* movingCube = new CMovingCube;
+			movingCube->Setup(mapData);
 		}
 			break;
 	} // << switch

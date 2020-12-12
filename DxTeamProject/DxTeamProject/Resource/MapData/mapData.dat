@@ -1,14 +1,14 @@
 # Object_Start
 # ObjectName
-Switch1
+Bridge1
 # FolderPath
-Resource/XFile/Gimmick/Switch
+Resource/XFile/Tile
 # FilePath
-Force_switch.X
+Bridge.X
 # TxtPath
-cubeworld_texture.tga
+Texture_01.png
 # ObjectType
-32
+37
 # Scale
 0.1
 0.1
@@ -18,9 +18,99 @@ cubeworld_texture.tga
 0
 0
 # Translate
-9.5
+0.5
 0
-9.5
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Bridge2
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Bridge.X
+# TxtPath
+Texture_01.png
+# ObjectType
+37
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+3.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Bridge3
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Bridge.X
+# TxtPath
+Texture_01.png
+# ObjectType
+37
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Bridge4
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Bridge.X
+# TxtPath
+Texture_01.png
+# ObjectType
+37
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+0.5
 # Color
 0.5
 0.5

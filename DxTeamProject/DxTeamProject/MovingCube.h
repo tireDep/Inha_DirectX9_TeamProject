@@ -4,19 +4,17 @@
 
 class COBB;
 
-class MovingCube : public CGimmick
+class CMovingCube : public CGimmick
 {
 public:
-	MovingCube();
-	~MovingCube();
+	CMovingCube();
+	~CMovingCube();
 
 private:
-	
-
-	int IndexNum; // 번호.
-	bool istrue; //범위 조절 장치
-	float speed; //속도
-	float startpos , endpos; // 거리 ?
+	int m_indexNum; // 번호.
+	bool m_istrue; //범위 조절 장치
+	float m_fSpeed; //속도
+	float m_fStartPos , m_fEndPos; // 거리 ?
 	D3DXVECTOR3 m_vPosition;
 
 	//D3DXMATRIXA16 matWorld;
@@ -26,11 +24,11 @@ private:
 public:
 	void Setup();
 	void Setup(ST_MapData setData);
-	void Update(float duration) { };
+	void Update(float duration);
 	void Update();
 
 	void Render();
 
-	
+	virtual void SetBool(bool set) { }
 };
 

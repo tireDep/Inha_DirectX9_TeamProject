@@ -9,6 +9,7 @@
 #include "Sphere.h"
 #include "Box.h"
 #include "Cylinder.h"
+#include "MovingCube.h"
 // collide
 //#include "Contact.h"
 
@@ -244,7 +245,7 @@ void CObjectManager::Collide(float duration)
 	///Sphere
 	for (int SphereIndex = 0; SphereIndex < m_vecSphere.size(); SphereIndex++)
 	{
-		// Sphere to Other PObject
+		/// Sphere to Other PObject
 		for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
 		{
 			switch (m_vecPObject[PObectIndex]->GetObjType())
@@ -280,7 +281,7 @@ void CObjectManager::Collide(float duration)
 				{
 					case eG_RotationBoard: case eG_Door: case eG_MovingCube:
 						{
-
+							
 						}
 						break;
 					default:
@@ -322,11 +323,16 @@ void CObjectManager::Collide(float duration)
 			{
 				switch (m_vecIObject[IObjectIndex]->GetObjType())
 				{
-					case eG_RotationBoard: case eG_Door: case eG_MovingCube:
-						{
-
-						}
+					case eG_RotationBoard: 
 						break;
+					case eG_Door:
+						break;
+					case eG_MovingCube:			
+						
+						break;
+					case  eG_Switch:
+						m_vecIObject[IObjectIndex]->SetBool(true);
+						break;	
 					default:
 						break;
 				}
@@ -364,7 +370,6 @@ void CObjectManager::Collide(float duration)
 				{
 					case eG_RotationBoard: case eG_Door: case eG_MovingCube:
 						{
-
 						}
 						break;
 					default:
@@ -373,27 +378,98 @@ void CObjectManager::Collide(float duration)
 			}
 		}
 	}
-
-
-
-	
-	if (COBB::IsCollision(m_vecGimmick[0]->GetOBB(), m_vecGimmick[0]->GetOBB()))
-	{
-		cout << "hi" << endl;
-	}
-	else
-	{
-		cout << "bye" << endl;
-	}
-	
-
-
-	// OBB TEST
-	//for (int i = 0; i < m_vecBox.size(); i++)
-	//	for (int j = 0; j < m_vecGimmick.size(); j++)
+	/////Box
+	//for (int BoxIndex = 0; BoxIndex < m_vecBox.size(); BoxIndex++)
+	//{
+	//	// Box to Other PObject
+	//	for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
 	//	{
-	//		m_vecBox[i]->hasIntersected(m_vecGimmick[j]);
+	//		switch (m_vecPObject[PObectIndex]->GetObjType())
+	//		{
+	//			case eSphere:
+	//				break;
+	//			case eBox:
+	//				if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CBox*>(m_vecPObject[PObectIndex])))
+	//				{
+	//					CollisionPObject(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
+	//				}
+	//				break;
+	//			case eCylinder:
+	//				if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
+	//				{
+	//					CollisionPObject(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
+	//				}
+	//				break;
+	//			default:
+	//				break;
+	//		}
 	//	}
+	//	// Box To IObject
+	//	for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
+	//	{
+	//		if (m_vecBox[BoxIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
+	//		{
+	//			switch (m_vecIObject[IObjectIndex]->GetObjType())
+	//			{
+	//				case eG_RotationBoard: case eG_Door: case eG_MovingCube:
+	//					{
+	//					
+	//					}
+	//					break;
+	//				default:
+	//					break;
+	//			}
+	//		}
+	//	}
+	//}
+	///// Cylinder
+	//for (int CylinderIndex = 0; CylinderIndex < m_vecCylinder.size(); CylinderIndex++)
+	//{
+	//	// Cylinder to Other PObject
+	//	for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
+	//	{
+	//		switch (m_vecPObject[PObectIndex]->GetObjType())
+	//		{
+	//			case eSphere:
+	//				break;
+	//			case eBox:
+	//				break;
+	//			case eCylinder:
+	//				if (m_vecCylinder[CylinderIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
+	//				{
+	//					CollisionPObject(m_vecCylinder[CylinderIndex], m_vecPObject[PObectIndex], duration);
+	//				}
+	//				break;
+	//			default:
+	//				break;
+	//		}
+	//	}
+	//	// Cylinder To IObject
+	//	for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
+	//	{
+	//		if (m_vecCylinder[CylinderIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
+	//		{
+	//			switch (m_vecIObject[IObjectIndex]->GetObjType())
+	//			{
+	//				case eG_RotationBoard: case eG_Door: case eG_MovingCube:
+	//					{
+
+	//					}
+	//					break;
+	//				default:
+	//					break;
+	//			}
+	//		}
+	//	}
+	//}
+
+	
+	// OBB TEST
+	
+		
+
+		
+	
 	//for (int i = 0; i < m_vecBox.size(); i++)
 	//	for (int j = 0; j < m_vecIObject.size(); j++)
 	//	{
@@ -427,8 +503,13 @@ void CObjectManager::CollisionPObject(PObject * one, PObject * two, float durati
 	two->SetForceVector(acceleration2 * two->GetMass());
 }
 
-void CObjectManager::CollisionIObject(PObject * pObject, float duration)
+void CObjectManager::CollisionIObject(PObject* pObject, IObject* iObject, float duration)
 {
+	D3DXVECTOR3 IObjectPosion(iObject->GetmatWorld()._41, iObject->GetmatWorld()._42, iObject->GetmatWorld()._43);
+	D3DXVECTOR3 unitNormal = pObject->GetPosition() - IObjectPosion;
+
+	float v = D3DXVec3Dot(&pObject->GetLinearVelocity(), &unitNormal);
+
 }
 
 void CObjectManager::Render()

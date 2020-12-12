@@ -144,18 +144,41 @@ void CFileLoadManager::LoadData(string path)
 			else if (strstr(readData.c_str(),  "# GimmickData"))
 				continue;
 
+			// >> 회전판자
 			else if (strstr(readData.c_str(), "# RotationSpeed"))
 			{
 				getline(file, readData);
-				mapData.gimmickData.roationSpeed = atof(readData.c_str());
+				mapData.gimmickData.roationSpeed_rotaitonBoard = atof(readData.c_str());
 			}
-
 			else if (strstr(readData.c_str(), "# RotationAxialIndex"))
 			{
 				getline(file, readData);
-				mapData.gimmickData.roationAxialIndex = atoi(readData.c_str());
+				mapData.gimmickData.roationAxialIndex_rotaitonBoard = atoi(readData.c_str());
 			}
+			// << 회전판자
 
+			// >> 무빙큐브
+			else if (strstr(readData.c_str(), "# StartPos"))
+			{
+				getline(file, readData);
+				mapData.gimmickData.startPos_movingCube = atof(readData.c_str());
+			}
+			else if (strstr(readData.c_str(), "# EndPos"))
+			{
+				getline(file, readData);
+				mapData.gimmickData.endPos_movingCube = atof(readData.c_str());
+			}
+			else if (strstr(readData.c_str(), "# Speed"))
+			{
+				getline(file, readData);
+				mapData.gimmickData.speed_movingCube = atof(readData.c_str());
+			}
+			else if (strstr(readData.c_str(), "# DirectionIndex"))
+			{
+				getline(file, readData);
+				mapData.gimmickData.directionIndex_movingCube = atoi(readData.c_str());
+			}
+			// << 무빙큐브
 
 			else if (strstr(readData.c_str(), "# Object_End"))
 				CObject::CreateObject(mapData);

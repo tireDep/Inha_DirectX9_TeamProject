@@ -19,4 +19,6 @@ public:
 	void Update(float duration);
 	bool hasIntersected(CSkinnedMesh * Character);
 	void Render();
+
+	virtual void SetBool(bool set) { }
 };

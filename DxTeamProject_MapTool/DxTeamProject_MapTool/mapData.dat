@@ -1,84 +1,24 @@
 # Object_Start
 # ObjectName
-Box1
+Bridge1
 # FolderPath
-
+Resource/XFile/Tile
 # FilePath
-
+Bridge.X
 # TxtPath
-
+Texture_01.png
 # ObjectType
-24
+37
 # Scale
-1
-1
-1
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
-4.5
 0.5
-0.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Sphere2
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-25
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
-4.5
-0.25
-4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-AutumnTree3
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_01.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.01
-0.01
-0.01
-# Rotate
-0
-0
-0
-# Translate
--4.5
 0
 0.5
 # Color
@@ -90,62 +30,87 @@ autumn_texture.png
 
 # Object_Start
 # ObjectName
-RoataionBoard4
+Bridge2
 # FolderPath
-Resource/XFile/Gimmick/RotationBoard
+Resource/XFile/Tile
 # FilePath
-Rotation_board.X
+Bridge.X
 # TxtPath
-board.png
+Texture_01.png
 # ObjectType
-27
+37
 # Scale
-0.05
-0.05
-0.05
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
+3.5
 0
-0
-9.5
+0.5
 # Color
 0.5
 0.5
 0.5
 1
-# GimmickData
-# RotationSpeed
-1
-# RotationAxialIndex
+# Object_End
+
+# Object_Start
+# ObjectName
+Bridge3
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Bridge.X
+# TxtPath
+Texture_01.png
+# ObjectType
+37
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
 1
 # Object_End
 
 # Object_Start
 # ObjectName
-Cylinder5
+Bridge4
 # FolderPath
-
+Resource/XFile/Tile
 # FilePath
-
+Bridge.X
 # TxtPath
-
+Texture_01.png
 # ObjectType
-26
+37
 # Scale
-0.5
-0.5
-1
+0.1
+0.1
+0.1
 # Rotate
-90
+0
 0
 0
 # Translate
-4.5
+1.5
+0
 0.5
--4.5
 # Color
 0.5
 0.5

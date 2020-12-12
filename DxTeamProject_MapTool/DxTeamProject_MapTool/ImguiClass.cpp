@@ -11,6 +11,7 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 #include "Door.h"
+#include "MovingCube.h"
 
 #include "ImguiClass.h"
 
@@ -23,19 +24,21 @@ void CImguiClass::SetVecItem()
 	vector<ObjectType> tempObjType;
 	if (m_NowLoadType == LoadType::eMap)
 	{
-		tempVec.push_back("Grass"); tempObjType.push_back(eTile01);
-		tempVec.push_back("Ground01"); tempObjType.push_back(eTile02);
-		tempVec.push_back("Ground02"); tempObjType.push_back(eTile03);
-		tempVec.push_back("Rock01"); tempObjType.push_back(eTile04);
-		tempVec.push_back("Rock02"); tempObjType.push_back(eTile05);
-		tempVec.push_back("Sand01"); tempObjType.push_back(eTile06);
-		tempVec.push_back("Sand02"); tempObjType.push_back(eTile07);
-		tempVec.push_back("Yellow"); tempObjType.push_back(eTile08);
-		tempVec.push_back("Water01"); tempObjType.push_back(eTile09);
-		tempVec.push_back("Water02"); tempObjType.push_back(eTile10);
-		tempVec.push_back("Water03"); tempObjType.push_back(eTile11);
-		tempVec.push_back("Water04"); tempObjType.push_back(eTile12);
-		tempVec.push_back("Ocean"); tempObjType.push_back(eTile13);
+		tempVec.push_back("Grass");		tempObjType.push_back(eTile01);
+		tempVec.push_back("Ground01");	tempObjType.push_back(eTile02);
+		tempVec.push_back("Ground02");	tempObjType.push_back(eTile03);
+		tempVec.push_back("Rock01");	tempObjType.push_back(eTile04);
+		tempVec.push_back("Rock02");	tempObjType.push_back(eTile05);
+		tempVec.push_back("Sand01");	tempObjType.push_back(eTile06);
+		tempVec.push_back("Sand02");	tempObjType.push_back(eTile07);
+		tempVec.push_back("Yellow");	tempObjType.push_back(eTile08);
+		tempVec.push_back("Water01");	tempObjType.push_back(eTile09);
+		tempVec.push_back("Water02");	tempObjType.push_back(eTile10);
+		tempVec.push_back("Water03");	tempObjType.push_back(eTile11);
+		tempVec.push_back("Water04");	tempObjType.push_back(eTile12);
+		tempVec.push_back("Ocean");		tempObjType.push_back(eTile13);
+
+		tempVec.push_back("Bridge");	tempObjType.push_back(eBridge);
 	}
 	else if (m_NowLoadType == LoadType::eObject)
 	{
@@ -85,18 +88,19 @@ void CImguiClass::SetVecItem()
 		{
 			tempVec.clear();
 #ifdef _DEBUG
-			tempVec.push_back("BlueFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("OrangeFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("PurpleFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("RedFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("WhiteFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("YellowFlower"); tempObjType.push_back(eFlower);
+			tempVec.push_back("WhiteFlower");	tempObjType.push_back(eFlower);
+			tempVec.push_back("PurpleFlower");	tempObjType.push_back(eFlower);
+			tempVec.push_back("RedFlower");		tempObjType.push_back(eFlower);
+			tempVec.push_back("OrangeFlower");	tempObjType.push_back(eFlower);
+			tempVec.push_back("BlueFlower");	tempObjType.push_back(eFlower);
+			tempVec.push_back("YellowFlower");	tempObjType.push_back(eFlower);
+			tempVec.push_back("Sprout");		tempObjType.push_back(eSprout);
 #endif // _DEBUG
 
 			tempVec.push_back("BeachBall"); tempObjType.push_back(eBall);
-			tempVec.push_back("Chair"); tempObjType.push_back(eChair);
-			tempVec.push_back("Umbrella"); tempObjType.push_back(eUmbrella);
-			tempVec.push_back("Snowman"); tempObjType.push_back(eSnowman);
+			tempVec.push_back("Chair");		tempObjType.push_back(eChair);
+			tempVec.push_back("Umbrella");	tempObjType.push_back(eUmbrella);
+			tempVec.push_back("Snowman");	tempObjType.push_back(eSnowman);
 
 #ifdef _DEBUG
 			tempVec.push_back("InvisibleWall"); tempObjType.push_back(eInvisibleWall);
@@ -112,9 +116,9 @@ void CImguiClass::SetVecItem()
 		tempVec.push_back("RotationBoard");		tempObjType.push_back(eG_RotationBoard);
 		tempVec.push_back("Switch");			tempObjType.push_back(eG_Switch);
 		tempVec.push_back("Door");				tempObjType.push_back(eG_DoorFrame);
+		tempVec.push_back("MovingCube");		tempObjType.push_back(eG_MovingCube);
 		tempVec.push_back("ColorChanger");		tempObjType.push_back(eG_ColorChanger);
 		tempVec.push_back("BreakWall");			tempObjType.push_back(eG_BreakWall);
-		tempVec.push_back("MovingCube");		tempObjType.push_back(eG_MovingCube);
 	}
 
 	else if (m_NowLoadType == LoadType::eItem)
@@ -605,7 +609,7 @@ void CImguiClass::Update_Inspector()
 				case eSomethingElse:	case eBall:	case eChair:	case eUmbrella:
 				case eSnowman:	
 #ifdef _DEBUG
-				case eFlower:	
+				case eFlower:	case eSprout:
 #endif // _DEBUG
 				
 				case eInvisibleWall:
@@ -613,7 +617,9 @@ void CImguiClass::Update_Inspector()
 				case eG_RotationBoard:	case eG_BreakWall:	
 				case eG_ColorChanger:	case eG_Switch:		
 #ifdef _DEBUG 
-				case eG_Razer:		case eG_MovingCube:
+				case eG_MovingCube:
+
+				case eBook:				case eOrb:
 #endif
 				{
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetDiffScale(vScale);
@@ -822,6 +828,41 @@ void CImguiClass::Update_Inspector()
 				} // << : for
 
 				ImGui::Separator();
+			}
+
+			// >> 무빙 큐브 기믹 : 시작점&끝점, 속도, 방향
+			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_MovingCube)
+			{
+				CMovingCube* temp = dynamic_cast<CMovingCube*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+				ImGui::Text("Direction");
+				static int pushIndex = 0;
+				pushIndex = temp->GetDirection();
+				string charName[3] = { "X", "Y", "Z" };
+				for (int i = 0; i < 3; i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str(), pushIndex == i))
+					{
+						pushIndex = i;
+						temp->SetDirection(pushIndex);
+					}
+				} // << : for
+
+				ImGui::Separator();
+
+				float inputS = temp->GetStartPos();
+				if (ImGui::InputFloat("StartPos", &inputS))
+					temp->SetStartPos(inputS);
+
+				float inputE = temp->GetEndPos();
+				if (ImGui::InputFloat("EndPos", &inputE))
+					temp->SetEndPos(inputE);
+
+				ImGui::Separator();
+
+				float inputSpeed = temp->GetSpeed();
+				if (ImGui::InputFloat("Speed", &inputSpeed))
+					temp->SetSpeed(inputSpeed);
+
 			}
 
 		} // << : if (m_nowSelectindex >= 0)

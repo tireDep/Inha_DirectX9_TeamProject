@@ -3,8 +3,9 @@
 #include <fstream>
 #include "stdafx.h"
 #include "IObject.h"
-#include "RotationBoard.h"
 #include "FileLoadManager.h"
+#include "RotationBoard.h"
+#include "MovingCube.h"
 
 #define StrFilePath(path, folder, file) { path = string(folder) + "/" + string(file); }
 #define ErrMessageBox(msg, type) { MessageBoxA(g_hWnd, string(msg).c_str(), string(type).c_str(), MB_OK); }
@@ -155,12 +156,33 @@ void CFileLoadManager::ReadMapData(string fileName)
 			else if (strstr(readData.c_str(), "# RotationSpeed"))
 			{
 				getline(mapFile, readData);
-				mapData.gimmickData.roationSpeed = atof(readData.c_str());
+				mapData.gimmickData.roationSpeed_rotaitonBoard = atof(readData.c_str());
 			}
 			else if (strstr(readData.c_str(), "# RotationAxialIndex"))
 			{
 				getline(mapFile, readData);
-				mapData.gimmickData.roationAxialIndex = atoi(readData.c_str());
+				mapData.gimmickData.roationAxialIndex_rotaitonBoard = atoi(readData.c_str());
+			}
+
+			else if (strstr(readData.c_str(), "# StartPos"))
+			{
+				getline(mapFile, readData);
+				mapData.gimmickData.startPos_movingCube = atof(readData.c_str());
+			}
+			else if (strstr(readData.c_str(), "# EndPos"))
+			{
+				getline(mapFile, readData);
+				mapData.gimmickData.endPos_movingCube = atof(readData.c_str());
+			}
+			else if (strstr(readData.c_str(), "# Speed"))
+			{
+				getline(mapFile, readData);
+				mapData.gimmickData.speed_movingCube = atof(readData.c_str());
+			}
+			else if (strstr(readData.c_str(), "# DirectionIndex"))
+			{
+				getline(mapFile, readData);
+				mapData.gimmickData.directionIndex_movingCube = atoi(readData.c_str());
 			}
 
 			else if (strstr(readData.c_str(), "# Object_End"))
@@ -282,9 +304,19 @@ ST_MapData CFileLoadManager::SetSaveData(int index)
 	{
 		CRotationBoard* temp = dynamic_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(index));
 		mapData.gimmickData.isData = true;
-		mapData.gimmickData.roationSpeed = temp->GetRotationSpeed();
-		mapData.gimmickData.roationAxialIndex = temp->GetRotationAxialIndex();
+		mapData.gimmickData.roationSpeed_rotaitonBoard = temp->GetRotationSpeed();
+		mapData.gimmickData.roationAxialIndex_rotaitonBoard = temp->GetRotationAxialIndex();
 	}
+	else if(mapData.objType == eG_MovingCube)
+	{
+		CMovingCube* temp = dynamic_cast<CMovingCube*> (&g_pObjectManager->GetIObject(index));
+		mapData.gimmickData.isData = true;
+		mapData.gimmickData.startPos_movingCube = temp->GetStartPos();
+		mapData.gimmickData.endPos_movingCube = temp->GetEndPos();
+		mapData.gimmickData.speed_movingCube = temp->GetSpeed();
+		mapData.gimmickData.directionIndex_movingCube = temp->GetDirection();
+	}
+
 	else
 		mapData.gimmickData.isData = false;
 
@@ -337,10 +369,24 @@ void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
 		if(mapData.objType == ObjectType::eG_RotationBoard)
 		{
 			file << "# RotationSpeed" << endl;
-			file << mapData.gimmickData.roationSpeed << endl;
+			file << mapData.gimmickData.roationSpeed_rotaitonBoard << endl;
 			
 			file << "# RotationAxialIndex" << endl;
-			file << mapData.gimmickData.roationAxialIndex << endl;
+			file << mapData.gimmickData.roationAxialIndex_rotaitonBoard << endl;
+		}
+		else if(mapData.objType == ObjectType::eG_MovingCube)
+		{
+			file << "# StartPos" << endl;
+			file << mapData.gimmickData.startPos_movingCube << endl;
+
+			file << "# EndPos" << endl;
+			file << mapData.gimmickData.endPos_movingCube << endl;
+
+			file << "# Speed" << endl;
+			file << mapData.gimmickData.speed_movingCube << endl;
+
+			file << "# DirectionIndex" << endl;
+			file << mapData.gimmickData.directionIndex_movingCube << endl;
 		}
 	}
 

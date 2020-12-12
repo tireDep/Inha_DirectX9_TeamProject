@@ -193,6 +193,16 @@ void IObject::Render_OBB_Box()
 #endif // _DEBUG
 }
 
+void IObject::SetDiffScale(D3DXVECTOR3 set)
+{
+	if (set.x != m_vScale.x)
+		m_vScale = D3DXVECTOR3(set.x, set.x, set.x);
+	else if (set.y != m_vScale.y)
+		m_vScale = D3DXVECTOR3(set.y, set.y, set.y);
+	else if (set.z != m_vScale.z)
+		m_vScale = D3DXVECTOR3(set.z, set.z, set.z);
+}
+
 D3DXMATRIXA16 IObject::GetmatWorld()
 {
 	D3DXMATRIXA16 matWorld, matS, matR, matT;
@@ -255,6 +265,19 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 			mapData.strXFilePath = string("Tile_") + to_string(objType + 1) + ".X";
 		else
 			mapData.strXFilePath = string("Tile_0") + to_string(objType + 1) + ".X";
+
+		CTile* tile = new CTile;
+		tile->Setup(mapData);
+	}
+		break;
+
+	case eBridge:
+	{
+		mapData.strObjName = string("Bridge") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Tile";
+		mapData.strTxtPath = "Texture_01.png";
+
+		mapData.strXFilePath = string("Bridge.X");
 
 		CTile* tile = new CTile;
 		tile->Setup(mapData);
@@ -327,7 +350,15 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eCTree:
 	{
-		mapData.strObjName = string("ColorTree") + to_string(m_nRefCnt + 1);
+		string name;
+		if (index == 0) name = "A_Tree_Blue_016_";
+		else if (index == 1) name = "A_Tree_Blue_020_";
+		else if (index == 2) name = "C_Bush_Blue_070_";
+		else if (index == 3) name = "C_Bush_Blue_071_";
+		else if (index == 4)  name = "D_Shrub_Blue_101_";
+		else if (index == 5) name = "D_Shrub_Blue_102_";
+
+		mapData.strObjName = name + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/ColorTree";
 		mapData.strTxtPath = "TreesBlue.png";
 
@@ -340,7 +371,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eBall:
 	{
-		mapData.strObjName = string("BeachBall") + to_string(m_nRefCnt + 1);
+		mapData.strObjName = string("Ball") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "BeachBall_Base_Color.png";
 		mapData.strXFilePath = "ball.X";
@@ -352,7 +383,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eChair:
 	{
-		mapData.strObjName = string("Chair") + to_string(m_nRefCnt + 1);
+		mapData.strObjName = string("Blue_Chair") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "";
 		mapData.strXFilePath = "blue_chair.X";
@@ -364,7 +395,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eUmbrella:
 	{
-		mapData.strObjName = string("Umbrella") + to_string(m_nRefCnt + 1);
+		mapData.strObjName = string("Umbrella_Blue") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "Umbrella_Blue.png";
 		mapData.strXFilePath = "Umbrella.X";
@@ -390,11 +421,34 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	case eFlower:
 	{
 		mapData.vScale = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
-		mapData.strObjName = string("Flower") + to_string(m_nRefCnt + 1);
+		
+		string name;
+		if (index == 0) name = "_White";
+		else if (index == 1) name = "_Purple";  
+		else if (index == 2) name = "_Red";
+		else if (index == 3) name = "_Orange"; 
+		else if (index == 4)  name = "_Blue"; 
+		else if (index == 5) name = "_Yellow";
+
+		mapData.strObjName = string("Flower") + name + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "";
 
 		mapData.strXFilePath = string("Flower_0") + to_string(index + 1) + ".X";
+
+		CBackground* background = new CBackground;
+		background->Setup(mapData);
+	}
+		break;
+
+	case eSprout:
+	{
+		mapData.vScale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
+		mapData.strObjName = string("Sprout") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Background/Else";
+		mapData.strTxtPath = "Sprout.png";
+
+		mapData.strXFilePath = string("Sprout.X");
 
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
@@ -422,6 +476,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 #endif // _DEBUG
 	case eG_ColorChanger:
 	case eG_Switch:
+	case eG_MovingCube:
 	{
 		CGimmick::CreateGimmick(objType);
 	}
@@ -450,6 +505,7 @@ void IObject::CreateObject(ST_MapData& mapData)
 	{
 	case eTile01: case eTile02:	case eTile03: case eTile04: case eTile05: case eTile06:
 	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
+	case eBridge:
 	{
 		CTile* tile = new CTile;
 		tile->Setup(mapData);
@@ -487,6 +543,7 @@ void IObject::CreateObject(ST_MapData& mapData)
 	case eSnowman:
 #ifdef _DEBUG
 	case eFlower:
+	case eSprout:
 #endif // _DEBUG
 	case eInvisibleWall:
 	{
@@ -500,6 +557,7 @@ void IObject::CreateObject(ST_MapData& mapData)
 	case eG_DoorFrame:		case eG_Door:
 #endif // _DEBUG
 	case eG_ColorChanger:	case eG_Switch:
+	case eG_MovingCube:
 	{
 		CGimmick::CreateGimmick_SaveData(mapData);
 	}

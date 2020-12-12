@@ -493,7 +493,14 @@ bool CCharacter::Collider(bool isCollided)
 void CCharacter::ColliderOtherObject(IObject * background)
 {
 	if (m_Character->GetOBB()->IsCollision(background->GetOBB()))
+	{
+		
 		m_isCollided = true;
+		
+	}
 	else
+	{
 		m_isCollided = false;
+		
+	}
 }
