@@ -304,21 +304,33 @@ void PObject::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick,
 
 void PObject::ReceiveEvent(ST_EVENT eventMsg)
 {
+	if (m_isPicked != true)
+		return;
+
 	if (eventMsg.eventType == EventType::eColorChangeEvent)
 	{
-		if (m_isPicked == true)
-		{
-			m_Color = *(D3DXCOLOR*)eventMsg.ptrMessage;
-			m_outLineColor = *(D3DXCOLOR*)eventMsg.ptrMessage;
-			m_isClicked = true;
+		// m_Color = *(D3DXCOLOR*)eventMsg.ptrMessage;
+		// m_outLineColor = *(D3DXCOLOR*)eventMsg.ptrMessage;
+		// m_isClicked = true;
+		// 
+		// this->ChangeObjectColor();
 
-			this->ChangeObjectColor();
+		ST_EVENT msg;
+		msg.eventType = EventType::eChangedColorEvent;
 
-			ST_EVENT msg;
-			msg.eventType = EventType::eChangedColorEvent;
-			msg.ptrMessage = &m_Color;
-			g_pEventManager->CheckEvent(msg);
-		}
+		D3DXCOLOR color = *(D3DXCOLOR*)eventMsg.ptrMessage;
+		msg.ptrMessage = &color;
+		g_pEventManager->CheckEvent(msg);
+	}
+	else if (eventMsg.eventType == EventType::eColorEffect)
+	{
+		// >> 용 이펙트 발사 이벤트 후 색상 변경 처리
+
+		m_Color = *(D3DXCOLOR*)eventMsg.ptrMessage;
+		m_outLineColor = *(D3DXCOLOR*)eventMsg.ptrMessage;
+		m_isClicked = true;
+	
+		this->ChangeObjectColor();
 	}
 	else
 		m_isClicked = false;

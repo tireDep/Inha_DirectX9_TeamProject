@@ -29,10 +29,14 @@ private:
 	float rotation;
 	// << testRotationMove
 
+	bool m_isEffect;
+	float m_effectDuration;
+	D3DXCOLOR m_color;
+
 public:
 	CDragon();
 	virtual ~CDragon(void);
-	virtual void Update(D3DXVECTOR3 pos);
+	virtual void Update(D3DXVECTOR3 pos, float duration);
 	virtual void Setup();
 	virtual void Render();
 	virtual void ChangeColor(D3DXCOLOR color);
