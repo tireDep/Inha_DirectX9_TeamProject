@@ -485,19 +485,19 @@ void CObjectManager::CollisionPObject(PObject * one, PObject * two, float durati
 {
 	D3DXVECTOR3 unitNormal = one->GetPosition() - two->GetPosition();
 
-	float v1 = D3DXVec3Dot(&one->GetLinearVelocity(), &unitNormal);
-	float v2 = D3DXVec3Dot(&two->GetLinearVelocity(), &unitNormal);
+	float v1 = D3DXVec3Dot(&one->GetVelocity(), &unitNormal);
+	float v2 = D3DXVec3Dot(&two->GetVelocity(), &unitNormal);
 
 	float averageE = (one->GetElasticity() + two->GetElasticity()) / 2.0f;
 
 	float finalv1 =	((one->GetMass() - averageE * two->GetMass()) * v1 + (1 + averageE) * two->GetMass() * v2) / (one->GetMass() + two->GetMass());
 	float finalv2 = ((two->GetMass() - averageE * one->GetMass()) * v2 + (1 + averageE) * one->GetMass() * v1) / (one->GetMass() + two->GetMass());
 	
-	one->SetLinearVelocity((((finalv1 - v1) * unitNormal) + one->GetLinearVelocity()));
-	two->SetLinearVelocity((((finalv2 - v2) * unitNormal) + two->GetLinearVelocity()));
+	one->SetVelocity((((finalv1 - v1) * unitNormal) + one->GetVelocity()));
+	two->SetVelocity((((finalv2 - v2) * unitNormal) + two->GetVelocity()));
 
-	D3DXVECTOR3 acceleration1 = one->GetLinearVelocity() / duration;
-	D3DXVECTOR3 acceleration2 = two->GetLinearVelocity() / duration;
+	D3DXVECTOR3 acceleration1 = one->GetVelocity() / duration;
+	D3DXVECTOR3 acceleration2 = two->GetVelocity() / duration;
 
 	one->SetForceVector(acceleration1 * one->GetMass());
 	two->SetForceVector(acceleration2 * two->GetMass());
@@ -508,7 +508,7 @@ void CObjectManager::CollisionIObject(PObject* pObject, IObject* iObject, float 
 	D3DXVECTOR3 IObjectPosion(iObject->GetmatWorld()._41, iObject->GetmatWorld()._42, iObject->GetmatWorld()._43);
 	D3DXVECTOR3 unitNormal = pObject->GetPosition() - IObjectPosion;
 
-	float v = D3DXVec3Dot(&pObject->GetLinearVelocity(), &unitNormal);
+	float v = D3DXVec3Dot(&pObject->GetVelocity(), &unitNormal);
 
 }
 

@@ -21,18 +21,17 @@ protected:
 	Synthesize(float, m_finverseMass, InverseMass);	// mass
 
 	Synthesize(D3DXVECTOR3, m_vPosition, Position);	// center position
-	Synthesize(D3DXVECTOR3, m_vLinearVelocity, LinearVelocity); // velocity
-	Synthesize(D3DXVECTOR3, m_vLinearAcceleration, LinearAcceleration); // acceleration
+	Synthesize(D3DXVECTOR3, m_vVelocity, Velocity);	// velocity
+	Synthesize(D3DXVECTOR3, m_vAcceleration, Acceleration); // acceleration
 	Synthesize(float, m_fDamping, Damping);	// floating point error
 	Synthesize(float, m_fLinearDrag, Drag);	// linear drag
-	Synthesize(D3DXVECTOR3, m_vLastFrameAcceleration, LastFrameAcceleration); // lastFrameAcceleration
 
 	Synthesize(bool, m_isForceApplied, ForceApplied);
-	Synthesize(D3DXVECTOR3, m_vForceAccum, ForceAccum);
+	//Synthesize(D3DXVECTOR3, m_vForceAccum, ForceAccum);
 	Synthesize(D3DXVECTOR3, m_vForceVector, ForceVector);
 	Synthesize(D3DXVECTOR3, m_vForceLocation, ForceLocation);
 
-	Synthesize(float, m_fBoundingSphere, BoundingSphere);	// collision radius
+	Synthesize(float, m_fBoundingSphere, BoundingSphere);	// collision radius // Later Sphere
 	Synthesize(float, m_fElasticity, Elasticity); // elasticity
 
 	// OBB TEST
@@ -67,6 +66,9 @@ public:
 };
 
 /// Delete Later...
+//Synthesize(D3DXVECTOR3, m_vLinearVelocity, LinearVelocity); // velocity
+//Synthesize(D3DXVECTOR3, m_vLinearAcceleration, LinearAcceleration); // acceleration
+//Synthesize(D3DXVECTOR3, m_vLastFrameAcceleration, LastFrameAcceleration); // lastFrameAcceleration
 //Synthesize(D3DXVECTOR3, m_vInverseRotationInertia, inverseRotationInertia);	// Rotation Inertia;
 //CTestAngleSet m_stOrientation; // Orientation
 //Synthesize(D3DXVECTOR3, m_vAngularVelocity, AngularVelocity); // Angular Velocity
