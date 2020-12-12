@@ -43,7 +43,7 @@ void CSkinnedMesh::SetUp(char * szFolder, char * szFile)
 	g_pObjectManager->AddOBBbox(m_pOBB);
 
 	LPD3DXANIMATIONSET pAniSet = NULL;
-	m_pAniController->GetAnimationSet(3, &pAniSet);
+	m_pAniController->GetAnimationSet(10, &pAniSet);
 	SafeRelease(pAniSet);
 }
 
@@ -68,23 +68,22 @@ void CSkinnedMesh::Update(float duration)
 	{
 		SetAnimationIndexBlend(2); // ApplyColor
 	}
-	else if (m_maxPlayTime <= m_passedTime + m_fBlendTime && strstr(m_sNowPlayAni.c_str(), "Jump"))
-	{
-		SetAnimationIndexBlend(6); // fall
-	}
+	// else if (m_maxPlayTime <= m_passedTime + m_fBlendTime && strstr(m_sNowPlayAni.c_str(), "Jump"))
+	// {
+	// 	SetAnimationIndexBlend(6); // fall
+	// }
 	else if (m_maxPlayTime <= m_passedTime + m_fBlendTime
 		&& (strstr(m_sNowPlayAni.c_str(), "ApplyColor") 
 		 || strstr(m_sNowPlayAni.c_str(), "Push") 
 		 || strstr(m_sNowPlayAni.c_str(), "Pull")
 		 || strstr(m_sNowPlayAni.c_str(), "Fall")))
 	{
-		SetAnimationIndexBlend(10); 
-		// >> Idle
+		SetAnimationIndex(10); // Idle
 	}
 	
 	if (m_isAniBlend)
 	{
-		m_fPassedBlendTime += g_pTimeManager->GetElapsedTime();	// 시간 누적
+		m_fPassedBlendTime += duration;	// 시간 누적
 		if (m_fPassedBlendTime >= m_fBlendTime)
 		{
 			m_isAniBlend = false;
@@ -102,7 +101,7 @@ void CSkinnedMesh::Update(float duration)
 		}
 	}
 	if (m_pAniController)
-		m_pAniController->AdvanceTime(g_pTimeManager->GetElapsedTime(), NULL);
+		m_pAniController->AdvanceTime(duration, NULL);
 	
 	if (m_pRoot)
 	{

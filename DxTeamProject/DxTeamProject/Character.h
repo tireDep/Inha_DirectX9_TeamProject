@@ -24,6 +24,7 @@ protected:
 	bool					jumpis;
 	bool					jumping;
 	CSkinnedMesh*			m_Character;
+	bool					m_isColorChanged;
 
 	float rotation;
 	// grab

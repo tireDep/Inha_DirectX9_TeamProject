@@ -17,6 +17,7 @@ CCharacter::CCharacter()
 	, jumpis(false)
 	, jumping(false)
 	, m_Character(NULL)
+	, m_isColorChanged(false)
 	// Ray y check
 {
 	D3DXMatrixIdentity(&m_matWorld);
@@ -52,7 +53,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 	if (!g_gameManager->GetUImode())
 	{
-		// todo : 상태에 따른 애니메이션 출력
+		// todo : 애니메이션 관련 함수 생성(인덱스 세팅)
 
 		if (eventMsg.message == WM_LBUTTONDOWN)
 		{
@@ -62,117 +63,118 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 			g_pEventManager->CheckEvent(msg);
 
-			m_Character->SetAnimationIndexBlend(3); // >> ChangeColor
+			m_Character->SetAnimationIndexBlend(3); // ChangeColor
 			return;
 		}
 
 		if (eventMsg.eventType == EventType::eChangedColorEvent)
 		{
-			eventMsg.playerInput = PlayerInputType::eUp;
-			speed = 1.0f;
-			// >> 속도 음수 방지
+			DoRotation(0.0f);
+			return;
+			// >> 색 변화가 일어날 경우 그 방향(정면) 쳐다봄
 		}
 
-		switch (eventMsg.playerInput)
+		if (eventMsg.eventType == EventType::eInputEvent)
 		{
-		case PlayerInputType::eUp:
-			rotation = 0.0f;
-			break;
-
-		case PlayerInputType::eLeftUp:
-			rotation = D3DX_PI / 4.0f * -1;
-			break;
-
-		case PlayerInputType::eRightUp:
-			rotation = D3DX_PI / 4.0f;
-			break;
-
-		case PlayerInputType::eDown:
-			rotation = D3DX_PI;
-			break;
-
-		case PlayerInputType::eLeftDown:
-			rotation = D3DX_PI + D3DX_PI / 4.0f;
-			break;
-
-		case PlayerInputType::eRightDown:
-			rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
-			break;
-
-		case PlayerInputType::eLeft:
-			rotation = -D3DX_PI / 2.0f;
-			break;
-
-		case PlayerInputType::eRight:
-			rotation = D3DX_PI / 2.0f;
-			break;
-
-		// todo : 점프 구현
-		case PlayerInputType::eJump:
-			if (!jumping)
+			switch (eventMsg.playerInput)
 			{
-				m_jump = true;
-				if (m_Character->CheckAnimationEnd())
+			case PlayerInputType::eUp:
+				rotation = 0.0f;
+				break;
+
+			case PlayerInputType::eLeftUp:
+				rotation = D3DX_PI / 4.0f * -1;
+				break;
+
+			case PlayerInputType::eRightUp:
+				rotation = D3DX_PI / 4.0f;
+				break;
+
+			case PlayerInputType::eDown:
+				rotation = D3DX_PI;
+				break;
+
+			case PlayerInputType::eLeftDown:
+				rotation = D3DX_PI + D3DX_PI / 4.0f;
+				break;
+
+			case PlayerInputType::eRightDown:
+				rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
+				break;
+
+			case PlayerInputType::eLeft:
+				rotation = -D3DX_PI / 2.0f;
+				break;
+
+			case PlayerInputType::eRight:
+				rotation = D3DX_PI / 2.0f;
+				break;
+
+				// todo : 점프 구현
+			case PlayerInputType::eJump:
+				if (!jumping)
 				{
-					m_Character->SetAnimationIndex(7); // Push
+					m_jump = true;
+					if (m_Character->CheckAnimationEnd())
+					{
+						m_Character->SetAnimationIndex(7); // jump
+					}
 				}
-			}
-			speed = -1.0f;
-			break;
-			// todo : 잡기 구현
-		case PlayerInputType::eHold:
-			if (m_nGrabAbleObeject != -1)
-			{
-				if (m_Character->CheckAnimationEnd())
-					m_Character->SetAnimationIndex(5); // Push
-			}
-			else
-				if (m_Character->CheckAnimationEnd())
-					m_Character->SetAnimationIndex(10); // Idle
 				speed = -1.0f;
-			break;
-		case PlayerInputType::eHoldPush:
-			if (m_nGrabAbleObeject != -1)
-			{
-				if (m_Character->CheckAnimationEnd())
-					m_Character->SetAnimationIndex(5); // Push
-			}
-			else
-				if (m_Character->CheckAnimationEnd())
-					m_Character->SetAnimationIndex(10); // Idle
-				speed = -1.0f;
-			break;
-		case PlayerInputType::eHoldPull:
-			if (m_nGrabAbleObeject != -1)
-			{
-				if (m_Character->CheckAnimationEnd())
-					m_Character->SetAnimationIndex(4); // Pull
-			}
-			else
-				if (m_Character->CheckAnimationEnd())
-					m_Character->SetAnimationIndex(10); // Idle
-				speed = -1.0f;
-			break;
-		default:
-			speed = -1.0f;
-			if(m_Character->CheckAnimationEnd())
-				m_Character->SetAnimationIndex(10); // Idle
-			break;
-		}
+				break;
 
-		if (speed > 0)
+				// todo : 잡기 구현
+			case PlayerInputType::eHold:
+				if (m_nGrabAbleObeject != -1)
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(5); // Push
+				}
+				else
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
+				speed = -1.0f;
+				break;
+			case PlayerInputType::eHoldPush:
+				if (m_nGrabAbleObeject != -1)
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(5); // Push
+				}
+				else
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
+				speed = -1.0f;
+				break;
+			case PlayerInputType::eHoldPull:
+				if (m_nGrabAbleObeject != -1)
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(4); // Pull
+				}
+				else
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
+				speed = -1.0f;
+				break;
+			default:
+				speed = -1.0f;
+				if (m_Character->CheckAnimationEnd())
+					m_Character->SetAnimationIndex(10); // Idle
+				break;
+			}
+		} // << eInputEvent
+
+		if (speed > 0 && m_Character->CheckAnimationEnd())
 		{
-			if(m_Character->CheckAnimationEnd())
-			{
-				// >> 애니메이션 재생 중 이동 하지 않음
-				// >> 색상 변경, 점프?
-				m_Character->SetAnimationIndex(9); // Walk
+			// >> 특정 애니메이션 재생 중 이동 하지 않음
+			m_Character->SetAnimationIndex(9); // Walk
 
-				// >> todo : 속도 변화 감지해서 달리기 추가
+			// >> todo : 속도 변화 감지해서 달리기 추가
+			// >> 입력 시간에 따른 달리기 변화?
 
-				DoRotation(rotation);
-				DoMove(speed);
-			}
+			DoRotation(rotation);
+			DoMove(speed);
 		}
 	}
 
@@ -314,6 +316,7 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 				jumpis = false;
 				jumping = false;
 			}
+			m_Character->SetAnimationIndexBlend(6); // fall
 		}
 	
 }
