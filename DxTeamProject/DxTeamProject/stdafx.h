@@ -151,36 +151,39 @@ struct ST_PT_VERTEX
 
 enum class EventType : int
 {
-	eInputEvent, eSceneChangeEvent, eColorChangeEvent, eChangedColorEvent, eColorEffect
+	eInputEvent, eSceneChangeEvent, eColorChangeEvent, eChangedColorEvent, eColorEffect,
+	eNull
 };
 
 enum class SceneType : int
 {
-	eMainScene, eGameScene, eUIScene, eResultScene
+	eMainScene, eGameScene, eUIScene, eResultScene,
 	// ePauseScene
+	eNull
 };
 
 enum class PlayerInputType : int
 {
-	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHold, eHoldPush, eHoldPull, eJump
+	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHold, eHoldPush, eHoldPull, eJump,
+	eNull
 };
 
 struct ST_EVENT
 {
-	EventType eventType;
+	EventType eventType = EventType::eNull;
 
 	// >> Input
-	UINT message;
-	WPARAM wParam; 
-	LPARAM lParam;
-	PlayerInputType playerInput;
+	UINT message = 0;
+	WPARAM wParam = 0; 
+	LPARAM lParam = 0;
+	PlayerInputType playerInput = PlayerInputType::eNull;
 	// << Input
 
 	// >> SceneChange
-	SceneType setNowScene;
+	SceneType setNowScene = SceneType::eNull;
 	// << SceneChange
 
-	float duration;
+	float duration = 0.0f;
 
 	void* ptrMessage = NULL;
 };

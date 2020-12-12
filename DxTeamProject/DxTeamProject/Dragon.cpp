@@ -33,10 +33,9 @@ void CDragon::Update(D3DXVECTOR3 pos, float duration)
 	{
 		m_effectDuration += duration;
 
-		float testDuration = 0.7f;
-		// >> todo : 1초? 시간제한 필요
+		float limitDuration = 0.5f;
 
-		if (m_effectDuration > testDuration)
+		if (m_effectDuration > limitDuration)
 		{
 			// >> 이펙트 완료 후 메시지 전송
 			ST_EVENT msg;
@@ -180,51 +179,54 @@ void CDragon::ReceiveEvent(ST_EVENT eventMsg)
 			eventMsg.playerInput = PlayerInputType::eUp;
 			m_color = *(D3DXCOLOR*)eventMsg.ptrMessage;
 			m_isEffect = true;
-		}
+		}	// << : eChangedColorEvent
 
-		switch (eventMsg.playerInput)
+		if (eventMsg.eventType == EventType::eInputEvent)
 		{
-		case PlayerInputType::eDown:
-			rotation = 0.0f;
-			DoRotation();
-			break;
+			switch (eventMsg.playerInput)
+			{
+			case PlayerInputType::eDown:
+				rotation = 0.0f;
+				DoRotation();
+				break;
 
-		case PlayerInputType::eRightDown:
-			rotation = D3DX_PI / 4.0f * -1;
-			DoRotation();
-			break;
+			case PlayerInputType::eRightDown:
+				rotation = D3DX_PI / 4.0f * -1;
+				DoRotation();
+				break;
 
-		case PlayerInputType::eLeftDown:
-			rotation = D3DX_PI / 4.0f;
-			DoRotation();
-			break;
+			case PlayerInputType::eLeftDown:
+				rotation = D3DX_PI / 4.0f;
+				DoRotation();
+				break;
 
-		case PlayerInputType::eUp:
-			rotation = D3DX_PI;
-			DoRotation();
-			break;
+			case PlayerInputType::eUp:
+				rotation = D3DX_PI;
+				DoRotation();
+				break;
 
-		case PlayerInputType::eRightUp:
-			rotation = D3DX_PI + D3DX_PI / 4.0f;
-			DoRotation();
-			break;
+			case PlayerInputType::eRightUp:
+				rotation = D3DX_PI + D3DX_PI / 4.0f;
+				DoRotation();
+				break;
 
-		case PlayerInputType::eLeftUp:
-			rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
-			DoRotation();
-			break;
+			case PlayerInputType::eLeftUp:
+				rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
+				DoRotation();
+				break;
 
-		case PlayerInputType::eRight:
-			rotation = -D3DX_PI / 2.0f;
-			DoRotation();
-			break;
+			case PlayerInputType::eRight:
+				rotation = -D3DX_PI / 2.0f;
+				DoRotation();
+				break;
 
-		case PlayerInputType::eLeft:
-			rotation = D3DX_PI / 2.0f;
-			DoRotation();
-			break;
+			case PlayerInputType::eLeft:
+				rotation = D3DX_PI / 2.0f;
+				DoRotation();
+				break;
+			} // << : swtich
 
-		}
+		} // eInputEvent
 	}
 }
 
