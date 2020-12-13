@@ -157,16 +157,16 @@ bool CSphere::hasIntersected(IObject * otherIObject)
 	//D3DXMatrixInverse(&inverseBoxMatrix, NULL, &otherIObject->GetmatWorld());
 	D3DXMATRIXA16 inverseBoxMatrix;
 	D3DXMatrixIdentity(&inverseBoxMatrix);
-	inverseBoxMatrix._41 = otherIObject->GetmatWorld()._41;
-	inverseBoxMatrix._42 = otherIObject->GetmatWorld()._42;
-	inverseBoxMatrix._43 = otherIObject->GetmatWorld()._43;
+	inverseBoxMatrix._41 = -otherIObject->GetmatWorld()._41;
+	inverseBoxMatrix._42 = -otherIObject->GetmatWorld()._42;
+	inverseBoxMatrix._43 = -otherIObject->GetmatWorld()._43;
 
 	D3DXVECTOR3 SphereToBoxCenter;
 	D3DXVec3TransformCoord(&SphereToBoxCenter, &m_vPosition, &inverseBoxMatrix);
 													
-	if ((fabsf(SphereToBoxCenter.x) - GetRadius()) > otherIObject->GetOBB()->GetOBBWidth()  ||
-		(fabsf(SphereToBoxCenter.y) - GetRadius()) > otherIObject->GetOBB()->GetOBBHeight() ||
-		(fabsf(SphereToBoxCenter.z) - GetRadius()) > otherIObject->GetOBB()->GetOBBDepth())
+	if (fabsf(SphereToBoxCenter.x) - GetRadius() > otherIObject->GetOBB()->GetOBBWidth()  ||
+		fabsf(SphereToBoxCenter.y) - GetRadius() > otherIObject->GetOBB()->GetOBBHeight() ||
+		fabsf(SphereToBoxCenter.z) - GetRadius() > otherIObject->GetOBB()->GetOBBDepth())
 		return false;
 
 	D3DXVECTOR3 closestPt(0, 0, 0);
