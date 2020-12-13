@@ -128,11 +128,12 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				if (m_nGrabAbleObeject != -1)
 				{
 					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(5); // Push
+						m_Character->SetAnimationIndexBlend(5); // push
+					// >> 블랜드가 안되서 잡기 대기 상태처럼 나옴
 				}
-				else
+				// else
 					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(10); // Idle
+						m_Character->SetAnimationIndexBlend(5); // push
 				speed = -1.0f;
 				break;
 			case PlayerInputType::eHoldPush:
@@ -168,7 +169,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 		if (speed > 0 && m_Character->CheckAnimationEnd())
 		{
 			// >> 특정 애니메이션 재생 중 이동 하지 않음
-			m_Character->SetAnimationIndex(9); // Walk
+			if(!jumping)
+				m_Character->SetAnimationIndex(9); // Walk
 
 			// >> todo : 속도 변화 감지해서 달리기 추가
 			// >> 입력 시간에 따른 달리기 변화?
