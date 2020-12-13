@@ -1,66 +1,41 @@
 # Object_Start
 # ObjectName
-Box1
+RoataionBoard1
 # FolderPath
-
+Resource/XFile/Gimmick/RotationBoard
 # FilePath
-
+Rotation_board.X
 # TxtPath
-
+board.png
 # ObjectType
-23
+26
 # Scale
-1
-1
-1
+0.03
+0.03
+0.03
 # Rotate
 0
 0
 0
 # Translate
-7.5
-0.5
+8.5
+0
 0.5
 # Color
 0.5
 0.5
 0.5
 1
-# Object_End
-
-# Object_Start
-# ObjectName
-Sphere2
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-24
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
-4.5
-0.25
-4.5
-# Color
-0.5
-0.5
-0.5
+# GimmickData
+# RotationSpeed
+1
+# RotationAxialIndex
 1
 # Object_End
 
 # Object_Start
 # ObjectName
-AutumnTree3
+Autumn_Tree_01_2
 # FolderPath
 Resource/XFile/Background/SeasonTree
 # FilePath
@@ -90,36 +65,61 @@ autumn_texture.png
 
 # Object_Start
 # ObjectName
-RoataionBoard4
+Box3
 # FolderPath
-Resource/XFile/Gimmick/RotationBoard
+
 # FilePath
-Rotation_board.X
+
 # TxtPath
-board.png
+
 # ObjectType
-26
+23
 # Scale
-0.05
-0.05
-0.05
+1
+1
+1
 # Rotate
 0
 0
 0
 # Translate
-6.5
-0
-9.5
+0.5
+0.5
+4.5
 # Color
 0.5
 0.5
 0.5
 1
-# GimmickData
-# RotationSpeed
-1
-# RotationAxialIndex
+# Object_End
+
+# Object_Start
+# ObjectName
+Sphere4
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+24
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0.25
+-4.5
+# Color
+0.5
+0.5
+0.5
 1
 # Object_End
 
@@ -135,9 +135,9 @@ Cylinder5
 # ObjectType
 25
 # Scale
-2
-2
-2
+0.5
+0.5
+1
 # Rotate
 90
 0
@@ -152,34 +152,6 @@ Cylinder5
 0.5
 1
 # Object_End
-# Object_Start
-# ObjectName
-Switch1
-# FolderPath
-Resource/XFile/Gimmick/Switch
-# FilePath
-Force_switch.X
-# TxtPath
-cubeworld_texture.tga
-# ObjectType
-31
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
-9
-0
-9
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
+
 # Section =======================================
 
