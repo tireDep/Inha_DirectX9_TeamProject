@@ -17,8 +17,8 @@ private:
 	float m_fStartPos , m_fEndPos; // 거리 ?
 	D3DXVECTOR3 m_vPosition;
 
-	D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRot; //setdata
-	//D3DXMATRIXA16 matWorld;
+	// D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRot; //setdata
+	// D3DXMATRIXA16 matWorld;
 	// D3DXMATRIXA16 matS, matT, matR; // 대용
 	// D3DXVECTOR3 m_vMin, m_vMax;
 public:

@@ -170,7 +170,7 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 			break;
 		case WM_MOUSEMOVE:
 		{
-			if (g_gameManager->GetUImode())
+			if (g_pGameManager->GetUImode())
 			{
 				POINT ptCurMouse;
 				ptCurMouse.x = LOWORD(eventMsg.lParam);

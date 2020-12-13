@@ -51,7 +51,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 	float speed = 10.0f * eventMsg.duration;
 	rotation = -1.0f;
 
-	if (!g_gameManager->GetUImode())
+	if (!g_pGameManager->GetUImode())
 	{
 		// todo : 애니메이션 관련 함수 생성(인덱스 세팅)
 

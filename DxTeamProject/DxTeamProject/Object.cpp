@@ -50,11 +50,14 @@ CObject::CObject() :
 	CObject::m_nRefCount += 1;
 	g_pObjectManager->AddObject(this);
 	D3DXMatrixIdentity(&m_matWorld);
+	D3DXMatrixIdentity(&m_matS);
+	D3DXMatrixIdentity(&m_matR);
+	D3DXMatrixIdentity(&m_matT);
+	ZeroMemory(&m_stMtl, sizeof(D3DMATERIAL9));
 	/// Color
 	//m_Color = GRAY;
 	//m_outLineColor = GRAY;
 	//LoadAssets();
-	ZeroMemory(&m_stMtl, sizeof(D3DMATERIAL9));
 }
 
 CObject::~CObject()

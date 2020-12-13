@@ -663,7 +663,7 @@ void CObjectManager::CollisionSphereToIObject(CSphere * one, IObject * two, floa
 void CObjectManager::Render()
 {
 	// << mapTest
-	if (g_gameManager->GetGridMapMode())
+	if (g_pGameManager->GetGridMapMode())
 	{
 		multimap<vector<IObject*>, bool>::iterator it;
 		for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)

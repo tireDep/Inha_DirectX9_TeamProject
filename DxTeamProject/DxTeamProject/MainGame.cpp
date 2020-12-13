@@ -112,10 +112,11 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
-	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxandCylinderToGimmick.dat");
+	g_pGameManager->SetLoadData();
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxandCylinderToGimmick.dat");
 
 #ifdef _DEBUG
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 	// >> mapData
 #else
@@ -179,7 +180,7 @@ void CMainGame::Setup()
 	m_pDragon = new CDragon;
 	m_pDragon->Setup();
 
-	g_pEventManager->AddListener(g_gameManager);
+	g_pEventManager->AddListener(g_pGameManager);
 	g_pEventManager->AddListener(m_pCamera);
 	g_pEventManager->AddListener(m_pCharacter);
 	g_pEventManager->AddListener(m_pDragon);
@@ -289,7 +290,7 @@ void CMainGame::Update()
 		/*m_pCharacter->UpdateRayYCheck(*m_pMeshTile);*/
 	}
 
-	 //if (g_gameManager->GetGridMapMode())
+	 //if (g_pGameManager->GetGridMapMode())
 	 //{
 	 //	m_pPrevFrustum = m_pNowFrustum;
 	 //	m_pNowFrustum.Update();
@@ -299,7 +300,7 @@ void CMainGame::Update()
 	 //	}
 	 //}
 
-	if (g_gameManager->GetGridMapMode())
+	if (g_pGameManager->GetGridMapMode())
 	{
 		m_pPrevFrustum = m_pNowFrustum;
 		m_pNowFrustum.Update();
@@ -427,7 +428,7 @@ void CMainGame::Render()
 	//if (m_pHeightMap)
 	//	m_pHeightMap->Render();
 
-	if (g_gameManager->GetDevMode())
+	if (g_pGameManager->GetDevMode())
 	{
 		if (m_pText)
 		{
@@ -479,7 +480,7 @@ void CMainGame::Render()
 	if (m_pDragon)
 		m_pDragon->Render();
 
-	if (g_gameManager->GetUImode())
+	if (g_pGameManager->GetUImode())
 	{
 		if (m_pUI)
 			m_pUI->UI_Render();

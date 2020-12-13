@@ -13,7 +13,6 @@ CMovingCube::CMovingCube()
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
 	D3DXMatrixIdentity(&m_matT);
-	D3DXMatrixIdentity(&m_matRot);
 }
 
 

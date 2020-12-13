@@ -172,7 +172,7 @@ string CDragon::GetName()
 
 void CDragon::ReceiveEvent(ST_EVENT eventMsg)
 {
-	if (!g_gameManager->GetUImode())
+	if (!g_pGameManager->GetUImode())
 	{
 		if (eventMsg.eventType == EventType::eChangedColorEvent)
 		{

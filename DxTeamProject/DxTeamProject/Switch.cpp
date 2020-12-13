@@ -13,11 +13,6 @@ CSwitch::CSwitch()
 	D3DXMatrixIdentity(&matT);
 	D3DXMatrixIdentity(&matWorld);
 	D3DXMatrixIdentity(&collWorld);
-
-	D3DXMatrixIdentity(&m_matS);
-	D3DXMatrixIdentity(&m_matR);
-	D3DXMatrixIdentity(&m_matT);
-	D3DXMatrixIdentity(&m_matRot);
 }
 
 CSwitch::~CSwitch()
@@ -93,7 +88,6 @@ void CSwitch::Setup(ST_MapData setData)
 	m_pColl = new COBB;
 	m_pColl->SetupMesh(m_vMin, m_vMax, 0.3f);
 
-
 	m_strObjName = setData.strObjName;
 	m_strFolder = setData.strFolderPath;
 	m_strXFile = setData.strXFilePath;
@@ -148,8 +142,6 @@ void CSwitch::Setup(ST_MapData setData)
 	 m_pOBB->Setup(*this);
 	 g_pObjectManager->AddOBBbox(m_pOBB);
 	 g_pObjectManager->AddGimmick(this);
-
-
 }
 
 

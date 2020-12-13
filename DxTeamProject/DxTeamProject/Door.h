@@ -10,7 +10,7 @@ private:
 	// Required_object : IsOpen(true, false)
 		// Update(float, bool)
 		// bool : switch ON/OFF
-	D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRotGimmick;
+	D3DXMATRIXA16 m_matRotGimmick;
 	float m_fOpeningAngle;
 	bool IsOpen;
 
