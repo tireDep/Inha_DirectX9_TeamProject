@@ -58,6 +58,7 @@ public:
 	virtual bool hasIntersected(PObject * otherobject);
 	virtual void Collision3D(PObject * otherobject);
 	virtual void UpdateLand(float duration);
+	virtual COBB* GetOBB() { return m_pOBB; }
 
 	virtual void Render();
 
