@@ -116,7 +116,7 @@ void CMainGame::Setup()
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxandCylinderToGimmick.dat");
 
 #ifdef _DEBUG
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 	// >> mapData
 #else

@@ -282,13 +282,17 @@ void CObjectManager::Collide(float duration)
 			{
 				switch (m_vecIObject[IObjectIndex]->GetObjType())
 				{
-					case eG_RotationBoard: case eG_Door: case eG_MovingCube:
+					case eG_RotationBoard:  case eG_MovingCube:
 						{
-							
+							D3DXVECTOR3 v;
+							v = m_vecSphere[SphereIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
+							D3DXVec3Normalize(&v, &v);
+							m_vecSphere[SphereIndex]->SetPusingForce(v);
 						}
 						break;
+					case eG_Door:
+						break;
 					default:
-							//cout << "IN" << endl;
 							CollisionSphereToIObject(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
 						break;
 				}
@@ -328,15 +332,8 @@ void CObjectManager::Collide(float duration)
 			{
 				switch (m_vecIObject[IObjectIndex]->GetObjType())
 				{
-					case eG_RotationBoard: 
-					{
-						D3DXVECTOR3 v;
-						v = m_vecBox[BoxIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
-						D3DXVec3Normalize(&v, &v);
-						m_vecBox[BoxIndex]->SetPusingForce(v);
-					}
-						break;
-					case eG_MovingCube:			
+					case eG_RotationBoard: 	case eG_MovingCube:
+
 					{
 						D3DXVECTOR3 v;
 						v = m_vecBox[BoxIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
@@ -385,7 +382,7 @@ void CObjectManager::Collide(float duration)
 			{
 				switch (m_vecIObject[IObjectIndex]->GetObjType())
 				{
-					case eG_RotationBoard: 
+					case eG_RotationBoard: 	case eG_MovingCube:
 						{
 							D3DXVECTOR3 v;
 							v = m_vecCylinder[CylinderIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
@@ -393,15 +390,8 @@ void CObjectManager::Collide(float duration)
 							m_vecCylinder[CylinderIndex]->SetPusingForce(v);
 						}
 						break;
-					case eG_MovingCube:
-					{
-						D3DXVECTOR3 v;
-						v = m_vecCylinder[CylinderIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
-						D3DXVec3Normalize(&v, &v);
-						m_vecCylinder[CylinderIndex]->SetPusingForce(v);
-					}
-						break;
 					case eG_Door: 
+						break;
 					default:
 						CollisionIObject(m_vecCylinder[CylinderIndex], m_vecIObject[IObjectIndex], duration);
 						break;
