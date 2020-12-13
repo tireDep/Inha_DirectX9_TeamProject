@@ -10,7 +10,17 @@ Color_changer::Color_changer()
 	, angle(0)
 	, m_scale(0.5, 0.5, 1)
 	, m_BeamOBB(NULL)
+	, c(1,1,1,1)
 {
+	D3DXMatrixIdentity(&matS);
+	D3DXMatrixIdentity(&matT);
+	D3DXMatrixIdentity(&matR);
+
+	D3DXMatrixIdentity(&m_matS);
+	D3DXMatrixIdentity(&m_matR);
+	D3DXMatrixIdentity(&m_matT);
+
+	D3DXMatrixIdentity(&BeamWorld);
 	ZeroMemory(&m_stMtl, sizeof(D3DMATERIAL9));
 	
 	m_stMtl.Ambient = RED;
@@ -22,7 +32,6 @@ Color_changer::~Color_changer()
 {
 	SafeDelete(m_BeamOBB);
 	SafeRelease(m_pMeshBeam);
-
 }
 
 void Color_changer::Setup()

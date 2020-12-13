@@ -8,9 +8,7 @@ public:
 	Color_changer();
 	~Color_changer();
 private:
-
-	 LPD3DXMESH m_pMeshBeam; //빔 메쉬.
-	
+	LPD3DXMESH m_pMeshBeam; //빔 메쉬.
 
 	D3DXMATRIXA16  BeamWorld; //장치월드 , 빔월드
 	D3DXMATRIXA16 m_matS, m_matR, m_matT;  //맵 데이터
@@ -20,7 +18,6 @@ private:
 	float angle; //장치 , 빔 앵글 조절.
 
 	float length; // 빔 길이 조절.
-	
 
 	D3DXCOLOR c; 
 	D3DXVECTOR3 m_vMin, m_vMax;

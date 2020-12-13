@@ -112,13 +112,11 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
-
-	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
-
 	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxandCylinderToGimmick.dat");
 
 #ifdef _DEBUG
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 	// >> mapData
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");

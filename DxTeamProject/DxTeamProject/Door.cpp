@@ -7,6 +7,9 @@ CDoor::CDoor()
 	, m_fRotAngle(0.0f)
 	, m_fRotationSpeed(1.0f)
 {
+	D3DXMatrixIdentity(&m_matS);
+	D3DXMatrixIdentity(&m_matR);
+	D3DXMatrixIdentity(&m_matT);
 	D3DXMatrixIdentity(&m_matRotGimmick);
 	m_strName = string("Door") + to_string(m_nRefCount);
 }

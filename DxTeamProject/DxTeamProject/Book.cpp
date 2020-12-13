@@ -9,6 +9,10 @@ CBook::CBook()
 	, m_fRotAngle(0.0f)
 {
 	D3DXMatrixIdentity(&m_matRot);
+	D3DXMatrixIdentity(&m_matS);
+	D3DXMatrixIdentity(&m_matR);
+	D3DXMatrixIdentity(&m_matT);
+
 	CBook::m_nCount += 1;
 }
 

@@ -9,13 +9,21 @@ CSwitch::CSwitch()
 	, m_pColl(NULL)
 	, m_pBox(NULL)
 {
+	D3DXMatrixIdentity(&matS);
+	D3DXMatrixIdentity(&matT);
 	D3DXMatrixIdentity(&matWorld);
+	D3DXMatrixIdentity(&collWorld);
+
+	D3DXMatrixIdentity(&m_matS);
+	D3DXMatrixIdentity(&m_matR);
+	D3DXMatrixIdentity(&m_matT);
+	D3DXMatrixIdentity(&m_matRot);
 }
 
 CSwitch::~CSwitch()
 {
-	SafeRelease(m_pBox);
 	SafeDelete(m_pColl);
+	SafeRelease(m_pBox);
 }
 
 bool CSwitch::GetBool()

@@ -6,19 +6,19 @@ CMovingCube::CMovingCube()
 : m_indexNum(1)
 , m_vPosition(0, 0, 0)
 , m_istrue(false)
-, m_fSpeed(0.005)
-, m_fStartPos(0)
-, m_fEndPos(8)
+, m_fSpeed(1.0f)
+, m_fStartPos(0.0f)
+, m_fEndPos(8.0f)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
 	D3DXMatrixIdentity(&m_matT);
+	D3DXMatrixIdentity(&m_matRot);
 }
 
 
 CMovingCube::~CMovingCube()
 {
-	
 }
 
 void CMovingCube::Setup()

@@ -2163,11 +2163,11 @@ moving_cube_1.png
 1
 # GimmickData
 # StartPos
-0
+10
 # EndPos
-0
+-10
 # Speed
-0
+5
 # DirectionIndex
 0
 # Object_End
