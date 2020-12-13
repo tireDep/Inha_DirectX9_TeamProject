@@ -5,8 +5,10 @@
 #include "Door.h"
 #include "MovingCube.h"
 
-CGimmick::CGimmick()
+CGimmick::CGimmick() : 
+	m_openCondition(OnOffCondition::eOrb)
 {
+	m_strConditionName = "Black";
 }
 
 CGimmick::~CGimmick()
@@ -40,6 +42,22 @@ void CGimmick::Setup(ST_MapData setData)
 	delete xfile;
 
 	IObject::Setup_OBB_Box();
+
+	// =================
+
+	if (setData.gimmickData.conditionName != "")
+	{
+		m_strConditionName = setData.gimmickData.conditionName;
+
+		if (setData.gimmickData.onOffConditionIndex == 0)		m_openCondition = OnOffCondition::eOrb;
+		else if (setData.gimmickData.onOffConditionIndex == 1)	m_openCondition = OnOffCondition::eItem;
+		else if (setData.gimmickData.onOffConditionIndex == 2)	m_openCondition = OnOffCondition::eSwitch;
+
+		if (m_openCondition != OnOffCondition::eOrb)
+			m_conditionOrbindex = 0;
+		else
+			m_conditionOrbindex = setData.gimmickData.conditionOrbIndex;
+	}
 }
 
 void CGimmick::Render()
@@ -52,7 +70,7 @@ void CGimmick::Render()
 	if (m_pMesh == NULL)
 		return;
 
-	if (g_pObjectManager->GetPickObjName() == m_strConditionName && m_pShader)
+	if (g_pObjectManager->GetPickObjName() == m_strConditionName && m_strConditionName != "" && m_pShader)
 	{
 		// >> 조건 오브젝트가 선택되었을 경우
 		SetShader(GetmatWorld());

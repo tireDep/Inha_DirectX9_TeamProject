@@ -136,39 +136,46 @@ enum ObjectType
 #endif // _Debug
 };
 
+enum class OnOffCondition { eOrb, eItem, eSwitch, eNull };
+
 struct ST_Gimmick
 {
-	bool isData;
+	bool isData = false;
 
-	float roationSpeed_rotaitonBoard;
-	int roationAxialIndex_rotaitonBoard;
+	float roationSpeed_rotaitonBoard = 0.0f;
+	int roationAxialIndex_rotaitonBoard = 0;
 	// >> 회전판자
 
-	int conditionIndex;
-	int maxMassIndex;
+	int conditionIndex_switch = 0;
+	int maxMassIndex_switch = 0;
 	// >> 스위치?
 
-	float startPos_movingCube;
-	float endPos_movingCube;
-	float speed_movingCube;
-	int directionIndex_movingCube;
+	float startPos_movingCube = 0.0f;
+	float endPos_movingCube = 0.0f;
+	float speed_movingCube = 0.0f;
+	int directionIndex_movingCube = 0;
 	// >> 무빙큐브
+
+	int onOffConditionIndex = 0;
+	string conditionName = "";
+	int conditionOrbIndex = 0;
+	// >> 문, 컬러레이저 조건
 };
 
 struct ST_MapData
 {
-	string strFolderPath;
-	string strXFilePath;
-	string strTxtPath;
+	string strFolderPath = "";
+	string strXFilePath = "";
+	string strTxtPath = "";
 
-	string strObjName;
-	ObjectType objType;
+	string strObjName = "";
+	ObjectType objType = ObjectType::eNull;
 
-	D3DXVECTOR3 vScale;
-	D3DXVECTOR3 vRotate;
-	D3DXVECTOR3 vTranslate;
+	D3DXVECTOR3 vScale = D3DXVECTOR3(0, 0, 0);
+	D3DXVECTOR3 vRotate = D3DXVECTOR3(0, 0, 0);
+	D3DXVECTOR3 vTranslate = D3DXVECTOR3(0, 0, 0);
 
-	D3DXCOLOR dxColor;
+	D3DXCOLOR dxColor = D3DXCOLOR(1, 1, 1, 1);
 
 	ST_Gimmick gimmickData;
 };

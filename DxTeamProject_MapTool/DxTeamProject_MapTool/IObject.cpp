@@ -28,7 +28,7 @@ IObject::IObject() :
 	m_dxColor(0.5, 0.5, 0.5, 1),
 	m_pOBB(NULL),
 	m_strConditionName(""),
-	m_conditionOrbTypeNum(0)
+	m_conditionOrbindex(0)
 {
 	ZeroMemory(&m_pMtrl, sizeof(D3DMATERIAL9));
 	m_pMtrl.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);

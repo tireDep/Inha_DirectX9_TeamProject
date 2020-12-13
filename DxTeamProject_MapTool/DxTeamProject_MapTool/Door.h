@@ -3,11 +3,6 @@
 class CDoor : public CGimmick
 {
 private:
-	// todo : condition variable
-	enum class OnOffCondition { eOrb, eItem, eSwitch };
-
-	OnOffCondition	m_openCondition;
-
 	int GetIndex();
 
 public:

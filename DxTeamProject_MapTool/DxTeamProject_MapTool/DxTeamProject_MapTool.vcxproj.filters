@@ -155,6 +155,9 @@
     <ClInclude Include="Book.h">
       <Filter>Object\Book</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui.cpp">
@@ -250,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="Book.cpp">
       <Filter>Object\Book</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

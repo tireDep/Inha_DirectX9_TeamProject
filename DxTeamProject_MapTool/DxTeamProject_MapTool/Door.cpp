@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "Door.h"
 
+#define Inf 0
+
 int CDoor::GetIndex()
 {
-	int index = 0;
+	int index = Inf;
 	int size = g_pObjectManager->GetVecSize();
 	for (int i = 0; i < size; i++)
 	{
@@ -23,10 +25,8 @@ int CDoor::GetIndex()
 	return index;
 }
 
-CDoor::CDoor() :
-	m_openCondition(OnOffCondition::eOrb)
+CDoor::CDoor()
 {
-	m_strConditionName = "";
 }
 
 CDoor::~CDoor()
@@ -36,8 +36,6 @@ CDoor::~CDoor()
 void CDoor::Setup(ST_MapData setData)
 {
 	CGimmick::Setup(setData);
-	m_strConditionName = "";
-	// todo condition variable
 }
 
 void CDoor::Render()
@@ -50,10 +48,12 @@ void CDoor::SetAnotherScale(D3DXVECTOR3 set)
 	SetDiffScale(set);
 
 	int index = GetIndex();
-	if (index == 0)return;
+	if (index == Inf)
+		return;
 
 	CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
-	temp->SetDiffScale(set);
+	if (temp->GetObjType() == eG_Door)
+		temp->SetDiffScale(set);
 }
 
 void CDoor::SetAnotherRotation(D3DXVECTOR3 set)
@@ -62,10 +62,12 @@ void CDoor::SetAnotherRotation(D3DXVECTOR3 set)
 	SetRotate(set);
 
 	int index = GetIndex();
-	if (index == 0)return;
+	if (index == Inf)
+		return;
 
 	CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
-	temp->SetRotate(set);
+	if (temp->GetObjType() == eG_Door)
+		temp->SetRotate(set);
 }
 
 void CDoor::SetAnotherTranslation(D3DXVECTOR3 set)
@@ -73,10 +75,11 @@ void CDoor::SetAnotherTranslation(D3DXVECTOR3 set)
 	SetTranslate(set);
 
 	int index = GetIndex();
-	if (index == 0)return;
+	if (index == Inf)return;
 
 	CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
-	temp->SetTranslate(set);
+	if (temp->GetObjType() == eG_Door)
+		temp->SetTranslate(set);
 }
 
 void CDoor::SetOpenCondition(int index)
@@ -86,10 +89,13 @@ void CDoor::SetOpenCondition(int index)
 	else if (index == 2)	m_openCondition = OnOffCondition::eSwitch;
 
 	int search = GetIndex();
-	if (search == 0)return;
+	if (search == Inf)
+		return;
 
 	CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(search));
-	temp->SetOpenCondition(index);
+	
+	if(temp->GetObjType() == eG_Door)
+		temp->SetOpenCondition(index);
 }
 
 void CDoor::SetConditionName(string strName)
@@ -97,17 +103,22 @@ void CDoor::SetConditionName(string strName)
 	m_strConditionName = strName;
 
 	int index = GetIndex();
-	if (index == 0)return;
-
-	CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
-	temp->SetConditionName(strName);
+	if (index == Inf)
+		return;
+	
+	CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
+	
+	if (temp->GetObjType() == eG_Door)
+		temp->SetConditionName(strName);
 }
 
 int CDoor::GetOpenConditionIndex()
 {
 	if (m_openCondition == OnOffCondition::eOrb)			return 0;
 	else if (m_openCondition == OnOffCondition::eItem)		return 1;
-	else if (m_openCondition == OnOffCondition::eSwitch);	return 2;
+	else if (m_openCondition == OnOffCondition::eSwitch)	return 2;
+	else
+		return -1;
 }
 
 string CDoor::GetOpenConditionType()

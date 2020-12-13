@@ -642,9 +642,9 @@ void CImguiClass::Update_Inspector()
 					break;
 
 #ifdef _DEBUG
-				case eG_DoorFrame:	case eG_Door:
+				case eG_DoorFrame:	 case eG_Door:
 				{
-					CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+					CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 					temp->SetAnotherScale(vScale);
 				}
 				break;
@@ -887,7 +887,7 @@ void CImguiClass::Update_Inspector()
 			{
 				CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 				ImGui::Text("On/Off Condition");
-				static int pushIndex = 0;
+				int pushIndex = temp->GetOpenConditionIndex();
 				string charName[3] = { "Orb", "Item", "Switch" };
 
 				for (int i = 0; i < 3; i++)
@@ -904,47 +904,70 @@ void CImguiClass::Update_Inspector()
 				int conditionNum = temp->GetOpenConditionIndex();
 				if (pushIndex == 0)
 				{
+					if (conditionNum > 0)
+					{
+						g_pObjectManager->RemoveCondition(temp->GetConditionName());
+						temp->SetConditionName("Black");
+						temp->SetConditionOrbIndex(0);
+					}
+
 					// >> 오브 선택
-					int orbType = temp->GetConditionOrbNum();
+					int orbType = temp->GetConditionOrbIndex();
 					string charName[6] = { "Black", "White", "Yellow", "Green", "Red", "Blue" };
 
 					for (int i = 0; i < 6; i++)
 					{
 						if (ImGui::RadioButton(charName[i].c_str(), orbType == i))
-							temp->SetConditionOrbNum(i);
+						{
+							temp->SetConditionOrbIndex(i);
+							temp->SetConditionName(charName[i]);
+						}
 					} // << : for
+					
+					temp->SetOpenCondition(pushIndex);
+
 					ImGui::Separator();
 				}
 				else if (pushIndex == 1 && pushIndex != conditionNum)
 				{
+					// >> 조건 바뀔 시 기존 조건 삭제
+					if (temp->GetConditionName() != "")
+					{
+						if (conditionNum >  0)
+							g_pObjectManager->RemoveCondition(temp->GetConditionName());
+						temp->SetConditionName("");
+					}
+
 					// >> 아이템 선택
-					IObject::CreateObject(eBook, 0);
+					if(temp->GetConditionName() == "")
+						IObject::CreateObject(eBook, 0);
 
 					D3DXVECTOR3 pos = temp->GetTranslate();
 					pos.x -= 2;		pos.z -= 2;
 					g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).SetTranslate(pos);
 					g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).SetConditionName(temp->GetObjectName());
-
-					// >> 조건 바뀔 시 기존 조건 삭제
-					if (conditionNum != 0)
-						g_pObjectManager->RemoveCondition(temp->GetConditionName());
 
 					temp->SetOpenCondition(pushIndex);
 					temp->SetConditionName(g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).GetObjectName());
 				}
 				else if (pushIndex == 2 && pushIndex != conditionNum)
 				{
+					// >> 조건 바뀔 시 기존 조건 삭제
+					if (temp->GetConditionName() != "")
+					{
+						if (conditionNum >  0)
+							g_pObjectManager->RemoveCondition(temp->GetConditionName());
+						temp->SetConditionName("");
+					}
+
 					// >> 스위치 선택
-					IObject::CreateObject(eG_Switch, 0);
+					if (temp->GetConditionName() == "")
+						IObject::CreateObject(eG_Switch, 0);
 
 					D3DXVECTOR3 pos = temp->GetTranslate();
 					pos.x -= 2;		pos.z -= 2;
 					g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).SetTranslate(pos);
 					g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).SetConditionName(temp->GetObjectName());
-
-					// >> 조건 바뀔 시 기존 조건 삭제
-					if(conditionNum != 0 && temp->GetConditionName() != "")
-						g_pObjectManager->RemoveCondition(temp->GetConditionName());
 
 					temp->SetOpenCondition(pushIndex);
 					temp->SetConditionName(g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).GetObjectName());

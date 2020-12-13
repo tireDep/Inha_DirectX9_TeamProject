@@ -1,14 +1,14 @@
 # Object_Start
 # ObjectName
-Blue_Chair1
+Door1
 # FolderPath
-Resource/XFile/Background/Else
+Resource/XFile/Gimmick/Door
 # FilePath
-blue_chair.X
+door_frame.X
 # TxtPath
-
+cubeworld_texture.tga
 # ObjectType
-19
+28
 # Scale
 0.1
 0.1
@@ -26,6 +26,166 @@ blue_chair.X
 0.5
 0.5
 1
+# GimmickData
+# ConditionName
+Black
+# ConditionIndex
+0
+# ConditionOrbIndex
+0
+# ConditionName
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Door2
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_right.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+29
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# GimmickData
+# ConditionName
+Black
+# ConditionIndex
+0
+# ConditionOrbIndex
+0
+# ConditionName
+Black
+# Object_End
+
+# Section =======================================
+
+# Object_Start
+# ObjectName
+Door1(0)
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_frame.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+28
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+30.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# GimmickData
+# ConditionName
+Book4
+# ConditionIndex
+1
+# ConditionOrbIndex
+0
+# ConditionName
+Book4
+# Object_End
+
+# Object_Start
+# ObjectName
+Door2(1)
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_right.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+29
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+30.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# GimmickData
+# ConditionName
+Book4
+# ConditionIndex
+1
+# ConditionOrbIndex
+0
+# ConditionName
+Book4
+# Object_End
+
+# Object_Start
+# ObjectName
+Book4
+# FolderPath
+Resource/XFile/Book
+# FilePath
+book.X
+# TxtPath
+Bookshelf_diffuse.png
+# ObjectType
+33
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+28.5
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ConditionName
+Door1
 # Object_End
 
 # Section =======================================

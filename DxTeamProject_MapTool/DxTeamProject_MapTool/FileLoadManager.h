@@ -29,12 +29,15 @@ private:
 
 	ST_MapData SetSaveData(int index);
 	void DoFileSave(ofstream& saveFile, ofstream& mapFile, int index);
-	void FileSave(ofstream& file, const ST_MapData& mapData);
+	void FileSave(ofstream& file, ST_MapData& mapData);
 	void FileSave_Section(ofstream& file);
 
 	LPD3DXEFFECT LoadShader(const string fileName);
 
 	void ReadAndCutSlashR(ifstream& mapFile, string& readData);
+
+	void SaveGimmickData(ofstream& file, ST_MapData& mapData);
+	void ReadGimmickData(ifstream& mapFile, string& readData, ST_MapData& mapData);
 
 public:
 	void Setup();

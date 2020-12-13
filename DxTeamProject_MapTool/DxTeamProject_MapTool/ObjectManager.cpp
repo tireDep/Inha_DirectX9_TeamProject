@@ -188,6 +188,8 @@ void CObjectManager::RemoveClickedObj()
 	}
 }
 
+static int index = -1;
+static string name = "";
 void CObjectManager::CheckSameName()
 {
 	if (m_vecObject.size() == 0)
@@ -198,7 +200,31 @@ void CObjectManager::CheckSameName()
 		for (int j = i + 1; j < m_vecObject.size(); j++)
 		{
 			if (m_vecObject[i]->GetObjectName() == m_vecObject[j]->GetObjectName())
+			{
+				name = m_vecObject[j]->GetObjectName();
 				m_vecObject[j]->SetObjectName(m_vecObject[j]->GetObjectName() + "(" + to_string(m_sameNum++) + ")");
+			}
+			// >> todo : 중복 이름 시 조건 처리!! 
+			//for (int k = j - 1; k < m_vecObject.size(); k++)
+			//{
+			//	if (m_vecObject[k]->GetConditionName() == name)
+			//	{
+			//
+			//	}
+			//}
+			// if (m_vecObject[j]->GetConditionName() != "" && index == -1)
+			// {
+			// 	index = j;
+			// 	name = m_vecObject[j]->GetConditionName();
+			// }
+			// else if (i > index && m_vecObject[j]->GetConditionName() == name)
+			// {
+			// 	string temp = m_vecObject[index]->GetObjectName();
+			// 	m_vecObject[index]->SetConditionName(m_vecObject[j]->GetObjectName());
+			// 	m_vecObject[j]->SetConditionName(temp);
+			// 	index = -1;
+			// }
+			// >> todo : 중복 이름 시 조건 처리!! 
 		}
 	}
 }
