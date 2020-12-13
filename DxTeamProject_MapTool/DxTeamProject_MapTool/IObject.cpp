@@ -26,7 +26,9 @@ IObject::IObject() :
 	m_isClick(true),
 	m_isPick(true),
 	m_dxColor(0.5, 0.5, 0.5, 1),
-	m_pOBB(NULL)
+	m_pOBB(NULL),
+	m_strConditionName(""),
+	m_conditionOrbTypeNum(0)
 {
 	ZeroMemory(&m_pMtrl, sizeof(D3DMATERIAL9));
 	m_pMtrl.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
@@ -68,8 +70,13 @@ void IObject::SetShader(const D3DXMATRIXA16 & setMatWorld)
 
 		m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(0, 0, 0, 1));
 		m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(1, 1, 1, 1));
-
 	}
+}
+
+void IObject::SetShader_ConditionColor()
+{
+	m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(0, 0, 0, 1));
+	m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(0, 0.5, 0.5, 1));
 }
 
 IObject::~IObject()

@@ -35,6 +35,9 @@ protected:
 
 	Synthesize(D3DXCOLOR, m_dxColor, Color);
 
+	Synthesize(string, m_strConditionName, ConditionName);
+	Synthesize(int, m_conditionOrbTypeNum, ConditionOrbNum);
+
 	LPD3DXEFFECT m_pShader;
 	bool isLoad;
 
@@ -43,6 +46,7 @@ protected:
 	IObject();
 
 	void SetShader(const D3DXMATRIXA16& setMatWorld);
+	void SetShader_ConditionColor();
 
 public:
 	virtual ~IObject();

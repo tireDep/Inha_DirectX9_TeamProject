@@ -48,13 +48,36 @@ void CBook::Render()
 	if (m_pMesh == NULL)
 		return;
 
-	for (int i = 0; i < m_vecMtrls.size(); i++)
+	if (g_pObjectManager->GetPickObjName() == m_strConditionName && m_pShader)
 	{
-		if (m_vecTextures[i] != 0)
-			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
-		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
-		m_pMesh->DrawSubset(i);
+		// >> 조건 오브젝트가 선택되었을 경우
+		SetShader(GetmatWorld());
+		SetShader_ConditionColor();
+		IObject::Render();
 	}
+	else if (!m_isPick && !m_isClick || !m_pShader)
+	{
+		// >> 오브젝트가 선택되지 않거나 셰이더가 없을 경우
+		for (int i = 0; i < m_vecMtrls.size(); i++)
+		{
+			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+
+			if (m_vecTextures[i] != 0)
+				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+			else if (m_pTexture != NULL)
+				g_pD3DDevice->SetTexture(0, m_pTexture);
+			// >> 텍스처 매치 안되있을 때
+
+			m_pMesh->DrawSubset(i);
+		}
+	}
+	else
+	{
+		// >> 오브젝트가 선택되었을 경우
+		SetShader(GetmatWorld());
+		IObject::Render();
+	}
+
 	g_pD3DDevice->SetTexture(0, NULL);
 }
 

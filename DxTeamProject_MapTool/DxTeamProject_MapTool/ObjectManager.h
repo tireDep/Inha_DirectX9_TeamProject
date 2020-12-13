@@ -17,6 +17,8 @@ private:
 public:
 	void AddObject(IObject* pObject);
 	void RemoveObject(IObject* pObject);
+	void RemoveCondition(string objectName);
+
 	void Destroy();
 
 	void Update();
@@ -35,5 +37,7 @@ public:
 	int GetSelectIndex();
 
 	void CopyObject();
+
+	string GetPickObjName();
 };
 

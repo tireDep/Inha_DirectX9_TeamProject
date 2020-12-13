@@ -52,8 +52,16 @@ void CGimmick::Render()
 	if (m_pMesh == NULL)
 		return;
 
-	if (!m_isPick && !m_isClick || !m_pShader)
+	if (g_pObjectManager->GetPickObjName() == m_strConditionName && m_pShader)
 	{
+		// >> 조건 오브젝트가 선택되었을 경우
+		SetShader(GetmatWorld());
+		SetShader_ConditionColor();
+		IObject::Render();
+	}
+	else if (!m_isPick && !m_isClick || !m_pShader)
+	{
+		// >> 오브젝트가 선택되지 않거나 셰이더가 없을 경우
 		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
@@ -69,6 +77,8 @@ void CGimmick::Render()
 	}
 	else
 	{
+		// >> 오브젝트가 선택되었을 경우
+		string temp = g_pObjectManager->GetPickObjName();
 		SetShader(GetmatWorld());
 		IObject::Render();
 	}

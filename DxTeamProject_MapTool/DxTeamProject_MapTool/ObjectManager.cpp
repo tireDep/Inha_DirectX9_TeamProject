@@ -39,6 +39,15 @@ void CObjectManager::RemoveObject(IObject * pObject)
 	}
 }
 
+void CObjectManager::RemoveCondition(string objectName)
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		if (objectName == m_vecObject[i]->GetObjectName())
+			RemoveObject(m_vecObject[i]);
+	}
+}
+
 void CObjectManager::Destroy()
 {
 	for (int i = 0; i < m_vecObject.size(); i++)
@@ -113,6 +122,25 @@ void CObjectManager::RemoveClickedObj()
 		if (m_vecObject[i]->GetClick())
 		{
 			preIndex = i - 1;
+
+			if (m_vecObject[i]->GetConditionName() != "")
+			{
+				for (int j = 0; j < m_vecObject.size(); j++)
+				{
+					if (m_vecObject[i]->GetConditionName() == m_vecObject[j]->GetObjectName())
+					{
+						if (m_vecObject[j]->GetObjType() == eG_DoorFrame)
+						{
+							// >> 문은 삭제할 대상이 2개
+							CDoor* temp = static_cast<CDoor*>(m_vecObject[j]);
+							temp->SetConditionName("");
+						}
+						else
+							m_vecObject[j]->SetConditionName("");
+					}
+				}
+			}
+			// >> 삭제하는 대상이 누군가의 조건일 경우, 조건 삭제
 
 			// >>  문은 2개가 1세트
 #ifdef _DEBUG
@@ -304,4 +332,15 @@ void CObjectManager::CopyObject()
 
 	} // << : if
 	
+}
+
+string CObjectManager::GetPickObjName()
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		if (m_vecObject[i]->GetClick() == true || m_vecObject[i]->GetPick() == true)
+			return m_vecObject[i]->GetObjectName();
+	}
+
+	return "";
 }
