@@ -599,19 +599,36 @@ void CObjectManager::CollisionSphereToIObject(CSphere * one, IObject * two, floa
 	float dist;
 
 	dist = SphereToBoxCenter.x;
-	if (dist > two->GetOBB()->GetOBBWidth() / 2.0f) dist = two->GetOBB()->GetOBBWidth() / 2.0f;
-	if (dist < -two->GetOBB()->GetOBBWidth() / 2.0f) dist = -two->GetOBB()->GetOBBWidth() / 2.0f;
+	if (dist > two->GetOBB()->GetOBBWidth()) dist = two->GetOBB()->GetOBBWidth();
+	if (dist < -two->GetOBB()->GetOBBWidth()) dist = -two->GetOBB()->GetOBBWidth();
 	closestPt.x = dist;
 
 	dist = SphereToBoxCenter.y;
-	if (dist >  two->GetOBB()->GetOBBHeight() / 2.0f) dist = two->GetOBB()->GetOBBHeight() / 2.0f;
-	if (dist < -two->GetOBB()->GetOBBHeight() / 2.0f) dist = -two->GetOBB()->GetOBBHeight() / 2.0f;
+	if (dist >  two->GetOBB()->GetOBBHeight()) dist = two->GetOBB()->GetOBBHeight();
+	if (dist < -two->GetOBB()->GetOBBHeight()) dist = -two->GetOBB()->GetOBBHeight();
 	closestPt.y = dist;
 
 	dist = SphereToBoxCenter.z;
-	if (dist >  two->GetOBB()->GetOBBDepth() / 2.0f) dist = two->GetOBB()->GetOBBDepth() / 2.0f;
-	if (dist < -two->GetOBB()->GetOBBDepth() / 2.0f) dist = -two->GetOBB()->GetOBBDepth() / 2.0f;
+	if (dist >  two->GetOBB()->GetOBBDepth()) dist = two->GetOBB()->GetOBBDepth();
+	if (dist < -two->GetOBB()->GetOBBDepth()) dist = -two->GetOBB()->GetOBBDepth();
 	closestPt.z = dist;
+
+	//dist = SphereToBoxCenter.x;
+	//if (dist > two->GetOBB()->GetOBBWidth() / 2.0f) dist = two->GetOBB()->GetOBBWidth() / 2.0f;
+	//if (dist < -two->GetOBB()->GetOBBWidth() / 2.0f) dist = -two->GetOBB()->GetOBBWidth() / 2.0f;
+	//closestPt.x = dist;
+	//dist = SphereToBoxCenter.y;
+	//if (dist >  two->GetOBB()->GetOBBHeight() / 2.0f) dist = two->GetOBB()->GetOBBHeight() / 2.0f;
+	//if (dist < -two->GetOBB()->GetOBBHeight() / 2.0f) dist = -two->GetOBB()->GetOBBHeight() / 2.0f;
+	//closestPt.y = dist;
+	//dist = SphereToBoxCenter.z;
+	//if (dist >  two->GetOBB()->GetOBBDepth() / 2.0f) dist = two->GetOBB()->GetOBBDepth() / 2.0f;
+	//if (dist < -two->GetOBB()->GetOBBDepth() / 2.0f) dist = -two->GetOBB()->GetOBBDepth() / 2.0f;
+	//closestPt.z = dist;
+
+	SphereToBoxCenter.x *= two->GetmatWorld()._11;
+	SphereToBoxCenter.y *= two->GetmatWorld()._22;
+	SphereToBoxCenter.z *= two->GetmatWorld()._33;
 
 	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
 	dist = D3DXVec3Length(&tmp);
@@ -619,23 +636,31 @@ void CObjectManager::CollisionSphereToIObject(CSphere * one, IObject * two, floa
 	D3DXVECTOR3 closestPtWorld;
 	D3DXVec3TransformCoord(&closestPtWorld, &closestPt, &two->GetmatWorld());
 
-	D3DXVECTOR3 contactNormal = closestPtWorld - SphereToBoxCenter;
+	D3DXVECTOR3 contactNormal = closestPtWorld - SphereToBoxCenter;							// Need To Modify.. 1214 01:46
+	// TEST
+	contactNormal.y = 0;
+	//D3DXVECTOR3 contactNormal = SphereToBoxCenter - closestPtWorld;
 	D3DXVec3Normalize(&contactNormal, &contactNormal);
-	float penetration = one->GetRadius() - dist;
+	float penetration = one->GetRadius() - sqrtf(dist);
 	float elasticity = 0.1f; // TEST
 
 	D3DXVECTOR3 relativeVelocity = one->GetVelocity();
 	float separatinVelocity = D3DXVec3Dot(&relativeVelocity, &contactNormal);
-	if (separatinVelocity > 0) return;			// Need Modify? 1 = Elasticity
+	//if (separatinVelocity > 0) return;			// Need Modify? 1 = Elasticity		    // Need To Modify.. 1214 01:46
 	float newSepVelocity = -separatinVelocity * elasticity;
 
-	D3DXVECTOR3 accCausedVelocity = one->GetAcceleration();
+	D3DXVECTOR3 accCausedVelocity = one->GetAcceleration();									// Need To Modify.. 1214 01:46
 	float accCausedSepVelocity = D3DXVec3Dot(&accCausedVelocity, &contactNormal) * duration;
-	if (accCausedSepVelocity < 0)
-	{					  // Need Modify? 1 = Elasticity
-		newSepVelocity += (elasticity * accCausedSepVelocity);
-		if (newSepVelocity < 0) newSepVelocity = 0.0f;
-	}
+					// Need Modify? 1 = Elasticity
+	newSepVelocity += (elasticity * accCausedSepVelocity);
+
+	//D3DXVECTOR3 accCausedVelocity = one->GetAcceleration();									// Need To Modify.. 1214 01:46
+	//float accCausedSepVelocity = D3DXVec3Dot(&accCausedVelocity, &contactNormal) * duration; 
+	//if (accCausedSepVelocity < 0)
+	//{					  // Need Modify? 1 = Elasticity
+	//	newSepVelocity += (elasticity * accCausedSepVelocity);
+	//	if (newSepVelocity < 0) newSepVelocity = 0.0f;
+	//}
 
 	float deltaVelocity = newSepVelocity - separatinVelocity;
 	if (one->GetInverseMass() <= 0) return;
@@ -645,7 +670,7 @@ void CObjectManager::CollisionSphereToIObject(CSphere * one, IObject * two, floa
 
 	one->SetVelocity(one->GetVelocity() + impulsePerIMass * one->GetInverseMass());
 
-	if (penetration <= 0) return;
+	//if (penetration <= 0) return;
 	D3DXVECTOR3 movePerIMass = contactNormal * (penetration / one->GetInverseMass());
 	one->SetPosition(one->GetPosition() + movePerIMass * one->GetInverseMass());
 }

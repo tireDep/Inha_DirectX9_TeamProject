@@ -1,80 +1,6 @@
 # Object_Start
 # ObjectName
-RoataionBoard1
-# FolderPath
-Resource/XFile/Gimmick/RotationBoard
-# FilePath
-Rotation_board.X
-# TxtPath
-board.png
-# ObjectType
-26
-# Scale
-0.03
-0.03
-0.03
-# Rotate
-0
-0
-0
-# Translate
--4.5
-0
-0.5
-# Color
-0.5
-0.5
-0.5
-1
-# GimmickData
-# RotationSpeed
-1
-# RotationAxialIndex
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-MovingCube2
-# FolderPath
-Resource/XFile/Gimmick/MovingCube
-# FilePath
-moving_cube.X
-# TxtPath
-moving_cube_1.png
-# ObjectType
-32
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-4.5
-0
-0.5
-# Color
-0.5
-0.5
-0.5
-1
-# GimmickData
-# StartPos
-0
-# EndPos
-5
-# Speed
-1
-# DirectionIndex
-2
-# Object_End
-
-# Object_Start
-# ObjectName
-Box3
+Box1
 # FolderPath
 
 # FilePath
@@ -92,9 +18,9 @@ Box3
 0
 0
 # Translate
+2.5
 0.5
 0.5
--4.5
 # Color
 0.5
 0.5
@@ -104,37 +30,7 @@ Box3
 
 # Object_Start
 # ObjectName
-Cylinder4
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-25
-# Scale
-0.5
-0.5
-1
-# Rotate
-90
-0
-0
-# Translate
-0.5
-0.5
-4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Sphere5
+Sphere2
 # FolderPath
 
 # FilePath
@@ -152,9 +48,99 @@ Sphere5
 0
 0
 # Translate
-4.5
+-2.5
 0.25
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Cylinder3
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+25
+# Scale
+0.5
+0.5
+1
+# Rotate
+90
+0
+0
+# Translate
+3.5
+0.5
 4.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Autumn_Tree_01_4
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+AutumnTree_01.X
+# TxtPath
+autumn_texture.png
+# ObjectType
+13
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Summer_Tree_01_5
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+SummerTree_01.X
+# TxtPath
+summer_texture.png
+# ObjectType
+14
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+90
+0
+# Translate
+0.5
+0
+-4.5
 # Color
 0.5
 0.5
