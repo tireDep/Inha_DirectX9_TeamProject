@@ -288,7 +288,7 @@ void CObjectManager::Collide(float duration)
 						}
 						break;
 					default:
-							cout << "IN" << endl;
+							//cout << "IN" << endl;
 							CollisionSphereToIObject(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
 						break;
 				}
@@ -329,11 +329,22 @@ void CObjectManager::Collide(float duration)
 				switch (m_vecIObject[IObjectIndex]->GetObjType())
 				{
 					case eG_RotationBoard: 
-						break;
-					case eG_Door:
+					{
+						D3DXVECTOR3 v;
+						v = m_vecBox[BoxIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
+						D3DXVec3Normalize(&v, &v);
+						m_vecBox[BoxIndex]->SetPusingForce(v);
+					}
 						break;
 					case eG_MovingCube:			
-						
+					{
+						D3DXVECTOR3 v;
+						v = m_vecBox[BoxIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
+						D3DXVec3Normalize(&v, &v);
+						m_vecBox[BoxIndex]->SetPusingForce(v);
+					}
+						break;
+					case eG_Door:
 						break;
 					case  eG_Switch:
 						m_vecIObject[IObjectIndex]->SetBool(true);
@@ -374,10 +385,23 @@ void CObjectManager::Collide(float duration)
 			{
 				switch (m_vecIObject[IObjectIndex]->GetObjType())
 				{
-					case eG_RotationBoard: case eG_Door: case eG_MovingCube:
+					case eG_RotationBoard: 
 						{
+							D3DXVECTOR3 v;
+							v = m_vecCylinder[CylinderIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
+							D3DXVec3Normalize(&v, &v);
+							m_vecCylinder[CylinderIndex]->SetPusingForce(v);
 						}
 						break;
+					case eG_MovingCube:
+					{
+						D3DXVECTOR3 v;
+						v = m_vecCylinder[CylinderIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
+						D3DXVec3Normalize(&v, &v);
+						m_vecCylinder[CylinderIndex]->SetPusingForce(v);
+					}
+						break;
+					case eG_Door: 
 					default:
 						CollisionIObject(m_vecCylinder[CylinderIndex], m_vecIObject[IObjectIndex], duration);
 						break;
@@ -396,10 +420,11 @@ void CObjectManager::Collide(float duration)
 	//	m_vecIObject[i]->Update();
 	//}
 }
+
 void CObjectManager::CollisionPObject(PObject * one, PObject * two, float duration)
 {
 	D3DXVECTOR3 contactNormal = one->GetPosition() - two->GetPosition();
-	float penetration = fabs(D3DXVec3Length(&contactNormal)) - one->GetBoundingSphere() - two->GetBoundingSphere();
+	float penetration = D3DXVec3Length(&contactNormal) - one->GetBoundingSphere() - two->GetBoundingSphere();
 	float elasticity = 1.0f;
 
 	D3DXVECTOR3 relativeVelocity = one->GetVelocity() - two->GetVelocity();
@@ -434,7 +459,7 @@ void CObjectManager::CollisionPObject(PObject * one, PObject * two, float durati
 void CObjectManager::CollisionSphereToSphere(CSphere * one, CSphere * two, float duration)
 {
 	D3DXVECTOR3 contactNormal = one->GetPosition() - two->GetPosition();
-	float penetration = fabs(D3DXVec3Length(&contactNormal)) - one->GetBoundingSphere() - two->GetBoundingSphere();
+	float penetration = D3DXVec3Length(&contactNormal) - one->GetBoundingSphere() - two->GetBoundingSphere();
 	float elasticity = 1.0f;
 
 	D3DXVECTOR3 relativeVelocity = one->GetVelocity() - two->GetVelocity();
@@ -542,6 +567,8 @@ void CObjectManager::CollisionBoxToBox(PObject * one, PObject * two, float durat
 void CObjectManager::CollisionIObject(PObject* pObject, IObject* iObject, float duration)
 {
 	D3DXVECTOR3 contactNormal = pObject->GetPosition() - D3DXVECTOR3(iObject->GetmatWorld()._41, iObject->GetmatWorld()._42, iObject->GetmatWorld()._43);
+	// TEST
+	contactNormal.y = 0;
 	float penetration = fabs(D3DXVec3Length(&contactNormal)) - pObject->GetBoundingSphere();
 	float elasticity = 0.1f; // TEST
 	D3DXVECTOR3 relativeVelocity = pObject->GetVelocity();

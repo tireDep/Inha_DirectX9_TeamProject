@@ -18,7 +18,7 @@ board.png
 0
 0
 # Translate
-8.5
+-4.5
 0
 0.5
 # Color
@@ -35,32 +35,41 @@ board.png
 
 # Object_Start
 # ObjectName
-Autumn_Tree_01_2
+MovingCube74
 # FolderPath
-Resource/XFile/Background/SeasonTree
+Resource/XFile/Gimmick/MovingCube
 # FilePath
-AutumnTree_01.X
+moving_cube.X
 # TxtPath
-autumn_texture.png
+moving_cube_1.png
 # ObjectType
-13
+32
 # Scale
-0.01
-0.01
-0.01
+0.1
+0.1
+0.1
 # Rotate
 0
-0
+90
 0
 # Translate
--4.5
+1.5
 0
-0.5
+-7.5
 # Color
 0.5
 0.5
 0.5
 1
+# GimmickData
+# StartPos
+0
+# EndPos
+-10
+# Speed
+5
+# DirectionIndex
+2
 # Object_End
 
 # Object_Start
@@ -85,36 +94,6 @@ Box3
 # Translate
 0.5
 0.5
-4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Sphere4
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-24
-# Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
-0.5
-0.25
 -4.5
 # Color
 0.5
@@ -125,7 +104,7 @@ Sphere4
 
 # Object_Start
 # ObjectName
-Cylinder5
+Cylinder4
 # FolderPath
 
 # FilePath
@@ -143,9 +122,39 @@ Cylinder5
 0
 0
 # Translate
-4.5
 0.5
--4.5
+0.5
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Sphere5
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+24
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0.25
+4.5
 # Color
 0.5
 0.5

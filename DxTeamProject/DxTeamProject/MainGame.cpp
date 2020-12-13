@@ -115,10 +115,10 @@ void CMainGame::Setup()
 
 	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 
-	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PhysicsTest.dat");
+	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxandCylinderToGimmick.dat");
 
 #ifdef _DEBUG
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// >> mapData
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
@@ -170,10 +170,10 @@ void CMainGame::Setup()
 	/* m_pGimmick_Switch = new CSwitch;
 	 m_pGimmick_Switch->Setup();*/
 
-	m_pGimmick_BreakableWall[0] = new CBreakableWall;
-	m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "Pillar.X");
-	m_pGimmick_BreakableWall[1] = new CBreakableWall;
-	m_pGimmick_BreakableWall[1]->Setup("Resource/XFile/Gimmick/BreakableWall", "brick.X");
+	//m_pGimmick_BreakableWall[0] = new CBreakableWall;
+	//m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "Pillar.X");
+	//m_pGimmick_BreakableWall[1] = new CBreakableWall;
+	//m_pGimmick_BreakableWall[1]->Setup("Resource/XFile/Gimmick/BreakableWall", "brick.X");
 
 	//m_pBook = new CBook;
 	//m_pBook->Setup();
@@ -234,7 +234,7 @@ void CMainGame::Update()
 		m_pDragon->Update(m_pCharacter->GetPosition(), g_pTimeManager->GetElapsedTime());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		/// OBB TEST
-		m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[2]);
+		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[2]);
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
@@ -386,10 +386,10 @@ void CMainGame::Update()
 	//	 cout << 2 << endl;
 	// }
 
-	if (m_pGimmick_BreakableWall[0])
-		m_pGimmick_BreakableWall[0]->Update();
-	if (m_pGimmick_BreakableWall[1])
-		m_pGimmick_BreakableWall[1]->Update();
+	//if (m_pGimmick_BreakableWall[0])
+	//	m_pGimmick_BreakableWall[0]->Update();
+	//if (m_pGimmick_BreakableWall[1])
+	//	m_pGimmick_BreakableWall[1]->Update();
 
 	//if (m_pBook)
 	//	m_pBook->Update(g_pTimeManager->GetElapsedTime());
@@ -469,10 +469,10 @@ void CMainGame::Render()
 
 	/*if (m_pChanger)
 		m_pChanger->Render();*/
-	if (m_pGimmick_BreakableWall[0])
-		m_pGimmick_BreakableWall[0]->Render();
-	if (m_pGimmick_BreakableWall[1]) 
-		m_pGimmick_BreakableWall[1]->Render();
+	//if (m_pGimmick_BreakableWall[0])
+	//	m_pGimmick_BreakableWall[0]->Render();
+	//if (m_pGimmick_BreakableWall[1]) 
+	//	m_pGimmick_BreakableWall[1]->Render();
 //
 
 	//if (m_pBook)
