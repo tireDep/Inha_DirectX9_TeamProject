@@ -19,7 +19,6 @@ private:
 	float				 m_fAxisLen[3];
 	///
 	//D3DXMATRIXA16 m_matWorldTM;
-
 	//float m_fAxisLen[3];		
 public:
 	void Setup(CObject & object);

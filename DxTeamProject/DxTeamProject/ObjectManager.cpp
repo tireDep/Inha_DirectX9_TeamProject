@@ -288,7 +288,7 @@ void CObjectManager::Collide(float duration)
 						}
 						break;
 					default:
-							cout << "IN" << endl;
+							//cout << "IN" << endl;
 							CollisionSphereToIObject(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
 						break;
 				}
@@ -399,7 +399,7 @@ void CObjectManager::Collide(float duration)
 void CObjectManager::CollisionPObject(PObject * one, PObject * two, float duration)
 {
 	D3DXVECTOR3 contactNormal = one->GetPosition() - two->GetPosition();
-	float penetration = fabs(D3DXVec3Length(&contactNormal)) - one->GetBoundingSphere() - two->GetBoundingSphere();
+	float penetration = D3DXVec3Length(&contactNormal) - one->GetBoundingSphere() - two->GetBoundingSphere();
 	float elasticity = 1.0f;
 
 	D3DXVECTOR3 relativeVelocity = one->GetVelocity() - two->GetVelocity();
@@ -434,7 +434,7 @@ void CObjectManager::CollisionPObject(PObject * one, PObject * two, float durati
 void CObjectManager::CollisionSphereToSphere(CSphere * one, CSphere * two, float duration)
 {
 	D3DXVECTOR3 contactNormal = one->GetPosition() - two->GetPosition();
-	float penetration = fabs(D3DXVec3Length(&contactNormal)) - one->GetBoundingSphere() - two->GetBoundingSphere();
+	float penetration = D3DXVec3Length(&contactNormal) - one->GetBoundingSphere() - two->GetBoundingSphere();
 	float elasticity = 1.0f;
 
 	D3DXVECTOR3 relativeVelocity = one->GetVelocity() - two->GetVelocity();
