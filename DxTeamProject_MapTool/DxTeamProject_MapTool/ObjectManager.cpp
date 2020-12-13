@@ -227,9 +227,7 @@ void CObjectManager::CopyObject()
 			int indexNum = 0;
 			if (objType == ObjectType::eATree || objType == ObjectType::eSTree
 			 || objType == ObjectType::eWTree || objType == ObjectType::eCTree
-				|| objType == ObjectType::eFlower)
-#ifdef _DEBUG
-#endif // _DEBUG
+			 || objType == ObjectType::eFlower)
 			{
 				// >> 인덱스로 받아 오는 파일들은 인덱스 값 필요함
 				string num = m_vecObject[i]->GetXFilePath();

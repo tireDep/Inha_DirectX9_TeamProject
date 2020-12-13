@@ -2068,35 +2068,7 @@ Snowman.png
 1
 # Object_End
 
-# Object_Start
-# ObjectName
-InvisibleWall72
-# FolderPath
 
-# FilePath
-
-# TxtPath
-
-# ObjectType
-22
-# Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
-4.5
-0.5
--4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
 
 # Object_Start
 # ObjectName

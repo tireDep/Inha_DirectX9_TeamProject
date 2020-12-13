@@ -34,6 +34,8 @@ private:
 
 	LPD3DXEFFECT LoadShader(const string fileName);
 
+	void ReadAndCutSlashR(ifstream& mapFile, string& readData);
+
 public:
 	void Setup();
 

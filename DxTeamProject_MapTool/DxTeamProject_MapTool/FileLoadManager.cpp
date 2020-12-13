@@ -43,6 +43,13 @@ LPD3DXEFFECT CFileLoadManager::LoadShader(const string fileName)
 	return ret;
 }
 
+void CFileLoadManager::ReadAndCutSlashR(ifstream & mapFile, string & readData)
+{
+	getline(mapFile, readData);
+	if (strstr(readData.c_str(), "\r"))
+		readData = readData.substr(0, readData.length() - 1);
+}
+
 void CFileLoadManager::ReadMapData(string fileName)
 {
 	ifstream mapFile;
@@ -70,83 +77,83 @@ void CFileLoadManager::ReadMapData(string fileName)
 				continue;
 
 			else if (strstr(readData.c_str(), "# ObjectName"))
-			{
-				getline(mapFile, readData);
+			{	
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.strObjName = readData;
 			}
 
 			else if (strstr(readData.c_str(), "# FolderPath"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.strFolderPath = readData;
 			}
 
 			else if (strstr(readData.c_str(), "# FilePath"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.strXFilePath = readData;
 			}
 
 			else if (strstr(readData.c_str(), "# TxtPath"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.strTxtPath = readData;
 			}
 
 			else if (strstr(readData.c_str(), "# ObjectType"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.objType = (ObjectType)atoi(readData.c_str());
 			}
 
 			else if (strstr(readData.c_str(), "# Scale"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vScale.x = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vScale.y = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vScale.z = atof(readData.c_str());
 			}
 
 			else if (strstr(readData.c_str(), "# Rotate"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vRotate.x = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vRotate.y = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vRotate.z = atof(readData.c_str());
 			}
 
 			else if (strstr(readData.c_str(), "# Translate"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vTranslate.x = atof(readData.c_str()) + m_fNowX;
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vTranslate.y = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vTranslate.z = atof(readData.c_str()) + m_fNowZ;
 			}
 
 			else if (strstr(readData.c_str(), "# Color"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.dxColor.r = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.dxColor.g = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.dxColor.b = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.dxColor.a = atof(readData.c_str());
 			}
 
@@ -155,33 +162,33 @@ void CFileLoadManager::ReadMapData(string fileName)
 
 			else if (strstr(readData.c_str(), "# RotationSpeed"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.gimmickData.roationSpeed_rotaitonBoard = atof(readData.c_str());
 			}
 			else if (strstr(readData.c_str(), "# RotationAxialIndex"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.gimmickData.roationAxialIndex_rotaitonBoard = atoi(readData.c_str());
 			}
 
 			else if (strstr(readData.c_str(), "# StartPos"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.gimmickData.startPos_movingCube = atof(readData.c_str());
 			}
 			else if (strstr(readData.c_str(), "# EndPos"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.gimmickData.endPos_movingCube = atof(readData.c_str());
 			}
 			else if (strstr(readData.c_str(), "# Speed"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.gimmickData.speed_movingCube = atof(readData.c_str());
 			}
 			else if (strstr(readData.c_str(), "# DirectionIndex"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.gimmickData.directionIndex_movingCube = atoi(readData.c_str());
 			}
 

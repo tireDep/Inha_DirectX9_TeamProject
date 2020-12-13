@@ -452,7 +452,6 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	}
 	break;
 
-#ifdef _DEBUG
 	case eFlower:
 	{
 		mapData.vScale = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
@@ -502,7 +501,6 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 		background->Setup(mapData);
 	}
 		break;
- #endif // _DEBUG
 
 	case eG_RotationBoard:
 	case eG_BreakWall:
@@ -576,10 +574,8 @@ void IObject::CreateObject(ST_MapData& mapData)
 	case eChair:
 	case eUmbrella:
 	case eSnowman:
-#ifdef _DEBUG
 	case eFlower:
 	case eSprout:
-#endif // _DEBUG
 	case eInvisibleWall:
 	{
 		CBackground* background = new CBackground;
