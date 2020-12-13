@@ -10,8 +10,6 @@
 #include "Box.h"
 #include "Cylinder.h"
 #include "MovingCube.h"
-// collide
-//#include "Contact.h"
 
 CObjectManager::CObjectManager() : 
 	m_frustum(NULL),
@@ -229,19 +227,6 @@ void CObjectManager::UpdateLand(float duration)
 
 void CObjectManager::Collide(float duration)
 {
-	// Need To modify...
-	//for (int hittee = 0; hittee < m_vecPObject.size(); hittee++)
-	//{
-	//	for (int hitter = 0; hitter < m_vecPObject.size(); hitter++)
-	//	{
-	//		if (hittee >= hitter)
-	//			continue;
-	//		//m_vecPObject[hittee]->CollisionOtherObject(m_vecPObject[hitter]);
-	//		m_vecPObject[hittee]->Collision3D(m_vecPObject[hitter]);
-	//	}
-	//}
-
-	// Need To Modify...
 	///Sphere
 	for (int SphereIndex = 0; SphereIndex < m_vecSphere.size(); SphereIndex++)
 	{
@@ -253,21 +238,18 @@ void CObjectManager::Collide(float duration)
 				case eSphere:
 					if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CSphere*>(m_vecPObject[PObectIndex])))
 					{
-						//CollisionPObject(m_vecSphere[SphereIndex], m_vecPObject[PObectIndex], duration);
 						CollisionSphereToSphere(m_vecSphere[SphereIndex], dynamic_cast<CSphere*>(m_vecPObject[PObectIndex]), duration);
 					}
 					break;
 				case eBox:
 					if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CBox*>(m_vecPObject[PObectIndex])))
 					{
-						//CollisionPObject(m_vecSphere[SphereIndex], m_vecPObject[PObectIndex], duration);
 						CollisionSphereToBox(m_vecSphere[SphereIndex], m_vecPObject[PObectIndex], duration);
 					}
 					break;
 				case eCylinder:
 					if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
 					{
-						//CollisionPObject(m_vecSphere[SphereIndex], m_vecPObject[PObectIndex], duration);
 						CollisionSphereToBox(m_vecSphere[SphereIndex], m_vecPObject[PObectIndex], duration);
 					}
 					break;
@@ -399,18 +381,8 @@ void CObjectManager::Collide(float duration)
 			}
 		}
 	}
-	// OBB TEST
-	//for (int i = 0; i < m_vecBox.size(); i++)
-	//	for (int j = 0; j < m_vecIObject.size(); j++)
-	//	{
-	//		m_vecBox[i]->hasIntersected(m_vecIObject[j]);
-	//	}
-	//for (int i = 0; i < m_vecIObject.size(); i++)
-	//{
-	//	m_vecIObject[i]->Update();
-	//}
 }
-
+// Delete Later... Box to Box
 void CObjectManager::CollisionPObject(PObject * one, PObject * two, float duration)
 {
 	D3DXVECTOR3 contactNormal = one->GetPosition() - two->GetPosition();
@@ -493,19 +465,36 @@ void CObjectManager::CollisionSphereToBox(CSphere * one, PObject * two, float du
 	float dist;
 
 	dist = SphereToBoxCenter.x;
-	if (dist > two->GetOBB()->GetOBBWidth() / 2.0f) dist = two->GetOBB()->GetOBBWidth() / 2.0f;
-	if (dist < -two->GetOBB()->GetOBBWidth() / 2.0f) dist = -two->GetOBB()->GetOBBWidth() / 2.0f;
+	if (dist > two->GetOBB()->GetOBBWidth()) dist = two->GetOBB()->GetOBBWidth();
+	if (dist < -two->GetOBB()->GetOBBWidth()) dist = -two->GetOBB()->GetOBBWidth();
 	closestPt.x = dist;
 
 	dist = SphereToBoxCenter.y;
-	if (dist >  two->GetOBB()->GetOBBHeight() / 2.0f) dist =  two->GetOBB()->GetOBBHeight() / 2.0f;
-	if (dist < -two->GetOBB()->GetOBBHeight() / 2.0f) dist = -two->GetOBB()->GetOBBHeight() / 2.0f;
+	if (dist >  two->GetOBB()->GetOBBHeight()) dist = two->GetOBB()->GetOBBHeight();
+	if (dist < -two->GetOBB()->GetOBBHeight()) dist = -two->GetOBB()->GetOBBHeight();
 	closestPt.y = dist;
 
 	dist = SphereToBoxCenter.z;
-	if (dist >  two->GetOBB()->GetOBBDepth() / 2.0f) dist =  two->GetOBB()->GetOBBDepth() / 2.0f;
-	if (dist < -two->GetOBB()->GetOBBDepth() / 2.0f) dist = -two->GetOBB()->GetOBBDepth() / 2.0f;
+	if (dist >  two->GetOBB()->GetOBBDepth()) dist = two->GetOBB()->GetOBBDepth();
+	if (dist < -two->GetOBB()->GetOBBDepth()) dist = -two->GetOBB()->GetOBBDepth();
 	closestPt.z = dist;
+
+	//dist = SphereToBoxCenter.x;
+	//if (dist > two->GetOBB()->GetOBBWidth() / 2.0f) dist = two->GetOBB()->GetOBBWidth() / 2.0f;
+	//if (dist < -two->GetOBB()->GetOBBWidth() / 2.0f) dist = -two->GetOBB()->GetOBBWidth() / 2.0f;
+	//closestPt.x = dist;
+	//dist = SphereToBoxCenter.y;
+	//if (dist >  two->GetOBB()->GetOBBHeight() / 2.0f) dist =  two->GetOBB()->GetOBBHeight() / 2.0f;
+	//if (dist < -two->GetOBB()->GetOBBHeight() / 2.0f) dist = -two->GetOBB()->GetOBBHeight() / 2.0f;
+	//closestPt.y = dist;
+	//dist = SphereToBoxCenter.z;
+	//if (dist >  two->GetOBB()->GetOBBDepth() / 2.0f) dist =  two->GetOBB()->GetOBBDepth() / 2.0f;
+	//if (dist < -two->GetOBB()->GetOBBDepth() / 2.0f) dist = -two->GetOBB()->GetOBBDepth() / 2.0f;
+	//closestPt.z = dist;
+
+	SphereToBoxCenter.x *= two->GetmatWorld()._11;
+	SphereToBoxCenter.y *= two->GetmatWorld()._22;
+	SphereToBoxCenter.z *= two->GetmatWorld()._33;
 
 	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
 	dist = D3DXVec3Length(&tmp);
@@ -515,7 +504,9 @@ void CObjectManager::CollisionSphereToBox(CSphere * one, PObject * two, float du
 
 	D3DXVECTOR3 contactNormal = closestPtWorld - SphereToBoxCenter;
 	D3DXVec3Normalize(&contactNormal, &contactNormal);
-	float penetration = one->GetRadius() - dist;
+	// TEST
+	contactNormal.y = 0;
+	float penetration = one->GetRadius() - sqrtf(dist);
 	float elasticity = 1.0f;
 
 	D3DXVECTOR3 relativeVelocity = one->GetVelocity() - two->GetVelocity();
@@ -554,6 +545,7 @@ void CObjectManager::CollisionBoxToBox(PObject * one, PObject * two, float durat
 
 }
 
+// Delete Later... Box to Box
 void CObjectManager::CollisionIObject(PObject* pObject, IObject* iObject, float duration)
 {
 	D3DXVECTOR3 contactNormal = pObject->GetPosition() - D3DXVECTOR3(iObject->GetmatWorld()._41, iObject->GetmatWorld()._42, iObject->GetmatWorld()._43);
@@ -587,6 +579,7 @@ void CObjectManager::CollisionIObject(PObject* pObject, IObject* iObject, float 
 	pObject->SetPosition(pObject->GetPosition() + movePerIMass * pObject->GetInverseMass());
 }
 
+// Integrate CollisionSphereToBox(Rotation Error)
 void CObjectManager::CollisionSphereToIObject(CSphere * one, IObject * two, float duration)
 {
 	D3DXMATRIXA16 inverseBoxMatrix;
@@ -1050,4 +1043,26 @@ COBB* CObjectManager::GetTileOBB()
 //
 //	one->SetForceVector(acceleration1 * one->GetMass());
 //	two->SetForceVector(acceleration2 * two->GetMass());
+//}
+// Need To modify...
+//for (int hittee = 0; hittee < m_vecPObject.size(); hittee++)
+//{
+//	for (int hitter = 0; hitter < m_vecPObject.size(); hitter++)
+//	{
+//		if (hittee >= hitter)
+//			continue;
+//		//m_vecPObject[hittee]->CollisionOtherObject(m_vecPObject[hitter]);
+//		m_vecPObject[hittee]->Collision3D(m_vecPObject[hitter]);
+//	}
+//}
+// Need To Modify...
+// OBB TEST
+//for (int i = 0; i < m_vecBox.size(); i++)
+//	for (int j = 0; j < m_vecIObject.size(); j++)
+//	{
+//		m_vecBox[i]->hasIntersected(m_vecIObject[j]);
+//	}
+//for (int i = 0; i < m_vecIObject.size(); i++)
+//{
+//	m_vecIObject[i]->Update();
 //}
