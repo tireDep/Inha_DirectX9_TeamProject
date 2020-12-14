@@ -9,18 +9,15 @@ public:
 	~COBB();
 private:
 	// get set later
-	D3DXVECTOR3			 m_vOriCenterPos;		// center
-	D3DXVECTOR3			 m_vOriAxisDir[3];	// axis	
+	D3DXVECTOR3			 m_vOriCenterPos;	// center
+	D3DXVECTOR3			 m_vOriAxisDir[3];	// axis
 	float				 m_fAxisHalfLen[3];	// distance of center to OBB surface
-	D3DXMATRIXA16		 m_matWorld;			// matrix
-	vector<ST_PC_VERTEX> m_vOBBLineVertex; // OBB Box Line
-	D3DXVECTOR3			 m_vCenterPos;
-	D3DXVECTOR3			 m_vAxisDir[3];
-	float			 m_fAxisLen[3];
-	///
-	//D3DXMATRIXA16 m_matWorldTM;
+	D3DXMATRIXA16		 m_matWorld;		// OBB matrix
+	D3DXVECTOR3			 m_vCenterPos;		// center from translate to OBB matrix
+	D3DXVECTOR3			 m_vAxisDir[3];		// axis from translate to OBB matrix
 
-	//float m_fAxisLen[3];		
+	vector<ST_PC_VERTEX> m_vOBBLineVertex;  // OBB Box Line
+	float				 m_fAxisLen[3];	
 public:
 	void Setup(CObject & object);
 	void Setup(CAllocateHierarchy & ah);
@@ -29,6 +26,8 @@ public:
 	static bool IsCollision(COBB * pOBB1, COBB* pOBB2);
 	bool IsCollision(COBB * otherOBB);
 	void Render();
-	void Render(D3DXMATRIXA16* pmatWorld);
 	D3DXVECTOR3 GetCenter() { return m_vCenterPos; }
+	float GetOBBWidth()  { return m_fAxisHalfLen[0]; }	// distance of center to x axis
+	float GetOBBHeight() { return m_fAxisHalfLen[1]; }	// distance of center to y axis
+	float GetOBBDepth()  { return m_fAxisHalfLen[2]; }  // distance of center to z axis
 };

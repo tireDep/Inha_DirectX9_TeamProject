@@ -2,9 +2,10 @@
 #include "TimeManager.h"
 
 CTimeManager::CTimeManager()
-	:m_fFPS_Timer(0)
-	,m_FPS(0)
-	,m_count(0)
+	: m_fFPS_Timer(0)
+	, m_FPS(0)
+	, m_count(0)
+	, m_fElapsedTime(0.0f)
 {
 	QueryPerformanceCounter(&m_liLastTime);
 }

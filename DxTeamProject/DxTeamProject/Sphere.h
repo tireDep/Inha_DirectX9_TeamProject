@@ -22,8 +22,8 @@ public:
 	bool hasIntersected(CSphere * otherSphere);
 	bool hasIntersected(CBox * otherBox);
 	bool hasIntersected(CCylinder * otherCylinder);
-	bool hasIntersected(CGimmick * otherIObject);
 	bool hasIntersected(IObject * otherIObject);
+	//bool hasIntersected(CGimmick * otherIObject);
 
 	string GetName();
 };

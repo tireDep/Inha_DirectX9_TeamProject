@@ -3,9 +3,12 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 #include "Door.h"
+#include "MovingCube.h"
 
-CGimmick::CGimmick()
+CGimmick::CGimmick() : 
+	m_openCondition(OnOffCondition::eOrb)
 {
+	m_strConditionName = "Black";
 }
 
 CGimmick::~CGimmick()
@@ -39,6 +42,22 @@ void CGimmick::Setup(ST_MapData setData)
 	delete xfile;
 
 	IObject::Setup_OBB_Box();
+
+	// =================
+
+	if (setData.gimmickData.conditionName != "")
+	{
+		m_strConditionName = setData.gimmickData.conditionName;
+
+		if (setData.gimmickData.onOffConditionIndex == 0)		m_openCondition = OnOffCondition::eOrb;
+		else if (setData.gimmickData.onOffConditionIndex == 1)	m_openCondition = OnOffCondition::eItem;
+		else if (setData.gimmickData.onOffConditionIndex == 2)	m_openCondition = OnOffCondition::eSwitch;
+
+		if (m_openCondition != OnOffCondition::eOrb)
+			m_conditionOrbindex = 0;
+		else
+			m_conditionOrbindex = setData.gimmickData.conditionOrbIndex;
+	}
 }
 
 void CGimmick::Render()
@@ -51,8 +70,16 @@ void CGimmick::Render()
 	if (m_pMesh == NULL)
 		return;
 
-	if (!m_isPick && !m_isClick || !m_pShader)
+	if (g_pObjectManager->GetPickObjName() == m_strConditionName && m_strConditionName != "" && m_pShader)
 	{
+		// >> 조건 오브젝트가 선택되었을 경우
+		SetShader(GetmatWorld());
+		SetShader_ConditionColor();
+		IObject::Render();
+	}
+	else if (!m_isPick && !m_isClick || !m_pShader)
+	{
+		// >> 오브젝트가 선택되지 않거나 셰이더가 없을 경우
 		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
@@ -68,6 +95,8 @@ void CGimmick::Render()
 	}
 	else
 	{
+		// >> 오브젝트가 선택되었을 경우
+		string temp = g_pObjectManager->GetPickObjName();
 		SetShader(GetmatWorld());
 		IObject::Render();
 	}
@@ -105,8 +134,8 @@ void CGimmick::CreateGimmick(const ObjectType& objType)
 
 		mapData.strXFilePath = string("Rotation_board") + string(".X");
 
-		mapData.gimmickData.roationSpeed = 0.0f;
-		mapData.gimmickData.roationAxialIndex = 0;
+		mapData.gimmickData.roationSpeed_rotaitonBoard = 0.0f;
+		mapData.gimmickData.roationAxialIndex_rotaitonBoard = 0;
 
 		CRotationBoard* rotationBoard = new CRotationBoard;
 		rotationBoard->Setup(mapData);
@@ -151,11 +180,29 @@ void CGimmick::CreateGimmick(const ObjectType& objType)
 
 		mapData.strXFilePath = string("Force_switch") + string(".X");
 
-		mapData.gimmickData.roationSpeed = 0.0f;
-		mapData.gimmickData.roationAxialIndex = 0;
+		mapData.gimmickData.roationSpeed_rotaitonBoard = 0.0f;
+		mapData.gimmickData.roationAxialIndex_rotaitonBoard = 0;
 
 		CSwitch* cSwitch = new CSwitch;
 		cSwitch->Setup(mapData);
+	}
+		break;
+
+	case eG_MovingCube:
+	{
+		mapData.strObjName = string("MovingCube") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Gimmick/MovingCube";
+		mapData.strTxtPath = "moving_cube_1.png";
+
+		mapData.strXFilePath = string("moving_cube") + string(".X");
+
+		mapData.gimmickData.startPos_movingCube= 0.0f;
+		mapData.gimmickData.endPos_movingCube = 0.0f;
+		mapData.gimmickData.speed_movingCube = 0.0f;
+		mapData.gimmickData.directionIndex_movingCube = 0;
+
+		CMovingCube* movingCube = new CMovingCube;
+		movingCube->Setup(mapData);
 	}
 		break;
 	} // << switch
@@ -191,6 +238,13 @@ void CGimmick::CreateGimmick_SaveData(ST_MapData & mapData)
 	{
 		CSwitch* cSwitch = new CSwitch;
 		cSwitch->Setup(mapData);
+	}
+		break;
+
+	case eG_MovingCube:
+	{
+		CMovingCube* rotationBoard = new CMovingCube;
+		rotationBoard->Setup(mapData);
 	}
 		break;
 	} // << switch

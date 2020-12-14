@@ -13,11 +13,16 @@ CCharacter::CCharacter()
 	, m_vPosition(0, 0.0f, 0)
 	// , m_pOBB(NULL)
 	, m_isCollided(false)
-	,m_Character(NULL)
+	, m_jump(false)
+	, jumpis(false)
+	, jumping(false)
+	, m_Character(NULL)
+	, m_isColorChanged(false)
 	// Ray y check
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
+	D3DXMatrixIdentity(&matT);
 	m_strName = "Character";
 }
 
@@ -41,18 +46,14 @@ void CCharacter::SetColor(D3DXCOLOR c)
 
 void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 {
-#if _DEBUG
-	float speed = 0.005f;
-#else
-	float speed = 0.003f;
-#endif
 	// float duration = *(float*) eventMsg.ptrMessage;
 	// speed *= duration;
+	float speed = 10.0f * eventMsg.duration;
 	rotation = -1.0f;
 
-	if (!g_gameManager->GetUImode())
+	if (!g_pGameManager->GetUImode())
 	{
-		// todo : 상태에 따른 애니메이션 출력
+		// todo : 애니메이션 관련 함수 생성(인덱스 세팅)
 
 		if (eventMsg.message == WM_LBUTTONDOWN)
 		{
@@ -61,90 +62,129 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			msg.ptrMessage = &m_color;
 
 			g_pEventManager->CheckEvent(msg);
+
+			m_Character->SetAnimationIndexBlend(3); // ChangeColor
 			return;
 		}
 
 		if (eventMsg.eventType == EventType::eChangedColorEvent)
 		{
-			eventMsg.playerInput = PlayerInputType::eUp;
+			DoRotation(0.0f);
+			return;
+			// >> 색 변화가 일어날 경우 그 방향(정면) 쳐다봄
 		}
 
-		switch (eventMsg.playerInput)
+		if (eventMsg.eventType == EventType::eInputEvent)
 		{
-		case PlayerInputType::eUp:
-			rotation = 0.0f;
-			break;
-
-		case PlayerInputType::eLeftUp:
-			rotation = D3DX_PI / 4.0f * -1;
-			break;
-
-		case PlayerInputType::eRightUp:
-			rotation = D3DX_PI / 4.0f;
-			break;
-
-		case PlayerInputType::eDown:
-			rotation = D3DX_PI;
-			break;
-
-		case PlayerInputType::eLeftDown:
-			rotation = D3DX_PI + D3DX_PI / 4.0f;
-			break;
-
-		case PlayerInputType::eRightDown:
-			rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
-			break;
-
-		case PlayerInputType::eLeft:
-			rotation = -D3DX_PI / 2.0f;
-			break;
-
-		case PlayerInputType::eRight:
-			rotation = D3DX_PI / 2.0f;
-			break;
-
-			// todo : 잡기 구현
-		case PlayerInputType::eHold:
-			if (m_nGrabAbleObeject != -1)
+			switch (eventMsg.playerInput)
 			{
+			case PlayerInputType::eUp:
+				rotation = 0.0f;
+				break;
 
-			}
-			else
+			case PlayerInputType::eLeftUp:
+				rotation = D3DX_PI / 4.0f * -1;
+				break;
+
+			case PlayerInputType::eRightUp:
+				rotation = D3DX_PI / 4.0f;
+				break;
+
+			case PlayerInputType::eDown:
+				rotation = D3DX_PI;
+				break;
+
+			case PlayerInputType::eLeftDown:
+				rotation = D3DX_PI + D3DX_PI / 4.0f;
+				break;
+
+			case PlayerInputType::eRightDown:
+				rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
+				break;
+
+			case PlayerInputType::eLeft:
+				rotation = -D3DX_PI / 2.0f;
+				break;
+
+			case PlayerInputType::eRight:
+				rotation = D3DX_PI / 2.0f;
+				break;
+
+				// todo : 점프 구현
+			case PlayerInputType::eJump:
+				if (!jumping)
+				{
+					m_jump = true;
+					if (m_Character->CheckAnimationEnd())
+					{
+						m_Character->SetAnimationIndex(7); // jump
+					}
+				}
 				speed = -1.0f;
-			break;
-		case PlayerInputType::eHoldPush:
-			if (m_nGrabAbleObeject != -1)
-			{
+				break;
 
-			}
-			else
+				// todo : 잡기 구현
+			case PlayerInputType::eHold:
+				if (m_nGrabAbleObeject != -1)
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndexBlend(5); // push
+					// >> 블랜드가 안되서 잡기 대기 상태처럼 나옴
+				}
+				// else
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndexBlend(5); // push
 				speed = -1.0f;
-			break;
-		case PlayerInputType::eHoldPull:
-			if (m_nGrabAbleObeject != -1)
-			{
-
-			}
-			else
+				break;
+			case PlayerInputType::eHoldPush:
+				if (m_nGrabAbleObeject != -1)
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(5); // Push
+				}
+				else
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
 				speed = -1.0f;
-			break;
+				break;
+			case PlayerInputType::eHoldPull:
+				if (m_nGrabAbleObeject != -1)
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(4); // Pull
+				}
+				else
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
+				speed = -1.0f;
+				break;
+			default:
+				speed = -1.0f;
+				if (m_Character->CheckAnimationEnd())
+					m_Character->SetAnimationIndex(10); // Idle
+				break;
+			}
+		} // << eInputEvent
 
-		default:
-			speed = -1.0f;
-			break;
-		}
-
-		if (speed > 0)
+		if (speed > 0 && m_Character->CheckAnimationEnd())
 		{
+			// >> 특정 애니메이션 재생 중 이동 하지 않음
+			if(!jumping)
+				m_Character->SetAnimationIndex(9); // Walk
+
+			// >> todo : 속도 변화 감지해서 달리기 추가
+			// >> 입력 시간에 따른 달리기 변화?
+
 			DoRotation(rotation);
 			DoMove(speed);
 		}
 	}
 
-	D3DXMATRIXA16 matT;
-	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 
-	m_matWorld = m_matRotY * matT;
+	//D3DXMATRIXA16 matT;
+	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+
+	//m_matWorld = m_matRotY * matT;
 }
 
 string CCharacter::GetName()
@@ -243,7 +283,9 @@ void CCharacter::Setup()
 	// m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
 
 	m_Character = new CSkinnedMesh;
-	m_Character->SetUp("Resource/XFile/Character", "Character.X");
+	m_Character->SetUp("Resource/XFile/Character", "AnimationCharacter.X");
+	// m_Character->SetAnimationIndexBlend(8);
+	m_Character->SetAnimationIndex(10);
 
 	// Ray y check
 	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 10, 0);
@@ -254,6 +296,31 @@ void CCharacter::Setup()
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
+
+		if (m_jump)
+		{
+			jumping = true;
+			if (m_vPosition.y <= 3.f)
+			{
+				m_vPosition.y += 0.005f;
+				if (m_vPosition.y >= 3.f)
+				{
+					jumpis = true;
+					m_jump = false;
+				}
+			}
+		}
+		if (jumpis == true)
+		{
+			m_vPosition.y -= 0.005f;
+			if (m_vPosition.y <= 0)
+			{
+				jumpis = false;
+				jumping = false;
+			}
+			m_Character->SetAnimationIndexBlend(6); // fall
+		}
+	
 }
 
 //void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
@@ -380,7 +447,7 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 //
 //}
 
-int CCharacter::Update(vector<PObject*> ObjectPosition)
+int CCharacter::Update(vector<PObject*> ObjectPosition, float duration)
 {
 
 	//if (m_pOBB)
@@ -404,7 +471,7 @@ int CCharacter::Update(vector<PObject*> ObjectPosition)
 	// >> skinnedMesh
 	if (m_Character)
 	{
-		m_Character->Update();
+		m_Character->Update(duration);
 		m_Character->SetTransform(&m_matWorld);
 	}
 	// << skinnedMesh
@@ -453,6 +520,9 @@ void CCharacter::Render(D3DCOLOR d)
 	{
 		m_Character->Render(NULL);
 	}
+	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+
+	m_matWorld = m_matRotY * matT;
 }
 
 D3DXVECTOR3& CCharacter::GetPosition()
@@ -479,4 +549,19 @@ bool CCharacter::Collider(bool isCollided)
 {
 	m_isCollided = isCollided;
 	return m_isCollided;
+}
+
+void CCharacter::ColliderOtherObject(IObject * background)
+{
+	if (m_Character->GetOBB()->IsCollision(background->GetOBB()))
+	{
+		
+		m_isCollided = true;
+		
+	}
+	else
+	{
+		m_isCollided = false;
+		
+	}
 }

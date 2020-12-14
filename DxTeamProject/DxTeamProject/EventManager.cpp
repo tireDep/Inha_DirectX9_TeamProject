@@ -34,24 +34,47 @@ bool CEventManager::RemoveListener(IListener * listener)
 	return false;
 }
 
-void CEventManager::Update()
+static float nowTime = 0;
+static float pastTime = -1;
+
+static PlayerInputType lastInput = PlayerInputType::eNull;
+
+void CEventManager::Update(float duration)
 {
 	bool pushW = GetKeyState('W') & 0x8000;
 	bool pushS = GetKeyState('S') & 0x8000;
 	bool pushA = GetKeyState('A') & 0x8000;
 	bool pushD = GetKeyState('D') & 0x8000;
 	bool pushF = GetKeyState('F') & 0x8000;
+	bool pushSpace = GetKeyState(VK_SPACE) & 0x8000;
+	
+	// >> 키 입력 딜레이
+	nowTime += duration;
 
-	if (!pushW && !pushS && !pushA && !pushD && !pushF)
+	if (!pushW && !pushS && !pushA && !pushD && !pushF && !pushSpace)
+	{
+		lastInput = PlayerInputType::eNull;
 		return;
+	}
 
 	ST_EVENT msg;
 	msg.eventType = EventType::eInputEvent;
+	msg.duration = duration;
 
 	// float duration = g_pTimeManager->GetElapsedTime();
 	// msg.ptrMessage = &duration;
 
-	if (pushW && pushA)
+	if (pushSpace)
+		msg.playerInput = PlayerInputType::eJump;
+
+	else if (pushF && pushW)
+		msg.playerInput = PlayerInputType::eHoldPush;
+	else if (pushF && pushS)
+		msg.playerInput = PlayerInputType::eHoldPull;
+	else if (pushF)
+		msg.playerInput = PlayerInputType::eHold;
+
+	else if (pushW && pushA)
 		msg.playerInput = PlayerInputType::eLeftUp;
 	else if (pushW && pushD)
 		msg.playerInput = PlayerInputType::eRightUp;
@@ -70,10 +93,21 @@ void CEventManager::Update()
 	else if (pushD)
 		msg.playerInput = PlayerInputType::eRight;
 
-	else if (pushF && pushW)
-		msg.playerInput = PlayerInputType::eHoldPush;
-	else if (pushF && pushS)
-		msg.playerInput = PlayerInputType::eHoldPull;
+	if (lastInput == PlayerInputType::eNull)
+		lastInput = msg.playerInput;
+
+	if (nowTime - pastTime > 0.1f)
+	{
+		pastTime = nowTime;
+		lastInput = msg.playerInput;
+	}
+	else
+	{
+		if (lastInput == PlayerInputType::eJump)
+			lastInput = PlayerInputType::eNull;
+		
+		msg.playerInput = lastInput;
+	}
 
 	CheckEvent(msg);
 }

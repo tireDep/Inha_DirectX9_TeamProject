@@ -20,7 +20,6 @@ CSphere::~CSphere()
 void CSphere::Setup()
 {
 	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pMesh, NULL);
-	m_fBoundingSphere = m_fRadius;
 
 	//m_vInverseRotationInertia.x = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
 	//m_vInverseRotationInertia.y = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
@@ -38,44 +37,41 @@ void CSphere::Setup(const ST_MapData & mapData)
 	Setup();
 
 	m_strObjName = mapData.strObjName;
-
 	m_strFolder = mapData.strFolderPath;
 	m_strXFile = mapData.strXFilePath;
 	m_strTxtFile = mapData.strTxtPath;
-
 	m_ObjectType = mapData.objType;
 
-	D3DXVECTOR3 vScale, vRotate;
-	vScale = mapData.vScale;
-	// JW ADD...
-	m_vScale = vScale;
-	vRotate = mapData.vRotate;
-	m_vPosition = mapData.vTranslate;
+	m_vScale = mapData.vScale;
+	m_vRotation = mapData.vRotate;
+	m_vTranslation = mapData.vTranslate;
+	m_vPosition = m_vTranslation;
 
 	m_Color = mapData.dxColor;
 	this->ChangeObjectColor();
 
-	m_fRadius = vScale.x;
-	m_fRadius = vScale.y;
-	m_fRadius = vScale.z;
-
-	// ============================================================
+	m_fRadius *= m_vScale.x;
+	m_fBoundingSphere = m_fRadius;
 
 	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixScaling(&matS, vScale.x, vScale.y, vScale.z);
-
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(vRotate.x);
-	v.y = D3DXToRadian(vRotate.y);
-	v.z = D3DXToRadian(vRotate.z);
-
-	// D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
-	D3DXMatrixRotationX(&matR, v.x);
-	D3DXMatrixRotationY(&matR, v.y);
-	D3DXMatrixRotationZ(&matR, v.z);
-
-	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
 	m_matWorld = matS * matR * matT;
+
+	g_pObjectManager->AddSphere(this);
+	//D3DXVECTOR3 vScale, vRotate;
+	//vScale = mapData.vScale;
+	// JW ADD...
+	//m_vScale = vScale;
+	//vRotate = mapData.vRotate;
+	//m_vPosition = mapData.vTranslate;
+	//m_fRadius = vScale.x;
+	//m_fRadius = vScale.y;
+	//m_fRadius = vScale.z;
+	//D3DXMatrixRotationX(&matR, v.x);
+	//D3DXMatrixRotationY(&matR, v.y);
+	//D3DXMatrixRotationZ(&matR, v.z);
 }
 
 void CSphere::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos)
@@ -95,12 +91,53 @@ void CSphere::Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, 
 
 bool CSphere::hasIntersected(CSphere * otherSphere)
 {
-	return false;
+	if (this == otherSphere)
+		return false;
+
+	D3DXVECTOR3 direction = this->GetPosition() - otherSphere->GetPosition();
+
+	if ((this->GetBoundingSphere() + otherSphere->GetBoundingSphere()) * (this->GetBoundingSphere() + otherSphere->GetBoundingSphere()) < D3DXVec3LengthSq(&direction))
+		return false;
+
+	return true;
 }
 
 bool CSphere::hasIntersected(CBox * otherBox)
 {
-	return false;
+	D3DXMATRIXA16 inverseBoxMatrix;
+	D3DXMatrixInverse(&inverseBoxMatrix, NULL, &otherBox->GetmatWorld());
+
+	D3DXVECTOR3 SphereToBoxCenter;
+	D3DXVec3TransformCoord(&SphereToBoxCenter, &m_vPosition, &inverseBoxMatrix);
+
+	if( fabsf(SphereToBoxCenter.x) - GetRadius() > otherBox->GetWidth()  / 2.0f ||
+		fabsf(SphereToBoxCenter.y) - GetRadius() > otherBox->GetHeight() / 2.0f ||
+		fabsf(SphereToBoxCenter.z) - GetRadius() > otherBox->GetDepth()  / 2.0f)
+		return false;
+
+	D3DXVECTOR3 closestPt(0, 0, 0);
+	float dist;
+
+	dist = SphereToBoxCenter.x;
+	if (dist > otherBox->GetWidth() / 2.0f) dist = otherBox->GetWidth() / 2.0f;
+	if (dist < -otherBox->GetWidth() / 2.0f) dist = -otherBox->GetWidth() / 2.0f;
+	closestPt.x = dist;
+
+	dist = SphereToBoxCenter.y;
+	if (dist > otherBox->GetHeight() / 2.0f) dist = otherBox->GetHeight() / 2.0f;
+	if (dist < -otherBox->GetHeight() / 2.0f) dist = -otherBox->GetHeight() / 2.0f;
+	closestPt.y = dist;
+
+	dist = SphereToBoxCenter.z;
+	if (dist > otherBox->GetDepth() / 2.0f) dist = otherBox->GetDepth() / 2.0f;
+	if (dist < -otherBox->GetDepth() / 2.0f) dist = -otherBox->GetDepth() / 2.0f;
+	closestPt.z = dist;
+
+	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
+	dist = D3DXVec3LengthSq(&tmp);
+	if (dist > GetRadius() * GetRadius())
+		return false;
+	return true;
 }
 
 bool CSphere::hasIntersected(CCylinder * otherCylinder)
@@ -108,14 +145,53 @@ bool CSphere::hasIntersected(CCylinder * otherCylinder)
 	return false;
 }
 
-bool CSphere::hasIntersected(CGimmick * otherIObject)
-{
-	return false;
-}
+//bool CSphere::hasIntersected(CGimmick * otherIObject)
+//{
+//	return false;
+//}
 
 bool CSphere::hasIntersected(IObject * otherIObject)
 {
-	return false;
+	//D3DXMATRIXA16 inverseBoxMatrix;
+	//// Need To Modify... OBB's WorldMatrix
+	//D3DXMatrixInverse(&inverseBoxMatrix, NULL, &otherIObject->GetmatWorld());
+	D3DXMATRIXA16 inverseBoxMatrix;
+	D3DXMatrixIdentity(&inverseBoxMatrix);
+	inverseBoxMatrix._41 = -otherIObject->GetmatWorld()._41;
+	inverseBoxMatrix._42 = -otherIObject->GetmatWorld()._42;
+	inverseBoxMatrix._43 = -otherIObject->GetmatWorld()._43;
+
+	D3DXVECTOR3 SphereToBoxCenter;
+	D3DXVec3TransformCoord(&SphereToBoxCenter, &m_vPosition, &inverseBoxMatrix);
+													
+	if (fabsf(SphereToBoxCenter.x) - GetRadius() > otherIObject->GetOBB()->GetOBBWidth()  ||
+		fabsf(SphereToBoxCenter.y) - GetRadius() > otherIObject->GetOBB()->GetOBBHeight() ||
+		fabsf(SphereToBoxCenter.z) - GetRadius() > otherIObject->GetOBB()->GetOBBDepth())
+		return false;
+
+	D3DXVECTOR3 closestPt(0, 0, 0);
+	float dist;
+
+	dist = SphereToBoxCenter.x;
+	if (dist > otherIObject->GetOBB()->GetOBBWidth()) dist = otherIObject->GetOBB()->GetOBBWidth();
+	if (dist < -otherIObject->GetOBB()->GetOBBWidth()) dist = -otherIObject->GetOBB()->GetOBBWidth();
+	closestPt.x = dist;
+
+	dist = SphereToBoxCenter.y;
+	if (dist >  otherIObject->GetOBB()->GetOBBHeight()) dist =  otherIObject->GetOBB()->GetOBBHeight();
+	if (dist < -otherIObject->GetOBB()->GetOBBHeight()) dist = -otherIObject->GetOBB()->GetOBBHeight();
+	closestPt.y = dist;
+
+	dist = SphereToBoxCenter.z;
+	if (dist >  otherIObject->GetOBB()->GetOBBDepth()) dist =  otherIObject->GetOBB()->GetOBBDepth();
+	if (dist < -otherIObject->GetOBB()->GetOBBDepth()) dist = -otherIObject->GetOBB()->GetOBBDepth();
+	closestPt.z = dist;
+
+	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
+	dist = D3DXVec3LengthSq(&tmp);
+	if (dist > GetRadius() * GetRadius())
+		return false;
+	return true;
 }
 
 //void CSphere::Update(float duration)

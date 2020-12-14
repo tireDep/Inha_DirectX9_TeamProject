@@ -70,11 +70,18 @@ public:
 	vector<CObject *> GetVecObject()	{ return m_vecObject; }
 	vector<PObject *> GetVecPObejct()	{ return m_vecPObject; }
 	vector<IObject *> GetVecIObject()	{ return m_vecIObject; }
-
+	vector<CGimmick*> GetVecGimmickObject() { return m_vecGimmick; }
 	void Update(CRay ray, D3DXCOLOR& objectcolor);		// Color Change
 	void UpdateLand(float duration);					// PObject Physics
 	void Update(float duration);						// IObject(Gimmick) Physics		// Integration...
-	void Collide();										// Collision			
+
+	void Collide(float duration);						// Collision
+	void CollisionPObject(PObject* one, PObject* two, float duration);
+	void CollisionSphereToSphere(CSphere* one, CSphere* two, float duration);
+	void CollisionSphereToBox(CSphere* one, PObject* two, float duration);
+	void CollisionBoxToBox(PObject* one, PObject* two, float duration);
+	void CollisionSphereToIObject(CSphere* one, IObject* two, float duration);
+	void CollisionIObject(PObject* pObject, IObject* iObject, float duration);
 
 	void Render();
 	void RenderOBBBox();

@@ -9,14 +9,14 @@ PObject::PObject()
 	, m_finverseMass(10.0f)
 	, m_fDamping(0.999f)
 	, m_vPosition(0, 0, 0)
-	, m_vLinearVelocity(0, 0, 0)
-	, m_vLinearAcceleration(0, 0, 0)
+	, m_vVelocity(0, 0, 0)
+	, m_vAcceleration(0, 0, 0)
 	, m_fElasticity(1.0f)
 	, m_isForceApplied(false)
 	, m_fLinearDrag(0.995f)
 	, m_vForceVector(0, 0, 0)
 	, m_vForceLocation(0, 0, 0)
-	, m_vForceAccum(0, 0, 0)
+	//, m_vForceAccum(0, 0, 0)
 	//, m_vAngularVelocity(0, 0, 0)
 	//, m_vAngularAcceleration(0, 0, 0)
 	//, m_vInverseRotationInertia(1, 1, 1)
@@ -39,7 +39,7 @@ void PObject::Update(float duration)
 	if (m_isForceApplied)
 	{
 		if (!hasFiniteMass()) return;
-		linearforce = m_vForceVector * GetMass();
+		linearforce = m_vForceVector * GetInverseMass();
 		//D3DXVec3Cross(&angularforce, &m_vForceLocation, &m_vForceVector);
 		m_isForceApplied = false;
 	}
@@ -52,20 +52,30 @@ void PObject::Update(float duration)
 	if (m_finverseMass <= 0.0f) return;
 	assert(duration > 0.0f);
 	
-	m_vLinearAcceleration = (linearforce + GRAVITY) * m_finverseMass;
+	m_vAcceleration = (linearforce + GRAVITY) * m_finverseMass;
 //	m_vLinearAcceleration = (linearforce) * m_finverseMass;
-	m_vLinearVelocity += (m_vLinearAcceleration * duration);
-	m_vLinearVelocity *= powf(m_fDamping, duration);
-	m_vLinearVelocity *= m_fLinearDrag;
-	if (CloseToZero(m_vLinearVelocity.x) && CloseToZero(m_vLinearVelocity.y) && CloseToZero(m_vLinearVelocity.z))
+	m_vVelocity += (m_vAcceleration * duration);
+	m_vVelocity *= powf(m_fDamping, duration);
+	m_vVelocity *= m_fLinearDrag;
+	if (CloseToZero(m_vVelocity.x) && CloseToZero(m_vVelocity.y) && CloseToZero(m_vVelocity.z))
 	{
-		m_vLinearVelocity.x = m_vLinearVelocity.y = m_vLinearVelocity.z = 0.0f;
+		m_vVelocity.x = m_vVelocity.y = m_vVelocity.z = 0.0f;
 	}
 	else
-		m_vPosition += (m_vLinearVelocity * duration);
+		m_vPosition += (m_vVelocity * duration);
 	
-	D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	m_vTranslation = m_vPosition;
 
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+	m_matWorld = matS * matR * matT;
+
+	//D3DXMATRIXA16 matT;
+	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	//D3DXMatrixMultiply(&m_matWorld, &m_matWorld, &matT);
+	//D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	/// Rotation
 	//D3DXMATRIXA16 totalTransaltion;
 	//D3DXMatrixTranslation(&totalTransaltion, m_vPosition.x, m_vPosition.y, m_vPosition.z);
@@ -101,7 +111,7 @@ void PObject::SetPusingForce(D3DXVECTOR3 forcedirection)
 {
 	D3DXVECTOR3 forcePosition = forcedirection * m_fBoundingSphere;
 	m_vForceLocation = forcePosition;
-	m_vForceVector = forcedirection * 100.0f;
+	m_vForceVector = forcedirection * 100;
 	SetForceApplied(true);
 }
 
@@ -134,7 +144,7 @@ void PObject::Collision3D(PObject * otherobject)
 		overlapInterval = 2 * otherobject->GetBoundingSphere() - distance;
 		warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetBoundingSphere() - overlapInterval));
 
-		if (D3DXVec3LengthSq(&otherobject->GetLinearVelocity()) >= D3DXVec3LengthSq(&this->GetLinearVelocity()))
+		if (D3DXVec3LengthSq(&otherobject->GetVelocity()) >= D3DXVec3LengthSq(&this->GetVelocity()))
 		{
 			otherobject->Collision3D(this);
 			return;
@@ -149,8 +159,8 @@ void PObject::Collision3D(PObject * otherobject)
 
 		float v1, v2;
 		D3DXVec3Normalize(&direction, &direction);
-		v1 = D3DXVec3Dot(&this->GetLinearVelocity(), &direction);
-		v2 = D3DXVec3Dot(&otherobject->GetLinearVelocity(), &direction);
+		v1 = D3DXVec3Dot(&this->GetVelocity(), &direction);
+		v2 = D3DXVec3Dot(&otherobject->GetVelocity(), &direction);
 
 		float elasticity = (this->GetElasticity() + otherobject->GetElasticity()) / 2;
 
@@ -161,11 +171,11 @@ void PObject::Collision3D(PObject * otherobject)
 			/ (this->GetMass() + otherobject->GetMass());
 
 		D3DXVECTOR3 collisionV1, collisionV2;
-		collisionV1 = this->GetLinearVelocity() + (finalv1 - v1) * direction;
-		collisionV2 = otherobject->GetLinearVelocity() + (finalv2 - v2) * direction;
+		collisionV1 = this->GetVelocity() + (finalv1 - v1) * direction;
+		collisionV2 = otherobject->GetVelocity() + (finalv2 - v2) * direction;
 
-		this->SetLinearVelocity(collisionV1);
-		otherobject->SetLinearVelocity(collisionV2);
+		this->SetVelocity(collisionV1);
+		otherobject->SetVelocity(collisionV2);
 	}
 }
 
@@ -174,9 +184,10 @@ void PObject::UpdateLand(float duration)
 	float distance = GetPosition().y - GetBoundingSphere();
 	if (CloseToZero(distance) || distance < 0.0f)
 	{
-		D3DXVECTOR3 tmp = m_vLinearVelocity;
+		m_vPosition.y += -distance;
+		D3DXVECTOR3 tmp = m_vVelocity;
 		tmp.y = -tmp.y * m_fElasticity;
-		m_vLinearVelocity = tmp;
+		m_vVelocity = tmp;
 	}
 }
 
@@ -293,21 +304,33 @@ void PObject::Update(CRay ray, D3DXCOLOR & playerColor, vector<bool>& vecIsPick,
 
 void PObject::ReceiveEvent(ST_EVENT eventMsg)
 {
+	if (m_isPicked != true)
+		return;
+
 	if (eventMsg.eventType == EventType::eColorChangeEvent)
 	{
-		if (m_isPicked == true)
-		{
-			m_Color = *(D3DXCOLOR*)eventMsg.ptrMessage;
-			m_outLineColor = *(D3DXCOLOR*)eventMsg.ptrMessage;
-			m_isClicked = true;
+		// m_Color = *(D3DXCOLOR*)eventMsg.ptrMessage;
+		// m_outLineColor = *(D3DXCOLOR*)eventMsg.ptrMessage;
+		// m_isClicked = true;
+		// 
+		// this->ChangeObjectColor();
 
-			this->ChangeObjectColor();
+		ST_EVENT msg;
+		msg.eventType = EventType::eChangedColorEvent;
 
-			ST_EVENT msg;
-			msg.eventType = EventType::eChangedColorEvent;
-			msg.ptrMessage = &m_Color;
-			g_pEventManager->CheckEvent(msg);
-		}
+		D3DXCOLOR color = *(D3DXCOLOR*)eventMsg.ptrMessage;
+		msg.ptrMessage = &color;
+		g_pEventManager->CheckEvent(msg);
+	}
+	else if (eventMsg.eventType == EventType::eColorEffect)
+	{
+		// >> 용 이펙트 발사 이벤트 후 색상 변경 처리
+
+		m_Color = *(D3DXCOLOR*)eventMsg.ptrMessage;
+		m_outLineColor = *(D3DXCOLOR*)eventMsg.ptrMessage;
+		m_isClicked = true;
+	
+		this->ChangeObjectColor();
 	}
 	else
 		m_isClicked = false;
@@ -360,7 +383,7 @@ void PObject::ChangeObjectColor()
 	switch (m_tmpColor)
 	{
 	case Color::Black:
-		SetMass(100);
+		SetMass(10);
 		SetElasticity(1.0f);
 		SetDrag(0.995f);
 		break;

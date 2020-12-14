@@ -16,10 +16,15 @@ protected:
 	D3DXVECTOR3				m_vPosition;
 	D3DXMATRIXA16			m_matRotY;
 	D3DXMATRIXA16			m_matWorld;
+	D3DXMATRIXA16			matT;
 	D3DXCOLOR				m_color;
 	bool					m_isCollided;
 	bool					m_isOBB;
+	bool					m_jump;
+	bool					jumpis;
+	bool					jumping;
 	CSkinnedMesh*			m_Character;
+	bool					m_isColorChanged;
 
 	float rotation;
 	// grab
@@ -31,7 +36,7 @@ public:
 	virtual void Setup();
 	virtual void Update(D3DXVECTOR3 cameradirection);
 //	virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
-	int Update(vector<PObject*> ObjectPosition);
+	int Update(vector<PObject*> ObjectPosition, float duration);
 	virtual void DoRotation(const float& radian);
 	virtual void DoMove(const float& velocity);
 	virtual void Render(D3DCOLOR c);
@@ -46,8 +51,10 @@ public:
 	// tmp Collision Test
 	// setup erase
 	virtual bool Collider(bool isCollided);
-	// COBB* m_pOBB;
-	// COBB* GetOBB();
+
+	void ColliderOtherObject(IObject * background);
+	COBB* m_pOBB;
+	COBB* GetOBB();
 	// void SetBool(bool istrue);
 	
 

@@ -151,34 +151,39 @@ struct ST_PT_VERTEX
 
 enum class EventType : int
 {
-	eInputEvent, eSceneChangeEvent, eColorChangeEvent, eChangedColorEvent
+	eInputEvent, eSceneChangeEvent, eColorChangeEvent, eChangedColorEvent, eColorEffect,
+	eNull
 };
 
 enum class SceneType : int
 {
-	eMainScene, eGameScene, eUIScene, eResultScene
+	eMainScene, eGameScene, eUIScene, eResultScene,
 	// ePauseScene
+	eNull
 };
 
 enum class PlayerInputType : int
 {
-	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHold, eHoldPush, eHoldPull, eJump
+	eUp, eDown, eLeft, eRight, eLeftUp, eLeftDown, eRightUp, eRightDown, eHold, eHoldPush, eHoldPull, eJump,
+	eNull
 };
 
 struct ST_EVENT
 {
-	EventType eventType;
+	EventType eventType = EventType::eNull;
 
 	// >> Input
-	UINT message;
-	WPARAM wParam; 
-	LPARAM lParam;
-	PlayerInputType playerInput;
+	UINT message = 0;
+	WPARAM wParam = 0; 
+	LPARAM lParam = 0;
+	PlayerInputType playerInput = PlayerInputType::eNull;
 	// << Input
 
 	// >> SceneChange
-	SceneType setNowScene;
+	SceneType setNowScene = SceneType::eNull;
 	// << SceneChange
+
+	float duration = 0.0f;
 
 	void* ptrMessage = NULL;
 };
@@ -202,13 +207,19 @@ enum ObjectType
 
 	/* BackObj, */
 	eATree, eSTree, eWTree, eCTree,
-	eSomethingElse, eBall, eChair, eUmbrella, eSnowman, eFlower, eInvisibleWall,
+	eSomethingElse, eBall, eChair, eUmbrella, eSnowman, eInvisibleWall,
 
 	/* Object */
 	eBox, eSphere, eCylinder,
 
 	/* Gimmick, */
-	eG_RotationBoard, eG_BreakWall, eG_DoorFrame, eG_Door, eG_ColorChanger, eG_Switch, eG_Razer, eG_MovingCube,
+	eG_RotationBoard, eG_BreakWall, eG_DoorFrame, eG_Door, eG_ColorChanger, eG_Switch,  eG_MovingCube,
+
+	/* Item */
+	eBook, eOrb,
+
+	/* Added */
+	eFlower, eSprout, eBridge,
 
 	eNull
 };
@@ -216,9 +227,20 @@ enum ObjectType
 struct ST_Gimmick
 {
 	bool isData;
-	float roationSpeed;
-	int roationAxialIndex;
-	// >> rotation Board
+
+	float roationSpeed_rotaitonBoard;
+	int roationAxialIndex_rotaitonBoard;
+	// >> 회전판자
+
+	int conditionIndex;
+	int maxMassIndex;
+	// >> 스위치?
+
+	float startPos_movingCube;
+	float endPos_movingCube;
+	float speed_movingCube;
+	int directionIndex_movingCube;
+	// >> 무빙큐브
 };
 
 struct ST_MapData

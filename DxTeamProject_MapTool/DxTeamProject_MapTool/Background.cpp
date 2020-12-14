@@ -89,14 +89,11 @@ void CBackground::Render()
 
 	if (m_pMesh == NULL)
 		return;
-#ifdef _DEBUG
+
 	if (m_ObjectType == ObjectType::eInvisibleWall || m_ObjectType == ObjectType::eFlower)
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	else
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-#else
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-#endif // _DEBUG
 
 	if (!m_isPick && !m_isClick || !m_pShader)
 	{
@@ -104,9 +101,7 @@ void CBackground::Render()
 		{
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
-#ifdef _DEBUG
 			if (m_ObjectType != ObjectType::eInvisibleWall && m_ObjectType != ObjectType::eFlower)
-#endif // _DEBUG
 			{
 				if(m_vecTextures[i] != NULL)
 					g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
@@ -163,8 +158,11 @@ int CBackground::GetTextureIndex()
 
 void CBackground::SetTexture(int index)
 {
+	bool isTree = false;
+	bool isUmbrella = false;
 	if (m_ObjectType == ObjectType::eCTree)
 	{
+		isTree = true;
 		if (index == 0)
 			m_strTxtFile = "TreesBlue.png";
 		else if (index == 1)
@@ -176,6 +174,7 @@ void CBackground::SetTexture(int index)
 	}
 	else if (m_ObjectType == ObjectType::eUmbrella)
 	{
+		isUmbrella = true;
 		if (index == 0)
 			m_strTxtFile = "Umbrella_Blue.png";
 		else if (index == 1)
@@ -184,6 +183,55 @@ void CBackground::SetTexture(int index)
 			m_strTxtFile = "Umbrella_Red.png";
 		else if (index == 3)
 			m_strTxtFile = "Umbrella_White.png";
+	}
+
+	if (isUmbrella)
+	{
+		int index = 0;
+		for (int i = 0; i < m_strObjName.length(); i++)
+		{
+			if (m_strObjName[i] >= 48 && m_strObjName[i] <= 57)
+			{
+				index = i;
+				break;
+			}
+		}
+		// << refCnt 추출
+
+		string temp = m_strTxtFile;
+		temp = temp.substr(0, temp.length() - 4);
+
+		m_strObjName = temp + m_strObjName.substr(index, m_strObjName.length());
+	}
+	else if (isTree)
+	{
+		int index = 0;
+		int index1 = 0;
+		int index2 = 0;
+		int check = 0;
+		for (int i = 0; i < m_strObjName.length(); i++)
+		{
+			if (m_strObjName[i] == '_')
+			{
+				check++;
+				if (check <= 2)
+					index = i;
+				else if (check == 3)
+					index1 = i;
+				else if (check == 4)
+					index2 = i - 1;
+			}
+		}
+		// >> 이름 인덱스 추출
+
+		string temp;
+		if (strstr(m_strTxtFile.c_str(), "Blue")) temp = "_Blue";
+		else if (strstr(m_strTxtFile.c_str(), "Green")) temp = "_Green";
+		else if (strstr(m_strTxtFile.c_str(), "Red")) temp = "_Red";
+		else if (strstr(m_strTxtFile.c_str(), "Yellow")) temp = "_Yellow";
+
+		m_strObjName = m_strObjName.substr(0, index) + temp
+			+ m_strObjName.substr(index1, index2);
 	}
 
 	g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);

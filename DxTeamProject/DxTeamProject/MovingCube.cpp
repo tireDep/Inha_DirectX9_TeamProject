@@ -2,23 +2,25 @@
 #include "MovingCube.h"
 #include "OBB.h"
 
-MovingCube::MovingCube()
-: IndexNum(1)
+CMovingCube::CMovingCube()
+: m_indexNum(1)
 , m_vPosition(0, 0, 0)
-, istrue(false)
-, speed(0.005)
-, startpos(0)
-, endpos(8)
+, m_istrue(false)
+, m_fSpeed(1.0f)
+, m_fStartPos(0.0f)
+, m_fEndPos(8.0f)
 {
+	D3DXMatrixIdentity(&m_matS);
+	D3DXMatrixIdentity(&m_matR);
+	D3DXMatrixIdentity(&m_matT);
 }
 
 
-MovingCube::~MovingCube()
+CMovingCube::~CMovingCube()
 {
-	
 }
 
-void MovingCube::Setup()
+void CMovingCube::Setup()
 {
 	ST_XFile* xfile = new ST_XFile;
 
@@ -55,7 +57,7 @@ void MovingCube::Setup()
 
 }
 
-void MovingCube::Setup(ST_MapData setData)
+void CMovingCube::Setup(ST_MapData setData)
 {
 	m_strObjName = setData.strObjName;
 	m_strFolder = setData.strFolderPath;
@@ -63,13 +65,19 @@ void MovingCube::Setup(ST_MapData setData)
 	m_strTxtFile = setData.strTxtPath;
 	m_ObjectType = setData.objType;
 
-	D3DXVECTOR3 vScale, vRotate, vTranslate;
+	// D3DXVECTOR3 vScale, vRotate, vTranslate;
+	// 
+	// vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
+	// 						 // JW ADD...
+	// m_vScale = vScale;
+	// vRotate = setData.vRotate;
+	// vTranslate = setData.vTranslate;
 
-	vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
-							 // JW ADD...
-	m_vScale = vScale;
-	vRotate = setData.vRotate;
-	vTranslate = setData.vTranslate;
+	m_vScale = setData.vScale;
+	m_vRotation = setData.vRotate;
+	m_vTranslation = setData.vTranslate;
+
+	m_vPosition = m_vTranslation;
 
 	ST_XFile* xfile = new ST_XFile;
 
@@ -85,6 +93,29 @@ void MovingCube::Setup(ST_MapData setData)
 	m_numMtrls = xfile->nMtrlNum;
 
 	delete xfile;
+
+	m_fStartPos = setData.gimmickData.startPos_movingCube;
+	m_fEndPos = setData.gimmickData.endPos_movingCube;
+	m_fSpeed = setData.gimmickData.speed_movingCube;
+	m_indexNum = setData.gimmickData.directionIndex_movingCube;
+
+	m_vPosition.y += m_fStartPos;
+
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+	
+	m_matS = matS;
+	m_matR = matR;
+	m_matT = matT;
+
+	m_matWorld = matS * matR * matT;
+
+	m_pOBB = new COBB;
+	m_pOBB->Setup(*this);
+	g_pObjectManager->AddOBBbox(m_pOBB);
+	g_pObjectManager->AddGimmick(this);
 
 	//D3DXMATRIXA16 matS, matR, matT;
 	//D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
@@ -105,57 +136,58 @@ void MovingCube::Setup(ST_MapData setData)
 	g_pObjectManager->AddOBBbox(m_pOBB);*/
 }
 
-void MovingCube::Update()
+void CMovingCube::Update(float duration)
 {
-	if (IndexNum == 0 && istrue == false)
+	if (m_indexNum == 0 && m_istrue == false)
 	{
-		m_vPosition.y += speed;
-		if (m_vPosition.y > endpos)
-			istrue = true;
+		m_vPosition.y += m_fSpeed * duration;
+		if (m_vPosition.y > m_fStartPos)
+			m_istrue = true;
 	}
-	else if (IndexNum == 0 && istrue == true)
+	else if (m_indexNum == 0 && m_istrue == true)
 	{
-		m_vPosition.y -= speed;
-		if (m_vPosition.y < startpos)
-			istrue = false;
-	}
-
-	if (IndexNum == 1 && istrue == false)
-	{
-		m_vPosition.x += speed;
-		if (m_vPosition.x > endpos)
-			istrue = true;
-	}
-	else if (IndexNum == 1 && istrue == true)
-	{
-		m_vPosition.x -= speed;
-		if (m_vPosition.x < startpos)
-			istrue = false;
+		m_vPosition.y -= m_fSpeed * duration;
+		if (m_vPosition.y < m_fEndPos)
+			m_istrue = false;
 	}
 
-
-	if (IndexNum == 2 && istrue == false)
+	if (m_indexNum == 1 && m_istrue == false)
 	{
-		m_vPosition.z += speed;
-		if (m_vPosition.z > endpos)
-			istrue = true;
+		m_vPosition.x += m_fSpeed * duration;
+		if (m_vPosition.x > m_fStartPos)
+			m_istrue = true;
 	}
-	else if (IndexNum == 2 && istrue == true)
+	else if (m_indexNum == 1 && m_istrue == true)
 	{
-		m_vPosition.z -= speed;
-		if (m_vPosition.z < startpos)
-			istrue = false;
+		m_vPosition.x -= m_fSpeed * duration;
+		if (m_vPosition.x < m_fEndPos)
+			m_istrue = false;
 	}
 
-	D3DXMatrixRotationY(&matR, 0);
-	D3DXMatrixScaling(&matS, 0.3, 0.3, 0.3);
-	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	m_matWorld = matS * matR * matT;
+	if (m_indexNum == 2 && m_istrue == false)
+	{
+		m_vPosition.z += m_fSpeed * duration;
+		if (m_vPosition.z > m_fStartPos)
+			m_istrue = true;
+	}
+	else if (m_indexNum == 2 && m_istrue == true)
+	{
+		m_vPosition.z -= m_fSpeed * duration;
+		if (m_vPosition.z < m_fEndPos)
+			m_istrue = false;
+	}
+
+	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	m_matWorld = m_matS * m_matR * m_matT;
 
 	m_pOBB->Update(&m_matWorld);
 }
 
-void MovingCube::Render()
+void CMovingCube::Update()
+{
+}
+
+void CMovingCube::Render()
 {
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 

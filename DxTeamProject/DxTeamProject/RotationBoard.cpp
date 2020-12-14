@@ -2,52 +2,38 @@
 #include "RotationBoard.h"
 
 CRotationBoard::CRotationBoard()
-	//: m_pMesh(NULL)
-	//, m_adjBuffer(NULL)
-	//, m_numMtrls(0)
 	: rotationAxial(RotationAxial::NONE)
-	// Test Y Rotation
-	//: rotationAxial(RotationAxial::Rotation_Y)
-	, m_fRotationSpeed(1.0)
+	, m_fRotationSpeed(1.0f)
 	, m_fRotAngle(0.0f)
 {
-	//D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotGimmick);
+	m_strName = string("RotationBoard") + to_string(m_nRefCount);
 }
 
 CRotationBoard::~CRotationBoard()
 {
-	//SafeRelease(m_pMesh);
-	//SafeRelease(m_adjBuffer);
 }
 
-void CRotationBoard::Setup(ST_MapData setData)
+void CRotationBoard::Setup(const ST_MapData & mapData)
 {
-	m_fRotationSpeed = 0.0f;
-	rotationAxial = RotationAxial::NONE;
+	m_strObjName = mapData.strObjName;
+	m_strFolder = mapData.strFolderPath;
+	m_strXFile = mapData.strXFilePath;
+	m_strTxtFile = mapData.strTxtPath;
+	m_ObjectType = mapData.objType;
 
-	m_strObjName = setData.strObjName;
-	m_strFolder = setData.strFolderPath;
-	m_strXFile = setData.strXFilePath;
-	m_strTxtFile = setData.strTxtPath;
-	m_ObjectType = setData.objType;
+	m_vScale = mapData.vScale;
+	m_vRotation = mapData.vRotate;
+	m_vTranslation = mapData.vTranslate;
 
-	D3DXVECTOR3 vScale, vRotate, vTranslate;
-
-	vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
-	// JW ADD...
-	m_vScale = vScale;
-	vRotate = setData.vRotate;
-	vTranslate = setData.vTranslate;
-
-	m_fRotationSpeed = setData.gimmickData.roationSpeed;
-	if (setData.gimmickData.roationAxialIndex == 0)
+	m_fRotationSpeed = mapData.gimmickData.roationSpeed_rotaitonBoard;
+	if (mapData.gimmickData.roationAxialIndex_rotaitonBoard == 0)
 		rotationAxial = RotationAxial::Rotation_X;
-	else if (setData.gimmickData.roationAxialIndex == 1)
+	else if (mapData.gimmickData.roationAxialIndex_rotaitonBoard == 1)
 		rotationAxial = RotationAxial::Rotation_Y;
-	else if (setData.gimmickData.roationAxialIndex == 2)
+	else if (mapData.gimmickData.roationAxialIndex_rotaitonBoard == 2)
 		rotationAxial = RotationAxial::Rotation_Z;
-	else if (setData.gimmickData.roationAxialIndex == 3)
+	else if (mapData.gimmickData.roationAxialIndex_rotaitonBoard == 3)
 		rotationAxial = RotationAxial::NONE;
 
 	ST_XFile* xfile = new ST_XFile;
@@ -65,24 +51,33 @@ void CRotationBoard::Setup(ST_MapData setData)
 
 	delete xfile;
 
-	//D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
-
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(vRotate.x);
-	v.y = D3DXToRadian(vRotate.y);
-	v.z = D3DXToRadian(vRotate.z);
-
-	D3DXMatrixRotationYawPitchRoll(&m_matR, v.x, v.y, v.z);
-
-	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
-	//m_matWorld = matS * matR * matT;
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+	m_matWorld = matS * matR * matT;
 
 	// OBB TEST
 	m_pOBB = new COBB;
 	m_pOBB->Setup(*this);
 	g_pObjectManager->AddOBBbox(m_pOBB);
 	g_pObjectManager->AddGimmick(this);
+
+	//D3DXVECTOR3 vScale, vRotate, vTranslate;
+	//vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
+	//// JW ADD...
+	//m_vScale = vScale;
+	//vRotate = setData.vRotate;
+	//vTranslate = setData.vTranslate;
+	//D3DXMATRIXA16 matS, matR, matT;
+	//D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
+	//D3DXVECTOR3 v;
+	//v.x = D3DXToRadian(vRotate.x);
+	//v.y = D3DXToRadian(vRotate.y);
+	//v.z = D3DXToRadian(vRotate.z);
+	//D3DXMatrixRotationYawPitchRoll(&m_matR, v.x, v.y, v.z);
+	//D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
+	//m_matWorld = matS * matR * matT;
 }
 
 //void RotationBoard::Setup(string folder, string file)
@@ -132,7 +127,12 @@ void CRotationBoard::Update(float duration)
 		break;
 	}
 	
-	m_matWorld = m_matS * m_matRotGimmick * m_matT;
+	D3DXMATRIXA16 matS, matT;
+	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+
+	// Need to Modify... Rotation
+	m_matWorld = matS * m_matRotGimmick * matT;
 	m_pOBB->Update(&m_matWorld);
 }
 
@@ -141,15 +141,6 @@ void CRotationBoard::Render()
 	if (g_pD3DDevice)
 	{
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-
-		// Test
-		//D3DXMATRIXA16 matS, matT;
-		//D3DXMatrixScaling(&matS, 0.03f, 0.03f, 0.03f);
-		//D3DXMatrixTranslation(&matT, -25, 0, 0);
-		
-		// need to Modify... Roation
-		m_matR = m_matRotGimmick;
-		m_matWorld = m_matS * m_matR * m_matT;
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 		if (m_pMesh == NULL)
 			return;

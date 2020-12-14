@@ -6,13 +6,12 @@
 CSkinnedMesh::CSkinnedMesh() :
 	m_pRoot(NULL),
 	m_pAniController(NULL),
-	m_fBlendTime(0.3f),
-	m_fPassedBlendTime(0.0f),
+	m_fBlendTime(0.0f),
+	m_fPassedBlendTime(0.03f),
 	m_isAniBlend(false),
 	m_passedTime(0.0f),
 	m_maxPlayTime(0.0f)
 {
-
 }
 
 CSkinnedMesh::~CSkinnedMesh()
@@ -44,22 +43,47 @@ void CSkinnedMesh::SetUp(char * szFolder, char * szFile)
 	g_pObjectManager->AddOBBbox(m_pOBB);
 
 	LPD3DXANIMATIONSET pAniSet = NULL;
-	m_pAniController->GetAnimationSet(3, &pAniSet);
+	m_pAniController->GetAnimationSet(10, &pAniSet);
 	SafeRelease(pAniSet);
 }
 
-void CSkinnedMesh::Update()
+void CSkinnedMesh::Update(float duration)
 {
-	m_passedTime += g_pTimeManager->GetElapsedTime();
-	//if (m_maxPlayTime <= m_passedTime + m_fBlendTime && strstr(m_sNowPlayAni.c_str(), "Attack"))
-	//{
-	//	// 블랜딩 시간 추가
-	//	SetAnimationIndexBlend(4);
-	//}
+	/// Animation Index
+	// 10 idle
+	// 9 walk
+	// 8 running
+	// 7 jump
+	// 6 fall
+	// 5 push
+	// 4 pull
+	// 3 changeColor
+	// 2 applyColor
+	// 1 Sturn
+	// 0 Getup
+
+	m_passedTime += duration;
+
+	if (m_maxPlayTime <= m_passedTime + m_fBlendTime && strstr(m_sNowPlayAni.c_str(), "ChangeColor"))
+	{
+		SetAnimationIndexBlend(2); // ApplyColor
+	}
+	// else if (m_maxPlayTime <= m_passedTime + m_fBlendTime && strstr(m_sNowPlayAni.c_str(), "Jump"))
+	// {
+	// 	SetAnimationIndexBlend(6); // fall
+	// }
+	else if (m_maxPlayTime <= m_passedTime + m_fBlendTime
+		&& (strstr(m_sNowPlayAni.c_str(), "ApplyColor") 
+		 || strstr(m_sNowPlayAni.c_str(), "Push") 
+		 || strstr(m_sNowPlayAni.c_str(), "Pull")
+		 || strstr(m_sNowPlayAni.c_str(), "Fall")))
+	{
+		SetAnimationIndex(10); // Idle
+	}
 	
 	if (m_isAniBlend)
 	{
-		m_fPassedBlendTime += g_pTimeManager->GetElapsedTime();	// 시간 누적
+		m_fPassedBlendTime += duration;	// 시간 누적
 		if (m_fPassedBlendTime >= m_fBlendTime)
 		{
 			m_isAniBlend = false;
@@ -77,7 +101,7 @@ void CSkinnedMesh::Update()
 		}
 	}
 	if (m_pAniController)
-		m_pAniController->AdvanceTime(g_pTimeManager->GetElapsedTime(), NULL);
+		m_pAniController->AdvanceTime(duration, NULL);
 	
 	if (m_pRoot)
 	{
@@ -301,6 +325,9 @@ void CSkinnedMesh::SetAnimationIndex(int nIndex)
 	m_pAniController->SetTrackAnimationSet(0, pAnimSet);
 	// m_pAniController->ResetTime();	// 처음부터 실행
 
+	SetNowPlayMaxTime(pAnimSet);
+	m_passedTime = 0.0f;
+
 	m_pAniController->GetPriorityBlend();	// 이전 동작과 섞임
 }
 
@@ -331,15 +358,44 @@ void CSkinnedMesh::SetAnimationIndexBlend(int nIndex)
 	m_pAniController->SetTrackWeight(0, 0.0f);
 	m_pAniController->SetTrackWeight(1, 1.0f);
 	// << 가중치
-
+	
+	SetNowPlayMaxTime(pNextAniSet);
 	m_passedTime = 0.0f;
 
 	SafeRelease(pPrevAniSet);
 	SafeRelease(pNextAniSet);
 }
 
+void CSkinnedMesh::SetNowPlayMaxTime(LPD3DXANIMATIONSET aniInfo)
+{
+	m_maxPlayTime = aniInfo->GetPeriod();
+	m_sNowPlayAni = aniInfo->GetName();
+}
+
 void CSkinnedMesh::SetTransform(D3DXMATRIXA16 * pmat)
 {
 	m_matworldTM = *pmat;
+}
+
+bool CSkinnedMesh::CheckAnimationEnd()
+{
+	if (strstr(m_sNowPlayAni.c_str(), "Color") 
+	|| strstr(m_sNowPlayAni.c_str(), "Jump")
+	// || strstr(m_sNowPlayAni.c_str(), "Fall")
+	 || strstr(m_sNowPlayAni.c_str(), "Stun")
+	// || strstr(m_sNowPlayAni.c_str(), "Push")
+	// || strstr(m_sNowPlayAni.c_str(), "Pull")
+	 || strstr(m_sNowPlayAni.c_str(), "Getup"))
+	{
+		// >> 중간에 끊기면 안되는 애니메이션들
+		// >> 색상 변경
+
+		if (m_maxPlayTime <= m_passedTime + m_fBlendTime)
+			return true;
+		else
+			return false;
+	}
+
+	return true;
 }
 

@@ -32,8 +32,14 @@ protected:
 
 	Synthesize(bool, m_isClick, Click);
 	Synthesize(bool, m_isPick, Pick);
+	// >> 현재 클릭한 오브젝트
 
 	Synthesize(D3DXCOLOR, m_dxColor, Color);
+	// >> 색상 변수
+
+	Synthesize(string, m_strConditionName, ConditionName);
+	Synthesize(int, m_conditionOrbindex, ConditionOrbIndex);
+	// >> On/Off 조건 변수
 
 	LPD3DXEFFECT m_pShader;
 	bool isLoad;
@@ -43,6 +49,7 @@ protected:
 	IObject();
 
 	void SetShader(const D3DXMATRIXA16& setMatWorld);
+	void SetShader_ConditionColor();
 
 public:
 	virtual ~IObject();
@@ -58,7 +65,7 @@ public:
 	virtual void Render();
 	virtual void Render_OBB_Box();
 
-	virtual void SetDiffScale(D3DXVECTOR3 set) = 0;
+	virtual void SetDiffScale(D3DXVECTOR3 set);
 	virtual D3DXMATRIXA16 GetmatWorld();
 
 	static void SetRefCnt(int set);

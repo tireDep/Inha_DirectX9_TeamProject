@@ -18,8 +18,8 @@ public:
 	void Update(float duration);
 
 	bool hasIntersected(CCylinder * otherCylinder);
-	bool hasIntersected(CGimmick * otherIObject);
 	bool hasIntersected(IObject * otherIObject);
+	//bool hasIntersected(CGimmick * otherIObject);
 
 	string GetName();
 	// OBB TEST

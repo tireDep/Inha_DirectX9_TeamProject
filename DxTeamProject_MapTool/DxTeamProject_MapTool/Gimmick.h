@@ -4,6 +4,8 @@
 class CGimmick : public IObject
 {
 protected:
+	OnOffCondition	m_openCondition;
+
 	CGimmick();
 
 public:

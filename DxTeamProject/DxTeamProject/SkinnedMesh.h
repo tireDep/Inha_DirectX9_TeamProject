@@ -31,7 +31,7 @@ public:
 	~CSkinnedMesh();
 
 	void SetUp(char* szFolder, char* szFile);
-	void Update();
+	void Update(float duration);
 	void Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent);
 	void Update(ST_BONE* pCurrent, D3DXMATRIXA16* pMatParent);
 	void Render(LPD3DXFRAME pFrame);
@@ -41,9 +41,14 @@ public:
 	void SetAnimationIndex(int nIndex); // 애니메이션
 	void SetAnimationIndexBlend(int nIndex); //  애니메이션 블렌드
 
+	void SetNowPlayMaxTime(LPD3DXANIMATIONSET aniInfo);
+
 	void SetTransform(D3DXMATRIXA16 * pmat); // << 월드 매트릭스 설정
 
+	COBB* GetOBB() { return m_pOBB; }
 	//CPSOBB* GetOBB() { return m_pOBB; }
+
+	bool CheckAnimationEnd();
 };
 
 

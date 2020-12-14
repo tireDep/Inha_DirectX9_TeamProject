@@ -94,6 +94,10 @@ Material _Brickdefault {
  10.000000;
  0.000000;0.000000;0.000000;;
  0.000000;0.000000;0.000000;;
+
+TextureFilename {
+  "Brick.bmp";
+  }
 }
 
 Frame Brick {

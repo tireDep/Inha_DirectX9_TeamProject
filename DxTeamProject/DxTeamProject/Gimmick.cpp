@@ -3,25 +3,24 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 #include "Door.h"
+#include "MovingCube.h"
 
 CGimmick::CGimmick()
-	//: m_pOBB(NULL)
 {
 }
 
 CGimmick::~CGimmick()
 {
-	//SafeDelete(m_pOBB)
 }
 
-void CGimmick::Setup(ST_MapData setData)
+void CGimmick::Setup(const ST_MapData & mapData)
 {
-	switch (setData.objType)
+	switch (mapData.objType)
 	{
 		case eG_RotationBoard:
 			{
 				CRotationBoard* rotationBoard = new CRotationBoard;
-				rotationBoard->Setup(setData);
+				rotationBoard->Setup(mapData);
 			}
 			break;
 
@@ -31,7 +30,7 @@ void CGimmick::Setup(ST_MapData setData)
 		case eG_DoorFrame: case eG_Door:
 			{
 				CDoor* door = new CDoor;
-				door->Setup(setData);
+				door->Setup(mapData);
 			}
 			break;
 
@@ -41,7 +40,14 @@ void CGimmick::Setup(ST_MapData setData)
 		case eG_Switch:
 		{
 			CSwitch* cSwitch = new CSwitch;
-			cSwitch->Setup(setData);
+			cSwitch->Setup(mapData);
+		}
+			break;
+
+		case eG_MovingCube:
+		{
+			CMovingCube* movingCube = new CMovingCube;
+			movingCube->Setup(mapData);
 		}
 			break;
 	} // << switch

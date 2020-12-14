@@ -8,7 +8,10 @@ CBook::CBook()
 	: m_fRotationSpeed(1.0f)
 	, m_fRotAngle(0.0f)
 {
-	D3DXMatrixIdentity(&m_matRot);
+	D3DXMatrixIdentity(&m_matS);
+	D3DXMatrixIdentity(&m_matR);
+	D3DXMatrixIdentity(&m_matT);
+
 	CBook::m_nCount += 1;
 }
 
@@ -70,7 +73,6 @@ void CBook::Setup(ST_MapData setData)
 
 	delete xfile;
 
-	//D3DXMATRIXA16 matS, matR, matT;
 	D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
 
 	D3DXVECTOR3 v;
@@ -78,31 +80,28 @@ void CBook::Setup(ST_MapData setData)
 	v.y = D3DXToRadian(vRotate.y);
 	v.z = D3DXToRadian(vRotate.z);
 
-	D3DXMatrixRotationYawPitchRoll(&m_matR, v.x, v.y, v.z);
+	D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
 
 	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
-	//m_matWorld = matS * matR * matT;
+	m_matWorld = m_matS * m_matR * m_matT;
 
 	// OBB TEST
-	//m_pOBB = new CPSOBB;
-	//m_pOBB->Setup(*this);
+	m_pOBB = new COBB;
+	m_pOBB->Setup(*this);
 	g_pObjectManager->AddOBBbox(m_pOBB);
 }
 
 void CBook::Update(float duration)
 {
 	m_fRotAngle += m_fRotationSpeed * duration;
+
 	if (m_fRotAngle > 2 * D3DX_PI)
 		m_fRotAngle -= 2 * D3DX_PI;
-	D3DXMatrixRotationY(&m_matRot, m_fRotAngle);
+
+	D3DXMatrixRotationY(&m_matR, m_fRotAngle);
 
 	//if(hasIntersected)
-	//	g_gameManager->SetItem(m_nCount);
-
-
-
-	m_matWorld = m_matRot;
-//	m_matWorld = m_matS * m_matRot * m_matT;
+	//	g_pGameManager->SetItem(m_nCount);
 
 	//m_pOBB->Update(&m_matWorld);
 }
@@ -129,6 +128,8 @@ void CBook::Render()
 	//D3DXMatrixTranslation(&matT, 12, 0, 0);
 	//matWorld = matS* matR * matT;
 	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+
+	m_matWorld = m_matS * m_matR * m_matT;
 
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);

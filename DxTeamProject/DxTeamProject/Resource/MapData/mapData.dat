@@ -1,26 +1,26 @@
 # Object_Start
 # ObjectName
-Switch1
+Book1
 # FolderPath
-Resource/XFile/Gimmick/Switch
+Resource/XFile/Book
 # FilePath
-Force_switch.X
+book.X
 # TxtPath
-cubeworld_texture.tga
+Bookshelf_diffuse.png
 # ObjectType
-31
+33
 # Scale
-0.1
-0.1
-0.1
+1
+1
+1
 # Rotate
 0
-0
+90
 0
 # Translate
-9.5
-9.5
+0.5
 0
+0.5
 # Color
 0.5
 0.5

@@ -11,6 +11,7 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 #include "Door.h"
+#include "MovingCube.h"
 
 #include "ImguiClass.h"
 
@@ -23,59 +24,76 @@ void CImguiClass::SetVecItem()
 	vector<ObjectType> tempObjType;
 	if (m_NowLoadType == LoadType::eMap)
 	{
-		tempVec.push_back("Grass"); tempObjType.push_back(eTile01);
-		tempVec.push_back("Ground01"); tempObjType.push_back(eTile02);
-		tempVec.push_back("Ground02"); tempObjType.push_back(eTile03);
-		tempVec.push_back("Rock01"); tempObjType.push_back(eTile04);
-		tempVec.push_back("Rock02"); tempObjType.push_back(eTile05);
-		tempVec.push_back("Sand01"); tempObjType.push_back(eTile06);
-		tempVec.push_back("Sand02"); tempObjType.push_back(eTile07);
-		tempVec.push_back("Yellow"); tempObjType.push_back(eTile08);
-		tempVec.push_back("Water01"); tempObjType.push_back(eTile09);
-		tempVec.push_back("Water02"); tempObjType.push_back(eTile10);
-		tempVec.push_back("Water03"); tempObjType.push_back(eTile11);
-		tempVec.push_back("Water04"); tempObjType.push_back(eTile12);
-		tempVec.push_back("Ocean"); tempObjType.push_back(eTile13);
+		tempVec.push_back("Tile_01_grass");		tempObjType.push_back(eTile01);
+		tempVec.push_back("Tile_02_ground");	tempObjType.push_back(eTile02);
+		tempVec.push_back("Tile_04_ground2");	tempObjType.push_back(eTile03);
+		tempVec.push_back("Tile_05_rock");		tempObjType.push_back(eTile04);
+		tempVec.push_back("Tile_07_rock2");		tempObjType.push_back(eTile05);
+		tempVec.push_back("Tile_11_sand");		tempObjType.push_back(eTile06);
+		tempVec.push_back("Tile_12_sand2");		tempObjType.push_back(eTile07);
+		tempVec.push_back("Tile_13_water");		tempObjType.push_back(eTile08);
+		tempVec.push_back("Tile_14_water2");	tempObjType.push_back(eTile09);
+		tempVec.push_back("Tile_15_water3");	tempObjType.push_back(eTile10);
+		tempVec.push_back("Tile_16_water4");	tempObjType.push_back(eTile11);
+		tempVec.push_back("Tile_17_yellow");	tempObjType.push_back(eTile12);
+
+		tempVec.push_back("Tile_Ocean");		tempObjType.push_back(eTile13);
+
+		tempVec.push_back("Bridge");			tempObjType.push_back(eBridge);
 	}
 	else if (m_NowLoadType == LoadType::eObject)
 	{
-		tempVec.push_back("Box");			tempObjType.push_back(eBox);
-		tempVec.push_back("Sphere");		tempObjType.push_back(eSphere);
-		tempVec.push_back("Cylinder");		tempObjType.push_back(eCylinder);
+		tempVec.push_back("Object_Box");			tempObjType.push_back(eBox);
+		tempVec.push_back("Object_Sphere");			tempObjType.push_back(eSphere);
+		tempVec.push_back("Object_Cylinder");		tempObjType.push_back(eCylinder);
 	}
 	else if (m_NowLoadType == LoadType::eBackground)
 	{
-		tempVec.push_back("Tree01");
-		tempVec.push_back("Tree02");
-		tempVec.push_back("Tree03");
-		tempVec.push_back("Tree04");
-		tempVec.push_back("Tree05");
-		tempVec.push_back("Tree06");
-
 		if (m_SubType == LoadType::eAutumnTree)
 		{
+			tempVec.push_back("autumn_tree_01");
+			tempVec.push_back("autumn_tree_02");
+			tempVec.push_back("autumn_tree_03");
+			tempVec.push_back("autumn_tree_04");
+			tempVec.push_back("autumn_ctree_07");
+			tempVec.push_back("autumn_tree_08");
+
 			for (int i = 0; i < tempVec.size(); i++)
 				tempObjType.push_back(eATree);
 		}
 		else if (m_SubType == LoadType::eSummerTree)
 		{
+			tempVec.push_back("summer_tree_01");
+			tempVec.push_back("summer_tree_02");
+			tempVec.push_back("summer_tree_03");
+			tempVec.push_back("summer_tree_04");
+			tempVec.push_back("summer_ctree_07");
+			tempVec.push_back("summer_tree_08");
+
 			for (int i = 0; i < tempVec.size(); i++)
 				tempObjType.push_back(eSTree);
 		}
 		else if (m_SubType == LoadType::eWinterTree)
 		{
+			tempVec.push_back("winter_tree_01");
+			tempVec.push_back("winter_tree_02");
+			tempVec.push_back("winter_tree_03");
+			tempVec.push_back("winter_tree_04");
+			tempVec.push_back("winter_ctree_07");
+			tempVec.push_back("winter_tree_08");
+
 			for (int i = 0; i < tempVec.size(); i++)
 				tempObjType.push_back(eWTree);
 		}
 		else if (m_SubType == LoadType::eColorTree)
 		{
 			tempVec.clear();
-			tempVec.push_back("Tree01");
-			tempVec.push_back("Tree02");
-			tempVec.push_back("Bush01");
-			tempVec.push_back("Bush02");
-			tempVec.push_back("Shrub01");
-			tempVec.push_back("Shrub02");
+			tempVec.push_back("A_Tree_blue_016");
+			tempVec.push_back("A_Tree_blue_020");
+			tempVec.push_back("C_Bush_blue_070");
+			tempVec.push_back("C_Bush_blue_071");
+			tempVec.push_back("D_Shrub_blue_101");
+			tempVec.push_back("D_Shrub_blue_102");
 
 			for (int i = 0; i < tempVec.size(); i++)
 				tempObjType.push_back(eCTree);
@@ -84,43 +102,44 @@ void CImguiClass::SetVecItem()
 		else if (m_SubType == LoadType::eSomethingElse)
 		{
 			tempVec.clear();
-#ifdef _DEBUG
-			tempVec.push_back("BlueFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("OrangeFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("PurpleFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("RedFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("WhiteFlower"); tempObjType.push_back(eFlower);
-			tempVec.push_back("YellowFlower"); tempObjType.push_back(eFlower);
-#endif // _DEBUG
+			tempVec.push_back("flower_white");		tempObjType.push_back(eFlower);
+			tempVec.push_back("flower_purple");		tempObjType.push_back(eFlower);
+			tempVec.push_back("flower_red");		tempObjType.push_back(eFlower);
+			tempVec.push_back("flower_orange");		tempObjType.push_back(eFlower);
+			tempVec.push_back("flower_blue");		tempObjType.push_back(eFlower);
+			tempVec.push_back("flower_yellow");		tempObjType.push_back(eFlower);
 
-			tempVec.push_back("BeachBall"); tempObjType.push_back(eBall);
-			tempVec.push_back("Chair"); tempObjType.push_back(eChair);
-			tempVec.push_back("Umbrella"); tempObjType.push_back(eUmbrella);
-			tempVec.push_back("Snowman"); tempObjType.push_back(eSnowman);
+			tempVec.push_back("sprout");			tempObjType.push_back(eSprout);
 
-#ifdef _DEBUG
-			tempVec.push_back("InvisibleWall"); tempObjType.push_back(eInvisibleWall);
-#endif // _DEBUG
+			tempVec.push_back("ball");				tempObjType.push_back(eBall);
+			tempVec.push_back("blue chair");		tempObjType.push_back(eChair);
+			tempVec.push_back("Umbrella_blue");		tempObjType.push_back(eUmbrella);
+			tempVec.push_back("Snowman");			tempObjType.push_back(eSnowman);
+
+			tempVec.push_back("BackGround_InvisibleWall"); tempObjType.push_back(eInvisibleWall);
 		}
 
 
 	} // << background
 
-#ifdef _DEBUG
+
 	else if (m_NowLoadType == LoadType::eGimmick)
 	{
-		tempVec.push_back("RotationBoard");		tempObjType.push_back(eG_RotationBoard);
-		tempVec.push_back("Switch");			tempObjType.push_back(eG_Switch);
-		tempVec.push_back("Door");				tempObjType.push_back(eG_DoorFrame);
-		tempVec.push_back("ColorChanger");		tempObjType.push_back(eG_ColorChanger);
-		tempVec.push_back("BreakWall");			tempObjType.push_back(eG_BreakWall);
-		tempVec.push_back("MovingCube");		tempObjType.push_back(eG_MovingCube);
+		tempVec.push_back("Gimmick_RotationBoard");		tempObjType.push_back(eG_RotationBoard);
+		tempVec.push_back("Gimmick_MovingCube");		tempObjType.push_back(eG_MovingCube);
+#ifdef _DEBUG
+		tempVec.push_back("Gimmick_Switch");			tempObjType.push_back(eG_Switch);
+		tempVec.push_back("Gimmick_Door");				tempObjType.push_back(eG_DoorFrame);
+		tempVec.push_back("Gimmick_ColorChanger");		tempObjType.push_back(eG_ColorChanger);
+		tempVec.push_back("Gimmick_BreakWall");			tempObjType.push_back(eG_BreakWall);
+#endif
 	}
 
+#ifdef _DEBUG
 	else if (m_NowLoadType == LoadType::eItem)
 	{
-		tempVec.push_back("Book");	tempObjType.push_back(eBook);
-		tempVec.push_back("Orb");	tempObjType.push_back(eOrb);
+		tempVec.push_back("Item_Book");	tempObjType.push_back(eBook);
+		tempVec.push_back("Item_Orb");	tempObjType.push_back(eOrb);
 	}
 #endif
 
@@ -177,7 +196,7 @@ void CImguiClass::SetObjectColor()
 
 CImguiClass::CImguiClass() :
 	m_isReset(false),
-	m_FileLoadIndex(-1),
+	m_FileLoadIndex(0),
 	m_showItem("\0"),
 	m_pMesh(NULL)
 {
@@ -476,14 +495,14 @@ void CImguiClass::Update_FileLoader()
 {
 	ImGui::Begin("File Loader");
 
-	if (ImGui::RadioButton("MapTile", m_NowLoadType == LoadType::eMap)) { m_NowLoadType = LoadType::eMap; m_FileLoadIndex = -1; }
-	ImGui::SameLine(); if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = -1; }
+	if (ImGui::RadioButton("MapTile", m_NowLoadType == LoadType::eMap)) { m_NowLoadType = LoadType::eMap; m_FileLoadIndex = 0; }
+	ImGui::SameLine(); if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = 0; }
 
-	if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = -1; }
+	if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = 0; }
+
+	ImGui::SameLine();  if (ImGui::RadioButton("Gimmick", m_NowLoadType == LoadType::eGimmick)) { m_NowLoadType = LoadType::eGimmick; m_FileLoadIndex = 0; }
 #ifdef _DEBUG
-	ImGui::SameLine();  if (ImGui::RadioButton("Gimmick", m_NowLoadType == LoadType::eGimmick)) { m_NowLoadType = LoadType::eGimmick; m_FileLoadIndex = -1; }
-
-	if (ImGui::RadioButton("Item", m_NowLoadType == LoadType::eItem)) { m_NowLoadType = LoadType::eItem; m_FileLoadIndex = -1; }
+	if (ImGui::RadioButton("Item", m_NowLoadType == LoadType::eItem)) { m_NowLoadType = LoadType::eItem; m_FileLoadIndex = 0; }
 	// ImGui::SameLine();  if (ImGui::RadioButton("EventTrigger", m_NowLoadType == LoadType::eTrigger)) { m_NowLoadType = LoadType::eTrigger; m_FileLoadIndex = -1; }
 #endif // _DEBUG
 
@@ -497,13 +516,13 @@ void CImguiClass::Update_FileLoader()
 	else if (m_NowLoadType == LoadType::eBackground)
 	{
 		// >> 배경 나무들은 세부 선택 존재
-		if (ImGui::RadioButton("AutumnTree", m_SubType == LoadType::eAutumnTree)) { m_SubType = LoadType::eAutumnTree; m_FileLoadIndex = -1; }
-		ImGui::SameLine(); if (ImGui::RadioButton("SummerTree", m_SubType == LoadType::eSummerTree)) { m_SubType = LoadType::eSummerTree; m_FileLoadIndex = -1; }
+		if (ImGui::RadioButton("AutumnTree", m_SubType == LoadType::eAutumnTree)) { m_SubType = LoadType::eAutumnTree; m_FileLoadIndex = 0; }
+		ImGui::SameLine(); if (ImGui::RadioButton("SummerTree", m_SubType == LoadType::eSummerTree)) { m_SubType = LoadType::eSummerTree; m_FileLoadIndex = 0; }
 
-		if (ImGui::RadioButton("WinterTree", m_SubType == LoadType::eWinterTree)) { m_SubType = LoadType::eWinterTree; m_FileLoadIndex = -1; }
-		ImGui::SameLine(); if (ImGui::RadioButton("ColorTree", m_SubType == LoadType::eColorTree)) { m_SubType = LoadType::eColorTree; m_FileLoadIndex = -1; }
+		if (ImGui::RadioButton("WinterTree", m_SubType == LoadType::eWinterTree)) { m_SubType = LoadType::eWinterTree; m_FileLoadIndex = 0; }
+		ImGui::SameLine(); if (ImGui::RadioButton("ColorTree", m_SubType == LoadType::eColorTree)) { m_SubType = LoadType::eColorTree; m_FileLoadIndex = 0; }
 
-		if (ImGui::RadioButton("SomethingElse", m_SubType == LoadType::eSomethingElse)) { m_SubType = LoadType::eSomethingElse; m_FileLoadIndex = -1; }
+		if (ImGui::RadioButton("SomethingElse", m_SubType == LoadType::eSomethingElse)) { m_SubType = LoadType::eSomethingElse; m_FileLoadIndex = 0; }
 
 		SetVecItem();
 		m_PreLoadType = m_NowLoadType;
@@ -604,16 +623,18 @@ void CImguiClass::Update_Inspector()
 				case eATree:	case eSTree:	case eWTree:	case eCTree:
 				case eSomethingElse:	case eBall:	case eChair:	case eUmbrella:
 				case eSnowman:	
-#ifdef _DEBUG
-				case eFlower:	
-#endif // _DEBUG
+
+				case eFlower:	case eSprout:
 				
 				case eInvisibleWall:
 
-				case eG_RotationBoard:	case eG_BreakWall:	
+				case eG_RotationBoard:	case eG_MovingCube:
+
+#ifdef _DEBUG 				
+				case eG_BreakWall:
 				case eG_ColorChanger:	case eG_Switch:		
-#ifdef _DEBUG 
-				case eG_Razer:		case eG_MovingCube:
+
+				case eBook:				case eOrb:
 #endif
 				{
 					g_pObjectManager->GetIObject(m_nowSelectindex).SetDiffScale(vScale);
@@ -621,9 +642,9 @@ void CImguiClass::Update_Inspector()
 					break;
 
 #ifdef _DEBUG
-				case eG_DoorFrame:	case eG_Door:
+				case eG_DoorFrame:	 case eG_Door:
 				{
-					CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+					CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 					temp->SetAnotherScale(vScale);
 				}
 				break;
@@ -822,6 +843,147 @@ void CImguiClass::Update_Inspector()
 				} // << : for
 
 				ImGui::Separator();
+			}
+
+			// >> 무빙 큐브 기믹 : 시작점&끝점, 속도, 방향
+			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_MovingCube)
+			{
+				CMovingCube* temp = dynamic_cast<CMovingCube*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+				ImGui::Text("Direction");
+				static int pushIndex = 0;
+				pushIndex = temp->GetDirection();
+				string charName[3] = { "X", "Y", "Z" };
+				for (int i = 0; i < 3; i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str(), pushIndex == i))
+					{
+						pushIndex = i;
+						temp->SetDirection(pushIndex);
+					}
+				} // << : for
+
+				ImGui::Separator();
+
+				float inputS = temp->GetStartPos();
+				if (ImGui::InputFloat("StartPos", &inputS))
+					temp->SetStartPos(inputS);
+
+				float inputE = temp->GetEndPos();
+				if (ImGui::InputFloat("EndPos", &inputE))
+					temp->SetEndPos(inputE);
+
+				ImGui::Separator();
+
+				float inputSpeed = temp->GetSpeed();
+				if (ImGui::InputFloat("Speed", &inputSpeed))
+					temp->SetSpeed(inputSpeed);
+
+			}
+
+			// >> 문, 컬러레이저 기믹 : On/Off 조건 선택
+			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_DoorFrame
+			// 	  || g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_Door
+				  || g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_ColorChanger)
+			{
+				CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+				ImGui::Text("On/Off Condition");
+				int pushIndex = temp->GetOpenConditionIndex();
+				string charName[3] = { "Orb", "Item", "Switch" };
+
+				for (int i = 0; i < 3; i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str(), pushIndex == i))
+					{
+						pushIndex = i;
+					}
+					if (i < 2) ImGui::SameLine();
+				} // << : for
+
+				ImGui::Separator();
+
+				int conditionNum = temp->GetOpenConditionIndex();
+				if (pushIndex == 0)
+				{
+					if (conditionNum > 0)
+					{
+						g_pObjectManager->RemoveCondition(temp->GetConditionName());
+						temp->SetConditionName("Black");
+						temp->SetConditionOrbIndex(0);
+					}
+
+					// >> 오브 선택
+					int orbType = temp->GetConditionOrbIndex();
+					string charName[6] = { "Black", "White", "Yellow", "Green", "Red", "Blue" };
+
+					for (int i = 0; i < 6; i++)
+					{
+						if (ImGui::RadioButton(charName[i].c_str(), orbType == i))
+						{
+							temp->SetConditionOrbIndex(i);
+							temp->SetConditionName(charName[i]);
+						}
+					} // << : for
+					
+					temp->SetOpenCondition(pushIndex);
+
+					ImGui::Separator();
+				}
+				else if (pushIndex == 1 && pushIndex != conditionNum)
+				{
+					// >> 조건 바뀔 시 기존 조건 삭제
+					if (temp->GetConditionName() != "")
+					{
+						if (conditionNum >  0)
+							g_pObjectManager->RemoveCondition(temp->GetConditionName());
+						temp->SetConditionName("");
+					}
+
+					// >> 아이템 선택
+					if(temp->GetConditionName() == "")
+						IObject::CreateObject(eBook, 0);
+
+					D3DXVECTOR3 pos = temp->GetTranslate();
+					pos.x -= 2;		pos.z -= 2;
+					g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).SetTranslate(pos);
+					g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).SetConditionName(temp->GetObjectName());
+
+					temp->SetOpenCondition(pushIndex);
+					temp->SetConditionName(g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).GetObjectName());
+				}
+				else if (pushIndex == 2 && pushIndex != conditionNum)
+				{
+					// >> 조건 바뀔 시 기존 조건 삭제
+					if (temp->GetConditionName() != "")
+					{
+						if (conditionNum >  0)
+							g_pObjectManager->RemoveCondition(temp->GetConditionName());
+						temp->SetConditionName("");
+					}
+
+					// >> 스위치 선택
+					if (temp->GetConditionName() == "")
+						IObject::CreateObject(eG_Switch, 0);
+
+					D3DXVECTOR3 pos = temp->GetTranslate();
+					pos.x -= 2;		pos.z -= 2;
+					g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).SetTranslate(pos);
+					g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).SetConditionName(temp->GetObjectName());
+
+					temp->SetOpenCondition(pushIndex);
+					temp->SetConditionName(g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).GetObjectName());
+				}
+
+				ImGui::Text("Now Condition");
+				ImGui::Text("OpenType : ");
+				ImGui::SameLine(); ImGui::Text(temp->GetOpenConditionType().c_str());
+				ImGui::Text("Condition : ");
+				ImGui::SameLine(); ImGui::Text(temp->GetConditionName().c_str());
+			}
+			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetConditionName() != "")
+			{
+				ImGui::Text("Now Condition");
+				ImGui::Text("Condition : ");
+				ImGui::SameLine(); ImGui::Text(g_pObjectManager->GetIObject(m_nowSelectindex).GetConditionName().c_str());
 			}
 
 		} // << : if (m_nowSelectindex >= 0)

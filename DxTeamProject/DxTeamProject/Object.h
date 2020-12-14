@@ -11,6 +11,14 @@ class CObject : public IListener
 protected:
 	static int    m_nRefCount;
 	Synthesize_Pass_by_Ref(D3DXMATRIXA16, m_matWorld, matWorld);
+	Synthesize_Pass_by_Ref(D3DXMATRIXA16, m_matS, matS);
+	Synthesize_Pass_by_Ref(D3DXMATRIXA16, m_matT, matT);
+	Synthesize_Pass_by_Ref(D3DXMATRIXA16, m_matR, matR);
+
+	Synthesize(D3DXVECTOR3, m_vScale, Scale);
+	Synthesize(D3DXVECTOR3, m_vRotation, Rotation);
+	Synthesize(D3DXVECTOR3, m_vTranslation, Translation);
+
 
 	D3DMATERIAL9 m_stMtl;
 	LPDIRECT3DTEXTURE9 m_pTexture;
@@ -30,7 +38,6 @@ protected:
 
 	Synthesize(ObjectType, m_ObjectType, ObjType);
 
-	Synthesize(D3DXVECTOR3, m_vScale, Scale);
 	/// Color
 	//bool		  m_isPicked;
 	//bool		  m_isClicked;

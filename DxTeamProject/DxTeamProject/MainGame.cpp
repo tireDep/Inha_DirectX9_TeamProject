@@ -112,12 +112,15 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
-	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "OBBBackgroundTest.dat");
+	g_pGameManager->SetLoadData();
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToTree.dat");
+
 #ifdef _DEBUG
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 	// >> mapData
 #else
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 #endif // DEBUG
 	
 	m_pGrid = new CGrid;
@@ -163,11 +166,11 @@ void CMainGame::Setup()
 	// m_pGimmick_RotationBoard = new RotationBoard;
 	// m_pGimmick_RotationBoard->Setup("Resource/XFile/Gimmick/RotationBoard", "Rotation_board.X");
 
-	// m_pGimmick_Switch = new CSwitch;
-	// m_pGimmick_Switch->Setup();
+	/* m_pGimmick_Switch = new CSwitch;
+	 m_pGimmick_Switch->Setup();*/
 
 	//m_pGimmick_BreakableWall[0] = new CBreakableWall;
-	//m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "standard_wall.X");
+	//m_pGimmick_BreakableWall[0]->Setup("Resource/XFile/Gimmick/BreakableWall", "Pillar.X");
 	//m_pGimmick_BreakableWall[1] = new CBreakableWall;
 	//m_pGimmick_BreakableWall[1]->Setup("Resource/XFile/Gimmick/BreakableWall", "brick.X");
 
@@ -177,9 +180,10 @@ void CMainGame::Setup()
 	m_pDragon = new CDragon;
 	m_pDragon->Setup();
 
-	g_pEventManager->AddListener(g_gameManager);
+	g_pEventManager->AddListener(g_pGameManager);
 	g_pEventManager->AddListener(m_pCamera);
 	g_pEventManager->AddListener(m_pCharacter);
+	g_pEventManager->AddListener(m_pDragon);
 	g_pEventManager->AddListener(m_pUI);
 
 	for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
@@ -214,7 +218,7 @@ void CMainGame::Setup()
 void CMainGame::Update()
 {
 	g_pTimeManager->Update();
-	g_pEventManager->Update();
+	g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
 	if (m_pCamera)
 		m_pCamera->Update();
@@ -225,9 +229,11 @@ void CMainGame::Update()
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
-		//m_pDragon->DoRotation(m_pCharacter->Getrotation(), m_pCamera->GetCameraDirection());
-		m_pDragon->Update(m_pCharacter->GetPosition());
+		m_pDragon->DirectionSet(m_pCamera->GetCameraDirection());
+		m_pDragon->Update(m_pCharacter->GetPosition(), g_pTimeManager->GetElapsedTime());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
+		/// OBB TEST
+		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[2]);
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
@@ -264,17 +270,17 @@ void CMainGame::Update()
 			break;
 		}
 		// grab
-		if (m_pCharacter->Update(g_pObjectManager->GetVecPObejct()) != -1)
+		if (m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime()) != -1)
 		{
 			m_pText->SetisGrabstate(true);
 			D3DXVECTOR3 v;
-			v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct())]->GetPosition() - m_pCharacter->GetPosition();
+			v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->GetPosition() - m_pCharacter->GetPosition();
 			v.y -= 0.5f;
 			//v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
 			//v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
 			//v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
 			D3DXVec3Normalize(&v, &v);
-			g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct())]->SetPusingForce(v);
+			g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->SetPusingForce(v);
 		}
 		else
 		{
@@ -284,7 +290,7 @@ void CMainGame::Update()
 		/*m_pCharacter->UpdateRayYCheck(*m_pMeshTile);*/
 	}
 
-	 //if (g_gameManager->GetGridMapMode())
+	 //if (g_pGameManager->GetGridMapMode())
 	 //{
 	 //	m_pPrevFrustum = m_pNowFrustum;
 	 //	m_pNowFrustum.Update();
@@ -294,7 +300,7 @@ void CMainGame::Update()
 	 //	}
 	 //}
 
-	if (g_gameManager->GetGridMapMode())
+	if (g_pGameManager->GetGridMapMode())
 	{
 		m_pPrevFrustum = m_pNowFrustum;
 		m_pNowFrustum.Update();
@@ -320,7 +326,7 @@ void CMainGame::Update()
 	g_pObjectManager->Update(ray, m_pCharacter->GetColor());		// Color Change
 	g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());	// PObject Physics
 	g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());		// IObject(Gimmick) Physics
-	g_pObjectManager->Collide();									// Collide
+	g_pObjectManager->Collide(g_pTimeManager->GetElapsedTime());	// Collide
 	///
 	//m_pBox->Update(g_pTimeManager->GetElapsedTime());
 	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
@@ -340,8 +346,11 @@ void CMainGame::Update()
 	//if (m_pChanger)
 	//	m_pChanger->Update();
 
-	//if (m_pMovingCube)
-	//	m_pMovingCube->Update();
+	/*if (m_pMovingCube)
+		m_pMovingCube->Update();*/
+
+
+	
 
 	//for(int i =0 ; i < m_pMeshTile.size(); ++i)
 	//if (m_pMeshTile[i])
@@ -365,15 +374,15 @@ void CMainGame::Update()
 	//}
 	// if (m_pGimmick_Switch)
 	// 	m_pGimmick_Switch->Update();
-	// 
-	// 
-	// if (COBB::IsCollision(g_pObjectManager->GetvecOBB(), m_pGimmick_Switch->GetOBB2()) == true)
+	//// 
+	//// 
+	// if (COBB::IsCollision(m_pMovingCube->GetOBB(), m_pGimmick_Switch->GetOBB()) == true)
 	// {
-	// 	m_pGimmick_Switch->SetBool(true);
+	//	 cout << 1 << endl;
 	// }
 	// else
 	// {
-	// 	m_pGimmick_Switch->SetBool(false);
+	//	 cout << 2 << endl;
 	// }
 
 	//if (m_pGimmick_BreakableWall[0])
@@ -419,7 +428,7 @@ void CMainGame::Render()
 	//if (m_pHeightMap)
 	//	m_pHeightMap->Render();
 
-	if (g_gameManager->GetDevMode())
+	if (g_pGameManager->GetDevMode())
 	{
 		if (m_pText)
 		{
@@ -437,8 +446,8 @@ void CMainGame::Render()
 	// Ray y check
 
 	/*if(m_pMovingCube)
-		m_pMovingCube->Render();
-*/
+		m_pMovingCube->Render();*/
+
 	//for(int i =0; i < m_pMeshTile.size(); ++i)
 	//	m_pMeshTile[i]->Render();
 
@@ -452,12 +461,11 @@ void CMainGame::Render()
 	//	m_pGimmick_Door[1]->Render();
 	//if (m_pGimmick_RotationBoard)
 	//	m_pGimmick_RotationBoard->Render();
-	// if (m_pGimmick_Switch)
-	// 	m_pGimmick_Switch->Render();
+	/* if (m_pGimmick_Switch)
+	 	m_pGimmick_Switch->Render();*/
 	//if (m_pChanger)
 	//	m_pChanger->Render();
-	/*if (m_pGimmick_Switch)
-		m_pGimmick_Switch->Render();*/
+
 	/*if (m_pChanger)
 		m_pChanger->Render();*/
 	//if (m_pGimmick_BreakableWall[0])
@@ -472,7 +480,7 @@ void CMainGame::Render()
 	if (m_pDragon)
 		m_pDragon->Render();
 
-	if (g_gameManager->GetUImode())
+	if (g_pGameManager->GetUImode())
 	{
 		if (m_pUI)
 			m_pUI->UI_Render();

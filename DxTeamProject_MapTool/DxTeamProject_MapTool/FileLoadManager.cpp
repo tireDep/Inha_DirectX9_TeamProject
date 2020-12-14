@@ -3,8 +3,10 @@
 #include <fstream>
 #include "stdafx.h"
 #include "IObject.h"
-#include "RotationBoard.h"
 #include "FileLoadManager.h"
+#include "RotationBoard.h"
+#include "MovingCube.h"
+#include "Door.h"
 
 #define StrFilePath(path, folder, file) { path = string(folder) + "/" + string(file); }
 #define ErrMessageBox(msg, type) { MessageBoxA(g_hWnd, string(msg).c_str(), string(type).c_str(), MB_OK); }
@@ -42,6 +44,114 @@ LPD3DXEFFECT CFileLoadManager::LoadShader(const string fileName)
 	return ret;
 }
 
+void CFileLoadManager::ReadAndCutSlashR(ifstream & mapFile, string & readData)
+{
+	getline(mapFile, readData);
+	if (strstr(readData.c_str(), "\r"))
+		readData = readData.substr(0, readData.length() - 1);
+}
+
+void CFileLoadManager::SaveGimmickData(ofstream& file, ST_MapData& mapData)
+{
+	file << "# GimmickData" << endl;
+	if (mapData.objType == ObjectType::eG_RotationBoard)
+	{
+		file << "# RotationSpeed" << endl;
+		file << mapData.gimmickData.roationSpeed_rotaitonBoard << endl;
+
+		file << "# RotationAxialIndex" << endl;
+		file << mapData.gimmickData.roationAxialIndex_rotaitonBoard << endl;
+	}
+	else if (mapData.objType == ObjectType::eG_MovingCube)
+	{
+		file << "# StartPos" << endl;
+		file << mapData.gimmickData.startPos_movingCube << endl;
+
+		file << "# EndPos" << endl;
+		file << mapData.gimmickData.endPos_movingCube << endl;
+
+		file << "# Speed" << endl;
+		file << mapData.gimmickData.speed_movingCube << endl;
+
+		file << "# DirectionIndex" << endl;
+		file << mapData.gimmickData.directionIndex_movingCube << endl;
+	}
+	else if (mapData.objType == ObjectType::eG_DoorFrame
+		|| mapData.objType == ObjectType::eG_Door
+		|| mapData.objType == ObjectType::eG_ColorChanger)
+	{
+		file << "# ConditionName" << endl;
+		file << mapData.gimmickData.conditionName << endl;
+
+		file << "# ConditionIndex" << endl;
+		file << mapData.gimmickData.onOffConditionIndex << endl;
+
+		file << "# ConditionOrbIndex" << endl;
+		file << mapData.gimmickData.conditionOrbIndex << endl;
+	}
+}
+
+void CFileLoadManager::ReadGimmickData(ifstream & mapFile, string& readData, ST_MapData& mapData)
+{
+	while (true)
+	{
+		if (strstr(readData.c_str(), "# Object_End"))
+			break;
+
+		ReadAndCutSlashR(mapFile, readData);
+
+		if (strstr(readData.c_str(), "# RotationSpeed"))
+		{
+			ReadAndCutSlashR(mapFile, readData);
+			mapData.gimmickData.roationSpeed_rotaitonBoard = atof(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# RotationAxialIndex"))
+		{
+			ReadAndCutSlashR(mapFile, readData);
+			mapData.gimmickData.roationAxialIndex_rotaitonBoard = atoi(readData.c_str());
+		}
+		// >> 회전판자
+
+		else if (strstr(readData.c_str(), "# StartPos"))
+		{
+			ReadAndCutSlashR(mapFile, readData);
+			mapData.gimmickData.startPos_movingCube = atof(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# EndPos"))
+		{
+			ReadAndCutSlashR(mapFile, readData);
+			mapData.gimmickData.endPos_movingCube = atof(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# Speed"))
+		{
+			ReadAndCutSlashR(mapFile, readData);
+			mapData.gimmickData.speed_movingCube = atof(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# DirectionIndex"))
+		{
+			ReadAndCutSlashR(mapFile, readData);
+			mapData.gimmickData.directionIndex_movingCube = atoi(readData.c_str());
+		}
+		// >> 무빙큐브
+
+		else if (strstr(readData.c_str(), "# ConditionName"))
+		{
+			ReadAndCutSlashR(mapFile, readData);
+			mapData.gimmickData.conditionName = readData.c_str();
+		}
+		else if (strstr(readData.c_str(), "# ConditionIndex"))
+		{
+			ReadAndCutSlashR(mapFile, readData);
+			mapData.gimmickData.onOffConditionIndex = atoi(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# ConditionOrbIndex"))
+		{
+			ReadAndCutSlashR(mapFile, readData);
+			mapData.gimmickData.conditionOrbIndex = atoi(readData.c_str());
+		}
+	}
+}
+
 void CFileLoadManager::ReadMapData(string fileName)
 {
 	ifstream mapFile;
@@ -65,109 +175,101 @@ void CFileLoadManager::ReadMapData(string fileName)
 
 		while (getline(mapFile, readData))
 		{
-			if (readData == "# Object_Start")
+			if (strstr(readData.c_str(), "# Object_Start"))
 				continue;
 
-			else if (readData == "# ObjectName")
+			else if (strstr(readData.c_str(), "# ObjectName"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.strObjName = readData;
 			}
 
-			else if (readData == "# FolderPath")
+			else if (strstr(readData.c_str(), "# FolderPath"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.strFolderPath = readData;
 			}
 
-			else if (readData == "# FilePath")
+			else if (strstr(readData.c_str(), "# FilePath"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.strXFilePath = readData;
 			}
 
-			else if (readData == "# TxtPath")
+			else if (strstr(readData.c_str(), "# TxtPath"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.strTxtPath = readData;
 			}
 
-			else if (readData == "# ObjectType")
+			else if (strstr(readData.c_str(), "# ObjectType"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.objType = (ObjectType)atoi(readData.c_str());
 			}
 
-			else if (readData == "# Scale")
+			else if (strstr(readData.c_str(), "# Scale"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vScale.x = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vScale.y = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vScale.z = atof(readData.c_str());
 			}
 
-			else if (readData == "# Rotate")
+			else if (strstr(readData.c_str(), "# Rotate"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vRotate.x = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vRotate.y = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vRotate.z = atof(readData.c_str());
 			}
 
-			else if (readData == "# Translate")
+			else if (strstr(readData.c_str(), "# Translate"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vTranslate.x = atof(readData.c_str()) + m_fNowX;
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vTranslate.y = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.vTranslate.z = atof(readData.c_str()) + m_fNowZ;
 			}
 
-			else if (readData == "# Color")
+			else if (strstr(readData.c_str(), "# Color"))
 			{
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.dxColor.r = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.dxColor.g = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.dxColor.b = atof(readData.c_str());
 
-				getline(mapFile, readData);
+				ReadAndCutSlashR(mapFile, readData);
 				mapData.dxColor.a = atof(readData.c_str());
 			}
 
-			else if (readData == "# GimmickData")
-				continue;
-
-			else if (readData == "# RotationSpeed")
+			// >> gimmick
+			else if (strstr(readData.c_str(), "# GimmickData"))
+				ReadGimmickData(mapFile, readData, mapData);
+			else if (strstr(readData.c_str(), "# ConditionName"))
 			{
-				getline(mapFile, readData);
-				mapData.gimmickData.roationSpeed = atof(readData.c_str());
-			}
-			else if (readData == "# RotationAxialIndex")
-			{
-				getline(mapFile, readData);
-				mapData.gimmickData.roationAxialIndex = atoi(readData.c_str());
+				ReadAndCutSlashR(mapFile, readData);
+				mapData.gimmickData.conditionName = readData;
 			}
 
-			else if (readData == "# Object_End")
+			if (strstr(readData.c_str(), "# Object_End"))
 			{
-				// todo
-				// 기믹, 이벤트 트리거 등 오브젝트 타입에 따라 파싱 추가
-
 				IObject::CreateObject(mapData);
 			}
 
@@ -280,13 +382,38 @@ ST_MapData CFileLoadManager::SetSaveData(int index)
 
 	if (mapData.objType == eG_RotationBoard)
 	{
-		CRotationBoard* temp = dynamic_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(index));
+		CRotationBoard* temp = static_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(index));
 		mapData.gimmickData.isData = true;
-		mapData.gimmickData.roationSpeed = temp->GetRotationSpeed();
-		mapData.gimmickData.roationAxialIndex = temp->GetRotationAxialIndex();
+		mapData.gimmickData.roationSpeed_rotaitonBoard = temp->GetRotationSpeed();
+		mapData.gimmickData.roationAxialIndex_rotaitonBoard = temp->GetRotationAxialIndex();
 	}
+	else if(mapData.objType == eG_MovingCube)
+	{
+		CMovingCube* temp = static_cast<CMovingCube*> (&g_pObjectManager->GetIObject(index));
+		mapData.gimmickData.isData = true;
+		mapData.gimmickData.startPos_movingCube = temp->GetStartPos();
+		mapData.gimmickData.endPos_movingCube = temp->GetEndPos();
+		mapData.gimmickData.speed_movingCube = temp->GetSpeed();
+		mapData.gimmickData.directionIndex_movingCube = temp->GetDirection();
+	}
+	else if (mapData.objType == eG_DoorFrame
+		  || mapData.objType == eG_Door)
+		 // || mapData.objType == eG_ColorChanger)
+	{
+		CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
+		mapData.gimmickData.isData = true;
+		mapData.gimmickData.onOffConditionIndex = temp->GetOpenConditionIndex();
+		mapData.gimmickData.conditionName = temp->GetConditionName();
+		mapData.gimmickData.conditionOrbIndex = temp->GetConditionOrbIndex();
+	}
+
 	else
+	{
 		mapData.gimmickData.isData = false;
+
+		if (vecObject.GetConditionName() != "")
+			mapData.gimmickData.conditionName = vecObject.GetConditionName();
+	}
 
 	return mapData;
 }
@@ -298,7 +425,7 @@ void CFileLoadManager::DoFileSave(ofstream & saveFile, ofstream & mapFile, int i
 	FileSave(mapFile, mapData);
 }
 
-void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
+void CFileLoadManager::FileSave(ofstream& file, ST_MapData& mapData)
 {
 	file << "# Object_Start" << endl;
 
@@ -329,21 +456,18 @@ void CFileLoadManager::FileSave(ofstream& file, const ST_MapData& mapData)
 	file << "# Color" << endl;
 	file << mapData.dxColor.r << endl << mapData.dxColor.g << endl << mapData.dxColor.b << endl << mapData.dxColor.a << endl;
 
-	// todo
-	// 기믹, 이벤트 트리거 등 오브젝트 타입에 따라 파싱 추가
+	// >> 기믹, 이벤트 트리거 등 오브젝트 타입에 따라 파싱 추가
 	if (mapData.gimmickData.isData == true)
-	{
-		file << "# GimmickData" << endl;
-		if(mapData.objType == ObjectType::eG_RotationBoard)
-		{
-			file << "# RotationSpeed" << endl;
-			file << mapData.gimmickData.roationSpeed << endl;
-			
-			file << "# RotationAxialIndex" << endl;
-			file << mapData.gimmickData.roationAxialIndex << endl;
-		}
+	{	
+		SaveGimmickData(file, mapData);
 	}
 
+	if (mapData.gimmickData.conditionName != "")
+	{
+		// >> 조건 오브젝트 저장(쌍방 저장)
+		file << "# ConditionName" << endl;
+		file << mapData.gimmickData.conditionName << endl;
+	}
 
 	file << "# Object_End" << endl << endl;
 }

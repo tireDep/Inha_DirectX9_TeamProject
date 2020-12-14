@@ -6,6 +6,8 @@
 #include "RotationBoard.h"
 #include "Switch.h"
 #include "Door.h"
+#include "Switch.h"
+#include "Background.h"
 
 void CObjectManager::SetCopyObject(int index)
 {
@@ -34,6 +36,15 @@ void CObjectManager::RemoveObject(IObject * pObject)
 		}
 		else
 			it++;
+	}
+}
+
+void CObjectManager::RemoveCondition(string objectName)
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		if (objectName == m_vecObject[i]->GetObjectName())
+			RemoveObject(m_vecObject[i]);
 	}
 }
 
@@ -112,6 +123,25 @@ void CObjectManager::RemoveClickedObj()
 		{
 			preIndex = i - 1;
 
+			if (m_vecObject[i]->GetConditionName() != "")
+			{
+				for (int j = 0; j < m_vecObject.size(); j++)
+				{
+					if (m_vecObject[i]->GetConditionName() == m_vecObject[j]->GetObjectName())
+					{
+						if (m_vecObject[j]->GetObjType() == eG_DoorFrame)
+						{
+							// >> 문은 삭제할 대상이 2개
+							CDoor* temp = static_cast<CDoor*>(m_vecObject[j]);
+							temp->SetConditionName("");
+						}
+						else
+							m_vecObject[j]->SetConditionName("");
+					}
+				}
+			}
+			// >> 삭제하는 대상이 누군가의 조건일 경우, 조건 삭제
+
 			// >>  문은 2개가 1세트
 #ifdef _DEBUG
 			if (m_vecObject[i]->GetObjType() == ObjectType::eG_DoorFrame)
@@ -158,6 +188,8 @@ void CObjectManager::RemoveClickedObj()
 	}
 }
 
+static int index = -1;
+static string name = "";
 void CObjectManager::CheckSameName()
 {
 	if (m_vecObject.size() == 0)
@@ -168,7 +200,31 @@ void CObjectManager::CheckSameName()
 		for (int j = i + 1; j < m_vecObject.size(); j++)
 		{
 			if (m_vecObject[i]->GetObjectName() == m_vecObject[j]->GetObjectName())
+			{
+				name = m_vecObject[j]->GetObjectName();
 				m_vecObject[j]->SetObjectName(m_vecObject[j]->GetObjectName() + "(" + to_string(m_sameNum++) + ")");
+			}
+			// >> todo : 중복 이름 시 조건 처리!! 
+			//for (int k = j - 1; k < m_vecObject.size(); k++)
+			//{
+			//	if (m_vecObject[k]->GetConditionName() == name)
+			//	{
+			//
+			//	}
+			//}
+			// if (m_vecObject[j]->GetConditionName() != "" && index == -1)
+			// {
+			// 	index = j;
+			// 	name = m_vecObject[j]->GetConditionName();
+			// }
+			// else if (i > index && m_vecObject[j]->GetConditionName() == name)
+			// {
+			// 	string temp = m_vecObject[index]->GetObjectName();
+			// 	m_vecObject[index]->SetConditionName(m_vecObject[j]->GetObjectName());
+			// 	m_vecObject[j]->SetConditionName(temp);
+			// 	index = -1;
+			// }
+			// >> todo : 중복 이름 시 조건 처리!! 
 		}
 	}
 }
@@ -224,10 +280,8 @@ void CObjectManager::CopyObject()
 
 			int indexNum = 0;
 			if (objType == ObjectType::eATree || objType == ObjectType::eSTree
-			 || objType == ObjectType::eWTree || objType == ObjectType::eCTree )
-#ifdef _DEBUG
-				|| objType == ObjectType::eFlower)
-#endif // _DEBUG
+			 || objType == ObjectType::eWTree || objType == ObjectType::eCTree
+			 || objType == ObjectType::eFlower)
 			{
 				// >> 인덱스로 받아 오는 파일들은 인덱스 값 필요함
 				string num = m_vecObject[i]->GetXFilePath();
@@ -258,6 +312,16 @@ void CObjectManager::CopyObject()
 			m_vecObject[m_vecObject.size() - 1]->SetColor(m_vecObject[index]->GetColor());
 			break;
 
+		case eCTree:
+		case eUmbrella:
+		{
+			CBackground* temp = dynamic_cast<CBackground*> (&g_pObjectManager->GetIObject(m_vecObject.size() - 1));
+			CBackground* temp2 = dynamic_cast<CBackground*> (&g_pObjectManager->GetIObject(index));
+
+			temp->SetTexture(temp2->GetTextureIndex());
+		}
+			break;
+
 		case eG_RotationBoard:
 		{
 			CRotationBoard* temp = dynamic_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(m_vecObject.size() - 1));
@@ -273,15 +337,36 @@ void CObjectManager::CopyObject()
 		{
 			CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_vecObject.size() - 1));
 			CDoor* temp2 = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
-			temp->SetAnotherScale(temp->GetScale());
-			temp->SetAnotherRotation(temp->GetRotate());
-			temp->SetAnotherTranslation(temp->GetTranslate());
+
+			temp->SetAnotherScale(temp2->GetScale());
+			temp->SetAnotherRotation(temp2->GetRotate());
+			temp->SetAnotherTranslation(temp2->GetTranslate());
 		}
 		break;
+
+		case eG_Switch:
+		{
+			CSwitch* temp = dynamic_cast<CSwitch*> (&g_pObjectManager->GetIObject(m_vecObject.size() - 1));
+			CSwitch* temp2 = dynamic_cast<CSwitch*> (&g_pObjectManager->GetIObject(index));
+
+			temp->SetTexture(temp2->GetTextureIndex());
+		}
+			break;
 #endif // _DEBUG
 
 		} // << : switch
 
 	} // << : if
 	
+}
+
+string CObjectManager::GetPickObjName()
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		if (m_vecObject[i]->GetClick() == true || m_vecObject[i]->GetPick() == true)
+			return m_vecObject[i]->GetObjectName();
+	}
+
+	return "";
 }

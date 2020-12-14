@@ -47,49 +47,62 @@ void CBox::Setup(const ST_MapData & mapData)
 	Setup();
 
 	m_strObjName = mapData.strObjName;
-
 	m_strFolder = mapData.strFolderPath;
 	m_strXFile = mapData.strXFilePath;
 	m_strTxtFile = mapData.strTxtPath;
-
 	m_ObjectType = mapData.objType;
 
-	D3DXVECTOR3 vScale, vRotate;
-	vScale = mapData.vScale;
-	// JW ADD...
-	m_vScale = vScale;
-	vRotate = mapData.vRotate;
-	m_vPosition = mapData.vTranslate;
+	m_vScale = mapData.vScale;
+	m_vRotation = mapData.vRotate;
+	m_vTranslation = mapData.vTranslate;
+	m_vPosition = m_vTranslation;
 
 	m_Color = mapData.dxColor;
-	// color change
 	this->ChangeObjectColor();
 
-	m_fWidth = vScale.x;
-	m_fHeight = vScale.y;
-	m_fDepth = vScale.z;
+	m_fWidth *= m_vScale.x;
+	m_fHeight *= m_vScale.y;
+	m_fDepth *= m_vScale.z;
 
-	// ============================================================
-
-	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixScaling(&matS, vScale.x, vScale.y, vScale.z);
-
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(vRotate.x);
-	v.y = D3DXToRadian(vRotate.y);
-	v.z = D3DXToRadian(vRotate.z);
-
-	D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
-
-	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	m_matWorld = matS * matR * matT;
-	
+	//m_strObjName = mapData.strObjName;
+	//m_strFolder = mapData.strFolderPath;
+	//m_strXFile = mapData.strXFilePath;
+	//m_strTxtFile = mapData.strTxtPath;
+	//m_ObjectType = mapData.objType;
+	//D3DXVECTOR3 vScale, vRotate;
+	//vScale = mapData.vScale;
+	//// JW ADD...
+	//m_vScale = vScale;
+	//vRotate = mapData.vRotate;
+	//m_vPosition = mapData.vTranslate;
+	//m_Color = mapData.dxColor;
+	//// color change
+	//this->ChangeObjectColor();
+	//m_fWidth = vScale.x;
+	//m_fHeight = vScale.y;
+	//m_fDepth = vScale.z;
+	//// ============================================================
+	//D3DXMATRIXA16 matS, matR, matT;
+	//D3DXMatrixScaling(&matS, vScale.x, vScale.y, vScale.z);
+	//D3DXVECTOR3 v;
+	//v.x = D3DXToRadian(vRotate.x);
+	//v.y = D3DXToRadian(vRotate.y);
+	//v.z = D3DXToRadian(vRotate.z);
+	//D3DXMatrixRotationYawPitchRoll(&matR, v.x, v.y, v.z);
+	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	//m_matWorld = matS * matR * matT;
 	// Collide
 	//collisionbox.m_pObject = this;
 	//collisionbox.halfSize.x = m_fWidth;
 	//collisionbox.halfSize.y = m_fHeight;
 	//collisionbox.halfSize.z = m_fDepth;
 	//collisionbox.calculateInternals();
+
+	D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+	m_matWorld = matS * matR * matT;
 
 	// OBB TEST
 	m_pOBB = new COBB;
@@ -105,47 +118,10 @@ void CBox::Update(float duration)
 	m_pOBB->Update(&m_matWorld);
 }
 
-//bool CBox::hasIntersected(CSphere & otherSphere)
-//{
-//	D3DXVECTOR3 center = otherSphere.GetPosition();
-//	D3DXMATRIXA16 inverseBoxMatrix;
-//	D3DXMatrixInverse(&inverseBoxMatrix, NULL, &m_matWorld);
-//	D3DXVECTOR3 SphereToBoxCenter;
-//	D3DXVec3TransformCoord(&SphereToBoxCenter, &center, &inverseBoxMatrix);
-//
-//	if (fabsf(SphereToBoxCenter.x) - otherSphere.GetRadius() > m_fWidth / 2.0f ||
-//		fabsf(SphereToBoxCenter.y) - otherSphere.GetRadius() > m_fHeight / 2.0f ||
-//		fabsf(SphereToBoxCenter.z) - otherSphere.GetRadius() > m_fHeight / 2.0f)
-//		return false;
-//
-//	D3DXVECTOR3 closestPt(0, 0, 0);
-//	float dist;
-//
-//	dist = SphereToBoxCenter.x;
-//	if (dist > m_fWidth / 2.0f) dist = m_fWidth / 2.0f;
-//	if (dist < -m_fWidth / 2.0f) dist = -m_fWidth / 2.0f;
-//	closestPt.x = dist;
-//
-//	dist = SphereToBoxCenter.y;
-//	if (dist > m_fHeight / 2.0f) dist = m_fHeight / 2.0f;
-//	if (dist < -m_fHeight / 2.0f) dist = -m_fHeight / 2.0f;
-//	closestPt.y = dist;
-//
-//	dist = SphereToBoxCenter.z;
-//	if (dist > m_fDepth / 2.0f) dist = m_fDepth / 2.0f;
-//	if (dist < -m_fDepth / 2.0f) dist = -m_fDepth / 2.0f;
-//	closestPt.z = dist;
-//
-//	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
-//	dist = D3DXVec3LengthSq(&tmp);
-//	if (dist > otherSphere.GetRadius()*otherSphere.GetRadius())
-//		return false;
-//
-//	return true;
-//}
-
 bool CBox::hasIntersected(CBox * otherBox)
 {
+	if (this == otherBox)
+		return false;
 	if (this->m_pOBB->IsCollision(otherBox->GetOBB()))
 		return true;
 	return false;
@@ -162,29 +138,40 @@ bool CBox::hasIntersected(IObject * otherIObject)
 {
 	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
 	{
-		D3DXVECTOR3 v;
-		v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
-		D3DXVec3Normalize(&v, &v);
-		this->SetPusingForce(v);
-		//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
 		return true;
 	}
-	return false;
+	else
+	{
+		return false;
+	}
+	//if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
+	//{
+	//	D3DXVECTOR3 v;
+	//	v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
+	//	D3DXVec3Normalize(&v, &v);
+	//	this->SetPusingForce(v);
+	//	//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
+	//	return true;
+	//}
+	//return false;
 }
 
-bool CBox::hasIntersected(CGimmick * otherIObject)
-{
-	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
-	{
-		D3DXVECTOR3 v;
-		v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
-		D3DXVec3Normalize(&v, &v);
-		this->SetPusingForce(v);
-		//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
-		return true;
-	}
-	return false;
-}
+//bool CBox::hasIntersected(CGimmick * otherIObject)
+//{
+//	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
+//		return true;
+//	return false;
+//	//if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
+//	//{
+//	//	D3DXVECTOR3 v;
+//	//	v = this->GetPosition() - otherIObject->GetOBB()->GetCenter();
+//	//	D3DXVec3Normalize(&v, &v);
+//	//	this->SetPusingForce(v);
+//	//	//this->SetLinearVelocity(-1 * this->GetLinearVelocity());
+//	//	return true;
+//	//}
+//	//return false;
+//}
 
 string CBox::GetName()
 {
@@ -280,4 +267,42 @@ string CBox::GetName()
 //void CBox::CollideUpdate(float duration)
 //{
 //	resolver.resolveContacts(cData.contactArray, cData.contactCount, duration);
+//}
+//bool CBox::hasIntersected(CSphere & otherSphere)
+//{
+//	D3DXVECTOR3 center = otherSphere.GetPosition();
+//	D3DXMATRIXA16 inverseBoxMatrix;
+//	D3DXMatrixInverse(&inverseBoxMatrix, NULL, &m_matWorld);
+//	D3DXVECTOR3 SphereToBoxCenter;
+//	D3DXVec3TransformCoord(&SphereToBoxCenter, &center, &inverseBoxMatrix);
+//
+//	if (fabsf(SphereToBoxCenter.x) - otherSphere.GetRadius() > m_fWidth / 2.0f ||
+//		fabsf(SphereToBoxCenter.y) - otherSphere.GetRadius() > m_fHeight / 2.0f ||
+//		fabsf(SphereToBoxCenter.z) - otherSphere.GetRadius() > m_fDepth / 2.0f)
+//		return false;
+//
+//	D3DXVECTOR3 closestPt(0, 0, 0);
+//	float dist;
+//
+//	dist = SphereToBoxCenter.x;
+//	if (dist > m_fWidth / 2.0f) dist = m_fWidth / 2.0f;
+//	if (dist < -m_fWidth / 2.0f) dist = -m_fWidth / 2.0f;
+//	closestPt.x = dist;
+//
+//	dist = SphereToBoxCenter.y;
+//	if (dist > m_fHeight / 2.0f) dist = m_fHeight / 2.0f;
+//	if (dist < -m_fHeight / 2.0f) dist = -m_fHeight / 2.0f;
+//	closestPt.y = dist;
+//
+//	dist = SphereToBoxCenter.z;
+//	if (dist > m_fDepth / 2.0f) dist = m_fDepth / 2.0f;
+//	if (dist < -m_fDepth / 2.0f) dist = -m_fDepth / 2.0f;
+//	closestPt.z = dist;
+//
+//	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
+//	dist = D3DXVec3LengthSq(&tmp);
+//	if (dist > otherSphere.GetRadius()*otherSphere.GetRadius())
+//		return false;
+//
+//	return true;
 //}

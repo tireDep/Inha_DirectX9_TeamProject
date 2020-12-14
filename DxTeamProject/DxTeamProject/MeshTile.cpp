@@ -3,19 +3,21 @@
 #include "OBB.h"
 MeshTile::MeshTile()
 	: m_pMesh(NULL)
+	, m_pos(0,0,0)
+	, m_pOBB(NULL)
 {
 	D3DXMatrixIdentity(&m_matWorld);
+	D3DXMatrixIdentity(&m_matS);
+	D3DXMatrixIdentity(&m_matT);
+	D3DXMatrixIdentity(&obbWorld);
 	ZeroMemory(&m_stMtlSphere, sizeof(D3DMATERIAL9));
 	ZeroMemory(&m_stMtlSphere2, sizeof(D3DMATERIAL9));
-
-
-	
 }
 
 MeshTile::~MeshTile()
 {
-	SafeDelete(m_pOBB);
 	SafeRelease(m_pMesh);
+	SafeDelete(m_pOBB);
 }
 
 void MeshTile::Setup(float x, float y, float z)
