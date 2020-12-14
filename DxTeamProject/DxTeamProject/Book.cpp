@@ -7,12 +7,14 @@ int CBook::m_nCount = 0;
 CBook::CBook()
 	: m_fRotationSpeed(1.0f)
 	, m_fRotAngle(0.0f)
+	, istrue(false)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
 	D3DXMatrixIdentity(&m_matT);
 
 	CBook::m_nCount += 1;
+	
 }
 
 CBook::~CBook()
@@ -98,12 +100,18 @@ void CBook::Update(float duration)
 	if (m_fRotAngle > 2 * D3DX_PI)
 		m_fRotAngle -= 2 * D3DX_PI;
 
-	D3DXMatrixRotationY(&m_matR, m_fRotAngle);
+	D3DXMatrixRotationY(&m_matRot, m_fRotAngle);
+
+
+
+	m_matWorld = m_matS * m_matRot * m_matT;
+//	m_matWorld = m_matS * m_matRot * m_matT;
 
 	//if(hasIntersected)
 	//	g_pGameManager->SetItem(m_nCount);
 
-	//m_pOBB->Update(&m_matWorld);
+
+	m_pOBB->Update(&m_matWorld);
 }
 
 bool CBook::hasIntersected(CSkinnedMesh * Character)
@@ -129,7 +137,7 @@ void CBook::Render()
 	//matWorld = matS* matR * matT;
 	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 
-	m_matWorld = m_matS * m_matR * m_matT;
+	m_matWorld = m_matS * m_matRot * m_matT;
 
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
@@ -142,5 +150,12 @@ void CBook::Render()
 		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 		m_pMesh->DrawSubset(i);
 	}
+	if (istrue == true)
+	{
+		m_pMesh->Release();
+		g_pObjectManager->RemoveObject(m_pOBB);
+	}
+	
+
 	g_pD3DDevice->SetTexture(0, NULL);
 }

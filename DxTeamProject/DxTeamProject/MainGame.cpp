@@ -112,12 +112,23 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
+
+
+	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+
+	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PhysicsTest.dat");
+
+
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
+
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxToTile.dat");
+
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
+
 	// >> mapData
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
@@ -233,7 +244,14 @@ void CMainGame::Update()
 		m_pDragon->Update(m_pCharacter->GetPosition(), g_pTimeManager->GetElapsedTime());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		/// OBB TEST
+
+		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
+
+		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
+
+	
 		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[2]);
+
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:

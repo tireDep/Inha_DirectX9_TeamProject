@@ -17,6 +17,8 @@ void COBB::Setup(CObject & object)
 {
 	//m_matWorld = object.GetmatWorld();
 
+	object.Update(0);
+
 	D3DXVECTOR3* pVertices;
 	object.GetMesh()->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
 
@@ -89,7 +91,7 @@ void COBB::Setup(CObject & object)
 	// Check OriCenterPos, OriAxisDir
 	for (int i = 0; i < 3; ++i)
 		D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &m_matWorld);
-	D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &m_matWorld);
+		D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &m_matWorld);
 	//for (int i = 0; i < 3; ++i)
 	//	D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &object.GetmatWorld());
 	//D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &object.GetmatWorld());
@@ -673,7 +675,7 @@ bool COBB::IsCollision(COBB * otherOBB)
 	float r0, r1, r;			//  구간 반경과 구간 중심점 사이의 거리
 	int i;
 	// 상자의 축들 사이각들의 consine을 위한 cutoff
-	const float cutOff = 0.999999f;	
+	const float cutOff = 0.999999f;
 	bool existsParallelPair = false;
 
 	D3DXVECTOR3 D = otherOBB->m_vCenterPos - this->m_vCenterPos;
@@ -1001,7 +1003,8 @@ bool COBB::IsCollision(COBB * otherOBB, D3DXVECTOR3 * contactNormal, float * pen
 			return true;
 		}
 	}
-		return true;
+
+	return true;
 
 	unsigned bestSingleAxis = best;
 	// --------------------------------------------------------------------------------------------------------- //

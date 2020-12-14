@@ -22,7 +22,7 @@ CObjectManager::~CObjectManager()
 {
 	// >> mapTest
 	RemoveMap();
-
+	
 	if (m_thread != NULL)
 	{
 		if (m_thread->joinable())
@@ -205,6 +205,7 @@ void CObjectManager::Update(float duration)
 {
 	for (int i = 0; i < m_vecIObject.size(); i++)
 		m_vecIObject[i]->Update(duration);
+
 	//for (int i = 0; i < m_vecGimmick.size(); i++)
 	//	m_vecGimmick[i]->Update(duration);
 
@@ -334,6 +335,11 @@ void CObjectManager::Collide(float duration)
 						CollisionBoxToTile(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
 						break;
 				}
+			}
+			else
+			{
+				m_vecIObject[IObjectIndex]->SetBool(false);
+
 			}
 		}
 	}

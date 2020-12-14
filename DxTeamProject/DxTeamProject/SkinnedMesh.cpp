@@ -10,7 +10,8 @@ CSkinnedMesh::CSkinnedMesh() :
 	m_fPassedBlendTime(0.03f),
 	m_isAniBlend(false),
 	m_passedTime(0.0f),
-	m_maxPlayTime(0.0f)
+	m_maxPlayTime(0.0f),
+	m_pOBB(NULL)
 {
 }
 
@@ -19,6 +20,7 @@ CSkinnedMesh::~CSkinnedMesh()
 	CAllocateHierarchy ah;
 	D3DXFrameDestroy(m_pRoot, &ah);
 	SafeRelease(m_pAniController);
+	SafeDelete(m_pOBB);
 }
 
 void CSkinnedMesh::SetUp(char * szFolder, char * szFile)
