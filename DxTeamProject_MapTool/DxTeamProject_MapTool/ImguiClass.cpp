@@ -881,6 +881,7 @@ void CImguiClass::Update_Inspector()
 			}
 
 			// >> 문, 컬러레이저 기믹 : On/Off 조건 선택
+			// >> todo : 컬러레이저 붙이고 함수 분리
 			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_DoorFrame
 			// 	  || g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_Door
 				  || g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_ColorChanger)
@@ -973,16 +974,16 @@ void CImguiClass::Update_Inspector()
 					temp->SetConditionName(g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).GetObjectName());
 				}
 
-				ImGui::Text("Now Condition");
+				ImGui::Text("[ Now Condition ]");
 				ImGui::Text("OpenType : ");
 				ImGui::SameLine(); ImGui::Text(temp->GetOpenConditionType().c_str());
-				ImGui::Text("Condition : ");
-				ImGui::SameLine(); ImGui::Text(temp->GetConditionName().c_str());
 			}
-			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetConditionName() != "")
+			
+			if (g_pObjectManager->GetIObject(m_nowSelectindex).GetConditionName() != "")
 			{
-				ImGui::Text("Now Condition");
-				ImGui::Text("Condition : ");
+				// >> 선택한 오브젝트에 조건 변수가 존재할 경우
+				// >> 스위치 등 기믹에서 출력되지 않아서 if문으로 처리
+				ImGui::Text("Select Condition : ");
 				ImGui::SameLine(); ImGui::Text(g_pObjectManager->GetIObject(m_nowSelectindex).GetConditionName().c_str());
 			}
 
