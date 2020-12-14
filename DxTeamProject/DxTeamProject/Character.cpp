@@ -18,6 +18,7 @@ CCharacter::CCharacter()
 	, jumping(false)
 	, m_Character(NULL)
 	, m_isColorChanged(false)
+	, m_color(GRAY)
 	// Ray y check
 {
 	D3DXMatrixIdentity(&m_matWorld);

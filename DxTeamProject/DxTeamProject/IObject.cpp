@@ -4,7 +4,10 @@
 //int IObject::m_nRefCnt = 0;
 
 IObject::IObject() :
+	m_strConditionName(""),
+	m_isCondition(false),
 	m_pOBB(NULL)
+	//m_conditionOrbindex(-1),
 //: m_pTexture(NULL),
 	//m_pMesh(NULL),
 	//m_numMtrls(0),
@@ -30,6 +33,18 @@ void IObject::Release()
 {
 	g_pObjectManager->RemoveObject(this);
 	//IObject::m_nRefCnt -= 1;
+}
+
+void IObject::ReceiveEvent(ST_EVENT eventMsg)
+{
+	if (m_strConditionName == "")
+		return;
+
+	if (eventMsg.eventType == EventType::eConditionChange)
+	{
+		if (m_strConditionName == eventMsg.conditionName)
+			m_isCondition = true;
+	}
 }
 
 //void IObject::CreateObject(const ST_MapData & mapData)

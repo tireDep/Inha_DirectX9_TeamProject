@@ -151,7 +151,9 @@ struct ST_PT_VERTEX
 
 enum class EventType : int
 {
-	eInputEvent, eSceneChangeEvent, eColorChangeEvent, eChangedColorEvent, eColorEffect,
+	eInputEvent, eSceneChangeEvent, 
+	eColorChangeEvent, eChangedColorEvent, eColorEffect,
+	eConditionChange,
 	eNull
 };
 
@@ -183,6 +185,10 @@ struct ST_EVENT
 	SceneType setNowScene = SceneType::eNull;
 	// << SceneChange
 
+	// >> ConditionChange
+	string conditionName = "";
+	// << ConditionChange
+
 	float duration = 0.0f;
 
 	void* ptrMessage = NULL;
@@ -190,11 +196,11 @@ struct ST_EVENT
 
 struct ST_XFile
 {
-	ID3DXMesh* pMesh;
-	ID3DXBuffer* adjBuffer;
-	ID3DXBuffer* mtrlBuffer;
+	ID3DXMesh* pMesh = NULL;
+	ID3DXBuffer* adjBuffer = NULL;
+	ID3DXBuffer* mtrlBuffer = NULL;
 
-	DWORD nMtrlNum;
+	DWORD nMtrlNum = 0;
 	vector<D3DMATERIAL9> vecMtrl;
 	vector<IDirect3DTexture9*> vecTextrure;
 };
@@ -224,39 +230,46 @@ enum ObjectType
 	eNull
 };
 
+enum class OnOffCondition { eOrb, eItem, eSwitch, eNull };
+
 struct ST_Gimmick
 {
-	bool isData;
+	bool isData = false;
 
-	float roationSpeed_rotaitonBoard;
-	int roationAxialIndex_rotaitonBoard;
+	float roationSpeed_rotaitonBoard = 0.0f;
+	int roationAxialIndex_rotaitonBoard = 0;
 	// >> 회전판자
 
-	int conditionIndex;
-	int maxMassIndex;
+	int conditionIndex_switch = 0;
+	int maxMassIndex_switch = 0;
 	// >> 스위치?
 
-	float startPos_movingCube;
-	float endPos_movingCube;
-	float speed_movingCube;
-	int directionIndex_movingCube;
+	float startPos_movingCube = 0.0f;
+	float endPos_movingCube = 0.0f;
+	float speed_movingCube = 0.0f;
+	int directionIndex_movingCube = 0;
 	// >> 무빙큐브
+
+	int onOffConditionIndex = 0;
+	string conditionName = "";
+	int conditionOrbIndex = 0;
+	// >> 문, 컬러레이저 조건
 };
 
 struct ST_MapData
 {
-	string strFolderPath;
-	string strXFilePath;
-	string strTxtPath;
+	string strFolderPath = "";
+	string strXFilePath = "";
+	string strTxtPath = "";
 
-	string strObjName;
-	ObjectType objType;
+	string strObjName = "";
+	ObjectType objType = ObjectType::eNull;
 
-	D3DXVECTOR3 vScale;
-	D3DXVECTOR3 vRotate;
-	D3DXVECTOR3 vTranslate;
+	D3DXVECTOR3 vScale = D3DXVECTOR3(0, 0, 0);
+	D3DXVECTOR3 vRotate = D3DXVECTOR3(0, 0, 0);
+	D3DXVECTOR3 vTranslate = D3DXVECTOR3(0, 0, 0);
 
-	D3DXCOLOR dxColor;
+	D3DXCOLOR dxColor = D3DXCOLOR(1, 1, 1, 1);
 
 	ST_Gimmick gimmickData;
 };
@@ -264,7 +277,7 @@ struct ST_MapData
 struct ST_Sprite
 {
 	D3DXIMAGE_INFO imageInfo;
-	LPDIRECT3DTEXTURE9 lpTexture;
+	LPDIRECT3DTEXTURE9 lpTexture = NULL;
 };
 
 #define GRAY    D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f)

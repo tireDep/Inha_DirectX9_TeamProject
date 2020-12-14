@@ -54,142 +54,177 @@ void CFileLoadManager::LoadData(string path)
 
 			else if (strstr(readData.c_str(), "# ObjectName"))
 			{
-				getline(file, readData);
-				if(strstr(readData.c_str(), "\r"))
-					readData = readData.substr(0, readData.length() - 1);
+				ReadAndCutSlashR(file, readData);
 				mapData.strObjName = readData;
 			}
 
 			else if (strstr(readData.c_str(), "# FolderPath"))
 			{
-				getline(file, readData);
-				if (strstr(readData.c_str(), "\r"))
-					readData = readData.substr(0, readData.length() - 1);
+				ReadAndCutSlashR(file, readData);
 				mapData.strFolderPath = readData;
 			}
 
 			else if (strstr(readData.c_str(), "# FilePath"))
 			{
-				getline(file, readData);
-				if (strstr(readData.c_str(), "\r"))
-					readData = readData.substr(0, readData.length() - 1);
+				ReadAndCutSlashR(file, readData);
 				mapData.strXFilePath = readData;
 			}
 
 			else if (strstr(readData.c_str(), "# TxtPath"))
 			{
-				getline(file, readData);
-				if (strstr(readData.c_str(), "\r"))
-					readData = readData.substr(0, readData.length() - 1);
+				ReadAndCutSlashR(file, readData);
 				mapData.strTxtPath = readData;
 			}
 
 			else if (strstr(readData.c_str(), "# ObjectType"))
 			{
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.objType = (ObjectType)atoi(readData.c_str());
 			}
 
 			else if (strstr(readData.c_str(), "# Scale"))
 			{
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vScale.x = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vScale.y = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vScale.z = atof(readData.c_str());
 			}
 
 			else if (strstr(readData.c_str(), "# Rotate"))
 			{
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vRotate.x = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vRotate.y = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vRotate.z = atof(readData.c_str());
 			}
 
 			else if (strstr(readData.c_str(), "# Translate"))
 			{
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vTranslate.x = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vTranslate.y = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vTranslate.z = atof(readData.c_str());
 			}
 
 			else if (strstr(readData.c_str(), "# Color"))
 			{
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.dxColor.r = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.dxColor.g = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.dxColor.b = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.dxColor.a = atof(readData.c_str());
 			}
 
-			else if (strstr(readData.c_str(),  "# GimmickData"))
-				continue;
+			else if (strstr(readData.c_str(), "# GimmickData"))
+			{
+				ReadGimmickData(file, readData, mapData);
+			}
+			else if (strstr(readData.c_str(), "# ConditionName"))
+			{
+				ReadAndCutSlashR(file , readData);
+				mapData.gimmickData.conditionName = readData;
+			}
 
-			// >> 회전판자
-			else if (strstr(readData.c_str(), "# RotationSpeed"))
-			{
-				getline(file, readData);
-				mapData.gimmickData.roationSpeed_rotaitonBoard = atof(readData.c_str());
-			}
-			else if (strstr(readData.c_str(), "# RotationAxialIndex"))
-			{
-				getline(file, readData);
-				mapData.gimmickData.roationAxialIndex_rotaitonBoard = atoi(readData.c_str());
-			}
-			// << 회전판자
-
-			// >> 무빙큐브
-			else if (strstr(readData.c_str(), "# StartPos"))
-			{
-				getline(file, readData);
-				mapData.gimmickData.startPos_movingCube = atof(readData.c_str());
-			}
-			else if (strstr(readData.c_str(), "# EndPos"))
-			{
-				getline(file, readData);
-				mapData.gimmickData.endPos_movingCube = atof(readData.c_str());
-			}
-			else if (strstr(readData.c_str(), "# Speed"))
-			{
-				getline(file, readData);
-				mapData.gimmickData.speed_movingCube = atof(readData.c_str());
-			}
-			else if (strstr(readData.c_str(), "# DirectionIndex"))
-			{
-				getline(file, readData);
-				mapData.gimmickData.directionIndex_movingCube = atoi(readData.c_str());
-			}
-			// << 무빙큐브
-
-			else if (strstr(readData.c_str(), "# Object_End"))
+			if (strstr(readData.c_str(), "# Object_End"))
 				CObject::CreateObject(mapData);
 
 			// >> mapTest
-			else if (strstr(readData.c_str(), "# Section"))
+			if (strstr(readData.c_str(), "# Section"))
 				g_pObjectManager->AddMap();
 		}
 	}
 
 	file.close();
+}
+
+void CFileLoadManager::ReadAndCutSlashR(ifstream & file, string & readData)
+{
+	getline(file, readData);
+	if (strstr(readData.c_str(), "\r"))
+		readData = readData.substr(0, readData.length() - 1);
+}
+
+void CFileLoadManager::ReadGimmickData(ifstream & file, string& readData, ST_MapData & mapData)
+{
+	while (true)
+	{
+		getline(file, readData);
+
+		if (strstr(readData.c_str(), "# Object_End"))
+			break;
+
+		// >> 회전판자
+		if (strstr(readData.c_str(), "# RotationSpeed"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.roationSpeed_rotaitonBoard = atof(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# RotationAxialIndex"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.roationAxialIndex_rotaitonBoard = atoi(readData.c_str());
+		}
+		// << 회전판자
+
+		// >> 무빙큐브
+		else if (strstr(readData.c_str(), "# StartPos"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.startPos_movingCube = atof(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# EndPos"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.endPos_movingCube = atof(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# Speed"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.speed_movingCube = atof(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# DirectionIndex"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.directionIndex_movingCube = atoi(readData.c_str());
+		}
+		// << 무빙큐브
+
+		// >> 조건변수(문, 컬러레이저)
+		else if (strstr(readData.c_str(), "# ConditionName"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.conditionName = readData.c_str();
+		}
+		else if (strstr(readData.c_str(), "# ConditionIndex"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.onOffConditionIndex = atoi(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# ConditionOrbIndex"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.conditionOrbIndex = atoi(readData.c_str());
+		}
+		// << 조건변수(문, 컬러레이저)
+	}
 }
 
 

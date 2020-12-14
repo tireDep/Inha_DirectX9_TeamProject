@@ -5,7 +5,8 @@
 #include "Door.h"
 #include "MovingCube.h"
 
-CGimmick::CGimmick()
+CGimmick::CGimmick() :
+	m_onOffCondition(OnOffCondition::eNull)
 {
 }
 
@@ -51,4 +52,21 @@ void CGimmick::Setup(const ST_MapData & mapData)
 		}
 			break;
 	} // << switch
+}
+
+void CGimmick::SetGimmickCondition(const ST_MapData & mapData)
+{
+	if (mapData.gimmickData.conditionName != "")
+	{
+		m_strConditionName = mapData.gimmickData.conditionName;
+
+		if (mapData.gimmickData.onOffConditionIndex == 0)		m_onOffCondition = OnOffCondition::eOrb;
+		else if (mapData.gimmickData.onOffConditionIndex == 1)	m_onOffCondition = OnOffCondition::eItem;
+		else if (mapData.gimmickData.onOffConditionIndex == 2)	m_onOffCondition = OnOffCondition::eSwitch;
+
+		// if (m_onOffCondition != OnOffCondition::eOrb)
+		// 	m_conditionOrbindex = -1;
+		// else
+		// 	m_conditionOrbindex = mapData.gimmickData.conditionOrbIndex;
+	}
 }

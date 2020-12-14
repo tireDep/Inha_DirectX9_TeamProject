@@ -112,24 +112,16 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CMainGame::Setup()
 {
-
-
-	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
-
-	 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PhysicsTest.dat");
-
-
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
 
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxToTile.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 
-	// >> mapData
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "doorTest2.dat");
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 #endif // DEBUG
@@ -228,6 +220,10 @@ void CMainGame::Setup()
 
 void CMainGame::Update()
 {
+	// if (GetKeyState('1') & 0x8000)
+	// 	g_pGameManager->SetGetOrb("Blue");
+	// >> 조건 확인 테스트
+
 	g_pTimeManager->Update();
 	g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 

@@ -22,6 +22,12 @@ protected:
 	//Synthesize(D3DXVECTOR3, m_vScale, Scale);
 	//Synthesize(D3DXVECTOR3, m_vRotate, Rotate);
 	//Synthesize(D3DXVECTOR3, m_vTranslate, Translate);
+	
+	Synthesize(string, m_strConditionName, ConditionName);
+	// Synthesize(int, m_conditionOrbindex, ConditionOrbIndex); // 필요없을지도?
+	Synthesize(bool, m_isCondition, Condition);
+	// >> On/Off 조건 변수
+
 	COBB* m_pOBB;
 	IObject();
 public:
@@ -35,5 +41,7 @@ public:
 	virtual string GetName() { return m_strName; }
 	virtual void SetBool(bool setup) = 0; //상호작용 
 	virtual COBB* GetOBB() { return m_pOBB; }
+
+	virtual void ReceiveEvent(ST_EVENT eventMsg);
 	//static void CreateObject(const ST_MapData& mapData);
 };

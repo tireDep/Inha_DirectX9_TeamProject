@@ -86,7 +86,7 @@ public:
 	virtual void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos) = 0;
 	virtual void Render() = 0;
 
-	virtual string GetName() { return string(); }
+	virtual string GetName() { return m_strName; }
 	/// Color
 	//virtual void ReceiveEvent(ST_EVENT eventMsg);
 	//virtual void OutlineRender();

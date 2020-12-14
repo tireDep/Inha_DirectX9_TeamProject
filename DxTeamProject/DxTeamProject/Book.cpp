@@ -60,6 +60,8 @@ void CBook::Setup(ST_MapData setData)
 	vRotate = setData.vRotate;
 	vTranslate = setData.vTranslate;
 
+	m_strConditionName = setData.gimmickData.conditionName;
+
 	ST_XFile* xfile = new ST_XFile;
 
 	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);

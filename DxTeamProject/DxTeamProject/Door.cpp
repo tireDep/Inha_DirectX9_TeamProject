@@ -32,6 +32,8 @@ void CDoor::Setup(const ST_MapData & mapData)
 	m_vRotation = mapData.vRotate;
 	m_vTranslation = mapData.vTranslate;
 
+	CGimmick::SetGimmickCondition(mapData);
+
 	ST_XFile* xfile = new ST_XFile;
 
 	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
@@ -79,25 +81,43 @@ void CDoor::Setup(const ST_MapData & mapData)
 void CDoor::Update(float duration)
 {
 	// tmp Test
-	static int tmpCount = 0;
-	tmpCount++;
-	if (tmpCount >= 10000)
-	{
-		IsOpen = false;
-		if (tmpCount >= 20000)
-		{
-			IsOpen = true;
-			tmpCount = 0;
-		}
-	}
+	// static int tmpCount = 0;
+	// tmpCount++;
+	// if (tmpCount >= 10000)
+	// {
+	// 	IsOpen = false;
+	// 	if (tmpCount >= 20000)
+	// 	{
+	// 		IsOpen = true;
+	// 		tmpCount = 0;
+	// 	}
+	// }
 
 	// tmp
 	//if (g_pGameManager->getOrb())
 	//	IsOpen = true;
 	//if (g_pGameManager->getBook())
 	//	IsOpen = true;
-	
-	if (IsOpen)
+
+	// if (IsOpen)
+	// {
+	// 	m_fRotAngle += m_fRotationSpeed * duration;
+	// 	if (m_fRotAngle >= m_fOpeningAngle)
+	// 		m_fRotationSpeed = 0;
+	// 	else
+	// 		m_fRotationSpeed = 1.0f;
+	// }
+	// else
+	// {
+	// 	m_fRotAngle -= m_fRotationSpeed * duration;
+	// 	if (m_fRotAngle <= 0)
+	// 		m_fRotationSpeed = 0;
+	// 	else
+	// 		m_fRotationSpeed = 1.0f;
+	// }
+
+	// >> testCode
+	if (m_isCondition)
 	{
 		m_fRotAngle += m_fRotationSpeed * duration;
 		if (m_fRotAngle >= m_fOpeningAngle)
@@ -105,14 +125,8 @@ void CDoor::Update(float duration)
 		else
 			m_fRotationSpeed = 1.0f;
 	}
-	else
-	{
-		m_fRotAngle -= m_fRotationSpeed * duration;
-		if (m_fRotAngle <= 0)
-			m_fRotationSpeed = 0;
-		else
-			m_fRotationSpeed = 1.0f;
-	}
+	// << testCode
+
 	D3DXMatrixRotationY(&m_matRotGimmick, m_fRotAngle);
 
 	D3DXMATRIXA16 matS, matT;
@@ -126,16 +140,16 @@ void CDoor::Update(float duration)
 
 void CDoor::Update(float duration, bool isSwitchOn)
 {
-	if (isSwitchOn)
-	{
-		IsOpen = true;
-		Update(duration);
-	}
-	else
-	{
-		IsOpen = false;
-		Update(duration);
-	}
+	// if (isSwitchOn)
+	// {
+	// 	IsOpen = true;
+	// 	Update(duration);
+	// }
+	// else
+	// {
+	// 	IsOpen = false;
+	// 	Update(duration);
+	// }
 	//m_matWorld = m_matS * m_matRotGimmick * m_matT;
 	//m_pOBB->Update(&m_matWorld);
 }

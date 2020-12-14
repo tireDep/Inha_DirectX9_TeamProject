@@ -94,6 +94,8 @@ void CSwitch::Setup(ST_MapData setData)
 	m_strTxtFile = setData.strTxtPath;
 	m_ObjectType = setData.objType;
 
+	CGimmick::SetGimmickCondition(setData);
+
 	D3DXVECTOR3 vScale, vRotate, vTranslate;
 
 	vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
@@ -138,10 +140,11 @@ void CSwitch::Setup(ST_MapData setData)
 	m_matWorld = m_matS * m_matR * m_matT;
 	m_position = vTranslate;
 	m_scale = vScale;
-	 m_pOBB = new COBB;
-	 m_pOBB->Setup(*this);
-	 g_pObjectManager->AddOBBbox(m_pOBB);
-	 g_pObjectManager->AddGimmick(this);
+
+	m_pOBB = new COBB;
+	m_pOBB->Setup(*this);
+	g_pObjectManager->AddOBBbox(m_pOBB);
+	g_pObjectManager->AddGimmick(this);
 }
 
 

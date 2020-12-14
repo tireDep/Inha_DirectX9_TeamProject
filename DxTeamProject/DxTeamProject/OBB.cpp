@@ -17,7 +17,7 @@ void COBB::Setup(CObject & object)
 {
 	//m_matWorld = object.GetmatWorld();
 
-	object.Update(0);
+	object.Update(0.0001f);
 
 	D3DXVECTOR3* pVertices;
 	object.GetMesh()->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);

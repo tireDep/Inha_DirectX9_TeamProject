@@ -78,7 +78,14 @@ void CGameManager::SetGetOrb(string orbType)
 	for (it = m_mapOrb.begin(); it != m_mapOrb.end(); it++)
 	{
 		if (it->first == orbType)
+		{
 			it->second = true;
+			
+			ST_EVENT msg;
+			msg.eventType = EventType::eConditionChange;
+			msg.conditionName = it->first;
+			g_pEventManager->CheckEvent(msg);
+		}
 	}
 }
 

@@ -14,7 +14,8 @@ CDragon::CDragon() :
 	m_vDirection(0,0,1),
 	rotation(D3DX_PI),
 	m_isEffect(false),
-	m_effectDuration(0.0f)
+	m_effectDuration(0.0f),
+	m_color(GRAY)
 {
 	D3DXMatrixIdentity(&m_matRotY);
 	m_strName = "Dragon";
@@ -29,7 +30,7 @@ CDragon::~CDragon()
 
 void CDragon::Update(D3DXVECTOR3 pos, float duration)
 {
-	if (m_isEffect)
+	if (m_isEffect && m_color != GRAY)
 	{
 		m_effectDuration += duration;
 
@@ -143,6 +144,7 @@ void CDragon::ChangeColor(D3DXCOLOR color)
 	if (color == WHITE)
 		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_17(white).png", m_pTexture);
 
+	// m_color = color;
 }
 
 void CDragon::DoRotation()
@@ -177,6 +179,7 @@ void CDragon::ReceiveEvent(ST_EVENT eventMsg)
 		if (eventMsg.eventType == EventType::eChangedColorEvent)
 		{
 			m_color = *(D3DXCOLOR*)eventMsg.ptrMessage;
+
 			m_isEffect = true;
 
 			rotation = D3DX_PI;
