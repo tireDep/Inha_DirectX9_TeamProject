@@ -96,7 +96,6 @@ void CGimmick::Render()
 	else
 	{
 		// >> 오브젝트가 선택되었을 경우
-		string temp = g_pObjectManager->GetPickObjName();
 		SetShader(GetmatWorld());
 		IObject::Render();
 	}

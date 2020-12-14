@@ -19,24 +19,25 @@ void CObjectManager::SetCopyObject(int index)
 void CObjectManager::SetReConditionName()
 {
 	map<string, string>::iterator it;
-	it = m_mapConditionName.begin();
 
 	for (int i = m_preVecObjSize; i < m_vecObject.size(); i++)
 	{
-		if (m_vecObject[i]->GetConditionName() == it->first)
+		for (it = m_mapConditionName.begin(); it != m_mapConditionName.end(); it++)
 		{
-			if (m_vecObject[i]->GetObjType() == ObjectType::eG_DoorFrame 
-			 || m_vecObject[i]->GetObjType() == ObjectType::eG_Door)
+			if (m_vecObject[i]->GetConditionName() == it->first)
 			{
-				CDoor* temp = static_cast<CDoor*>(m_vecObject[i]);
-				temp->SetConditionName(it->second);
+				if (m_vecObject[i]->GetObjType() == ObjectType::eG_DoorFrame
+					|| m_vecObject[i]->GetObjType() == ObjectType::eG_Door)
+				{
+					CDoor* temp = static_cast<CDoor*>(m_vecObject[i]);
+					temp->SetConditionName(it->second);
+				}
+				else
+					m_vecObject[i]->SetConditionName(it->second);
 			}
-			else
-				m_vecObject[i]->SetConditionName(it->second);
+		} // << : for_it
 
-			it++;
-		}
-	}
+	} // << : for_i
 
 	m_mapConditionName.clear();
 }
