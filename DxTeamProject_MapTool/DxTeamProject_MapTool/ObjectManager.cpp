@@ -16,6 +16,31 @@ void CObjectManager::SetCopyObject(int index)
 	m_vecObject[m_vecObject.size() - 1]->SetTranslate(m_vecObject[index]->GetTranslate());
 }
 
+void CObjectManager::SetReConditionName()
+{
+	map<string, string>::iterator it;
+	it = m_mapConditionName.begin();
+
+	for (int i = m_preVecObjSize; i < m_vecObject.size(); i++)
+	{
+		if (m_vecObject[i]->GetConditionName() == it->first)
+		{
+			if (m_vecObject[i]->GetObjType() == ObjectType::eG_DoorFrame 
+			 || m_vecObject[i]->GetObjType() == ObjectType::eG_Door)
+			{
+				CDoor* temp = static_cast<CDoor*>(m_vecObject[i]);
+				temp->SetConditionName(it->second);
+			}
+			else
+				m_vecObject[i]->SetConditionName(it->second);
+
+			it++;
+		}
+	}
+
+	m_mapConditionName.clear();
+}
+
 void CObjectManager::AddObject(IObject * pObject)
 {
 	m_vecObject.push_back(pObject);
@@ -188,8 +213,6 @@ void CObjectManager::RemoveClickedObj()
 	}
 }
 
-static int index = -1;
-static string name = "";
 void CObjectManager::CheckSameName()
 {
 	if (m_vecObject.size() == 0)
@@ -201,32 +224,27 @@ void CObjectManager::CheckSameName()
 		{
 			if (m_vecObject[i]->GetObjectName() == m_vecObject[j]->GetObjectName())
 			{
-				name = m_vecObject[j]->GetObjectName();
-				m_vecObject[j]->SetObjectName(m_vecObject[j]->GetObjectName() + "(" + to_string(m_sameNum++) + ")");
+				if (m_vecObject[j]->GetConditionName() != "")
+				{
+					// >> 이름이 변경될 파일에 조건 변수가 존재할 경우
+					string preName = m_vecObject[j]->GetObjectName();
+
+					m_vecObject[j]->SetObjectName(m_vecObject[j]->GetObjectName() + "(" + to_string(m_sameNum++) + ")");
+
+					string nowName = m_vecObject[j]->GetObjectName();
+
+					m_mapConditionName.insert(pair<string, string>(preName, nowName));
+				}
+				else
+					m_vecObject[j]->SetObjectName(m_vecObject[j]->GetObjectName() + "(" + to_string(m_sameNum++) + ")");
 			}
-			// >> todo : 중복 이름 시 조건 처리!! 
-			//for (int k = j - 1; k < m_vecObject.size(); k++)
-			//{
-			//	if (m_vecObject[k]->GetConditionName() == name)
-			//	{
-			//
-			//	}
-			//}
-			// if (m_vecObject[j]->GetConditionName() != "" && index == -1)
-			// {
-			// 	index = j;
-			// 	name = m_vecObject[j]->GetConditionName();
-			// }
-			// else if (i > index && m_vecObject[j]->GetConditionName() == name)
-			// {
-			// 	string temp = m_vecObject[index]->GetObjectName();
-			// 	m_vecObject[index]->SetConditionName(m_vecObject[j]->GetObjectName());
-			// 	m_vecObject[j]->SetConditionName(temp);
-			// 	index = -1;
-			// }
-			// >> todo : 중복 이름 시 조건 처리!! 
-		}
-	}
+
+		} // >> : for_j
+
+	} // >> : for_i
+
+	if (m_mapConditionName.size() != 0)
+		SetReConditionName();
 }
 
 vector<IObject*> CObjectManager::GetVecObject()
@@ -370,3 +388,9 @@ string CObjectManager::GetPickObjName()
 
 	return "";
 }
+
+void CObjectManager::SetPreVecSize(int set)
+{
+	m_preVecObjSize = set;
+}
+
