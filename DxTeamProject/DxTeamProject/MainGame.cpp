@@ -122,8 +122,10 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
+
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxToTile.dat");
+
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 
@@ -245,7 +247,7 @@ void CMainGame::Update()
 
 		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
 
-		m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
+		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
 
 	
 		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[2]);

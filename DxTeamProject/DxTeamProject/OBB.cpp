@@ -1003,6 +1003,7 @@ bool COBB::IsCollision(COBB * otherOBB, D3DXVECTOR3 * contactNormal, float * pen
 			return true;
 		}
 	}
+
 	return true;
 
 	unsigned bestSingleAxis = best;
