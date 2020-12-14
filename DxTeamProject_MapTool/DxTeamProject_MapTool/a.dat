@@ -28,13 +28,13 @@ cubeworld_texture.tga
 1
 # GimmickData
 # ConditionName
-Book4
+Blue
 # ConditionIndex
-1
+0
 # ConditionOrbIndex
-4
+5
 # ConditionName
-Book4
+Blue
 # Object_End
 
 # Object_Start
@@ -67,45 +67,13 @@ cubeworld_texture.tga
 1
 # GimmickData
 # ConditionName
-Book4
+Blue
 # ConditionIndex
-1
+0
 # ConditionOrbIndex
 0
 # ConditionName
-Book4
-# Object_End
-
-# Object_Start
-# ObjectName
-Book4
-# FolderPath
-Resource/XFile/Book
-# FilePath
-book.X
-# TxtPath
-Bookshelf_diffuse.png
-# ObjectType
-33
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--1.5
-0
--1.5
-# Color
-0.5
-0.5
-0.5
-1
-# ConditionName
-Door1
+Blue
 # Object_End
 
 # Section =======================================

@@ -3,6 +3,8 @@
 class CDoor : public CGimmick
 {
 private:
+	Synthesize(bool, m_isAnotherClick, IsAnotherClick);
+
 	int GetIndex();
 
 public:
@@ -11,7 +13,9 @@ public:
 
 	void Setup(ST_MapData setData);
 
-	void Render();
+	void Update();
+
+	void Render() override;
 
 	void SetAnotherScale(D3DXVECTOR3 set);
 	void SetAnotherRotation(D3DXVECTOR3 set);

@@ -49,8 +49,8 @@
     <Filter Include="Object\Gimmick">
       <UniqueIdentifier>{8b321869-a60a-47ca-a531-6e6f29863968}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Book">
-      <UniqueIdentifier>{6804e2ff-e857-4958-b1a4-750661bd26ba}</UniqueIdentifier>
+    <Filter Include="Object\Item">
+      <UniqueIdentifier>{97d02914-428b-4f81-b5a3-28d5d2887186}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -153,10 +153,10 @@
       <Filter>Object\Gimmick</Filter>
     </ClInclude>
     <ClInclude Include="Book.h">
-      <Filter>Object\Book</Filter>
+      <Filter>Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>Header</Filter>
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -252,10 +252,10 @@
       <Filter>Object\Gimmick</Filter>
     </ClCompile>
     <ClCompile Include="Book.cpp">
-      <Filter>Object\Book</Filter>
+      <Filter>Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
-      <Filter>Source</Filter>
+      <Filter>Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

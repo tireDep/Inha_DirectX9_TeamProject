@@ -160,6 +160,8 @@ void CFileLoadManager::ReadMapData(string fileName)
 	int loopCnt = 0;
 	if (mapFile.is_open())
 	{
+		g_pObjectManager->SetPreVecSize(g_pObjectManager->GetVecSize());
+
 		if(m_fNowX == -nGridSize && g_pObjectManager->GetVecObject().size() != 0)
 			m_fNowX += m_fAddNumX * 2; // object exist && first load
 		else if (m_fNowX < m_fLimitNumX)

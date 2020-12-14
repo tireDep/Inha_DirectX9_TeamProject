@@ -1,18 +1,18 @@
 # Object_Start
 # ObjectName
-Tile_01_Grass1
+Door1
 # FolderPath
-Resource/XFile/Tile
+Resource/XFile/Gimmick/Door
 # FilePath
-Tile_01.X
+door_frame.X
 # TxtPath
-Texture_01.png
+cubeworld_texture.tga
 # ObjectType
-0
+28
 # Scale
-2
-0.03
-2
+0.1
+0.1
+0.1
 # Rotate
 0
 0
@@ -26,126 +26,54 @@ Texture_01.png
 0.5
 0.5
 1
-# Object_End
-
-# Object_Start
-# ObjectName
-Box2
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-23
-# Scale
-1
-1
-1
-# Rotate
+# GimmickData
+# ConditionName
+Blue
+# ConditionIndex
 0
-0
-0
-# Translate
-0.5
+# ConditionOrbIndex
 5
-0.5
-# Color
-0.5
-0.5
-0.5
-1
+# ConditionName
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Box3
+Door2
 # FolderPath
-
+Resource/XFile/Gimmick/Door
 # FilePath
-
+door_right.X
 # TxtPath
-
+cubeworld_texture.tga
 # ObjectType
-23
+29
 # Scale
-1
-1
-1
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
 0.5
-10
+0
 0.5
 # Color
 0.5
 0.5
 0.5
 1
-# Object_End
-
-# Object_Start
-# ObjectName
-Box4
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-23
-# Scale
-1
-1
-1
-# Rotate
+# GimmickData
+# ConditionName
+Blue
+# ConditionIndex
 0
+# ConditionOrbIndex
 0
-0
-# Translate
-4.5
-5
-0.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Box5
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-23
-# Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
--4.5
-10
-0.5
-# Color
-0.5
-0.5
-0.5
-1
+# ConditionName
+Blue
 # Object_End
 
 # Section =======================================
