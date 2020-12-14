@@ -11,11 +11,14 @@ COBB::COBB() :
 
 COBB::~COBB()
 {
+
 }
 
 void COBB::Setup(CObject & object)
 {
 	//m_matWorld = object.GetmatWorld();
+
+	object.Update(0);
 
 	D3DXVECTOR3* pVertices;
 	object.GetMesh()->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
@@ -93,7 +96,7 @@ void COBB::Setup(CObject & object)
 	//D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &m_matWorld);
 	for (int i = 0; i < 3; ++i)
 		D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &object.GetmatWorld());
-	D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &object.GetmatWorld());
+	//D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &object.GetmatWorld());
 
 	object.GetMesh()->UnlockVertexBuffer();
 }

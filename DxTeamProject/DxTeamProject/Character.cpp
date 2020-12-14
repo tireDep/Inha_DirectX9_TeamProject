@@ -494,13 +494,17 @@ void CCharacter::ColliderOtherObject(IObject * background)
 {
 	if (m_Character->GetOBB()->IsCollision(background->GetOBB()))
 	{
-		
+		cout << 1 << endl;
 		m_isCollided = true;
-		
+		background->SetBool(true);
+	
 	}
 	else
 	{
+		
 		m_isCollided = false;
 		
 	}
+
+	
 }

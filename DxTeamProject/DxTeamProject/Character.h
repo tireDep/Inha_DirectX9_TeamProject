@@ -42,14 +42,14 @@ public:
 
 	virtual void SetColor(D3DXCOLOR c);
 	virtual D3DXCOLOR GetColor();
-
+	COBB* m_pOBB;
+	COBB* GetOBB() { return m_pOBB; }
 	// tmp Collision Test
 	// setup erase
 	virtual bool Collider(bool isCollided);
 
 	void ColliderOtherObject(IObject * background);
-	COBB* m_pOBB;
-	COBB* GetOBB();
+	
 	// void SetBool(bool istrue);
 	
 

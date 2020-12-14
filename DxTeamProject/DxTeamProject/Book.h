@@ -9,7 +9,7 @@ private:
 	static int m_nCount;
 	float m_fRotationSpeed;
 	float m_fRotAngle;
-
+	bool istrue;
 	D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRot;
 public:
 	CBook();
@@ -20,5 +20,5 @@ public:
 	bool hasIntersected(CSkinnedMesh * Character);
 	void Render();
 
-	virtual void SetBool(bool set) { }
+	void SetBool(bool set) { istrue = true; }
 };

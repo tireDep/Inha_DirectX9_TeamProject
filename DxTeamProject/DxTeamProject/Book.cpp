@@ -7,9 +7,11 @@ int CBook::m_nCount = 0;
 CBook::CBook()
 	: m_fRotationSpeed(1.0f)
 	, m_fRotAngle(0.0f)
+	, istrue(false)
 {
 	D3DXMatrixIdentity(&m_matRot);
 	CBook::m_nCount += 1;
+	
 }
 
 CBook::~CBook()
@@ -81,7 +83,7 @@ void CBook::Setup(ST_MapData setData)
 	D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
 
 	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
-	//m_matWorld = matS * matR * matT;
+	m_matWorld = m_matS * m_matR * m_matT;
 
 	// OBB TEST
 	m_pOBB = new COBB;
@@ -101,10 +103,10 @@ void CBook::Update(float duration)
 
 
 
-	m_matWorld = m_matRot;
+	m_matWorld = m_matS * m_matRot * m_matT;
 //	m_matWorld = m_matS * m_matRot * m_matT;
 
-	//m_pOBB->Update(&m_matWorld);
+	m_pOBB->Update(&m_matWorld);
 }
 
 bool CBook::hasIntersected(CSkinnedMesh * Character)
@@ -141,5 +143,12 @@ void CBook::Render()
 		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 		m_pMesh->DrawSubset(i);
 	}
+	if (istrue == true)
+	{
+		m_pMesh->Release();
+		g_pObjectManager->RemoveObject(m_pOBB);
+	}
+	
+
 	g_pD3DDevice->SetTexture(0, NULL);
 }
