@@ -1169,7 +1169,7 @@ bool COBB::IsCollision(COBB * otherOBB, D3DXVECTOR3 * contactNormal, float * pen
 	{
 		D3DXVECTOR3 normal;
 		normal = this->m_vAxisDir[best];
-		if (D3DXVec3Dot(&D, &this->m_vAxisDir[best]) < 0)
+		if (D3DXVec3Dot(&D, &this->m_vAxisDir[best]) < 0)	// Need To Modify? -
 			normal = normal * -1.0f;
 		contactNormal->x = normal.x;
 		contactNormal->y = normal.y;
@@ -1181,7 +1181,7 @@ bool COBB::IsCollision(COBB * otherOBB, D3DXVECTOR3 * contactNormal, float * pen
 	{
 		D3DXVECTOR3 normal;
 		normal = otherOBB->m_vAxisDir[best - 3];
-		if (D3DXVec3Dot(&D, &otherOBB->m_vAxisDir[best - 3]) > 0)
+		if (D3DXVec3Dot(&D, &otherOBB->m_vAxisDir[best - 3]) > 0)	// Need To Modify?
 			normal = normal * -1.0f;
 		contactNormal->x = normal.x;
 		contactNormal->y = normal.y;
@@ -1191,6 +1191,18 @@ bool COBB::IsCollision(COBB * otherOBB, D3DXVECTOR3 * contactNormal, float * pen
 	}
 	else
 	{
+		best -= 6;
+		D3DXVECTOR3 normal, thisvector, othervector;
+		thisvector = this->m_vAxisDir[best / 3];
+		othervector = otherOBB->m_vAxisDir[best % 3];
+		D3DXVec3Cross(&normal, &thisvector, &othervector);
+		D3DXVec3Normalize(&normal, &normal);
+		if (D3DXVec3Dot(&D, &normal) < 0)
+			normal = normal * -1.0f;
+		contactNormal->x = normal.x;
+		contactNormal->y = normal.y;
+		contactNormal->z = normal.z;
+		*penetration = penetrationTmp;
 		return true;
 	}
 }
