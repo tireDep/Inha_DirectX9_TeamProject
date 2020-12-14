@@ -88,63 +88,70 @@ void CSwitch::Setup(ST_MapData setData)
 	m_pColl = new COBB;
 	m_pColl->SetupMesh(m_vMin, m_vMax, 0.3f);
 
-	m_strObjName = setData.strObjName;
-	m_strFolder = setData.strFolderPath;
-	m_strXFile = setData.strXFilePath;
-	m_strTxtFile = setData.strTxtPath;
-	m_ObjectType = setData.objType;
+	CGimmick::SetLoadData(setData);
 
-	CGimmick::SetGimmickCondition(setData);
+	m_position = m_vTranslation;
+	m_scale = m_vScale;
 
-	D3DXVECTOR3 vScale, vRotate, vTranslate;
+	// todo : switchCondition
 
-	vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
-							 // JW ADD...
-	m_vScale = vScale;
-	vRotate = setData.vRotate;
-	vTranslate = setData.vTranslate;
-
-	ST_XFile* xfile = new ST_XFile;
-
-	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
-
-	if (m_strTxtFile != "")
-	{
-		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
-		// m_vecTextures.push_back(m_pTexture);
-	}
-
-	m_pMesh = xfile->pMesh;
-	m_adjBuffer = xfile->adjBuffer;
-	m_vecMtrls = xfile->vecMtrl;
-	m_vecTextures = xfile->vecTextrure;
-	m_numMtrls = xfile->nMtrlNum;
-
-	delete xfile;
-
-	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixIdentity(&matS);
-	D3DXMatrixIdentity(&matR);
-	D3DXMatrixIdentity(&matT);
-
-	D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
-
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(vRotate.x);
-	v.y = D3DXToRadian(vRotate.y);
-	v.z = D3DXToRadian(vRotate.z);
-	D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
-
-	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
-	
-	m_matWorld = m_matS * m_matR * m_matT;
-	m_position = vTranslate;
-	m_scale = vScale;
-
-	m_pOBB = new COBB;
-	m_pOBB->Setup(*this);
-	g_pObjectManager->AddOBBbox(m_pOBB);
-	g_pObjectManager->AddGimmick(this);
+	//m_strObjName = setData.strObjName;
+	//m_strFolder = setData.strFolderPath;
+	//m_strXFile = setData.strXFilePath;
+	//m_strTxtFile = setData.strTxtPath;
+	//m_ObjectType = setData.objType;
+	//
+	//CGimmick::SetGimmickCondition(setData);
+	//
+	//D3DXVECTOR3 vScale, vRotate, vTranslate;
+	//
+	//vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
+	//						 // JW ADD...
+	//m_vScale = vScale;
+	//vRotate = setData.vRotate;
+	//vTranslate = setData.vTranslate;
+	//
+	//ST_XFile* xfile = new ST_XFile;
+	//
+	//g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
+	//
+	//if (m_strTxtFile != "")
+	//{
+	//	g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+	//	// m_vecTextures.push_back(m_pTexture);
+	//}
+	//
+	//m_pMesh = xfile->pMesh;
+	//m_adjBuffer = xfile->adjBuffer;
+	//m_vecMtrls = xfile->vecMtrl;
+	//m_vecTextures = xfile->vecTextrure;
+	//m_numMtrls = xfile->nMtrlNum;
+	//
+	//delete xfile;
+	//
+	//D3DXMATRIXA16 matS, matR, matT;
+	//D3DXMatrixIdentity(&matS);
+	//D3DXMatrixIdentity(&matR);
+	//D3DXMatrixIdentity(&matT);
+	//
+	//D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
+	//
+	//D3DXVECTOR3 v;
+	//v.x = D3DXToRadian(vRotate.x);
+	//v.y = D3DXToRadian(vRotate.y);
+	//v.z = D3DXToRadian(vRotate.z);
+	//D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
+	//
+	//D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
+	//
+	//m_matWorld = m_matS * m_matR * m_matT;
+	//m_position = vTranslate;
+	//m_scale = vScale;
+	//
+	//m_pOBB = new COBB;
+	//m_pOBB->Setup(*this);
+	//g_pObjectManager->AddOBBbox(m_pOBB);
+	//g_pObjectManager->AddGimmick(this);
 }
 
 
@@ -173,10 +180,7 @@ void CSwitch::Render()
 	}
 
 	{
-	
-
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &GetmatWorld());
-		
 
 		if (m_pMesh == NULL)
 			return;
@@ -192,7 +196,6 @@ void CSwitch::Render()
 
 			if (istrue == false)
 			{
-				
 				m_pMesh->DrawSubset(i);
 			}
 			else

@@ -39,6 +39,8 @@ public:
 
 	void SetColor(D3DXCOLOR color);
 	
+	void SetBool(bool setup) { }
+
 	// KT
 	void SetHitLength(float HitLength); // 빔이 맞았을때 거리 구해줌.
 

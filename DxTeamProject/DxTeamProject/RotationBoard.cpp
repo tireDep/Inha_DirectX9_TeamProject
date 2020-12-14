@@ -16,15 +16,7 @@ CRotationBoard::~CRotationBoard()
 
 void CRotationBoard::Setup(const ST_MapData & mapData)
 {
-	m_strObjName = mapData.strObjName;
-	m_strFolder = mapData.strFolderPath;
-	m_strXFile = mapData.strXFilePath;
-	m_strTxtFile = mapData.strTxtPath;
-	m_ObjectType = mapData.objType;
-
-	m_vScale = mapData.vScale;
-	m_vRotation = mapData.vRotate;
-	m_vTranslation = mapData.vTranslate;
+	CGimmick::SetLoadData(mapData);
 
 	m_fRotationSpeed = mapData.gimmickData.roationSpeed_rotaitonBoard;
 	if (mapData.gimmickData.roationAxialIndex_rotaitonBoard == 0)
@@ -36,33 +28,43 @@ void CRotationBoard::Setup(const ST_MapData & mapData)
 	else if (mapData.gimmickData.roationAxialIndex_rotaitonBoard == 3)
 		rotationAxial = RotationAxial::NONE;
 
-	ST_XFile* xfile = new ST_XFile;
-
-	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
-
-	if (m_strTxtFile != "")
-		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
-
-	m_pMesh = xfile->pMesh;
-	m_adjBuffer = xfile->adjBuffer;
-	m_vecMtrls = xfile->vecMtrl;
-	m_vecTextures = xfile->vecTextrure;
-	m_numMtrls = xfile->nMtrlNum;
-
-	delete xfile;
-
-	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
-	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
-	m_matWorld = matS * matR * matT;
-
-	// OBB TEST
-	m_pOBB = new COBB;
-	m_pOBB->Setup(*this);
-	g_pObjectManager->AddOBBbox(m_pOBB);
-	g_pObjectManager->AddGimmick(this);
-
+	//m_strObjName = mapData.strObjName;
+	//m_strFolder = mapData.strFolderPath;
+	//m_strXFile = mapData.strXFilePath;
+	//m_strTxtFile = mapData.strTxtPath;
+	//m_ObjectType = mapData.objType;
+	//
+	//m_vScale = mapData.vScale;
+	//m_vRotation = mapData.vRotate;
+	//m_vTranslation = mapData.vTranslate;
+	//
+	//ST_XFile* xfile = new ST_XFile;
+	//
+	//g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
+	//
+	//if (m_strTxtFile != "")
+	//	g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+	//
+	//m_pMesh = xfile->pMesh;
+	//m_adjBuffer = xfile->adjBuffer;
+	//m_vecMtrls = xfile->vecMtrl;
+	//m_vecTextures = xfile->vecTextrure;
+	//m_numMtrls = xfile->nMtrlNum;
+	//
+	//delete xfile;
+	//
+	//D3DXMATRIXA16 matS, matR, matT;
+	//D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	//D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+	//D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+	//m_matWorld = matS * matR * matT;
+	//
+	//// OBB TEST
+	//m_pOBB = new COBB;
+	//m_pOBB->Setup(*this);
+	//g_pObjectManager->AddOBBbox(m_pOBB);
+	//g_pObjectManager->AddGimmick(this);
+	//
 	//D3DXVECTOR3 vScale, vRotate, vTranslate;
 	//vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
 	//// JW ADD...

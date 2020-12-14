@@ -160,9 +160,7 @@ void CDoor::SetAnotherTranslation(D3DXVECTOR3 set)
 
 void CDoor::SetOpenCondition(int index)
 {
-	if (index == 0)			m_openCondition = OnOffCondition::eOrb;
-	else if (index == 1)	m_openCondition = OnOffCondition::eItem;
-	else if (index == 2)	m_openCondition = OnOffCondition::eSwitch;
+	CGimmick::SetOpenCondition(index);
 
 	int search = GetIndex();
 	if (search == Inf)
@@ -176,7 +174,7 @@ void CDoor::SetOpenCondition(int index)
 
 void CDoor::SetConditionName(string strName)
 {
-	m_strConditionName = strName;
+	CGimmick::SetConditionName(strName);
 
 	int index = GetIndex();
 	if (index == Inf)
@@ -188,23 +186,16 @@ void CDoor::SetConditionName(string strName)
 		temp->SetConditionName(strName);
 }
 
-int CDoor::GetOpenConditionIndex()
+void CDoor::SetTexture(int index)
 {
-	if (m_openCondition == OnOffCondition::eOrb)			return 0;
-	else if (m_openCondition == OnOffCondition::eItem)		return 1;
-	else if (m_openCondition == OnOffCondition::eSwitch)	return 2;
-	else
-		return -1;
-}
+	CGimmick::SetTexture(index);
 
-string CDoor::GetOpenConditionType()
-{
-	if (m_openCondition == OnOffCondition::eOrb)			return "Orb";
-	else if (m_openCondition == OnOffCondition::eItem)		return "Item";
-	else if (m_openCondition == OnOffCondition::eSwitch);	return "Switch";
-}
+	int search = GetIndex();
+	if (search == Inf)
+		return;
 
-string CDoor::GetConditionName()
-{
-	return m_strConditionName;
+	CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(search));
+
+	if (temp->GetObjType() == eG_Door)
+		temp->SetTexture(index);
 }

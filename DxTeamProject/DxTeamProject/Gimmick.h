@@ -11,6 +11,7 @@ public:
 	virtual void Setup() { };
 	
 	static void Setup(const ST_MapData & mapData);
+	void SetLoadData(const ST_MapData & mapData);
 	void SetGimmickCondition(const ST_MapData & mapData);
 
 	virtual void Update(float duration) = 0;

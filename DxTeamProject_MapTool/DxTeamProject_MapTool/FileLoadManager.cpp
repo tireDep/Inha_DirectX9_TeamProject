@@ -399,8 +399,8 @@ ST_MapData CFileLoadManager::SetSaveData(int index)
 		mapData.gimmickData.directionIndex_movingCube = temp->GetDirection();
 	}
 	else if (mapData.objType == eG_DoorFrame
-		  || mapData.objType == eG_Door)
-		 // || mapData.objType == eG_ColorChanger)
+		  || mapData.objType == eG_Door
+		  || mapData.objType == eG_ColorChanger)
 	{
 		CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
 		mapData.gimmickData.isData = true;

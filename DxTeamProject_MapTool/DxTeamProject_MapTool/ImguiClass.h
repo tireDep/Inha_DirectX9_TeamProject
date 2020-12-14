@@ -49,6 +49,9 @@ private:
 	Synthesize(vector<IDirect3DTexture9*>, m_vecTextures, VecTexture);
 	// << testLoad
 
+	void SetGimmickTexture();
+	void SetGimmickCondition();
+
 public:
 	static int m_nowSelectindex;
 	static int m_prevSelectIndex;

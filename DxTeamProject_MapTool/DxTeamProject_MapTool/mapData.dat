@@ -1,6 +1,112 @@
 # Object_Start
 # ObjectName
-Door1
+RoataionBoard1
+# FolderPath
+Resource/XFile/Gimmick/RotationBoard
+# FilePath
+Rotation_board.X
+# TxtPath
+board.png
+# ObjectType
+26
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# GimmickData
+# RotationSpeed
+5
+# RotationAxialIndex
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+MovingCube2
+# FolderPath
+Resource/XFile/Gimmick/MovingCube
+# FilePath
+moving_cube.X
+# TxtPath
+moving_cube_1.png
+# ObjectType
+32
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# GimmickData
+# StartPos
+10
+# EndPos
+-10
+# Speed
+5
+# DirectionIndex
+2
+# Object_End
+
+# Object_Start
+# ObjectName
+Switch3
+# FolderPath
+Resource/XFile/Gimmick/Switch
+# FilePath
+Force_switch.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+31
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ConditionName
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Door4
 # FolderPath
 Resource/XFile/Gimmick/Door
 # FilePath
@@ -18,7 +124,85 @@ cubeworld_texture.tga
 0
 0
 # Translate
+4.5
+0
 0.5
+# Color
+0.5
+0.5
+0.5
+1
+# GimmickData
+# ConditionName
+Switch7
+# ConditionIndex
+2
+# ConditionOrbIndex
+5
+# ConditionName
+Switch7
+# Object_End
+
+# Object_Start
+# ObjectName
+Door5
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_right.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+29
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# GimmickData
+# ConditionName
+Switch7
+# ConditionIndex
+2
+# ConditionOrbIndex
+0
+# ConditionName
+Switch7
+# Object_End
+
+# Object_Start
+# ObjectName
+ColorChanger6
+# FolderPath
+Resource/XFile/Gimmick/ColorChanger
+# FilePath
+Color_changer.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+30
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
 0
 0.5
 # Color
@@ -39,15 +223,15 @@ Blue
 
 # Object_Start
 # ObjectName
-Door2
+Switch7
 # FolderPath
-Resource/XFile/Gimmick/Door
+Resource/XFile/Gimmick/Switch
 # FilePath
-door_right.X
+Force_switch.X
 # TxtPath
-cubeworld_texture.tga
+cubeworld_metal.tga
 # ObjectType
-29
+31
 # Scale
 0.1
 0.1
@@ -57,23 +241,16 @@ cubeworld_texture.tga
 0
 0
 # Translate
-0.5
+2.5
 0
-0.5
+-1.5
 # Color
 0.5
 0.5
 0.5
 1
-# GimmickData
 # ConditionName
-Blue
-# ConditionIndex
-0
-# ConditionOrbIndex
-0
-# ConditionName
-Blue
+Door4
 # Object_End
 
 # Section =======================================

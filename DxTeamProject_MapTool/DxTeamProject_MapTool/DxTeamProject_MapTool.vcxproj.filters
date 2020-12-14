@@ -158,6 +158,9 @@
     <ClInclude Include="Item.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
+    <ClInclude Include="ColorChanger.h">
+      <Filter>Object\Gimmick</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui.cpp">
@@ -256,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorChanger.cpp">
+      <Filter>Object\Gimmick</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

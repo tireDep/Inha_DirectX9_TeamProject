@@ -78,61 +78,81 @@ void Color_changer::Setup()
 
 void Color_changer::Setup(ST_MapData setData)
 {
-	m_strObjName = setData.strObjName;
-	m_strFolder = setData.strFolderPath;
-	m_strXFile = setData.strXFilePath;
-	m_strTxtFile = setData.strTxtPath;
-	m_ObjectType = setData.objType;
-	
-	D3DXVECTOR3 vScale, vRotate, vTranslate;
+	CGimmick::SetLoadData(setData);
+	m_pOBB->Update(&m_matWorld);
 
-	vScale = setData.vScale; 
-							 
-	m_vScale = vScale;
-	vRotate = setData.vRotate;
-	vTranslate = setData.vTranslate;
+	//BEAM
+	{
+		length = 50;
+		D3DXCreateCylinder(g_pD3DDevice, 0.5f, 0.5f, length, 20, 20, &m_pMeshBeam, NULL);
 
-	ST_XFile* xfile = new ST_XFile;
+		D3DXVECTOR3* pVertices;
 
-	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
+		m_pMeshBeam->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+		D3DXComputeBoundingBox(pVertices, m_pMeshBeam->GetNumVertices(), m_pMeshBeam->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+		m_pMeshBeam->UnlockVertexBuffer();
 
-	if (m_strTxtFile != "")
-		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+		m_BeamOBB = new COBB;
+		m_BeamOBB->SetupMesh(m_vMin, m_vMax, 0.5f);
+	}
 
-	m_pMesh = xfile->pMesh;
-	m_adjBuffer = xfile->adjBuffer;
-	m_vecMtrls = xfile->vecMtrl;
-	m_vecTextures = xfile->vecTextrure;
-	m_numMtrls = xfile->nMtrlNum;
-
-	delete xfile;
-
-	D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z); // ¸ãµ¥ÀÌÅÍ Å©±â
-
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(vRotate.x);
-	v.y = D3DXToRadian(vRotate.y);
-	v.z = D3DXToRadian(vRotate.z);
-
-	D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z); //¸ãµ¥ÀÌÅÍ
-
-	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z); //¸ãµ¥ÀÌÅÍ
-
-	//m_matWorld = m_matS * m_matR * m_matT
-
-	//---------------------------------------------------------------------
-
-	D3DXMatrixRotationY(&matR, D3DXToRadian(angle));
-	D3DXMatrixScaling(&matS, 0.3f, 0.3f, 0.3f);
-	D3DXMatrixTranslation(&matT, m_position.x, m_position.y, m_position.z);
-	
-	m_matWorld = matS * matR * matT;
-	
-
-	m_pOBB = new COBB;
-	m_pOBB->Setup(*this);
-	g_pObjectManager->AddOBBbox(m_pOBB);
-	g_pObjectManager->AddGimmick(this);
+	//m_strObjName = setData.strObjName;
+	//m_strFolder = setData.strFolderPath;
+	//m_strXFile = setData.strXFilePath;
+	//m_strTxtFile = setData.strTxtPath;
+	//m_ObjectType = setData.objType;
+	//
+	//CGimmick::SetGimmickCondition();
+	//
+	//D3DXVECTOR3 vScale, vRotate, vTranslate;
+	//
+	//vScale = setData.vScale; 
+	//						 
+	//m_vScale = vScale;
+	//vRotate = setData.vRotate;
+	//vTranslate = setData.vTranslate;
+	//
+	//ST_XFile* xfile = new ST_XFile;
+	//
+	//g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
+	//
+	//if (m_strTxtFile != "")
+	//	g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+	//
+	//m_pMesh = xfile->pMesh;
+	//m_adjBuffer = xfile->adjBuffer;
+	//m_vecMtrls = xfile->vecMtrl;
+	//m_vecTextures = xfile->vecTextrure;
+	//m_numMtrls = xfile->nMtrlNum;
+	//
+	//delete xfile;
+	//
+	//D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z); // ¸ãµ¥ÀÌÅÍ Å©±â
+	//
+	//D3DXVECTOR3 v;
+	//v.x = D3DXToRadian(vRotate.x);
+	//v.y = D3DXToRadian(vRotate.y);
+	//v.z = D3DXToRadian(vRotate.z);
+	//
+	//D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z); //¸ãµ¥ÀÌÅÍ
+	//
+	//D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z); //¸ãµ¥ÀÌÅÍ
+	//
+	////m_matWorld = m_matS * m_matR * m_matT
+	//
+	////---------------------------------------------------------------------
+	//
+	//D3DXMatrixRotationY(&matR, D3DXToRadian(angle));
+	//D3DXMatrixScaling(&matS, 0.3f, 0.3f, 0.3f);
+	//D3DXMatrixTranslation(&matT, m_position.x, m_position.y, m_position.z);
+	//
+	//m_matWorld = matS * matR * matT;
+	//
+	//
+	//m_pOBB = new COBB;
+	//m_pOBB->Setup(*this);
+	//g_pObjectManager->AddOBBbox(m_pOBB);
+	//g_pObjectManager->AddGimmick(this);
 
 }
 
@@ -160,17 +180,15 @@ void Color_changer::Update()
 	BeamWorld = matS * matT * matR;
 	
 	m_BeamOBB->Update(&BeamWorld);
-	
+	m_pOBB->Update(&m_matWorld);
 }
 
 void Color_changer::Render()
 {
-
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);	
+
 	//Beam
 	{
-		
-		
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &BeamWorld);
 		g_pD3DDevice->SetMaterial(&m_stMtl);
 		m_BeamOBB->Render();
@@ -178,11 +196,6 @@ void Color_changer::Render()
 	}
 	// ÄÃ·¯Ã¼ÀÎÀú
 	{
-		D3DXMatrixRotationY(&matR, D3DXToRadian(angle));
-		D3DXMatrixScaling(&matS, 0.3f, 0.3f, 0.3f);
-		D3DXMatrixTranslation(&matT, m_position.x, m_position.y, m_position.z);
-		m_matWorld = matS * matR * matT;
-
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 
 		if (m_pMesh == NULL)
@@ -192,9 +205,8 @@ void Color_changer::Render()
 			if (m_vecTextures[i] != 0)
 				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+			m_pMesh->DrawSubset(i);
 		}
-
-		m_pMesh->DrawSubset(0);
 		g_pD3DDevice->SetTexture(0, NULL);
 	}
 }

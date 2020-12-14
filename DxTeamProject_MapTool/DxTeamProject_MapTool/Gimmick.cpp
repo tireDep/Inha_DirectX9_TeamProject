@@ -4,6 +4,7 @@
 #include "Switch.h"
 #include "Door.h"
 #include "MovingCube.h"
+#include "ColorChanger.h"
 
 CGimmick::CGimmick() : 
 	m_openCondition(OnOffCondition::eOrb)
@@ -114,6 +115,83 @@ void CGimmick::SetDiffScale(D3DXVECTOR3 set)
 		m_vScale = D3DXVECTOR3(set.z, set.z, set.z);
 }
 
+void CGimmick::SetTexture(int index)
+{
+	switch (index)
+	{
+	case 0:
+		m_strTxtFile = "cubeworld_glow.tga";
+		break;
+
+	case 1:
+		m_strTxtFile = "cubeworld_metal.tga";
+		break;
+
+	case 2:
+		m_strTxtFile = "cubeworld_rough.tga";
+		break;
+
+	case 3:
+		m_strTxtFile = "cubeworld_texture.tga";
+		break;
+
+	case 4:
+		m_strTxtFile = "tower_defense_texture.tga";
+		break;
+	}
+
+	g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+	// m_vecTextures.clear(); // 텍스쳐가 없어서 지우면 터짐(0 삭제됨)
+	m_vecTextures.push_back(m_pTexture);
+}
+
+int CGimmick::GetTextureIndex()
+{
+	if (m_strTxtFile == "cubeworld_glow.tga")
+		return 0;
+	if (m_strTxtFile == "cubeworld_metal.tga")
+		return 1;
+	if (m_strTxtFile == "cubeworld_rough.tga")
+		return 2;
+	if (m_strTxtFile == "cubeworld_texture.tga")
+		return 3;
+	if (m_strTxtFile == "tower_defense_texture.tga")
+		return 4;
+}
+
+void CGimmick::SetOpenCondition(int index)
+{
+	if (index == 0)			m_openCondition = OnOffCondition::eOrb;
+	else if (index == 1)	m_openCondition = OnOffCondition::eItem;
+	else if (index == 2)	m_openCondition = OnOffCondition::eSwitch;
+}
+
+void CGimmick::SetConditionName(string strName)
+{
+	m_strConditionName = strName;
+}
+
+int CGimmick::GetOpenConditionIndex()
+{
+	if (m_openCondition == OnOffCondition::eOrb)			return 0;
+	else if (m_openCondition == OnOffCondition::eItem)		return 1;
+	else if (m_openCondition == OnOffCondition::eSwitch)	return 2;
+	else
+		return -1;
+}
+
+string CGimmick::GetOpenConditionType()
+{
+	if (m_openCondition == OnOffCondition::eOrb)			return "Orb";
+	else if (m_openCondition == OnOffCondition::eItem)		return "Item";
+	else if (m_openCondition == OnOffCondition::eSwitch);	return "Switch";
+}
+
+string CGimmick::GetConditionName()
+{
+	return m_strConditionName;
+}
+
 void CGimmick::CreateGimmick(const ObjectType& objType)
 {
 	ST_MapData mapData;
@@ -169,6 +247,16 @@ void CGimmick::CreateGimmick(const ObjectType& objType)
 #endif // _DEBUG
 
 	case eG_ColorChanger:
+	{
+		mapData.strObjName = string("ColorChanger") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/XFile/Gimmick/ColorChanger";
+		mapData.strTxtPath = "cubeworld_texture.tga";
+
+		mapData.strXFilePath = string("Color_changer.X");
+
+		CColorChanger* colorChanger = new CColorChanger;
+		colorChanger->Setup(mapData);
+	}
 		break;
 
 	case eG_Switch:
@@ -178,9 +266,6 @@ void CGimmick::CreateGimmick(const ObjectType& objType)
 		mapData.strTxtPath = "cubeworld_texture.tga";
 
 		mapData.strXFilePath = string("Force_switch") + string(".X");
-
-		mapData.gimmickData.roationSpeed_rotaitonBoard = 0.0f;
-		mapData.gimmickData.roationAxialIndex_rotaitonBoard = 0;
 
 		CSwitch* cSwitch = new CSwitch;
 		cSwitch->Setup(mapData);
@@ -231,6 +316,10 @@ void CGimmick::CreateGimmick_SaveData(ST_MapData & mapData)
 #endif // _DEBUG
 
 	case eG_ColorChanger:
+	{
+		CColorChanger* colorChanger = new CColorChanger;
+		colorChanger->Setup(mapData);
+	}
 		break;
 
 	case eG_Switch:
