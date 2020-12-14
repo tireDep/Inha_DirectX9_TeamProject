@@ -126,7 +126,7 @@ void CFileLoadManager::LoadData(string path)
 				mapData.vTranslate.z = atof(readData.c_str());
 			}
 
-			else if (readData == "# Color")
+			else if (strstr(readData.c_str(), "# Color"))
 			{
 				getline(file, readData);
 				mapData.dxColor.r = atof(readData.c_str());

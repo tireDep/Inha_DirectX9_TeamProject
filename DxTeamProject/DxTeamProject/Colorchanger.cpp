@@ -10,7 +10,13 @@ Color_changer::Color_changer()
 	, angle(0)
 	, m_scale(0.5, 0.5, 1)
 	, m_BeamOBB(NULL)
+	, c(1,1,1,1)
 {
+	D3DXMatrixIdentity(&matS);
+	D3DXMatrixIdentity(&matT);
+	D3DXMatrixIdentity(&matR);
+
+	D3DXMatrixIdentity(&BeamWorld);
 	ZeroMemory(&m_stMtl, sizeof(D3DMATERIAL9));
 	
 	m_stMtl.Ambient = RED;
@@ -22,7 +28,6 @@ Color_changer::~Color_changer()
 {
 	SafeDelete(m_BeamOBB);
 	SafeRelease(m_pMeshBeam);
-
 }
 
 void Color_changer::Setup()
@@ -34,7 +39,6 @@ void Color_changer::Setup()
 
 		D3DXVECTOR3* pVertices;
 		
-
 		m_pMeshBeam->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
 		D3DXComputeBoundingBox(pVertices, m_pMeshBeam->GetNumVertices(), m_pMeshBeam->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
 		m_pMeshBeam->UnlockVertexBuffer();
@@ -42,7 +46,6 @@ void Color_changer::Setup()
 		m_BeamOBB = new COBB;
 		m_BeamOBB->SetupMesh(m_vMin,m_vMax, 0.5f);
 
-	
 	}
 
 	// COLORCHANGER
@@ -71,10 +74,6 @@ void Color_changer::Setup()
 		}
 	}*/
 	delete xfile;
-
-
-	
-	
 }
 
 void Color_changer::Setup(ST_MapData setData)

@@ -31,7 +31,7 @@ public:
 	~CSkinnedMesh();
 
 	void SetUp(char* szFolder, char* szFile);
-	void Update();
+	void Update(float duration);
 	void Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent);
 	void Update(ST_BONE* pCurrent, D3DXMATRIXA16* pMatParent);
 	void Render(LPD3DXFRAME pFrame);

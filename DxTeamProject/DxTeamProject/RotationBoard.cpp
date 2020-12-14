@@ -3,7 +3,7 @@
 
 CRotationBoard::CRotationBoard()
 	: rotationAxial(RotationAxial::NONE)
-	, m_fRotationSpeed(1.0)
+	, m_fRotationSpeed(1.0f)
 	, m_fRotAngle(0.0f)
 {
 	D3DXMatrixIdentity(&m_matRotGimmick);

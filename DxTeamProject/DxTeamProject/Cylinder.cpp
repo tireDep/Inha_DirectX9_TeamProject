@@ -100,6 +100,8 @@ void CCylinder::Update(float duration)
 
 bool CCylinder::hasIntersected(CCylinder * otherCylinder)
 {
+	if (this == otherCylinder)
+		return false;
 	if (this->m_pOBB->IsCollision(otherCylinder->GetOBB()))
 		return true;
 	return false;

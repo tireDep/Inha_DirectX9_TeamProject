@@ -11,8 +11,19 @@
 
 int CObject::m_nRefCount = 0;
 
-CObject::CObject()
-	: m_pMesh(NULL)
+CObject::CObject() : 
+	m_pMesh(NULL),
+	m_pTexture(NULL),
+	m_adjBuffer(NULL),
+	m_vScale(0, 0, 0),
+	m_vRotation(0, 0, 0),
+	m_vTranslation(0, 0, 0),
+	m_numMtrls(0),
+	m_strObjName(""),
+	m_strFolder(""),
+	m_strXFile(""),
+	m_strTxtFile(""),
+	m_ObjectType(ObjectType::eNull)
 	/// Color
 	//, m_pShader(NULL)
 	//, m_isClicked(false)
@@ -39,15 +50,20 @@ CObject::CObject()
 	CObject::m_nRefCount += 1;
 	g_pObjectManager->AddObject(this);
 	D3DXMatrixIdentity(&m_matWorld);
+	D3DXMatrixIdentity(&m_matS);
+	D3DXMatrixIdentity(&m_matR);
+	D3DXMatrixIdentity(&m_matT);
+	ZeroMemory(&m_stMtl, sizeof(D3DMATERIAL9));
 	/// Color
 	//m_Color = GRAY;
 	//m_outLineColor = GRAY;
 	//LoadAssets();
-	ZeroMemory(&m_stMtl, sizeof(D3DMATERIAL9));
 }
 
 CObject::~CObject()
 {
+	SafeRelease(m_pMesh);
+	SafeRelease(m_adjBuffer);
 }
 
 /// Color

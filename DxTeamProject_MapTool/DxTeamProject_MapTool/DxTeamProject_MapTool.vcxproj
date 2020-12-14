@@ -172,6 +172,7 @@
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="IObject.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MovingCube.h" />
     <ClInclude Include="OBB.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="imgui_impl_win32.cpp" />
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="IObject.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MovingCube.cpp" />
     <ClCompile Include="OBB.cpp" />

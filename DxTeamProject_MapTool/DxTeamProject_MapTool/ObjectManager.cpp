@@ -16,6 +16,32 @@ void CObjectManager::SetCopyObject(int index)
 	m_vecObject[m_vecObject.size() - 1]->SetTranslate(m_vecObject[index]->GetTranslate());
 }
 
+void CObjectManager::SetReConditionName()
+{
+	map<string, string>::iterator it;
+
+	for (int i = m_preVecObjSize; i < m_vecObject.size(); i++)
+	{
+		for (it = m_mapConditionName.begin(); it != m_mapConditionName.end(); it++)
+		{
+			if (m_vecObject[i]->GetConditionName() == it->first)
+			{
+				if (m_vecObject[i]->GetObjType() == ObjectType::eG_DoorFrame
+					|| m_vecObject[i]->GetObjType() == ObjectType::eG_Door)
+				{
+					CDoor* temp = static_cast<CDoor*>(m_vecObject[i]);
+					temp->SetConditionName(it->second);
+				}
+				else
+					m_vecObject[i]->SetConditionName(it->second);
+			}
+		} // << : for_it
+
+	} // << : for_i
+
+	m_mapConditionName.clear();
+}
+
 void CObjectManager::AddObject(IObject * pObject)
 {
 	m_vecObject.push_back(pObject);
@@ -36,6 +62,15 @@ void CObjectManager::RemoveObject(IObject * pObject)
 		}
 		else
 			it++;
+	}
+}
+
+void CObjectManager::RemoveCondition(string objectName)
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		if (objectName == m_vecObject[i]->GetObjectName())
+			RemoveObject(m_vecObject[i]);
 	}
 }
 
@@ -114,6 +149,25 @@ void CObjectManager::RemoveClickedObj()
 		{
 			preIndex = i - 1;
 
+			if (m_vecObject[i]->GetConditionName() != "")
+			{
+				for (int j = 0; j < m_vecObject.size(); j++)
+				{
+					if (m_vecObject[i]->GetConditionName() == m_vecObject[j]->GetObjectName())
+					{
+						if (m_vecObject[j]->GetObjType() == eG_DoorFrame)
+						{
+							// >> 문은 삭제할 대상이 2개
+							CDoor* temp = static_cast<CDoor*>(m_vecObject[j]);
+							temp->SetConditionName("");
+						}
+						else
+							m_vecObject[j]->SetConditionName("");
+					}
+				}
+			}
+			// >> 삭제하는 대상이 누군가의 조건일 경우, 조건 삭제
+
 			// >>  문은 2개가 1세트
 #ifdef _DEBUG
 			if (m_vecObject[i]->GetObjType() == ObjectType::eG_DoorFrame)
@@ -170,9 +224,28 @@ void CObjectManager::CheckSameName()
 		for (int j = i + 1; j < m_vecObject.size(); j++)
 		{
 			if (m_vecObject[i]->GetObjectName() == m_vecObject[j]->GetObjectName())
-				m_vecObject[j]->SetObjectName(m_vecObject[j]->GetObjectName() + "(" + to_string(m_sameNum++) + ")");
-		}
-	}
+			{
+				if (m_vecObject[j]->GetConditionName() != "")
+				{
+					// >> 이름이 변경될 파일에 조건 변수가 존재할 경우
+					string preName = m_vecObject[j]->GetObjectName();
+
+					m_vecObject[j]->SetObjectName(m_vecObject[j]->GetObjectName() + "(" + to_string(m_sameNum++) + ")");
+
+					string nowName = m_vecObject[j]->GetObjectName();
+
+					m_mapConditionName.insert(pair<string, string>(preName, nowName));
+				}
+				else
+					m_vecObject[j]->SetObjectName(m_vecObject[j]->GetObjectName() + "(" + to_string(m_sameNum++) + ")");
+			}
+
+		} // >> : for_j
+
+	} // >> : for_i
+
+	if (m_mapConditionName.size() != 0)
+		SetReConditionName();
 }
 
 vector<IObject*> CObjectManager::GetVecObject()
@@ -227,9 +300,7 @@ void CObjectManager::CopyObject()
 			int indexNum = 0;
 			if (objType == ObjectType::eATree || objType == ObjectType::eSTree
 			 || objType == ObjectType::eWTree || objType == ObjectType::eCTree
-				|| objType == ObjectType::eFlower)
-#ifdef _DEBUG
-#endif // _DEBUG
+			 || objType == ObjectType::eFlower)
 			{
 				// >> 인덱스로 받아 오는 파일들은 인덱스 값 필요함
 				string num = m_vecObject[i]->GetXFilePath();
@@ -307,3 +378,20 @@ void CObjectManager::CopyObject()
 	} // << : if
 	
 }
+
+string CObjectManager::GetPickObjName()
+{
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		if (m_vecObject[i]->GetClick() == true || m_vecObject[i]->GetPick() == true)
+			return m_vecObject[i]->GetObjectName();
+	}
+
+	return "";
+}
+
+void CObjectManager::SetPreVecSize(int set)
+{
+	m_preVecObjSize = set;
+}
+

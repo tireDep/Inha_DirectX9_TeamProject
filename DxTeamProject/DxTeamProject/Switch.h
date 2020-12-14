@@ -8,14 +8,12 @@ private:
 	D3DXMATRIXA16 matS, matT, matWorld , collWorld; // 콜리더 부분 지우면안댐!
 	D3DXVECTOR3 m_position, m_scale;
 
-	D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRot; //setdata
-	
 	//----- 충돌
 	LPD3DXMESH m_pBox; // CreateBox
 	
-	
 	D3DXVECTOR3 m_vMin, m_vMax;
 
+	// D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRot; //setdata
 
 public:
 

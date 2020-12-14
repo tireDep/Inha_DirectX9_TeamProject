@@ -3,7 +3,8 @@
 
 //int IObject::m_nRefCnt = 0;
 
-IObject::IObject() 
+IObject::IObject() :
+	m_pOBB(NULL)
 //: m_pTexture(NULL),
 	//m_pMesh(NULL),
 	//m_numMtrls(0),
@@ -22,6 +23,7 @@ IObject::IObject()
 
 IObject::~IObject()
 {
+	SafeDelete(m_pOBB);
 }
 
 void IObject::Release()

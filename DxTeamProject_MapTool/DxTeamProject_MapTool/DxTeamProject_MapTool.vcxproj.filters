@@ -49,6 +49,9 @@
     <Filter Include="Object\Gimmick">
       <UniqueIdentifier>{8b321869-a60a-47ca-a531-6e6f29863968}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Item">
+      <UniqueIdentifier>{97d02914-428b-4f81-b5a3-28d5d2887186}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imconfig.h">
@@ -146,11 +149,14 @@
     <ClInclude Include="Door.h">
       <Filter>Object\Gimmick</Filter>
     </ClInclude>
-    <ClInclude Include="Book.h">
-      <Filter>Header</Filter>
-    </ClInclude>
     <ClInclude Include="MovingCube.h">
       <Filter>Object\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Book.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -242,11 +248,14 @@
     <ClCompile Include="Door.cpp">
       <Filter>Object\Gimmick</Filter>
     </ClCompile>
-    <ClCompile Include="Book.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="MovingCube.cpp">
       <Filter>Object\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Book.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

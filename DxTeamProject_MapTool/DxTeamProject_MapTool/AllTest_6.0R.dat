@@ -420,6 +420,96 @@ Texture_01.png
 
 # Object_Start
 # ObjectName
+Box15
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+23
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0.5
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Sphere16
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+24
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0.25
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Cylinder17
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+25
+# Scale
+0.5
+0.5
+1
+# Rotate
+90
+0
+0
+# Translate
+12.5
+0.5
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# Object_End
+
+# Object_Start
+# ObjectName
 Autumn_Tree_01_18
 # FolderPath
 Resource/XFile/Background/SeasonTree
@@ -438,7 +528,7 @@ autumn_texture.png
 0
 0
 # Translate
-14.5
+13.5
 0
 12.5
 # Color
@@ -468,7 +558,7 @@ autumn_texture.png
 0
 0
 # Translate
-13.5
+14.5
 0
 12.5
 # Color
@@ -2020,17 +2110,17 @@ board.png
 # ObjectType
 26
 # Scale
-0.03
-0.03
-0.03
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
--4.5
+14.5
 0
-0.5
+-7.5
 # Color
 0.5
 0.5
@@ -2038,9 +2128,9 @@ board.png
 1
 # GimmickData
 # RotationSpeed
-1
+0
 # RotationAxialIndex
-1
+0
 # Object_End
 
 # Object_Start
@@ -2075,101 +2165,11 @@ moving_cube_1.png
 # StartPos
 0
 # EndPos
--10
+0
 # Speed
-5
+0
 # DirectionIndex
-2
-# Object_End
-
-# Object_Start
-# ObjectName
-Box15
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-23
-# Scale
-1
-1
-1
-# Rotate
 0
-0
-0
-# Translate
-0.5
-0.5
--4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Sphere16
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-24
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
-4.5
-0.25
-4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Cylinder17
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-25
-# Scale
-0.5
-0.5
-1
-# Rotate
-90
-0
-0
-# Translate
-0.5
-0.5
-4.5
-# Color
-0.5
-0.5
-0.5
-1
 # Object_End
 
 # Object_Start

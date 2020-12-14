@@ -3,7 +3,7 @@
 class CDoor : public CGimmick
 {
 private:
-	// todo : condition variable
+	Synthesize(bool, m_isAnotherClick, IsAnotherClick);
 
 	int GetIndex();
 
@@ -13,10 +13,19 @@ public:
 
 	void Setup(ST_MapData setData);
 
-	void Render();
+	void Update();
+
+	void Render() override;
 
 	void SetAnotherScale(D3DXVECTOR3 set);
 	void SetAnotherRotation(D3DXVECTOR3 set);
 	void SetAnotherTranslation(D3DXVECTOR3 set);
+
+	void SetOpenCondition(int index);
+	void SetConditionName(string strName);
+
+	int GetOpenConditionIndex();
+	string GetOpenConditionType();
+	string GetConditionName();
 };
 

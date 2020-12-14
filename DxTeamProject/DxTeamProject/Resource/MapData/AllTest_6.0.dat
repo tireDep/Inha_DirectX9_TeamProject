@@ -1968,7 +1968,7 @@ Snowman.png
 0
 0
 # Translate
-4.5
+5.5
 0
 -4.5
 # Color
@@ -1998,7 +1998,7 @@ InvisibleWall72
 0
 0
 # Translate
-3.5
+4.5
 0.5
 -4.5
 # Color
@@ -2081,7 +2081,6 @@ moving_cube_1.png
 # DirectionIndex
 2
 # Object_End
-
 # Object_Start
 # ObjectName
 Box15
@@ -2165,36 +2164,6 @@ Cylinder17
 0.5
 0.5
 4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Umbrella_Blue73
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Umbrella.X
-# TxtPath
-Umbrella_Blue.png
-# ObjectType
-20
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-5.5
-0
--4.5
 # Color
 0.5
 0.5

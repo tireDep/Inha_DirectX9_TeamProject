@@ -12,7 +12,9 @@ CDragon::CDragon() :
 	Drangon_y(4.5f),
 	m_vDrangonPos(0, 0, 0),
 	m_vDirection(0,0,1),
-	rotation(D3DX_PI)
+	rotation(D3DX_PI),
+	m_isEffect(false),
+	m_effectDuration(0.0f)
 {
 	D3DXMatrixIdentity(&m_matRotY);
 	m_strName = "Dragon";
@@ -25,8 +27,31 @@ CDragon::~CDragon()
 	SafeRelease(m_adjBuffer);
 }
 
-void CDragon::Update(D3DXVECTOR3 pos)
+void CDragon::Update(D3DXVECTOR3 pos, float duration)
 {
+	if (m_isEffect)
+	{
+		m_effectDuration += duration;
+
+		float limitDuration = 0.5f;
+
+		if (m_effectDuration > limitDuration)
+		{
+			// >> 이펙트 완료 후 메시지 전송
+			ST_EVENT msg;
+			msg.eventType = EventType::eColorEffect;
+			msg.ptrMessage = &m_color;
+
+			g_pEventManager->CheckEvent(msg);
+			m_effectDuration = 0.0f;
+			m_isEffect = false;
+		}
+	}
+	else
+	{
+		// todo : 시간 초 제한, 이펙트&이벤트 바로발생 하지 않음
+	}
+
 	m_vPosition = pos;
 
 	//m_DrangonPos.y = m_position.y + Drangon_y;
@@ -147,48 +172,63 @@ string CDragon::GetName()
 
 void CDragon::ReceiveEvent(ST_EVENT eventMsg)
 {
-	switch (eventMsg.playerInput)
+	if (!g_pGameManager->GetUImode())
 	{
-	case PlayerInputType::eDown:
-		rotation = 0.0f;
-		DoRotation();
-		break;
+		if (eventMsg.eventType == EventType::eChangedColorEvent)
+		{
+			m_color = *(D3DXCOLOR*)eventMsg.ptrMessage;
+			m_isEffect = true;
 
-	case PlayerInputType::eRightDown:
-		rotation = D3DX_PI / 4.0f * -1;
-		DoRotation();
-		break;
+			rotation = D3DX_PI;
+			DoRotation();
+		}	// << : eChangedColorEvent
 
-	case PlayerInputType::eLeftDown:
-		rotation = D3DX_PI / 4.0f;
-		DoRotation();
-		break;
+		if (eventMsg.eventType == EventType::eInputEvent)
+		{
+			switch (eventMsg.playerInput)
+			{
+			case PlayerInputType::eDown:
+				rotation = 0.0f;
+				DoRotation();
+				break;
 
-	case PlayerInputType::eUp:
-		rotation = D3DX_PI;
-		DoRotation();
-		break;
+			case PlayerInputType::eRightDown:
+				rotation = D3DX_PI / 4.0f * -1;
+				DoRotation();
+				break;
 
-	case PlayerInputType::eRightUp:
-		rotation = D3DX_PI + D3DX_PI / 4.0f;
-		DoRotation();
-		break;
+			case PlayerInputType::eLeftDown:
+				rotation = D3DX_PI / 4.0f;
+				DoRotation();
+				break;
 
-	case PlayerInputType::eLeftUp:
-		rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
-		DoRotation();
-		break;
+			case PlayerInputType::eUp:
+				rotation = D3DX_PI;
+				DoRotation();
+				break;
 
-	case PlayerInputType::eRight:
-		rotation = -D3DX_PI / 2.0f;
-		DoRotation();
-		break;
+			case PlayerInputType::eRightUp:
+				rotation = D3DX_PI + D3DX_PI / 4.0f;
+				DoRotation();
+				break;
 
-	case PlayerInputType::eLeft:
-		rotation = D3DX_PI / 2.0f;
-		DoRotation();
-		break;
+			case PlayerInputType::eLeftUp:
+				rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
+				DoRotation();
+				break;
 
+			case PlayerInputType::eRight:
+				rotation = -D3DX_PI / 2.0f;
+				DoRotation();
+				break;
+
+			case PlayerInputType::eLeft:
+				rotation = D3DX_PI / 2.0f;
+				DoRotation();
+				break;
+			} // << : swtich
+
+		} // eInputEvent
 	}
 }
 

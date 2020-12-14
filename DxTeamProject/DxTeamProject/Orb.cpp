@@ -2,17 +2,20 @@
 #include "Orb.h"
 
 
-COrb::COrb() :
+COrb::COrb() : 
 	m_Uv_x(0),
-	m_Uv_y(0.2)
+	m_Uv_y(0.2),
+	m_pTex0(NULL)
 {
+	v.t = { 0,0 };
+	v.p = D3DXVECTOR3{ 0,0,0 };
+
 	D3DXMatrixIdentity(&m_matWorld);
 }
 
 
 COrb::~COrb()
 {
-
 }
 
 void COrb::Setup()

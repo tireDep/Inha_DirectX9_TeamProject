@@ -1,7 +1,7 @@
 #pragma once
 #include "IListener.h"
 
-#define g_gameManager CGameManager::GetInstance()
+#define g_pGameManager CGameManager::GetInstance()
 
 const static int ITEMCOUNT = 10;
 
@@ -22,11 +22,16 @@ private:
 	CGameManager();
 
 	// Orb Item
-	bool Orb[6] = { false };
+	// bool Orb[6] = { false };
+	map<string, bool> m_mapOrb; // >> orbType, isGet
 	bool Item[ITEMCOUNT] = { false };
+
 public:
 	static CGameManager* GetInstance();
 	virtual ~CGameManager() { }
+
+	void SetLoadData();
+	// >> todo : 세이브 파일 로드
 
 	bool GetDevMode();
 	bool GetUImode();
@@ -40,8 +45,12 @@ public:
 	bool GetGridMapMode();
 	// << 맵 완료시 삭제
 
-	void SetOrb(int index);
-	bool GetOrb(int index);
+	// void SetOrb(int index);
+	// bool GetOrb(int index);
+
 	void SetItem(int index);
 	bool GetItem(int index);
+
+	void SetGetOrb(string orbType);
+	bool GetIsHasOrb(string orbType);
 };

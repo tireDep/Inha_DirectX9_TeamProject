@@ -120,6 +120,8 @@ void CBox::Update(float duration)
 
 bool CBox::hasIntersected(CBox * otherBox)
 {
+	if (this == otherBox)
+		return false;
 	if (this->m_pOBB->IsCollision(otherBox->GetOBB()))
 		return true;
 	return false;
@@ -136,16 +138,11 @@ bool CBox::hasIntersected(IObject * otherIObject)
 {
 	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
 	{
-		
 		return true;
-		
 	}
 	else
 	{
-
 		return false;
-	
-		
 	}
 	//if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
 	//{

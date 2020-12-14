@@ -22,6 +22,20 @@ CGameManager* CGameManager::GetInstance()
 	return &instance;
 }
 
+void CGameManager::SetLoadData()
+{
+	// >> todo : 세이브데이터 로드
+	// 세이브 데이터 파일이 없으면 초기값 세팅
+	pair<string, bool> temp;
+
+	temp.first = "Black";	temp.second = false;	m_mapOrb.insert(temp);
+	temp.first = "White";	temp.second = false;	m_mapOrb.insert(temp);
+	temp.first = "Yellow";	temp.second = false;	m_mapOrb.insert(temp);
+	temp.first = "Green";	temp.second = false;	m_mapOrb.insert(temp);
+	temp.first = "Red";		temp.second = false;	m_mapOrb.insert(temp);
+	temp.first = "Blue";	temp.second = false;	m_mapOrb.insert(temp);
+}
+
 bool CGameManager::GetDevMode()
 {
 	return m_isDevMode;
@@ -37,15 +51,15 @@ bool CGameManager::GetGridMapMode()
 	return m_isGridMap;
 }
 
-void CGameManager::SetOrb(int index)
-{
-	Orb[index] = true;
-}
+// void CGameManager::SetOrb(int index)
+// {
+// 	Orb[index] = true;
+// }
 
-bool CGameManager::GetOrb(int index)
-{
-	return Orb[index];
-}
+// bool CGameManager::GetOrb(int index)
+// {
+// 	return Orb[index];
+// }
 
 void CGameManager::SetItem(int index)
 {
@@ -55,6 +69,28 @@ void CGameManager::SetItem(int index)
 bool CGameManager::GetItem(int index)
 {
 	return Item[index];
+}
+
+void CGameManager::SetGetOrb(string orbType)
+{
+	// >> 색상 오브 획득
+	map<string, bool>::iterator it;
+	for (it = m_mapOrb.begin(); it != m_mapOrb.end(); it++)
+	{
+		if (it->first == orbType)
+			it->second = true;
+	}
+}
+
+bool CGameManager::GetIsHasOrb(string orbType)
+{
+	// >> 색상 오브를 가지고 있는지 판별
+	map<string, bool>::iterator it;
+	for (it = m_mapOrb.begin(); it != m_mapOrb.end(); it++)
+	{
+		if (it->first == orbType)
+			return it->second;
+	}
 }
 
 void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
