@@ -554,19 +554,20 @@ bool CCharacter::Collider(bool isCollided)
 
 void CCharacter::ColliderOtherObject(IObject * background)
 {
-	if (m_Character->GetOBB()->IsCollision(background->GetOBB()))
-	{
-		cout << 1 << endl;
-		m_isCollided = true;
-		background->SetBool(true);
 	
-	}
-	else
-	{
-		
-		m_isCollided = false;
-		
-	}
+		if (m_Character->GetOBB()->IsCollision(background->GetOBB()))
+		{
+			m_isCollided = true;
+			background->SetBool(true);
+
+		}
+		else
+		{
+
+			m_isCollided = false;
+			background->SetBool(false);
+		}
+	
 
 	
 }

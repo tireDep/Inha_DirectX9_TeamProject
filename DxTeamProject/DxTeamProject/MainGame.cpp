@@ -115,12 +115,11 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToTree.dat");
+
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
-
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
-
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
-
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "doorTest2.dat");
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
@@ -243,7 +242,8 @@ void CMainGame::Update()
 
 		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
 
-		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
+		for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
+			m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);
 
 	
 		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[2]);

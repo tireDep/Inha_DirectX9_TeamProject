@@ -383,7 +383,7 @@ void PObject::ChangeObjectColor()
 	switch (m_tmpColor)
 	{
 	case Color::Black:
-		SetMass(10);
+		SetMass(3);
 		SetElasticity(1.0f);
 		SetDrag(0.995f);
 		break;
