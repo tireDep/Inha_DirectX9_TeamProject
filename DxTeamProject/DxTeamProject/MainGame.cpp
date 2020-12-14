@@ -113,14 +113,14 @@ void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 void CMainGame::Setup()
 {
 	g_pGameManager->SetLoadData();
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToTree.dat");
 
 #ifdef _DEBUG
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToTree.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 	// >> mapData
 #else
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 #endif // DEBUG
 	
 	m_pGrid = new CGrid;
