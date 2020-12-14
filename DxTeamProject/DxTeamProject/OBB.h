@@ -25,6 +25,7 @@ public:
 	void Update(D3DXMATRIXA16* pmatWorld);
 	static bool IsCollision(COBB * pOBB1, COBB* pOBB2);
 	bool IsCollision(COBB * otherOBB);
+	bool IsCollision(COBB * otherOBB, D3DXVECTOR3* contactNormal, float* penetration);
 	void Render();
 	D3DXVECTOR3 GetCenter() { return m_vCenterPos; }
 	float GetOBBWidth()  { return m_fAxisHalfLen[0]; }	// distance of center to x axis

@@ -115,7 +115,7 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToTree.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxToTile.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 	// >> mapData

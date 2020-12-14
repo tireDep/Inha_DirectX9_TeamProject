@@ -329,7 +329,8 @@ void CObjectManager::Collide(float duration)
 						m_vecIObject[IObjectIndex]->SetBool(true);
 						break;	
 					default:
-						CollisionIObject(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
+						//CollisionIObject(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
+						CollisionBoxToTile(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
 						break;
 				}
 			}
@@ -579,6 +580,39 @@ void CObjectManager::CollisionIObject(PObject* pObject, IObject* iObject, float 
 	pObject->SetPosition(pObject->GetPosition() + movePerIMass * pObject->GetInverseMass());
 }
 
+void CObjectManager::CollisionBoxToTile(PObject * pObject, IObject * iObject, float duration)
+{
+	D3DXVECTOR3 contactNormal;
+	float penetration;
+	pObject->GetOBB()->IsCollision(iObject->GetOBB(), &contactNormal, &penetration);
+
+	float elasticity = 0.1f; // TEST
+	D3DXVECTOR3 relativeVelocity = pObject->GetVelocity();
+	float separatinVelocity = D3DXVec3Dot(&relativeVelocity, &contactNormal);
+	if (separatinVelocity > 0) return;			// Need Modify? 1 = Elasticity
+	float newSepVelocity = -separatinVelocity * elasticity;
+
+	D3DXVECTOR3 accCausedVelocity = pObject->GetAcceleration();
+	float accCausedSepVelocity = D3DXVec3Dot(&accCausedVelocity, &contactNormal) * duration;
+	if (accCausedSepVelocity < 0)
+	{					  // Need Modify? 1 = Elasticity
+		newSepVelocity += (elasticity * accCausedSepVelocity);
+		if (newSepVelocity < 0) newSepVelocity = 0.0f;
+	}
+
+	float deltaVelocity = newSepVelocity - separatinVelocity;
+	if (pObject->GetInverseMass() <= 0) return;
+
+	float impulse = deltaVelocity / pObject->GetInverseMass();
+	D3DXVECTOR3 impulsePerIMass = contactNormal * impulse;
+
+	pObject->SetVelocity(pObject->GetVelocity() + impulsePerIMass * pObject->GetInverseMass());
+
+	if (penetration <= 0) return;
+	D3DXVECTOR3 movePerIMass = contactNormal * (penetration / pObject->GetInverseMass());
+	pObject->SetPosition(pObject->GetPosition() + movePerIMass * pObject->GetInverseMass());
+}
+
 // Integrate CollisionSphereToBox(Rotation Error)
 void CObjectManager::CollisionSphereToIObject(CSphere * one, IObject * two, float duration)
 {
@@ -667,6 +701,7 @@ void CObjectManager::CollisionSphereToIObject(CSphere * one, IObject * two, floa
 	D3DXVECTOR3 movePerIMass = contactNormal * (penetration / one->GetInverseMass());
 	one->SetPosition(one->GetPosition() + movePerIMass * one->GetInverseMass());
 }
+
 
 void CObjectManager::Render()
 {
