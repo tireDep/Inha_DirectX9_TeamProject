@@ -101,16 +101,7 @@ void CBook::Update(float duration)
 		m_fRotAngle -= 2 * D3DX_PI;
 
 	D3DXMatrixRotationY(&m_matRot, m_fRotAngle);
-
-
-
 	m_matWorld = m_matS * m_matRot * m_matT;
-//	m_matWorld = m_matS * m_matRot * m_matT;
-
-	//if(hasIntersected)
-	//	g_pGameManager->SetItem(m_nCount);
-
-
 	m_pOBB->Update(&m_matWorld);
 }
 
@@ -137,8 +128,6 @@ void CBook::Render()
 	//matWorld = matS* matR * matT;
 	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 
-	m_matWorld = m_matS * m_matRot * m_matT;
-
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	if (m_pMesh == NULL)
@@ -151,10 +140,15 @@ void CBook::Render()
 		m_pMesh->DrawSubset(i);
 	}
 	if (istrue == true)
-	{
-		m_pMesh->Release();
+	{	
+		SafeRelease(m_pMesh);
 		g_pObjectManager->RemoveObject(m_pOBB);
+		static int count = 0;
+		count++;
+		
+		cout << count << endl;
 	}
+	
 	
 
 	g_pD3DDevice->SetTexture(0, NULL);
