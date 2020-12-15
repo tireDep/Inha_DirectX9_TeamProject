@@ -18,5 +18,7 @@ public:
 
 	void Setup(int nNumHalfTile = 15, float fInterval = 1.0f);
 	void Render();
+
+	vector<D3DXVECTOR3> GetGridVertex();
 };
 

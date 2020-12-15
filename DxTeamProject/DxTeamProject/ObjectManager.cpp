@@ -335,7 +335,19 @@ void CObjectManager::Collide(float duration)
 					case eG_Door:
 						break;
 					case  eG_Switch:
+					{
 						m_vecIObject[IObjectIndex]->pBoxBool(true);
+						if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
+						{
+							ST_EVENT msg;
+							msg.eventType = EventType::eConditionChange;
+							msg.isCondition = false;
+							msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
+
+							g_pEventManager->CheckEvent(msg);
+						}
+					}
+
 						break;	
 					default:
 						//CollisionIObject(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
@@ -345,8 +357,19 @@ void CObjectManager::Collide(float duration)
 			}
 			else
 			{
-				m_vecIObject[IObjectIndex]->pBoxBool(false);
 
+
+				m_vecIObject[IObjectIndex]->pBoxBool(false);
+				if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
+				{
+					ST_EVENT msg;
+					msg.eventType = EventType::eConditionChange;
+					msg.isCondition = true;
+					msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
+
+
+					g_pEventManager->CheckEvent(msg);
+				}
 			}
 		}
 	}

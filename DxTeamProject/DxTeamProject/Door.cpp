@@ -82,6 +82,33 @@ void CDoor::Setup(const ST_MapData & mapData)
 
 void CDoor::Update(float duration)
 {
+	if (m_isCondition)
+	{
+		m_fRotAngle += m_fRotationSpeed * duration;
+		if (m_fRotAngle >= m_fOpeningAngle)
+			m_fRotationSpeed = 0;
+		else
+			m_fRotationSpeed = 1.0f;
+	}
+	else
+	{
+		m_fRotAngle -= m_fRotationSpeed * duration;
+		if (m_fRotAngle <= 0)
+			m_fRotationSpeed = 0;
+		else
+			m_fRotationSpeed = 1.0f;
+	}
+
+	D3DXMatrixRotationY(&m_matRotGimmick, m_fRotAngle);
+
+	D3DXMATRIXA16 matS, matT;
+	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+
+	// Need to Modify... Rotation
+	m_matWorld = matS * m_matRotGimmick * matT;
+	m_pOBB->Update(&m_matWorld);
+
 	// tmp Test
 	// static int tmpCount = 0;
 	// tmpCount++;
@@ -94,13 +121,13 @@ void CDoor::Update(float duration)
 	// 		tmpCount = 0;
 	// 	}
 	// }
-
+	//
 	// tmp
 	//if (g_pGameManager->getOrb())
 	//	IsOpen = true;
 	//if (g_pGameManager->getBook())
 	//	IsOpen = true;
-
+	//
 	// if (IsOpen)
 	// {
 	// 	m_fRotAngle += m_fRotationSpeed * duration;
@@ -117,27 +144,6 @@ void CDoor::Update(float duration)
 	// 	else
 	// 		m_fRotationSpeed = 1.0f;
 	// }
-
-	// >> testCode
-	if (m_isCondition)
-	{
-		m_fRotAngle += m_fRotationSpeed * duration;
-		if (m_fRotAngle >= m_fOpeningAngle)
-			m_fRotationSpeed = 0;
-		else
-			m_fRotationSpeed = 1.0f;
-	}
-	// << testCode
-
-	D3DXMatrixRotationY(&m_matRotGimmick, m_fRotAngle);
-
-	D3DXMATRIXA16 matS, matT;
-	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
-
-	// Need to Modify... Rotation
-	m_matWorld = matS * m_matRotGimmick * matT;
-	m_pOBB->Update(&m_matWorld);
 }
 
 void CDoor::Update(float duration, bool isSwitchOn)
