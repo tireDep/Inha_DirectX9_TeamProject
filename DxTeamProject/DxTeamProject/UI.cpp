@@ -258,18 +258,17 @@ void CUI::Main_Render()
 
 	//BackG
 
-	SetRect(&Backrc, 0, 0,
-		m_stImageInfo0.Width, m_stImageInfo0.Height);
+	SetRect(&Backrc, 0, 0,m_stImageInfo0.Width, m_stImageInfo0.Height);
 
-	m_pSprite->Draw(m_pTextureUI0, &Backrc2,
+	m_pSprite->Draw(m_pTextureUI0, &Backrc,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 	//start
 
-	SetRect(&UIrc, 0, -50, m_stImageInfo9.Width, m_stImageInfo9.Height);
+	SetRect(&UIrc, -250, -100, m_stImageInfo9.Width, m_stImageInfo9.Height);
 
-	m_pSprite->Draw(m_pTextureUI9, &Startrc,
+	m_pSprite->Draw(m_pTextureUI9, &UIrc,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
