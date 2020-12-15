@@ -4,12 +4,14 @@
 class CTile : public IObject
 {
 private:
-	bool pObject;
+	bool  pBox, pCylinder, pSphere;
 	bool player;
 public:
 	CTile();
 	~CTile();
-	void pOjbectBool(bool set) { pObject = set; }
+	void pBoxBool(bool set) { pBox = set; }
+	void pCylinderBool(bool set) { pCylinder = set; }
+	void pSphereBool(bool set) { pSphere = set; }
 	void SetBool(bool set) { player = set; }
 	void Setup() { };
 	void Setup(const ST_MapData & mapData);

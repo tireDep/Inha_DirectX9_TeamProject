@@ -773,7 +773,6 @@ bool COBB::IsCollision(COBB * otherOBB)
 	}
 	if (existsParallelPair)
 	{
-		cout << "here2" << endl;
 		return true;
 	}
 	// --------------------------------------------------------------------------------------------------------- //
