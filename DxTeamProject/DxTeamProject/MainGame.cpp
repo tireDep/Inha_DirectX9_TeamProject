@@ -29,6 +29,7 @@
 #include "MovingCube.h"
 #include "Book.h"
 #include "Dragon.h"
+//
 /// 이 아래는 지울 수도 있는 선언
 //#include "CHeight.h"
 //#include "PSphere.h"
@@ -119,7 +120,7 @@ void CMainGame::Setup()
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToSwitch.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToGimmick.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
@@ -127,7 +128,7 @@ void CMainGame::Setup()
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 #endif // DEBUG
-	
+
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
 
@@ -415,6 +416,12 @@ void CMainGame::Render()
 
 	//if (m_pSkydome)
 	//	m_pSkydome->Render(m_pCamera->GetCameraEye());
+
+	if (g_pGameManager->GetNowScene() == SceneType::eMainScene)
+	{
+		if (m_pUI)
+			m_pUI->Main_Render();
+	}
 
 	if (m_pGrid)
 		m_pGrid->Render();

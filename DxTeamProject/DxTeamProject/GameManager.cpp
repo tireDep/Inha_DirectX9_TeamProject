@@ -5,6 +5,8 @@ CGameManager::CGameManager()
 {
 	m_strName = "GameManager";
 
+	m_SceneName = SceneType::eMainScene;
+
 	m_isDevMode = false;
 	m_isUIMode = false;
 	
@@ -111,6 +113,11 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 		{
 		case WM_KEYDOWN:
 		{
+			if (m_SceneName == SceneType::eMainScene)
+			{
+				m_SceneName = SceneType::eGameScene;
+				return;
+			}
 			if (VK_CONTROL == eventMsg.wParam && !m_isUIModeIn)
 			{
 				m_isUIMode = !m_isUIMode;

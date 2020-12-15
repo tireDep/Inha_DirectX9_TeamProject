@@ -27,7 +27,6 @@ class RotationBoard;
 class CSwitch;
 class CBook;
 class CDragon;
-
 //class CSoundManager;
 class CBox;
 class CSphere;

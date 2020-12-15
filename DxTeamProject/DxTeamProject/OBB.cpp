@@ -672,6 +672,9 @@ bool COBB::IsCollision(COBB * pOBB1, COBB * pOBB2)
 // KT TEST 
 bool COBB::IsCollision(COBB * otherOBB)
 {
+	if (otherOBB == NULL)
+		return false;
+
 	// 중심							m_vCenterPos
 	// 축							m_vAxisDir[3]
 	// 중심에서 OBB면까지의 거리	m_fAxisHalfLen[3]
@@ -772,9 +775,8 @@ bool COBB::IsCollision(COBB * otherOBB)
 			return false;
 	}
 	if (existsParallelPair)
-	{
 		return true;
-	}
+
 	// --------------------------------------------------------------------------------------------------------- //
 	// 축C0 + t * A0 × B0
 	{
@@ -1228,6 +1230,9 @@ bool COBB::IsCollision(COBB * otherOBB, D3DXVECTOR3 * contactNormal, float * pen
 
 void COBB::Render()
 {
+	if (this == NULL)
+		return;
+
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
