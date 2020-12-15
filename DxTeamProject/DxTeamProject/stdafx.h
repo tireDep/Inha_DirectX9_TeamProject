@@ -187,6 +187,7 @@ struct ST_EVENT
 
 	// >> ConditionChange
 	string conditionName = "";
+	bool isCondition = "false";
 	// << ConditionChange
 
 	float duration = 0.0f;
