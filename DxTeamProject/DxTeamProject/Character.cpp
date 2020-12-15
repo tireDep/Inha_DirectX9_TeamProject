@@ -116,10 +116,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				if (!jumping)
 				{
 					m_jump = true;
-					if (m_Character->CheckAnimationEnd())
-					{
-						m_Character->SetAnimationIndex(7); // jump
-					}
+					m_Character->SetAnimationIndex(7); // jump
 				}
 				speed = -1.0f;
 				break;

@@ -117,7 +117,6 @@ void CMainGame::Setup()
 #ifdef _DEBUG
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToGimmick.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");

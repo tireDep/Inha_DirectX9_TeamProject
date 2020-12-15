@@ -78,8 +78,6 @@ void Color_changer::Setup()
 
 void Color_changer::Setup(ST_MapData setData)
 {
-	
-	
 	m_position = setData.vTranslate;
 	m_scale = setData.vScale;
 	//BEAM
@@ -205,9 +203,13 @@ void Color_changer::Render()
 			return;
 		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{
+			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+
 			if (m_vecTextures[i] != 0)
 				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
-			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+			else
+				g_pD3DDevice->SetTexture(0, m_pTexture);
+
 			m_pMesh->DrawSubset(i);
 		}
 		g_pD3DDevice->SetTexture(0, NULL);
