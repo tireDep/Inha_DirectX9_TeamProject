@@ -1,6 +1,7 @@
 #pragma once
 
-class COrb
+class COBB;
+class COrb 
 {
 private:
 	D3DXIMAGE_INFO m_stImageInfo;
@@ -10,7 +11,12 @@ private:
 	D3DXMATRIXA16 m_matWorld;
 	float m_Uv_x;
 	float m_Uv_y;
+	LPD3DXMESH m_pMesh;
+	D3DXVECTOR3 m_vMin, m_vMax;
+	D3DXMATRIXA16 mView, mInvView;
 public:
+
+	COBB* m_pOBB;
 	COrb();
 	~COrb();
 	void Setup();
