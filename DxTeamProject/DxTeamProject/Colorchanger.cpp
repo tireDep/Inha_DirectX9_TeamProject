@@ -78,12 +78,13 @@ void Color_changer::Setup()
 
 void Color_changer::Setup(ST_MapData setData)
 {
-	CGimmick::SetLoadData(setData);
-	m_pOBB->Update(&m_matWorld);
-
+	
+	
+	m_position = setData.vTranslate;
+	m_scale = setData.vScale;
 	//BEAM
-	{
-		length = 50;
+	
+		length = 30;
 		D3DXCreateCylinder(g_pD3DDevice, 0.5f, 0.5f, length, 20, 20, &m_pMeshBeam, NULL);
 
 		D3DXVECTOR3* pVertices;
@@ -94,7 +95,8 @@ void Color_changer::Setup(ST_MapData setData)
 
 		m_BeamOBB = new COBB;
 		m_BeamOBB->SetupMesh(m_vMin, m_vMax, 0.5f);
-	}
+	
+		CGimmick::SetLoadData(setData);
 
 	//m_strObjName = setData.strObjName;
 	//m_strFolder = setData.strFolderPath;
@@ -156,7 +158,7 @@ void Color_changer::Setup(ST_MapData setData)
 
 }
 
-void Color_changer::Update()
+void Color_changer::Update(float duration)
 {
 	/*if (istrue == false)
 	{
@@ -171,15 +173,16 @@ void Color_changer::Update()
 		if (m_position.y < -5)
 			istrue = false;
 	}*/
+	
+	
 
-	angle += 0.01;
 	D3DXMatrixRotationY(&matR, D3DXToRadian(angle));// D3DXToRadian(angle)
 
-	D3DXMatrixTranslation(&matT, m_position.x, m_position.y + 1.5f, m_position.z - m_fHitLength / 2.0);
+	D3DXMatrixTranslation(&matT, m_position.x, m_position.y + 0.5f, m_position.z - m_fHitLength / 2.0);
 	D3DXMatrixScaling(&matS, m_scale.x, m_scale.y, m_fHitLength / length);
 	BeamWorld = matS * matT * matR;
 	
-	m_BeamOBB->Update(&BeamWorld);
+	m_BeamOBB->Update(&BeamWorld);//ºö
 	m_pOBB->Update(&m_matWorld);
 }
 

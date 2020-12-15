@@ -35,7 +35,7 @@ public:
 	void Update();
 	void Render();
 
-	void Update(float duration) { };
+	void Update(float duration);
 
 	void SetColor(D3DXCOLOR color);
 	
