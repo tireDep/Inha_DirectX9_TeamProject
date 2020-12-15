@@ -1,6 +1,7 @@
 #pragma once
 #include "IListener.h"
 
+enum class SceneType;
 #define g_pGameManager CGameManager::GetInstance()
 
 const static int ITEMCOUNT = 10;
@@ -18,6 +19,8 @@ private:
 	bool m_isGridMapIn;
 	bool m_isGridMap;
 	// << 맵 완료시 삭제
+
+	Synthesize(SceneType, m_SceneName, NowScene);
 
 	CGameManager();
 

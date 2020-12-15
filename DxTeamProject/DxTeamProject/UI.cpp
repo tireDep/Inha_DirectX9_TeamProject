@@ -34,6 +34,28 @@ void CUI::Setup_UI()
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_stImageInfo, NULL, &m_pTextureUI);
+	//start
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/start.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_stImageInfo9, NULL, &m_pTextureUI9);
+	//
+	//backG2
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/back.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_stImageInfo0, NULL, &m_pTextureUI0);
+	//
 
 
 	////BackG
@@ -136,6 +158,7 @@ void CUI::UI_Render()
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(150, 255, 255, 255));
 
+
 	//MAIN UI
 	SetRect(&UIrc,-500,-50,m_stImageInfo.Width, m_stImageInfo.Height);
 
@@ -217,6 +240,39 @@ void CUI::UI_Render()
 			&D3DXVECTOR3(0, 0, 0),
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
+
+	m_pSprite->End();
+}
+
+void CUI::Main_Render()
+{
+	SetRect(&imageRC, matT._41, matT._42,
+		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
+
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND); // | D3DXSPRITE_SORT_TEXTURE
+
+	D3DXMatrixTranslation(&matT, movep, movepy, 0);
+	matWorld = matT;
+
+	m_pSprite->SetTransform(&matWorld);
+
+	//BackG
+
+	SetRect(&Backrc, 0, 0,
+		m_stImageInfo0.Width, m_stImageInfo0.Height);
+
+	m_pSprite->Draw(m_pTextureUI0, &Backrc2,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+	//start
+
+	SetRect(&UIrc, 0, -50, m_stImageInfo9.Width, m_stImageInfo9.Height);
+
+	m_pSprite->Draw(m_pTextureUI9, &Startrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	m_pSprite->End();
 }
