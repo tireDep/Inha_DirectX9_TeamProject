@@ -9,7 +9,8 @@ class CMovingCube : public CGimmick
 public:
 	CMovingCube();
 	~CMovingCube();
-
+	bool pObject;
+	bool player;
 private:
 	int m_indexNum; // 번호.
 	bool m_istrue; //범위 조절 장치
@@ -29,6 +30,7 @@ public:
 
 	void Render();
 
-	virtual void SetBool(bool set) { }
+	void pOjbectBool(bool set) { pObject = set; }
+	void SetBool(bool set) { player = set; }
 };
 

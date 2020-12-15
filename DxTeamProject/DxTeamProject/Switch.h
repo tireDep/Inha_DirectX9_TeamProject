@@ -12,13 +12,11 @@ private:
 	LPD3DXMESH m_pBox; // CreateBox
 	
 	D3DXVECTOR3 m_vMin, m_vMax;
-
+	bool pObject, player;
 	// D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRot; //setdata
 
 public:
 
-	//잠깐
-	bool istrue;
 	COBB* m_pColl; //충돌박스
 	CSwitch();
 	~CSwitch();
@@ -28,8 +26,8 @@ public:
 	void Update();
 	void Render();
 	void Update(float duration);
-	void SetBool(bool set);
-	
+	void pOjbectBool(bool set) { pObject = set; }
+	void SetBool(bool set) { player = set; }
 	COBB* GetOBB2() { return m_pColl; } // 콜리더부분!
 };
 

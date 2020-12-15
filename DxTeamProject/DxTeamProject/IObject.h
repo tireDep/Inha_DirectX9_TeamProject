@@ -41,7 +41,7 @@ public:
 	virtual string GetName() { return m_strName; }
 	virtual void SetBool(bool setup) = 0; //상호작용 
 	virtual COBB* GetOBB() { return m_pOBB; }
-
+	virtual void pOjbectBool(bool set) = 0; //피오브젝트와 상호작용
 	virtual void ReceiveEvent(ST_EVENT eventMsg);
 	//static void CreateObject(const ST_MapData& mapData);
 };

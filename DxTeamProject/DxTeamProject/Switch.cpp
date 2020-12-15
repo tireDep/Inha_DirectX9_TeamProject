@@ -5,9 +5,9 @@
 CSwitch::CSwitch()
 	: m_scale(1,1,1)
 	, m_position(10,0.5f,0)
-	, istrue(false)
 	, m_pColl(NULL)
 	, m_pBox(NULL)
+	, pObject(false)
 {
 	D3DXMatrixIdentity(&matS);
 	D3DXMatrixIdentity(&matT);
@@ -21,10 +21,7 @@ CSwitch::~CSwitch()
 	SafeRelease(m_pBox);
 }
 
-bool CSwitch::GetBool()
-{
-	return istrue;
-}
+
 
 void CSwitch::Setup()
 {
@@ -165,10 +162,7 @@ void CSwitch::Update(float duration)
 	m_pOBB->Update(&m_matWorld); //스위치 고유 충돌
 }
 
-void CSwitch::SetBool(bool set)
-{
-	istrue = set;
-}
+
 
 void CSwitch::Render()
 {
@@ -194,8 +188,9 @@ void CSwitch::Render()
 
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
-			if (istrue == false)
+			if (pObject == false) // 부딪히지 않았을떄
 			{
+				
 				m_pMesh->DrawSubset(i);
 			}
 			else

@@ -3,10 +3,14 @@
 
 class CTile : public IObject
 {
+private:
+	bool pObject;
+	bool player;
 public:
 	CTile();
 	~CTile();
-	void SetBool(bool set) { };
+	void pOjbectBool(bool set) { pObject = set; }
+	void SetBool(bool set) { player = set; }
 	void Setup() { };
 	void Setup(const ST_MapData & mapData);
 	void Update(float duration) { m_pOBB->Update(&m_matWorld); };

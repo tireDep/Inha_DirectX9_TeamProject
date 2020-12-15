@@ -12,7 +12,8 @@ private:
 	RotationAxial rotationAxial;
 	float m_fRotationSpeed;
 	float m_fRotAngle;
-
+	bool pObject;
+	bool player;
 	/// Need Map tool
 	// Size : Use m_vScale
 	// Rotation_axial : enum class RotationAxial
@@ -21,7 +22,8 @@ private:
 public:
 	CRotationBoard();
 	~CRotationBoard();
-	void SetBool(bool set) {};
+	void pOjbectBool(bool set) { pObject = set; }
+	void SetBool(bool set) { player = set; }
 	void Setup(const ST_MapData & mapData);
 	void Update(float duration);
 	void Render();

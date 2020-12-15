@@ -7,7 +7,7 @@ int CBook::m_nCount = 0;
 CBook::CBook()
 	: m_fRotationSpeed(1.0f)
 	, m_fRotAngle(0.0f)
-	, istrue(false)
+	, pObject(false)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
@@ -141,7 +141,7 @@ void CBook::Render()
 		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 		m_pMesh->DrawSubset(i);
 	}
-	if (istrue == true)
+	if (pObject == true)
 	{	
 		SafeRelease(m_pMesh);
 		g_pObjectManager->RemoveObject(m_pOBB);

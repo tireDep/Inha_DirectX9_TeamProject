@@ -328,7 +328,7 @@ void CObjectManager::Collide(float duration)
 					case eG_Door:
 						break;
 					case  eG_Switch:
-						m_vecIObject[IObjectIndex]->SetBool(true);
+						m_vecIObject[IObjectIndex]->pOjbectBool(true);
 						break;	
 					default:
 						//CollisionIObject(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
@@ -338,7 +338,7 @@ void CObjectManager::Collide(float duration)
 			}
 			else
 			{
-				m_vecIObject[IObjectIndex]->SetBool(false);
+				m_vecIObject[IObjectIndex]->pOjbectBool(false);
 
 			}
 		}

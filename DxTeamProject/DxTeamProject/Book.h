@@ -10,7 +10,8 @@ private:
 	float m_fRotationSpeed;
 	float m_fRotAngle;
 	
-	bool istrue;
+	bool pObject;
+	bool player;
 	D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRot;
 
 
@@ -22,6 +23,6 @@ public:
 	void Update(float duration);
 	bool hasIntersected(CSkinnedMesh * Character);
 	void Render();
-
-	void SetBool(bool set) { istrue = set; }
+	void pOjbectBool(bool set) { pObject = set; }
+	void SetBool(bool set) { player = set; }
 };
