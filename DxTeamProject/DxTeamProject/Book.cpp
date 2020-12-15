@@ -93,6 +93,8 @@ void CBook::Setup(ST_MapData setData)
 	m_pOBB = new COBB;
 	m_pOBB->Setup(*this);
 	g_pObjectManager->AddOBBbox(m_pOBB);
+	m_pOBB->Update(&m_matWorld);
+
 }
 
 void CBook::Update(float duration)
@@ -141,7 +143,7 @@ void CBook::Render()
 		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 		m_pMesh->DrawSubset(i);
 	}
-	if (pObject == true)
+	if (player == true)
 	{	
 		SafeRelease(m_pMesh);
 		g_pObjectManager->RemoveObject(m_pOBB);

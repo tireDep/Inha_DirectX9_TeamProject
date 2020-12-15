@@ -7,6 +7,12 @@ COBB::COBB() :
 	m_vOriCenterPos(0, 0, 0)
 {
 	D3DXMatrixIdentity(&m_matWorld);
+	for (int i = 0; i < 3; ++i)
+	{
+		m_vAxisDir[i].x = 0;
+		m_vAxisDir[i].y = 0;
+		m_vAxisDir[i].z = 0;
+	}
 }
 
 COBB::~COBB()
@@ -672,8 +678,19 @@ bool COBB::IsCollision(COBB * otherOBB)
 	float cos[3][3];			//	cos[3][3] = D3DXVec3Dot(pOBB1->m_vOriAxisDir[i], pOBB2->m_vOriAxisDir[j])
 	float absCos[3][3];			//	absCos[3][3] = abs(Cos[i][j])
 	float dist[3];				//  각 축에 대한 중심벡터의 투영 길이
-	float r0, r1, r;			//  구간 반경과 구간 중심점 사이의 거리
-	int i;
+	
+	//for (int i = 0; i < 3; ++i)
+	//{
+	//	dist[i] = 0;
+	//
+	//	for (int j = 0; j < 3; ++j)
+	//	{
+	//		cos[i][j] = 0;
+	//		absCos[i][j] = 0;
+	//	}
+	//}
+	float r0 = 0, r1 = 0, r = 0;			//  구간 반경과 구간 중심점 사이의 거리
+	int i = 0;
 	// 상자의 축들 사이각들의 consine을 위한 cutoff
 	const float cutOff = 0.999999f;
 	bool existsParallelPair = false;
@@ -755,7 +772,10 @@ bool COBB::IsCollision(COBB * otherOBB)
 			return false;
 	}
 	if (existsParallelPair)
+	{
+		cout << "here2" << endl;
 		return true;
+	}
 	// --------------------------------------------------------------------------------------------------------- //
 	// 축C0 + t * A0 × B0
 	{
