@@ -116,11 +116,11 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToSwitch.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToSwitch.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToGimmick.dat");
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
@@ -147,8 +147,8 @@ void CMainGame::Setup()
 	//m_pMovingCube = new MovingCube;
 	//m_pMovingCube->Setup();
 
-	//m_pOrb = new COrb;
-	//m_pOrb->Setup();
+	m_pOrb = new COrb;
+	m_pOrb->Setup();
 
 	m_pLight = new CLight;
 	m_pLight->Setup();
@@ -233,8 +233,8 @@ void CMainGame::Update()
 	if (m_pCamera)
 		m_pCamera->Update();
 
-	//if(m_pOrb)
-	//	m_pOrb->Update();
+	if(m_pOrb)
+		m_pOrb->Update();
 
 	if (m_pCharacter)
 	{
@@ -243,8 +243,9 @@ void CMainGame::Update()
 		m_pDragon->Update(m_pCharacter->GetPosition(), g_pTimeManager->GetElapsedTime());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
-		for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
-			m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);
+		//for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
+		//	m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);
+
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
@@ -430,11 +431,11 @@ void CMainGame::Render()
 	if (m_pCharacter)
 		m_pCharacter->Render(c);
 
-	//if (m_pOrb)
-	//{
-	//	m_pOrb->SetBillbord();
-	//	m_pOrb->Render();
-	//}
+	if (m_pOrb)
+	{
+		m_pOrb->SetBillbord();
+		m_pOrb->Render();
+	}
 
 	g_pObjectManager->Render();
 

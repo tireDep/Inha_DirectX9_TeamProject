@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "Orb.h"
-
+#include "OBB.h"
 
 COrb::COrb() : 
 	m_Uv_x(0),
 	m_Uv_y(0.2),
-	m_pTex0(NULL)
+	m_pTex0(NULL),
+	m_pMesh(NULL)
 {
 	v.t = { 0,0 };
 	v.p = D3DXVECTOR3{ 0,0,0 };
@@ -16,6 +17,7 @@ COrb::COrb() :
 
 COrb::~COrb()
 {
+
 }
 
 void COrb::Setup()
@@ -30,6 +32,18 @@ void COrb::Setup()
 	v.p = D3DXVECTOR3(2, 2, 0); v.t = D3DXVECTOR2(m_Uv_y, m_Uv_x); m_vecVertex_Multi.push_back(v);
 	v.p = D3DXVECTOR3(2, 0, 0); v.t = D3DXVECTOR2(m_Uv_y, m_Uv_y); m_vecVertex_Multi.push_back(v);
 	v.p = D3DXVECTOR3(0, 2, 0); v.t = D3DXVECTOR2(m_Uv_x, m_Uv_x); m_vecVertex_Multi.push_back(v);
+
+	
+	D3DXCreateBox(g_pD3DDevice, 3,3,3, &m_pMesh, NULL);
+
+	D3DXVECTOR3* pVertices;
+
+	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+	D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+	m_pMesh->UnlockVertexBuffer();
+
+	m_pOBB = new COBB;
+	m_pOBB->SetupMesh(m_vMin, m_vMax, 0.5f);
 
 }
 
@@ -87,6 +101,9 @@ void COrb::Update()
 	 m_vecVertex_Multi[3].t = D3DXVECTOR2(m_Uv_y, m_Uv_x);
 	 m_vecVertex_Multi[4].t = D3DXVECTOR2(m_Uv_y, m_Uv_y);
 	 m_vecVertex_Multi[5].t = D3DXVECTOR2(m_Uv_x, m_Uv_x);
+
+	 D3DXMatrixTranslation(&m_matWorld, 5, 2, 10);
+	 m_pOBB->Update(&m_matWorld);
 }
 
 void COrb::SetBillbord()
@@ -108,18 +125,15 @@ void COrb::SetBillbord()
 	//D3DXMatrixInverse(&matBillBoard, NULL, &matBillBoard);
 	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &matBillBoard);
 
-	D3DXMATRIXA16 mView, mInvView;
+	
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &mView);
 
-
-	mView._41 = 0;
-	mView._42 = 0;
-	mView._43 = 0;
+	m_pOBB->Render();
 
 	D3DXMatrixInverse(&mInvView, 0, &mView);
-	mInvView._41 = m_matWorld._41 + 5.0f;
-	mInvView._42 = m_matWorld._42 + 2.0f;
-	mInvView._43 = m_matWorld._43 + 10.0f;
+	mInvView._41 = m_matWorld._41 ;
+	mInvView._42 = m_matWorld._42 ;
+	mInvView._43 = m_matWorld._43 ;
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &mInvView);
 }

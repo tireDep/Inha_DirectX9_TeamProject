@@ -181,7 +181,6 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 	//D3DXMATRIXA16 matT;
 	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-
 	//m_matWorld = m_matRotY * matT;
 }
 
@@ -211,9 +210,18 @@ void CCharacter::UpdateRayYCheck(MeshTile & meshtile)
 	//	m_vPosition.y = 0.5f;
 }
 
-void CCharacter::ColliderObject(CObject * allObject)
+void CCharacter::ColliderObject()
 {
-	//if(m_Character->GetOBB()->IsCollision())
+	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
+	{
+		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
+		{
+			m_isCollided = true;
+			return;
+		}
+	}
+
+	m_isCollided = false;
 }
 
 CCharacter::~CCharacter()
@@ -300,30 +308,29 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
 
-		if (m_jump)
+	if (m_jump)
+	{
+		jumping = true;
+		if (m_vPosition.y <= 3.f)
 		{
-			jumping = true;
-			if (m_vPosition.y <= 3.f)
+			m_vPosition.y += 0.005f;
+			if (m_vPosition.y >= 3.f)
 			{
-				m_vPosition.y += 0.005f;
-				if (m_vPosition.y >= 3.f)
-				{
-					jumpis = true;
-					m_jump = false;
-				}
+				jumpis = true;
+				m_jump = false;
 			}
 		}
-		if (jumpis == true)
+	}
+	if (jumpis == true)
+	{
+		m_vPosition.y -= 0.005f;
+		if (m_vPosition.y <= 0)
 		{
-			m_vPosition.y -= 0.005f;
-			if (m_vPosition.y <= 0)
-			{
-				jumpis = false;
-				jumping = false;
-			}
-			m_Character->SetAnimationIndexBlend(6); // fall
+			jumpis = false;
+			jumping = false;
 		}
-	
+		m_Character->SetAnimationIndexBlend(6); // fall
+	}
 }
 
 //void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
@@ -498,6 +505,7 @@ void CCharacter::DoRotation(const float& radian)
 void CCharacter::DoMove(const float& velocity)
 {
 	static D3DXVECTOR3 m_position = m_vPosition;
+	CCharacter::ColliderObject();
 
 	if (m_isCollided)
 	{
@@ -556,14 +564,14 @@ bool CCharacter::Collider(bool isCollided)
 
 void CCharacter::ColliderOtherObject(IObject * background)
 {
-		if (m_Character->GetOBB()->IsCollision(background->GetOBB()))
-		{
-			m_isCollided = true;
-			background->SetBool(true);
-		}
-		else
-		{
-			m_isCollided = false;
-			background->SetBool(false);
-		}
+	if (m_Character->GetOBB()->IsCollision(background->GetOBB()))
+	{
+		m_isCollided = true;
+		background->SetBool(true);
+	}
+	else
+	{
+		m_isCollided = false;
+		background->SetBool(false);
+	}
 }

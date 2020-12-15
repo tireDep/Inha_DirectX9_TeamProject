@@ -64,5 +64,5 @@ public:
 	virtual void UpdateRayYCheck(MeshTile & meshtile);
 
 	// KT Character to Object
-	void ColliderObject(CObject* allObject);
+	void ColliderObject();
 };
