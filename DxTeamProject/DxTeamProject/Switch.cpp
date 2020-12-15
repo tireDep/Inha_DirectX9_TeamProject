@@ -7,7 +7,9 @@ CSwitch::CSwitch()
 	, m_position(10,0.5f,0)
 	, m_pColl(NULL)
 	, m_pBox(NULL)
-	, pObject(false)
+	, pBox(false)
+	,pCylinder(false)
+	,pSphere(false)
 {
 	D3DXMatrixIdentity(&matS);
 	D3DXMatrixIdentity(&matT);
@@ -164,6 +166,8 @@ void CSwitch::Update(float duration)
 
 
 
+
+
 void CSwitch::Render()
 {
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
@@ -188,15 +192,18 @@ void CSwitch::Render()
 
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
-			if (pObject == false) // 부딪히지 않았을떄
+			if (pBox == false && pCylinder == false) // 부딪히지 않았을떄
 			{
-				
+			
 				m_pMesh->DrawSubset(i);
 			}
 			else
 			{				
+				
 				m_pMesh->DrawSubset(0);
 			}
+
+		
 		}
 
 		g_pD3DDevice->SetTexture(0, NULL);

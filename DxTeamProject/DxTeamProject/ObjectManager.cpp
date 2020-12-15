@@ -276,10 +276,17 @@ void CObjectManager::Collide(float duration)
 						break;
 					case eG_Door:
 						break;
+					case eG_Switch:
+						m_vecIObject[IObjectIndex]->pSphereBool(true);
+						break;
 					default:
 							CollisionSphereToIObject(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
 						break;
 				}
+			}
+			else
+			{
+				m_vecIObject[IObjectIndex]->pSphereBool(false);
 			}
 		}
 	}
@@ -291,24 +298,24 @@ void CObjectManager::Collide(float duration)
 		{
 			switch (m_vecPObject[PObectIndex]->GetObjType())
 			{
-				case eSphere:
-					break;
-				case eBox:
-					if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CBox*>(m_vecPObject[PObectIndex])))
-					{
-						//CollisionPObject(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
-						CollisionBoxToBox(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
-					}
-					break;
-				case eCylinder:
-					if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
-					{
-						//CollisionPObject(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
-						CollisionBoxToBox(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
-					}
-					break;
-				default:
-					break;
+			case eSphere:
+				break;
+			case eBox:
+				if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CBox*>(m_vecPObject[PObectIndex])))
+				{
+					//CollisionPObject(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
+					CollisionBoxToBox(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
+				}
+				break;
+			case eCylinder:
+				if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
+				{
+					//CollisionPObject(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
+					CollisionBoxToBox(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
+				}
+				break;
+			default:
+				break;
 			}
 		}
 		// Box To IObject
@@ -325,12 +332,12 @@ void CObjectManager::Collide(float duration)
 						D3DXVec3Normalize(&v, &v);
 						m_vecBox[BoxIndex]->SetPusingForce(v);
 					}
-						break;
+					break;
 					case eG_Door:
 						break;
 					case  eG_Switch:
 					{
-						m_vecIObject[IObjectIndex]->pOjbectBool(true);
+						m_vecIObject[IObjectIndex]->pBoxBool(true);
 						if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
 						{
 							ST_EVENT msg;
@@ -341,6 +348,7 @@ void CObjectManager::Collide(float duration)
 							g_pEventManager->CheckEvent(msg);
 						}
 					}
+
 						break;	
 					default:
 						//CollisionIObject(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
@@ -350,16 +358,11 @@ void CObjectManager::Collide(float duration)
 			}
 			else
 			{
-				m_vecIObject[IObjectIndex]->pOjbectBool(false);
-				if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
-				{
-					ST_EVENT msg;
-					msg.eventType = EventType::eConditionChange;
-					msg.isCondition = true;
-					msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
-
-					g_pEventManager->CheckEvent(msg);
-				}
+				m_vecIObject[IObjectIndex]->pBoxBool(false);
+				ST_EVENT msg;
+				msg.eventType = EventType::eConditionChange;
+				msg.isCondition = true;
+				msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
 			}
 		}
 	}
@@ -393,19 +396,26 @@ void CObjectManager::Collide(float duration)
 				switch (m_vecIObject[IObjectIndex]->GetObjType())
 				{
 					case eG_RotationBoard: 	case eG_MovingCube:
-						{
-							D3DXVECTOR3 v;
-							v = m_vecCylinder[CylinderIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
-							D3DXVec3Normalize(&v, &v);
-							m_vecCylinder[CylinderIndex]->SetPusingForce(v);
-						}
+					{
+						D3DXVECTOR3 v;
+						v = m_vecCylinder[CylinderIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
+						D3DXVec3Normalize(&v, &v);
+						m_vecCylinder[CylinderIndex]->SetPusingForce(v);
+					}
+					break;
+					case eG_Door:
 						break;
-					case eG_Door: 
+					case eG_Switch:
+						m_vecIObject[IObjectIndex]->pCylinderBool(true);
 						break;
 					default:
 						CollisionIObject(m_vecCylinder[CylinderIndex], m_vecIObject[IObjectIndex], duration);
 						break;
 				}
+			}
+			else
+			{
+				m_vecIObject[IObjectIndex]->pCylinderBool(false);
 			}
 		}
 	}

@@ -4,12 +4,14 @@
 class CBackground : public IObject
 {
 private:
-	bool pObject;
+	bool pBox, pCylinder, pSphere;
 	bool player;
 public:
 	CBackground();
 	virtual ~CBackground();
-	void pOjbectBool(bool set) { pObject = set; }
+	void pBoxBool(bool set) { pBox = set; }
+	void pCylinderBool(bool set) { pCylinder = set; }
+	void pSphereBool(bool set) { pSphere = set; }
 	void SetBool(bool set) { player = set; }
 	virtual void Setup() { };
 	virtual void Setup(const ST_MapData & mapData);

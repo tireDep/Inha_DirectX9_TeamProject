@@ -20,7 +20,7 @@ private:
 
 	D3DXCOLOR c; 
 	D3DXVECTOR3 m_vMin, m_vMax;
-	bool pObject, player;
+	bool pBox, pCylinder, pSphere, player;
 	// KT
 	float m_fHitLength;
 	// D3DXMATRIXA16 m_matS, m_matR, m_matT;  //∏  µ•¿Ã≈Õ
@@ -39,7 +39,9 @@ public:
 
 	void SetColor(D3DXCOLOR color);
 	
-	void pOjbectBool(bool set) { pObject = set; }
+	void pBoxBool(bool set) { pBox = set; }
+	void pCylinderBool(bool set) { pCylinder = set; }
+	void pSphereBool(bool set) { pSphere = set; }
 	void SetBool(bool set) { player = set; }
 
 	// KT
