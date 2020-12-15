@@ -33,11 +33,6 @@ void CSphere::Update()
 {
 }
 
-void CSphere::Update(CRay * ray)
-{
-	IObject::Update(ray);
-}
-
 void CSphere::Render()
 {
 	CObject::Render();

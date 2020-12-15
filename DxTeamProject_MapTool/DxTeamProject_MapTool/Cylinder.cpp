@@ -35,11 +35,6 @@ void CCylinder::Update()
 {
 }
 
-void CCylinder::Update(CRay * ray)
-{
-	IObject::Update(ray);
-}
-
 void CCylinder::Render()
 {
 	CObject::Render();

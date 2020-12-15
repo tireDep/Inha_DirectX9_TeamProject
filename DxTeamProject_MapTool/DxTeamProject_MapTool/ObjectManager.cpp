@@ -407,3 +407,53 @@ void CObjectManager::SetPreVecSize(int set)
 	m_preVecObjSize = set;
 }
 
+int CObjectManager::GetConditionIndex()
+{
+	int index = GetSelectIndex();
+	string conditionName = m_vecObject[index]->GetConditionName();
+
+	if (conditionName != "")
+	{
+		for (int i = 0; i < m_vecObject.size(); i++)
+		{
+			if (m_vecObject[i]->GetObjectName() == conditionName)
+				return i;
+		}
+	}
+
+	return -1;
+}
+
+D3DXVECTOR3 CObjectManager::GetHighestY(int index)
+{
+	// >> 해당 좌표(x, y)의 가장 높은 값 추출
+	D3DXVECTOR3 checkPos(0, 0, 0);
+	D3DXVECTOR3 pos = m_vecObject[index]->GetTranslate();
+	float y = 0;
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		checkPos = m_vecObject[i]->GetTranslate();
+
+		if (checkPos.x == pos.x && checkPos.z == pos.z)
+			y = checkPos.y > pos.y ? checkPos.y : pos.y;
+	}
+
+	pos.y = y;
+	return pos;
+}
+
+bool CObjectManager::GetIsAnotherPos(D3DXVECTOR3 pos)
+{
+	// >> 해당 위치에 오브젝트가 존재하는지 확인
+	D3DXVECTOR3 result;
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		result = m_vecObject[i]->GetTranslate();
+		if (pos.x == result.x
+		 && pos.y == result.y 
+		 && pos.z == result.z)
+			return false;
+	}
+	return true;
+}
+

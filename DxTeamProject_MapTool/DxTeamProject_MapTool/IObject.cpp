@@ -97,7 +97,7 @@ void IObject::Setup_OBB_Box()
 	m_pOBB->Setup(this);
 }
 
-void IObject::Update(CRay * ray)
+bool IObject::Update(CRay * ray)
 {
 	// >> MOLLER-Trumbore 선 삼각 교차점 알고리즘
 
@@ -153,11 +153,11 @@ void IObject::Update(CRay * ray)
 		{
 			// 광선 교차
 			// t를 계산하여 선에서 교차점이 어디있는지 알아낼 수 있음
-			// D3DXVECTOR3 result = ray->GetOrigin() + ray->GetDirection() * t;
+			D3DXVECTOR3 result = ray->GetOrigin() + ray->GetDirection() * t;
 
 			m_isPick = true;
 			m_isClick = true;
-			return;
+			return true;
 		}
 		else
 		{
@@ -166,6 +166,8 @@ void IObject::Update(CRay * ray)
 			continue;
 		}
 	}
+
+	return false;
 }
 
 void IObject::Render()

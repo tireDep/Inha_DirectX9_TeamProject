@@ -47,4 +47,9 @@ public:
 	string GetPickObjName();
 
 	void SetPreVecSize(int set);
+
+	int GetConditionIndex();
+
+	D3DXVECTOR3 GetHighestY(int index);
+	bool GetIsAnotherPos(D3DXVECTOR3 pos);
 };

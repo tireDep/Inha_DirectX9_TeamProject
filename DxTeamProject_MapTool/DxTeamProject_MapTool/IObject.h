@@ -61,7 +61,7 @@ public:
 
 	virtual void Update() = 0;
 	// ray
-	virtual void Update(CRay * ray);
+	virtual bool Update(CRay * ray);
 	virtual void Render();
 	virtual void Render_OBB_Box();
 

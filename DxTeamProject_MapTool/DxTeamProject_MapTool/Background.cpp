@@ -76,11 +76,6 @@ void CBackground::Update()
 {
 }
 
-void CBackground::Update(CRay * ray)
-{
-	IObject::Update(ray);
-}
-
 void CBackground::Render()
 {
 	IObject::Render_OBB_Box();

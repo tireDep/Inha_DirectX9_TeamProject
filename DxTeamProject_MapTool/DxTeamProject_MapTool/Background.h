@@ -13,8 +13,6 @@ public:
 	virtual void Setup();
 	virtual void Setup(ST_MapData setData);
 	virtual void Update();
-	// ray
-	virtual void Update(CRay * ray);
 	virtual void Render();
 
 	virtual void SetDiffScale(D3DXVECTOR3 set);

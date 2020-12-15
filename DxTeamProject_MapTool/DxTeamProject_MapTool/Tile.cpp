@@ -44,11 +44,6 @@ void CTile::Update()
 {
 }
 
-void CTile::Update(CRay * ray)
-{
-	IObject::Update(ray);
-}
-
 void CTile::Render()
 {
 	IObject::Render_OBB_Box();

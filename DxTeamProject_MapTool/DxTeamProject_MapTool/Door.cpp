@@ -128,7 +128,7 @@ void CDoor::SetAnotherScale(D3DXVECTOR3 set)
 		return;
 
 	CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
-	if (temp->GetObjType() == eG_Door)
+	// if (temp->GetObjType() == eG_Door)
 		temp->SetDiffScale(set);
 }
 
@@ -142,7 +142,7 @@ void CDoor::SetAnotherRotation(D3DXVECTOR3 set)
 		return;
 
 	CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
-	if (temp->GetObjType() == eG_Door)
+	// if (temp->GetObjType() == eG_Door)
 		temp->SetRotate(set);
 }
 
@@ -154,7 +154,7 @@ void CDoor::SetAnotherTranslation(D3DXVECTOR3 set)
 	if (index == Inf)return;
 
 	CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
-	if (temp->GetObjType() == eG_Door)
+	// if (temp->GetObjType() == eG_Door)
 		temp->SetTranslate(set);
 }
 
@@ -167,7 +167,6 @@ void CDoor::SetOpenCondition(int index)
 		return;
 
 	CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(search));
-	
 	if(temp->GetObjType() == eG_Door)
 		temp->SetOpenCondition(index);
 }
@@ -181,8 +180,7 @@ void CDoor::SetConditionName(string strName)
 		return;
 	
 	CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
-	
-	if (temp->GetObjType() == eG_Door)
+	//if (temp->GetObjType() == eG_Door)
 		temp->SetConditionName(strName);
 }
 
@@ -195,7 +193,6 @@ void CDoor::SetTexture(int index)
 		return;
 
 	CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(search));
-
-	if (temp->GetObjType() == eG_Door)
+	//if (temp->GetObjType() == eG_Door)
 		temp->SetTexture(index);
 }

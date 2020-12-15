@@ -1082,6 +1082,11 @@ void CImguiClass::CreateMouseRBtn()
 	if (m_FileLoadIndex != -1)
 	{
 		g_pObjectManager->SetSelectAllFalse();
+
+		if (m_nowObjType == eG_Door)
+			m_nowObjType = eG_DoorFrame;
+
 		IObject::CreateObject(m_nowObjType, m_FileLoadIndex);
 	}
 }
+

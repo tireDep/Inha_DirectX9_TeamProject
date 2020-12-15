@@ -35,10 +35,6 @@ void CObject::Setup(ST_MapData setData)
 	m_dxColor = setData.dxColor;
 }
 
-void CObject::Update()
-{
-}
-
 void CObject::Render()
 {
 	IObject::Render_OBB_Box();

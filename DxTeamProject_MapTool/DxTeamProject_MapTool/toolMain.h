@@ -32,5 +32,8 @@ public:
 	void WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 	CImguiClass* GetImgui();
+
+	void CreateObject_RBtn(CRay& r);
+	void SetCreateObjectPos(D3DXVECTOR3 pos);
 };
 
