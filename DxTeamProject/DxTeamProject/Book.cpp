@@ -147,6 +147,16 @@ void CBook::Render()
 	}
 	if (player == true)
 	{	
+		if (m_strConditionName != "")
+		{
+			ST_EVENT msg;
+			msg.eventType = EventType::eConditionChange;
+			msg.isCondition = false;
+			msg.conditionName = m_strObjName;
+
+			g_pEventManager->CheckEvent(msg);
+		}
+
 		g_pEventManager->RemoveListener(this);
 
 		SafeRelease(m_pMesh);

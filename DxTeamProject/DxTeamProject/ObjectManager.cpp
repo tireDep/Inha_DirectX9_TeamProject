@@ -363,6 +363,8 @@ void CObjectManager::Collide(float duration)
 				msg.eventType = EventType::eConditionChange;
 				msg.isCondition = true;
 				msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
+
+				// g_pEventManager->CheckEvent(msg);
 			}
 		}
 	}

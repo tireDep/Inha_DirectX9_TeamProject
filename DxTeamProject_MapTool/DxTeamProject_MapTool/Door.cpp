@@ -180,7 +180,7 @@ void CDoor::SetConditionName(string strName)
 		return;
 	
 	CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(index));
-	//if (temp->GetObjType() == eG_Door)
+	if (temp->GetObjType() == eG_Door)
 		temp->SetConditionName(strName);
 }
 
