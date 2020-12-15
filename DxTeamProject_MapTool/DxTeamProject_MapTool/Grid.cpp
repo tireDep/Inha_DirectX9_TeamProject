@@ -89,3 +89,12 @@ void CGrid::Render()
 	for each (auto p in m_vecGizmo)
 		p->Render();
 }
+
+vector<D3DXVECTOR3> CGrid::GetGridVertex()
+{
+	vector<D3DXVECTOR3> result;
+	for (int i = 0; i < m_vecVertex.size(); i++)
+		result.push_back(m_vecVertex[i].p);
+
+	return result;
+}

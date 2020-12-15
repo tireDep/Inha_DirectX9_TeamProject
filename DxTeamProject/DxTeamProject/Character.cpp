@@ -316,7 +316,7 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 				jumpis = false;
 				jumping = false;
 			}
-			m_Character->SetAnimationIndexBlend(6); // fall
+			m_Character->SetAnimationIndex(6); // fall
 		}
 	
 }

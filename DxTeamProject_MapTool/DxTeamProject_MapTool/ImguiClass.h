@@ -25,7 +25,8 @@ private:
 	vector<ObjectType> m_vecObjType;
 	string m_showItem;
 
-	int m_FileLoadIndex;
+	static int m_FileLoadIndex;
+	static ObjectType m_nowObjType;
 	LoadType m_PreLoadType;
 	LoadType m_NowLoadType;
 	LoadType m_SubType;
@@ -72,5 +73,7 @@ public:
 
 	void ResetDevice();
 	void Destroy();
+
+	static void CreateMouseRBtn();
 };
 

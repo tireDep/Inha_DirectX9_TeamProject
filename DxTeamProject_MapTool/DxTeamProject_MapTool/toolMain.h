@@ -19,6 +19,8 @@ private:
 	CRay* m_pRay;
 	CLight* m_pLight;
 
+	bool m_isPushRBtn;
+
 public:
 	CToolMain();
 	~CToolMain();

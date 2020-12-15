@@ -11,7 +11,8 @@
 CToolMain::CToolMain() : 
 	m_pRay(NULL),
 	m_pLight(NULL),
-	m_isPushCtrl(false)
+	m_isPushCtrl(false),
+	m_isPushRBtn(false)
 {
 }
 
@@ -110,6 +111,7 @@ void CToolMain::Render()
 		m_pImgui->ResetDevice();
 }
 
+static D3DXVECTOR3 lastPos(0, 0, 0);
 void CToolMain::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	m_pCamera->WndProc(hWnd, msg, wParam, lParam);
@@ -128,15 +130,77 @@ void CToolMain::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		}
 	break;
 
+	case WM_RBUTTONUP:
+		m_isPushRBtn = false;
+		break;
+
 	case WM_RBUTTONDOWN:
-		CImguiClass::m_nowSelectindex = -1;
-		CImguiClass::m_prevSelectIndex = 0;
-		m_pRay->SetOrigin(D3DXVECTOR3(9999, 9999, 9999));
-		m_pRay->SetDirection(D3DXVECTOR3(0, 0, 0));
-		g_pObjectManager->SetSelectAllFalse();
+		m_isPushRBtn = true;
+		{
+			CRay r = CRay::RayAtWorldSpace(LOWORD(lParam), HIWORD(lParam));
+
+			vector<D3DXVECTOR3> vCheck = m_pGrid->GetGridVertex();
+			D3DXVECTOR3 pos(0, 0, 0);
+			for (int i = 0; i < vCheck.size(); i += 3)
+			{
+				if (r.IntersectTri(vCheck[i + 0], vCheck[i + 1], vCheck[i + 2], pos))
+				{
+					lastPos = pos;
+
+					pos.x = floor(pos.x);	pos.x += 0.5f;
+					pos.y = 0;
+					pos.z = floor(pos.z);	pos.z += 0.5f;
+					// pos.z = pos.z <= 0 ? pos.z + 0.5f : pos.z - 0.5f;
+
+					CImguiClass::CreateMouseRBtn();
+					g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).SetTranslate(pos);
+					break;
+				}
+			}
+		}
+	break;
+
+	case WM_MOUSEMOVE:
+		if (m_isPushRBtn)
+		{
+			// todo : drag
+			CRay r = CRay::RayAtWorldSpace(LOWORD(lParam), HIWORD(lParam));
+
+			vector<D3DXVECTOR3> vCheck = m_pGrid->GetGridVertex();
+			D3DXVECTOR3 pos(0, 0, 0);
+			bool check = false;
+			for (int i = 0; i < vCheck.size(); i += 3)
+			{
+				if (r.IntersectTri(vCheck[i + 0], vCheck[i + 1], vCheck[i + 2], pos))
+				{
+					if (abs(pos.x - lastPos.x) <= 1.0f && abs(pos.y - lastPos.y) <= 1.0f && abs(pos.z - lastPos.z) <= 1.0f)
+						continue;
+
+					lastPos = pos;
+
+					pos.x = floor(pos.x);	pos.x += 0.5f;
+					pos.y = 0;
+					pos.z = floor(pos.z);	pos.z += 0.5f;
+					// pos.z = pos.z <= 0 ? pos.z + 0.5f : pos.z - 0.5f;
+
+					CImguiClass::CreateMouseRBtn();
+					g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).SetTranslate(pos);
+					break;
+				}
+			}
+		}
 		break;
 
 	case WM_KEYDOWN:
+		if (wParam == VK_ESCAPE)
+		{
+			CImguiClass::m_nowSelectindex = -1;
+			CImguiClass::m_prevSelectIndex = 0;
+			m_pRay->SetOrigin(D3DXVECTOR3(9999, 9999, 9999));
+			m_pRay->SetDirection(D3DXVECTOR3(0, 0, 0));
+			g_pObjectManager->SetSelectAllFalse();
+		}
+
 		if (wParam == VK_CONTROL)
 			m_isPushCtrl = true;
 

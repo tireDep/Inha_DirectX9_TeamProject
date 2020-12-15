@@ -49,10 +49,11 @@ CRay CRay::RayAtWorldSpace(int nScreenX, int nScreenY)
 	return r;
 }
 
-bool CRay::IntersectTri(IN D3DXVECTOR3 & v0, IN D3DXVECTOR3 & v1, IN D3DXVECTOR3 & v2)
+bool CRay::IntersectTri(IN D3DXVECTOR3 & v0, IN D3DXVECTOR3 & v1, IN D3DXVECTOR3 & v2, OUT D3DXVECTOR3& vPickedPosition)
 {
-	float u, v, f;
-	bool b = D3DXIntersectTri(&v0, &v1, &v2, &m_vOrg, &m_vDir, &u, &v, &f);
-	
+	float u, v, dist;
+	bool b = D3DXIntersectTri(&v0, &v1, &v2, &m_vOrg, &m_vDir, &u, &v, &dist);
+	vPickedPosition = m_vOrg + m_vDir * dist;
+
 	return b;
 }

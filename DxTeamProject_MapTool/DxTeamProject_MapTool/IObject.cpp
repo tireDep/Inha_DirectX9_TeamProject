@@ -156,6 +156,7 @@ void IObject::Update(CRay * ray)
 			// D3DXVECTOR3 result = ray->GetOrigin() + ray->GetDirection() * t;
 
 			m_isPick = true;
+			m_isClick = true;
 			return;
 		}
 		else
