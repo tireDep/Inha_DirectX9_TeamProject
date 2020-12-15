@@ -565,6 +565,6 @@ void CCharacter::ColliderOtherObject(IObject * background)
 			background->SetBool(false);
 		}
 	
-
+	
 	
 }

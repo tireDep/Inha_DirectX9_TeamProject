@@ -214,6 +214,8 @@ void Color_changer::Render()
 		}
 		g_pD3DDevice->SetTexture(0, NULL);
 	}
+
+
 }
 
 

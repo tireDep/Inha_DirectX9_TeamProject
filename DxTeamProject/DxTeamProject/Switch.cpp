@@ -194,8 +194,7 @@ void CSwitch::Render()
 				m_pMesh->DrawSubset(i);
 			}
 			else
-			{
-				cout << "Ãæµ¹" << endl;
+			{				
 				m_pMesh->DrawSubset(0);
 			}
 		}
