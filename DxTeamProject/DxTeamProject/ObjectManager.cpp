@@ -357,7 +357,11 @@ void CObjectManager::Collide(float duration)
 			}
 			else
 			{
-
+				m_vecIObject[IObjectIndex]->pBoxBool(false);
+				ST_EVENT msg;
+				msg.eventType = EventType::eConditionChange;
+				msg.isCondition = true;
+				msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
 			}
 		}
 	}
@@ -401,12 +405,16 @@ void CObjectManager::Collide(float duration)
 					case eG_Door:
 						break;
 					case eG_Switch:
-						m_vecIObject[IObjectIndex]->pBoxBool(true);
+						m_vecIObject[IObjectIndex]->pCylinderBool(true);
 						break;
 					default:
 						CollisionIObject(m_vecCylinder[CylinderIndex], m_vecIObject[IObjectIndex], duration);
 						break;
 				}
+			}
+			else
+			{
+				m_vecIObject[IObjectIndex]->pCylinderBool(false);
 			}
 		}
 	}

@@ -192,7 +192,7 @@ void CSwitch::Render()
 
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
-			if (pBox == false) // 부딪히지 않았을떄
+			if (pBox == false && pCylinder == false) // 부딪히지 않았을떄
 			{
 			
 				m_pMesh->DrawSubset(i);
