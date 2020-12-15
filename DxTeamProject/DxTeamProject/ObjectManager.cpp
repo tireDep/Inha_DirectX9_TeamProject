@@ -86,9 +86,10 @@ void CObjectManager::RemoveObject(COBB * OBBBox)
 	{
 		if (*it == OBBBox)
 		{
-			COBB* temp = *it;
-			it = m_vecOBBBox.erase(it);
-			delete temp;
+			// COBB* temp = *it;
+			// it = m_vecOBBBox.erase(it);
+			// delete temp;
+			*it = NULL;
 			return;
 		}
 		else

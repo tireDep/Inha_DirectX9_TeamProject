@@ -134,8 +134,10 @@ void CBook::Render()
 
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+
 	if (m_pMesh == NULL)
 		return;
+
 	for (int i = 0; i < m_vecMtrls.size(); i++)
 	{
 		if (m_vecTextures[i] != 0)
@@ -145,15 +147,11 @@ void CBook::Render()
 	}
 	if (player == true)
 	{	
+		g_pEventManager->RemoveListener(this);
+
 		SafeRelease(m_pMesh);
 		g_pObjectManager->RemoveObject(m_pOBB);
-		static int count = 0;
-		count++;
-		
-		cout << count << endl;
 	}
-	
-	
 
 	g_pD3DDevice->SetTexture(0, NULL);
 }
