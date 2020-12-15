@@ -243,8 +243,8 @@ void CMainGame::Update()
 		m_pDragon->Update(m_pCharacter->GetPosition(), g_pTimeManager->GetElapsedTime());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
-		for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
-			m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);
+		//for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
+		//	m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);
 
 		switch (m_pUI->GetPickColor())
 		{
