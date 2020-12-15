@@ -59,6 +59,9 @@ void CSphere::Setup(const ST_MapData & mapData)
 	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
 	m_matWorld = matS * matR * matT;
 
+	m_pOBB = new COBB;
+	m_pOBB->Setup(*this);
+	g_pObjectManager->AddOBBbox(m_pOBB);
 	g_pObjectManager->AddSphere(this);
 	//D3DXVECTOR3 vScale, vRotate;
 	//vScale = mapData.vScale;

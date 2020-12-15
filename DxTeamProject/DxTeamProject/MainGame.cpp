@@ -116,11 +116,11 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToGimmick.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
-
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToSwitch.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToGimmick.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
@@ -242,14 +242,9 @@ void CMainGame::Update()
 		m_pDragon->DirectionSet(m_pCamera->GetCameraDirection());
 		m_pDragon->Update(m_pCharacter->GetPosition(), g_pTimeManager->GetElapsedTime());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
-		/// OBB TEST
-
 		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
-
 		for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
 			m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);
-
-
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
@@ -365,9 +360,6 @@ void CMainGame::Update()
 	/*if (m_pMovingCube)
 		m_pMovingCube->Update();*/
 
-
-	
-
 	//for(int i =0 ; i < m_pMeshTile.size(); ++i)
 	//if (m_pMeshTile[i])
 	//	m_pMeshTile[i]->Update();
@@ -379,7 +371,6 @@ void CMainGame::Update()
 	//		D3DXVECTOR3 tmp = m_pChanger->m_position - m_pMeshTile[i]->GetPos();
 	//		m_pChanger->SetHitLength(D3DXVec3Length(&tmp));
 	//		m_pMeshTile[i]->SetColor(m_pChanger->m_stMtl);
-
 	//		break;
 	//	}
 	//	else 

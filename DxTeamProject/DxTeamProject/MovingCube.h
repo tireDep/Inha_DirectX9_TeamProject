@@ -9,7 +9,7 @@ class CMovingCube : public CGimmick
 public:
 	CMovingCube();
 	~CMovingCube();
-	bool pObject;
+	bool pBox, pCylinder, pSphere;
 	bool player;
 private:
 	int m_indexNum; // ¹øÈ£.
@@ -29,8 +29,9 @@ public:
 	void Update();
 
 	void Render();
-
-	void pOjbectBool(bool set) { pObject = set; }
+	void pBoxBool(bool set) { pBox = set; }
+	void pCylinderBool(bool set) { pCylinder = set; }
+	void pSphereBool(bool set) { pSphere = set; }
 	void SetBool(bool set) { player = set; }
 };
 

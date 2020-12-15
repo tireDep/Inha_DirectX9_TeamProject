@@ -78,6 +78,8 @@ void Color_changer::Setup()
 
 void Color_changer::Setup(ST_MapData setData)
 {
+	//D3DXMatrixRotationYawPitchRoll(&matR,setData.vRotate.x, setData.vRotate.y, setData.vRotate.z); //∏„µ•¿Ã≈Õ
+
 	m_position = setData.vTranslate;
 	m_scale = setData.vScale;
 	//BEAM

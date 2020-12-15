@@ -12,7 +12,8 @@ private:
 	LPD3DXMESH m_pBox; // CreateBox
 	
 	D3DXVECTOR3 m_vMin, m_vMax;
-	bool pObject, player;
+	bool pBox, pCylinder,pSphere ,player;
+
 	// D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRot; //setdata
 
 public:
@@ -26,7 +27,9 @@ public:
 	void Update();
 	void Render();
 	void Update(float duration);
-	void pOjbectBool(bool set) { pObject = set; }
+	void pBoxBool(bool set) { pBox = set; }
+	void pCylinderBool(bool set) { pCylinder = set; }
+	void pSphereBool(bool set) { pSphere = set; }
 	void SetBool(bool set) { player = set; }
 	COBB* GetOBB2() { return m_pColl; } // 콜리더부분!
 };

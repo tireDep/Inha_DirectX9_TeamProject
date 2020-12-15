@@ -23,7 +23,7 @@ void COBB::Setup(CObject & object)
 {
 	//m_matWorld = object.GetmatWorld();
 
-	object.Update(0.0001f);
+	//object.Update(0.0001f);
 
 	D3DXVECTOR3* pVertices;
 	object.GetMesh()->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
@@ -97,7 +97,7 @@ void COBB::Setup(CObject & object)
 	// Check OriCenterPos, OriAxisDir
 	for (int i = 0; i < 3; ++i)
 		D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &m_matWorld);
-		//D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &m_matWorld);
+	D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &m_matWorld);
 	//for (int i = 0; i < 3; ++i)
 	//	D3DXVec3TransformNormal(&m_vOriAxisDir[i], &m_vOriAxisDir[i], &object.GetmatWorld());
 	//D3DXVec3TransformCoord(&m_vOriCenterPos, &m_vOriCenterPos, &object.GetmatWorld());
@@ -672,6 +672,9 @@ bool COBB::IsCollision(COBB * pOBB1, COBB * pOBB2)
 // KT TEST 
 bool COBB::IsCollision(COBB * otherOBB)
 {
+	if (otherOBB == NULL)
+		return false;
+
 	// 중심							m_vCenterPos
 	// 축							m_vAxisDir[3]
 	// 중심에서 OBB면까지의 거리	m_fAxisHalfLen[3]
@@ -772,10 +775,8 @@ bool COBB::IsCollision(COBB * otherOBB)
 			return false;
 	}
 	if (existsParallelPair)
-	{
-		cout << "here2" << endl;
 		return true;
-	}
+
 	// --------------------------------------------------------------------------------------------------------- //
 	// 축C0 + t * A0 × B0
 	{
@@ -1229,6 +1230,9 @@ bool COBB::IsCollision(COBB * otherOBB, D3DXVECTOR3 * contactNormal, float * pen
 
 void COBB::Render()
 {
+	if (this == NULL)
+		return;
+
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);

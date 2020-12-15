@@ -211,6 +211,11 @@ void CCharacter::UpdateRayYCheck(MeshTile & meshtile)
 	//	m_vPosition.y = 0.5f;
 }
 
+void CCharacter::ColliderObject(CObject * allObject)
+{
+	//if(m_Character->GetOBB()->IsCollision())
+}
+
 CCharacter::~CCharacter()
 {
 	SafeDelete(m_Character);
@@ -316,7 +321,7 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 				jumpis = false;
 				jumping = false;
 			}
-			m_Character->SetAnimationIndex(6); // fall
+			m_Character->SetAnimationIndexBlend(6); // fall
 		}
 	
 }
@@ -551,20 +556,14 @@ bool CCharacter::Collider(bool isCollided)
 
 void CCharacter::ColliderOtherObject(IObject * background)
 {
-	
 		if (m_Character->GetOBB()->IsCollision(background->GetOBB()))
 		{
 			m_isCollided = true;
 			background->SetBool(true);
-
 		}
 		else
 		{
-
 			m_isCollided = false;
 			background->SetBool(false);
 		}
-	
-	
-	
 }
