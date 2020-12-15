@@ -173,7 +173,7 @@ enum class PlayerInputType : int
 struct ST_EVENT
 {
 	EventType eventType = EventType::eNull;
-
+	
 	// >> Input
 	UINT message = 0;
 	WPARAM wParam = 0; 
@@ -187,6 +187,7 @@ struct ST_EVENT
 
 	// >> ConditionChange
 	string conditionName = "";
+	bool isCondition = "false";
 	// << ConditionChange
 
 	float duration = 0.0f;

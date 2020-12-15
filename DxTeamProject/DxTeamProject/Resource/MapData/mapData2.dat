@@ -1,100 +1,112 @@
 # Object_Start
 # ObjectName
-Tile1
+Door1
 # FolderPath
-Resource/XFile/Tile
+Resource/XFile/Gimmick/Door
 # FilePath
-Tile_07.X
+door_frame.X
 # TxtPath
-Texture_01.png
+cubeworld_texture.tga
 # ObjectType
-6
-# Scale
-0.3
-0.01
-0.3
-# Rotate
-0
-0
-0
-# Translate
-0
-0
-0
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile2
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_05.X
-# TxtPath
-Texture_01.png
-# ObjectType
-4
-# Scale
-0.5
-0.03
-0.2
-# Rotate
-0
-0
-0
-# Translate
-0
-0.0
-20
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile3
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_05.X
-# TxtPath
-Texture_01.png
-# ObjectType
-4
-# Scale
-0.2
-0.01
-0.2
-# Rotate
-0
-0
-0
-# Translate
-11
-1.54
-10
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile4
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_05.X
-# TxtPath
-Texture_01.png
-# ObjectType
-4
+28
 # Scale
 0.1
-0.01
-0.2
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
-17
 0.5
-10
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# GimmickData
+# ConditionName
+Switch4
+# ConditionIndex
+2
+# ConditionOrbIndex
+0
+# ConditionName
+Switch4
 # Object_End
+
+# Object_Start
+# ObjectName
+Door2
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_right.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+29
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# GimmickData
+# ConditionName
+Switch4
+# ConditionIndex
+2
+# ConditionOrbIndex
+0
+# ConditionName
+Switch4
+# Object_End
+
+# Object_Start
+# ObjectName
+Switch4
+# FolderPath
+Resource/XFile/Gimmick/Switch
+# FilePath
+Force_switch.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+31
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ConditionName
+Door1
+# Object_End
+
+# Section =======================================
 

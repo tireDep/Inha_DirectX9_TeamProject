@@ -7,7 +7,7 @@ int CBook::m_nCount = 0;
 CBook::CBook()
 	: m_fRotationSpeed(1.0f)
 	, m_fRotAngle(0.0f)
-	, pObject(false)
+	, pBox(false)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);

@@ -99,10 +99,6 @@ Material cw_tower_defense_mat {
  43.219280;
  0.000000;0.000000;0.000000;;
  0.000000;0.000000;0.000000;;
-
- TextureFilename {
-  "tower_defense_texture.tga";
- }
 }
 
 Frame mortar_head_lvl4_LOD_group {

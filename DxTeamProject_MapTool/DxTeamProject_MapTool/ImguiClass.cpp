@@ -18,6 +18,8 @@
 
 int CImguiClass::m_nowSelectindex = -1;
 int CImguiClass::m_prevSelectIndex = 0;
+int CImguiClass::m_FileLoadIndex = 0;
+ObjectType CImguiClass::m_nowObjType = ObjectType::eNull;
 
 void CImguiClass::SetVecItem()
 {
@@ -321,7 +323,6 @@ void CImguiClass::SetGimmickCondition()
 
 CImguiClass::CImguiClass() :
 	m_isReset(false),
-	m_FileLoadIndex(0),
 	m_showItem("\0"),
 	m_pMesh(NULL)
 {
@@ -675,15 +676,12 @@ void CImguiClass::Update_FileLoader()
 	// << combo
 
 	ImGui::SameLine();
+	m_nowObjType = m_vecObjType[m_FileLoadIndex];
 	if (ImGui::Button("Load") && m_FileLoadIndex != -1)
 	{
 		g_pObjectManager->SetSelectAllFalse();
 
-		IObject::CreateObject(m_vecObjType[m_FileLoadIndex], m_FileLoadIndex);
-
-		//int index = g_pObjectManager->GetVecSize() - 1;
-		//g_pObjectManager->GetIObject(index).SetClick(true);
-		//g_pObjectManager->GetIObject(index).SetPick(true);
+		IObject::CreateObject(m_nowObjType, m_FileLoadIndex);
 	}
 
 	ImGui::Separator();
@@ -1077,4 +1075,13 @@ void CImguiClass::Destroy()
 	ImGui_ImplDX9_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();
+}
+
+void CImguiClass::CreateMouseRBtn()
+{
+	if (m_FileLoadIndex != -1)
+	{
+		g_pObjectManager->SetSelectAllFalse();
+		IObject::CreateObject(m_nowObjType, m_FileLoadIndex);
+	}
 }

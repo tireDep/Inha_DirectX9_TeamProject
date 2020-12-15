@@ -382,7 +382,7 @@ void CSkinnedMesh::SetTransform(D3DXMATRIXA16 * pmat)
 bool CSkinnedMesh::CheckAnimationEnd()
 {
 	if (strstr(m_sNowPlayAni.c_str(), "Color") 
-	|| strstr(m_sNowPlayAni.c_str(), "Jump")
+	 || strstr(m_sNowPlayAni.c_str(), "Jump")
 	// || strstr(m_sNowPlayAni.c_str(), "Fall")
 	 || strstr(m_sNowPlayAni.c_str(), "Stun")
 	// || strstr(m_sNowPlayAni.c_str(), "Push")

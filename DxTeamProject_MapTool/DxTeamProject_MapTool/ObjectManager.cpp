@@ -98,13 +98,22 @@ void CObjectManager::Update()
 
 void CObjectManager::Update(CRay * ray)
 {	
+	// bool isSelect = false;
+	// for (int i = 0; i < m_vecObject.size(); i++)
+	// {
+	// 	if (m_vecObject[i]->GetClick() == true)
+	// 		isSelect = true;
+	// }
+
 	for (int i = 0; i < m_vecObject.size(); i++)
 		m_vecObject[i]->Update(ray);
 
 	// >> 피킹 오브젝트 판별
 	// - 같은 선상에 있는 모든 오브젝트가 피킹 되기 때문에
 	//   레이 위치와 가장 가까운 오브젝트 판별한 후 나머지 false
-	int index = 0;
+	
+	int index = -1;
+
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
 		if (m_vecObject[i]->GetPick() == true)
@@ -113,6 +122,9 @@ void CObjectManager::Update(CRay * ray)
 			break;
 		}
 	}
+
+	// if (index == -1 && !isSelect)
+	// 	SetSelectAllFalse();
 
 	D3DXVECTOR3 rayOrigin = ray->GetOrigin();
 	for (int i = index + 1; i < m_vecObject.size(); i++)
