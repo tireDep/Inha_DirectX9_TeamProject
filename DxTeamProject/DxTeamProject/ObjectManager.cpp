@@ -382,6 +382,9 @@ void CObjectManager::Collide(float duration)
 						break;
 					case eG_Door: 
 						break;
+					case  eG_Switch:
+						m_vecIObject[IObjectIndex]->pOjbectBool(true);
+						break;
 					default:
 						CollisionIObject(m_vecCylinder[CylinderIndex], m_vecIObject[IObjectIndex], duration);
 						break;

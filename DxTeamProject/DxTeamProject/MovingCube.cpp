@@ -143,49 +143,65 @@ void CMovingCube::Setup(ST_MapData setData)
 
 void CMovingCube::Update(float duration)
 {
-	if (m_indexNum == 0 && m_istrue == false)
-	{
-		m_vPosition.y += m_fSpeed * duration;
-		if (m_vPosition.y > m_fStartPos)
-			m_istrue = true;
-	}
-	else if (m_indexNum == 0 && m_istrue == true)
-	{
-		m_vPosition.y -= m_fSpeed * duration;
-		if (m_vPosition.y < m_fEndPos)
-			m_istrue = false;
-	}
+	//D3DXVECTOR3 start_pos, end_pos;
+	//if (m_indexNum == 0)
+	//{
+	//	float start = m_vPosition.y + m_fStartPos;
+	//	float end = m_vPosition.y + m_fEndPos;
+	//	start_pos = m_vPosition + D3DXVECTOR3(0, start, 0);
+	//	end_pos = m_vPosition + D3DXVECTOR3(0, end, 0);
+	//}
+	//else if(m_indexNum == 1)
+	//{
+	//	float start = m_vPosition.x + m_fStartPos;
+	//	start_pos = m_vPosition + D3DXVECTOR3(0, start, 0);
+	//}
+	//	
+	//end_pos = m_vPosition + 
 
-	if (m_indexNum == 1 && m_istrue == false)
-	{
-		m_vPosition.x += m_fSpeed * duration;
-		if (m_vPosition.x > m_fStartPos)
-			m_istrue = true;
-	}
-	else if (m_indexNum == 1 && m_istrue == true)
-	{
-		m_vPosition.x -= m_fSpeed * duration;
-		if (m_vPosition.x < m_fEndPos)
-			m_istrue = false;
-	}
+	//if (m_indexNum == 0 && m_istrue == false)
+	//{
+	//	if (m_vPosition.y > m_fStartPos)
+	//		m_istrue = true;
+	//	m_vPosition.y += m_fSpeed * duration;
+	//}
+	//else if (m_indexNum == 0 && m_istrue == true)
+	//{
+	//	m_vPosition.y -= m_fSpeed * duration;
+	//	if (m_vPosition.y < m_fEndPos)
+	//		m_istrue = false;
+	//}
 
-	if (m_indexNum == 2 && m_istrue == false)
-	{
-		m_vPosition.z += m_fSpeed * duration;
-		if (m_vPosition.z > m_fStartPos)
-			m_istrue = true;
-	}
-	else if (m_indexNum == 2 && m_istrue == true)
-	{
-		m_vPosition.z -= m_fSpeed * duration;
-		if (m_vPosition.z < m_fEndPos)
-			m_istrue = false;
-	}
+	//if (m_indexNum == 1 && m_istrue == false)
+	//{
+	//	m_vPosition.x += m_fSpeed * duration;
+	//	if (m_vPosition.x > m_fStartPos)
+	//		m_istrue = true;
+	//}
+	//else if (m_indexNum == 1 && m_istrue == true)
+	//{
+	//	m_vPosition.x -= m_fSpeed * duration;
+	//	if (m_vPosition.x < m_fEndPos)
+	//		m_istrue = false;
+	//}
 
-	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	m_matWorld = m_matS * m_matR * m_matT;
+	//if (m_indexNum == 2 && m_istrue == false)
+	//{
+	//	m_vPosition.z += m_fSpeed * duration;
+	//	if (m_vPosition.z > m_fStartPos)
+	//		m_istrue = true;
+	//}
+	//else if (m_indexNum == 2 && m_istrue == true)
+	//{
+	//	m_vPosition.z -= m_fSpeed * duration;
+	//	if (m_vPosition.z < m_fEndPos)
+	//		m_istrue = false;
+	//}
 
-	m_pOBB->Update(&m_matWorld);
+	//D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	//m_matWorld = m_matS * m_matR * m_matT;
+
+	//m_pOBB->Update(&m_matWorld);
 }
 
 void CMovingCube::Update()
