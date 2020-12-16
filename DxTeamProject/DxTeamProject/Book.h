@@ -1,9 +1,9 @@
 #pragma once
-#include "IObject.h"
+#include "Item.h"
 
 class CSkinnedMesh;
 
-class CBook : public IObject
+class CBook : public CItem
 {
 private:
 	static int m_nCount;
@@ -13,7 +13,6 @@ private:
 	bool pBox, pCylinder, pSphere;
 	bool player;
 	D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRot;
-
 
 public:
 	CBook();

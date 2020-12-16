@@ -101,44 +101,6 @@ void CItem::Render()
 	g_pD3DDevice->SetTexture(0, NULL);
 }
 
-void CItem::Render_Sprite()
-{
-
-	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
-	g_pD3DDevice->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
-	g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-
-	g_pD3DDevice->SetFVF(ST_PT_VERTEX::FVF);
-
-	g_pD3DDevice->SetMaterial(&m_pMtrl);
-
-	if (m_pTexture)
-		g_pD3DDevice->SetTexture(0, m_pTexture);
-
-	if (!m_isPick && !m_isClick || !m_pShader)
-	{
-		g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PT_VERTEX));
-	}
-	else
-	{
-		SetShader(GetmatWorld());
-
-		D3DXVECTOR4 color;
-		if (GetSpriteIndex() == 0)		color = D3DXVECTOR4(0, 0, 0, 1);
-		else if (GetSpriteIndex() == 1)	color = D3DXVECTOR4(1, 1, 1, 1);
-		else if (GetSpriteIndex() == 2)	color = D3DXVECTOR4(1, 1, 0, 1);
-		else if (GetSpriteIndex() == 3)	color = D3DXVECTOR4(0, 1, 0, 1);
-		else if (GetSpriteIndex() == 4)	color = D3DXVECTOR4(1, 0, 0, 1);
-		else if (GetSpriteIndex() == 5)	color = D3DXVECTOR4(0, 0, 1, 1);
-
-		SetShaderColor(D3DXVECTOR4(0, 0, 0, 1), color);
-		IObject::Render();
-	}
-
-	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
-
-	g_pD3DDevice->SetTexture(0, NULL);
-}
 
 int CItem::GetSpriteIndex()
 {

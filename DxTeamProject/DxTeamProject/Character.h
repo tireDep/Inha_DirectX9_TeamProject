@@ -29,7 +29,8 @@ protected:
 
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
-	float rotation;
+	float					rotation;
+	float					m_preRotation;
 	// grab
 	Synthesize(bool, m_isGrab, Grab);
 	int						m_nGrabAbleObeject;

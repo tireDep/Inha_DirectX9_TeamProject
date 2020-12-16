@@ -20,6 +20,7 @@ CCharacter::CCharacter()
 	, m_fMaxJumpHeight(1.5f)
 	, m_fRadianJump(0.0f)
 	, m_isFallAni(false)
+	, m_preRotation(0.0f)
 	// , m_pOBB(NULL)
 	// , jumpis(false)
 	// , jumping(false)
@@ -48,6 +49,9 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 		if (eventMsg.message == WM_LBUTTONDOWN)
 		{
+			if (m_isJump)
+				return;
+
 			ST_EVENT msg;
 			msg.eventType = EventType::eColorChangeEvent;
 			msg.ptrMessage = &m_color;
@@ -69,6 +73,103 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 		{
 			switch (eventMsg.playerInput)
 			{
+				// todo : 점프 구현
+			case PlayerInputType::eJump:
+				//if (!jumping)
+				// {
+				// 	m_isJump = true;
+				// 	m_Character->SetAnimationIndex(7); // jump
+				// }
+				// speed = -1.0f;
+
+				if (!m_isJump)
+				{
+					m_isJump = true;
+					m_Character->SetAnimationIndexBlend(7); // jump
+					speed = -1;
+				}
+				break;
+
+				// todo : 잡기 구현
+			case PlayerInputType::eHold:
+				if (m_isGrab)
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(5);
+				}
+				else
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
+				}
+				//if (m_nGrabAbleObeject != -1)
+				//{
+				//	if (m_Character->CheckAnimationEnd())
+				//		//m_Character->SetAnimationIndexBlend(5); // push
+				//		m_Character->SetAnimationIndex(5);
+				//	// >> 블랜드가 안되서 잡기 대기 상태처럼 나옴
+				//}
+				// else
+				//m_Character->SetAnimationIndexBlend(5); // push
+				//m_Character->SetAnimationIndex(5);
+				speed = -1.0f;
+				break;
+
+			case PlayerInputType::eHoldPush:
+				if (m_isGrab)
+				{
+					if (m_nGrabAbleObeject != -1)
+					{
+						D3DXVECTOR3 v;
+						v = g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetPosition() - this->GetPosition();
+						v.y -= 0.5f;
+						D3DXVec3Normalize(&v, &v);
+						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetPusingForce(v);
+						rotation = m_preRotation;
+						speed = 1.0f;
+
+						m_Character->SetAnimationIndex(5);
+					}
+					// if (m_Character->CheckAnimationEnd())
+				}
+				else
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
+					speed = -1.0f;
+				}
+				//if (m_nGrabAbleObeject != -1)
+				//{
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(5); // Push
+				//}
+				//else
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(10); // Idle
+
+				break;
+			case PlayerInputType::eHoldPull:
+				if (m_isGrab)
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(4);
+				}
+				else
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
+				}
+				//if (m_nGrabAbleObeject != -1)
+				//{
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(4); // Pull
+				//}
+				//else
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(10); // Idle
+				speed = -1.0f;
+				break;
+
 			case PlayerInputType::eUp:
 				rotation = 0.0f;
 				break;
@@ -101,102 +202,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				rotation = D3DX_PI / 2.0f;
 				break;
 
-				// todo : 점프 구현
-			case PlayerInputType::eJump:
-				//if (!jumping)
-				// {
-				// 	m_isJump = true;
-				// 	m_Character->SetAnimationIndex(7); // jump
-				// }
-				// speed = -1.0f;
-
-				if (!m_isJump)
-				{
-					m_isJump = true;
-					m_Character->SetAnimationIndexBlend(7); // jump
-					speed = -1;
-				}
-				break;
-
-				// todo : 잡기 구현
-			case PlayerInputType::eHold:
-				if(m_isGrab)
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(5);
-				}
-				else
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(10); // Idle
-				}
-				//if (m_nGrabAbleObeject != -1)
-				//{
-				//	if (m_Character->CheckAnimationEnd())
-				//		//m_Character->SetAnimationIndexBlend(5); // push
-				//		m_Character->SetAnimationIndex(5);
-				//	// >> 블랜드가 안되서 잡기 대기 상태처럼 나옴
-				//}
-				// else
-				//m_Character->SetAnimationIndexBlend(5); // push
-				//m_Character->SetAnimationIndex(5);
-				speed = -1.0f;
-				break;
-			case PlayerInputType::eHoldPush:
-				if (m_isGrab)
-				{
-					if (m_nGrabAbleObeject != -1)
-					{
-						D3DXVECTOR3 v;
-						v = g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetPosition() - this->GetPosition();
-						v.y -= 0.5f;
-						D3DXVec3Normalize(&v, &v);
-						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetPusingForce(v);
-						rotation = 0;
-						speed = 1.0f;
-					}
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(5);
-				}
-				else
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(10); // Idle
-					speed = -1.0f;
-				}
-				//if (m_nGrabAbleObeject != -1)
-				//{
-				//	if (m_Character->CheckAnimationEnd())
-				//		m_Character->SetAnimationIndex(5); // Push
-				//}
-				//else
-				//	if (m_Character->CheckAnimationEnd())
-				//		m_Character->SetAnimationIndex(10); // Idle
-				
-				break;
-			case PlayerInputType::eHoldPull:
-				if (m_isGrab)
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(4);
-				}
-				else
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(10); // Idle
-				}
-				//if (m_nGrabAbleObeject != -1)
-				//{
-				//	if (m_Character->CheckAnimationEnd())
-				//		m_Character->SetAnimationIndex(4); // Pull
-				//}
-				//else
-				//	if (m_Character->CheckAnimationEnd())
-				//		m_Character->SetAnimationIndex(10); // Idle
-				speed = -1.0f;
-				break;
 			default:
-				if (!m_isJump || m_Character->CheckAnimationEnd())
+				if (m_Character->CheckAnimationEnd()) // !m_isJump || 
 				{
 					speed = -1.0f;
 					m_Character->SetAnimationIndex(10); // Idle
@@ -207,6 +214,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 		if (speed > 0 && m_Character->CheckAnimationEnd())
 		{
+			m_preRotation = rotation;
+
 			// >> 특정 애니메이션 재생 중 이동 하지 않음
 			if(!m_isJump)
 				m_Character->SetAnimationIndex(9); // Walk
@@ -524,7 +533,9 @@ void CCharacter::Update(float duration)
 
 		if (m_fRadianJump >= D3DXToRadian(180.0f))
 		{
-			m_Character->SetAnimationIndexBlend(10); // idle
+			if(m_Character->CheckAnimationEnd())
+				m_Character->SetAnimationIndexBlend(10); // idle
+
 			m_isFallAni = false;
 			m_isJump = false;
 			m_fRadianJump = 0;

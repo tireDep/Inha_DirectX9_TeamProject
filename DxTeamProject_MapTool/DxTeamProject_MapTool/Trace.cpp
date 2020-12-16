@@ -12,6 +12,7 @@ CTrace::~CTrace()
 void CTrace::Setup(ST_MapData setData)
 {
 	CItem::Setup(setData);
+
 	ST_PT_VERTEX v;
 	float f = m_vScale.x;
 	v.p = D3DXVECTOR3(-f, 0, -f);	v.t = D3DXVECTOR2(1, 0); m_vecVertex.push_back(v);
@@ -21,7 +22,6 @@ void CTrace::Setup(ST_MapData setData)
 	v.p = D3DXVECTOR3(-f, 0, -f);	v.t = D3DXVECTOR2(1, 0); m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(f, 0, f);		v.t = D3DXVECTOR2(0, 1); m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(f, 0, -f);	v.t = D3DXVECTOR2(1, 1); m_vecVertex.push_back(v);
-
 }
 
 void CTrace::Render()

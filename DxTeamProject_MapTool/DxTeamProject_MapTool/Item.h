@@ -19,7 +19,6 @@ public:
 
 	virtual void Setup(ST_MapData setData);
 	virtual void Render();
-	virtual void Render_Sprite();
 
 	virtual int GetSpriteIndex();
 	virtual void SetSpriteIndex(int index);

@@ -1,26 +1,26 @@
 # Object_Start
 # ObjectName
-Tile_01_Grass1
+Book1
 # FolderPath
-Resource/XFile/Tile
+Resource/XFile/Book
 # FilePath
-Tile_01.X
+book.X
 # TxtPath
-Texture_01.png
+Bookshelf_diffuse.png
 # ObjectType
-0
+33
 # Scale
-0.1
-0.1
-0.1
+1
+1
+1
 # Rotate
 0
 0
 0
 # Translate
--0.5
+0.5
 0
--2.5
+0.5
 # Color
 0.5
 0.5
@@ -31,27 +31,58 @@ Texture_01.png
 
 # Object_Start
 # ObjectName
-Trace_Yellow2
+Orb_Blue2
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Blue.png
+# ObjectType
+34
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0.6
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Blue3
 # FolderPath
 Resource/Sprite/Trace
 # FilePath
 
 # TxtPath
-WaterColor_Yellow.png
+WaterColor_Blue.png
 # ObjectType
 38
 # Scale
-1
-1
-1
+2
+0.5
+2
 # Rotate
 0
-45
+0
 0
 # Translate
--0.5
-1.05
--2.5
+4.5
+0.3
+0.5
 # Color
 0.5
 0.5
