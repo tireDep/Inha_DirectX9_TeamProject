@@ -36,6 +36,9 @@ protected:
 	int						m_nGrabAbleObeject;
 	// Ray y check
 	CRay					m_Ray;
+	D3DXVECTOR3 m_vContactNormal;
+	float m_fPenetration;
+	bool m_isCollidedTile;
 public:
 	virtual ~CCharacter(void);
 	virtual void Setup();

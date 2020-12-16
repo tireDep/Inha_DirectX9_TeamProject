@@ -10,7 +10,7 @@
 
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
-	, m_vPosition(5,0, 5)
+	, m_vPosition(0, 0, 0)
 	, m_isCollided(false)
 	, m_Character(NULL)
 	, m_isColorChanged(false)
@@ -21,6 +21,10 @@ CCharacter::CCharacter()
 	, m_fRadianJump(0.0f)
 	, m_isFallAni(false)
 	, m_preRotation(0.0f)
+	, m_vContactNormal(0, 0, 0)
+	, m_fPenetration(0.0f)
+	, m_isCollidedTile(false)
+
 	// , m_pOBB(NULL)
 	// , jumpis(false)
 	// , jumping(false)
@@ -261,14 +265,16 @@ void CCharacter::UpdateRayYCheck(MeshTile & meshtile)
 
 void CCharacter::ColliderObject()
 {
-	//for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
-	//{
-	//	if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
-	//	{
-	//		m_isCollided = true;
-	//		return;
-	//	}
-	//}
+	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
+	{
+		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB(), &m_vContactNormal, &m_fPenetration))
+		{
+			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= 12)
+				m_isCollidedTile = true;
+			m_isCollided = true;
+			return;
+		}
+	}
 	for (int i = 0; i < g_pObjectManager->GetVecPObejct().size(); i++)
 	{
 		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecPObejct()[i]->GetOBB()))
@@ -576,12 +582,29 @@ void CCharacter::DoMove(const float& velocity)
 	if (m_isCollided)
 	{
 		m_vPosition = m_position;
+		if (m_isCollidedTile)
+		{
+			//m_vPosition.y += 0.005f;
+			D3DXVec3Normalize(&m_vContactNormal, &m_vContactNormal);
+			m_vPosition += m_vContactNormal * m_fPenetration;
+ 			//m_vPosition.x += m_vContactNormal.x * m_fPenetration;
+			//m_vPosition.y += m_vContactNormal.y * m_fPenetration;
+			//m_vPosition.z += m_vContactNormal.z * m_fPenetration;
+			//cout << "m_vContactNormal : " << m_vContactNormal.x << ' ' << m_vContactNormal.y << ' ' << m_vContactNormal.z << endl;
+			//cout << m_fPenetration << endl;
+			m_isCollidedTile = false;
+		}
 	}
 	else
 	{
 		m_position = m_vPosition;
 	}
+	//cout << "m_vDirection : " << m_vDirection.x << ' ' << m_vDirection.y << ' ' << m_vDirection.z << endl;
 	m_vPosition = m_vPosition + (m_vDirection * velocity);
+	if (m_vPosition.y >= 0)
+		m_vPosition.y -= 0.005f;
+	else
+		m_vPosition.y = 0;
 }
 
 
