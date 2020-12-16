@@ -240,11 +240,13 @@ void CMainGame::Update()
 		g_pGameManager->SetGetOrb("Yellow");
 		g_pGameManager->SetGetOrb("Black");
 	}
+
 	g_pGameManager->CompleteOrb();
 	// >> 조건 확인 테스트
 	// >> on/off 상태 조건 // 텍스쳐 태깅
 
 	g_pTimeManager->Update();
+
 	g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
 	if (m_pCamera)
@@ -458,8 +460,6 @@ void CMainGame::Render()
 
 	if (m_pCharacter)
 		m_pCharacter->Render(c);
-
-
 
 	g_pObjectManager->Render();
 
