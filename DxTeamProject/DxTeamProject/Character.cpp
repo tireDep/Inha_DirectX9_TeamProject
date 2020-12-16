@@ -10,7 +10,7 @@
 
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
-	, m_vPosition(0, 0.0f, 0)
+	, m_vPosition(5,0, 5)
 	, m_isCollided(false)
 	, m_Character(NULL)
 	, m_isColorChanged(false)
