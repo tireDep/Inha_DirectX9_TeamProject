@@ -39,6 +39,8 @@ private:
 	void SaveGimmickData(ofstream& file, ST_MapData& mapData);
 	void ReadGimmickData(ifstream& mapFile, string& readData, ST_MapData& mapData);
 
+	void ResetMapData(ST_MapData& mapData);
+
 public:
 	void Setup();
 

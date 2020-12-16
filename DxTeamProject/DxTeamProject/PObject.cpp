@@ -111,7 +111,7 @@ void PObject::SetPusingForce(D3DXVECTOR3 forcedirection)
 {
 	D3DXVECTOR3 forcePosition = forcedirection * m_fBoundingSphere;
 	m_vForceLocation = forcePosition;
-	m_vForceVector = forcedirection * 100;
+	m_vForceVector = forcedirection * 80;
 	SetForceApplied(true);
 }
 

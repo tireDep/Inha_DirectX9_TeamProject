@@ -41,6 +41,10 @@ protected:
 	Synthesize(int, m_conditionOrbindex, ConditionOrbIndex);
 	// >> On/Off 조건 변수
 
+	Synthesize(vector<string>, m_vecColorTag, VecColorTag);
+	// >> 태그
+	// >> 배경 오브젝트만 사용, 편의를 위해 상위에 선언
+
 	LPD3DXEFFECT m_pShader;
 	bool isLoad;
 

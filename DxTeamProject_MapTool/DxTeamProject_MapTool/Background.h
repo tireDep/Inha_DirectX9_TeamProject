@@ -5,6 +5,8 @@ class CRay;
 
 class CBackground : public IObject
 {
+protected:
+	void DoNewTagging(int cnt, string ...);
 
 public:
 	 CBackground();

@@ -1,6 +1,20 @@
 #include "stdafx.h"
 #include "Background.h"
 
+bool CBackground::CheckIsGetColorOrb()
+{
+	// >> 태그와 맞는 색상 오브가 있는지 판별
+	// >> 하나라도 존재 하지 않을 경우 false
+
+	for (int i = 0; i < m_vecColorTag.size(); i++)
+	{
+		if (!g_pGameManager->GetIsHasOrb(m_vecColorTag[i]))
+			return false;
+	}
+
+	return true;
+}
+
 CBackground::CBackground()
 {
 	m_strName = string("Background") + to_string(m_nRefCount);
@@ -28,6 +42,8 @@ void CBackground::Setup(const ST_MapData & mapData)
 	m_vScale = mapData.vScale;
 	m_vRotation = mapData.vRotate;
 	m_vTranslation = mapData.vTranslate;
+	
+	m_vecColorTag = mapData.vecColorTag;
 
 	if (m_strXFile != "")
 	{
@@ -90,20 +106,18 @@ void CBackground::Setup(const ST_MapData & mapData)
 
 void CBackground::Render()
 {
-	// >> 투명벽, 꽃은 텍스쳐 없고 매터리얼 값으로만 이루어져 있음
-
 	if (m_ObjectType == ObjectType::eInvisibleWall)
 		return; // >> 투명벽 랜더하지 않음
 
-	if(m_ObjectType == ObjectType::eFlower || m_ObjectType == ObjectType::eInvisibleWall)
-		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-	else
-		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	// if (m_ObjectType == ObjectType::eFlower) // || m_ObjectType == ObjectType::eInvisibleWall)
+	// {
+	// 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	// 	// todo : setTexture
+	// }
+	// else
+	// 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
-
-	// if(m_pMtrl!=NULL)
-	// 	g_pD3DDevice->SetMaterial(&m_pMtrl);
 
 	if (m_pMesh == NULL)
 		return;
@@ -112,17 +126,30 @@ void CBackground::Render()
 	{
 		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
-		if (m_ObjectType != ObjectType::eFlower && m_ObjectType != ObjectType::eInvisibleWall)
+		if (m_ObjectType != ObjectType::eFlower) // && m_ObjectType != ObjectType::eInvisibleWall)
 		{
-			// >> 
-			if (m_vecTextures[i] != 0)
-				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
-			else if (m_pTexture != NULL)
+			g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+
+			if (!CheckIsGetColorOrb())
+				g_pD3DDevice->SetTexture(0, g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "BasicGray_127.png"));
+			else
 			{
-				g_pD3DDevice->SetTexture(0, m_pTexture);
-				// >> 텍스처 매치 안되있을 때
+				if (m_vecTextures[i] != 0)
+					g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+				else if (m_pTexture != NULL)
+					g_pD3DDevice->SetTexture(0, m_pTexture);
 			}
 		}
+		else
+		{
+			// >> 투명벽, 꽃은 텍스쳐 없고 매터리얼 값으로만 이루어져 있음
+			g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+
+			if (!CheckIsGetColorOrb())
+				g_pD3DDevice->SetTexture(0,
+					g_pFileLoadManager->GetFileNameTexture("Resource/Texture","BasicGray_127.png"));
+		}
+
 		m_pMesh->DrawSubset(i);
 	}
 	g_pD3DDevice->SetTexture(0, NULL);
