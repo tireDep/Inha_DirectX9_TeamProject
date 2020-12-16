@@ -13,6 +13,8 @@
 #include "Door.h"
 #include "MovingCube.h"
 #include "ColorChanger.h"
+#include "Orb.h"
+#include "Trace.h"
 
 #include "ImguiClass.h"
 
@@ -143,6 +145,7 @@ void CImguiClass::SetVecItem()
 	{
 		tempVec.push_back("Item_Book");	tempObjType.push_back(eBook);
 		tempVec.push_back("Item_Orb");	tempObjType.push_back(eOrb);
+		tempVec.push_back("Item_Trace");	tempObjType.push_back(eTrace);
 	}
 #endif
 
@@ -152,49 +155,47 @@ void CImguiClass::SetVecItem()
 
 void CImguiClass::SetObjectColor()
 {
+	ImGui::Text("Set Color");
+	string charName[8] = { "Gray", "Black", "White", "Red", "Blue", "Green", "Yellow" };
+	for (int i = 0; i < m_vecColor.size(); i++)
 	{
-		ImGui::Text("Set Color");
-		string charName[8] = { "Gray", "Black", "White", "Red", "Blue", "Green", "Yellow" };
-		for (int i = 0; i < m_vecColor.size(); i++)
+		if (ImGui::RadioButton(charName[i].c_str(), m_NowcolorType == m_vecColor[i]))
 		{
-			if (ImGui::RadioButton(charName[i].c_str(), m_NowcolorType == m_vecColor[i]))
+			m_NowcolorType = m_vecColor[i];
+
+			D3DXCOLOR color;
+			switch (m_NowcolorType)
 			{
-				m_NowcolorType = m_vecColor[i];
-
-				D3DXCOLOR color;
-				switch (m_NowcolorType)
-				{
-				case ColorType::eGray:
-					color = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
-					break;
-				case ColorType::eBlack:
-					color = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
-					break;
-				case ColorType::eWhite:
-					color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
-					break;
-				case ColorType::eRed:
-					color = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-					break;
-				case ColorType::eBlue:
-					color = D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f);
-					break;
-				case ColorType::eGreen:
-					color = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
-					break;
-				case ColorType::eYellow:
-					color = D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f);
-					break;
-				}
-				g_pObjectManager->GetIObject(m_nowSelectindex).SetColor(color);
+			case ColorType::eGray:
+				color = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+				break;
+			case ColorType::eBlack:
+				color = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
+				break;
+			case ColorType::eWhite:
+				color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+				break;
+			case ColorType::eRed:
+				color = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+				break;
+			case ColorType::eBlue:
+				color = D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f);
+				break;
+			case ColorType::eGreen:
+				color = D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f);
+				break;
+			case ColorType::eYellow:
+				color = D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f);
+				break;
 			}
+			g_pObjectManager->GetIObject(m_nowSelectindex).SetColor(color);
+		}
 
-			if (i != 2 && i != m_vecColor.size() - 1)
-				ImGui::SameLine();
+		if (i != 2 && i != m_vecColor.size() - 1)
+			ImGui::SameLine();
 
-		} // << : for
-		ImGui::Separator();
-	} // << : if
+	} // << : for
+	ImGui::Separator();
 }
 
 void CImguiClass::SetGimmickTexture()
@@ -760,6 +761,7 @@ void CImguiClass::Update_Inspector()
 				case eG_ColorChanger:	case eG_Switch:		
 
 				case eBook:				case eOrb:
+				case eTrace:
 #endif
 				{
 					nowObject.SetDiffScale(vScale);
@@ -855,6 +857,11 @@ void CImguiClass::Update_Inspector()
 					CDoor* temp = dynamic_cast<CDoor*> (&nowObject);
 					temp->SetAnotherTranslation(vTrans);
 				}
+				else if (tempType == ObjectType::eTrace)
+				{
+					CTrace* temp = static_cast<CTrace*>(&nowObject);
+					temp->SetTranslate(vTrans);
+				}
 				else
 					nowObject.SetTranslate(vTrans);
 #else
@@ -879,11 +886,10 @@ void CImguiClass::Update_Inspector()
 			// >> 색상 나무 : 텍스쳐 선택
 			else if (nowObjectType == eUmbrella)
 			{
-				CBackground* temp = dynamic_cast<CBackground*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+				CBackground* temp = static_cast<CBackground*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 
 				ImGui::Text("Texture");
-				static int pushIndex = 0;
-				pushIndex = temp->GetTextureIndex();
+				int pushIndex = temp->GetTextureIndex();
 				string charName[4] = { "Blue", "BlueRed", "Red", "White" };
 				for (int i = 0; i < 4; i++)
 				{
@@ -900,11 +906,10 @@ void CImguiClass::Update_Inspector()
 			// >> 파라솔 : 텍스쳐 선택
 			else if (nowObjectType == eCTree)
 			{
-				CBackground* temp = dynamic_cast<CBackground*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+				CBackground* temp = static_cast<CBackground*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 
 				ImGui::Text("Texture");
-				static int pushIndex = 0;
-				pushIndex = temp->GetTextureIndex();
+				int pushIndex = temp->GetTextureIndex();
 				string charName[4] = { "Blue", "Green", "Yellow", "Red" };
 				for (int i = 0; i < 4; i++)
 				{
@@ -922,7 +927,7 @@ void CImguiClass::Update_Inspector()
 			// >> 회전판자 기믹 : 기믹 관련 변수 설정
 			else if (nowObjectType == eG_RotationBoard)
 			{
-				CRotationBoard* temp = dynamic_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+				CRotationBoard* temp = static_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 
 				ImGui::Text("RotationAxial");
 				static int pushIndex = 0;
@@ -996,6 +1001,26 @@ void CImguiClass::Update_Inspector()
 			{
 				SetGimmickTexture();
 				SetGimmickCondition();
+			}
+
+			// >> 오브, 흔적 : 스프라이트 선택
+			else if (nowObjectType == eOrb || nowObjectType == eTrace)
+			{
+				CItem* temp = static_cast<CItem*> (&nowObject);
+
+				ImGui::Text("Texture");
+				int pushIndex = temp->GetSpriteIndex();
+				string charName[6] = { "Black", "White", "Yellow", "Green", "Red", "Blue" };
+				for (int i = 0; i < 6; i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str(), pushIndex == i))
+					{
+						pushIndex = i;
+						temp->SetSpriteIndex(pushIndex);
+					}
+				} // << : for
+
+				ImGui::Separator();
 			}
 			
 			if (nowObject.GetConditionName() != "" 

@@ -53,7 +53,8 @@ protected:
 	IObject();
 
 	void SetShader(const D3DXMATRIXA16& setMatWorld);
-	void SetShader_ConditionColor();
+	void SetShaderColor(const D3DXVECTOR4& outLine, const D3DXVECTOR4& inner);
+	// void SetShader_ConditionColor();
 
 public:
 	virtual ~IObject();

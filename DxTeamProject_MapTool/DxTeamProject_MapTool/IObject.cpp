@@ -7,6 +7,8 @@
 #include "Background.h"
 #include "Book.h"
 #include "Gimmick.h"
+#include "Orb.h"
+#include "Trace.h"
 
 int IObject::m_nRefCnt = 0;
 
@@ -73,10 +75,10 @@ void IObject::SetShader(const D3DXMATRIXA16 & setMatWorld)
 	}
 }
 
-void IObject::SetShader_ConditionColor()
+void IObject::SetShaderColor(const D3DXVECTOR4 & outLine, const D3DXVECTOR4 & inner)
 {
-	m_pShader->SetVector("OutlineColor", &D3DXVECTOR4(0, 0, 0, 1));
-	m_pShader->SetVector("SurfaceColor", &D3DXVECTOR4(0, 0.5, 0.5, 1));
+	m_pShader->SetVector("OutlineColor", &outLine);
+	m_pShader->SetVector("SurfaceColor", &inner);
 }
 
 IObject::~IObject()
@@ -547,11 +549,41 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 		mapData.strTxtPath = "Bookshelf_diffuse.png";
 		mapData.strXFilePath = "book.X";
 
-		CBook* background = new CBook;
-		background->Setup(mapData);
+		CBook* book = new CBook;
+		book->Setup(mapData);
 	}
-#endif // _DEBUG
+	break;
+	case eOrb:
+	{
+		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.6f, 0.5f);
+
+		mapData.strObjName = string("Orb_Blue") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/Sprite/Orb";
+		mapData.strTxtPath = "Orb_Blue.png";
+		mapData.strXFilePath = "";
+
+		COrb* orb = new COrb;
+		orb->Setup(mapData);
+	}
 		break;
+	case eTrace:
+	{
+		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.15f, 0.5f);
+
+		mapData.strObjName = string("Trace_Blue") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "Resource/Sprite/Trace";
+		mapData.strTxtPath = "WaterColor_Blue.png";
+		mapData.strXFilePath = "";
+
+		CTrace* trace = new CTrace;
+		trace->Setup(mapData);
+	}
+	break;
+
+#endif // _DEBUG
+		
 	} // << : switch
 }
 
@@ -624,6 +656,20 @@ void IObject::CreateObject(ST_MapData& mapData)
 		book->Setup(mapData);
 	}
 	break;
+
+	case eOrb:
+	{
+		COrb* orb = new COrb;
+		orb->Setup(mapData);
+	}
+	break;
+
+	case eTrace:
+	{
+		CTrace* trace = new CTrace;
+		trace->Setup(mapData);
+	}
+		break;
 #endif // _DEBUG
 
 	} // << : switch

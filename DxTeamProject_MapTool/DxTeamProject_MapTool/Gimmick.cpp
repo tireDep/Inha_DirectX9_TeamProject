@@ -83,7 +83,7 @@ void CGimmick::Render()
 	{
 		// >> 조건 오브젝트가 선택되었을 경우
 		SetShader(GetmatWorld());
-		SetShader_ConditionColor();
+		SetShaderColor(D3DXVECTOR4(0, 0, 0, 1), D3DXVECTOR4(0, 0.5, 0.5, 1));
 		IObject::Render();
 	}
 	else if (!m_isPick && !m_isClick || !m_pShader)

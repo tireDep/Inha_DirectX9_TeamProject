@@ -161,6 +161,12 @@
     <ClInclude Include="ColorChanger.h">
       <Filter>Object\Gimmick</Filter>
     </ClInclude>
+    <ClInclude Include="Orb.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Trace.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui.cpp">
@@ -262,6 +268,12 @@
     </ClCompile>
     <ClCompile Include="ColorChanger.cpp">
       <Filter>Object\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Orb.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Trace.cpp">
+      <Filter>Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
