@@ -19,7 +19,6 @@ CCharacter::CCharacter()
 	, m_Character(NULL)
 	, m_isColorChanged(false)
 	, m_color(GRAY)
-	// Ray y check
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
@@ -27,21 +26,8 @@ CCharacter::CCharacter()
 	m_strName = "Character";
 }
 
-//COBB* CCharacter::GetOBB()
-//{
-//	// return m_pOBB;
-//}
-//
-//void CCharacter::SetBool(bool istrue)
-//{
-//	
-//	m_isOBB = istrue;
-//}
-
 void CCharacter::SetColor(D3DXCOLOR c)
 {
-	// for (int i = 12; i <= 17; i++)
-	// 	m_vecVertex[i].c = c;
 	m_color = c;
 }
 
@@ -177,8 +163,6 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			DoMove(speed);
 		}
 	}
-
-
 	//D3DXMATRIXA16 matT;
 	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	//m_matWorld = m_matRotY * matT;
@@ -220,7 +204,14 @@ void CCharacter::ColliderObject()
 			return;
 		}
 	}
-
+	for (int i = 0; i < g_pObjectManager->GetVecPObejct().size(); i++)
+	{
+		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecPObejct()[i]->GetOBB()))
+		{
+			m_isCollided = true;
+			return;
+		}
+	}
 	m_isCollided = false;
 }
 
@@ -231,68 +222,6 @@ CCharacter::~CCharacter()
 
 void CCharacter::Setup()
 {
-	//ST_PC_VERTEX v;
-	//float cubeSize = 0.5f;
-	//
-	//// : front
-	//v.c = RED; // Ä³¸¯ÅÍ ÈÄ¸é »¡°­
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : back 
-	//v.c = BLUE; // Ä³¸¯ÅÍ Á¤¸é ÆÄ¶û
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : top 
-	//v.c = D3DCOLOR_XRGB(127, 127, 127); // Ä³¸¯ÅÍ ¶Ñ²±(º¯È­)
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : left
-	//v.c = WHITE; // Ä³¸¯ÅÍ ¿Þ¸é(Èò)
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : right 
-	//v.c = BLACK; // Ä³¸¯ÅÍ ¿À¸¥¸é(Èæ)
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : bottom
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//
-	//for (int i = 0; i < m_vecVertex.size(); i++)
-	//	m_vecVertex[i].p += D3DXVECTOR3(0, 0.5f, 0);
-	//
-	// m_pOBB = new COBB;
-	// m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
-
 	m_Character = new CSkinnedMesh;
 	m_Character->SetUp("Resource/XFile/Character", "AnimationCharacter.X");
 	// m_Character->SetAnimationIndexBlend(8);
@@ -311,10 +240,10 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 	if (m_jump)
 	{
 		jumping = true;
-		if (m_vPosition.y <= 3.f)
+		if (m_vPosition.y <= 3.0f)
 		{
 			m_vPosition.y += 0.005f;
-			if (m_vPosition.y >= 3.f)
+			if (m_vPosition.y >= 3.0f)
 			{
 				jumpis = true;
 				m_jump = false;
@@ -459,7 +388,6 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 
 int CCharacter::Update(vector<PObject*> ObjectPosition, float duration)
 {
-
 	//if (m_pOBB)
 	//	m_pOBB->Update(&m_matWorld);
 
@@ -477,16 +405,16 @@ int CCharacter::Update(vector<PObject*> ObjectPosition, float duration)
 		}
 	}
 	//m_nGrabAbleObeject = -1;
+	return -1;
+}
 
-	// >> skinnedMesh
+void CCharacter::Update(float duration)
+{
 	if (m_Character)
 	{
 		m_Character->Update(duration);
 		m_Character->SetTransform(&m_matWorld);
 	}
-	// << skinnedMesh
-
-	return -1;
 }
 
 void CCharacter::DoRotation(const float& radian)
@@ -505,9 +433,9 @@ void CCharacter::DoRotation(const float& radian)
 void CCharacter::DoMove(const float& velocity)
 {
 	static D3DXVECTOR3 m_position = m_vPosition;
+	m_position = m_position + (m_vDirection * velocity);
 	CCharacter::ColliderObject();
-
-	if (m_isCollided)
+	if (!m_isCollided)
 	{
 		m_vPosition = m_position;
 	}
@@ -515,7 +443,7 @@ void CCharacter::DoMove(const float& velocity)
 	{
 		m_position = m_vPosition;
 	}
-	m_vPosition = m_vPosition + (m_vDirection * velocity);
+	//m_vPosition = m_vPosition + (m_vDirection * velocity);
 }
 
 void CCharacter::Render(D3DCOLOR d)

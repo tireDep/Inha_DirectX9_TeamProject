@@ -37,6 +37,7 @@ public:
 	virtual void Update(D3DXVECTOR3 cameradirection);
 //	virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
 	int Update(vector<PObject*> ObjectPosition, float duration);
+	void Update(float duration);
 	virtual void DoRotation(const float& radian);
 	virtual void DoMove(const float& velocity);
 	virtual void Render(D3DCOLOR c);
