@@ -39,6 +39,8 @@ public:
 
 	bool FileLoad_MapData(string szFolder, string szFile);
 
+	LPDIRECT3DTEXTURE9 GetFileNameTexture(string szFolder, string szFile);
+
 	void Destroy();
 };
 

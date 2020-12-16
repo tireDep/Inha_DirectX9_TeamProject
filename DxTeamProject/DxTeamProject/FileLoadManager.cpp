@@ -118,7 +118,7 @@ void CFileLoadManager::LoadData(string path)
 				mapData.vTranslate.z = atof(readData.c_str());
 			}
 
-			else if (strstr(readData.c_str(), "# Color"))
+			else if (strstr(readData.c_str(), "# Color") && strstr(readData.c_str(), "Tag") == NULL)
 			{
 				ReadAndCutSlashR(file, readData);
 				mapData.dxColor.r = atof(readData.c_str());
@@ -132,12 +132,27 @@ void CFileLoadManager::LoadData(string path)
 				ReadAndCutSlashR(file, readData);
 				mapData.dxColor.a = atof(readData.c_str());
 			}
+			
+			// >> colorTag_Background
+			else if (strstr(readData.c_str(), "# ColorTag"))
+			{
+				while (true)
+				{
+					ReadAndCutSlashR(file, readData);
+
+					if (strstr(readData.c_str(), "#"))
+						break;
+
+					mapData.vecColorTag.push_back(readData);
+				}
+			}
 
 			else if (strstr(readData.c_str(), "# GimmickData"))
 			{
 				ReadGimmickData(file, readData, mapData);
 			}
-			else if (strstr(readData.c_str(), "# ConditionName"))
+			else if (strstr(readData.c_str(), "# ConditionName")
+				&& (mapData.objType != eG_Door && mapData.objType != eG_DoorFrame && mapData.objType != eG_ColorChanger))
 			{
 				ReadAndCutSlashR(file , readData);
 				mapData.gimmickData.conditionName = readData;
@@ -359,6 +374,23 @@ bool CFileLoadManager::FileLoad_MapData(string szFolder, string szFile)
 	LoadData(filePath);
 
 	return true;
+}
+
+LPDIRECT3DTEXTURE9 CFileLoadManager::GetFileNameTexture(string szFolder, string szFile)
+{
+	string filePath;
+	StrFilePath(filePath, szFolder, szFile);
+
+	if (m_mapTexture.find(filePath) == m_mapTexture.end())
+	{
+		if (D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &m_mapTexture[filePath.c_str()]))
+		{
+			ErrMessageBox("Texture Load Error", "ERROR");
+			return false;
+		}
+	}
+
+	return m_mapTexture[filePath];
 }
 
 void CFileLoadManager::Destroy()

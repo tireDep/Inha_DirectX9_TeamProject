@@ -1,10 +1,12 @@
+
+
 # Object_Start
 # ObjectName
-A_Tree_Blue_016_1
+C_Bush_Blue_071_4
 # FolderPath
 Resource/XFile/Background/ColorTree
 # FilePath
-Tree_01.X
+Tree_04.X
 # TxtPath
 TreesBlue.png
 # ObjectType
@@ -18,9 +20,9 @@ TreesBlue.png
 0
 0
 # Translate
-0.5
+5
 0
--4.5
+0.5
 # Color
 0.5
 0.5
@@ -64,43 +66,11 @@ Blue
 
 # Object_Start
 # ObjectName
-C_Bush_Green_070_3
+A_Tree_Blue_016_1
 # FolderPath
 Resource/XFile/Background/ColorTree
 # FilePath
-Tree_03.X
-# TxtPath
-TreesGreen.png
-# ObjectType
-16
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--4.5
-0
-0.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-# Object_End
-
-# Object_Start
-# ObjectName
-C_Bush_Blue_071_4
-# FolderPath
-Resource/XFile/Background/ColorTree
-# FilePath
-Tree_04.X
+Tree_01.X
 # TxtPath
 TreesBlue.png
 # ObjectType
@@ -114,9 +84,9 @@ TreesBlue.png
 0
 0
 # Translate
-0
-0
 0.5
+0
+-4.5
 # Color
 0.5
 0.5
@@ -125,6 +95,7 @@ TreesBlue.png
 # ColorTag
 Blue
 # Object_End
+
 
 # Object_Start
 # ObjectName
@@ -188,6 +159,38 @@ TreesRed.png
 1
 # ColorTag
 Red
+# Object_End
+
+# Object_Start
+# ObjectName
+C_Bush_Green_070_3
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_03.X
+# TxtPath
+TreesGreen.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
 # Object_End
 
 # Section =======================================

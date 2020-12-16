@@ -6,6 +6,9 @@ class CBackground : public IObject
 private:
 	bool pBox, pCylinder, pSphere;
 	bool player;
+	vector<string> m_vecColorTag;
+
+	bool CheckIsGetColorOrb();
 public:
 	CBackground();
 	virtual ~CBackground();
