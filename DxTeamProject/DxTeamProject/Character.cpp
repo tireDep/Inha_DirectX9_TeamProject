@@ -11,15 +11,18 @@
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
 	, m_vPosition(0, 0.0f, 0)
-	// , m_pOBB(NULL)
 	, m_isCollided(false)
-	, m_jump(false)
-	, jumpis(false)
-	, jumping(false)
 	, m_Character(NULL)
 	, m_isColorChanged(false)
 	, m_color(GRAY)
 	, m_isGrab(false)
+	, m_isJump(false)
+	, m_fMaxJumpHeight(1.5f)
+	, m_fRadianJump(0.0f)
+	, m_isFallAni(false)
+	// , m_pOBB(NULL)
+	// , jumpis(false)
+	// , jumping(false)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
@@ -100,12 +103,19 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 				// todo : 점프 구현
 			case PlayerInputType::eJump:
-				if (!jumping)
+				//if (!jumping)
+				// {
+				// 	m_isJump = true;
+				// 	m_Character->SetAnimationIndex(7); // jump
+				// }
+				// speed = -1.0f;
+
+				if (!m_isJump)
 				{
-					m_jump = true;
-					m_Character->SetAnimationIndex(7); // jump
+					m_isJump = true;
+					m_Character->SetAnimationIndexBlend(7); // jump
+					speed = -1;
 				}
-				speed = -1.0f;
 				break;
 
 				// todo : 잡기 구현
@@ -186,9 +196,11 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				speed = -1.0f;
 				break;
 			default:
-				speed = -1.0f;
-				if (m_Character->CheckAnimationEnd())
+				if (!m_isJump || m_Character->CheckAnimationEnd())
+				{
+					speed = -1.0f;
 					m_Character->SetAnimationIndex(10); // Idle
+				}
 				break;
 			}
 		} // << eInputEvent
@@ -196,8 +208,9 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 		if (speed > 0 && m_Character->CheckAnimationEnd())
 		{
 			// >> 특정 애니메이션 재생 중 이동 하지 않음
-			if(!jumping)
+			if(!m_isJump)
 				m_Character->SetAnimationIndex(9); // Walk
+			// m_Character->SetAnimationIndex(9); // Walk
 
 			// >> todo : 속도 변화 감지해서 달리기 추가
 			// >> 입력 시간에 따른 달리기 변화?
@@ -293,29 +306,29 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
 
-	if (m_jump)
-	{
-		jumping = true;
-		if (m_vPosition.y <= 3.f)
-		{
-			m_vPosition.y += 0.005f;
-			if (m_vPosition.y >= 3.f)
-			{
-				jumpis = true;
-				m_jump = false;
-			}
-		}
-	}
-	if (jumpis == true)
-	{
-		m_vPosition.y -= 0.005f;
-		if (m_vPosition.y <= 0)
-		{
-			jumpis = false;
-			jumping = false;
-		}
-		m_Character->SetAnimationIndexBlend(6); // fall
-	}
+	//if (m_isJump)
+	//{
+	//	// jumping = true;
+	//	if (m_vPosition.y <= 3.f)
+	//	{
+	//		m_vPosition.y += 0.005f;
+	//		if (m_vPosition.y >= 3.f)
+	//		{
+	//			jumpis = true;
+	//			m_jump = false;
+	//		}
+	//	}
+	//}
+	//if (jumpis == true)
+	//{
+	//	m_vPosition.y -= 0.005f;
+	//	if (m_vPosition.y <= 0)
+	//	{
+	//		jumpis = false;
+	//		jumping = false;
+	//	}
+	//	m_Character->SetAnimationIndexBlend(6); // fall
+	//}
 }
 
 //void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
@@ -464,8 +477,36 @@ int CCharacter::Update(vector<PObject*> ObjectPosition, float duration)
 	return -1;
 }
 
+
 void CCharacter::Update(float duration)
 {
+	D3DXVECTOR3 tempPos = m_vPosition;
+	if (m_isJump)
+	{
+		// cout << radian << endl;
+		// radian += D3DXToRadian(180.0f * duration);
+		m_fRadianJump += 7.0f * duration;
+		tempPos.y = m_fMaxJumpHeight * sinf(m_fRadianJump);
+
+		// >> todo : collision
+		if (true)
+			m_vPosition = tempPos;
+
+		if (m_fRadianJump >= D3DXToRadian(180.0f))
+		{
+			m_Character->SetAnimationIndexBlend(10); // idle
+			m_isFallAni = false;
+			m_isJump = false;
+			m_fRadianJump = 0;
+		}
+		else if (m_fRadianJump >= D3DXToRadian(90.0f) && !m_isFallAni)
+		{
+			// >> todo : 충돌 났을 경우도 낙하 판정으로(머리 위 장애물)
+			m_Character->SetAnimationIndex(6); // fall
+			m_isFallAni = true;
+		}
+	}
+
 	if (m_Character)
 	{
 		m_Character->Update(duration);

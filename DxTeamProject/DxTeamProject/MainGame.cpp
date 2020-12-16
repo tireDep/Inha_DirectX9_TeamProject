@@ -116,7 +116,7 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "colorTagTest.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
