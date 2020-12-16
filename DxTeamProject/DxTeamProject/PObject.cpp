@@ -388,7 +388,7 @@ void PObject::ChangeObjectColor()
 		SetDrag(0.995f);
 		break;
 	case Color::White:
-		SetMass(0.1f);
+		SetMass(0.5f);
 		SetElasticity(1.0f);
 		SetDrag(0.995f);
 		break;

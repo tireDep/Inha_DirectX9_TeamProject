@@ -239,14 +239,14 @@ void CCharacter::UpdateRayYCheck(MeshTile & meshtile)
 
 void CCharacter::ColliderObject()
 {
-	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
-	{
-		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
-		{
-			m_isCollided = true;
-			return;
-		}
-	}
+	//for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
+	//{
+	//	if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
+	//	{
+	//		m_isCollided = true;
+	//		return;
+	//	}
+	//}
 	for (int i = 0; i < g_pObjectManager->GetVecPObejct().size(); i++)
 	{
 		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecPObejct()[i]->GetOBB()))
@@ -450,27 +450,26 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 //
 //}
 
-int CCharacter::Update(vector<PObject*> ObjectPosition, float duration)
-{
-	//if (m_pOBB)
-	//	m_pOBB->Update(&m_matWorld);
-
-	for (int i = 0; i < ObjectPosition.size(); ++i)
-	{
-		if (ObjectPosition[i]->GetPosition().x - m_vPosition.x < 1.0f
-			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z < 1.0f
-			&& ObjectPosition[i]->GetPosition().x - m_vPosition.x > -1.0f
-			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z > -1.0f
-			&& ObjectPosition[i]->GetPosition().y - m_vPosition.y <  1.0f
-			&& ObjectPosition[i]->GetPosition().y - m_vPosition.y > -1.0f)
-		{
-			//m_nGrabAbleObeject = i;
-			return i;
-		}
-	}
-	//m_nGrabAbleObeject = -1;
-	return -1;
-}
+//int CCharacter::Update(vector<PObject*> ObjectPosition, float duration)
+//{
+//	//if (m_pOBB)
+//	//	m_pOBB->Update(&m_matWorld);
+//	//for (int i = 0; i < ObjectPosition.size(); ++i)
+//	//{
+//	//	if (ObjectPosition[i]->GetPosition().x - m_vPosition.x < 1.0f
+//	//		&& ObjectPosition[i]->GetPosition().z - m_vPosition.z < 1.0f
+//	//		&& ObjectPosition[i]->GetPosition().x - m_vPosition.x > -1.0f
+//	//		&& ObjectPosition[i]->GetPosition().z - m_vPosition.z > -1.0f
+//	//		&& ObjectPosition[i]->GetPosition().y - m_vPosition.y <  1.0f
+//	//		&& ObjectPosition[i]->GetPosition().y - m_vPosition.y > -1.0f)
+//	//	{
+//	//		//m_nGrabAbleObeject = i;
+//	//		return i;
+//	//	}
+//	//}
+//	////m_nGrabAbleObeject = -1;
+//	//return -1;
+//}
 
 void CCharacter::Update(float duration)
 {
