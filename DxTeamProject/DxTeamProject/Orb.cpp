@@ -23,18 +23,51 @@ COrb::~COrb()
 void COrb::Setup()
 {
 	g_pFileLoadManager->FileLoad_Texture("Resource/Sprite/Orb", "力格 绝澜-1.png", m_pTex0);
+	D3DXVECTOR3 size = D3DXVECTOR3(2,2,0);
+	v.p = D3DXVECTOR3(0, 0, 0);			  v.t = D3DXVECTOR2(m_Uv_x, m_Uv_y); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(0, size.y, 0);	  v.t = D3DXVECTOR2(m_Uv_x, m_Uv_x); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(size.x, 0, 0);	  v.t = D3DXVECTOR2(m_Uv_y, m_Uv_y); m_vecVertex_Multi.push_back(v);
+
+	v.p = D3DXVECTOR3(size.x, size.y, 0); v.t = D3DXVECTOR2(m_Uv_y, m_Uv_x); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(size.x, 0, 0);	  v.t = D3DXVECTOR2(m_Uv_y, m_Uv_y); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(0, size.y, 0);	  v.t = D3DXVECTOR2(m_Uv_x, m_Uv_x); m_vecVertex_Multi.push_back(v);
+	
+	D3DXCreateBox(g_pD3DDevice, size.x , size.y , size.z +3, &m_pMesh, NULL);
+
+	D3DXVECTOR3* pVertices;
+
+	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+	D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+	m_pMesh->UnlockVertexBuffer();
+
+	m_pOBB = new COBB;
+	m_pOBB->SetupMesh(m_vMin, m_vMax, 0.5f);
+
+	D3DXMatrixTranslation(&m_matWorld, 5, 2, 10);
+
+}
+
+void COrb::Setup(ST_MapData setData)
+{
+	g_pFileLoadManager->FileLoad_Texture("Resource/Sprite/Orb", "力格 绝澜-1.png", m_pTex0);
+	
+	D3DXVECTOR3 size = setData.vScale;
+	D3DXMatrixTranslation(&m_matWorld ,
+		setData.vTranslate.x , 
+		setData.vTranslate.y,
+		setData.vTranslate.z);
 
 	//ST_PT_VERTEX v;
-	v.p = D3DXVECTOR3(0, 0, 0); v.t = D3DXVECTOR2(m_Uv_x, m_Uv_y); m_vecVertex_Multi.push_back(v);
-	v.p = D3DXVECTOR3(0, 2, 0); v.t = D3DXVECTOR2(m_Uv_x, m_Uv_x); m_vecVertex_Multi.push_back(v);
-	v.p = D3DXVECTOR3(2, 0, 0); v.t = D3DXVECTOR2(m_Uv_y, m_Uv_y); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(0, 0, 0);			  v.t = D3DXVECTOR2(m_Uv_x, m_Uv_y); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(0, size.y, 0);	  v.t = D3DXVECTOR2(m_Uv_x, m_Uv_x); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(size.x, 0, 0);	  v.t = D3DXVECTOR2(m_Uv_y, m_Uv_y); m_vecVertex_Multi.push_back(v);
 
-	v.p = D3DXVECTOR3(2, 2, 0); v.t = D3DXVECTOR2(m_Uv_y, m_Uv_x); m_vecVertex_Multi.push_back(v);
-	v.p = D3DXVECTOR3(2, 0, 0); v.t = D3DXVECTOR2(m_Uv_y, m_Uv_y); m_vecVertex_Multi.push_back(v);
-	v.p = D3DXVECTOR3(0, 2, 0); v.t = D3DXVECTOR2(m_Uv_x, m_Uv_x); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(size.x, size.y, 0); v.t = D3DXVECTOR2(m_Uv_y, m_Uv_x); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(size.x, 0, 0);	  v.t = D3DXVECTOR2(m_Uv_y, m_Uv_y); m_vecVertex_Multi.push_back(v);
+	v.p = D3DXVECTOR3(0, size.y, 0);	  v.t = D3DXVECTOR2(m_Uv_x, m_Uv_x); m_vecVertex_Multi.push_back(v);
 
-	
-	D3DXCreateBox(g_pD3DDevice, 3,3,3, &m_pMesh, NULL);
+
+	D3DXCreateBox(g_pD3DDevice, size.x + 1, size.y + 1, size.z +3, &m_pMesh, NULL);
 
 	D3DXVECTOR3* pVertices;
 
@@ -102,7 +135,7 @@ void COrb::Update()
 	 m_vecVertex_Multi[4].t = D3DXVECTOR2(m_Uv_y, m_Uv_y);
 	 m_vecVertex_Multi[5].t = D3DXVECTOR2(m_Uv_x, m_Uv_x);
 
-	 D3DXMatrixTranslation(&m_matWorld, 5, 2, 10);
+	 
 	 m_pOBB->Update(&m_matWorld);
 }
 
@@ -131,9 +164,9 @@ void COrb::SetBillbord()
 	m_pOBB->Render();
 
 	D3DXMatrixInverse(&mInvView, 0, &mView);
-	mInvView._41 = m_matWorld._41 ;
-	mInvView._42 = m_matWorld._42 ;
-	mInvView._43 = m_matWorld._43 ;
+	mInvView._41 = m_matWorld._41;
+	mInvView._42 = m_matWorld._42 -1;
+	mInvView._43 = m_matWorld._43;
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &mInvView);
 }
