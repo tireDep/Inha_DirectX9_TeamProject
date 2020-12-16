@@ -20,9 +20,13 @@ protected:
 	D3DXCOLOR				m_color;
 	bool					m_isCollided;
 	bool					m_isOBB;
-	bool					m_jump;
-	bool					jumpis;
-	bool					jumping;
+	bool					m_isJump;
+	float					m_fMaxJumpHeight;
+	float					m_fRadianJump;
+	bool					m_isFallAni;
+	//bool					jumpis;
+	//bool					jumping;
+
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
 	float rotation;
