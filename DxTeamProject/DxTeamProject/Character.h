@@ -25,9 +25,9 @@ protected:
 	bool					jumping;
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
-
 	float rotation;
 	// grab
+	Synthesize(bool, m_isGrab, Grab);
 	int						m_nGrabAbleObeject;
 	// Ray y check
 	CRay					m_Ray;
@@ -37,6 +37,7 @@ public:
 	virtual void Update(D3DXVECTOR3 cameradirection);
 //	virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
 	int Update(vector<PObject*> ObjectPosition, float duration);
+	void Update(float duration);
 	virtual void DoRotation(const float& radian);
 	virtual void DoMove(const float& velocity);
 	virtual void Render(D3DCOLOR c);

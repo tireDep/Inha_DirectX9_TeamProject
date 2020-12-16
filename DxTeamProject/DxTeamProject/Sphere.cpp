@@ -197,10 +197,12 @@ bool CSphere::hasIntersected(IObject * otherIObject)
 	return true;
 }
 
-//void CSphere::Update(float duration)
-//{
-//	PObject::Update(duration);
-//}
+void CSphere::Update(float duration)
+{
+	PObject::Update(duration);
+	// OBB TEST
+	m_pOBB->Update(&m_matWorld);
+}
 
 string CSphere::GetName()
 {

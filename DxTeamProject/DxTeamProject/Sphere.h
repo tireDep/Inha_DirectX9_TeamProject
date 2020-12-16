@@ -17,7 +17,7 @@ public:
 	void Setup();
 	void Setup(const ST_MapData & mapData);
 	void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos);
-	//void Update(float duration);
+	void Update(float duration);
 
 	bool hasIntersected(CSphere * otherSphere);
 	bool hasIntersected(CBox * otherBox);

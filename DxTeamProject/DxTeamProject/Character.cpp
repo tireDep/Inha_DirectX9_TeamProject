@@ -19,7 +19,7 @@ CCharacter::CCharacter()
 	, m_Character(NULL)
 	, m_isColorChanged(false)
 	, m_color(GRAY)
-	// Ray y check
+	, m_isGrab(false)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
@@ -27,21 +27,8 @@ CCharacter::CCharacter()
 	m_strName = "Character";
 }
 
-//COBB* CCharacter::GetOBB()
-//{
-//	// return m_pOBB;
-//}
-//
-//void CCharacter::SetBool(bool istrue)
-//{
-//	
-//	m_isOBB = istrue;
-//}
-
 void CCharacter::SetColor(D3DXCOLOR c)
 {
-	// for (int i = 12; i <= 17; i++)
-	// 	m_vecVertex[i].c = c;
 	m_color = c;
 }
 
@@ -126,12 +113,14 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				if (m_nGrabAbleObeject != -1)
 				{
 					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndexBlend(5); // push
+						//m_Character->SetAnimationIndexBlend(5); // push
+						m_Character->SetAnimationIndex(5);
 					// >> 블랜드가 안되서 잡기 대기 상태처럼 나옴
 				}
 				// else
 					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndexBlend(5); // push
+						//m_Character->SetAnimationIndexBlend(5); // push
+						m_Character->SetAnimationIndex(5);
 				speed = -1.0f;
 				break;
 			case PlayerInputType::eHoldPush:
@@ -177,8 +166,6 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			DoMove(speed);
 		}
 	}
-
-
 	//D3DXMATRIXA16 matT;
 	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	//m_matWorld = m_matRotY * matT;
@@ -220,8 +207,22 @@ void CCharacter::ColliderObject()
 			return;
 		}
 	}
-
+	for (int i = 0; i < g_pObjectManager->GetVecPObejct().size(); i++)
+	{
+		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecPObejct()[i]->GetOBB()))
+		{
+			D3DXVECTOR3 grabvector = g_pObjectManager->GetVecPObejct()[i]->GetPosition() - this->GetPosition();
+			float grabradian = D3DXVec3Dot(&this->m_vDirection, &grabvector);
+			if (grabradian)
+				m_isGrab = true;
+			else
+				m_isGrab = false;
+			m_isCollided = true;
+			return;
+		}
+	}
 	m_isCollided = false;
+	m_isGrab = false;
 }
 
 CCharacter::~CCharacter()
@@ -231,68 +232,6 @@ CCharacter::~CCharacter()
 
 void CCharacter::Setup()
 {
-	//ST_PC_VERTEX v;
-	//float cubeSize = 0.5f;
-	//
-	//// : front
-	//v.c = RED; // 캐릭터 후면 빨강
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : back 
-	//v.c = BLUE; // 캐릭터 정면 파랑
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : top 
-	//v.c = D3DCOLOR_XRGB(127, 127, 127); // 캐릭터 뚜껑(변화)
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : left
-	//v.c = WHITE; // 캐릭터 왼면(흰)
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : right 
-	//v.c = BLACK; // 캐릭터 오른면(흑)
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : bottom
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//
-	//for (int i = 0; i < m_vecVertex.size(); i++)
-	//	m_vecVertex[i].p += D3DXVECTOR3(0, 0.5f, 0);
-	//
-	// m_pOBB = new COBB;
-	// m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
-
 	m_Character = new CSkinnedMesh;
 	m_Character->SetUp("Resource/XFile/Character", "AnimationCharacter.X");
 	// m_Character->SetAnimationIndexBlend(8);
@@ -459,7 +398,6 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 
 int CCharacter::Update(vector<PObject*> ObjectPosition, float duration)
 {
-
 	//if (m_pOBB)
 	//	m_pOBB->Update(&m_matWorld);
 
@@ -477,16 +415,16 @@ int CCharacter::Update(vector<PObject*> ObjectPosition, float duration)
 		}
 	}
 	//m_nGrabAbleObeject = -1;
+	return -1;
+}
 
-	// >> skinnedMesh
+void CCharacter::Update(float duration)
+{
 	if (m_Character)
 	{
 		m_Character->Update(duration);
 		m_Character->SetTransform(&m_matWorld);
 	}
-	// << skinnedMesh
-
-	return -1;
 }
 
 void CCharacter::DoRotation(const float& radian)
@@ -504,9 +442,9 @@ void CCharacter::DoRotation(const float& radian)
 
 void CCharacter::DoMove(const float& velocity)
 {
-	static D3DXVECTOR3 m_position = m_vPosition;
+	//static D3DXVECTOR3 m_position = m_vPosition;
+	D3DXVECTOR3 m_position = m_vPosition;
 	CCharacter::ColliderObject();
-
 	if (m_isCollided)
 	{
 		m_vPosition = m_position;
@@ -517,6 +455,7 @@ void CCharacter::DoMove(const float& velocity)
 	}
 	m_vPosition = m_vPosition + (m_vDirection * velocity);
 }
+
 
 void CCharacter::Render(D3DCOLOR d)
 {

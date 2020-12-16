@@ -241,13 +241,13 @@ void CMainGame::Update()
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
+		m_pCharacter->Update(g_pTimeManager->GetElapsedTime());
 		m_pDragon->DirectionSet(m_pCamera->GetCameraDirection());
 		m_pDragon->Update(m_pCharacter->GetPosition(), g_pTimeManager->GetElapsedTime());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
-		for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
-			m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);
-
+		//for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
+		//	m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
@@ -284,22 +284,26 @@ void CMainGame::Update()
 			break;
 		}
 		// grab
-		if (m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime()) != -1)
-		{
+		if (m_pCharacter->GetGrab())
 			m_pText->SetisGrabstate(true);
-			D3DXVECTOR3 v;
-			v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->GetPosition() - m_pCharacter->GetPosition();
-			v.y -= 0.5f;
-			//v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
-			//v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
-			//v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
-			D3DXVec3Normalize(&v, &v);
-			g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->SetPusingForce(v);
-		}
 		else
-		{
 			m_pText->SetisGrabstate(false);
-		}
+		//if (m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime()) != -1)
+		//{
+		//	m_pText->SetisGrabstate(true);
+		//	//D3DXVECTOR3 v;
+		//	//v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->GetPosition() - m_pCharacter->GetPosition();
+		//	//v.y -= 0.5f;
+		//	////v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
+		//	////v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
+		//	////v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
+		//	//D3DXVec3Normalize(&v, &v);
+		//	//g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->SetPusingForce(v);
+		//}
+		//else
+		//{
+		//	m_pText->SetisGrabstate(false);
+		//}
 		// Ray y check
 		/*m_pCharacter->UpdateRayYCheck(*m_pMeshTile);*/
 	}
