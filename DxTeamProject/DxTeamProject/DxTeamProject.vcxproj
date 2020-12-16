@@ -217,6 +217,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="RotationBoard.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SkinnedMesh.h" />
     <ClInclude Include="Skydome.h" />
@@ -303,6 +304,7 @@
     <ClCompile Include="ReleaseTimer.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="RotationBoard.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SkinnedMesh.cpp" />
     <ClCompile Include="Skydome.cpp" />
     <ClCompile Include="SoundManager.cpp" />

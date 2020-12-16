@@ -30,6 +30,8 @@
 #include "Book.h"
 #include "Dragon.h"
 //
+#include "Scene.h"
+//
 /// 이 아래는 지울 수도 있는 선언
 //#include "CHeight.h"
 //#include "PSphere.h"
@@ -58,7 +60,8 @@ CMainGame::CMainGame() :
 	// m_pGimmick_Switch(NULL),
 	//
 	m_pBook(NULL),
-	m_pDragon(NULL)
+	m_pDragon(NULL),
+	m_pScene(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
@@ -90,6 +93,8 @@ CMainGame::~CMainGame()
 	
 	/// 이 아래는 지울 수도 있는 선언
 	SafeDelete(m_pHeightMap);
+
+	SafeDelete(m_pScene);
 
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
@@ -130,6 +135,8 @@ void CMainGame::Setup()
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 #endif // DEBUG
+	m_pScene = new CScene;
+	m_pScene->Setup();
 
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
@@ -225,7 +232,15 @@ void CMainGame::Setup()
 void CMainGame::Update()
 {
 	if (GetKeyState('1') & 0x8000)
+	{
 		g_pGameManager->SetGetOrb("Blue");
+		g_pGameManager->SetGetOrb("Green");
+		g_pGameManager->SetGetOrb("Red");
+		g_pGameManager->SetGetOrb("White");
+		g_pGameManager->SetGetOrb("Yellow");
+		g_pGameManager->SetGetOrb("Black");
+	}
+	g_pGameManager->CompleteOrb();
 	// >> 조건 확인 테스트
 	// >> on/off 상태 조건 // 텍스쳐 태깅
 
@@ -424,8 +439,16 @@ void CMainGame::Render()
 
 	if (g_pGameManager->GetNowScene() == SceneType::eMainScene)
 	{
-		if (m_pUI)
-			m_pUI->Main_Render();
+		if (m_pScene)
+			m_pScene->Render_Main();
+	}
+
+	if (g_pGameManager->GetNowScene() == SceneType::eEndingScene)
+	{
+		if (m_pScene)
+			m_pScene->Render_Ending();
+		g_pGameManager->SetClipCursor(-15);
+		ShowCursor(true);
 	}
 
 	if (m_pGrid)
