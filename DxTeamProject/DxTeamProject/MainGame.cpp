@@ -122,11 +122,11 @@ void CMainGame::Setup()
 
 #ifdef _DEBUG
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
+	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "colorTagTest.dat");
 
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxToTile.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxToTile.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "colorTagTest.dat");
 
@@ -161,8 +161,6 @@ void CMainGame::Setup()
 
 	//m_pMovingCube = new MovingCube;
 	//m_pMovingCube->Setup();
-
-
 
 	m_pLight = new CLight;
 	m_pLight->Setup();
