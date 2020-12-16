@@ -19,6 +19,7 @@ CCharacter::CCharacter()
 	, m_Character(NULL)
 	, m_isColorChanged(false)
 	, m_color(GRAY)
+	, m_isGrab(false)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
@@ -112,12 +113,14 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				if (m_nGrabAbleObeject != -1)
 				{
 					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndexBlend(5); // push
+						//m_Character->SetAnimationIndexBlend(5); // push
+						m_Character->SetAnimationIndex(5);
 					// >> 블랜드가 안되서 잡기 대기 상태처럼 나옴
 				}
 				// else
 					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndexBlend(5); // push
+						//m_Character->SetAnimationIndexBlend(5); // push
+						m_Character->SetAnimationIndex(5);
 				speed = -1.0f;
 				break;
 			case PlayerInputType::eHoldPush:
@@ -208,11 +211,18 @@ void CCharacter::ColliderObject()
 	{
 		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecPObejct()[i]->GetOBB()))
 		{
+			D3DXVECTOR3 grabvector = g_pObjectManager->GetVecPObejct()[i]->GetPosition() - this->GetPosition();
+			float grabradian = D3DXVec3Dot(&this->m_vDirection, &grabvector);
+			if (grabradian)
+				m_isGrab = true;
+			else
+				m_isGrab = false;
 			m_isCollided = true;
 			return;
 		}
 	}
 	m_isCollided = false;
+	m_isGrab = false;
 }
 
 CCharacter::~CCharacter()
@@ -432,9 +442,9 @@ void CCharacter::DoRotation(const float& radian)
 
 void CCharacter::DoMove(const float& velocity)
 {
-	static D3DXVECTOR3 m_position = m_vPosition;
+	//static D3DXVECTOR3 m_position = m_vPosition;
+	D3DXVECTOR3 m_position = m_vPosition;
 	CCharacter::ColliderObject();
-
 	if (m_isCollided)
 	{
 		m_vPosition = m_position;

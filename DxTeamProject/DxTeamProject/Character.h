@@ -25,9 +25,9 @@ protected:
 	bool					jumping;
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
-
 	float rotation;
 	// grab
+	Synthesize(bool, m_isGrab, Grab);
 	int						m_nGrabAbleObeject;
 	// Ray y check
 	CRay					m_Ray;
