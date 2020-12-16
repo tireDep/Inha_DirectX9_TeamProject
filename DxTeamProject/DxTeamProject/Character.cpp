@@ -240,10 +240,10 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 	if (m_jump)
 	{
 		jumping = true;
-		if (m_vPosition.y <= 3.0f)
+		if (m_vPosition.y <= 3.f)
 		{
 			m_vPosition.y += 0.005f;
-			if (m_vPosition.y >= 3.0f)
+			if (m_vPosition.y >= 3.f)
 			{
 				jumpis = true;
 				m_jump = false;
@@ -433,9 +433,9 @@ void CCharacter::DoRotation(const float& radian)
 void CCharacter::DoMove(const float& velocity)
 {
 	static D3DXVECTOR3 m_position = m_vPosition;
-	m_position = m_position + (m_vDirection * velocity);
 	CCharacter::ColliderObject();
-	if (!m_isCollided)
+
+	if (m_isCollided)
 	{
 		m_vPosition = m_position;
 	}
@@ -443,8 +443,9 @@ void CCharacter::DoMove(const float& velocity)
 	{
 		m_position = m_vPosition;
 	}
-	//m_vPosition = m_vPosition + (m_vDirection * velocity);
+	m_vPosition = m_vPosition + (m_vDirection * velocity);
 }
+
 
 void CCharacter::Render(D3DCOLOR d)
 {
