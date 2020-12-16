@@ -1,166 +1,16 @@
 # Object_Start
 # ObjectName
-Box1
+A_Tree_Red_016_1
 # FolderPath
-
+Resource/XFile/Background/ColorTree
 # FilePath
-
+Tree_01.X
 # TxtPath
-
+TreesRed.png
 # ObjectType
-23
+16
 # Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
-4.5
-0.5
-0.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Sphere2
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-24
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
-4.5
-0.25
-4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Cylinder3
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-25
-# Scale
-0.5
-0.5
-1
-# Rotate
-90
-0
-0
-# Translate
-4.5
-0.5
--4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass4
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.9
-0.05
-3
-# Rotate
-0
-0
-0
-# Translate
--6.5
-0
-0.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_01_5
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_01.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.01
-0.01
-0.01
-# Rotate
-0
-0
-0
-# Translate
-0.5
-0
-4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Bridge6
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Bridge.X
-# TxtPath
-Texture_01.png
-# ObjectType
-37
-# Scale
-0.3
+0.1
 0.1
 0.1
 # Rotate
@@ -168,92 +18,125 @@ Texture_01.png
 0
 0
 # Translate
--0.5
-0
--4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass7
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.3
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--0.5
-0
--4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-RoataionBoard9
-# FolderPath
-Resource/XFile/Gimmick/RotationBoard
-# FilePath
-Rotation_board.X
-# TxtPath
-board.png
-# ObjectType
-26
-# Scale
-0.03
-0.03
-0.03
-# Rotate
-0
-0
-0
-# Translate
-4.5
-0
 -9.5
+0
+0.5
 # Color
 0.5
 0.5
 0.5
 1
-# GimmickData
-# RotationSpeed
-1
-# RotationAxialIndex
-1
+# ColorTag
+Red
 # Object_End
 
 # Object_Start
 # ObjectName
-MovingCube10
+A_Tree_Green_016_2
 # FolderPath
-Resource/XFile/Gimmick/MovingCube
+Resource/XFile/Background/ColorTree
 # FilePath
-moving_cube.X
+Tree_01.X
 # TxtPath
-moving_cube_1.png
+TreesGreen.png
 # ObjectType
-32
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+# Object_End
+
+# Object_Start
+# ObjectName
+A_Tree_Yellow_016_3
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_01.X
+# TxtPath
+TreesYellow.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+A_Tree_Green_016_4
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_01.X
+# TxtPath
+TreesGreen.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+# Object_End
+
+# Object_Start
+# ObjectName
+A_Tree_Red_016_5
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_01.X
+# TxtPath
+TreesRed.png
+# ObjectType
+16
 # Scale
 0.1
 0.1
@@ -271,15 +154,8 @@ moving_cube_1.png
 0.5
 0.5
 1
-# GimmickData
-# StartPos
-0
-# EndPos
-10
-# Speed
-1
-# DirectionIndex
-2
+# ColorTag
+Red
 # Object_End
 
 # Section =======================================

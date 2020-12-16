@@ -46,6 +46,14 @@ void CGimmick::Setup(ST_MapData setData)
 
 	// =================
 
+	if (m_ObjectType != ObjectType::eG_Door
+		&& m_ObjectType != ObjectType::eG_DoorFrame
+		&& m_ObjectType != ObjectType::eG_ColorChanger)
+	{
+		m_strConditionName = "";
+		return;
+	}
+
 	if (setData.gimmickData.conditionName != "")
 	{
 		m_strConditionName = setData.gimmickData.conditionName;

@@ -1,6 +1,26 @@
 #include "stdafx.h"
 #include "Background.h"
 
+// #define Va_Start	__crt_va_start
+// #define Va_Arg		__crt_va_arg
+// #define Va_End		__crt_va_end
+// #define Va_Copy(dest, source) ((dest) == (source))
+
+void CBackground::DoNewTagging(int cnt, string ...)
+{
+	m_vecColorTag.clear();
+
+	va_list vaList;
+	va_start(vaList, cnt);
+	
+	for (int i = 0; i < cnt; i++)
+	{
+		m_vecColorTag.push_back(va_arg(vaList, string));
+	}
+
+	va_end(vaList);
+}
+
 CBackground::CBackground()
 {
 	m_pMesh = NULL;
@@ -25,6 +45,8 @@ void CBackground::Setup(ST_MapData setData)
 	m_vScale = setData.vScale;
 	m_vRotate = setData.vRotate;
 	m_vTranslate = setData.vTranslate;
+
+	m_vecColorTag = setData.vecColorTag; 
 
 	if (m_strXFile != "")
 	{
@@ -159,25 +181,49 @@ void CBackground::SetTexture(int index)
 	{
 		isTree = true;
 		if (index == 0)
+		{
 			m_strTxtFile = "TreesBlue.png";
+			DoNewTagging(1, "Blue");
+		}
 		else if (index == 1)
+		{
 			m_strTxtFile = "TreesGreen.png";
+			DoNewTagging(1, "Green");
+		}
 		else if (index == 2)
+		{
 			m_strTxtFile = "TreesYellow.png";
+			DoNewTagging(1, "Yellow");
+		}
 		else if (index == 3)
+		{
 			m_strTxtFile = "TreesRed.png";
+			DoNewTagging(1, "Red");
+		}
 	}
 	else if (m_ObjectType == ObjectType::eUmbrella)
 	{
 		isUmbrella = true;
 		if (index == 0)
+		{
 			m_strTxtFile = "Umbrella_Blue.png";
+			DoNewTagging(1, "Blue");
+		}
 		else if (index == 1)
+		{
 			m_strTxtFile = "Umbrella_BlueRed.png";
+			DoNewTagging(2, "Blue", "Red");
+		}
 		else if (index == 2)
+		{
 			m_strTxtFile = "Umbrella_Red.png";
+			DoNewTagging(1, "Red");
+		}
 		else if (index == 3)
+		{
 			m_strTxtFile = "Umbrella_White.png";
+			DoNewTagging(1, "White");
+		}
 	}
 
 	if (isUmbrella)

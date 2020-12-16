@@ -50,7 +50,10 @@ void CFileLoadManager::LoadData(string path)
 		while (getline(file, readData))
 		{
 			if (strstr(readData.c_str(), "# Object_Start"))
+			{
+				ResetLoadMapData(mapData);
 				continue;
+			}
 
 			else if (strstr(readData.c_str(), "# ObjectName"))
 			{
@@ -118,7 +121,7 @@ void CFileLoadManager::LoadData(string path)
 				mapData.vTranslate.z = atof(readData.c_str());
 			}
 
-			else if (strstr(readData.c_str(), "# Color"))
+			else if (strstr(readData.c_str(), "# Color") && strstr(readData.c_str(), "Tag") == NULL)
 			{
 				ReadAndCutSlashR(file, readData);
 				mapData.dxColor.r = atof(readData.c_str());
@@ -132,12 +135,27 @@ void CFileLoadManager::LoadData(string path)
 				ReadAndCutSlashR(file, readData);
 				mapData.dxColor.a = atof(readData.c_str());
 			}
+			
+			// >> colorTag_Background
+			else if (strstr(readData.c_str(), "# ColorTag"))
+			{
+				while (true)
+				{
+					ReadAndCutSlashR(file, readData);
+
+					if (strstr(readData.c_str(), "#"))
+						break;
+
+					mapData.vecColorTag.push_back(readData);
+				}
+			}
 
 			else if (strstr(readData.c_str(), "# GimmickData"))
 			{
 				ReadGimmickData(file, readData, mapData);
 			}
-			else if (strstr(readData.c_str(), "# ConditionName"))
+			else if (strstr(readData.c_str(), "# ConditionName")
+				&& (mapData.objType != eG_Door && mapData.objType != eG_DoorFrame && mapData.objType != eG_ColorChanger))
 			{
 				ReadAndCutSlashR(file , readData);
 				mapData.gimmickData.conditionName = readData;
@@ -227,6 +245,34 @@ void CFileLoadManager::ReadGimmickData(ifstream & file, string& readData, ST_Map
 	}
 }
 
+void CFileLoadManager::ResetLoadMapData(ST_MapData & mapData)
+{
+	// basicData
+	mapData.strFolderPath = "";
+	mapData.strXFilePath = "";
+	mapData.strTxtPath = "";
+	mapData.strObjName = "";
+	mapData.objType = ObjectType::eNull;
+	mapData.vScale = D3DXVECTOR3(0, 0, 0);
+	mapData.vRotate = D3DXVECTOR3(0, 0, 0);
+	mapData.vTranslate = D3DXVECTOR3(0, 0, 0);
+	mapData.dxColor = D3DXCOLOR(1, 1, 1, 1);
+	mapData.vecColorTag.clear();
+	mapData.gimmickData.isData = false;
+
+	// >> gimmickData
+	mapData.gimmickData.roationSpeed_rotaitonBoard = 0.0f;
+	mapData.gimmickData.roationAxialIndex_rotaitonBoard = 0;
+	mapData.gimmickData.conditionIndex_switch = 0;
+	mapData.gimmickData.maxMassIndex_switch = 0;
+	mapData.gimmickData.startPos_movingCube = 0.0f;
+	mapData.gimmickData.endPos_movingCube = 0.0f;
+	mapData.gimmickData.speed_movingCube = 0.0f;
+	mapData.gimmickData.directionIndex_movingCube = 0;
+	mapData.gimmickData.onOffConditionIndex = 0;
+	mapData.gimmickData.conditionName = "";
+	mapData.gimmickData.conditionOrbIndex = 0;
+}
 
 CFileLoadManager * CFileLoadManager::GetInstance()
 {
@@ -359,6 +405,23 @@ bool CFileLoadManager::FileLoad_MapData(string szFolder, string szFile)
 	LoadData(filePath);
 
 	return true;
+}
+
+LPDIRECT3DTEXTURE9 CFileLoadManager::GetFileNameTexture(string szFolder, string szFile)
+{
+	string filePath;
+	StrFilePath(filePath, szFolder, szFile);
+
+	if (m_mapTexture.find(filePath) == m_mapTexture.end())
+	{
+		if (D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &m_mapTexture[filePath.c_str()]))
+		{
+			ErrMessageBox("Texture Load Error", "ERROR");
+			return false;
+		}
+	}
+
+	return m_mapTexture[filePath];
 }
 
 void CFileLoadManager::Destroy()

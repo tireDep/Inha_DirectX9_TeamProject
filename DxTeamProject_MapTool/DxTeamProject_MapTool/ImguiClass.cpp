@@ -706,11 +706,13 @@ void CImguiClass::Update_Inspector()
 	{
 		if (m_nowSelectindex >= 0)
 		{
+			IObject& nowObject = g_pObjectManager->GetIObject(m_nowSelectindex);
+
 			char name[1024] = "\0";
-			int strLength = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjectName().length();
+			int strLength = nowObject.GetObjectName().length();
 			for (int i = 0; i < strLength; i++)
 			{
-				name[i] = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjectName()[i];
+				name[i] = nowObject.GetObjectName()[i];
 			}
 			name[strLength] = '\0';
 
@@ -729,14 +731,14 @@ void CImguiClass::Update_Inspector()
 						isSame = true;
 				}
 
-				if (!isSame) g_pObjectManager->GetIObject(m_nowSelectindex).SetObjectName(name);
+				if (!isSame) nowObject.SetObjectName(name);
 			}
 			// << 이름 변경 판정 다시 하기?
 
 			ImGui::Separator();
 
-			D3DXVECTOR3 vScale = g_pObjectManager->GetIObject(m_nowSelectindex).GetScale();
-			ObjectType tempType = g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType();
+			D3DXVECTOR3 vScale = nowObject.GetScale();
+			ObjectType tempType = nowObject.GetObjType();
 			if (ImGui::InputFloat3("Scale", vScale))
 			{
 				switch (tempType)
@@ -760,14 +762,14 @@ void CImguiClass::Update_Inspector()
 				case eBook:				case eOrb:
 #endif
 				{
-					g_pObjectManager->GetIObject(m_nowSelectindex).SetDiffScale(vScale);
+					nowObject.SetDiffScale(vScale);
 				}
 					break;
 
 #ifdef _DEBUG
 				case eG_DoorFrame:	 case eG_Door:
 				{
-					CDoor* temp = static_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+					CDoor* temp = static_cast<CDoor*> (&nowObject);
 					temp->SetAnotherScale(vScale);
 				}
 				break;
@@ -775,29 +777,29 @@ void CImguiClass::Update_Inspector()
 
 				default:
 				{
-					g_pObjectManager->GetIObject(m_nowSelectindex).SetScale(vScale);
+					nowObject.SetScale(vScale);
 				}
 					break;
 				}
 			}
 
-			D3DXVECTOR3 vRot = g_pObjectManager->GetIObject(m_nowSelectindex).GetRotate();
+			D3DXVECTOR3 vRot = nowObject.GetRotate();
 			if (ImGui::InputFloat3("Rotate", vRot))
 			{
 #ifdef _DEBUG
 				if (tempType == ObjectType::eG_DoorFrame || tempType == ObjectType::eG_Door)
 				{
-					CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+					CDoor* temp = dynamic_cast<CDoor*> (&nowObject);
 					temp->SetAnotherRotation(vRot);
 				}
 				else
-					g_pObjectManager->GetIObject(m_nowSelectindex).SetRotate(vRot);
+					nowObject.SetRotate(vRot);
 #else
-				g_pObjectManager->GetIObject(m_nowSelectindex).SetRotate(vRot);
+				nowObject.SetRotate(vRot);
 #endif // _DEBUG
 			}
 
-			D3DXVECTOR3 vTrans = g_pObjectManager->GetIObject(m_nowSelectindex).GetTranslate();
+			D3DXVECTOR3 vTrans = nowObject.GetTranslate();
 			D3DXVECTOR3 temp = vTrans;
 			if (ImGui::InputFloat3("Translate", vTrans))
 			{
@@ -850,13 +852,13 @@ void CImguiClass::Update_Inspector()
 #ifdef _DEBUG
 				if (tempType == ObjectType::eG_DoorFrame || tempType == ObjectType::eG_Door)
 				{
-					CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+					CDoor* temp = dynamic_cast<CDoor*> (&nowObject);
 					temp->SetAnotherTranslation(vTrans);
 				}
 				else
-					g_pObjectManager->GetIObject(m_nowSelectindex).SetTranslate(vTrans);
+					nowObject.SetTranslate(vTrans);
 #else
-				g_pObjectManager->GetIObject(m_nowSelectindex).SetTranslate(vTrans);
+				nowObject.SetTranslate(vTrans);
 #endif // _DEBUG
 
 			}
@@ -866,9 +868,8 @@ void CImguiClass::Update_Inspector()
 			// >> 선택된 오브젝트에 따라 인스펙터 변경
 
 			// >> 물리 적용 오브젝트 : 색상 선택
-			if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eBox
-				|| g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere
-				|| g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCylinder)
+			ObjectType nowObjectType = nowObject.GetObjType();
+			if (nowObjectType == eBox || nowObjectType == eSphere || nowObjectType == eCylinder)
 			{
 				// >> object만 색 지정 가능
 				SetObjectColor();
@@ -876,7 +877,7 @@ void CImguiClass::Update_Inspector()
 
 			// >> 배경 관련
 			// >> 색상 나무 : 텍스쳐 선택
-			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eUmbrella)
+			else if (nowObjectType == eUmbrella)
 			{
 				CBackground* temp = dynamic_cast<CBackground*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 
@@ -897,7 +898,7 @@ void CImguiClass::Update_Inspector()
 			}
 
 			// >> 파라솔 : 텍스쳐 선택
-			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCTree)
+			else if (nowObjectType == eCTree)
 			{
 				CBackground* temp = dynamic_cast<CBackground*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 
@@ -919,7 +920,7 @@ void CImguiClass::Update_Inspector()
 			
 			// >> 기믹 관련
 			// >> 회전판자 기믹 : 기믹 관련 변수 설정
-			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_RotationBoard)
+			else if (nowObjectType == eG_RotationBoard)
 			{
 				CRotationBoard* temp = dynamic_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 
@@ -948,14 +949,14 @@ void CImguiClass::Update_Inspector()
 			} // << : Rotation Board
 
 			// >> 스위치 기믹 : 텍스쳐 선택, 조건 선택
-			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_Switch)
+			else if (nowObjectType == eG_Switch)
 			{
 				SetGimmickTexture();
 				// todo : switchCondition
 			}
 
 			// >> 무빙 큐브 기믹 : 시작점&끝점, 속도, 방향
-			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_MovingCube)
+			else if (nowObjectType == eG_MovingCube)
 			{
 				CMovingCube* temp = static_cast<CMovingCube*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 				ImGui::Text("Direction");
@@ -990,20 +991,61 @@ void CImguiClass::Update_Inspector()
 			}
 
 			// >> 문, 컬러레이저 기믹 : 텍스쳐 선택, On/Off 조건 선택
-			else if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_DoorFrame 
-				  || g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eG_ColorChanger)
+			else if (nowObjectType == eG_DoorFrame 
+				  || nowObjectType == eG_ColorChanger)
 			{
 				SetGimmickTexture();
 				SetGimmickCondition();
 			}
 			
-			if (g_pObjectManager->GetIObject(m_nowSelectindex).GetConditionName() != "")
+			if (nowObject.GetConditionName() != "" 
+			 && (nowObjectType == ObjectType::eG_Door
+				 || nowObjectType == ObjectType::eG_DoorFrame
+				 || nowObjectType == ObjectType::eG_ColorChanger
+				 || nowObjectType == ObjectType::eG_Switch
+				 || nowObjectType == ObjectType::eBook
+				 || nowObjectType == ObjectType::eOrb))
 			{
 				// >> 선택한 오브젝트에 조건 변수가 존재할 경우
 				// >> 스위치 등 기믹에서 출력되지 않아서 if문으로 처리
 				ImGui::Text("Select Condition : ");
 				ImGui::SameLine(); ImGui::Text(g_pObjectManager->GetIObject(m_nowSelectindex).GetConditionName().c_str());
 			}
+
+			// >> tag
+			switch (nowObjectType)
+			{
+				case eTile01: case eTile02:	case eTile03: case eTile04: case eTile05: case eTile06:
+				case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
+				case eBridge:
+				case eATree:  case eSTree:	case eWTree:  case eCTree:
+				case eBall:	  case eChair:	case eUmbrella:	case eSnowman:	case eFlower: 	case eSprout:
+				{
+					ImGui::Text("ColorTag");
+					vector<string> tag = nowObject.GetVecColorTag();
+					ImVec4 buttonColor(1, 1, 1, 0.7);
+					for (int i = 0; i < tag.size(); i++)
+					{
+						// ImGui::Text(tag[i].c_str());
+						//ImGui::TextColored(ImVec4(0.0f, 0.0f, 1.0f, 1.0f), tag[i].c_str());
+						//ImGui::ColorButton(tag[i].c_str(), ImVec4(0.0f, 0.0f, 1.0f, 1.0f));
+
+						if (tag[i] == "Black")			buttonColor = ImVec4(0, 0, 0, 0.7f);
+						else if (tag[i] == "White")		buttonColor = ImVec4(1, 1, 1, 0.7f);
+						else if (tag[i] == "Red")		buttonColor = ImVec4(1, 0, 0, 0.7f);
+						else if (tag[i] == "Blue")		buttonColor = ImVec4(0, 0, 1, 0.7f);
+						else if (tag[i] == "Green")		buttonColor = ImVec4(0, 1, 0, 0.7f);
+						else if (tag[i] == "Yellow")	buttonColor = ImVec4(1, 1, 0, 0.7f);
+
+						ImGui::PushStyleColor(ImGuiCol_Button, buttonColor);
+						ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.5f, 0.5f, 0.5f, 0.5f));
+						ImGui::Button(tag[i].c_str());
+						ImGui::PopStyleColor(2);
+					}
+				}
+					break;
+			}
+			// << tag
 
 		} // << : if (m_nowSelectindex >= 0)
 

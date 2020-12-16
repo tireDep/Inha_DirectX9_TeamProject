@@ -177,6 +177,8 @@ struct ST_MapData
 
 	D3DXCOLOR dxColor = D3DXCOLOR(1, 1, 1, 1);
 
+	vector<string> vecColorTag;
+
 	ST_Gimmick gimmickData;
 };
 
