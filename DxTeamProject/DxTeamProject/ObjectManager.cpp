@@ -317,56 +317,63 @@ void CObjectManager::Collide(float duration)
 			default:
 				break;
 			}
+
 		}
+	}
 		// Box To IObject
+	for (int BoxIndex = 0; BoxIndex < m_vecBox.size(); BoxIndex++)
+	{
 		for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
 		{
 			if (m_vecBox[BoxIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
 			{
 				switch (m_vecIObject[IObjectIndex]->GetObjType())
 				{
-					case eG_RotationBoard: 	case eG_MovingCube:
-					{
-						D3DXVECTOR3 v;
-						v = m_vecBox[BoxIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
-						D3DXVec3Normalize(&v, &v);
-						m_vecBox[BoxIndex]->SetPusingForce(v);
-					}
-					break;
-					case eG_Door:
-						break;
-					case  eG_Switch:
-					{
-						m_vecIObject[IObjectIndex]->pBoxBool(true);
-						if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
-						{
-							ST_EVENT msg;
-							msg.eventType = EventType::eConditionChange;
-							msg.isCondition = false;
-							msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
-
-							g_pEventManager->CheckEvent(msg);
-						}
-					}
-
-						break;	
-					default:
-						//CollisionIObject(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
-						CollisionBoxToTile(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
-						break;
+				case eG_RotationBoard: 	case eG_MovingCube:
+				{
+					D3DXVECTOR3 v;
+					v = m_vecBox[BoxIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
+					D3DXVec3Normalize(&v, &v);
+					m_vecBox[BoxIndex]->SetPusingForce(v);
 				}
+				break;
+				case eG_Door:
+					break;
+				case  eG_Switch:
+				{
+					m_vecIObject[IObjectIndex]->pBoxBool(true);
+					if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
+					{
+						ST_EVENT msg;
+						msg.eventType = EventType::eConditionChange;
+						msg.isCondition = false; // ¿­¸°´Ù
+						msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
+
+						g_pEventManager->CheckEvent(msg);
+					}
+				}
+
+				break;
+				default:
+					//CollisionIObject(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
+					CollisionBoxToTile(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
+					break;
+				}
+				
 			}
 			else
 			{
-				m_vecIObject[IObjectIndex]->pBoxBool(false);
+				
 				ST_EVENT msg;
 				msg.eventType = EventType::eConditionChange;
-				msg.isCondition = true;
+				msg.isCondition = true; //´ÝÈù´Ù
 				msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
 
-				// g_pEventManager->CheckEvent(msg);
+				g_pEventManager->CheckEvent(msg);
 			}
+		
 		}
+		
 	}
 	/// Cylinder
 	for (int CylinderIndex = 0; CylinderIndex < m_vecCylinder.size(); CylinderIndex++)
