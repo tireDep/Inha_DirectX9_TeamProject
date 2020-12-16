@@ -243,6 +243,9 @@
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -509,6 +512,9 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -656,6 +662,9 @@
     </Filter>
     <Filter Include="...TrashCan\Physics\cyclone">
       <UniqueIdentifier>{00e05eae-24f5-4dfb-9fc3-f0105fd54c0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{8f11bd14-6ae4-4eed-ae82-786400494f04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

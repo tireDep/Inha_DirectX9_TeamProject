@@ -20,9 +20,13 @@ protected:
 	D3DXCOLOR				m_color;
 	bool					m_isCollided;
 	bool					m_isOBB;
-	bool					m_jump;
-	bool					jumpis;
-	bool					jumping;
+	bool					m_isJump;
+	float					m_fMaxJumpHeight;
+	float					m_fRadianJump;
+	bool					m_isFallAni;
+	//bool					jumpis;
+	//bool					jumping;
+
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
 	float rotation;
@@ -35,8 +39,8 @@ public:
 	virtual ~CCharacter(void);
 	virtual void Setup();
 	virtual void Update(D3DXVECTOR3 cameradirection);
-//	virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
-	int Update(vector<PObject*> ObjectPosition, float duration);
+	//virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
+	//int Update(vector<PObject*> ObjectPosition, float duration);
 	void Update(float duration);
 	virtual void DoRotation(const float& radian);
 	virtual void DoMove(const float& velocity);

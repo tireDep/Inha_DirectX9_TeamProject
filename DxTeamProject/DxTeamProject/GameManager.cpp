@@ -14,6 +14,8 @@ CGameManager::CGameManager()
 	m_isGridMap = false;
 	// << 맵 완료시 삭제 예정
 
+	m_Orbcomplete = false;
+
 	SetClipCursor(0);
 	ShowCursor(false);
 }
@@ -100,6 +102,18 @@ bool CGameManager::GetIsHasOrb(string orbType)
 		if (it->first == orbType)
 			return it->second;
 	}
+}
+
+bool CGameManager::CompleteOrb()
+{
+	if (GetIsHasOrb("Blue") && GetIsHasOrb("Green") && GetIsHasOrb("Red") &&
+		GetIsHasOrb("White") && GetIsHasOrb("Yellow") && GetIsHasOrb("Black"))
+	{
+		m_Orbcomplete = true;
+		m_SceneName = SceneType::eEndingScene;
+	}
+
+	return m_Orbcomplete;
 }
 
 void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
