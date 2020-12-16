@@ -8,11 +8,11 @@ private:
 	LPD3DXSPRITE m_pSprite;
 	D3DXIMAGE_INFO m_stImageInfo, m_stImageInfo2, m_stImageInfo3,
 		m_stImageInfo4, m_stImageInfo5, m_stImageInfo6, m_stImageInfo7,
-		m_stImageInfo8, m_stImageInfo9, m_stImageInfo0;
+		m_stImageInfo8, m_stImageInfo9;
 
 	LPDIRECT3DTEXTURE9 m_pTextureUI, m_pTextureUI2, m_pTextureUI3,
 		m_pTextureUI4, m_pTextureUI5, m_pTextureUI6, m_pTextureUI7,
-		m_pTextureUI8, m_pTextureUI9, m_pTextureUI0;
+		m_pTextureUI8, m_pTextureUI9;
 
 	POINT pUI;
 	POINT px; //´­·¶À»¶§
@@ -34,7 +34,6 @@ public:
 	bool m_isLButtonDown;
 	void Setup_UI();
 	void UI_Render();
-	void Main_Render();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName() override;

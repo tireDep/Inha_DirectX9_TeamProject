@@ -329,6 +329,37 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 	//	}
 	//	m_Character->SetAnimationIndexBlend(6); // fall
 	//}
+	//if (m_jump)
+	//{
+	//	jumping = true;
+	//	if (m_vPosition.y <= 3.f)
+	//	{
+	//		m_vPosition.y += 0.005f;
+	//		if (m_vPosition.y >= 3.f)
+	//		{
+	//			jumpis = true;
+	//			m_jump = false;
+	//		}
+	//	}
+	//}
+	//if (jumpis == true)
+	//{
+	//	CCharacter::ColliderObject();
+	//	if(!m_isCollided && m_vPosition.y > 0)
+	//		m_vPosition.y -= 0.005f;
+	//	else
+	//	{
+	//		jumpis = false;
+	//		jumping = false;
+	//		//if (m_vPosition.y <= 0)
+	//		//{
+	//		//	jumpis = false;
+	//		//	jumping = false;
+	//		//}
+	//	}
+	//	
+	//	m_Character->SetAnimationIndexBlend(6); // fall
+	//}
 }
 
 //void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
