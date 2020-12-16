@@ -246,7 +246,7 @@ void CFileLoadManager::ReadMapData(string fileName)
 				mapData.vTranslate.z = atof(readData.c_str()) + m_fNowZ;
 			}
 
-			else if (strstr(readData.c_str(), "# Color"))
+			else if (strstr(readData.c_str(), "# Color") && strstr(readData.c_str(), "Tag") == NULL)
 			{
 				ReadAndCutSlashR(mapFile, readData);
 				mapData.dxColor.r = atof(readData.c_str());
@@ -261,10 +261,25 @@ void CFileLoadManager::ReadMapData(string fileName)
 				mapData.dxColor.a = atof(readData.c_str());
 			}
 
+			// >> colorTag_Background
+			else if (strstr(readData.c_str(), "# ColorTag"))
+			{
+				while (true)
+				{
+					ReadAndCutSlashR(mapFile, readData);
+
+					if (strstr(readData.c_str(), "#"))
+						break;
+
+					mapData.vecColorTag.push_back(readData);
+				}
+			}
+
 			// >> gimmick
 			else if (strstr(readData.c_str(), "# GimmickData"))
 				ReadGimmickData(mapFile, readData, mapData);
-			else if (strstr(readData.c_str(), "# ConditionName"))
+			else if (strstr(readData.c_str(), "# ConditionName") 
+				&& (mapData.objType != eG_Door && mapData.objType != eG_DoorFrame && mapData.objType != eG_ColorChanger))
 			{
 				ReadAndCutSlashR(mapFile, readData);
 				mapData.gimmickData.conditionName = readData;
@@ -382,6 +397,8 @@ ST_MapData CFileLoadManager::SetSaveData(int index)
 
 	mapData.dxColor = vecObject.GetColor();
 
+	mapData.vecColorTag = vecObject.GetVecColorTag();
+
 	if (mapData.objType == eG_RotationBoard)
 	{
 		CRotationBoard* temp = static_cast<CRotationBoard*> (&g_pObjectManager->GetIObject(index));
@@ -458,14 +475,20 @@ void CFileLoadManager::FileSave(ofstream& file, ST_MapData& mapData)
 	file << "# Color" << endl;
 	file << mapData.dxColor.r << endl << mapData.dxColor.g << endl << mapData.dxColor.b << endl << mapData.dxColor.a << endl;
 
+	file << "# ColorTag" << endl;
+	for (int i = 0; i<mapData.vecColorTag.size(); i++)
+		file << mapData.vecColorTag[i] << endl;
+
 	// >> 기믹, 이벤트 트리거 등 오브젝트 타입에 따라 파싱 추가
 	if (mapData.gimmickData.isData == true)
 	{	
 		SaveGimmickData(file, mapData);
 	}
 
-	if (mapData.gimmickData.conditionName != "")
+	if (mapData.gimmickData.conditionName != ""
+	 && (mapData.objType != eG_Door && mapData.objType != eG_DoorFrame && mapData.objType != eG_ColorChanger))
 	{
+		// >> 두 번 저장 방지
 		// >> 조건 오브젝트 저장(쌍방 저장)
 		file << "# ConditionName" << endl;
 		file << mapData.gimmickData.conditionName << endl;

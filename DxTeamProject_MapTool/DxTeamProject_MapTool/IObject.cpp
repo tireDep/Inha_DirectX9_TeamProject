@@ -267,7 +267,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	case eTile01: case eTile02:	case eTile03: case eTile04: case eTile05: case eTile06:
 	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
 	{
-
+		// todo : tagging
 		if(objType == eTile01)			mapData.strObjName = string("Tile_01_Grass") + to_string(m_nRefCnt + 1);
 		else if (objType == eTile02)	mapData.strObjName = string("Tile_02_Ground") + to_string(m_nRefCnt + 1);
 		else if (objType == eTile03)	mapData.strObjName = string("Tile_04_Ground2_") + to_string(m_nRefCnt + 1);
@@ -297,6 +297,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eBridge:
 	{
+		// todo : tagging
 		mapData.strObjName = string("Bridge") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Tile";
 		mapData.strTxtPath = "Texture_01.png";
@@ -332,6 +333,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eATree:
 	{
+		// todo : tagging
 		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
 
 		if(index == 0)			mapData.strObjName = string("Autumn_Tree_01_") + to_string(m_nRefCnt + 1);
@@ -353,6 +355,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eSTree:
 	{
+		// todo : tagging
 		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
 
 		if (index == 0)			mapData.strObjName = string("Summer_Tree_01_") + to_string(m_nRefCnt + 1);
@@ -374,6 +377,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eWTree:
 	{
+		// todo : tagging
 		mapData.vScale = D3DXVECTOR3(0.01f, 0.01f, 0.01f);
 		
 		if (index == 0)			mapData.strObjName = string("Winter_Tree_01_") + to_string(m_nRefCnt + 1);
@@ -403,6 +407,9 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 		else if (index == 4)  name = "D_Shrub_Blue_101_";
 		else if (index == 5) name = "D_Shrub_Blue_102_";
 
+		// >> tagging
+		mapData.vecColorTag.push_back("Blue");
+
 		mapData.strObjName = name + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/ColorTree";
 		mapData.strTxtPath = "TreesBlue.png";
@@ -416,6 +423,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eBall:
 	{
+		// todo : tagging
 		mapData.strObjName = string("Ball") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "BeachBall_Base_Color.png";
@@ -428,6 +436,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eChair:
 	{
+		// todo : tagging
 		mapData.strObjName = string("Blue_Chair") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "";
@@ -440,6 +449,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eUmbrella:
 	{
+		// todo : tagging
 		mapData.strObjName = string("Umbrella_Blue") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "Umbrella_Blue.png";
@@ -452,6 +462,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eSnowman:
 	{
+		// todo : tagging
 		mapData.strObjName = string("Snowman") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "Snowman.png";
@@ -464,6 +475,8 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eFlower:
 	{
+		// todo : tagging
+		// => material only, texture on/off set
 		mapData.vScale = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
 		
 		string name;
@@ -487,6 +500,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eSprout:
 	{
+		// todo : tagging
 		mapData.vScale = D3DXVECTOR3(0.1f, 0.1f, 0.1f);
 		mapData.strObjName = string("Sprout") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
