@@ -41,6 +41,7 @@ static PlayerInputType lastInput = PlayerInputType::eNull;
 
 void CEventManager::Update(float duration)
 {
+	
 	bool pushW = GetKeyState('W') & 0x8000;
 	bool pushS = GetKeyState('S') & 0x8000;
 	bool pushA = GetKeyState('A') & 0x8000;
@@ -114,6 +115,7 @@ void CEventManager::Update(float duration)
 
 void CEventManager::CheckEvent(ST_EVENT eventMsg)
 {
+	
 	if (eventMsg.message == WM_ACTIVATE)
 	{
 		if (LOWORD(eventMsg.wParam) == WA_INACTIVE)

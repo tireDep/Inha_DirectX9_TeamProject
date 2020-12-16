@@ -160,6 +160,9 @@ void CSwitch::Update(float duration)
 	D3DXMatrixTranslation(&matT, m_position.x, m_position.y +0.1f, m_position.z);
 	collWorld = matS *matT;
 	 
+	pBox = false;
+	pCylinder = false;
+	pSphere = false;
 	m_pColl->Update(&collWorld); //내부 충돌 
 	m_pOBB->Update(&m_matWorld); //스위치 고유 충돌
 }
@@ -192,7 +195,7 @@ void CSwitch::Render()
 
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
-			if (pBox == false && pCylinder == false) // 부딪히지 않았을떄
+			if (pBox == false && pCylinder == false && pSphere == false) // 부딪히지 않았을떄
 			{
 			
 				m_pMesh->DrawSubset(i);
