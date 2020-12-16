@@ -1,14 +1,14 @@
 # Object_Start
 # ObjectName
-ColorChanger1
+A_Tree_Red_016_1
 # FolderPath
-Resource/XFile/Gimmick/ColorChanger
+Resource/XFile/Background/ColorTree
 # FilePath
-Color_changer.X
+Tree_01.X
 # TxtPath
-cubeworld_texture.tga
+TreesRed.png
 # ObjectType
-30
+16
 # Scale
 0.1
 0.1
@@ -18,7 +18,7 @@ cubeworld_texture.tga
 0
 0
 # Translate
-0.5
+-9.5
 0
 0.5
 # Color
@@ -26,28 +26,21 @@ cubeworld_texture.tga
 0.5
 0.5
 1
-# GimmickData
-# ConditionName
-Book2
-# ConditionIndex
-1
-# ConditionOrbIndex
-0
-# ConditionName
-Book2
+# ColorTag
+Red
 # Object_End
 
 # Object_Start
 # ObjectName
-Book2
+A_Tree_Green_016_2
 # FolderPath
-Resource/XFile/Book
+Resource/XFile/Background/ColorTree
 # FilePath
-book.X
+Tree_01.X
 # TxtPath
-Bookshelf_diffuse.png
+TreesGreen.png
 # ObjectType
-33
+16
 # Scale
 0.1
 0.1
@@ -57,16 +50,112 @@ Bookshelf_diffuse.png
 0
 0
 # Translate
--1.5
+-4.5
 0
--1.5
+0.5
 # Color
 0.5
 0.5
 0.5
 1
-# ConditionName
-ColorChanger1
+# ColorTag
+Green
+# Object_End
+
+# Object_Start
+# ObjectName
+A_Tree_Yellow_016_3
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_01.X
+# TxtPath
+TreesYellow.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+A_Tree_Green_016_4
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_01.X
+# TxtPath
+TreesGreen.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+# Object_End
+
+# Object_Start
+# ObjectName
+A_Tree_Red_016_5
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_01.X
+# TxtPath
+TreesRed.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Red
 # Object_End
 
 # Section =======================================

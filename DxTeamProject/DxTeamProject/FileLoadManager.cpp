@@ -50,7 +50,10 @@ void CFileLoadManager::LoadData(string path)
 		while (getline(file, readData))
 		{
 			if (strstr(readData.c_str(), "# Object_Start"))
+			{
+				ResetLoadMapData(mapData);
 				continue;
+			}
 
 			else if (strstr(readData.c_str(), "# ObjectName"))
 			{
@@ -242,6 +245,34 @@ void CFileLoadManager::ReadGimmickData(ifstream & file, string& readData, ST_Map
 	}
 }
 
+void CFileLoadManager::ResetLoadMapData(ST_MapData & mapData)
+{
+	// basicData
+	mapData.strFolderPath = "";
+	mapData.strXFilePath = "";
+	mapData.strTxtPath = "";
+	mapData.strObjName = "";
+	mapData.objType = ObjectType::eNull;
+	mapData.vScale = D3DXVECTOR3(0, 0, 0);
+	mapData.vRotate = D3DXVECTOR3(0, 0, 0);
+	mapData.vTranslate = D3DXVECTOR3(0, 0, 0);
+	mapData.dxColor = D3DXCOLOR(1, 1, 1, 1);
+	mapData.vecColorTag.clear();
+	mapData.gimmickData.isData = false;
+
+	// >> gimmickData
+	mapData.gimmickData.roationSpeed_rotaitonBoard = 0.0f;
+	mapData.gimmickData.roationAxialIndex_rotaitonBoard = 0;
+	mapData.gimmickData.conditionIndex_switch = 0;
+	mapData.gimmickData.maxMassIndex_switch = 0;
+	mapData.gimmickData.startPos_movingCube = 0.0f;
+	mapData.gimmickData.endPos_movingCube = 0.0f;
+	mapData.gimmickData.speed_movingCube = 0.0f;
+	mapData.gimmickData.directionIndex_movingCube = 0;
+	mapData.gimmickData.onOffConditionIndex = 0;
+	mapData.gimmickData.conditionName = "";
+	mapData.gimmickData.conditionOrbIndex = 0;
+}
 
 CFileLoadManager * CFileLoadManager::GetInstance()
 {

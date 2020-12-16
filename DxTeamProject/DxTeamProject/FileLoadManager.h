@@ -20,6 +20,7 @@ private:
 	void ReadAndCutSlashR(ifstream& file, string& readData);
 	void ReadGimmickData(ifstream& file, string& readData, ST_MapData& mapData);
 
+	void ResetLoadMapData(ST_MapData& mapData);
 public:
 	static CFileLoadManager* GetInstance();
 	virtual ~CFileLoadManager() { }
