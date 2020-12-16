@@ -308,12 +308,20 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 	}
 	if (jumpis == true)
 	{
-		m_vPosition.y -= 0.005f;
-		if (m_vPosition.y <= 0)
+		CCharacter::ColliderObject();
+		if(!m_isCollided && m_vPosition.y > 0)
+			m_vPosition.y -= 0.005f;
+		else
 		{
 			jumpis = false;
 			jumping = false;
+			//if (m_vPosition.y <= 0)
+			//{
+			//	jumpis = false;
+			//	jumping = false;
+			//}
 		}
+		
 		m_Character->SetAnimationIndexBlend(6); // fall
 	}
 }
