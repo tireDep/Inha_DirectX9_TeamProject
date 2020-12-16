@@ -110,39 +110,79 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 				// todo : 잡기 구현
 			case PlayerInputType::eHold:
-				if (m_nGrabAbleObeject != -1)
+				if(m_isGrab)
 				{
 					if (m_Character->CheckAnimationEnd())
-						//m_Character->SetAnimationIndexBlend(5); // push
 						m_Character->SetAnimationIndex(5);
-					// >> 블랜드가 안되서 잡기 대기 상태처럼 나옴
 				}
-				// else
+				else
+				{
 					if (m_Character->CheckAnimationEnd())
-						//m_Character->SetAnimationIndexBlend(5); // push
-						m_Character->SetAnimationIndex(5);
+						m_Character->SetAnimationIndex(10); // Idle
+				}
+				//if (m_nGrabAbleObeject != -1)
+				//{
+				//	if (m_Character->CheckAnimationEnd())
+				//		//m_Character->SetAnimationIndexBlend(5); // push
+				//		m_Character->SetAnimationIndex(5);
+				//	// >> 블랜드가 안되서 잡기 대기 상태처럼 나옴
+				//}
+				// else
+				//m_Character->SetAnimationIndexBlend(5); // push
+				//m_Character->SetAnimationIndex(5);
 				speed = -1.0f;
 				break;
 			case PlayerInputType::eHoldPush:
-				if (m_nGrabAbleObeject != -1)
+				if (m_isGrab)
 				{
+					if (m_nGrabAbleObeject != -1)
+					{
+						D3DXVECTOR3 v;
+						v = g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetPosition() - this->GetPosition();
+						v.y -= 0.5f;
+						D3DXVec3Normalize(&v, &v);
+						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetPusingForce(v);
+						rotation = 0;
+						speed = 1.0f;
+					}
 					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(5); // Push
+						m_Character->SetAnimationIndex(5);
 				}
 				else
+				{
 					if (m_Character->CheckAnimationEnd())
 						m_Character->SetAnimationIndex(10); // Idle
-				speed = -1.0f;
+					speed = -1.0f;
+				}
+				//if (m_nGrabAbleObeject != -1)
+				//{
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(5); // Push
+				//}
+				//else
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(10); // Idle
+				
 				break;
 			case PlayerInputType::eHoldPull:
-				if (m_nGrabAbleObeject != -1)
+				if (m_isGrab)
 				{
 					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(4); // Pull
+						m_Character->SetAnimationIndex(4);
 				}
 				else
+				{
 					if (m_Character->CheckAnimationEnd())
 						m_Character->SetAnimationIndex(10); // Idle
+				}
+				//if (m_nGrabAbleObeject != -1)
+				//{
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(4); // Pull
+				//}
+				//else
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(10); // Idle
 				speed = -1.0f;
 				break;
 			default:
@@ -214,9 +254,15 @@ void CCharacter::ColliderObject()
 			D3DXVECTOR3 grabvector = g_pObjectManager->GetVecPObejct()[i]->GetPosition() - this->GetPosition();
 			float grabradian = D3DXVec3Dot(&this->m_vDirection, &grabvector);
 			if (grabradian)
+			{
 				m_isGrab = true;
+				m_nGrabAbleObeject = i;
+			}
 			else
+			{
 				m_isGrab = false;
+				m_nGrabAbleObeject = -1;
+			}
 			m_isCollided = true;
 			return;
 		}
@@ -442,8 +488,8 @@ void CCharacter::DoRotation(const float& radian)
 
 void CCharacter::DoMove(const float& velocity)
 {
-	//static D3DXVECTOR3 m_position = m_vPosition;
-	D3DXVECTOR3 m_position = m_vPosition;
+	static D3DXVECTOR3 m_position = m_vPosition;
+	//D3DXVECTOR3 m_position = m_vPosition;
 	CCharacter::ColliderObject();
 	if (m_isCollided)
 	{
