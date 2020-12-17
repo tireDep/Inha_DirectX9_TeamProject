@@ -18,7 +18,7 @@ private:
 
 public:
 
-	COBB* m_pColl; //충돌박스
+	COBB* m_pColl; //충돌스박
 	CSwitch();
 	~CSwitch();
 	bool GetBool();
