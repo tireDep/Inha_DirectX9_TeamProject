@@ -449,6 +449,7 @@ void CMainGame::Render()
 			m_pScene->Render_Ending();
 		g_pGameManager->SetClipCursor(-15);
 		ShowCursor(true);
+		g_pGameManager->InitializationOrb();
 	}
 
 	if (m_pGrid)
