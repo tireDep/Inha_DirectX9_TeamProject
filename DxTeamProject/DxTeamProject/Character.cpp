@@ -130,8 +130,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 						D3DXVec3Normalize(&v, &v);
 						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetPusingForce(v);
 						rotation = m_preRotation;
-						speed = 1.0f;
-
+						// Need To Modify...
+						speed = 0.0f;
 						m_Character->SetAnimationIndex(5);
 					}
 					// if (m_Character->CheckAnimationEnd())
