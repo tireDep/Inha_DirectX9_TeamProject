@@ -99,6 +99,24 @@ void COrb::Render()
 {
 	SetBillbord();
 
+	
+
+	if (player == true) // Ãæµ¹
+	{
+		if (m_strConditionName != "")
+		{
+			ST_EVENT msg;
+			msg.eventType = EventType::eConditionChange;
+			msg.isCondition = false;
+			msg.conditionName = m_strObjName;
+
+			g_pEventManager->CheckEvent(msg);
+		}
+		render = false;
+
+		g_pObjectManager->RemoveObject(m_pOBB);
+	}
+
 	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
 	g_pD3DDevice->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
 	g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
@@ -107,11 +125,15 @@ void COrb::Render()
 
 	g_pD3DDevice->SetFVF(ST_PT_VERTEX::FVF);
 	g_pD3DDevice->SetTexture(0, m_pTexture);
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PT_VERTEX));
-
+	if (render == true)
+	{
+		g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PT_VERTEX));
+	}
 	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
 
 	g_pD3DDevice->SetTexture(0, NULL);
+
+	
 }
 
 void COrb::Update(float duration)
@@ -143,6 +165,10 @@ void COrb::Update(float duration)
 		m_vecVertex[4].t = D3DXVECTOR2(m_UvY, m_UvY);
 		m_vecVertex[5].t = D3DXVECTOR2(m_UvX, m_UvX);
 	}
+
+	
+
+
 
 	 // m_pOBB->Update(&GetmatWorld());
 }
@@ -179,22 +205,6 @@ void COrb::SetBillbord()
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matInvView);
 
 	
-	if (player == true)
-	{
-		if (m_strConditionName != "")
-		{
-			ST_EVENT msg;
-			msg.eventType = EventType::eConditionChange;
-			msg.isCondition = false;
-			msg.conditionName = m_strObjName;
-
-			g_pEventManager->CheckEvent(msg);
-		}
-		render = false;
-		g_pObjectManager->RemoveObject(m_pOBB);
-			
-	}
 	
-		
 	
 }

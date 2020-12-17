@@ -849,14 +849,13 @@ void CObjectManager::Render()
 	}
 	// >> mapTest
 
-	
+
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
-
+		
 		m_vecObject[i]->Render();
 
 	}
-
 
 
 	//for (int i = 0; i < m_vecIObject.size(); i++)

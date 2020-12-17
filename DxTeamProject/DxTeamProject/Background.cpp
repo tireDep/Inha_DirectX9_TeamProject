@@ -17,7 +17,7 @@ bool CBackground::CheckIsGetColorOrb()
 
 CBackground::CBackground()
 {
-	render = false;
+
 	m_strName = string("Background") + to_string(m_nRefCount);
 }
 
