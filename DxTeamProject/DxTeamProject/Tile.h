@@ -5,7 +5,7 @@ class CTile : public IObject
 {
 private:
 	bool  pBox, pCylinder, pSphere;
-	bool player;
+	bool player, render;
 public:
 	CTile();
 	~CTile();
@@ -17,6 +17,7 @@ public:
 	void Setup(const ST_MapData & mapData);
 	void Update(float duration) { m_pOBB->Update(&m_matWorld); };
 	void Render();
+	bool GetBool() { return render; }
 	virtual string GetName() { return m_strName; }
 };
 /// Delete Later...

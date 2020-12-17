@@ -20,7 +20,7 @@ private:
 
 	D3DXCOLOR c; 
 	D3DXVECTOR3 m_vMin, m_vMax;
-	bool pBox, pCylinder, pSphere, player;
+	bool pBox, pCylinder, pSphere, player, render;
 	// KT
 	float m_fHitLength;
 	// D3DXMATRIXA16 m_matS, m_matR, m_matT;  //맵 데이터
@@ -43,7 +43,7 @@ public:
 	void pCylinderBool(bool set) { pCylinder = set; }
 	void pSphereBool(bool set) { pSphere = set; }
 	void SetBool(bool set) { player = set; }
-
+	bool GetBool() { return render; }
 	// KT
 	void SetHitLength(float HitLength); // 빔이 맞았을때 거리 구해줌.
 

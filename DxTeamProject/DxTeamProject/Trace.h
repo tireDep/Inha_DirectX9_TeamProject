@@ -3,6 +3,8 @@
 
 class CTrace : public CItem
 {
+private:
+	bool render;
 public:
 	CTrace();
 	~CTrace();
@@ -16,5 +18,6 @@ public:
 	virtual void pBoxBool(bool set) { }; //피오브젝트와 상호작용
 	virtual void pCylinderBool(bool set) { };
 	virtual	void pSphereBool(bool set) { };
+	bool GetBool() { return render; }
 };
 

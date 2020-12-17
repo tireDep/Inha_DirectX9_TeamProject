@@ -3,6 +3,7 @@
 
 CTile::CTile()
 {
+	render = false;
 	m_strName = string("Tile") + to_string(m_nRefCount);
 }
 

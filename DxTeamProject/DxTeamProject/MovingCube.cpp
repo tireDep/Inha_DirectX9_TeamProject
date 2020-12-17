@@ -10,6 +10,7 @@ CMovingCube::CMovingCube()
 , m_fStartPos(0.0f)
 , m_fEndPos(8.0f)
 {
+	render = true;
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
 	D3DXMatrixIdentity(&m_matT);

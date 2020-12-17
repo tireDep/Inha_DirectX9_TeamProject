@@ -6,6 +6,7 @@ CDoor::CDoor()
 	, IsOpen(false)
 	, m_fRotAngle(0.0f)
 	, m_fRotationSpeed(1.0f)
+	,render(true)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);

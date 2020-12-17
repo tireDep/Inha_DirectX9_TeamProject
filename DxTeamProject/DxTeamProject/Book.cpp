@@ -8,6 +8,7 @@ CBook::CBook()
 	: m_fRotationSpeed(1.0f)
 	, m_fRotAngle(0.0f)
 	, pBox(false)
+	, render(true)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
@@ -158,7 +159,7 @@ void CBook::Render()
 
 			g_pEventManager->CheckEvent(msg);
 		}
-
+		render = false;
 		g_pEventManager->RemoveListener(this);
 
 		SafeRelease(m_pMesh);

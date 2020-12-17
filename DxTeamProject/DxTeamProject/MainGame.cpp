@@ -123,13 +123,13 @@ void CMainGame::Setup()
 #ifdef _DEBUG
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "DoorTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxToTile.dat");
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToGimmick.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToGimmick.dat");
 
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "colorTagTest.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ItemTest.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "doorTest2.dat");
@@ -262,7 +262,7 @@ void CMainGame::Update()
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
 		//for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
-		//	m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);
+			//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:

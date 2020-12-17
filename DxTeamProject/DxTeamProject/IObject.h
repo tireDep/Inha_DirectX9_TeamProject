@@ -40,6 +40,7 @@ public:
 	virtual void Render() = 0;
 	virtual string GetName() { return m_strName; }
 	virtual void SetBool(bool setup) = 0; //상호작용 
+	virtual bool GetBool() = 0;
 	virtual COBB* GetOBB() { return m_pOBB; }
 	virtual void pBoxBool(bool set) = 0; //피오브젝트와 상호작용
 	virtual void pCylinderBool(bool set) = 0;

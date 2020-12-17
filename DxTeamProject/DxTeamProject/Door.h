@@ -14,7 +14,7 @@ private:
 	float m_fOpeningAngle;
 	bool IsOpen;
 	bool pBox, pCylinder, pSphere;
-	bool player;
+	bool player ,render;
 	float m_fRotationSpeed;
 	float m_fRotAngle;
 public:
@@ -28,6 +28,7 @@ public:
 	void Update(float duration);
 	void Update(float duration, bool isSwitchOn);
 	void Render();
+	bool GetBool() { return render; }
 	string GetName() { return m_strName; }
 };
 //void Setup(string folder, string file);

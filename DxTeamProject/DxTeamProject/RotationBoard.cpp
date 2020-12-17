@@ -5,6 +5,7 @@ CRotationBoard::CRotationBoard()
 	: rotationAxial(RotationAxial::NONE)
 	, m_fRotationSpeed(1.0f)
 	, m_fRotAngle(0.0f)
+	,render(true)
 {
 	D3DXMatrixIdentity(&m_matRotGimmick);
 	m_strName = string("RotationBoard") + to_string(m_nRefCount);

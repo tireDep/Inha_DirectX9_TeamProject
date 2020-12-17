@@ -7,6 +7,7 @@ COrb::COrb() :
 	m_nowAni(0.0f),
 	m_UvX(0.0f),
 	m_UvY(0.2f)
+	,render(true)
 {
 }
 
@@ -47,8 +48,8 @@ void COrb::Setup(ST_MapData setData)
 	ST_PT_VERTEX v;
 	float f = m_vScale.x;
 	v.p = D3DXVECTOR3(-f, -f, 0.05);	v.t = D3DXVECTOR2(m_UvX, m_UvY); m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-f, f, 0.05);	v.t = D3DXVECTOR2(m_UvX, m_UvX); m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(f, -f, 0.05);	v.t = D3DXVECTOR2(m_UvY, m_UvY); m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(-f, f, 0.05);	v.t = D3DXVECTOR2(m_UvX, m_UvX);	m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(f, -f, 0.05);	v.t = D3DXVECTOR2(m_UvY, m_UvY);	m_vecVertex.push_back(v);
 
 	v.p = D3DXVECTOR3(f, f, 0.05);		v.t = D3DXVECTOR2(m_UvY, m_UvX); m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(f, -f, 0.05);		v.t = D3DXVECTOR2(m_UvY, m_UvY); m_vecVertex.push_back(v);
@@ -143,7 +144,7 @@ void COrb::Update(float duration)
 		m_vecVertex[5].t = D3DXVECTOR2(m_UvX, m_UvX);
 	}
 
-	 // m_pOBB->Update(&m_matWorld);
+	 // m_pOBB->Update(&GetmatWorld());
 }
 
 void COrb::SetBillbord()
@@ -176,4 +177,24 @@ void COrb::SetBillbord()
 	matInvView._43 = GetmatWorld()._43;
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matInvView);
+
+	
+	if (player == true)
+	{
+		if (m_strConditionName != "")
+		{
+			ST_EVENT msg;
+			msg.eventType = EventType::eConditionChange;
+			msg.isCondition = false;
+			msg.conditionName = m_strObjName;
+
+			g_pEventManager->CheckEvent(msg);
+		}
+		render = false;
+		g_pObjectManager->RemoveObject(m_pOBB);
+			
+	}
+	
+		
+	
 }

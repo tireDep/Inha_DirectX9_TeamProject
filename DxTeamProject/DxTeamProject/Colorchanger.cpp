@@ -11,6 +11,7 @@ Color_changer::Color_changer()
 	, m_scale(0.5, 0.5, 1)
 	, m_BeamOBB(NULL)
 	, c(1,1,1,1)
+	,render(true)
 {
 	D3DXMatrixIdentity(&matS);
 	D3DXMatrixIdentity(&matT);

@@ -23,5 +23,6 @@ public:
 	virtual void pBoxBool(bool set) = 0; //피오브젝트와 상호작용
 	virtual void pCylinderBool(bool set) = 0;
 	virtual	void pSphereBool(bool set) = 0;
+	virtual bool GetBool() = 0;
 };
 

@@ -3,10 +3,12 @@
 
 CTrace::CTrace()
 {
+	render = true;
 }
 
 CTrace::~CTrace()
 {
+	
 }
 
 void CTrace::Setup(ST_MapData setData)

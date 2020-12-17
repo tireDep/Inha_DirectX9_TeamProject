@@ -10,7 +10,7 @@ public:
 	CMovingCube();
 	~CMovingCube();
 	bool pBox, pCylinder, pSphere;
-	bool player;
+	bool player, render;
 private:
 	int m_indexNum; // 번호.
 	bool m_istrue; //범위 조절 장치
@@ -33,5 +33,6 @@ public:
 	void pCylinderBool(bool set) { pCylinder = set; }
 	void pSphereBool(bool set) { pSphere = set; }
 	void SetBool(bool set) { player = set; }
+	bool GetBool() { return render; }
 };
 

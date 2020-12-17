@@ -11,7 +11,7 @@ private:
 	float m_fRotAngle;
 	
 	bool pBox, pCylinder, pSphere;
-	bool player;
+	bool player ,render;
 	D3DXMATRIXA16 m_matRot;
 public:
 	CBook();
@@ -25,4 +25,5 @@ public:
 	void pCylinderBool(bool set) { pCylinder = set; }
 	void pSphereBool(bool set) { pSphere = set; }
 	void SetBool(bool set) { player = set; }
+	bool GetBool() { return render; }
 };

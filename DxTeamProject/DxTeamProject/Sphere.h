@@ -12,6 +12,7 @@ public:
 	CSphere();
 	~CSphere();
 protected:
+	bool render = true;
 	Synthesize(float, m_fRadius, Radius);
 public:
 	void Setup();
@@ -24,7 +25,7 @@ public:
 	bool hasIntersected(CCylinder * otherCylinder);
 	bool hasIntersected(IObject * otherIObject);
 	//bool hasIntersected(CGimmick * otherIObject);
-
+	bool GetBool() { return render; }
 	string GetName();
 };
 

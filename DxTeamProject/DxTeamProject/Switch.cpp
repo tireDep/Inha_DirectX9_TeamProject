@@ -10,6 +10,7 @@ CSwitch::CSwitch()
 	, pBox(false)
 	,pCylinder(false)
 	,pSphere(false)
+	,render(true)
 {
 	D3DXMatrixIdentity(&matS);
 	D3DXMatrixIdentity(&matT);

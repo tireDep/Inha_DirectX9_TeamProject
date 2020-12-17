@@ -12,9 +12,9 @@ private:
 
 	//충돌
 	bool pBox, pCylinder, pSphere, player;
-
+	bool render;
 public:
-	COBB* m_pOBB;
+
 	COrb();
 	~COrb();
 	void Setup();
@@ -29,5 +29,6 @@ public:
 	void pSphereBool(bool set) { pSphere = set; }
 	//캐릭터와충돌
 	void SetBool(bool set) { player = set; }
+	bool GetBool() { return render; }
 };
 
