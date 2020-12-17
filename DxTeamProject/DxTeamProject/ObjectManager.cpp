@@ -359,7 +359,7 @@ void CObjectManager::Collide(float duration)
 					CollisionBoxToTile(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
 					break;
 				}
-				
+				return;
 			}
 			else
 			{

@@ -126,6 +126,8 @@ void CMainGame::Setup()
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "colorTagTest.dat");
 
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
+
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxToTile.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "colorTagTest.dat");
