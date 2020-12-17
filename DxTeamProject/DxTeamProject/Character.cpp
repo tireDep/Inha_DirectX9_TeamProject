@@ -271,8 +271,11 @@ void CCharacter::ColliderObject()
 		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
 		{
 			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBook)
+			{
 				g_pObjectManager->GetVecIObject()[i]->SetBool(true);
-			continue;
+				continue;
+			}
+				
 			//if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
 			//{
 			//	BOOL hit = false;
