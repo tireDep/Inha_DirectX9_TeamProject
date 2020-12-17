@@ -267,8 +267,12 @@ void CCharacter::ColliderObject()
 {
 	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
 	{
-		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB(), &m_vContactNormal, &m_fPenetration))
+		//if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB(), &m_vContactNormal, &m_fPenetration))
+		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
 		{
+			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBook)
+				g_pObjectManager->GetVecIObject()[i]->SetBool(true);
+			continue;
 			//if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
 			//{
 			//	BOOL hit = false;
