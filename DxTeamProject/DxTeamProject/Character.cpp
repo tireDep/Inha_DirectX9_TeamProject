@@ -281,7 +281,7 @@ void CCharacter::ColliderObject()
 		{
 			D3DXVECTOR3 grabvector = g_pObjectManager->GetVecPObejct()[i]->GetPosition() - this->GetPosition();
 			float grabradian = D3DXVec3Dot(&this->m_vDirection, &grabvector);
-			if (grabradian)
+			if (grabradian > 0)
 			{
 				m_isGrab = true;
 				m_nGrabAbleObeject = i;

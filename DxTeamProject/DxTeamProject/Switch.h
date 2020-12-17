@@ -27,10 +27,12 @@ public:
 	void Update();
 	void Render();
 	void Update(float duration);
-	void pBoxBool(bool set) { pBox = set; }
-	void pCylinderBool(bool set) { pCylinder = set; }
-	void pSphereBool(bool set) { pSphere = set; }
-	void SetBool(bool set) { player = set; }
+	void pBoxBool(bool set);
+	void pCylinderBool(bool set);
+	void pSphereBool(bool set);
+	void SetBool(bool set);
 	COBB* GetOBB2() { return m_pColl; } // 콜리더부분!
+
+	void ChangeConditionMsg(bool set);
 };
 

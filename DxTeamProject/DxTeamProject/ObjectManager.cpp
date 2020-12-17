@@ -342,15 +342,15 @@ void CObjectManager::Collide(float duration)
 				case  eG_Switch:
 				{
 					m_vecIObject[IObjectIndex]->pBoxBool(true);
-					if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
-					{
-						ST_EVENT msg;
-						msg.eventType = EventType::eConditionChange;
-						msg.isCondition = false; // ¿­¸°´Ù
-						msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
+					//if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
+					//{
+					//	ST_EVENT msg;
+					//	msg.eventType = EventType::eConditionChange;
+					//	msg.isCondition = false; // ¿­¸°´Ù
+					//	msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
 
-						g_pEventManager->CheckEvent(msg);
-					}
+					//	g_pEventManager->CheckEvent(msg);
+					//}
 				}
 
 				break;
@@ -364,12 +364,12 @@ void CObjectManager::Collide(float duration)
 			else
 			{
 				
-				ST_EVENT msg;
-				msg.eventType = EventType::eConditionChange;
-				msg.isCondition = true; //´ÝÈù´Ù
-				msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
+				//ST_EVENT msg;
+				//msg.eventType = EventType::eConditionChange;
+				//msg.isCondition = true; //´ÝÈù´Ù
+				//msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
 
-				g_pEventManager->CheckEvent(msg);
+				//g_pEventManager->CheckEvent(msg);
 			}
 		
 		}

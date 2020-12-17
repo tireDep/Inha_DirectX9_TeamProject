@@ -122,12 +122,12 @@ void CMainGame::Setup()
 
 #ifdef _DEBUG
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
-	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "colorTagTest.dat");
 
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
 
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxToTile.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "colorTagTest.dat");
@@ -257,8 +257,6 @@ void CMainGame::Update()
 
 	if (m_pCamera)
 		m_pCamera->Update();
-
-	
 
 	if (m_pCharacter)
 	{
