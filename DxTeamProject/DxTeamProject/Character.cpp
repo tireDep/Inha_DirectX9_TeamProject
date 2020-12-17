@@ -351,6 +351,7 @@ void CCharacter::Setup()
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
+	// Need To Modify...
 	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 4.5f, 0);
 	m_Ray.SetOrigin(rayOrigin);
 	//if (m_isJump)

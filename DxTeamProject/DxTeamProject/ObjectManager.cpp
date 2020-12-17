@@ -209,9 +209,6 @@ void CObjectManager::Update(float duration)
 
 	//for (int i = 0; i < m_vecGimmick.size(); i++)
 	//   m_vecGimmick[i]->Update(duration);
-
-
-
 	//for (int i = 0; i < m_vecObject.size(); i++)
 	//   m_vecObject[i]->Update(duration);
 	//GenerateContacts();
@@ -849,14 +846,10 @@ void CObjectManager::Render()
 	}
 	// >> mapTest
 
-
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
-		
 		m_vecObject[i]->Render();
-
 	}
-
 
 	//for (int i = 0; i < m_vecIObject.size(); i++)
 	//{
