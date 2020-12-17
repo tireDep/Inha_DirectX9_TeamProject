@@ -9,7 +9,7 @@ CDragon::CDragon() :
 	m_numMtrls(0),
 	m_isTrue(false),
 	m_vPosition(0, 0, 0),
-	Drangon_y(4.5f),
+	Drangon_y(2.5f),
 	m_vDrangonPos(0, 0, 0),
 	m_vDirection(0,0,1),
 	rotation(D3DX_PI),

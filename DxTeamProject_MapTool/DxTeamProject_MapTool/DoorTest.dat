@@ -1,6 +1,99 @@
 # Object_Start
 # ObjectName
-Door1
+Box1
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+23
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0.5
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Sphere2
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+24
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0.25
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Cylinder3
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+25
+# Scale
+0.5
+0.5
+1
+# Rotate
+90
+0
+0
+# Translate
+-1.5
+0.5
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Door7
 # FolderPath
 Resource/XFile/Gimmick/Door
 # FilePath
@@ -10,17 +103,17 @@ cubeworld_texture.tga
 # ObjectType
 28
 # Scale
-0.5
-0.5
-0.5
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
-0.5
 0
-4.5
+0
+-6.5
 # Color
 0.5
 0.5
@@ -29,16 +122,16 @@ cubeworld_texture.tga
 # ColorTag
 # GimmickData
 # ConditionName
-Book3
+Black
 # ConditionIndex
-1
+0
 # ConditionOrbIndex
 0
 # Object_End
 
 # Object_Start
 # ObjectName
-Door2
+Door8
 # FolderPath
 Resource/XFile/Gimmick/Door
 # FilePath
@@ -48,17 +141,17 @@ cubeworld_texture.tga
 # ObjectType
 29
 # Scale
-0.5
-0.5
-0.5
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
-0.5
 0
-4.5
+0
+-6.5
 # Color
 0.5
 0.5
@@ -67,7 +160,45 @@ cubeworld_texture.tga
 # ColorTag
 # GimmickData
 # ConditionName
-Book3
+Black
+# ConditionIndex
+0
+# ConditionOrbIndex
+0
+# Object_End
+
+# Object_Start
+# ObjectName
+Door9
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_frame.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+28
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# ConditionName
+Book11
 # ConditionIndex
 1
 # ConditionOrbIndex
@@ -76,7 +207,45 @@ Book3
 
 # Object_Start
 # ObjectName
-Book3
+Door10
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_right.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+29
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# ConditionName
+Book11
+# ConditionIndex
+1
+# ConditionOrbIndex
+0
+# Object_End
+
+# Object_Start
+# ObjectName
+Book11
 # FolderPath
 Resource/XFile/Book
 # FilePath
@@ -94,9 +263,9 @@ Bookshelf_diffuse.png
 0
 0
 # Translate
-4.5
+7.5
 0
-4.5
+-0.5
 # Color
 0.5
 0.5
@@ -104,12 +273,12 @@ Bookshelf_diffuse.png
 1
 # ColorTag
 # ConditionName
-Door1
+Door9
 # Object_End
 
 # Object_Start
 # ObjectName
-Door4
+Door12
 # FolderPath
 Resource/XFile/Gimmick/Door
 # FilePath
@@ -119,9 +288,9 @@ cubeworld_texture.tga
 # ObjectType
 28
 # Scale
-0.5
-0.5
-0.5
+0.1
+0.1
+0.1
 # Rotate
 0
 0
@@ -129,7 +298,7 @@ cubeworld_texture.tga
 # Translate
 0
 0
--4.5
+7.5
 # Color
 0.5
 0.5
@@ -138,7 +307,7 @@ cubeworld_texture.tga
 # ColorTag
 # GimmickData
 # ConditionName
-Switch6
+Switch14
 # ConditionIndex
 2
 # ConditionOrbIndex
@@ -147,7 +316,7 @@ Switch6
 
 # Object_Start
 # ObjectName
-Door5
+Door13
 # FolderPath
 Resource/XFile/Gimmick/Door
 # FilePath
@@ -157,9 +326,9 @@ cubeworld_texture.tga
 # ObjectType
 29
 # Scale
-0.5
-0.5
-0.5
+0.1
+0.1
+0.1
 # Rotate
 0
 0
@@ -167,7 +336,7 @@ cubeworld_texture.tga
 # Translate
 0
 0
--4.5
+7.5
 # Color
 0.5
 0.5
@@ -176,7 +345,7 @@ cubeworld_texture.tga
 # ColorTag
 # GimmickData
 # ConditionName
-Switch6
+Switch14
 # ConditionIndex
 2
 # ConditionOrbIndex
@@ -185,7 +354,7 @@ Switch6
 
 # Object_Start
 # ObjectName
-Switch6
+Switch14
 # FolderPath
 Resource/XFile/Gimmick/Switch
 # FilePath
@@ -203,9 +372,9 @@ cubeworld_texture.tga
 0
 0
 # Translate
-4.5
 0
--4.5
+0
+2.5
 # Color
 0.5
 0.5
@@ -213,7 +382,7 @@ cubeworld_texture.tga
 1
 # ColorTag
 # ConditionName
-Door4
+Door12
 # Object_End
 
 # Section =======================================

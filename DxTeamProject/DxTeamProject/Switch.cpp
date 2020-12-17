@@ -24,8 +24,6 @@ CSwitch::~CSwitch()
 	SafeRelease(m_pBox);
 }
 
-
-
 void CSwitch::Setup()
 {
 	/*D3DXCreateBox(g_pD3DDevice, 2.5, 0.3f, 2.5, &m_pBox, NULL);
@@ -168,9 +166,43 @@ void CSwitch::Update(float duration)
 	m_pOBB->Update(&m_matWorld); //스위치 고유 충돌
 }
 
+void CSwitch::pBoxBool(bool set)
+{
+	pBox = set;
+	ChangeConditionMsg(set);
+}
 
+void CSwitch::pCylinderBool(bool set)
+{
+	pCylinder = set;
+	ChangeConditionMsg(set);
+}
 
+void CSwitch::pSphereBool(bool set)
+{
+	pSphere = set;
+	ChangeConditionMsg(set);
+}
 
+void CSwitch::SetBool(bool set)
+{
+	player = set;
+	ChangeConditionMsg(set);
+}
+
+void CSwitch::ChangeConditionMsg(bool set)
+{
+	if (m_strConditionName != "")
+	{
+		ST_EVENT msg;
+		msg.eventType = EventType::eConditionChange;
+		msg.isCondition = !set;
+		// >> 스위치 상태와 문 상태가 반대로 동작
+		msg.conditionName = m_strObjName;
+
+		g_pEventManager->CheckEvent(msg);
+	}
+}
 
 void CSwitch::Render()
 {
@@ -205,13 +237,9 @@ void CSwitch::Render()
 			}
 			else
 			{				
-				
 				m_pMesh->DrawSubset(0);
 			}
-
-		
 		}
-
 		g_pD3DDevice->SetTexture(0, NULL);
 	}
 	

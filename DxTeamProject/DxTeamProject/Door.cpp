@@ -109,12 +109,14 @@ void CDoor::Update(float duration)
 
 		// Need to Modify... Rotation
 		m_matWorld = matS * m_matRotGimmick * matT;
+
 		m_pOBB->Update(&m_matWorld);
 	}
 	else
 	{
 		m_pOBB->Update(&m_matWorld);
 	}
+
 
 	// tmp Test
 	// static int tmpCount = 0;

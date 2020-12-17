@@ -57,6 +57,7 @@ public:
 	bool GetItem(int index);
 
 	void SetGetOrb(string orbType);
+	void InitializationOrb();
 	bool GetIsHasOrb(string orbType);
 	bool CompleteOrb();
 };

@@ -121,11 +121,17 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "DesignTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "DoorTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxToTile.dat");
+
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToGimmick.dat");
+
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToGimmick.dat");
 
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ItemTest.dat");
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
@@ -250,8 +256,6 @@ void CMainGame::Update()
 
 	if (m_pCamera)
 		m_pCamera->Update();
-
-	
 
 	if (m_pCharacter)
 	{
@@ -450,6 +454,7 @@ void CMainGame::Render()
 			m_pScene->Render_Ending();
 		g_pGameManager->SetClipCursor(-15);
 		ShowCursor(true);
+		g_pGameManager->InitializationOrb();
 	}
 
 	if (m_pGrid)

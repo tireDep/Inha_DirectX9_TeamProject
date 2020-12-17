@@ -283,15 +283,15 @@ void CObjectManager::Collide(float duration)
 				case  eG_Switch:
 				{
 					m_vecIObject[IObjectIndex]->pSphereBool(true);
-					if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
-					{
-						ST_EVENT msg;
-						msg.eventType = EventType::eConditionChange;
-						msg.isCondition = false; // 열린다
-						msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
+					//if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
+					//{
+					//	ST_EVENT msg;
+					//	msg.eventType = EventType::eConditionChange;
+					//	msg.isCondition = false; // 열린다
+					//	msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
 
-						g_pEventManager->CheckEvent(msg);
-					}
+					//	g_pEventManager->CheckEvent(msg);
+					//}
 				}
 				break;
 				default:
@@ -302,15 +302,16 @@ void CObjectManager::Collide(float duration)
 			}
 			else
 			{
-				if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
-				{
-					ST_EVENT msg;
-					msg.eventType = EventType::eConditionChange;
-					msg.isCondition = true; // 열린다
-					msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
+				m_vecIObject[IObjectIndex]->pSphereBool(false);
+				//if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
+				//{
+				//	ST_EVENT msg;
+				//	msg.eventType = EventType::eConditionChange;
+				//	msg.isCondition = true; // 열린다
+				//	msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
 
-					g_pEventManager->CheckEvent(msg);
-				}
+				//	g_pEventManager->CheckEvent(msg);
+				//}
 
 			}
 		}
@@ -368,15 +369,15 @@ void CObjectManager::Collide(float duration)
 				case  eG_Switch:
 				{
 					m_vecIObject[IObjectIndex]->pBoxBool(true);
-					if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
-					{
-						ST_EVENT msg;
-						msg.eventType = EventType::eConditionChange;
-						msg.isCondition = false; // 열린다
-						msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
+					//if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
+					//{
+					//	ST_EVENT msg;
+					//	msg.eventType = EventType::eConditionChange;
+					//	msg.isCondition = false; // 열린다
+					//	msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
 
-						g_pEventManager->CheckEvent(msg);
-					}
+					//	g_pEventManager->CheckEvent(msg);
+					//}
 				}
 
 				break;
@@ -389,13 +390,13 @@ void CObjectManager::Collide(float duration)
 			}
 			else
 			{
+				m_vecIObject[IObjectIndex]->pBoxBool(false);
+				//ST_EVENT msg;
+				//msg.eventType = EventType::eConditionChange;
+				//msg.isCondition = true; //닫힌다
+				//msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
 
-				ST_EVENT msg;
-				msg.eventType = EventType::eConditionChange;
-				msg.isCondition = true; //닫힌다
-				msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
-
-				g_pEventManager->CheckEvent(msg);
+				//g_pEventManager->CheckEvent(msg);
 			}
 
 		}
@@ -445,15 +446,15 @@ void CObjectManager::Collide(float duration)
 					break;
 				case eG_Switch:
 					m_vecIObject[IObjectIndex]->pCylinderBool(true);
-					if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
-					{
-						ST_EVENT msg;
-						msg.eventType = EventType::eConditionChange;
-						msg.isCondition = false; // 열린다
-						msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
+					//if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
+					//{
+					//	ST_EVENT msg;
+					//	msg.eventType = EventType::eConditionChange;
+					//	msg.isCondition = false; // 열린다
+					//	msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
 
-						g_pEventManager->CheckEvent(msg);
-					}
+					//	g_pEventManager->CheckEvent(msg);
+					//}
 					break;
 				default:
 					CollisionIObject(m_vecCylinder[CylinderIndex], m_vecIObject[IObjectIndex], duration);
@@ -464,15 +465,15 @@ void CObjectManager::Collide(float duration)
 			else
 			{
 				m_vecIObject[IObjectIndex]->pCylinderBool(false);
-				if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
-				{
-					ST_EVENT msg;
-					msg.eventType = EventType::eConditionChange;
-					msg.isCondition = true; // 열린다
-					msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
+				//if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
+				//{
+				//	ST_EVENT msg;
+				//	msg.eventType = EventType::eConditionChange;
+				//	msg.isCondition = true; // 열린다
+				//	msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
 
-					g_pEventManager->CheckEvent(msg);
-				}
+				//	g_pEventManager->CheckEvent(msg);
+				//}
 			}
 		}
 	}
@@ -849,19 +850,13 @@ void CObjectManager::Render()
 	// >> mapTest
 
 	
-	for (int i = 0; i < m_vecPObject.size(); i++)
+	for (int i = 0; i < m_vecObject.size(); i++)
 	{
 
-		m_vecPObject[i]->Render();
+		m_vecObject[i]->Render();
 
 	}
 
-	for (int i = 0; i < m_vecIObject.size(); i++)
-	{
-		if (m_vecIObject[i]->GetBool() == true)
-			m_vecIObject[i]->Render();
-
-	}
 
 
 	//for (int i = 0; i < m_vecIObject.size(); i++)

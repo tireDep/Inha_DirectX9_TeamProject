@@ -1,165 +1,187 @@
 # Object_Start
 # ObjectName
-RoataionBoard1
+Orb_Black1
 # FolderPath
-Resource/XFile/Gimmick/RotationBoard
-# FilePath
-Rotation_board.X
-# TxtPath
-board.png
-# ObjectType
-26
-# Scale
-0.03
-0.03
-0.03
-# Rotate
-0
-0
-0
-# Translate
--4.5
-0
-0.5
-# Color
-0.5
-0.5
-0.5
-1
-# GimmickData
-# RotationSpeed
-1
-# RotationAxialIndex
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-MovingCube74
-# FolderPath
-Resource/XFile/Gimmick/MovingCube
-# FilePath
-moving_cube.X
-# TxtPath
-moving_cube_1.png
-# ObjectType
-32
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-90
-0
-# Translate
-1.5
-0
--7.5
-# Color
-0.5
-0.5
-0.5
-1
-# GimmickData
-# StartPos
-0
-# EndPos
-10
-# Speed
-5
-# DirectionIndex
-2
-# Object_End
-
-# Object_Start
-# ObjectName
-Box3
-# FolderPath
-
+Resource/Sprite/Orb
 # FilePath
 
 # TxtPath
-
+Orb_Black.png
 # ObjectType
-23
+34
 # Scale
 1
 1
 1
-# Rotate
-0
-0
-0
-# Translate
-0.5
-0.5
--4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Cylinder4
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-25
-# Scale
-0.5
-0.5
-1
-# Rotate
-90
-0
-0
-# Translate
-0.5
-0.5
-4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Sphere5
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-24
-# Scale
-0.5
-0.5
-0.5
 # Rotate
 0
 0
 0
 # Translate
 4.5
-0.25
+0.6
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Blue4
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Blue.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0.6
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Yellow5
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Yellow.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0.6
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Green6
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Green.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0.6
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Red7
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Red.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0.6
 4.5
 # Color
 0.5
 0.5
 0.5
 1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_White8
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_White.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0.6
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
 # Object_End
 
 # Section =======================================
