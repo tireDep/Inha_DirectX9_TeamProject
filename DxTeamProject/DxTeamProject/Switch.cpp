@@ -199,6 +199,8 @@ void CSwitch::Render()
 			{
 			
 				m_pMesh->DrawSubset(i);
+
+
 			}
 			else
 			{				
