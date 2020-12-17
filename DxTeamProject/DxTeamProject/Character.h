@@ -39,6 +39,7 @@ protected:
 	D3DXVECTOR3 m_vContactNormal;
 	float m_fPenetration;
 	bool m_isCollidedTile;
+	float m_fHeightTile;
 public:
 	virtual ~CCharacter(void);
 	virtual void Setup();
