@@ -12,8 +12,7 @@ private:
 	
 	bool pBox, pCylinder, pSphere;
 	bool player;
-	D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRot;
-
+	D3DXMATRIXA16 m_matRot;
 public:
 	CBook();
 	~CBook();

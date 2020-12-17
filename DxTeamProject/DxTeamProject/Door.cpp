@@ -23,7 +23,6 @@ void CDoor::Setup(const ST_MapData & mapData)
 	CGimmick::SetLoadData(mapData);
 
 	//m_fOpeningAngle = mapData. XXX
-
 	//m_strObjName = mapData.strObjName;
 	//m_strFolder = mapData.strFolderPath;
 	//m_strXFile = mapData.strXFilePath;
@@ -82,32 +81,39 @@ void CDoor::Setup(const ST_MapData & mapData)
 
 void CDoor::Update(float duration)
 {
-	if (m_isCondition)
+	if (m_ObjectType == eG_Door)
 	{
-		m_fRotAngle += m_fRotationSpeed * duration;
-		if (m_fRotAngle >= m_fOpeningAngle)
-			m_fRotationSpeed = 0;
+		if (m_isCondition)
+		{
+			m_fRotAngle += m_fRotationSpeed * duration;
+			if (m_fRotAngle >= m_fOpeningAngle)
+				m_fRotationSpeed = 0;
+			else
+				m_fRotationSpeed = 1.0f;
+		}
 		else
-			m_fRotationSpeed = 1.0f;
+		{
+			m_fRotAngle -= m_fRotationSpeed * duration;
+			if (m_fRotAngle <= 0)
+				m_fRotationSpeed = 0;
+			else
+				m_fRotationSpeed = 1.0f;
+		}
+
+		D3DXMatrixRotationY(&m_matRotGimmick, m_fRotAngle);
+
+		D3DXMATRIXA16 matS, matT;
+		D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+		D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+
+		// Need to Modify... Rotation
+		m_matWorld = matS * m_matRotGimmick * matT;
+		m_pOBB->Update(&m_matWorld);
 	}
 	else
 	{
-		m_fRotAngle -= m_fRotationSpeed * duration;
-		if (m_fRotAngle <= 0)
-			m_fRotationSpeed = 0;
-		else
-			m_fRotationSpeed = 1.0f;
+		m_pOBB->Update(&m_matWorld);
 	}
-
-	D3DXMatrixRotationY(&m_matRotGimmick, m_fRotAngle);
-
-	D3DXMATRIXA16 matS, matT;
-	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
-
-	// Need to Modify... Rotation
-	m_matWorld = matS * m_matRotGimmick * matT;
-	m_pOBB->Update(&m_matWorld);
 
 	// tmp Test
 	// static int tmpCount = 0;

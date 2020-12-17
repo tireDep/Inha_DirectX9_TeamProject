@@ -122,7 +122,7 @@ void CMainGame::Setup()
 
 #ifdef _DEBUG
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
-	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterToTile.dat");
+	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "DoorTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "colorTagTest.dat");
 
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");

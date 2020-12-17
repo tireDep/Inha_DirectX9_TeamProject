@@ -10,9 +10,9 @@ cubeworld_texture.tga
 # ObjectType
 28
 # Scale
-0.1
-0.1
-0.1
+0.5
+0.5
+0.5
 # Rotate
 0
 0
@@ -48,9 +48,9 @@ cubeworld_texture.tga
 # ObjectType
 29
 # Scale
-0.1
-0.1
-0.1
+0.5
+0.5
+0.5
 # Rotate
 0
 0
@@ -119,9 +119,9 @@ cubeworld_texture.tga
 # ObjectType
 28
 # Scale
-0.1
-0.1
-0.1
+0.5
+0.5
+0.5
 # Rotate
 0
 0
@@ -157,9 +157,9 @@ cubeworld_texture.tga
 # ObjectType
 29
 # Scale
-0.1
-0.1
-0.1
+0.5
+0.5
+0.5
 # Rotate
 0
 0
