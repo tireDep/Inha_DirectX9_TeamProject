@@ -452,8 +452,8 @@ bool CObjectManager::GetIsAnotherPos(D3DXVECTOR3 pos)
 		if (pos.x == result.x
 		 && pos.y == result.y 
 		 && pos.z == result.z)
-			return false;
+			return true;
 	}
-	return true;
+	return false;
 }
 

@@ -122,10 +122,12 @@ void CMainGame::Setup()
 
 #ifdef _DEBUG
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
+	 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "colorTagTest.dat");
 
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
+
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxToTile.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "colorTagTest.dat");
@@ -161,8 +163,6 @@ void CMainGame::Setup()
 
 	//m_pMovingCube = new MovingCube;
 	//m_pMovingCube->Setup();
-
-
 
 	m_pLight = new CLight;
 	m_pLight->Setup();
@@ -246,11 +246,13 @@ void CMainGame::Update()
 		g_pGameManager->SetGetOrb("Yellow");
 		g_pGameManager->SetGetOrb("Black");
 	}
+
 	g_pGameManager->CompleteOrb();
 	// >> 조건 확인 테스트
 	// >> on/off 상태 조건 // 텍스쳐 태깅
 
 	g_pTimeManager->Update();
+
 	g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
 	if (m_pCamera)
@@ -464,8 +466,6 @@ void CMainGame::Render()
 
 	if (m_pCharacter)
 		m_pCharacter->Render(c);
-
-
 
 	g_pObjectManager->Render();
 

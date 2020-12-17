@@ -10,7 +10,7 @@
 
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
-	, m_vPosition(5,0, 5)
+	, m_vPosition(0, 0, 0)
 	, m_isCollided(false)
 	, m_Character(NULL)
 	, m_isColorChanged(false)
@@ -20,6 +20,11 @@ CCharacter::CCharacter()
 	, m_fMaxJumpHeight(1.5f)
 	, m_fRadianJump(0.0f)
 	, m_isFallAni(false)
+	, m_preRotation(0.0f)
+	, m_vContactNormal(0, 0, 0)
+	, m_fPenetration(0.0f)
+	, m_isCollidedTile(false)
+
 	// , m_pOBB(NULL)
 	// , jumpis(false)
 	// , jumping(false)
@@ -48,6 +53,9 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 		if (eventMsg.message == WM_LBUTTONDOWN)
 		{
+			if (m_isJump)
+				return;
+
 			ST_EVENT msg;
 			msg.eventType = EventType::eColorChangeEvent;
 			msg.ptrMessage = &m_color;
@@ -69,6 +77,103 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 		{
 			switch (eventMsg.playerInput)
 			{
+				// todo : 점프 구현
+			case PlayerInputType::eJump:
+				//if (!jumping)
+				// {
+				// 	m_isJump = true;
+				// 	m_Character->SetAnimationIndex(7); // jump
+				// }
+				// speed = -1.0f;
+
+				if (!m_isJump)
+				{
+					m_isJump = true;
+					m_Character->SetAnimationIndexBlend(7); // jump
+					speed = -1;
+				}
+				break;
+
+				// todo : 잡기 구현
+			case PlayerInputType::eHold:
+				if (m_isGrab)
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(5);
+				}
+				else
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
+				}
+				//if (m_nGrabAbleObeject != -1)
+				//{
+				//	if (m_Character->CheckAnimationEnd())
+				//		//m_Character->SetAnimationIndexBlend(5); // push
+				//		m_Character->SetAnimationIndex(5);
+				//	// >> 블랜드가 안되서 잡기 대기 상태처럼 나옴
+				//}
+				// else
+				//m_Character->SetAnimationIndexBlend(5); // push
+				//m_Character->SetAnimationIndex(5);
+				speed = -1.0f;
+				break;
+
+			case PlayerInputType::eHoldPush:
+				if (m_isGrab)
+				{
+					if (m_nGrabAbleObeject != -1)
+					{
+						D3DXVECTOR3 v;
+						v = g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetPosition() - this->GetPosition();
+						v.y -= 0.5f;
+						D3DXVec3Normalize(&v, &v);
+						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetPusingForce(v);
+						rotation = m_preRotation;
+						speed = 1.0f;
+
+						m_Character->SetAnimationIndex(5);
+					}
+					// if (m_Character->CheckAnimationEnd())
+				}
+				else
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
+					speed = -1.0f;
+				}
+				//if (m_nGrabAbleObeject != -1)
+				//{
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(5); // Push
+				//}
+				//else
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(10); // Idle
+
+				break;
+			case PlayerInputType::eHoldPull:
+				if (m_isGrab)
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(4);
+				}
+				else
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
+				}
+				//if (m_nGrabAbleObeject != -1)
+				//{
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(4); // Pull
+				//}
+				//else
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(10); // Idle
+				speed = -1.0f;
+				break;
+
 			case PlayerInputType::eUp:
 				rotation = 0.0f;
 				break;
@@ -101,102 +206,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				rotation = D3DX_PI / 2.0f;
 				break;
 
-				// todo : 점프 구현
-			case PlayerInputType::eJump:
-				//if (!jumping)
-				// {
-				// 	m_isJump = true;
-				// 	m_Character->SetAnimationIndex(7); // jump
-				// }
-				// speed = -1.0f;
-
-				if (!m_isJump)
-				{
-					m_isJump = true;
-					m_Character->SetAnimationIndexBlend(7); // jump
-					speed = -1;
-				}
-				break;
-
-				// todo : 잡기 구현
-			case PlayerInputType::eHold:
-				if(m_isGrab)
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(5);
-				}
-				else
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(10); // Idle
-				}
-				//if (m_nGrabAbleObeject != -1)
-				//{
-				//	if (m_Character->CheckAnimationEnd())
-				//		//m_Character->SetAnimationIndexBlend(5); // push
-				//		m_Character->SetAnimationIndex(5);
-				//	// >> 블랜드가 안되서 잡기 대기 상태처럼 나옴
-				//}
-				// else
-				//m_Character->SetAnimationIndexBlend(5); // push
-				//m_Character->SetAnimationIndex(5);
-				speed = -1.0f;
-				break;
-			case PlayerInputType::eHoldPush:
-				if (m_isGrab)
-				{
-					if (m_nGrabAbleObeject != -1)
-					{
-						D3DXVECTOR3 v;
-						v = g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetPosition() - this->GetPosition();
-						v.y -= 0.5f;
-						D3DXVec3Normalize(&v, &v);
-						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetPusingForce(v);
-						rotation = 0;
-						speed = 1.0f;
-					}
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(5);
-				}
-				else
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(10); // Idle
-					speed = -1.0f;
-				}
-				//if (m_nGrabAbleObeject != -1)
-				//{
-				//	if (m_Character->CheckAnimationEnd())
-				//		m_Character->SetAnimationIndex(5); // Push
-				//}
-				//else
-				//	if (m_Character->CheckAnimationEnd())
-				//		m_Character->SetAnimationIndex(10); // Idle
-				
-				break;
-			case PlayerInputType::eHoldPull:
-				if (m_isGrab)
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(4);
-				}
-				else
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(10); // Idle
-				}
-				//if (m_nGrabAbleObeject != -1)
-				//{
-				//	if (m_Character->CheckAnimationEnd())
-				//		m_Character->SetAnimationIndex(4); // Pull
-				//}
-				//else
-				//	if (m_Character->CheckAnimationEnd())
-				//		m_Character->SetAnimationIndex(10); // Idle
-				speed = -1.0f;
-				break;
 			default:
-				if (!m_isJump || m_Character->CheckAnimationEnd())
+				if (m_Character->CheckAnimationEnd()) // !m_isJump || 
 				{
 					speed = -1.0f;
 					m_Character->SetAnimationIndex(10); // Idle
@@ -207,6 +218,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 		if (speed > 0 && m_Character->CheckAnimationEnd())
 		{
+			m_preRotation = rotation;
+
 			// >> 특정 애니메이션 재생 중 이동 하지 않음
 			if(!m_isJump)
 				m_Character->SetAnimationIndex(9); // Walk
@@ -252,14 +265,16 @@ void CCharacter::UpdateRayYCheck(MeshTile & meshtile)
 
 void CCharacter::ColliderObject()
 {
-	//for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
-	//{
-	//	if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
-	//	{
-	//		m_isCollided = true;
-	//		return;
-	//	}
-	//}
+	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
+	{
+		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB(), &m_vContactNormal, &m_fPenetration))
+		{
+			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= 12)
+				m_isCollidedTile = true;
+			m_isCollided = true;
+			return;
+		}
+	}
 	for (int i = 0; i < g_pObjectManager->GetVecPObejct().size(); i++)
 	{
 		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecPObejct()[i]->GetOBB()))
@@ -524,7 +539,9 @@ void CCharacter::Update(float duration)
 
 		if (m_fRadianJump >= D3DXToRadian(180.0f))
 		{
-			m_Character->SetAnimationIndexBlend(10); // idle
+			if(m_Character->CheckAnimationEnd())
+				m_Character->SetAnimationIndexBlend(10); // idle
+
 			m_isFallAni = false;
 			m_isJump = false;
 			m_fRadianJump = 0;
@@ -565,12 +582,29 @@ void CCharacter::DoMove(const float& velocity)
 	if (m_isCollided)
 	{
 		m_vPosition = m_position;
+		if (m_isCollidedTile)
+		{
+			//m_vPosition.y += 0.005f;
+			D3DXVec3Normalize(&m_vContactNormal, &m_vContactNormal);
+			m_vPosition += m_vContactNormal * m_fPenetration;
+ 			//m_vPosition.x += m_vContactNormal.x * m_fPenetration;
+			//m_vPosition.y += m_vContactNormal.y * m_fPenetration;
+			//m_vPosition.z += m_vContactNormal.z * m_fPenetration;
+			//cout << "m_vContactNormal : " << m_vContactNormal.x << ' ' << m_vContactNormal.y << ' ' << m_vContactNormal.z << endl;
+			//cout << m_fPenetration << endl;
+			m_isCollidedTile = false;
+		}
 	}
 	else
 	{
 		m_position = m_vPosition;
 	}
+	//cout << "m_vDirection : " << m_vDirection.x << ' ' << m_vDirection.y << ' ' << m_vDirection.z << endl;
 	m_vPosition = m_vPosition + (m_vDirection * velocity);
+	if (m_vPosition.y >= 0)
+		m_vPosition.y -= 0.005f;
+	else
+		m_vPosition.y = 0;
 }
 
 

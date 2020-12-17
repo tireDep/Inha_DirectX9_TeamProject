@@ -46,54 +46,56 @@ void CBook::Setup()
 
 void CBook::Setup(ST_MapData setData)
 {
-	m_strObjName = setData.strObjName;
-	m_strFolder = setData.strFolderPath;
-	m_strXFile = setData.strXFilePath;
-	m_strTxtFile = setData.strTxtPath;
-	m_ObjectType = setData.objType;
+	CItem::Setup(setData);
 
-	D3DXVECTOR3 vScale, vRotate, vTranslate;
+	//m_strObjName = setData.strObjName;
+	//m_strFolder = setData.strFolderPath;
+	//m_strXFile = setData.strXFilePath;
+	//m_strTxtFile = setData.strTxtPath;
+	//m_ObjectType = setData.objType;
 
-	vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
-							 // JW ADD...
-	m_vScale = vScale;
-	vRotate = setData.vRotate;
-	vTranslate = setData.vTranslate;
+	//D3DXVECTOR3 vScale, vRotate, vTranslate;
 
-	m_strConditionName = setData.gimmickData.conditionName;
+	//vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
+	//						 // JW ADD...
+	//m_vScale = vScale;
+	//vRotate = setData.vRotate;
+	//vTranslate = setData.vTranslate;
 
-	ST_XFile* xfile = new ST_XFile;
+	//m_strConditionName = setData.gimmickData.conditionName;
 
-	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
+	//ST_XFile* xfile = new ST_XFile;
 
-	if (m_strTxtFile != "")
-		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+	//g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
 
-	m_pMesh = xfile->pMesh;
-	m_adjBuffer = xfile->adjBuffer;
-	m_vecMtrls = xfile->vecMtrl;
-	m_vecTextures = xfile->vecTextrure;
-	m_numMtrls = xfile->nMtrlNum;
+	//if (m_strTxtFile != "")
+	//	g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
 
-	delete xfile;
+	//m_pMesh = xfile->pMesh;
+	//m_adjBuffer = xfile->adjBuffer;
+	//m_vecMtrls = xfile->vecMtrl;
+	//m_vecTextures = xfile->vecTextrure;
+	//m_numMtrls = xfile->nMtrlNum;
 
-	D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
+	//delete xfile;
 
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(vRotate.x);
-	v.y = D3DXToRadian(vRotate.y);
-	v.z = D3DXToRadian(vRotate.z);
+	//D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
 
-	D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
+	//D3DXVECTOR3 v;
+	//v.x = D3DXToRadian(vRotate.x);
+	//v.y = D3DXToRadian(vRotate.y);
+	//v.z = D3DXToRadian(vRotate.z);
 
-	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
-	m_matWorld = m_matS * m_matR * m_matT;
+	//D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
 
-	// OBB TEST
-	m_pOBB = new COBB;
-	m_pOBB->Setup(*this);
-	g_pObjectManager->AddOBBbox(m_pOBB);
-	m_pOBB->Update(&m_matWorld);
+	//D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
+	//m_matWorld = m_matS * m_matR * m_matT;
+
+	//// OBB TEST
+	//m_pOBB = new COBB;
+	//m_pOBB->Setup(*this);
+	//g_pObjectManager->AddOBBbox(m_pOBB);
+	//m_pOBB->Update(&m_matWorld);
 
 }
 

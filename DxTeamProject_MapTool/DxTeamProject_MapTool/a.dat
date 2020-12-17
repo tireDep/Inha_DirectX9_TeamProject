@@ -1,24 +1,24 @@
 # Object_Start
 # ObjectName
-A_Tree_Red_016_1
+Book1
 # FolderPath
-Resource/XFile/Background/ColorTree
+Resource/XFile/Book
 # FilePath
-Tree_01.X
+book.X
 # TxtPath
-TreesRed.png
+Bookshelf_diffuse.png
 # ObjectType
-16
+33
 # Scale
-0.1
-0.1
-0.1
+1
+1
+1
 # Rotate
 0
 0
 0
 # Translate
--9.5
+0.5
 0
 0.5
 # Color
@@ -27,31 +27,30 @@ TreesRed.png
 0.5
 1
 # ColorTag
-Red
 # Object_End
 
 # Object_Start
 # ObjectName
-A_Tree_Green_016_2
+Orb_Blue2
 # FolderPath
-Resource/XFile/Background/ColorTree
+Resource/Sprite/Orb
 # FilePath
-Tree_01.X
+
 # TxtPath
-TreesGreen.png
+Orb_Blue.png
 # ObjectType
-16
+34
 # Scale
-0.1
-0.1
-0.1
+2
+2
+2
 # Rotate
 0
 0
 0
 # Translate
 -4.5
-0
+0.6
 0.5
 # Color
 0.5
@@ -59,63 +58,30 @@ TreesGreen.png
 0.5
 1
 # ColorTag
-Green
 # Object_End
 
 # Object_Start
 # ObjectName
-A_Tree_Yellow_016_3
+Trace_Blue3
 # FolderPath
-Resource/XFile/Background/ColorTree
+Resource/Sprite/Trace
 # FilePath
-Tree_01.X
-# TxtPath
-TreesYellow.png
-# ObjectType
-16
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-0.5
-0
-0.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
 
-# Object_Start
-# ObjectName
-A_Tree_Green_016_4
-# FolderPath
-Resource/XFile/Background/ColorTree
-# FilePath
-Tree_01.X
 # TxtPath
-TreesGreen.png
+WaterColor_Blue.png
 # ObjectType
-16
+38
 # Scale
-0.1
-0.1
-0.1
+2
+0.5
+2
 # Rotate
 0
 0
 0
 # Translate
 4.5
-0
+0.3
 0.5
 # Color
 0.5
@@ -123,39 +89,6 @@ TreesGreen.png
 0.5
 1
 # ColorTag
-Green
-# Object_End
-
-# Object_Start
-# ObjectName
-A_Tree_Red_016_5
-# FolderPath
-Resource/XFile/Background/ColorTree
-# FilePath
-Tree_01.X
-# TxtPath
-TreesRed.png
-# ObjectType
-16
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-9.5
-0
-0.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
 # Object_End
 
 # Section =======================================

@@ -29,12 +29,16 @@ protected:
 
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
-	float rotation;
+	float					rotation;
+	float					m_preRotation;
 	// grab
 	Synthesize(bool, m_isGrab, Grab);
 	int						m_nGrabAbleObeject;
 	// Ray y check
 	CRay					m_Ray;
+	D3DXVECTOR3 m_vContactNormal;
+	float m_fPenetration;
+	bool m_isCollidedTile;
 public:
 	virtual ~CCharacter(void);
 	virtual void Setup();

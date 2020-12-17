@@ -8,6 +8,7 @@
 #include "Light.h"
 #include "toolMain.h"
 #include "Door.h"
+#include "Trace.h"
 
 CToolMain::CToolMain() : 
 	m_pRay(NULL),
@@ -267,7 +268,7 @@ void CToolMain::CreateObject_RBtn(CRay & r)
 			pos.y = 0;
 			pos.z = floor(pos.z);		pos.z += 0.5f;
 
-			if (g_pObjectManager->GetIsAnotherPos(pos))
+			if (!g_pObjectManager->GetIsAnotherPos(pos))
 			{
 				CImguiClass::CreateMouseRBtn();
 				SetCreateObjectPos(pos);
@@ -288,6 +289,12 @@ void CToolMain::SetCreateObjectPos(D3DXVECTOR3 pos)
 	{
 		CDoor* temp = static_cast<CDoor*>(&g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1));
 		temp->SetAnotherTranslation(pos);
+	}
+	else if (g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).GetObjType() == eTrace)
+	{
+		CTrace* temp = static_cast<CTrace*>(&g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1));
+		pos.y -= 0.1f;
+		temp->SetTranslate(pos);
 	}
 	else
 		g_pObjectManager->GetIObject(g_pObjectManager->GetVecSize() - 1).SetTranslate(pos);

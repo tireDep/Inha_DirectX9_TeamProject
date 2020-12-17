@@ -31,4 +31,5 @@ public:
 	float GetOBBWidth() { return m_fAxisHalfLen[0]; }	// distance of center to x axis
 	float GetOBBHeight() { return m_fAxisHalfLen[1]; }	// distance of center to y axis
 	float GetOBBDepth() { return m_fAxisHalfLen[2]; }  // distance of center to z axis
+	D3DXMATRIXA16 GetOBBWorldMatrix(){ return m_matWorld; }
 };

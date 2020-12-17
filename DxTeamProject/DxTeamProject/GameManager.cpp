@@ -125,6 +125,15 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 	{
 		switch (eventMsg.message)
 		{
+		case WM_LBUTTONDOWN:
+			if (m_SceneName == SceneType::eEndingScene)
+			{
+				m_SceneName = SceneType::eMainScene;
+				cout << "in" << endl;
+				return;
+			}
+			break;
+
 		case WM_KEYDOWN:
 		{
 			if (m_SceneName == SceneType::eMainScene)
@@ -132,6 +141,7 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 				m_SceneName = SceneType::eGameScene;
 				return;
 			}
+
 			if (VK_CONTROL == eventMsg.wParam && !m_isUIModeIn)
 			{
 				m_isUIMode = !m_isUIMode;
