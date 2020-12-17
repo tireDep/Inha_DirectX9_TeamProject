@@ -93,6 +93,15 @@ void CGameManager::SetGetOrb(string orbType)
 	}
 }
 
+void CGameManager::InitializationOrb()
+{
+	map<string, bool>::iterator it;
+	for (it = m_mapOrb.begin(); it != m_mapOrb.end(); it++)
+	{
+		it->second = false;
+	}
+}
+
 bool CGameManager::GetIsHasOrb(string orbType)
 {
 	// >> 색상 오브를 가지고 있는지 판별
