@@ -121,9 +121,6 @@
     <ClCompile Include="FileLoadManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsObjectManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -251,6 +248,9 @@
     </ClCompile>
     <ClCompile Include="Trace.cpp">
       <Filter>Object\IObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsObjectManager.cpp">
+      <Filter>...TrashCan</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -396,9 +396,6 @@
     <ClInclude Include="FileLoadManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsObjectManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -526,6 +523,9 @@
     </ClInclude>
     <ClInclude Include="Trace.h">
       <Filter>Object\IObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsObjectManager.h">
+      <Filter>...TrashCan</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

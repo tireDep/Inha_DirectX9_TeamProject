@@ -112,7 +112,7 @@ void COBB::Setup(CAllocateHierarchy & ah)
 	//	0.000000, 5.161628, 0.000000, 0.000000, 
 	//	0.000000, 0.000000, 5.161628, 0.000000, 
 	//	0.003480, 0.304418, 5.063910, 1.000000);
-	D3DXVECTOR3 Upvector = D3DXVECTOR3(0, 1.5, 0);
+	D3DXVECTOR3 Upvector = D3DXVECTOR3(0, 1.77, 0);
 	D3DXVECTOR3 m_vMin = ah.GetMin() * 2 + Upvector;
 	D3DXVECTOR3 m_vMax = ah.GetMax() * 2 + Upvector;
 	m_vMin.x = ah.GetMin().x * 1.8;		m_vMin.z = ah.GetMin().z * 5;

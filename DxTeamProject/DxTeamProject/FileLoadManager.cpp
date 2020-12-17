@@ -150,7 +150,7 @@ void CFileLoadManager::LoadData(string path)
 				}
 			}
 
-			else if (strstr(readData.c_str(), "# GimmickData"))
+			if (strstr(readData.c_str(), "# GimmickData"))
 			{
 				ReadGimmickData(file, readData, mapData);
 			}

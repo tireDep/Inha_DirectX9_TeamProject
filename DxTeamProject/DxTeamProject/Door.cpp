@@ -23,7 +23,6 @@ void CDoor::Setup(const ST_MapData & mapData)
 	CGimmick::SetLoadData(mapData);
 
 	//m_fOpeningAngle = mapData. XXX
-
 	//m_strObjName = mapData.strObjName;
 	//m_strFolder = mapData.strFolderPath;
 	//m_strXFile = mapData.strXFilePath;
@@ -113,7 +112,10 @@ void CDoor::Update(float duration)
 		m_pOBB->Update(&m_matWorld);
 	}
 	else
+	{
 		m_pOBB->Update(&m_matWorld);
+	}
+
 
 	// tmp Test
 	// static int tmpCount = 0;
