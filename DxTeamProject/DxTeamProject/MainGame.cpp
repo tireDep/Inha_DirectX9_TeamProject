@@ -121,8 +121,8 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToGimmick.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "DoorTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxToTile.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
