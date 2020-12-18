@@ -13,7 +13,8 @@
 
 CObjectManager::CObjectManager() :
 	m_frustum(NULL),
-	m_thread(NULL)
+	m_thread(NULL),
+	ResetCube(false)
 	/// KT Reset
 	//Reset(true)
 {
@@ -744,11 +745,17 @@ void CObjectManager::Reset()
 {
 	for (int i = 0; i < m_vecPObject.size(); i++)
 	{
+		m_vecPObject[i]->SetDxColor(m_vecPObject[i]->ResetColor);
 		m_vecPObject[i]->SetPosition(m_vecPObject[i]->saveTranslation);
 		m_vecPObject[i]->SetForceApplied(false);
 		m_vecPObject[i]->SetAcceleration(D3DXVECTOR3(0, 0, 0));
 		m_vecPObject[i]->SetVelocity(D3DXVECTOR3(0, 0, 0));
 		m_vecPObject[i]->SetForceVector(D3DXVECTOR3(0, 0, 0));
+	}
+
+	for (int i = 0; i < m_vecIObject.size(); ++i)
+	{
+		m_vecIObject[i]->PresentPosition = m_vecIObject[i]->ResetPosition;
 	}
 	// Need To Add IObject...
 }

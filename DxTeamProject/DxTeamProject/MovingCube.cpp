@@ -68,6 +68,8 @@ void CMovingCube::Setup(ST_MapData setData)
 	m_fSpeed = setData.gimmickData.speed_movingCube;
 	m_indexNum = setData.gimmickData.directionIndex_movingCube;
 
+	
+	ResetPosition = setData.vTranslate;
 	//m_strObjName = setData.strObjName;
 	//m_strFolder = setData.strFolderPath;
 	//m_strXFile = setData.strXFilePath;
@@ -212,6 +214,8 @@ void CMovingCube::Update(float duration)
 		}
 	}
 
+	if(g_pObjectManager->ResetCube  == true)
+		m_vPosition = PresentPosition;
 	// MJ Code
 	//if (m_indexNum == 0 && m_istrue == false)
 	//{
@@ -249,9 +253,11 @@ void CMovingCube::Update(float duration)
 	//	if (m_vPosition.z < m_fEndPos)
 	//		m_istrue = false;
 	//}
-
+	
 	D3DXMatrixTranslation(&m_matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	m_matWorld = m_matS * m_matR * m_matT;
+
+	
 
 	m_pOBB->Update(&m_matWorld);
 }
