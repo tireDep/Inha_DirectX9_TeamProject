@@ -27,6 +27,7 @@ CCharacter::CCharacter()
 	, m_fHeightTile(0.0f)
 	, m_fSpeed(0.0f)
 	, m_fRotation(0.0f)
+	, m_fGrabRotation(0.0f)
 	/// KT Reset
 	//, Reset(false)
 	// , m_pOBB(NULL)
@@ -134,7 +135,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 						v.y -= 0.5f;
 						D3DXVec3Normalize(&v, &v);
 						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetPusingForce(v);
-						m_fRotation = m_preRotation;
+						//m_fRotation = m_fGrabRotation;
 						// Need To Modify...
 						m_fSpeed = 0.0f;
 						m_Character->SetAnimationIndex(5);
@@ -182,49 +183,49 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			case PlayerInputType::eUp:
 				m_fRotation = 0.0f;
 				m_fSpeed = 10.0f;
-				m_preRotation = m_fRotation;
+				//m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eLeftUp:
 				m_fRotation = D3DX_PI / 4.0f * -1;
 				m_fSpeed = 10.0f;
-				m_preRotation = m_fRotation;
+				//m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eRightUp:
 				m_fRotation = D3DX_PI / 4.0f;
 				m_fSpeed = 10.0f;
-				m_preRotation = m_fRotation;
+				//m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eDown:
 				m_fRotation = D3DX_PI;
 				m_fSpeed = 10.0f;
-				m_preRotation = m_fRotation;
+				//m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eLeftDown:
 				m_fRotation = D3DX_PI + D3DX_PI / 4.0f;
 				m_fSpeed = 10.0f;
-				m_preRotation = m_fRotation;
+				//m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eRightDown:
 				m_fRotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
 				m_fSpeed = 10.0f;
-				m_preRotation = m_fRotation;
+				//m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eLeft:
 				m_fRotation = -D3DX_PI / 2.0f;
 				m_fSpeed = 10.0f;
-				m_preRotation = m_fRotation;
+				//m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eRight:
 				m_fRotation = D3DX_PI / 2.0f;
 				m_fSpeed = 10.0f;
-				m_preRotation = m_fRotation;
+				//m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eReset:
@@ -243,16 +244,18 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				{
 					m_fSpeed = 0.0f;
 					m_Character->SetAnimationIndex(10); // Idle
-					
 				}
 				/// KT Reset
 				//g_pObjectManager->Reset = true;
 				//Reset = false;
-				
 				break;
 			}
 		} // << eInputEvent
-
+		if (m_fSpeed > 0 && m_Character->CheckAnimationEnd())
+		{
+			//m_fGrabRotation = m_fRotation;
+			//DoRotation(m_fRotation);
+		}
 	}
 	//D3DXMATRIXA16 matT;
 	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
@@ -335,6 +338,7 @@ void CCharacter::ColliderObject()
 		{
 			D3DXVECTOR3 grabvector = g_pObjectManager->GetVecPObejct()[i]->GetPosition() - this->GetPosition();
 
+			//float grabradian = D3DXVec3Dot(&this->m_vDirection, &grabvector) / (D3DXVec3Length(&m_vDirection) * D3DXVec3Length(&grabvector));
 			float grabradian = D3DXVec3Dot(&this->m_vDirection, &grabvector) / (D3DXVec3Length(&m_vDirection) * D3DXVec3Length(&grabvector));
 			if (grabradian > cosf(D3DXToRadian(45)))
 			{
@@ -386,7 +390,8 @@ void CCharacter::Setup()
 
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
-	m_vDirection = cameradirection;
+	if(!m_isGrab)
+		m_vDirection = cameradirection;
 	//if (m_isJump)
 	//{
 	//	// jumping = true;
@@ -599,7 +604,9 @@ void CCharacter::Update(float duration)
 		m_vPosition.y = m_fMaxJumpHeight * sinf(m_fRadianJump);
 		m_vPosition.z += m_vDirection.z * m_fSpeed * duration;
 		
-		DoRotation(m_preRotation);
+		//DoRotation(m_preRotation);
+		//m_fGrabRotation = m_fRotation;
+		//DoRotation(m_fRotation);
 
 		if (m_fRadianJump >= D3DXToRadian(180.0f))				// Low Spot	
 		{
@@ -621,8 +628,9 @@ void CCharacter::Update(float duration)
 	{
 		if (m_fSpeed > 0 && m_Character->CheckAnimationEnd())
 		{
+			//m_fGrabRotation = m_fRotation;
 			m_Character->SetAnimationIndex(9); // Walk
-			m_preRotation = m_fRotation;
+			//m_preRotation = m_fRotation;
 			DoRotation(m_fRotation);
 			m_vPosition += (m_vDirection * m_fSpeed * duration);
 		}
@@ -632,7 +640,6 @@ void CCharacter::Update(float duration)
 	if (m_isCollided)
 	{
 		m_vPosition = prePos;
-
 	}
 	else
 	{

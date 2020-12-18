@@ -70,6 +70,7 @@ void PObject::Update(float duration)
 	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
 	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
 	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+	m_matWorld = matS * matR * matT;
 
 	/// KT Reset
 	//if (g_pObjectManager->Reset == true)
@@ -131,7 +132,7 @@ void PObject::SetPusingForce(D3DXVECTOR3 forcedirection)
 {
 	D3DXVECTOR3 forcePosition = forcedirection * m_fBoundingSphere;
 	m_vForceLocation = forcePosition;
-	m_vForceVector = forcedirection * 100;
+	m_vForceVector = forcedirection * 2000;
 	SetForceApplied(true);
 }
 
