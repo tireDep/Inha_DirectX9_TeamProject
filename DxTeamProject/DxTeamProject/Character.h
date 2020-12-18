@@ -27,7 +27,8 @@ protected:
 	//bool					jumpis;
 	//bool					jumping;
 
-	bool Reset;
+	/// KT Reset
+	//bool Reset;
 
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
@@ -78,4 +79,7 @@ public:
 
 	// KT Character to Object
 	void ColliderObject();
+
+	/// KT Reset
+	void Reset();
 };

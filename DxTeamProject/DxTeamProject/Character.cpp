@@ -27,7 +27,8 @@ CCharacter::CCharacter()
 	, m_fHeightTile(0.0f)
 	, m_fSpeed(0.0f)
 	, m_fRotation(0.0f)
-	, Reset(false)
+	/// KT Reset
+	//, Reset(false)
 	// , m_pOBB(NULL)
 	// , jumpis(false)
 	// , jumping(false)
@@ -227,11 +228,14 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				break;
 
 			case PlayerInputType::eReset:
-				cout << "hi" << endl;
-				Reset = true;
-				g_pObjectManager->Reset = false;
-			
-//				speed = -1.0f;
+				/// KT Reset
+				//cout << "hi" << endl;
+				//Reset = true;
+				//g_pObjectManager->Reset = false;
+				Reset();
+				g_pObjectManager->Reset();
+
+				//speed = -1.0f;
 				break;
 
 			default:
@@ -241,8 +245,9 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 					m_Character->SetAnimationIndex(10); // Idle
 					
 				}
+				/// KT Reset
 				//g_pObjectManager->Reset = true;
-				Reset = false;
+				//Reset = false;
 				
 				break;
 			}
@@ -347,6 +352,18 @@ void CCharacter::ColliderObject()
 	}
 	m_isCollided = false;
 	m_isGrab = false;
+}
+
+/// KT Reset
+void CCharacter::Reset()
+{
+	// Need To Modify... SavePosition;
+	m_vPosition = D3DXVECTOR3(0, 0, 0);
+
+	m_vDirection = D3DXVECTOR3(0, 0, 1);
+	D3DXMatrixIdentity(&m_matWorld);
+	D3DXMatrixIdentity(&m_matRotY);
+	D3DXMatrixIdentity(&matT);
 }
 
 CCharacter::~CCharacter()
@@ -652,11 +669,11 @@ void CCharacter::Update(float duration)
 		m_Character->SetTransform(&m_matWorld);
 	}
 
-	if (Reset == true)
-	{
-		m_vPosition = D3DXVECTOR3(0, 0, 0);
-		
-	}
+	/// KT Reset
+	//if (Reset == true)
+	//{
+	//	m_vPosition = D3DXVECTOR3(0, 0, 0);
+	//}
 }
 
 void CCharacter::DoRotation(const float& radian)

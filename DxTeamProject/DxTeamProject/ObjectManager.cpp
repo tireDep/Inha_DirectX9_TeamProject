@@ -13,8 +13,9 @@
 
 CObjectManager::CObjectManager() :
 	m_frustum(NULL),
-	m_thread(NULL),
-	Reset(true)
+	m_thread(NULL)
+	/// KT Reset
+	//Reset(true)
 {
 	InitializeCriticalSection(&m_cs);
 }
@@ -738,11 +739,18 @@ void CObjectManager::CollisionBoxToTile(PObject * pObject, IObject * iObject, fl
 	pObject->SetPosition(pObject->GetPosition() + movePerIMass * pObject->GetInverseMass());
 }
 
-void CObjectManager::ResetpObject()
+/// KT Reset
+void CObjectManager::Reset()
 {
-	for(int i = 0; i < m_vecPObject.size(); i++)
-		m_vecPObject[i]->presentTranslation = m_vecPObject[i]->saveTranslation;
-	
+	for (int i = 0; i < m_vecPObject.size(); i++)
+	{
+		m_vecPObject[i]->SetPosition(m_vecPObject[i]->saveTranslation);
+		m_vecPObject[i]->SetForceApplied(false);
+		m_vecPObject[i]->SetAcceleration(D3DXVECTOR3(0, 0, 0));
+		m_vecPObject[i]->SetVelocity(D3DXVECTOR3(0, 0, 0));
+		m_vecPObject[i]->SetForceVector(D3DXVECTOR3(0, 0, 0));
+	}
+	// Need To Add IObject...
 }
 
 // Integrate CollisionSphereToBox(Rotation Error)
