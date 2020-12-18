@@ -5,12 +5,16 @@ CGameManager::CGameManager()
 {
 	m_strName = "GameManager";
 
+	m_SceneName = SceneType::eMainScene;
+
 	m_isDevMode = false;
 	m_isUIMode = false;
 	
 	// >> 맵 완료시 삭제 예정
 	m_isGridMap = false;
 	// << 맵 완료시 삭제 예정
+
+	m_Orbcomplete = false;
 
 	SetClipCursor(0);
 	ShowCursor(false);
@@ -78,7 +82,24 @@ void CGameManager::SetGetOrb(string orbType)
 	for (it = m_mapOrb.begin(); it != m_mapOrb.end(); it++)
 	{
 		if (it->first == orbType)
+		{
 			it->second = true;
+			
+			ST_EVENT msg;
+			msg.eventType = EventType::eConditionChange;
+			msg.conditionName = it->first;
+			msg.isCondition = false;
+			g_pEventManager->CheckEvent(msg);
+		}
+	}
+}
+
+void CGameManager::InitializationOrb()
+{
+	map<string, bool>::iterator it;
+	for (it = m_mapOrb.begin(); it != m_mapOrb.end(); it++)
+	{
+		it->second = false;
 	}
 }
 
@@ -93,6 +114,18 @@ bool CGameManager::GetIsHasOrb(string orbType)
 	}
 }
 
+bool CGameManager::CompleteOrb()
+{
+	if (GetIsHasOrb("Blue") && GetIsHasOrb("Green") && GetIsHasOrb("Red") &&
+		GetIsHasOrb("White") && GetIsHasOrb("Yellow") && GetIsHasOrb("Black"))
+	{
+		m_Orbcomplete = true;
+		m_SceneName = SceneType::eEndingScene;
+	}
+
+	return m_Orbcomplete;
+}
+
 void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 {
 	RECT rc;
@@ -102,8 +135,23 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 	{
 		switch (eventMsg.message)
 		{
+		case WM_LBUTTONDOWN:
+			if (m_SceneName == SceneType::eEndingScene)
+			{
+				m_SceneName = SceneType::eMainScene;
+				cout << "in" << endl;
+				return;
+			}
+			break;
+
 		case WM_KEYDOWN:
 		{
+			if (m_SceneName == SceneType::eMainScene)
+			{
+				m_SceneName = SceneType::eGameScene;
+				return;
+			}
+
 			if (VK_CONTROL == eventMsg.wParam && !m_isUIModeIn)
 			{
 				m_isUIMode = !m_isUIMode;

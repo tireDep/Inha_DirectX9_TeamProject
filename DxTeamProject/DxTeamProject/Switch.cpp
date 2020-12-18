@@ -5,9 +5,12 @@
 CSwitch::CSwitch()
 	: m_scale(1,1,1)
 	, m_position(10,0.5f,0)
-	, istrue(false)
 	, m_pColl(NULL)
 	, m_pBox(NULL)
+	, pBox(false)
+	,pCylinder(false)
+	,pSphere(false)
+	,render(true)
 {
 	D3DXMatrixIdentity(&matS);
 	D3DXMatrixIdentity(&matT);
@@ -19,11 +22,6 @@ CSwitch::~CSwitch()
 {
 	SafeDelete(m_pColl);
 	SafeRelease(m_pBox);
-}
-
-bool CSwitch::GetBool()
-{
-	return istrue;
 }
 
 void CSwitch::Setup()
@@ -88,60 +86,70 @@ void CSwitch::Setup(ST_MapData setData)
 	m_pColl = new COBB;
 	m_pColl->SetupMesh(m_vMin, m_vMax, 0.3f);
 
-	m_strObjName = setData.strObjName;
-	m_strFolder = setData.strFolderPath;
-	m_strXFile = setData.strXFilePath;
-	m_strTxtFile = setData.strTxtPath;
-	m_ObjectType = setData.objType;
+	CGimmick::SetLoadData(setData);
 
-	D3DXVECTOR3 vScale, vRotate, vTranslate;
+	m_position = m_vTranslation;
+	m_scale = m_vScale;
 
-	vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
-							 // JW ADD...
-	m_vScale = vScale;
-	vRotate = setData.vRotate;
-	vTranslate = setData.vTranslate;
+	// todo : switchCondition
 
-	ST_XFile* xfile = new ST_XFile;
-
-	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
-
-	if (m_strTxtFile != "")
-	{
-		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
-		// m_vecTextures.push_back(m_pTexture);
-	}
-
-	m_pMesh = xfile->pMesh;
-	m_adjBuffer = xfile->adjBuffer;
-	m_vecMtrls = xfile->vecMtrl;
-	m_vecTextures = xfile->vecTextrure;
-	m_numMtrls = xfile->nMtrlNum;
-
-	delete xfile;
-
-	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixIdentity(&matS);
-	D3DXMatrixIdentity(&matR);
-	D3DXMatrixIdentity(&matT);
-
-	D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
-
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(vRotate.x);
-	v.y = D3DXToRadian(vRotate.y);
-	v.z = D3DXToRadian(vRotate.z);
-	D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
-
-	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
-	
-	m_matWorld = m_matS * m_matR * m_matT;
-	m_position = vTranslate;
-	m_scale = vScale;
-	 m_pOBB = new COBB;
-	 m_pOBB->Setup(*this);
-	 g_pObjectManager->AddOBBbox(m_pOBB);
-	 g_pObjectManager->AddGimmick(this);
+	//m_strObjName = setData.strObjName;
+	//m_strFolder = setData.strFolderPath;
+	//m_strXFile = setData.strXFilePath;
+	//m_strTxtFile = setData.strTxtPath;
+	//m_ObjectType = setData.objType;
+	//
+	//CGimmick::SetGimmickCondition(setData);
+	//
+	//D3DXVECTOR3 vScale, vRotate, vTranslate;
+	//
+	//vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
+	//						 // JW ADD...
+	//m_vScale = vScale;
+	//vRotate = setData.vRotate;
+	//vTranslate = setData.vTranslate;
+	//
+	//ST_XFile* xfile = new ST_XFile;
+	//
+	//g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
+	//
+	//if (m_strTxtFile != "")
+	//{
+	//	g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+	//	// m_vecTextures.push_back(m_pTexture);
+	//}
+	//
+	//m_pMesh = xfile->pMesh;
+	//m_adjBuffer = xfile->adjBuffer;
+	//m_vecMtrls = xfile->vecMtrl;
+	//m_vecTextures = xfile->vecTextrure;
+	//m_numMtrls = xfile->nMtrlNum;
+	//
+	//delete xfile;
+	//
+	//D3DXMATRIXA16 matS, matR, matT;
+	//D3DXMatrixIdentity(&matS);
+	//D3DXMatrixIdentity(&matR);
+	//D3DXMatrixIdentity(&matT);
+	//
+	//D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
+	//
+	//D3DXVECTOR3 v;
+	//v.x = D3DXToRadian(vRotate.x);
+	//v.y = D3DXToRadian(vRotate.y);
+	//v.z = D3DXToRadian(vRotate.z);
+	//D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
+	//
+	//D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
+	//
+	//m_matWorld = m_matS * m_matR * m_matT;
+	//m_position = vTranslate;
+	//m_scale = vScale;
+	//
+	//m_pOBB = new COBB;
+	//m_pOBB->Setup(*this);
+	//g_pObjectManager->AddOBBbox(m_pOBB);
+	//g_pObjectManager->AddGimmick(this);
 }
 
 
@@ -151,13 +159,49 @@ void CSwitch::Update(float duration)
 	D3DXMatrixTranslation(&matT, m_position.x, m_position.y +0.1f, m_position.z);
 	collWorld = matS *matT;
 	 
+	pBox = false;
+	pCylinder = false;
+	pSphere = false;
 	m_pColl->Update(&collWorld); //내부 충돌 
 	m_pOBB->Update(&m_matWorld); //스위치 고유 충돌
 }
 
+void CSwitch::pBoxBool(bool set)
+{
+	pBox = set;
+	ChangeConditionMsg(set);
+}
+
+void CSwitch::pCylinderBool(bool set)
+{
+	pCylinder = set;
+	ChangeConditionMsg(set);
+}
+
+void CSwitch::pSphereBool(bool set)
+{
+	pSphere = set;
+	ChangeConditionMsg(set);
+}
+
 void CSwitch::SetBool(bool set)
 {
-	istrue = set;
+	player = set;
+	ChangeConditionMsg(set);
+}
+
+void CSwitch::ChangeConditionMsg(bool set)
+{
+	if (m_strConditionName != "")
+	{
+		ST_EVENT msg;
+		msg.eventType = EventType::eConditionChange;
+		msg.isCondition = !set;
+		// >> 스위치 상태와 문 상태가 반대로 동작
+		msg.conditionName = m_strObjName;
+
+		g_pEventManager->CheckEvent(msg);
+	}
 }
 
 void CSwitch::Render()
@@ -170,10 +214,7 @@ void CSwitch::Render()
 	}
 
 	{
-	
-
 		g_pD3DDevice->SetTransform(D3DTS_WORLD, &GetmatWorld());
-		
 
 		if (m_pMesh == NULL)
 			return;
@@ -187,18 +228,18 @@ void CSwitch::Render()
 
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 
-			if (istrue == false)
+			if (pBox == false && pCylinder == false && pSphere == false) // 부딪히지 않았을떄
 			{
-				
+			
 				m_pMesh->DrawSubset(i);
+
+
 			}
 			else
-			{
-				cout << "충돌" << endl;
+			{				
 				m_pMesh->DrawSubset(0);
 			}
 		}
-
 		g_pD3DDevice->SetTexture(0, NULL);
 	}
 	

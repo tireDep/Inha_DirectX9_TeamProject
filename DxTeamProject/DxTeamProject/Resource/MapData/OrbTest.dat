@@ -1,0 +1,392 @@
+# Object_Start
+# ObjectName
+Orb_Blue1
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Blue.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0.6
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Black2
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Black.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0.6
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_White3
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_White.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0.6
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Yellow4
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Yellow.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0.6
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Green5
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Green.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0.6
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Green
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Red6
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Red.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+5.5
+0.6
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Red
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black8
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0.05
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_White9
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_White.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0.05
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Yellow10
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Yellow.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0.05
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Green11
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Green.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0.05
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Red12
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Red.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0.05
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Red
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Blue13
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Blue.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0.05
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Section =======================================
+

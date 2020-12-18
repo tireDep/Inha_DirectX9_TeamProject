@@ -154,6 +154,7 @@
     <ClInclude Include="Book.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ColorChanger.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="DeviceManager.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="OBB.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="Orb.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="RotationBoard.h" />
     <ClInclude Include="Singleton.h" />
@@ -186,12 +188,14 @@
     <ClInclude Include="Switch.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="toolMain.h" />
+    <ClInclude Include="Trace.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ColorChanger.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
@@ -212,6 +216,7 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MovingCube.cpp" />
     <ClCompile Include="OBB.cpp" />
+    <ClCompile Include="Orb.cpp" />
     <ClCompile Include="originMain.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
@@ -221,6 +226,7 @@
     <ClCompile Include="Switch.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="toolMain.cpp" />
+    <ClCompile Include="Trace.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

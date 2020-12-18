@@ -20,23 +20,33 @@ protected:
 	D3DXCOLOR				m_color;
 	bool					m_isCollided;
 	bool					m_isOBB;
-	bool					m_jump;
-	bool					jumpis;
-	bool					jumping;
+	bool					m_isJump;
+	float					m_fMaxJumpHeight;
+	float					m_fRadianJump;
+	bool					m_isFallAni;
+	//bool					jumpis;
+	//bool					jumping;
+
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
-
-	float rotation;
+	float					rotation;
+	float					m_preRotation;
 	// grab
+	Synthesize(bool, m_isGrab, Grab);
 	int						m_nGrabAbleObeject;
 	// Ray y check
 	CRay					m_Ray;
+	D3DXVECTOR3 m_vContactNormal;
+	float m_fPenetration;
+	bool m_isCollidedTile;
+	float m_fHeightTile;
 public:
 	virtual ~CCharacter(void);
 	virtual void Setup();
 	virtual void Update(D3DXVECTOR3 cameradirection);
-//	virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
-	int Update(vector<PObject*> ObjectPosition, float duration);
+	//virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
+	//int Update(vector<PObject*> ObjectPosition, float duration);
+	void Update(float duration);
 	virtual void DoRotation(const float& radian);
 	virtual void DoMove(const float& velocity);
 	virtual void Render(D3DCOLOR c);
@@ -47,14 +57,13 @@ public:
 
 	virtual void SetColor(D3DXCOLOR c);
 	virtual D3DXCOLOR GetColor();
-
+	//COBB* m_pOBB;
+	//COBB* GetOBB() { return m_pOBB; }
 	// tmp Collision Test
 	// setup erase
 	virtual bool Collider(bool isCollided);
 
 	void ColliderOtherObject(IObject * background);
-	COBB* m_pOBB;
-	COBB* GetOBB();
 	// void SetBool(bool istrue);
 	
 
@@ -63,4 +72,7 @@ public:
 
 	// Ray y check
 	virtual void UpdateRayYCheck(MeshTile & meshtile);
+
+	// KT Character to Object
+	void ColliderObject();
 };

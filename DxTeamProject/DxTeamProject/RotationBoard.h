@@ -12,7 +12,8 @@ private:
 	RotationAxial rotationAxial;
 	float m_fRotationSpeed;
 	float m_fRotAngle;
-
+	bool pBox, pCylinder, pSphere;
+	bool player ,render;
 	/// Need Map tool
 	// Size : Use m_vScale
 	// Rotation_axial : enum class RotationAxial
@@ -21,10 +22,14 @@ private:
 public:
 	CRotationBoard();
 	~CRotationBoard();
-	void SetBool(bool set) {};
+	void pBoxBool(bool set) { pBox = set; }
+	void pCylinderBool(bool set) { pCylinder = set; }
+	void pSphereBool(bool set) { pSphere = set; }
+	void SetBool(bool set) { player = set; }
 	void Setup(const ST_MapData & mapData);
 	void Update(float duration);
 	void Render();
+	bool GetBool() { return render; }
 	string GetName() { return m_strName; }
 };
 /// Delete Later...

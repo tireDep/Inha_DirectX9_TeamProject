@@ -1,6 +1,7 @@
 #pragma once
 #include "IListener.h"
 
+enum class SceneType;
 #define g_pGameManager CGameManager::GetInstance()
 
 const static int ITEMCOUNT = 10;
@@ -17,7 +18,11 @@ private:
 	// >> 맵 완료시 삭제
 	bool m_isGridMapIn;
 	bool m_isGridMap;
+
+	bool m_Orbcomplete;
 	// << 맵 완료시 삭제
+
+	Synthesize(SceneType, m_SceneName, NowScene);
 
 	CGameManager();
 
@@ -52,5 +57,7 @@ public:
 	bool GetItem(int index);
 
 	void SetGetOrb(string orbType);
+	void InitializationOrb();
 	bool GetIsHasOrb(string orbType);
+	bool CompleteOrb();
 };

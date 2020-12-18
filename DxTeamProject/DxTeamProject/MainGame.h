@@ -27,10 +27,12 @@ class RotationBoard;
 class CSwitch;
 class CBook;
 class CDragon;
-
 //class CSoundManager;
 class CBox;
 class CSphere;
+//
+class CScene;
+//
 
 class CMainGame
 {
@@ -63,6 +65,9 @@ private:
 	CBook* m_pBook;
 	CDragon* m_pDragon;
 	MovingCube* m_pMovingCube;
+	//
+	CScene* m_pScene;
+	//
 	/// 릴리즈 버전을 위한 주석처리
 	//CSoundManager* m_pSm;
 public:

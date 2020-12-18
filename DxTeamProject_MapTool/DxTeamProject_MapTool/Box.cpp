@@ -31,11 +31,6 @@ void CBox::Update()
 {
 }
 
-void CBox::Update(CRay * ray)
-{
-	IObject::Update(ray);
-}
-
 void CBox::Render()
 {
 	CObject::Render();

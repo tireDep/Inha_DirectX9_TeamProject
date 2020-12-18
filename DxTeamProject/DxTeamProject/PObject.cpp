@@ -111,7 +111,7 @@ void PObject::SetPusingForce(D3DXVECTOR3 forcedirection)
 {
 	D3DXVECTOR3 forcePosition = forcedirection * m_fBoundingSphere;
 	m_vForceLocation = forcePosition;
-	m_vForceVector = forcedirection * 100;
+	m_vForceVector = forcedirection * 10;
 	SetForceApplied(true);
 }
 
@@ -383,12 +383,12 @@ void PObject::ChangeObjectColor()
 	switch (m_tmpColor)
 	{
 	case Color::Black:
-		SetMass(10);
+		SetMass(3);
 		SetElasticity(1.0f);
 		SetDrag(0.995f);
 		break;
 	case Color::White:
-		SetMass(0.1f);
+		SetMass(0.5f);
 		SetElasticity(1.0f);
 		SetDrag(0.995f);
 		break;

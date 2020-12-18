@@ -121,9 +121,6 @@
     <ClCompile Include="FileLoadManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsObjectManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -242,6 +239,18 @@
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Object\IObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Trace.cpp">
+      <Filter>Object\IObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsObjectManager.cpp">
+      <Filter>...TrashCan</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -387,9 +396,6 @@
     <ClInclude Include="FileLoadManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsObjectManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -508,6 +514,18 @@
     </ClInclude>
     <ClInclude Include="ObjectManager.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Object\IObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Trace.h">
+      <Filter>Object\IObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsObjectManager.h">
+      <Filter>...TrashCan</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -656,6 +674,9 @@
     </Filter>
     <Filter Include="...TrashCan\Physics\cyclone">
       <UniqueIdentifier>{00e05eae-24f5-4dfb-9fc3-f0105fd54c0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{8f11bd14-6ae4-4eed-ae82-786400494f04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

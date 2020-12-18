@@ -8,11 +8,11 @@ private:
 	LPD3DXSPRITE m_pSprite;
 	D3DXIMAGE_INFO m_stImageInfo, m_stImageInfo2, m_stImageInfo3,
 		m_stImageInfo4, m_stImageInfo5, m_stImageInfo6, m_stImageInfo7,
-		m_stImageInfo8;
+		m_stImageInfo8, m_stImageInfo9;
 
 	LPDIRECT3DTEXTURE9 m_pTextureUI, m_pTextureUI2, m_pTextureUI3,
 		m_pTextureUI4, m_pTextureUI5, m_pTextureUI6, m_pTextureUI7,
-		m_pTextureUI8;
+		m_pTextureUI8, m_pTextureUI9;
 
 	POINT pUI;
 	POINT px; //´­·¶À»¶§
@@ -20,7 +20,7 @@ private:
 	POINT px3; //¶¼¾úÀ»¶§
 	D3DXMATRIXA16 matT, matWorld;
 	int movep, movepy;
-	RECT UIrc, Backrc,  Redrc, Yellowrc, Greenrc, Bluerc , Blackrc, Whiterc;
+	RECT UIrc, Backrc, Backrc2,Startrc , Redrc, Yellowrc, Greenrc, Bluerc , Blackrc, Whiterc;
 	RECT imageRC;
 	Color OnButton;
 	Pick PickColor;

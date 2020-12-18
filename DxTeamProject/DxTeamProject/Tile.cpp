@@ -3,6 +3,7 @@
 
 CTile::CTile()
 {
+	render = false;
 	m_strName = string("Tile") + to_string(m_nRefCount);
 }
 
@@ -21,6 +22,8 @@ void CTile::Setup(const ST_MapData & mapData)
 	m_vScale = mapData.vScale;
 	m_vRotation = mapData.vRotate;
 	m_vTranslation = mapData.vTranslate;
+
+	m_vecColorTag = mapData.vecColorTag;
 
 	ST_XFile* xfile = new ST_XFile;
 
@@ -99,13 +102,20 @@ void CTile::Render()
 
 	for (int i = 0; i < m_vecMtrls.size(); i++)
 	{
-		//g_pD3DDevice->SetMaterial(m_vecMtrls[i]);
-		if (m_vecTextures[i] != 0)
-			g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
-		else if (m_pTexture != NULL)
+		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+		/*if (!CheckIsGetColorOrb())
 		{
-			g_pD3DDevice->SetTexture(0, m_pTexture); 
-			// >> 텍스처 매치 안되있을 때
+			g_pD3DDevice->SetTexture(0, g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "BasicGray_127.png"));
+		}
+		else*/
+		{
+			if (m_vecTextures[i] != 0)
+				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+			else if (m_pTexture != NULL)
+			{
+				g_pD3DDevice->SetTexture(0, m_pTexture);
+				// >> 텍스처 매치 안되있을 때
+			}
 		}
 		m_pMesh->DrawSubset(i);
 	}

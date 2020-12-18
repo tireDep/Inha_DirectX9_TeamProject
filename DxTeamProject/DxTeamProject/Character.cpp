@@ -10,15 +10,24 @@
 
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
-	, m_vPosition(0, 0.0f, 0)
-	// , m_pOBB(NULL)
+	, m_vPosition(0, 0, 0)
 	, m_isCollided(false)
-	, m_jump(false)
-	, jumpis(false)
-	, jumping(false)
 	, m_Character(NULL)
 	, m_isColorChanged(false)
-	// Ray y check
+	, m_color(GRAY)
+	, m_isGrab(false)
+	, m_isJump(false)
+	, m_fMaxJumpHeight(1.5f)
+	, m_fRadianJump(0.0f)
+	, m_isFallAni(false)
+	, m_preRotation(0.0f)
+	, m_vContactNormal(0, 0, 0)
+	, m_fPenetration(0.0f)
+	, m_isCollidedTile(false)
+	, m_fHeightTile(0.0f)
+	// , m_pOBB(NULL)
+	// , jumpis(false)
+	// , jumping(false)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
@@ -26,21 +35,8 @@ CCharacter::CCharacter()
 	m_strName = "Character";
 }
 
-//COBB* CCharacter::GetOBB()
-//{
-//	// return m_pOBB;
-//}
-//
-//void CCharacter::SetBool(bool istrue)
-//{
-//	
-//	m_isOBB = istrue;
-//}
-
 void CCharacter::SetColor(D3DXCOLOR c)
 {
-	// for (int i = 12; i <= 17; i++)
-	// 	m_vecVertex[i].c = c;
 	m_color = c;
 }
 
@@ -57,6 +53,9 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 		if (eventMsg.message == WM_LBUTTONDOWN)
 		{
+			if (m_isJump)
+				return;
+
 			ST_EVENT msg;
 			msg.eventType = EventType::eColorChangeEvent;
 			msg.ptrMessage = &m_color;
@@ -78,6 +77,103 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 		{
 			switch (eventMsg.playerInput)
 			{
+				// todo : 점프 구현
+			case PlayerInputType::eJump:
+				//if (!jumping)
+				// {
+				// 	m_isJump = true;
+				// 	m_Character->SetAnimationIndex(7); // jump
+				// }
+				// speed = -1.0f;
+
+				if (!m_isJump)
+				{
+					m_isJump = true;
+					m_Character->SetAnimationIndexBlend(7); // jump
+					speed = -1;
+				}
+				break;
+
+				// todo : 잡기 구현
+			case PlayerInputType::eHold:
+				if (m_isGrab)
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(5);
+				}
+				else
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
+				}
+				//if (m_nGrabAbleObeject != -1)
+				//{
+				//	if (m_Character->CheckAnimationEnd())
+				//		//m_Character->SetAnimationIndexBlend(5); // push
+				//		m_Character->SetAnimationIndex(5);
+				//	// >> 블랜드가 안되서 잡기 대기 상태처럼 나옴
+				//}
+				// else
+				//m_Character->SetAnimationIndexBlend(5); // push
+				//m_Character->SetAnimationIndex(5);
+				speed = -1.0f;
+				break;
+
+			case PlayerInputType::eHoldPush:
+				if (m_isGrab)
+				{
+					if (m_nGrabAbleObeject != -1)
+					{
+						D3DXVECTOR3 v;
+						v = g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetPosition() - this->GetPosition();
+						v.y -= 0.5f;
+						D3DXVec3Normalize(&v, &v);
+						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetPusingForce(v);
+						rotation = m_preRotation;
+						// Need To Modify...
+						speed = 0.0f;
+						m_Character->SetAnimationIndex(5);
+					}
+					// if (m_Character->CheckAnimationEnd())
+				}
+				else
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
+					speed = -1.0f;
+				}
+				//if (m_nGrabAbleObeject != -1)
+				//{
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(5); // Push
+				//}
+				//else
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(10); // Idle
+
+				break;
+			case PlayerInputType::eHoldPull:
+				if (m_isGrab)
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(4);
+				}
+				else
+				{
+					if (m_Character->CheckAnimationEnd())
+						m_Character->SetAnimationIndex(10); // Idle
+				}
+				//if (m_nGrabAbleObeject != -1)
+				//{
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(4); // Pull
+				//}
+				//else
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(10); // Idle
+				speed = -1.0f;
+				break;
+
 			case PlayerInputType::eUp:
 				rotation = 0.0f;
 				break;
@@ -110,67 +206,24 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				rotation = D3DX_PI / 2.0f;
 				break;
 
-				// todo : 점프 구현
-			case PlayerInputType::eJump:
-				if (!jumping)
-				{
-					m_jump = true;
-					if (m_Character->CheckAnimationEnd())
-					{
-						m_Character->SetAnimationIndex(7); // jump
-					}
-				}
-				speed = -1.0f;
-				break;
-
-				// todo : 잡기 구현
-			case PlayerInputType::eHold:
-				if (m_nGrabAbleObeject != -1)
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndexBlend(5); // push
-					// >> 블랜드가 안되서 잡기 대기 상태처럼 나옴
-				}
-				// else
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndexBlend(5); // push
-				speed = -1.0f;
-				break;
-			case PlayerInputType::eHoldPush:
-				if (m_nGrabAbleObeject != -1)
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(5); // Push
-				}
-				else
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(10); // Idle
-				speed = -1.0f;
-				break;
-			case PlayerInputType::eHoldPull:
-				if (m_nGrabAbleObeject != -1)
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(4); // Pull
-				}
-				else
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(10); // Idle
-				speed = -1.0f;
-				break;
 			default:
-				speed = -1.0f;
-				if (m_Character->CheckAnimationEnd())
+				if (m_Character->CheckAnimationEnd()) // !m_isJump || 
+				{
+					speed = -1.0f;
 					m_Character->SetAnimationIndex(10); // Idle
+				}
 				break;
 			}
 		} // << eInputEvent
 
 		if (speed > 0 && m_Character->CheckAnimationEnd())
 		{
+			m_preRotation = rotation;
+
 			// >> 특정 애니메이션 재생 중 이동 하지 않음
-			if(!jumping)
+			if(!m_isJump)
 				m_Character->SetAnimationIndex(9); // Walk
+			// m_Character->SetAnimationIndex(9); // Walk
 
 			// >> todo : 속도 변화 감지해서 달리기 추가
 			// >> 입력 시간에 따른 달리기 변화?
@@ -179,11 +232,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			DoMove(speed);
 		}
 	}
-
-
 	//D3DXMATRIXA16 matT;
 	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-
 	//m_matWorld = m_matRotY * matT;
 }
 
@@ -213,6 +263,73 @@ void CCharacter::UpdateRayYCheck(MeshTile & meshtile)
 	//	m_vPosition.y = 0.5f;
 }
 
+void CCharacter::ColliderObject()
+{
+	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
+	{
+		//if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB(), &m_vContactNormal, &m_fPenetration))
+		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
+		{
+			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBook || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eOrb)
+			{
+				g_pObjectManager->GetVecIObject()[i]->SetBool(true);
+				continue;
+			}
+			
+			//if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
+			//{
+			//	BOOL hit = false;
+			//	DWORD FaceIndex;
+			//	float u, v, dist;
+			//	D3DXVECTOR3 rayOrigin = m_Ray.GetOrigin();
+			//	D3DXMATRIXA16 matInverse;
+			//	D3DXMatrixInverse(&matInverse, NULL, &g_pObjectManager->GetVecIObject()[i]->GetOBB()->GetOBBWorldMatrix());
+			//	D3DXVec3TransformCoord(&rayOrigin, &rayOrigin, &matInverse);
+			//	D3DXIntersect(g_pObjectManager->GetVecIObject()[i]->GetMesh(), &rayOrigin, &m_Ray.GetDirection(), &hit, &FaceIndex, &u, &v, &dist, NULL, NULL);
+			//	if (hit)
+			//	{
+			//		if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
+			//			m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+			//		//cout << dist*g_pObjectManager->GetVecIObject()[i]->GetScale().y << endl;
+			//		//m_vPosition.y += dist*g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+			//		//m_fHeightTile =	m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+			//		//m_vPosition.y += m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+			//		//m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+			//		//m_vPosition.y = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+			//	}
+			//	m_isCollidedTile = true;
+			//	m_isCollided = true;
+			//}
+			m_isCollided = true;
+			return;
+		}
+
+	}
+	for (int i = 0; i < g_pObjectManager->GetVecPObejct().size(); i++)
+	{
+		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecPObejct()[i]->GetOBB()))
+		{
+			D3DXVECTOR3 grabvector = g_pObjectManager->GetVecPObejct()[i]->GetPosition() - this->GetPosition();
+
+			float grabradian = D3DXVec3Dot(&this->m_vDirection, &grabvector) / (D3DXVec3Length(&m_vDirection) * D3DXVec3Length(&grabvector));
+			if (grabradian > cosf(D3DXToRadian(45)))
+			{
+				m_isGrab = true;
+				m_nGrabAbleObeject = i;
+			}
+			else
+			{
+				m_isGrab = false;
+				m_nGrabAbleObeject = -1;
+			}
+			m_isCollided = true;
+			return;
+		}
+	}
+	m_isCollided = false;
+	m_isGrab = false;
+}
+
 CCharacter::~CCharacter()
 {
 	SafeDelete(m_Character);
@@ -220,75 +337,13 @@ CCharacter::~CCharacter()
 
 void CCharacter::Setup()
 {
-	//ST_PC_VERTEX v;
-	//float cubeSize = 0.5f;
-	//
-	//// : front
-	//v.c = RED; // 캐릭터 후면 빨강
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : back 
-	//v.c = BLUE; // 캐릭터 정면 파랑
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : top 
-	//v.c = D3DCOLOR_XRGB(127, 127, 127); // 캐릭터 뚜껑(변화)
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : left
-	//v.c = WHITE; // 캐릭터 왼면(흰)
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : right 
-	//v.c = BLACK; // 캐릭터 오른면(흑)
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//
-	//// : bottom
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(-cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, -cubeSize);	m_vecVertex.push_back(v);
-	//v.p = D3DXVECTOR3(cubeSize, -cubeSize, cubeSize);	m_vecVertex.push_back(v);
-	//
-	//for (int i = 0; i < m_vecVertex.size(); i++)
-	//	m_vecVertex[i].p += D3DXVECTOR3(0, 0.5f, 0);
-	//
-	// m_pOBB = new COBB;
-	// m_pOBB->SetupCube(m_vecVertex[0], m_vecVertex[11], cubeSize);
-
 	m_Character = new CSkinnedMesh;
 	m_Character->SetUp("Resource/XFile/Character", "AnimationCharacter.X");
 	// m_Character->SetAnimationIndexBlend(8);
 	m_Character->SetAnimationIndex(10);
 
 	// Ray y check
-	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 10, 0);
+	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 4.5f, 0);
 	m_Ray.SetOrigin(rayOrigin);
 	m_Ray.SetDirection(D3DXVECTOR3(0, -1, 0));
 }
@@ -296,31 +351,62 @@ void CCharacter::Setup()
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
-
-		if (m_jump)
-		{
-			jumping = true;
-			if (m_vPosition.y <= 3.f)
-			{
-				m_vPosition.y += 0.005f;
-				if (m_vPosition.y >= 3.f)
-				{
-					jumpis = true;
-					m_jump = false;
-				}
-			}
-		}
-		if (jumpis == true)
-		{
-			m_vPosition.y -= 0.005f;
-			if (m_vPosition.y <= 0)
-			{
-				jumpis = false;
-				jumping = false;
-			}
-			m_Character->SetAnimationIndexBlend(6); // fall
-		}
-	
+	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 4.5f, 0);
+	m_Ray.SetOrigin(rayOrigin);
+	//if (m_isJump)
+	//{
+	//	// jumping = true;
+	//	if (m_vPosition.y <= 3.f)
+	//	{
+	//		m_vPosition.y += 0.005f;
+	//		if (m_vPosition.y >= 3.f)
+	//		{
+	//			jumpis = true;
+	//			m_jump = false;
+	//		}
+	//	}
+	//}
+	//if (jumpis == true)
+	//{
+	//	m_vPosition.y -= 0.005f;
+	//	if (m_vPosition.y <= 0)
+	//	{
+	//		jumpis = false;
+	//		jumping = false;
+	//	}
+	//	m_Character->SetAnimationIndexBlend(6); // fall
+	//}
+	//if (m_jump)
+	//{
+	//	jumping = true;
+	//	if (m_vPosition.y <= 3.f)
+	//	{
+	//		m_vPosition.y += 0.005f;
+	//		if (m_vPosition.y >= 3.f)
+	//		{
+	//			jumpis = true;
+	//			m_jump = false;
+	//		}
+	//	}
+	//}
+	//if (jumpis == true)
+	//{
+	//	CCharacter::ColliderObject();
+	//	if(!m_isCollided && m_vPosition.y > 0)
+	//		m_vPosition.y -= 0.005f;
+	//	else
+	//	{
+	//		jumpis = false;
+	//		jumping = false;
+	//		//if (m_vPosition.y <= 0)
+	//		//{
+	//		//	jumpis = false;
+	//		//	jumping = false;
+	//		//}
+	//	}
+	//	
+	//	m_Character->SetAnimationIndexBlend(6); // fall
+	//}
 }
 
 //void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
@@ -447,36 +533,63 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 //
 //}
 
-int CCharacter::Update(vector<PObject*> ObjectPosition, float duration)
+//int CCharacter::Update(vector<PObject*> ObjectPosition, float duration)
+//{
+//	//if (m_pOBB)
+//	//	m_pOBB->Update(&m_matWorld);
+//	//for (int i = 0; i < ObjectPosition.size(); ++i)
+//	//{
+//	//	if (ObjectPosition[i]->GetPosition().x - m_vPosition.x < 1.0f
+//	//		&& ObjectPosition[i]->GetPosition().z - m_vPosition.z < 1.0f
+//	//		&& ObjectPosition[i]->GetPosition().x - m_vPosition.x > -1.0f
+//	//		&& ObjectPosition[i]->GetPosition().z - m_vPosition.z > -1.0f
+//	//		&& ObjectPosition[i]->GetPosition().y - m_vPosition.y <  1.0f
+//	//		&& ObjectPosition[i]->GetPosition().y - m_vPosition.y > -1.0f)
+//	//	{
+//	//		//m_nGrabAbleObeject = i;
+//	//		return i;
+//	//	}
+//	//}
+//	////m_nGrabAbleObeject = -1;
+//	//return -1;
+//}
+
+void CCharacter::Update(float duration)
 {
-
-	//if (m_pOBB)
-	//	m_pOBB->Update(&m_matWorld);
-
-	for (int i = 0; i < ObjectPosition.size(); ++i)
+	D3DXVECTOR3 tempPos = m_vPosition;
+	if (m_isJump)
 	{
-		if (ObjectPosition[i]->GetPosition().x - m_vPosition.x < 1.0f
-			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z < 1.0f
-			&& ObjectPosition[i]->GetPosition().x - m_vPosition.x > -1.0f
-			&& ObjectPosition[i]->GetPosition().z - m_vPosition.z > -1.0f
-			&& ObjectPosition[i]->GetPosition().y - m_vPosition.y <  1.0f
-			&& ObjectPosition[i]->GetPosition().y - m_vPosition.y > -1.0f)
+		// cout << radian << endl;
+		// radian += D3DXToRadian(180.0f * duration);
+		m_fRadianJump += 7.0f * duration;
+		tempPos.y = m_fMaxJumpHeight * sinf(m_fRadianJump);
+
+		// >> todo : collision
+		if (true)
+			m_vPosition = tempPos;
+
+		if (m_fRadianJump >= D3DXToRadian(180.0f))
 		{
-			//m_nGrabAbleObeject = i;
-			return i;
+			if(m_Character->CheckAnimationEnd())
+				m_Character->SetAnimationIndexBlend(10); // idle
+
+			m_isFallAni = false;
+			m_isJump = false;
+			m_fRadianJump = 0;
+		}
+		else if (m_fRadianJump >= D3DXToRadian(90.0f) && !m_isFallAni)
+		{
+			// >> todo : 충돌 났을 경우도 낙하 판정으로(머리 위 장애물)
+			m_Character->SetAnimationIndex(6); // fall
+			m_isFallAni = true;
 		}
 	}
-	//m_nGrabAbleObeject = -1;
 
-	// >> skinnedMesh
 	if (m_Character)
 	{
 		m_Character->Update(duration);
 		m_Character->SetTransform(&m_matWorld);
 	}
-	// << skinnedMesh
-
-	return -1;
 }
 
 void CCharacter::DoRotation(const float& radian)
@@ -495,17 +608,66 @@ void CCharacter::DoRotation(const float& radian)
 void CCharacter::DoMove(const float& velocity)
 {
 	static D3DXVECTOR3 m_position = m_vPosition;
-
+	//D3DXVECTOR3 m_position = m_vPosition;
+	CCharacter::ColliderObject();
+	//m_vPosition.y = m_fHeightTile;
+	//m_fHeightTile = 0.0f;
 	if (m_isCollided)
 	{
 		m_vPosition = m_position;
+		//if (m_isCollidedTile)
+		//{
+		//	m_vPosition.y = m_fHeightTile;
+		//	m_fHeightTile = 0.0f;
+		//}
+		//if (m_isCollidedTile)
+		//{
+		//	//m_vPosition.y += 0.005f;
+		//	D3DXVec3Normalize(&m_vContactNormal, &m_vContactNormal);
+		//	m_vPosition += m_vContactNormal * m_fPenetration;
+ 		//	//m_vPosition.x += m_vContactNormal.x * m_fPenetration;
+		//	//m_vPosition.y += m_vContactNormal.y * m_fPenetration;
+		//	//m_vPosition.z += m_vContactNormal.z * m_fPenetration;
+		//	//cout << "m_vContactNormal : " << m_vContactNormal.x << ' ' << m_vContactNormal.y << ' ' << m_vContactNormal.z << endl;
+		//	//cout << m_fPenetration << endl;
+		//	m_isCollidedTile = false;
+		//}
 	}
 	else
 	{
 		m_position = m_vPosition;
 	}
+	//cout << "m_vDirection : " << m_vDirection.x << ' ' << m_vDirection.y << ' ' << m_vDirection.z << endl;
+	//m_vPosition.y = m_fHeightTile;
+	//m_fHeightTile = 0.0f;
 	m_vPosition = m_vPosition + (m_vDirection * velocity);
+	//if (m_vPosition.y >= 0)
+	//	m_vPosition.y -= 0.005f;
+	//else
+	//	m_vPosition.y = 0;
+	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
+	{
+		if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
+		{
+			BOOL hit = false;
+			DWORD FaceIndex;
+			float u, v, dist;
+			D3DXVECTOR3 rayOrigin = m_Ray.GetOrigin();
+			D3DXMATRIXA16 matInverse;
+			D3DXMatrixInverse(&matInverse, NULL, &g_pObjectManager->GetVecIObject()[i]->GetOBB()->GetOBBWorldMatrix());
+			D3DXVec3TransformCoord(&rayOrigin, &rayOrigin, &matInverse);
+			D3DXIntersect(g_pObjectManager->GetVecIObject()[i]->GetMesh(), &rayOrigin, &m_Ray.GetDirection(), &hit, &FaceIndex, &u, &v, &dist, NULL, NULL);
+			if (hit)
+			{
+				if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
+					m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+			}
+		}
+	}
+	m_vPosition.y = m_fHeightTile;
+	m_fHeightTile = 0.0f;
 }
+
 
 void CCharacter::Render(D3DCOLOR d)
 {
@@ -555,13 +717,12 @@ void CCharacter::ColliderOtherObject(IObject * background)
 {
 	if (m_Character->GetOBB()->IsCollision(background->GetOBB()))
 	{
-		
 		m_isCollided = true;
-		
+		background->SetBool(true);
 	}
 	else
 	{
 		m_isCollided = false;
-		
+		background->SetBool(false);
 	}
 }

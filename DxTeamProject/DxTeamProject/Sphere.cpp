@@ -53,12 +53,15 @@ void CSphere::Setup(const ST_MapData & mapData)
 	m_fRadius *= m_vScale.x;
 	m_fBoundingSphere = m_fRadius;
 
-	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
-	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
-	m_matWorld = matS * matR * matT;
+	// D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixScaling(&m_matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixRotationYawPitchRoll(&m_matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+	D3DXMatrixTranslation(&m_matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+	m_matWorld = m_matS * m_matR * m_matT;
 
+	m_pOBB = new COBB;
+	m_pOBB->Setup(*this);
+	g_pObjectManager->AddOBBbox(m_pOBB);
 	g_pObjectManager->AddSphere(this);
 	//D3DXVECTOR3 vScale, vRotate;
 	//vScale = mapData.vScale;
@@ -194,10 +197,12 @@ bool CSphere::hasIntersected(IObject * otherIObject)
 	return true;
 }
 
-//void CSphere::Update(float duration)
-//{
-//	PObject::Update(duration);
-//}
+void CSphere::Update(float duration)
+{
+	PObject::Update(duration);
+	// OBB TEST
+	m_pOBB->Update(&m_matWorld);
+}
 
 string CSphere::GetName()
 {

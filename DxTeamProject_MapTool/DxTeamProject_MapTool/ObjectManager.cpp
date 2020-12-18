@@ -16,6 +16,32 @@ void CObjectManager::SetCopyObject(int index)
 	m_vecObject[m_vecObject.size() - 1]->SetTranslate(m_vecObject[index]->GetTranslate());
 }
 
+void CObjectManager::SetReConditionName()
+{
+	map<string, string>::iterator it;
+
+	for (int i = m_preVecObjSize; i < m_vecObject.size(); i++)
+	{
+		for (it = m_mapConditionName.begin(); it != m_mapConditionName.end(); it++)
+		{
+			if (m_vecObject[i]->GetConditionName() == it->first)
+			{
+				if (m_vecObject[i]->GetObjType() == ObjectType::eG_DoorFrame
+					|| m_vecObject[i]->GetObjType() == ObjectType::eG_Door)
+				{
+					CDoor* temp = static_cast<CDoor*>(m_vecObject[i]);
+					temp->SetConditionName(it->second);
+				}
+				else
+					m_vecObject[i]->SetConditionName(it->second);
+			}
+		} // << : for_it
+
+	} // << : for_i
+
+	m_mapConditionName.clear();
+}
+
 void CObjectManager::AddObject(IObject * pObject)
 {
 	m_vecObject.push_back(pObject);
@@ -72,13 +98,22 @@ void CObjectManager::Update()
 
 void CObjectManager::Update(CRay * ray)
 {	
+	// bool isSelect = false;
+	// for (int i = 0; i < m_vecObject.size(); i++)
+	// {
+	// 	if (m_vecObject[i]->GetClick() == true)
+	// 		isSelect = true;
+	// }
+
 	for (int i = 0; i < m_vecObject.size(); i++)
 		m_vecObject[i]->Update(ray);
 
 	// >> 피킹 오브젝트 판별
 	// - 같은 선상에 있는 모든 오브젝트가 피킹 되기 때문에
 	//   레이 위치와 가장 가까운 오브젝트 판별한 후 나머지 false
-	int index = 0;
+	
+	int index = -1;
+
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
 		if (m_vecObject[i]->GetPick() == true)
@@ -87,6 +122,9 @@ void CObjectManager::Update(CRay * ray)
 			break;
 		}
 	}
+
+	// if (index == -1 && !isSelect)
+	// 	SetSelectAllFalse();
 
 	D3DXVECTOR3 rayOrigin = ray->GetOrigin();
 	for (int i = index + 1; i < m_vecObject.size(); i++)
@@ -143,7 +181,7 @@ void CObjectManager::RemoveClickedObj()
 			// >> 삭제하는 대상이 누군가의 조건일 경우, 조건 삭제
 
 			// >>  문은 2개가 1세트
-#ifdef _DEBUG
+
 			if (m_vecObject[i]->GetObjType() == ObjectType::eG_DoorFrame)
 			{
 				RemoveObject(m_vecObject[i]);
@@ -159,9 +197,6 @@ void CObjectManager::RemoveClickedObj()
 
 			else
 				RemoveObject(m_vecObject[i]);
-#else
-			RemoveObject(m_vecObject[i]);
-#endif // _DEBUG
 		}
 	}
 
@@ -188,8 +223,6 @@ void CObjectManager::RemoveClickedObj()
 	}
 }
 
-static int index = -1;
-static string name = "";
 void CObjectManager::CheckSameName()
 {
 	if (m_vecObject.size() == 0)
@@ -201,32 +234,27 @@ void CObjectManager::CheckSameName()
 		{
 			if (m_vecObject[i]->GetObjectName() == m_vecObject[j]->GetObjectName())
 			{
-				name = m_vecObject[j]->GetObjectName();
-				m_vecObject[j]->SetObjectName(m_vecObject[j]->GetObjectName() + "(" + to_string(m_sameNum++) + ")");
+				if (m_vecObject[j]->GetConditionName() != "")
+				{
+					// >> 이름이 변경될 파일에 조건 변수가 존재할 경우
+					string preName = m_vecObject[j]->GetObjectName();
+
+					m_vecObject[j]->SetObjectName(m_vecObject[j]->GetObjectName() + "(" + to_string(m_sameNum++) + ")");
+
+					string nowName = m_vecObject[j]->GetObjectName();
+
+					m_mapConditionName.insert(pair<string, string>(preName, nowName));
+				}
+				else
+					m_vecObject[j]->SetObjectName(m_vecObject[j]->GetObjectName() + "(" + to_string(m_sameNum++) + ")");
 			}
-			// >> todo : 중복 이름 시 조건 처리!! 
-			//for (int k = j - 1; k < m_vecObject.size(); k++)
-			//{
-			//	if (m_vecObject[k]->GetConditionName() == name)
-			//	{
-			//
-			//	}
-			//}
-			// if (m_vecObject[j]->GetConditionName() != "" && index == -1)
-			// {
-			// 	index = j;
-			// 	name = m_vecObject[j]->GetConditionName();
-			// }
-			// else if (i > index && m_vecObject[j]->GetConditionName() == name)
-			// {
-			// 	string temp = m_vecObject[index]->GetObjectName();
-			// 	m_vecObject[index]->SetConditionName(m_vecObject[j]->GetObjectName());
-			// 	m_vecObject[j]->SetConditionName(temp);
-			// 	index = -1;
-			// }
-			// >> todo : 중복 이름 시 조건 처리!! 
-		}
-	}
+
+		} // >> : for_j
+
+	} // >> : for_i
+
+	if (m_mapConditionName.size() != 0)
+		SetReConditionName();
 }
 
 vector<IObject*> CObjectManager::GetVecObject()
@@ -288,12 +316,12 @@ void CObjectManager::CopyObject()
 				num = num[num.length() - 3];
 				indexNum = atoi(num.c_str()) - 1;
 			}
-#ifdef _DEBUG
+
 			else if (objType == ObjectType::eG_Door || objType == ObjectType::eG_DoorFrame)
 			{
 				objType = eG_DoorFrame;
 			}
-#endif // _DEBUG
+
 
 			IObject::CreateObject(objType, indexNum);
 			break;
@@ -332,7 +360,6 @@ void CObjectManager::CopyObject()
 		}
 		break;
 
-#ifdef _DEBUG
 		case eG_DoorFrame:	case eG_Door:
 		{
 			CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_vecObject.size() - 1));
@@ -352,7 +379,6 @@ void CObjectManager::CopyObject()
 			temp->SetTexture(temp2->GetTextureIndex());
 		}
 			break;
-#endif // _DEBUG
 
 		} // << : switch
 
@@ -370,3 +396,59 @@ string CObjectManager::GetPickObjName()
 
 	return "";
 }
+
+void CObjectManager::SetPreVecSize(int set)
+{
+	m_preVecObjSize = set;
+}
+
+int CObjectManager::GetConditionIndex()
+{
+	int index = GetSelectIndex();
+	string conditionName = m_vecObject[index]->GetConditionName();
+
+	if (conditionName != "")
+	{
+		for (int i = 0; i < m_vecObject.size(); i++)
+		{
+			if (m_vecObject[i]->GetObjectName() == conditionName)
+				return i;
+		}
+	}
+
+	return -1;
+}
+
+D3DXVECTOR3 CObjectManager::GetHighestY(int index)
+{
+	// >> 해당 좌표(x, y)의 가장 높은 값 추출
+	D3DXVECTOR3 checkPos(0, 0, 0);
+	D3DXVECTOR3 pos = m_vecObject[index]->GetTranslate();
+	float y = 0;
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		checkPos = m_vecObject[i]->GetTranslate();
+
+		if (checkPos.x == pos.x && checkPos.z == pos.z)
+			y = checkPos.y > pos.y ? checkPos.y : pos.y;
+	}
+
+	pos.y = y;
+	return pos;
+}
+
+bool CObjectManager::GetIsAnotherPos(D3DXVECTOR3 pos)
+{
+	// >> 해당 위치에 오브젝트가 존재하는지 확인
+	D3DXVECTOR3 result;
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		result = m_vecObject[i]->GetTranslate();
+		if (pos.x == result.x
+		 && pos.y == result.y 
+		 && pos.z == result.z)
+			return true;
+	}
+	return false;
+}
+

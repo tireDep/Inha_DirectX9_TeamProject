@@ -17,7 +17,10 @@ private:
 	LPD3DXEFFECT LoadShader(const string fileName);
 
 	void LoadData(string path);
+	void ReadAndCutSlashR(ifstream& file, string& readData);
+	void ReadGimmickData(ifstream& file, string& readData, ST_MapData& mapData);
 
+	void ResetLoadMapData(ST_MapData& mapData);
 public:
 	static CFileLoadManager* GetInstance();
 	virtual ~CFileLoadManager() { }
@@ -36,6 +39,8 @@ public:
 	bool FileLoad_Shader(string szFolder, string szFile, LPD3DXEFFECT& setShader);
 
 	bool FileLoad_MapData(string szFolder, string szFile);
+
+	LPDIRECT3DTEXTURE9 GetFileNameTexture(string szFolder, string szFile);
 
 	void Destroy();
 };

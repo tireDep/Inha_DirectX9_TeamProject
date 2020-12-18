@@ -25,7 +25,8 @@ private:
 	vector<ObjectType> m_vecObjType;
 	string m_showItem;
 
-	int m_FileLoadIndex;
+	static int m_FileLoadIndex;
+	static ObjectType m_nowObjType;
 	LoadType m_PreLoadType;
 	LoadType m_NowLoadType;
 	LoadType m_SubType;
@@ -49,6 +50,9 @@ private:
 	Synthesize(vector<IDirect3DTexture9*>, m_vecTextures, VecTexture);
 	// << testLoad
 
+	void SetGimmickTexture();
+	void SetGimmickCondition();
+
 public:
 	static int m_nowSelectindex;
 	static int m_prevSelectIndex;
@@ -69,5 +73,8 @@ public:
 
 	void ResetDevice();
 	void Destroy();
+
+	static void CreateMouseRBtn();
+	static float GetObjecFirstHeight();
 };
 

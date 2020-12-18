@@ -50,141 +50,122 @@ void CFileLoadManager::LoadData(string path)
 		while (getline(file, readData))
 		{
 			if (strstr(readData.c_str(), "# Object_Start"))
+			{
+				ResetLoadMapData(mapData);
 				continue;
+			}
 
 			else if (strstr(readData.c_str(), "# ObjectName"))
 			{
-				getline(file, readData);
-				if(strstr(readData.c_str(), "\r"))
-					readData = readData.substr(0, readData.length() - 1);
+				ReadAndCutSlashR(file, readData);
 				mapData.strObjName = readData;
 			}
 
 			else if (strstr(readData.c_str(), "# FolderPath"))
 			{
-				getline(file, readData);
-				if (strstr(readData.c_str(), "\r"))
-					readData = readData.substr(0, readData.length() - 1);
+				ReadAndCutSlashR(file, readData);
 				mapData.strFolderPath = readData;
 			}
 
 			else if (strstr(readData.c_str(), "# FilePath"))
 			{
-				getline(file, readData);
-				if (strstr(readData.c_str(), "\r"))
-					readData = readData.substr(0, readData.length() - 1);
+				ReadAndCutSlashR(file, readData);
 				mapData.strXFilePath = readData;
 			}
 
 			else if (strstr(readData.c_str(), "# TxtPath"))
 			{
-				getline(file, readData);
-				if (strstr(readData.c_str(), "\r"))
-					readData = readData.substr(0, readData.length() - 1);
+				ReadAndCutSlashR(file, readData);
 				mapData.strTxtPath = readData;
 			}
 
 			else if (strstr(readData.c_str(), "# ObjectType"))
 			{
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.objType = (ObjectType)atoi(readData.c_str());
 			}
 
 			else if (strstr(readData.c_str(), "# Scale"))
 			{
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vScale.x = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vScale.y = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vScale.z = atof(readData.c_str());
 			}
 
 			else if (strstr(readData.c_str(), "# Rotate"))
 			{
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vRotate.x = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vRotate.y = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vRotate.z = atof(readData.c_str());
 			}
 
 			else if (strstr(readData.c_str(), "# Translate"))
 			{
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vTranslate.x = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vTranslate.y = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.vTranslate.z = atof(readData.c_str());
 			}
 
-			else if (strstr(readData.c_str(), "# Color"))
+			else if (strstr(readData.c_str(), "# Color") && strstr(readData.c_str(), "Tag") == NULL)
 			{
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.dxColor.r = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.dxColor.g = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.dxColor.b = atof(readData.c_str());
 
-				getline(file, readData);
+				ReadAndCutSlashR(file, readData);
 				mapData.dxColor.a = atof(readData.c_str());
 			}
+			
+			// >> colorTag_Background
+			else if (strstr(readData.c_str(), "# ColorTag"))
+			{
+				while (true)
+				{
+					ReadAndCutSlashR(file, readData);
 
-			else if (strstr(readData.c_str(),  "# GimmickData"))
-				continue;
+					if (strstr(readData.c_str(), "#"))
+						break;
 
-			// >> 회전판자
-			else if (strstr(readData.c_str(), "# RotationSpeed"))
-			{
-				getline(file, readData);
-				mapData.gimmickData.roationSpeed_rotaitonBoard = atof(readData.c_str());
+					mapData.vecColorTag.push_back(readData);
+				}
 			}
-			else if (strstr(readData.c_str(), "# RotationAxialIndex"))
-			{
-				getline(file, readData);
-				mapData.gimmickData.roationAxialIndex_rotaitonBoard = atoi(readData.c_str());
-			}
-			// << 회전판자
 
-			// >> 무빙큐브
-			else if (strstr(readData.c_str(), "# StartPos"))
+			if (strstr(readData.c_str(), "# GimmickData"))
 			{
-				getline(file, readData);
-				mapData.gimmickData.startPos_movingCube = atof(readData.c_str());
+				ReadGimmickData(file, readData, mapData);
 			}
-			else if (strstr(readData.c_str(), "# EndPos"))
+			else if (strstr(readData.c_str(), "# ConditionName")
+				&& (mapData.objType != eG_Door && mapData.objType != eG_DoorFrame && mapData.objType != eG_ColorChanger))
 			{
-				getline(file, readData);
-				mapData.gimmickData.endPos_movingCube = atof(readData.c_str());
+				ReadAndCutSlashR(file , readData);
+				mapData.gimmickData.conditionName = readData;
 			}
-			else if (strstr(readData.c_str(), "# Speed"))
-			{
-				getline(file, readData);
-				mapData.gimmickData.speed_movingCube = atof(readData.c_str());
-			}
-			else if (strstr(readData.c_str(), "# DirectionIndex"))
-			{
-				getline(file, readData);
-				mapData.gimmickData.directionIndex_movingCube = atoi(readData.c_str());
-			}
-			// << 무빙큐브
 
-			else if (strstr(readData.c_str(), "# Object_End"))
+			if (strstr(readData.c_str(), "# Object_End"))
 				CObject::CreateObject(mapData);
 
 			// >> mapTest
-			else if (strstr(readData.c_str(), "# Section"))
+			if (strstr(readData.c_str(), "# Section"))
 				g_pObjectManager->AddMap();
 		}
 	}
@@ -192,6 +173,106 @@ void CFileLoadManager::LoadData(string path)
 	file.close();
 }
 
+void CFileLoadManager::ReadAndCutSlashR(ifstream & file, string & readData)
+{
+	getline(file, readData);
+	if (strstr(readData.c_str(), "\r"))
+		readData = readData.substr(0, readData.length() - 1);
+}
+
+void CFileLoadManager::ReadGimmickData(ifstream & file, string& readData, ST_MapData & mapData)
+{
+	while (true)
+	{
+		getline(file, readData);
+
+		if (strstr(readData.c_str(), "# Object_End"))
+			break;
+
+		// >> 회전판자
+		if (strstr(readData.c_str(), "# RotationSpeed"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.roationSpeed_rotaitonBoard = atof(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# RotationAxialIndex"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.roationAxialIndex_rotaitonBoard = atoi(readData.c_str());
+		}
+		// << 회전판자
+
+		// >> 무빙큐브
+		else if (strstr(readData.c_str(), "# StartPos"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.startPos_movingCube = atof(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# EndPos"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.endPos_movingCube = atof(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# Speed"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.speed_movingCube = atof(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# DirectionIndex"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.directionIndex_movingCube = atoi(readData.c_str());
+		}
+		// << 무빙큐브
+
+		// >> 조건변수(문, 컬러레이저)
+		else if (strstr(readData.c_str(), "# ConditionName"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.conditionName = readData.c_str();
+		}
+		else if (strstr(readData.c_str(), "# ConditionIndex"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.onOffConditionIndex = atoi(readData.c_str());
+		}
+		else if (strstr(readData.c_str(), "# ConditionOrbIndex"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.conditionOrbIndex = atoi(readData.c_str());
+		}
+		// << 조건변수(문, 컬러레이저)
+	}
+}
+
+void CFileLoadManager::ResetLoadMapData(ST_MapData & mapData)
+{
+	// basicData
+	mapData.strFolderPath = "";
+	mapData.strXFilePath = "";
+	mapData.strTxtPath = "";
+	mapData.strObjName = "";
+	mapData.objType = ObjectType::eNull;
+	mapData.vScale = D3DXVECTOR3(0, 0, 0);
+	mapData.vRotate = D3DXVECTOR3(0, 0, 0);
+	mapData.vTranslate = D3DXVECTOR3(0, 0, 0);
+	mapData.dxColor = D3DXCOLOR(1, 1, 1, 1);
+	mapData.vecColorTag.clear();
+	mapData.gimmickData.isData = false;
+
+	// >> gimmickData
+	mapData.gimmickData.roationSpeed_rotaitonBoard = 0.0f;
+	mapData.gimmickData.roationAxialIndex_rotaitonBoard = 0;
+	mapData.gimmickData.conditionIndex_switch = 0;
+	mapData.gimmickData.maxMassIndex_switch = 0;
+	mapData.gimmickData.startPos_movingCube = 0.0f;
+	mapData.gimmickData.endPos_movingCube = 0.0f;
+	mapData.gimmickData.speed_movingCube = 0.0f;
+	mapData.gimmickData.directionIndex_movingCube = 0;
+	mapData.gimmickData.onOffConditionIndex = 0;
+	mapData.gimmickData.conditionName = "";
+	mapData.gimmickData.conditionOrbIndex = 0;
+}
 
 CFileLoadManager * CFileLoadManager::GetInstance()
 {
@@ -324,6 +405,23 @@ bool CFileLoadManager::FileLoad_MapData(string szFolder, string szFile)
 	LoadData(filePath);
 
 	return true;
+}
+
+LPDIRECT3DTEXTURE9 CFileLoadManager::GetFileNameTexture(string szFolder, string szFile)
+{
+	string filePath;
+	StrFilePath(filePath, szFolder, szFile);
+
+	if (m_mapTexture.find(filePath) == m_mapTexture.end())
+	{
+		if (D3DXCreateTextureFromFileA(g_pD3DDevice, filePath.c_str(), &m_mapTexture[filePath.c_str()]))
+		{
+			ErrMessageBox("Texture Load Error", "ERROR");
+			return false;
+		}
+	}
+
+	return m_mapTexture[filePath];
 }
 
 void CFileLoadManager::Destroy()

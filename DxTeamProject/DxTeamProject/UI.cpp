@@ -35,7 +35,6 @@ void CUI::Setup_UI()
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_stImageInfo, NULL, &m_pTextureUI);
 
-
 	////BackG
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
 		"UI/back.png",
@@ -135,6 +134,7 @@ void CUI::UI_Render()
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(150, 255, 255, 255));
+
 
 	//MAIN UI
 	SetRect(&UIrc,-500,-50,m_stImageInfo.Width, m_stImageInfo.Height);

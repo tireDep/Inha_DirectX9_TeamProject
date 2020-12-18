@@ -1,21 +1,34 @@
 #pragma once
+#include "Item.h"
 
-class COrb
+class COBB;
+class COrb : public CItem
 {
 private:
-	D3DXIMAGE_INFO m_stImageInfo;
-	LPDIRECT3DTEXTURE9 m_pTex0;
-	vector<ST_PT_VERTEX> m_vecVertex_Multi;
-	ST_PT_VERTEX v;
-	D3DXMATRIXA16 m_matWorld;
-	float m_Uv_x;
-	float m_Uv_y;
+	float m_preAni;
+	float m_nowAni;
+	float m_UvX;
+	float m_UvY;
+
+	//충돌
+	bool pBox, pCylinder, pSphere, player;
+	bool render;
 public:
+
 	COrb();
 	~COrb();
 	void Setup();
+	void Setup(ST_MapData setData);
+	void Update(float duration);
 	void Render();
-	void Update();
 	void SetBillbord();
+
+	//충돌
+	void pBoxBool(bool set) { pBox = set; }
+	void pCylinderBool(bool set) { pCylinder = set; }
+	void pSphereBool(bool set) { pSphere = set; }
+	//캐릭터와충돌
+	void SetBool(bool set) { player = set; }
+	bool GetBool() { return render; }
 };
 

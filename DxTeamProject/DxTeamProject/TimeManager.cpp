@@ -40,7 +40,10 @@ void CTimeManager::Update()
 
 float CTimeManager::GetElapsedTime()
 {
-	return m_fElapsedTime;
+	if (m_fElapsedTime == 0)
+		return 0.0001;
+	else
+		return m_fElapsedTime;
 }
 
 int CTimeManager::GetFPS()

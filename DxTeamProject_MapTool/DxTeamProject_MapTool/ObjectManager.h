@@ -9,10 +9,16 @@ class IObject;
 class CObjectManager : public CSingleton<CObjectManager>
 {
 private:
-	vector<IObject *> m_vecObject;
-	int m_sameNum = 0;
+	vector<IObject *>	m_vecObject;
+	int					m_sameNum = 0;
+
+	int					m_preVecObjSize = 0;
+	map<string, string> m_mapConditionName;
+	// >> 동일이름 관련 조건 변수
+	// >> 맵 데이터 로드시 사용됨
 
 	void SetCopyObject(int index);
+	void SetReConditionName();
 
 public:
 	void AddObject(IObject* pObject);
@@ -39,5 +45,11 @@ public:
 	void CopyObject();
 
 	string GetPickObjName();
-};
 
+	void SetPreVecSize(int set);
+
+	int GetConditionIndex();
+
+	D3DXVECTOR3 GetHighestY(int index);
+	bool GetIsAnotherPos(D3DXVECTOR3 pos);
+};

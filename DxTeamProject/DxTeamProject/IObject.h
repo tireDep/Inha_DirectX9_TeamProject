@@ -22,6 +22,15 @@ protected:
 	//Synthesize(D3DXVECTOR3, m_vScale, Scale);
 	//Synthesize(D3DXVECTOR3, m_vRotate, Rotate);
 	//Synthesize(D3DXVECTOR3, m_vTranslate, Translate);
+	
+	Synthesize(string, m_strConditionName, ConditionName);
+	// Synthesize(int, m_conditionOrbindex, ConditionOrbIndex); // 필요없을지도?
+	Synthesize(bool, m_isCondition, Condition);
+	// >> On/Off 조건 변수
+
+	vector<string> m_vecColorTag;
+	bool CheckIsGetColorOrb();
+
 	COBB* m_pOBB;
 	IObject();
 public:
@@ -32,8 +41,13 @@ public:
 	virtual void Update(float duration) = 0;
 	virtual void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos) { };
 	virtual void Render() = 0;
-	virtual string GetName() { return string(); }
+	virtual string GetName() { return m_strName; }
 	virtual void SetBool(bool setup) = 0; //상호작용 
+	virtual bool GetBool() = 0;
 	virtual COBB* GetOBB() { return m_pOBB; }
+	virtual void pBoxBool(bool set) = 0; //피오브젝트와 상호작용
+	virtual void pCylinderBool(bool set) = 0;
+	virtual	void pSphereBool(bool set) = 0;
+	virtual void ReceiveEvent(ST_EVENT eventMsg);
 	//static void CreateObject(const ST_MapData& mapData);
 };

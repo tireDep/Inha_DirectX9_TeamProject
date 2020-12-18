@@ -15,6 +15,7 @@ protected:
 	Synthesize(float, m_fWidth, Width);
 	Synthesize(float, m_fHeight, Height);
 	Synthesize(float, m_fDepth, Depth);
+	bool render = true;
 public:
 	void Setup();
 	void Setup(const ST_MapData & mapData);
@@ -28,6 +29,7 @@ public:
 	string GetName();
 	// OBB TEST
 	COBB* GetOBB() { return m_pOBB; }
+	bool GetBool() { return render; }
 };
 
 /// Delete Later...

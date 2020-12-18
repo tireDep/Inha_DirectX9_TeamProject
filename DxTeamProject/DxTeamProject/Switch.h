@@ -12,24 +12,27 @@ private:
 	LPD3DXMESH m_pBox; // CreateBox
 	
 	D3DXVECTOR3 m_vMin, m_vMax;
+	bool pBox, pCylinder,pSphere ,player ,render;
 
 	// D3DXMATRIXA16 m_matS, m_matR, m_matT, m_matRot; //setdata
 
 public:
 
-	//잠깐
-	bool istrue;
-	COBB* m_pColl; //충돌박스
+	COBB* m_pColl; //충돌스박
 	CSwitch();
 	~CSwitch();
-	bool GetBool();
+	bool GetBool() { return render; }
 	void Setup();
 	void Setup(ST_MapData setData);
 	void Update();
 	void Render();
 	void Update(float duration);
+	void pBoxBool(bool set);
+	void pCylinderBool(bool set);
+	void pSphereBool(bool set);
 	void SetBool(bool set);
-	
 	COBB* GetOBB2() { return m_pColl; } // 콜리더부분!
+
+	void ChangeConditionMsg(bool set);
 };
 

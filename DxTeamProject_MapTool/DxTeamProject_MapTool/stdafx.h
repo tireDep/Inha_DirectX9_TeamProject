@@ -107,7 +107,7 @@ enum ObjectType
 	eBook, eOrb,
 
 	/* Added */
-	eFlower, eSprout, eBridge,
+	eFlower, eSprout, eBridge, eTrace,
 
 	eNull
 
@@ -130,7 +130,7 @@ enum ObjectType
 	eBook, eOrb,
 
 	/* Added */
-	eFlower, eSprout, eBridge,
+	eFlower, eSprout, eBridge, eTrace,
 
 	eNull
 #endif // _Debug
@@ -177,16 +177,18 @@ struct ST_MapData
 
 	D3DXCOLOR dxColor = D3DXCOLOR(1, 1, 1, 1);
 
+	vector<string> vecColorTag;
+
 	ST_Gimmick gimmickData;
 };
 
 struct ST_XFile
 {
-	ID3DXMesh* pMesh;
-	ID3DXBuffer* adjBuffer;
-	ID3DXBuffer* mtrlBuffer;
+	ID3DXMesh* pMesh = NULL;
+	ID3DXBuffer* adjBuffer = NULL;
+	ID3DXBuffer* mtrlBuffer = NULL;
 
-	DWORD nMtrlNum;
+	DWORD nMtrlNum = 0;
 	vector<D3DMATERIAL9> vecMtrl;
 	vector<IDirect3DTexture9*> vecTextrure;
 };
@@ -194,5 +196,5 @@ struct ST_XFile
 struct ST_Sprite
 {
 	D3DXIMAGE_INFO imageInfo;
-	LPDIRECT3DTEXTURE9 lpTexture;
+	LPDIRECT3DTEXTURE9 lpTexture = NULL;
 };

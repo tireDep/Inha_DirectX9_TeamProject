@@ -82,6 +82,7 @@ public:
 	void CollisionBoxToBox(PObject* one, PObject* two, float duration);
 	void CollisionSphereToIObject(CSphere* one, IObject* two, float duration);
 	void CollisionIObject(PObject* pObject, IObject* iObject, float duration);
+	void CollisionBoxToTile(PObject* pObject, IObject* iObject, float duration);
 
 	void Render();
 	void RenderOBBBox();

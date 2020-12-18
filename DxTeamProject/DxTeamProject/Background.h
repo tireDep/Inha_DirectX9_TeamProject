@@ -3,10 +3,18 @@
 
 class CBackground : public IObject
 {
+private:
+	bool pBox, pCylinder, pSphere;
+	bool player, render;
+
 public:
 	CBackground();
 	virtual ~CBackground();
-	virtual void SetBool(bool set) { };
+	void pBoxBool(bool set) { pBox = set; }
+	void pCylinderBool(bool set) { pCylinder = set; }
+	void pSphereBool(bool set) { pSphere = set; }
+	void SetBool(bool set) { player = set; }
+	bool GetBool() { return render; }
 	virtual void Setup() { };
 	virtual void Setup(const ST_MapData & mapData);
 	virtual void Update(float duration) { m_pOBB->Update(&m_matWorld);	};

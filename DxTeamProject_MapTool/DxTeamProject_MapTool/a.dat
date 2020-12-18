@@ -1,111 +1,103 @@
 # Object_Start
 # ObjectName
-Door1
+Tile_01_Grass1
 # FolderPath
-Resource/XFile/Gimmick/Door
+Resource/XFile/Tile
 # FilePath
-door_frame.X
+Tile_01.X
 # TxtPath
-cubeworld_texture.tga
+Texture_01.png
 # ObjectType
-28
+0
 # Scale
+3
 0.1
-0.1
-0.1
+3
 # Rotate
 0
 0
 0
 # Translate
-0.5
 0
-0.5
+0
+0
 # Color
 0.5
 0.5
 0.5
 1
-# GimmickData
-# ConditionName
-Book4
-# ConditionIndex
-1
-# ConditionOrbIndex
-4
-# ConditionName
-Book4
+# ColorTag
+Green
+Red
+Yellow
 # Object_End
 
 # Object_Start
 # ObjectName
-Door2
+Tile_01_Grass2
 # FolderPath
-Resource/XFile/Gimmick/Door
+Resource/XFile/Tile
 # FilePath
-door_right.X
+Tile_01.X
 # TxtPath
-cubeworld_texture.tga
+Texture_01.png
 # ObjectType
-29
+0
 # Scale
+3
 0.1
-0.1
-0.1
+2
 # Rotate
 0
 0
 0
 # Translate
-0.5
 0
-0.5
+1
+4.5
 # Color
 0.5
 0.5
 0.5
 1
-# GimmickData
-# ConditionName
-Book4
-# ConditionIndex
-1
-# ConditionOrbIndex
-0
-# ConditionName
-Book4
+# ColorTag
+Green
+Red
+Yellow
 # Object_End
 
 # Object_Start
 # ObjectName
-Book4
+Tile_01_Grass5
 # FolderPath
-Resource/XFile/Book
+Resource/XFile/Tile
 # FilePath
-book.X
+Tile_01.X
 # TxtPath
-Bookshelf_diffuse.png
+Texture_01.png
 # ObjectType
-33
+0
 # Scale
+2
 0.1
-0.1
-0.1
+1.5
 # Rotate
 0
 0
 0
 # Translate
--1.5
 0
--1.5
+2
+6.5
 # Color
 0.5
 0.5
 0.5
 1
-# ConditionName
-Door1
+# ColorTag
+Green
+Red
+Yellow
 # Object_End
 
 # Section =======================================

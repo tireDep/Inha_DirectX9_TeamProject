@@ -8,6 +8,8 @@
 #include "Tile.h"
 #include "Gimmick.h"
 #include "Book.h"
+#include "Orb.h"
+#include "Trace.h"
 
 int CObject::m_nRefCount = 0;
 
@@ -259,6 +261,20 @@ void CObject::CreateObject(const ST_MapData & mapData)
 	{
 		CBook* tile = new CBook;
 		tile->Setup(mapData);
+	}
+		break;
+
+	case eOrb:
+	{
+		COrb* orb = new COrb;
+		orb->Setup(mapData);
+	}
+		break;
+
+	case eTrace:
+	{
+		CTrace* trace = new CTrace;
+		trace->Setup(mapData);
 	}
 		break;
 	}

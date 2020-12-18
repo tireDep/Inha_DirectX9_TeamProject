@@ -41,6 +41,10 @@ protected:
 	Synthesize(int, m_conditionOrbindex, ConditionOrbIndex);
 	// >> On/Off 조건 변수
 
+	Synthesize(vector<string>, m_vecColorTag, VecColorTag);
+	// >> 태그
+	// >> 배경 오브젝트만 사용, 편의를 위해 상위에 선언
+
 	LPD3DXEFFECT m_pShader;
 	bool isLoad;
 
@@ -49,7 +53,8 @@ protected:
 	IObject();
 
 	void SetShader(const D3DXMATRIXA16& setMatWorld);
-	void SetShader_ConditionColor();
+	void SetShaderColor(const D3DXVECTOR4& outLine, const D3DXVECTOR4& inner);
+	// void SetShader_ConditionColor();
 
 public:
 	virtual ~IObject();
@@ -61,7 +66,7 @@ public:
 
 	virtual void Update() = 0;
 	// ray
-	virtual void Update(CRay * ray);
+	virtual bool Update(CRay * ray);
 	virtual void Render();
 	virtual void Render_OBB_Box();
 

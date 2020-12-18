@@ -29,6 +29,9 @@
 #include "MovingCube.h"
 #include "Book.h"
 #include "Dragon.h"
+//
+#include "Scene.h"
+//
 /// 이 아래는 지울 수도 있는 선언
 //#include "CHeight.h"
 //#include "PSphere.h"
@@ -57,7 +60,8 @@ CMainGame::CMainGame() :
 	// m_pGimmick_Switch(NULL),
 	//
 	m_pBook(NULL),
-	m_pDragon(NULL)
+	m_pDragon(NULL),
+	m_pScene(NULL)
 	/// 릴리즈 버전을 위한 주석처리
 	//m_pSm(NULL),
 {
@@ -90,6 +94,8 @@ CMainGame::~CMainGame()
 	/// 이 아래는 지울 수도 있는 선언
 	SafeDelete(m_pHeightMap);
 
+	SafeDelete(m_pScene);
+
 	g_pObjectManager->Destroy();
 	g_pDeviceManager->Destroy();
 	// Ray y check
@@ -115,14 +121,30 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToTree.dat");
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "DesignTest.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "DoorTest.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "BoxToTile.dat");
+
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Book.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToGimmick.dat");
+
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "CharacterCollisionTest.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "PObjectToGimmick.dat");
+
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "JumpTest.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
-	// >> mapData
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "doorTest2.dat");
 #else
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 #endif // DEBUG
-	
+	m_pScene = new CScene;
+	m_pScene->Setup();
+
 	m_pGrid = new CGrid;
 	m_pGrid->Setup(30, 1.0f);
 
@@ -140,9 +162,6 @@ void CMainGame::Setup()
 
 	//m_pMovingCube = new MovingCube;
 	//m_pMovingCube->Setup();
-
-	//m_pOrb = new COrb;
-	//m_pOrb->Setup();
 
 	m_pLight = new CLight;
 	m_pLight->Setup();
@@ -217,23 +236,37 @@ void CMainGame::Setup()
 
 void CMainGame::Update()
 {
+	if (GetKeyState('1') & 0x8000)
+	{
+		g_pGameManager->SetGetOrb("Blue");
+		g_pGameManager->SetGetOrb("Green");
+		g_pGameManager->SetGetOrb("Red");
+		g_pGameManager->SetGetOrb("White");
+		g_pGameManager->SetGetOrb("Yellow");
+		g_pGameManager->SetGetOrb("Black");
+	}
+
+	g_pGameManager->CompleteOrb();
+	// >> 조건 확인 테스트
+	// >> on/off 상태 조건 // 텍스쳐 태깅
+
 	g_pTimeManager->Update();
+
 	g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
 	if (m_pCamera)
 		m_pCamera->Update();
 
-	//if(m_pOrb)
-	//	m_pOrb->Update();
-
 	if (m_pCharacter)
 	{
 		m_pCharacter->Update(m_pCamera->GetCameraDirection());
+		m_pCharacter->Update(g_pTimeManager->GetElapsedTime());
 		m_pDragon->DirectionSet(m_pCamera->GetCameraDirection());
 		m_pDragon->Update(m_pCharacter->GetPosition(), g_pTimeManager->GetElapsedTime());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
-		/// OBB TEST
-		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[2]);
+		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
+		//for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
+			//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
@@ -270,22 +303,26 @@ void CMainGame::Update()
 			break;
 		}
 		// grab
-		if (m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime()) != -1)
-		{
+		if (m_pCharacter->GetGrab())
 			m_pText->SetisGrabstate(true);
-			D3DXVECTOR3 v;
-			v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->GetPosition() - m_pCharacter->GetPosition();
-			v.y -= 0.5f;
-			//v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
-			//v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
-			//v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
-			D3DXVec3Normalize(&v, &v);
-			g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->SetPusingForce(v);
-		}
 		else
-		{
 			m_pText->SetisGrabstate(false);
-		}
+		//if (m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime()) != -1)
+		//{
+		//	m_pText->SetisGrabstate(true);
+		//	//D3DXVECTOR3 v;
+		//	//v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->GetPosition() - m_pCharacter->GetPosition();
+		//	//v.y -= 0.5f;
+		//	////v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
+		//	////v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
+		//	////v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
+		//	//D3DXVec3Normalize(&v, &v);
+		//	//g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->SetPusingForce(v);
+		//}
+		//else
+		//{
+		//	m_pText->SetisGrabstate(false);
+		//}
 		// Ray y check
 		/*m_pCharacter->UpdateRayYCheck(*m_pMeshTile);*/
 	}
@@ -349,9 +386,6 @@ void CMainGame::Update()
 	/*if (m_pMovingCube)
 		m_pMovingCube->Update();*/
 
-
-	
-
 	//for(int i =0 ; i < m_pMeshTile.size(); ++i)
 	//if (m_pMeshTile[i])
 	//	m_pMeshTile[i]->Update();
@@ -363,7 +397,6 @@ void CMainGame::Update()
 	//		D3DXVECTOR3 tmp = m_pChanger->m_position - m_pMeshTile[i]->GetPos();
 	//		m_pChanger->SetHitLength(D3DXVec3Length(&tmp));
 	//		m_pMeshTile[i]->SetColor(m_pChanger->m_stMtl);
-
 	//		break;
 	//	}
 	//	else 
@@ -409,6 +442,21 @@ void CMainGame::Render()
 	//if (m_pSkydome)
 	//	m_pSkydome->Render(m_pCamera->GetCameraEye());
 
+	if (g_pGameManager->GetNowScene() == SceneType::eMainScene)
+	{
+		if (m_pScene)
+			m_pScene->Render_Main();
+	}
+
+	if (g_pGameManager->GetNowScene() == SceneType::eEndingScene)
+	{
+		if (m_pScene)
+			m_pScene->Render_Ending();
+		g_pGameManager->SetClipCursor(-15);
+		ShowCursor(true);
+		g_pGameManager->InitializationOrb();
+	}
+
 	if (m_pGrid)
 		m_pGrid->Render();
 	
@@ -416,12 +464,6 @@ void CMainGame::Render()
 
 	if (m_pCharacter)
 		m_pCharacter->Render(c);
-
-	//if (m_pOrb)
-	//{
-	//	m_pOrb->SetBillbord();
-	//	m_pOrb->Render();
-	//}
 
 	g_pObjectManager->Render();
 

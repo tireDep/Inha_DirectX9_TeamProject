@@ -22,7 +22,6 @@ public:
 	static CRay RayAtViewSpace(int nScreenX, int nScreenY);
 	static CRay RayAtWorldSpace(int nScreenX, int nScreenY);
 
-	bool	IntersectTri(IN D3DXVECTOR3& v0, IN D3DXVECTOR3 & v1,
-		IN D3DXVECTOR3& v2);
+	bool	IntersectTri(IN D3DXVECTOR3& v0, IN D3DXVECTOR3 & v1, IN D3DXVECTOR3& v2, OUT D3DXVECTOR3& vPickedPosition);
 };
 

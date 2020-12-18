@@ -184,6 +184,7 @@
     <ClInclude Include="IListener.h" />
     <ClInclude Include="IMap.h" />
     <ClInclude Include="IObject.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MeshTile.h" />
@@ -217,6 +218,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="RotationBoard.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SkinnedMesh.h" />
     <ClInclude Include="Skydome.h" />
@@ -233,6 +235,7 @@
     <ClInclude Include="Text.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="Trace.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="World.h" />
@@ -271,6 +274,7 @@
     <ClCompile Include="IListener.cpp" />
     <ClCompile Include="IMap.cpp" />
     <ClCompile Include="IObject.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="MeshTile.cpp" />
@@ -303,6 +307,7 @@
     <ClCompile Include="ReleaseTimer.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="RotationBoard.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SkinnedMesh.cpp" />
     <ClCompile Include="Skydome.cpp" />
     <ClCompile Include="SoundManager.cpp" />
@@ -322,6 +327,7 @@
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="Trace.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="World.cpp" />

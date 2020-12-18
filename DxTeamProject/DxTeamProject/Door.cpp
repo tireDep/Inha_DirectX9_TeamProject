@@ -6,6 +6,7 @@ CDoor::CDoor()
 	, IsOpen(false)
 	, m_fRotAngle(0.0f)
 	, m_fRotationSpeed(1.0f)
+	,render(true)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
@@ -20,45 +21,48 @@ CDoor::~CDoor()
 
 void CDoor::Setup(const ST_MapData & mapData)
 {
+	CGimmick::SetLoadData(mapData);
+
 	//m_fOpeningAngle = mapData. XXX
-
-	m_strObjName = mapData.strObjName;
-	m_strFolder = mapData.strFolderPath;
-	m_strXFile = mapData.strXFilePath;
-	m_strTxtFile = mapData.strTxtPath;
-	m_ObjectType = mapData.objType;
-
-	m_vScale = mapData.vScale;
-	m_vRotation = mapData.vRotate;
-	m_vTranslation = mapData.vTranslate;
-
-	ST_XFile* xfile = new ST_XFile;
-
-	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
-
-	if (m_strTxtFile != "")
-		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
-
-	m_pMesh = xfile->pMesh;
-	m_adjBuffer = xfile->adjBuffer;
-	m_vecMtrls = xfile->vecMtrl;
-	m_vecTextures = xfile->vecTextrure;
-	m_numMtrls = xfile->nMtrlNum;
-
-	delete xfile;
-
-	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
-	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
-	m_matWorld = matS * matR * matT;
-
-	// OBB TEST
-	m_pOBB = new COBB;
-	m_pOBB->Setup(*this);
-	g_pObjectManager->AddOBBbox(m_pOBB);
-	g_pObjectManager->AddGimmick(this);
-
+	//m_strObjName = mapData.strObjName;
+	//m_strFolder = mapData.strFolderPath;
+	//m_strXFile = mapData.strXFilePath;
+	//m_strTxtFile = mapData.strTxtPath;
+	//m_ObjectType = mapData.objType;
+	//
+	//m_vScale = mapData.vScale;
+	//m_vRotation = mapData.vRotate;
+	//m_vTranslation = mapData.vTranslate;
+	//
+	//CGimmick::SetGimmickCondition(mapData);
+	//
+	//ST_XFile* xfile = new ST_XFile;
+	//
+	//g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
+	//
+	//if (m_strTxtFile != "")
+	//	g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+	//
+	//m_pMesh = xfile->pMesh;
+	//m_adjBuffer = xfile->adjBuffer;
+	//m_vecMtrls = xfile->vecMtrl;
+	//m_vecTextures = xfile->vecTextrure;
+	//m_numMtrls = xfile->nMtrlNum;
+	//
+	//delete xfile;
+	//
+	//D3DXMATRIXA16 matS, matR, matT;
+	//D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	//D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+	//D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+	//m_matWorld = matS * matR * matT;
+	//
+	//// OBB TEST
+	//m_pOBB = new COBB;
+	//m_pOBB->Setup(*this);
+	//g_pObjectManager->AddOBBbox(m_pOBB);
+	//g_pObjectManager->AddGimmick(this);
+	//
 	//D3DXVECTOR3 vScale, vRotate, vTranslate;
 	//vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
 	//						 // JW ADD...
@@ -78,64 +82,91 @@ void CDoor::Setup(const ST_MapData & mapData)
 
 void CDoor::Update(float duration)
 {
-	// tmp Test
-	static int tmpCount = 0;
-	tmpCount++;
-	if (tmpCount >= 10000)
+	if (m_ObjectType == eG_Door)
 	{
-		IsOpen = false;
-		if (tmpCount >= 20000)
+		if (m_isCondition)
 		{
-			IsOpen = true;
-			tmpCount = 0;
+			m_fRotAngle += m_fRotationSpeed * duration;
+			if (m_fRotAngle >= m_fOpeningAngle)
+				m_fRotationSpeed = 0;
+			else
+				m_fRotationSpeed = 1.0f;
 		}
+		else
+		{
+			m_fRotAngle -= m_fRotationSpeed * duration;
+			if (m_fRotAngle <= 0)
+				m_fRotationSpeed = 0;
+			else
+				m_fRotationSpeed = 1.0f;
+		}
+
+		D3DXMatrixRotationY(&m_matRotGimmick, m_fRotAngle);
+
+		D3DXMATRIXA16 matS, matT;
+		D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+		D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+
+		// Need to Modify... Rotation
+		m_matWorld = matS * m_matRotGimmick * matT;
+
+		m_pOBB->Update(&m_matWorld);
+	}
+	else
+	{
+		m_pOBB->Update(&m_matWorld);
 	}
 
+
+	// tmp Test
+	// static int tmpCount = 0;
+	// tmpCount++;
+	// if (tmpCount >= 10000)
+	// {
+	// 	IsOpen = false;
+	// 	if (tmpCount >= 20000)
+	// 	{
+	// 		IsOpen = true;
+	// 		tmpCount = 0;
+	// 	}
+	// }
+	//
 	// tmp
 	//if (g_pGameManager->getOrb())
 	//	IsOpen = true;
 	//if (g_pGameManager->getBook())
 	//	IsOpen = true;
-	
-	if (IsOpen)
-	{
-		m_fRotAngle += m_fRotationSpeed * duration;
-		if (m_fRotAngle >= m_fOpeningAngle)
-			m_fRotationSpeed = 0;
-		else
-			m_fRotationSpeed = 1.0f;
-	}
-	else
-	{
-		m_fRotAngle -= m_fRotationSpeed * duration;
-		if (m_fRotAngle <= 0)
-			m_fRotationSpeed = 0;
-		else
-			m_fRotationSpeed = 1.0f;
-	}
-	D3DXMatrixRotationY(&m_matRotGimmick, m_fRotAngle);
-
-	D3DXMATRIXA16 matS, matT;
-	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
-
-	// Need to Modify... Rotation
-	m_matWorld = matS * m_matRotGimmick * matT;
-	m_pOBB->Update(&m_matWorld);
+	//
+	// if (IsOpen)
+	// {
+	// 	m_fRotAngle += m_fRotationSpeed * duration;
+	// 	if (m_fRotAngle >= m_fOpeningAngle)
+	// 		m_fRotationSpeed = 0;
+	// 	else
+	// 		m_fRotationSpeed = 1.0f;
+	// }
+	// else
+	// {
+	// 	m_fRotAngle -= m_fRotationSpeed * duration;
+	// 	if (m_fRotAngle <= 0)
+	// 		m_fRotationSpeed = 0;
+	// 	else
+	// 		m_fRotationSpeed = 1.0f;
+	// }
 }
 
 void CDoor::Update(float duration, bool isSwitchOn)
 {
-	if (isSwitchOn)
-	{
-		IsOpen = true;
-		Update(duration);
-	}
-	else
-	{
-		IsOpen = false;
-		Update(duration);
-	}
+	// if (isSwitchOn)
+	// {
+	// 	IsOpen = true;
+	// 	Update(duration);
+	// }
+	// else
+	// {
+	// 	IsOpen = false;
+	// 	Update(duration);
+	// }
 	//m_matWorld = m_matS * m_matRotGimmick * m_matT;
 	//m_pOBB->Update(&m_matWorld);
 }

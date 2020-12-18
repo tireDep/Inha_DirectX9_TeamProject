@@ -7,12 +7,15 @@ int CBook::m_nCount = 0;
 CBook::CBook()
 	: m_fRotationSpeed(1.0f)
 	, m_fRotAngle(0.0f)
+	, pBox(false)
+	, render(true)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
 	D3DXMatrixIdentity(&m_matT);
 
 	CBook::m_nCount += 1;
+	
 }
 
 CBook::~CBook()
@@ -44,51 +47,57 @@ void CBook::Setup()
 
 void CBook::Setup(ST_MapData setData)
 {
-	m_strObjName = setData.strObjName;
-	m_strFolder = setData.strFolderPath;
-	m_strXFile = setData.strXFilePath;
-	m_strTxtFile = setData.strTxtPath;
-	m_ObjectType = setData.objType;
+	CItem::Setup(setData);
 
-	D3DXVECTOR3 vScale, vRotate, vTranslate;
+	//m_strObjName = setData.strObjName;
+	//m_strFolder = setData.strFolderPath;
+	//m_strXFile = setData.strXFilePath;
+	//m_strTxtFile = setData.strTxtPath;
+	//m_ObjectType = setData.objType;
 
-	vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
-							 // JW ADD...
-	m_vScale = vScale;
-	vRotate = setData.vRotate;
-	vTranslate = setData.vTranslate;
+	//D3DXVECTOR3 vScale, vRotate, vTranslate;
 
-	ST_XFile* xfile = new ST_XFile;
+	//vScale = setData.vScale; // 0.01, 0.03, 0.01, 0.01
+	//						 // JW ADD...
+	//m_vScale = vScale;
+	//vRotate = setData.vRotate;
+	//vTranslate = setData.vTranslate;
 
-	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
+	//m_strConditionName = setData.gimmickData.conditionName;
 
-	if (m_strTxtFile != "")
-		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+	//ST_XFile* xfile = new ST_XFile;
 
-	m_pMesh = xfile->pMesh;
-	m_adjBuffer = xfile->adjBuffer;
-	m_vecMtrls = xfile->vecMtrl;
-	m_vecTextures = xfile->vecTextrure;
-	m_numMtrls = xfile->nMtrlNum;
+	//g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
 
-	delete xfile;
+	//if (m_strTxtFile != "")
+	//	g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
 
-	D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
+	//m_pMesh = xfile->pMesh;
+	//m_adjBuffer = xfile->adjBuffer;
+	//m_vecMtrls = xfile->vecMtrl;
+	//m_vecTextures = xfile->vecTextrure;
+	//m_numMtrls = xfile->nMtrlNum;
 
-	D3DXVECTOR3 v;
-	v.x = D3DXToRadian(vRotate.x);
-	v.y = D3DXToRadian(vRotate.y);
-	v.z = D3DXToRadian(vRotate.z);
+	//delete xfile;
 
-	D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
+	//D3DXMatrixScaling(&m_matS, vScale.x, vScale.y, vScale.z);
 
-	D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
-	m_matWorld = m_matS * m_matR * m_matT;
+	//D3DXVECTOR3 v;
+	//v.x = D3DXToRadian(vRotate.x);
+	//v.y = D3DXToRadian(vRotate.y);
+	//v.z = D3DXToRadian(vRotate.z);
 
-	// OBB TEST
-	m_pOBB = new COBB;
-	m_pOBB->Setup(*this);
-	g_pObjectManager->AddOBBbox(m_pOBB);
+	//D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
+
+	//D3DXMatrixTranslation(&m_matT, vTranslate.x, vTranslate.y, vTranslate.z);
+	//m_matWorld = m_matS * m_matR * m_matT;
+
+	//// OBB TEST
+	//m_pOBB = new COBB;
+	//m_pOBB->Setup(*this);
+	//g_pObjectManager->AddOBBbox(m_pOBB);
+	//m_pOBB->Update(&m_matWorld);
+
 }
 
 void CBook::Update(float duration)
@@ -98,12 +107,9 @@ void CBook::Update(float duration)
 	if (m_fRotAngle > 2 * D3DX_PI)
 		m_fRotAngle -= 2 * D3DX_PI;
 
-	D3DXMatrixRotationY(&m_matR, m_fRotAngle);
-
-	//if(hasIntersected)
-	//	g_pGameManager->SetItem(m_nCount);
-
-	//m_pOBB->Update(&m_matWorld);
+	D3DXMatrixRotationY(&m_matRot, m_fRotAngle);
+	m_matWorld = m_matS * m_matRot * m_matT;
+	m_pOBB->Update(&m_matWorld);
 }
 
 bool CBook::hasIntersected(CSkinnedMesh * Character)
@@ -129,12 +135,12 @@ void CBook::Render()
 	//matWorld = matS* matR * matT;
 	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 
-	m_matWorld = m_matS * m_matR * m_matT;
-
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+
 	if (m_pMesh == NULL)
 		return;
+
 	for (int i = 0; i < m_vecMtrls.size(); i++)
 	{
 		if (m_vecTextures[i] != 0)
@@ -142,5 +148,23 @@ void CBook::Render()
 		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 		m_pMesh->DrawSubset(i);
 	}
+	if (player == true)
+	{	
+		if (m_strConditionName != "")
+		{
+			ST_EVENT msg;
+			msg.eventType = EventType::eConditionChange;
+			msg.isCondition = false;
+			msg.conditionName = m_strObjName;
+
+			g_pEventManager->CheckEvent(msg);
+		}
+		render = false;
+		g_pEventManager->RemoveListener(this);
+
+		SafeRelease(m_pMesh);
+		g_pObjectManager->RemoveObject(m_pOBB);
+	}
+
 	g_pD3DDevice->SetTexture(0, NULL);
 }

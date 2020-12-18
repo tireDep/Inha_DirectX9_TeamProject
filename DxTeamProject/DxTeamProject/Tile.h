@@ -3,14 +3,21 @@
 
 class CTile : public IObject
 {
+private:
+	bool  pBox, pCylinder, pSphere;
+	bool player, render;
 public:
 	CTile();
 	~CTile();
-	void SetBool(bool set) { };
+	void pBoxBool(bool set) { pBox = set; }
+	void pCylinderBool(bool set) { pCylinder = set; }
+	void pSphereBool(bool set) { pSphere = set; }
+	void SetBool(bool set) { player = set; }
 	void Setup() { };
 	void Setup(const ST_MapData & mapData);
 	void Update(float duration) { m_pOBB->Update(&m_matWorld); };
 	void Render();
+	bool GetBool() { return render; }
 	virtual string GetName() { return m_strName; }
 };
 /// Delete Later...
