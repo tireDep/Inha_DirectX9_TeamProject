@@ -13,7 +13,8 @@
 
 CObjectManager::CObjectManager() :
 	m_frustum(NULL),
-	m_thread(NULL)
+	m_thread(NULL),
+	Reset(true)
 {
 	InitializeCriticalSection(&m_cs);
 }
@@ -62,6 +63,7 @@ void CObjectManager::RemoveObject(PObject * pObject)
 		else
 			it++;
 	}
+	
 }
 void CObjectManager::RemoveObject(IObject * iObject)
 {
@@ -737,6 +739,13 @@ void CObjectManager::CollisionBoxToTile(PObject * pObject, IObject * iObject, fl
 	if (penetration <= 0) return;
 	D3DXVECTOR3 movePerIMass = contactNormal * (penetration / pObject->GetInverseMass());
 	pObject->SetPosition(pObject->GetPosition() + movePerIMass * pObject->GetInverseMass());
+}
+
+void CObjectManager::ResetpObject()
+{
+	for(int i = 0; i < m_vecPObject.size(); i++)
+		m_vecPObject[i]->presentTranslation = m_vecPObject[i]->saveTranslation;
+	
 }
 
 // Integrate CollisionSphereToBox(Rotation Error)

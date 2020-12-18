@@ -175,7 +175,7 @@ void Color_changer::Update(float duration)
 			istrue = false;
 	}*/
 	
-	
+	//angle += 0.1f;
 
 	D3DXMatrixRotationY(&matR, D3DXToRadian(angle));// D3DXToRadian(angle)
 

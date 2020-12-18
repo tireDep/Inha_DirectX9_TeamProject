@@ -62,15 +62,36 @@ void PObject::Update(float duration)
 		m_vVelocity.x = m_vVelocity.y = m_vVelocity.z = 0.0f;
 	}
 	else
+	{
 		m_vPosition += (m_vVelocity * duration);
-	
+	}
 	m_vTranslation = m_vPosition;
+	
+	if (g_pObjectManager->Reset == true)
+	{
+	
+		m_vTranslation = saveTranslation += (m_vVelocity * duration);
+		D3DXMATRIXA16 matS, matR, matT;
+		D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+		D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+		D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
 
-	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
-	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
-	m_matWorld = matS * matR * matT;
+		m_matWorld = matS * matR * matT;
+	}
+	if (g_pObjectManager->Reset == false) //¸®¼ÂÀÌµÊ. 
+	{
+		
+		presentTranslation = saveTranslation += (m_vVelocity * duration);
+		presentRotation = saveRotation;
+		
+		D3DXMATRIXA16 matS, matR, matT;
+		D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+		D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+		D3DXMatrixTranslation(&matT, presentTranslation.x, presentTranslation.y, presentTranslation.z);
+
+		m_matWorld = matS * matR * matT;
+		
+	}
 
 	//D3DXMATRIXA16 matT;
 	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);

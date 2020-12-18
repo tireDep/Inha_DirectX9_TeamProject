@@ -27,6 +27,7 @@ CCharacter::CCharacter()
 	, m_fHeightTile(0.0f)
 	, m_fSpeed(0.0f)
 	, m_fRotation(0.0f)
+	, Reset(false)
 	// , m_pOBB(NULL)
 	// , jumpis(false)
 	// , jumping(false)
@@ -225,12 +226,24 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				m_preRotation = m_fRotation;
 				break;
 
+			case PlayerInputType::eReset:
+				cout << "hi" << endl;
+				Reset = true;
+				g_pObjectManager->Reset = false;
+			
+//				speed = -1.0f;
+				break;
+
 			default:
 				if (m_Character->CheckAnimationEnd()) // !m_isJump || 
 				{
 					m_fSpeed = 0.0f;
 					m_Character->SetAnimationIndex(10); // Idle
+					
 				}
+				//g_pObjectManager->Reset = true;
+				Reset = false;
+				
 				break;
 			}
 		} // << eInputEvent
@@ -637,6 +650,12 @@ void CCharacter::Update(float duration)
 	{
 		m_Character->Update(duration);
 		m_Character->SetTransform(&m_matWorld);
+	}
+
+	if (Reset == true)
+	{
+		m_vPosition = D3DXVECTOR3(0, 0, 0);
+		
 	}
 }
 

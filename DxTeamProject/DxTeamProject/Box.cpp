@@ -55,6 +55,11 @@ void CBox::Setup(const ST_MapData & mapData)
 	m_vScale = mapData.vScale;
 	m_vRotation = mapData.vRotate;
 	m_vTranslation = mapData.vTranslate;
+
+	//---ÀúÀå
+	saveRotation = mapData.vRotate;
+	saveTranslation = mapData.vTranslate; 
+	
 	m_vPosition = m_vTranslation;
 
 	m_Color = mapData.dxColor;
@@ -114,6 +119,7 @@ void CBox::Setup(const ST_MapData & mapData)
 void CBox::Update(float duration)
 {
 	PObject::Update(duration);
+	
 	// OBB TEST
 	m_pOBB->Update(&m_matWorld);
 }
