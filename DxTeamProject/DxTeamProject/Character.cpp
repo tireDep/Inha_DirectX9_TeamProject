@@ -300,7 +300,7 @@ void CCharacter::ColliderObject()
 				g_pObjectManager->GetVecIObject()[i]->SetBool(true);
 				continue;
 			}
-			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13)
+			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
 				continue;
 
 			//if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
@@ -383,7 +383,8 @@ void CCharacter::Setup()
 	m_Character->SetAnimationIndex(10);
 
 	// Ray y check
-	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 4.5f, 0);
+	//D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.95f, 0);	// 0.95 Need To Modify...
+	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.5f, 0);	// TEST
 	m_Ray.SetOrigin(rayOrigin);
 	m_Ray.SetDirection(D3DXVECTOR3(0, -1, 0));
 }
@@ -605,9 +606,7 @@ void CCharacter::Update(float duration)
 		// m_vPosition.x += m_vDirection.x * m_fSpeed * duration;
 		m_vPosition.y += m_fMaxJumpHeight * sinf(m_fRadianJump) * dir;
 		// m_vPosition.z += m_vDirection.z * m_fSpeed * duration;
-
-
-		cout << m_vPosition.y << endl;
+		//cout << m_vPosition.y << endl;
 		if (m_preRotation == m_fRotation)
 		{
 			DoRotation(m_preRotation);
@@ -658,7 +657,8 @@ void CCharacter::Update(float duration)
 	if (m_isFallAni || !m_isJump)
 	{
 		// >> 점프 중이 아닐 때 레이 판정(낙하상태 포함)
-		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 4.5f, 0);
+		//D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.95f, 0);	// 0.95 Need To Modify...
+		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.5f, 0);
 		m_Ray.SetOrigin(rayOrigin);
 
 		for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
