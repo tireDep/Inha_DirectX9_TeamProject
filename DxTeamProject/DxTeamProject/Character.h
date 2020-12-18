@@ -36,6 +36,7 @@ protected:
 	float					m_fRotation;
 	float					m_preRotation;
 	// grab
+	float					m_fGrabRotation;
 	Synthesize(bool, m_isGrab, Grab);
 	int						m_nGrabAbleObeject;
 	// Ray y check

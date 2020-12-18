@@ -237,19 +237,18 @@ void CMainGame::Update()
 {
 	if (GetKeyState('1') & 0x8000)
 	{
-		
 		g_pGameManager->SetGetOrb("Blue");
 		//g_pGameManager->SetGetOrb("Green");
 		//g_pGameManager->SetGetOrb("Red");
 		//g_pGameManager->SetGetOrb("White");
 		//g_pGameManager->SetGetOrb("Yellow");
 		//g_pGameManager->SetGetOrb("Black");
-		cout << " in" <<endl;
+		//cout << "in" <<endl;
 	}
 	if (GetKeyState('2') & 0x8000)
 	{
 		g_pSoundManager->PlayBGM("f_last");
-		cout << "in" << endl;
+		//cout << "in" << endl;
 	}
 	if (GetKeyState('3') & 0x8000)
 	{
