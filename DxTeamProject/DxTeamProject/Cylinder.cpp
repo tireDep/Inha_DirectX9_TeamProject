@@ -48,6 +48,7 @@ void CCylinder::Setup(const ST_MapData & mapData)
 	saveTranslation = mapData.vTranslate;
 
 	m_Color = mapData.dxColor;
+	ResetColor = mapData.dxColor;
 	this->ChangeObjectColor();
 
 	m_fRadius *= m_vScale.x;

@@ -47,8 +47,10 @@ private:
 	bool m_isThreadRun;
 	bool m_IsIn;
 
+
+
 	/// KT Reset
-	//bool		  Reset;
+	bool		  ResetCube;
 
 	//collide
 	//const static unsigned maxContacts = 256;

@@ -229,13 +229,10 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				break;
 
 			case PlayerInputType::eReset:
-				/// KT Reset
-				//cout << "hi" << endl;
-				//Reset = true;
-				//g_pObjectManager->Reset = false;
+				
 				Reset();
 				g_pObjectManager->Reset();
-
+				g_pObjectManager->ResetCube = true;
 				//speed = -1.0f;
 				break;
 
@@ -245,9 +242,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 					m_fSpeed = 0.0f;
 					m_Character->SetAnimationIndex(10); // Idle
 				}
-				/// KT Reset
-				//g_pObjectManager->Reset = true;
-				//Reset = false;
+				g_pObjectManager->ResetCube = false;
 				break;
 			}
 		} // << eInputEvent

@@ -22,7 +22,7 @@ CDoor::~CDoor()
 void CDoor::Setup(const ST_MapData & mapData)
 {
 	CGimmick::SetLoadData(mapData);
-
+	ResetPosition = mapData.vTranslate;
 	//m_fOpeningAngle = mapData. XXX
 	//m_strObjName = mapData.strObjName;
 	//m_strFolder = mapData.strFolderPath;

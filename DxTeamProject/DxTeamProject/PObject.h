@@ -20,6 +20,7 @@ protected:
 
 	D3DXVECTOR3 saveTranslation;
 	D3DXVECTOR3 saveRotation;
+	D3DXCOLOR ResetColor;
 
 	D3DXVECTOR3 presentTranslation;
 	D3DXVECTOR3 presentRotation;

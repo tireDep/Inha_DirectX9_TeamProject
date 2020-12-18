@@ -87,7 +87,7 @@ void CSwitch::Setup(ST_MapData setData)
 	m_pColl->SetupMesh(m_vMin, m_vMax, 0.3f);
 
 	CGimmick::SetLoadData(setData);
-
+	ResetPosition = setData.vTranslate;
 	m_position = m_vTranslation;
 	m_scale = m_vScale;
 

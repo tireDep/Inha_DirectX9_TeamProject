@@ -19,6 +19,8 @@ IObject::IObject() :
 	//m_vRotate(0, 0, 0),
 	//m_vTranslate(0, 0, 0)
 {
+	ResetPosition = D3DXVECTOR3(0, 0, 0);
+	PresentPosition = D3DXVECTOR3(0, 0, 0);
 	D3DXMatrixIdentity(&m_matWorld);
 	g_pObjectManager->AddObject(this);
 	m_strName = "Iobject" + to_string(m_nRefCount);

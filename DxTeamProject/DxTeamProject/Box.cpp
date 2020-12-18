@@ -63,6 +63,7 @@ void CBox::Setup(const ST_MapData & mapData)
 	m_vPosition = m_vTranslation;
 
 	m_Color = mapData.dxColor;
+	ResetColor = mapData.dxColor;
 	this->ChangeObjectColor();
 
 	m_fWidth *= m_vScale.x;
