@@ -28,7 +28,7 @@ void CRotationBoard::Setup(const ST_MapData & mapData)
 		rotationAxial = RotationAxial::Rotation_Z;
 	else if (mapData.gimmickData.roationAxialIndex_rotaitonBoard == 3)
 		rotationAxial = RotationAxial::NONE;
-
+	ResetPosition = mapData.vTranslate;
 	//m_strObjName = mapData.strObjName;
 	//m_strFolder = mapData.strFolderPath;
 	//m_strXFile = mapData.strXFilePath;

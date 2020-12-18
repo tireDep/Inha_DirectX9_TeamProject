@@ -52,6 +52,7 @@ void CSphere::Setup(const ST_MapData & mapData)
 	saveTranslation = mapData.vTranslate;
 
 	m_Color = mapData.dxColor;
+	ResetColor = mapData.dxColor;
 	this->ChangeObjectColor();
 
 	m_fRadius *= m_vScale.x;
@@ -159,18 +160,21 @@ bool CSphere::hasIntersected(CCylinder * otherCylinder)
 
 bool CSphere::hasIntersected(IObject * otherIObject)
 {
-	//D3DXMATRIXA16 inverseBoxMatrix;
-	//// Need To Modify... OBB's WorldMatrix
-	//D3DXMatrixInverse(&inverseBoxMatrix, NULL, &otherIObject->GetmatWorld());
 	D3DXMATRIXA16 inverseBoxMatrix;
-	D3DXMatrixIdentity(&inverseBoxMatrix);
-	inverseBoxMatrix._41 = -otherIObject->GetmatWorld()._41;
-	inverseBoxMatrix._42 = -otherIObject->GetmatWorld()._42;
-	inverseBoxMatrix._43 = -otherIObject->GetmatWorld()._43;
+	D3DXMatrixInverse(&inverseBoxMatrix, NULL, &otherIObject->GetOBB()->GetOBBWorldMatrix());
+	 		
+	//D3DXMatrixIdentity(&inverseBoxMatrix);
+	//inverseBoxMatrix._41 = -otherIObject->GetmatWorld()._41;
+	//inverseBoxMatrix._42 = -otherIObject->GetmatWorld()._42;
+	//inverseBoxMatrix._43 = -otherIObject->GetmatWorld()._43;
 
 	D3DXVECTOR3 SphereToBoxCenter;
 	D3DXVec3TransformCoord(&SphereToBoxCenter, &m_vPosition, &inverseBoxMatrix);
 													
+	//if (fabsf(SphereToBoxCenter.x) - GetRadius() > otherIObject->GetOBB()->GetOBBWidth()  ||
+	//	fabsf(SphereToBoxCenter.y) - GetRadius() > otherIObject->GetOBB()->GetOBBHeight() ||
+	//	fabsf(SphereToBoxCenter.z) - GetRadius() > otherIObject->GetOBB()->GetOBBDepth())
+	//	return false;
 	if (fabsf(SphereToBoxCenter.x) - GetRadius() > otherIObject->GetOBB()->GetOBBWidth()  ||
 		fabsf(SphereToBoxCenter.y) - GetRadius() > otherIObject->GetOBB()->GetOBBHeight() ||
 		fabsf(SphereToBoxCenter.z) - GetRadius() > otherIObject->GetOBB()->GetOBBDepth())

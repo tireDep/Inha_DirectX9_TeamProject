@@ -47,8 +47,10 @@ private:
 	bool m_isThreadRun;
 	bool m_IsIn;
 
+
+
 	/// KT Reset
-	//bool		  Reset;
+	bool		  ResetCube;
 
 	//collide
 	//const static unsigned maxContacts = 256;
@@ -80,7 +82,7 @@ public:
 	void Update(float duration);						// IObject(Gimmick) Physics		// Integration...
 
 	void Collide(float duration);						// Collision
-	void CollisionPObject(PObject* one, PObject* two, float duration);
+
 	void CollisionSphereToSphere(CSphere* one, CSphere* two, float duration);
 	void CollisionSphereToBox(CSphere* one, PObject* two, float duration);
 	void CollisionBoxToBox(PObject* one, PObject* two, float duration);
@@ -123,3 +125,4 @@ private:
 //void Collide(float duration);
 //void GenerateContacts();
 //void HandleOverlapping(float timeIncrement, int firstobject, int secondobject, CTestObjCollision& theCollision);
+//void CollisionPObject(PObject* one, PObject* two, float duration);

@@ -1,6 +1,6 @@
 # Object_Start
 # ObjectName
-Box1
+Sphere1
 # FolderPath
 
 # FilePath
@@ -8,38 +8,7 @@ Box1
 # TxtPath
 
 # ObjectType
-23
-# Scale
-2
-2
-2
-# Rotate
-0
-0
-0
-# Translate
--0.5
-1
-2.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# Object_End
-
-# Object_Start
-# ObjectName
-Box2
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-23
+24
 # Scale
 1
 1
@@ -50,8 +19,8 @@ Box2
 0
 # Translate
 -3.5
+0
 0.5
--0.5
 # Color
 0.5
 0.5
@@ -62,7 +31,7 @@ Box2
 
 # Object_Start
 # ObjectName
-Box3
+Sphere2
 # FolderPath
 
 # FilePath
@@ -70,7 +39,7 @@ Box3
 # TxtPath
 
 # ObjectType
-23
+24
 # Scale
 1
 1
@@ -80,9 +49,9 @@ Box3
 0
 0
 # Translate
-5.5
+4.5
+0
 0.5
--0.5
 # Color
 0
 0
@@ -93,7 +62,7 @@ Box3
 
 # Object_Start
 # ObjectName
-Box4
+Sphere3
 # FolderPath
 
 # FilePath
@@ -101,30 +70,30 @@ Box4
 # TxtPath
 
 # ObjectType
-23
+24
 # Scale
-1
-1
-1
+2
+2
+2
 # Rotate
 0
 0
 0
 # Translate
+-0.5
+0.5
 3.5
-0.5
--2.5
 # Color
-1
-1
-1
+0.5
+0.5
+0.5
 1
 # ColorTag
 # Object_End
 
 # Object_Start
 # ObjectName
-Box5
+Sphere4
 # FolderPath
 
 # FilePath
@@ -132,7 +101,7 @@ Box5
 # TxtPath
 
 # ObjectType
-23
+24
 # Scale
 1
 1
@@ -142,13 +111,44 @@ Box5
 0
 0
 # Translate
-0.5
-0.5
--4.5
+-0.5
+0
+-3.5
 # Color
 1
 1
 0
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Sphere5
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+24
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+-1.5
+# Color
+1
+1
+1
 1
 # ColorTag
 # Object_End

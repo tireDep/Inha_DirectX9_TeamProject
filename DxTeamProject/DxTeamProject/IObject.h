@@ -30,7 +30,8 @@ protected:
 
 	vector<string> m_vecColorTag;
 	bool CheckIsGetColorOrb();
-
+	D3DXVECTOR3 ResetPosition;
+	D3DXVECTOR3 PresentPosition;
 	COBB* m_pOBB;
 	IObject();
 public:
