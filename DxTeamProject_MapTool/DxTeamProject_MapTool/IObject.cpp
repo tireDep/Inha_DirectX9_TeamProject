@@ -629,19 +629,18 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 		break;
 
 	case eG_RotationBoard:
-	case eG_BreakWall:
-#ifdef _DEBUG
-	case eG_DoorFrame:
-#endif // _DEBUG
-	case eG_ColorChanger:
-	case eG_Switch:
 	case eG_MovingCube:
+	case eG_Switch:
+	case eG_DoorFrame:
+#ifdef _DEBUG
+	case eG_BreakWall:
+	case eG_ColorChanger:
+#endif // _DEBUG
 	{
 		CGimmick::CreateGimmick(objType);
 	}
 		break;
 
-#ifdef _DEBUG
 	case eBook:
 	{
 		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
@@ -685,8 +684,6 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 		trace->Setup(mapData);
 	}
 	break;
-
-#endif // _DEBUG
 		
 	} // << : switch
 }
@@ -743,17 +740,18 @@ void IObject::CreateObject(ST_MapData& mapData)
 	}
 		break;
 
-	case eG_RotationBoard:	case eG_BreakWall:		
-#ifdef _DEBUG
+	case eG_RotationBoard:	case eG_MovingCube:
 	case eG_DoorFrame:		case eG_Door:
+	case eG_Switch:
+	
+#ifdef _DEBUG
+	case eG_BreakWall:	case eG_ColorChanger:
 #endif // _DEBUG
-	case eG_ColorChanger:	case eG_Switch:
-	case eG_MovingCube:
 	{
 		CGimmick::CreateGimmick_SaveData(mapData);
 	}
 	break;
-#ifdef _DEBUG
+
 	case eBook:
 	{
 		CBook* book = new CBook;
@@ -774,7 +772,6 @@ void IObject::CreateObject(ST_MapData& mapData)
 		trace->Setup(mapData);
 	}
 		break;
-#endif // _DEBUG
 
 	} // << : switch
 }
