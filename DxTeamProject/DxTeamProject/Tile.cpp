@@ -103,11 +103,11 @@ void CTile::Render()
 	for (int i = 0; i < m_vecMtrls.size(); i++)
 	{
 		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
-		if (!CheckIsGetColorOrb())
+		/*if (!CheckIsGetColorOrb())
 		{
 			g_pD3DDevice->SetTexture(0, g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "BasicGray_127.png"));
 		}
-		else
+		else*/
 		{
 			if (m_vecTextures[i] != 0)
 				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
