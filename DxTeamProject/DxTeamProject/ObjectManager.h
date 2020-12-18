@@ -47,8 +47,9 @@ private:
 	bool m_isThreadRun;
 	bool m_IsIn;
 
-	//Reset
-	bool		  Reset;
+	/// KT Reset
+	//bool		  Reset;
+
 	//collide
 	//const static unsigned maxContacts = 256;
 	//Contact contacts[maxContacts];
@@ -87,7 +88,8 @@ public:
 	void CollisionIObject(PObject* pObject, IObject* iObject, float duration);
 	void CollisionBoxToTile(PObject* pObject, IObject* iObject, float duration);
 
-	void ResetpObject();
+	/// KT Reset
+	void Reset();
 
 	void Render();
 	void RenderOBBBox();

@@ -58,12 +58,12 @@ void CDragon::Update(D3DXVECTOR3 pos, float duration)
 	//m_DrangonPos.y = m_position.y + Drangon_y;
 
 	// >> testRotation
+	// Need To Modify... Variable Name
 	if (m_isTrue == false)
 	{
 		m_vDrangonPos.y += 0.0005f;
 		if (m_vDrangonPos.y >= 1.0f)
 			m_isTrue = true;
-
 	}
 	else if (m_isTrue == true)
 	{
