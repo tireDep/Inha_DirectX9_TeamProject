@@ -1,36 +1,46 @@
 # Object_Start
 # ObjectName
-Box1
+MovingCube1
 # FolderPath
-
+Resource/XFile/Gimmick/MovingCube
 # FilePath
-
+moving_cube.X
 # TxtPath
-
+moving_cube_1.png
 # ObjectType
-23
+32
 # Scale
-1
-1
-1
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
-2.5
 0.5
+0
 0.5
 # Color
 0.5
 0.5
 0.5
 1
+# ColorTag
+# GimmickData
+# StartPos
+-10
+# EndPos
+10
+# Speed
+5
+# DirectionIndex
+2
 # Object_End
 
 # Object_Start
 # ObjectName
-Sphere2
+Sphere8
 # FolderPath
 
 # FilePath
@@ -48,19 +58,20 @@ Sphere2
 0
 0
 # Translate
--2.5
-0.25
 0.5
+0.5
+5.5
 # Color
-0.5
-0.5
-0.5
 1
+1
+1
+1
+# ColorTag
 # Object_End
 
 # Object_Start
 # ObjectName
-Cylinder3
+Sphere9
 # FolderPath
 
 # FilePath
@@ -68,84 +79,56 @@ Cylinder3
 # TxtPath
 
 # ObjectType
-25
+24
 # Scale
 1
 1
 1
 # Rotate
-90
+0
 0
 0
 # Translate
+0.5
+0.5
 3.5
-0.5
-4.5
 # Color
-0.5
-0.5
-0.5
 1
+1
+0
+1
+# ColorTag
 # Object_End
 
 # Object_Start
 # ObjectName
-Autumn_Tree_01_4
+Sphere10
 # FolderPath
-Resource/XFile/Background/SeasonTree
+
 # FilePath
-AutumnTree_01.X
+
 # TxtPath
-autumn_texture.png
+
 # ObjectType
-13
+24
 # Scale
-0.01
-0.01
-0.01
+1
+1
+1
 # Rotate
 0
 0
 0
 # Translate
 0.5
-0
-4.5
+0.5
+-1.5
 # Color
-0.5
-0.5
-0.5
+0
+0
+0
 1
-# Object_End
-
-# Object_Start
-# ObjectName
-Summer_Tree_01_5
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-SummerTree_01.X
-# TxtPath
-summer_texture.png
-# ObjectType
-14
-# Scale
-0.01
-0.01
-0.01
-# Rotate
-0
-90
-0
-# Translate
-0.5
-0
--4.5
-# Color
-0.5
-0.5
-0.5
-1
+# ColorTag
 # Object_End
 
 # Section =======================================

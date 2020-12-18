@@ -17,7 +17,7 @@ CCharacter::CCharacter()
 	, m_color(GRAY)
 	, m_isGrab(false)
 	, m_isJump(false)
-	, m_fMaxJumpHeight(1.5f)
+	, m_fMaxJumpHeight(3.0f)
 	, m_fRadianJump(0.0f)
 	, m_isFallAni(false)
 	, m_preRotation(0.0f)
@@ -25,6 +25,8 @@ CCharacter::CCharacter()
 	, m_fPenetration(0.0f)
 	, m_isCollidedTile(false)
 	, m_fHeightTile(0.0f)
+	, m_fSpeed(0.0f)
+	, m_fRotation(0.0f)
 	// , m_pOBB(NULL)
 	// , jumpis(false)
 	// , jumping(false)
@@ -44,8 +46,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 {
 	// float duration = *(float*) eventMsg.ptrMessage;
 	// speed *= duration;
-	float speed = 10.0f * eventMsg.duration;
-	rotation = -1.0f;
+	// float speed = 10.0f * eventMsg.duration;
+	m_fRotation = -1.0f;
 
 	if (!g_pGameManager->GetUImode())
 	{
@@ -89,8 +91,9 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				if (!m_isJump)
 				{
 					m_isJump = true;
+					m_vDirection.x = m_vDirection.z = 0.0f;
 					m_Character->SetAnimationIndexBlend(7); // jump
-					speed = -1;
+					m_fSpeed = 10.0f;
 				}
 				break;
 
@@ -116,7 +119,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				// else
 				//m_Character->SetAnimationIndexBlend(5); // push
 				//m_Character->SetAnimationIndex(5);
-				speed = -1.0f;
+				m_fSpeed = 0.0f;
 				break;
 
 			case PlayerInputType::eHoldPush:
@@ -129,9 +132,9 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 						v.y -= 0.5f;
 						D3DXVec3Normalize(&v, &v);
 						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetPusingForce(v);
-						rotation = m_preRotation;
+						m_fRotation = m_preRotation;
 						// Need To Modify...
-						speed = 0.0f;
+						m_fSpeed = 0.0f;
 						m_Character->SetAnimationIndex(5);
 					}
 					// if (m_Character->CheckAnimationEnd())
@@ -140,7 +143,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				{
 					if (m_Character->CheckAnimationEnd())
 						m_Character->SetAnimationIndex(10); // Idle
-					speed = -1.0f;
+					m_fSpeed = 0.0f;
 				}
 				//if (m_nGrabAbleObeject != -1)
 				//{
@@ -171,66 +174,67 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				//else
 				//	if (m_Character->CheckAnimationEnd())
 				//		m_Character->SetAnimationIndex(10); // Idle
-				speed = -1.0f;
+				m_fSpeed = 0.0f;
 				break;
 
 			case PlayerInputType::eUp:
-				rotation = 0.0f;
+				m_fRotation = 0.0f;
+				m_fSpeed = 10.0f;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eLeftUp:
-				rotation = D3DX_PI / 4.0f * -1;
+				m_fRotation = D3DX_PI / 4.0f * -1;
+				m_fSpeed = 10.0f;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eRightUp:
-				rotation = D3DX_PI / 4.0f;
+				m_fRotation = D3DX_PI / 4.0f;
+				m_fSpeed = 10.0f;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eDown:
-				rotation = D3DX_PI;
+				m_fRotation = D3DX_PI;
+				m_fSpeed = 10.0f;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eLeftDown:
-				rotation = D3DX_PI + D3DX_PI / 4.0f;
+				m_fRotation = D3DX_PI + D3DX_PI / 4.0f;
+				m_fSpeed = 10.0f;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eRightDown:
-				rotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
+				m_fRotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
+				m_fSpeed = 10.0f;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eLeft:
-				rotation = -D3DX_PI / 2.0f;
+				m_fRotation = -D3DX_PI / 2.0f;
+				m_fSpeed = 10.0f;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eRight:
-				rotation = D3DX_PI / 2.0f;
+				m_fRotation = D3DX_PI / 2.0f;
+				m_fSpeed = 10.0f;
+				m_preRotation = m_fRotation;
 				break;
 
 			default:
 				if (m_Character->CheckAnimationEnd()) // !m_isJump || 
 				{
-					speed = -1.0f;
+					m_fSpeed = 0.0f;
 					m_Character->SetAnimationIndex(10); // Idle
 				}
 				break;
 			}
 		} // << eInputEvent
 
-		if (speed > 0 && m_Character->CheckAnimationEnd())
-		{
-			m_preRotation = rotation;
-
-			// >> 특정 애니메이션 재생 중 이동 하지 않음
-			if(!m_isJump)
-				m_Character->SetAnimationIndex(9); // Walk
-			// m_Character->SetAnimationIndex(9); // Walk
-
-			// >> todo : 속도 변화 감지해서 달리기 추가
-			// >> 입력 시간에 따른 달리기 변화?
-
-			DoRotation(rotation);
-			DoMove(speed);
-		}
 	}
 	//D3DXMATRIXA16 matT;
 	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
@@ -275,7 +279,9 @@ void CCharacter::ColliderObject()
 				g_pObjectManager->GetVecIObject()[i]->SetBool(true);
 				continue;
 			}
-			
+			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13)
+				continue;
+
 			//if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
 			//{
 			//	BOOL hit = false;
@@ -351,8 +357,6 @@ void CCharacter::Setup()
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	m_vDirection = cameradirection;
-	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 4.5f, 0);
-	m_Ray.SetOrigin(rayOrigin);
 	//if (m_isJump)
 	//{
 	//	// jumping = true;
@@ -556,34 +560,78 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 
 void CCharacter::Update(float duration)
 {
-	D3DXVECTOR3 tempPos = m_vPosition;
+	static D3DXVECTOR3 prePos = m_vPosition;
+
 	if (m_isJump)
 	{
-		// cout << radian << endl;
-		// radian += D3DXToRadian(180.0f * duration);
 		m_fRadianJump += 7.0f * duration;
-		tempPos.y = m_fMaxJumpHeight * sinf(m_fRadianJump);
+		m_vPosition.x += m_vDirection.x * m_fSpeed * duration;
+		m_vPosition.y = m_fMaxJumpHeight * sinf(m_fRadianJump);
+		m_vPosition.z += m_vDirection.z * m_fSpeed * duration;
+		
+		DoRotation(m_preRotation);
 
-		// >> todo : collision
-		if (true)
-			m_vPosition = tempPos;
-
-		if (m_fRadianJump >= D3DXToRadian(180.0f))
+		if (m_fRadianJump >= D3DXToRadian(180.0f))				// Low Spot	
 		{
-			if(m_Character->CheckAnimationEnd())
+			if (m_Character->CheckAnimationEnd())
 				m_Character->SetAnimationIndexBlend(10); // idle
-
 			m_isFallAni = false;
 			m_isJump = false;
 			m_fRadianJump = 0;
+			m_fSpeed = 0.0f;
 		}
-		else if (m_fRadianJump >= D3DXToRadian(90.0f) && !m_isFallAni)
+		else if (m_fRadianJump >= D3DXToRadian(90.0f) && !m_isFallAni)	// High Spot
 		{
-			// >> todo : 충돌 났을 경우도 낙하 판정으로(머리 위 장애물)
 			m_Character->SetAnimationIndex(6); // fall
 			m_isFallAni = true;
+			m_fSpeed = 0.0f;
 		}
 	}
+	else
+	{
+		if (m_fSpeed > 0 && m_Character->CheckAnimationEnd())
+		{
+			m_Character->SetAnimationIndex(9); // Walk
+			m_preRotation = m_fRotation;
+			DoRotation(m_fRotation);
+			m_vPosition += (m_vDirection * m_fSpeed * duration);
+		}
+	}
+
+	CCharacter::ColliderObject();
+	if (m_isCollided)
+	{
+		m_vPosition = prePos;
+
+	}
+	else
+	{
+		prePos = m_vPosition;
+	}
+
+	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 4.5f, 0);
+	m_Ray.SetOrigin(rayOrigin);
+	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
+	{
+		if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
+		{
+			BOOL hit = false;
+			DWORD FaceIndex;
+			float u, v, dist;
+			D3DXVECTOR3 rayOrigin = m_Ray.GetOrigin();
+			D3DXMATRIXA16 matInverse;
+			D3DXMatrixInverse(&matInverse, NULL, &g_pObjectManager->GetVecIObject()[i]->GetOBB()->GetOBBWorldMatrix());
+			D3DXVec3TransformCoord(&rayOrigin, &rayOrigin, &matInverse);
+			D3DXIntersect(g_pObjectManager->GetVecIObject()[i]->GetMesh(), &rayOrigin, &m_Ray.GetDirection(), &hit, &FaceIndex, &u, &v, &dist, NULL, NULL);
+			if (hit)
+			{
+				if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
+					m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+			}
+		}
+	}
+	m_vPosition.y = m_fHeightTile;
+	m_fHeightTile = 0.0f;
 
 	if (m_Character)
 	{
@@ -699,7 +747,7 @@ D3DXMATRIXA16* CCharacter::GetTransform()
 
 float CCharacter::Getrotation()
 {
-	return rotation;
+	return m_fRotation;
 }
 
 D3DXCOLOR CCharacter::GetColor()

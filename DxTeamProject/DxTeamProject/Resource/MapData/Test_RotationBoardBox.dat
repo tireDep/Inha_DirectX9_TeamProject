@@ -1,6 +1,42 @@
 # Object_Start
 # ObjectName
-Box1
+RoataionBoard1
+# FolderPath
+Resource/XFile/Gimmick/RotationBoard
+# FilePath
+Rotation_board.X
+# TxtPath
+board.png
+# ObjectType
+26
+# Scale
+0.05
+0.05
+0.05
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# RotationSpeed
+1
+# RotationAxialIndex
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+Box2
 # FolderPath
 
 # FilePath
@@ -18,19 +54,20 @@ Box1
 0
 0
 # Translate
-2.5
+-4.5
 0.5
-0.5
+6.5
 # Color
-0.5
-0.5
-0.5
+0
+0
+0
 1
+# ColorTag
 # Object_End
 
 # Object_Start
 # ObjectName
-Sphere2
+Box3
 # FolderPath
 
 # FilePath
@@ -38,7 +75,7 @@ Sphere2
 # TxtPath
 
 # ObjectType
-24
+23
 # Scale
 1
 1
@@ -49,18 +86,19 @@ Sphere2
 0
 # Translate
 -2.5
-0.25
 0.5
+6.5
 # Color
-0.5
-0.5
-0.5
 1
+1
+1
+1
+# ColorTag
 # Object_End
 
 # Object_Start
 # ObjectName
-Cylinder3
+Box4
 # FolderPath
 
 # FilePath
@@ -68,84 +106,25 @@ Cylinder3
 # TxtPath
 
 # ObjectType
-25
+23
 # Scale
 1
 1
 1
 # Rotate
-90
-0
-0
-# Translate
-3.5
-0.5
-4.5
-# Color
-0.5
-0.5
-0.5
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_01_4
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_01.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.01
-0.01
-0.01
-# Rotate
 0
 0
 0
 # Translate
+-0.5
 0.5
-0
-4.5
+6.5
 # Color
-0.5
-0.5
-0.5
 1
-# Object_End
-
-# Object_Start
-# ObjectName
-Summer_Tree_01_5
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-SummerTree_01.X
-# TxtPath
-summer_texture.png
-# ObjectType
-14
-# Scale
-0.01
-0.01
-0.01
-# Rotate
-0
-90
-0
-# Translate
-0.5
-0
--4.5
-# Color
-0.5
-0.5
-0.5
 1
+0
+1
+# ColorTag
 # Object_End
 
 # Section =======================================

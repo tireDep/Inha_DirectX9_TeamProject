@@ -1,0 +1,2058 @@
+# Object_Start
+# ObjectName
+Tile_01_Grass1
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass2
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass3
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass5
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass6
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass8
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass10
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass12
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+3.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass13
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass15
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+5.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass19
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass20
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass22
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass24
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass26
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass28
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass30
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass32
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+3.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass34
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass36
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass37
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass38
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass40
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass42
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass44
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass46
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass47
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+3.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass49
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass51
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass52
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass54
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass56
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass59
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass61
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass63
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+3.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass65
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass66
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass67
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass69
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass71
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass72
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass74
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass75
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass77
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+3.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass79
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass80
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass81
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass82
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass84
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass86
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass88
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass90
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass92
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+3.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass94
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass95
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Cylinder63
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+25
+# Scale
+1
+1
+1
+# Rotate
+90
+0
+0
+# Translate
+-1.5
+0.5
+2.5
+# Color
+1
+1
+0
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Cylinder64
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+25
+# Scale
+1
+1
+1
+# Rotate
+90
+0
+0
+# Translate
+1.5
+0.5
+2.5
+# Color
+1
+1
+1
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Cylinder65
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+25
+# Scale
+1
+1
+1
+# Rotate
+90
+0
+0
+# Translate
+4.5
+0.5
+4.5
+# Color
+0
+0
+0
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Cylinder66
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+25
+# Scale
+1
+1
+1
+# Rotate
+90
+0
+0
+# Translate
+-1.5
+1.5
+-3.5
+# Color
+0
+0
+0
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Cylinder67
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+25
+# Scale
+1
+1
+1
+# Rotate
+90
+0
+0
+# Translate
+0.5
+1.5
+-5.5
+# Color
+1
+1
+1
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Cylinder68
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+25
+# Scale
+1
+1
+1
+# Rotate
+90
+0
+0
+# Translate
+2.5
+1.5
+-3.5
+# Color
+1
+1
+0
+1
+# ColorTag
+# Object_End
+
+# Section =======================================
+

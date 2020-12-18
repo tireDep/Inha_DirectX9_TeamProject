@@ -310,7 +310,7 @@ void CFileLoadManager::ReadMapData(string fileName)
 			}
 
 			// >> gimmick
-			else if (strstr(readData.c_str(), "# GimmickData"))
+			if (strstr(readData.c_str(), "# GimmickData"))
 				ReadGimmickData(mapFile, readData, mapData);
 			else if (strstr(readData.c_str(), "# ConditionName") 
 				&& (mapData.objType != eG_Door && mapData.objType != eG_DoorFrame && mapData.objType != eG_ColorChanger))

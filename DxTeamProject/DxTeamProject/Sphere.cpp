@@ -6,7 +6,7 @@
 #include "Cylinder.h"
 
 CSphere::CSphere() 
-	: m_fRadius(1.0f)
+	: m_fRadius(0.5f)
 	//, resolver(maxContacts * 8)
 {
 	m_strName = string("Sphere") + to_string(m_nRefCount);
