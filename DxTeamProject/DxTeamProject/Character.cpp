@@ -556,43 +556,17 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 
 void CCharacter::Update(float duration)
 {
+	D3DXVECTOR3 tempPos = m_vPosition;
 	if (m_isJump)
 	{
 		// cout << radian << endl;
 		// radian += D3DXToRadian(180.0f * duration);
 		m_fRadianJump += 7.0f * duration;
-		m_vPosition.y = m_fMaxJumpHeight * sinf(m_fRadianJump);
+		tempPos.y = m_fMaxJumpHeight * sinf(m_fRadianJump);
 
 		// >> todo : collision
-		// if (true)
-		// 	m_vPosition = tempPos;
-
-		for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
-		{
-			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
-			{
-				BOOL hit = false;
-				DWORD FaceIndex;
-				float u, v, dist;
-				D3DXVECTOR3 rayOrigin = m_Ray.GetOrigin();
-				D3DXMATRIXA16 matInverse;
-				D3DXMatrixInverse(&matInverse, NULL, &g_pObjectManager->GetVecIObject()[i]->GetOBB()->GetOBBWorldMatrix());
-				D3DXVec3TransformCoord(&rayOrigin, &rayOrigin, &matInverse);
-				D3DXIntersect(g_pObjectManager->GetVecIObject()[i]->GetMesh(), &rayOrigin, &m_Ray.GetDirection(), &hit, &FaceIndex, &u, &v, &dist, NULL, NULL);
-				if (hit)
-				{
-					if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
-					{
-						m_isFallAni = false;
-						m_isJump = false;
-						m_fRadianJump = 0;
-						m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
-					}
-				}
-			}
-		}
-		m_vPosition.y = m_fHeightTile;
-		m_fHeightTile = 0.0f;
+		if (true)
+			m_vPosition = tempPos;
 
 		if (m_fRadianJump >= D3DXToRadian(180.0f))
 		{
@@ -686,12 +660,7 @@ void CCharacter::DoMove(const float& velocity)
 			if (hit)
 			{
 				if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
-				{
-					m_isFallAni = false;
-					m_isJump = false;
-					m_fRadianJump = 0;
 					m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
-				}
 			}
 		}
 	}

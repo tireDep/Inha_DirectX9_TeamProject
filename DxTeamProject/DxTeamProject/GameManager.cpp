@@ -88,6 +88,7 @@ void CGameManager::SetGetOrb(string orbType)
 			ST_EVENT msg;
 			msg.eventType = EventType::eConditionChange;
 			msg.conditionName = it->first;
+			msg.isCondition = false;
 			g_pEventManager->CheckEvent(msg);
 		}
 	}

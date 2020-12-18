@@ -97,43 +97,33 @@ void COrb::Setup(ST_MapData setData)
 
 void COrb::Render()
 {
-	SetBillbord();
-
-	
-
 	if (player == true) // Ãæµ¹
 	{
-		if (m_strConditionName != "")
-		{
-			ST_EVENT msg;
-			msg.eventType = EventType::eConditionChange;
-			msg.isCondition = false;
-			msg.conditionName = m_strObjName;
-
-			g_pEventManager->CheckEvent(msg);
-		}
 		render = false;
-
+		g_pGameManager->SetGetOrb(m_strConditionName);
 		g_pObjectManager->RemoveObject(m_pOBB);
 	}
 
-	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-	g_pD3DDevice->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
-	g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-
-	g_pD3DDevice->SetMaterial(&m_stMtl);
-
-	g_pD3DDevice->SetFVF(ST_PT_VERTEX::FVF);
-	g_pD3DDevice->SetTexture(0, m_pTexture);
+	
 	if (render == true)
 	{
+		SetBillbord();
+
+		g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+		g_pD3DDevice->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
+		g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+
+		g_pD3DDevice->SetMaterial(&m_stMtl);
+
+		g_pD3DDevice->SetFVF(ST_PT_VERTEX::FVF);
+		g_pD3DDevice->SetTexture(0, m_pTexture);
+
 		g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, m_vecVertex.size() / 3, &m_vecVertex[0], sizeof(ST_PT_VERTEX));
+
+		g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
+
+		g_pD3DDevice->SetTexture(0, NULL);
 	}
-	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
-
-	g_pD3DDevice->SetTexture(0, NULL);
-
-	
 }
 
 void COrb::Update(float duration)

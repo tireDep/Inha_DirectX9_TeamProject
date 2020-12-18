@@ -28,7 +28,7 @@ Orb_Blue.png
 1
 # ColorTag
 # ConditionName
-Blue
+Orb_Blue
 # Object_End
 
 # Object_Start
@@ -62,11 +62,11 @@ cubeworld_texture.tga
 # ColorTag
 # GimmickData
 # ConditionName
-Black
+Blue
 # ConditionIndex
 0
 # ConditionOrbIndex
-0
+5
 # Object_End
 
 # Object_Start
@@ -100,7 +100,7 @@ cubeworld_texture.tga
 # ColorTag
 # GimmickData
 # ConditionName
-Black
+Blue
 # ConditionIndex
 0
 # ConditionOrbIndex
@@ -329,7 +329,7 @@ Orb_Yellow.png
 1
 # ColorTag
 # ConditionName
-Yellow
+Orb_Blue
 # Object_End
 
 # Object_Start
@@ -362,7 +362,7 @@ Orb_Green.png
 1
 # ColorTag
 # ConditionName
-Green
+Orb_Blue
 # Object_End
 
 # Object_Start
@@ -395,7 +395,7 @@ Orb_Red.png
 1
 # ColorTag
 # ConditionName
-Red
+Orb_Blue
 # Object_End
 
 # Object_Start
@@ -428,7 +428,7 @@ Orb_Black.png
 1
 # ColorTag
 # ConditionName
-Black
+Orb_Blue
 # Object_End
 
 # Object_Start
@@ -461,7 +461,7 @@ Orb_White.png
 1
 # ColorTag
 # ConditionName
-White
+Orb_Blue
 # Object_End
 
 # Section =======================================
