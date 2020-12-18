@@ -120,12 +120,36 @@ void CItem::SetSpriteIndex(int index)
 	// >> Orb
 	if(m_ObjectType == ObjectType::eOrb)
 	{
-		if (index == 0)			m_strTxtFile = "Orb_Black.png";
-		else if (index == 1)	m_strTxtFile = "Orb_White.png";
-		else if (index == 2)	m_strTxtFile = "Orb_Yellow.png";
-		else if (index == 3)	m_strTxtFile = "Orb_Green.png";
-		else if (index == 4)	m_strTxtFile = "Orb_Red.png";
-		else if (index == 5)	m_strTxtFile = "Orb_Blue.png";
+		if (index == 0)
+		{
+			m_strTxtFile = "Orb_Black.png";
+			m_strConditionName = "Black";
+		}
+		else if (index == 1)
+		{
+			m_strTxtFile = "Orb_White.png";
+			m_strConditionName = "White";
+		}
+		else if (index == 2)
+		{
+			m_strTxtFile = "Orb_Yellow.png";
+			m_strConditionName = "Yellow";
+		}
+		else if (index == 3)
+		{
+			m_strTxtFile = "Orb_Green.png";
+			m_strConditionName = "Green";
+		}
+		else if (index == 4)
+		{
+			m_strTxtFile = "Orb_Red.png";
+			m_strConditionName = "Red";
+		}
+		else if (index == 5)
+		{
+			m_strTxtFile = "Orb_Blue.png";
+			m_strConditionName = "Blue";
+		}
 
 		int search = 0;
 		for (int i = 0; i < m_strObjName.length(); i++)
@@ -146,35 +170,42 @@ void CItem::SetSpriteIndex(int index)
 	// >> Trace
 	if (m_ObjectType == ObjectType::eTrace)
 	{
+		m_vecColorTag.clear();
 		switch (index)
 		{
 		case 0:
 			m_strTxtFile = "WaterColor_Black.png";		
+			m_vecColorTag.push_back("Black");
 			temp = "Black";
 			break;
 
 		case 1:
 			m_strTxtFile = "WaterColor_White.png";		
+			m_vecColorTag.push_back("White");
 			temp = "White";
 			break;
 
 		case 2:
 			m_strTxtFile = "WaterColor_Yellow.png";		
+			m_vecColorTag.push_back("Yellow");
 			temp = "Yellow";
 			break;
 
 		case 3:
-			m_strTxtFile = "WaterColor_Green.png";		
+			m_strTxtFile = "WaterColor_Green.png";	
+			m_vecColorTag.push_back("Green");
 			temp = "Green";
 			break;
 
 		case 4:
 			m_strTxtFile = "WaterColor_Red.png";		
+			m_vecColorTag.push_back("Red");
 			temp = "Red";
 			break;
 
 		case 5:
-			m_strTxtFile = "WaterColor_Blue.png";		
+			m_strTxtFile = "WaterColor_Blue.png";	
+			m_vecColorTag.push_back("Blue");
 			temp = "Blue";
 			break;
 		}

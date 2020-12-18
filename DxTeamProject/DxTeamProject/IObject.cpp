@@ -24,6 +24,20 @@ IObject::IObject() :
 	m_strName = "Iobject" + to_string(m_nRefCount);
 }
 
+bool IObject::CheckIsGetColorOrb()
+{
+	// >> 태그와 맞는 색상 오브가 있는지 판별
+	// >> 하나라도 존재 하지 않을 경우 false
+
+	for (int i = 0; i < m_vecColorTag.size(); i++)
+	{
+		if (!g_pGameManager->GetIsHasOrb(m_vecColorTag[i]))
+			return false;
+	}
+
+	return true;
+}
+
 IObject::~IObject()
 {
 	SafeDelete(m_pOBB);

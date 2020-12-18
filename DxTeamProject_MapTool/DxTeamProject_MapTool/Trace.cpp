@@ -13,6 +13,8 @@ void CTrace::Setup(ST_MapData setData)
 {
 	CItem::Setup(setData);
 
+	m_vecColorTag = setData.vecColorTag;
+
 	ST_PT_VERTEX v;
 	float f = m_vScale.x;
 	v.p = D3DXVECTOR3(-f, 0, -f);	v.t = D3DXVECTOR2(1, 0); m_vecVertex.push_back(v);

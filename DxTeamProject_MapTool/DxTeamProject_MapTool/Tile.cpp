@@ -22,6 +22,8 @@ void CTile::Setup(ST_MapData setData)
 	m_vRotate = setData.vRotate;
 	m_vTranslate = setData.vTranslate;
 
+	m_vecColorTag = setData.vecColorTag;
+
 	ST_XFile* xfile = new ST_XFile;
 	
 	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);

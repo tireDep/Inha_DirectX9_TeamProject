@@ -265,8 +265,9 @@ void CToolMain::CreateObject_RBtn(CRay & r)
 		if (r.IntersectTri(vCheck[i + 0], vCheck[i + 1], vCheck[i + 2], pos))
 		{
 			pos.x = floor(pos.x);		pos.x += 0.5f;
-			pos.y = 0;
 			pos.z = floor(pos.z);		pos.z += 0.5f;
+
+			pos.y = CImguiClass::GetObjecFirstHeight();
 
 			if (!g_pObjectManager->GetIsAnotherPos(pos))
 			{

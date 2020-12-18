@@ -15,9 +15,9 @@ CSphere::~CSphere()
 
 void CSphere::Setup()
 {
-	m_vScale = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
+	m_vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 	m_vTranslate = D3DXVECTOR3(0.5f, 0.25f, 0.5f);
-	D3DXCreateSphere(g_pD3DDevice, m_vScale.x, 10, 10, &m_pMesh, NULL);
+	D3DXCreateSphere(g_pD3DDevice, fBasicRadius, 10, 10, &m_pMesh, NULL);
 	IObject::Setup_OBB_Box();
 }
 

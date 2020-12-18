@@ -270,19 +270,78 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
 	{
 		// todo : tagging
-		if(objType == eTile01)			mapData.strObjName = string("Tile_01_Grass") + to_string(m_nRefCnt + 1);
-		else if (objType == eTile02)	mapData.strObjName = string("Tile_02_Ground") + to_string(m_nRefCnt + 1);
-		else if (objType == eTile03)	mapData.strObjName = string("Tile_04_Ground2_") + to_string(m_nRefCnt + 1);
-		else if (objType == eTile04)	mapData.strObjName = string("Tile_05_Rock") + to_string(m_nRefCnt + 1);
-		else if (objType == eTile05)	mapData.strObjName = string("Tile_07_Rock2_") + to_string(m_nRefCnt + 1);
-		else if (objType == eTile06)	mapData.strObjName = string("Tile_11_Sand") + to_string(m_nRefCnt + 1);
-		else if (objType == eTile07)	mapData.strObjName = string("Tile_12_Sand2") + to_string(m_nRefCnt + 1);
-		else if (objType == eTile08)	mapData.strObjName = string("Tile_13_Water") + to_string(m_nRefCnt + 1);
-		else if (objType == eTile09)	mapData.strObjName = string("Tile_14_Water2_") + to_string(m_nRefCnt + 1);
-		else if (objType == eTile10)	mapData.strObjName = string("Tile_15_Water3_") + to_string(m_nRefCnt + 1);
-		else if (objType == eTile11)	mapData.strObjName = string("Tile_16_Water4_") + to_string(m_nRefCnt + 1);
-		else if (objType == eTile12)	mapData.strObjName = string("Tile_17_Yellow") + to_string(m_nRefCnt + 1);
-		else if (objType == eTile13)	mapData.strObjName = string("Tile_Ocean") + to_string(m_nRefCnt + 1);
+		if (objType == eTile01)
+		{
+			mapData.strObjName = string("Tile_01_Grass") + to_string(m_nRefCnt + 1);
+			// >> tagging
+			mapData.vecColorTag.push_back("Green");
+			mapData.vecColorTag.push_back("Red");
+			mapData.vecColorTag.push_back("Yellow");
+		}
+		else if (objType == eTile02)
+		{
+			mapData.strObjName = string("Tile_02_Ground") + to_string(m_nRefCnt + 1);
+			mapData.vecColorTag.push_back("Red");
+			mapData.vecColorTag.push_back("Yellow");
+		}
+		else if (objType == eTile03)
+		{
+			mapData.strObjName = string("Tile_04_Ground2_") + to_string(m_nRefCnt + 1);
+			mapData.vecColorTag.push_back("Red");
+			mapData.vecColorTag.push_back("Yellow");
+		}
+		else if (objType == eTile04)
+		{
+			mapData.strObjName = string("Tile_05_Rock") + to_string(m_nRefCnt + 1);
+			mapData.vecColorTag.push_back("Black");
+		}
+		else if (objType == eTile05)
+		{
+			mapData.strObjName = string("Tile_07_Rock2_") + to_string(m_nRefCnt + 1);
+			mapData.vecColorTag.push_back("Black");
+		}
+		else if (objType == eTile06)
+		{
+			mapData.strObjName = string("Tile_11_Sand") + to_string(m_nRefCnt + 1);
+			mapData.vecColorTag.push_back("Red");
+			mapData.vecColorTag.push_back("Yellow");
+		}
+		else if (objType == eTile07)
+		{
+			mapData.strObjName = string("Tile_12_Sand2") + to_string(m_nRefCnt + 1);
+			mapData.vecColorTag.push_back("Red");
+			mapData.vecColorTag.push_back("Yellow");
+		}
+		else if (objType == eTile08)
+		{
+			mapData.strObjName = string("Tile_13_Water") + to_string(m_nRefCnt + 1);
+			mapData.vecColorTag.push_back("White");
+		}
+		else if (objType == eTile09)
+		{
+			mapData.strObjName = string("Tile_14_Water2_") + to_string(m_nRefCnt + 1);
+			mapData.vecColorTag.push_back("White");
+		}
+		else if (objType == eTile10)
+		{
+			mapData.strObjName = string("Tile_15_Water3_") + to_string(m_nRefCnt + 1);
+			mapData.vecColorTag.push_back("Blue");
+		}
+		else if (objType == eTile11)
+		{
+			mapData.strObjName = string("Tile_16_Water4_") + to_string(m_nRefCnt + 1);
+			mapData.vecColorTag.push_back("Blue");
+		}
+		else if (objType == eTile12)
+		{
+			mapData.strObjName = string("Tile_17_Yellow") + to_string(m_nRefCnt + 1);
+			mapData.vecColorTag.push_back("Yellow");
+		}
+		else if (objType == eTile13)
+		{
+			mapData.strObjName = string("Tile_Ocean") + to_string(m_nRefCnt + 1);
+			mapData.vecColorTag.push_back("Blue");
+		}
 
 		mapData.strFolderPath = "Resource/XFile/Tile";
 		mapData.strTxtPath = "Texture_01.png";
@@ -299,10 +358,13 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eBridge:
 	{
-		// todo : tagging
 		mapData.strObjName = string("Bridge") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Tile";
 		mapData.strTxtPath = "Texture_01.png";
+
+		// >> tagging
+		mapData.vecColorTag.push_back("Red");
+		mapData.vecColorTag.push_back("Yellow");
 
 		mapData.strXFilePath = string("Bridge.X");
 
@@ -345,9 +407,10 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 		else if (index == 4)	mapData.strObjName = string("Autumn_Ctree_07_") + to_string(m_nRefCnt + 1);
 		else if (index == 5)	mapData.strObjName = string("Autumn_Tree_08_") + to_string(m_nRefCnt + 1);
 		
+		mapData.vecColorTag.push_back("Yellow");
+
 		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "autumn_texture.png";
-
 		mapData.strXFilePath = string("AutumnTree_0") + to_string(index + 1) + ".X";
 
 		CBackground* background = new CBackground;
@@ -367,9 +430,10 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 		else if (index == 4)	mapData.strObjName = string("Summer_Ctree_07_") + to_string(m_nRefCnt + 1);
 		else if (index == 5)	mapData.strObjName = string("Summer_Tree_08_") + to_string(m_nRefCnt + 1);
 
+		mapData.vecColorTag.push_back("Green");
+
 		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "summer_texture.png";
-
 		mapData.strXFilePath = string("SummerTree_0") + to_string(index + 1) + ".X";
 
 		CBackground* background = new CBackground;
@@ -389,9 +453,10 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 		else if (index == 4)	mapData.strObjName = string("Winter_Ctree_07_") + to_string(m_nRefCnt + 1);
 		else if (index == 5)	mapData.strObjName = string("Winter_Tree_08_") + to_string(m_nRefCnt + 1);
 
+		mapData.vecColorTag.push_back("White");
+
 		mapData.strFolderPath = "Resource/XFile/Background/SeasonTree";
 		mapData.strTxtPath = "winter_texture.png";
-
 		mapData.strXFilePath = string("WinterTree_0") + to_string(index + 1) + ".X";
 
 		CBackground* background = new CBackground;
@@ -425,11 +490,14 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eBall:
 	{
-		// todo : tagging
 		mapData.strObjName = string("Ball") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "BeachBall_Base_Color.png";
 		mapData.strXFilePath = "ball.X";
+
+		// >> tagging
+		mapData.vecColorTag.push_back("Blue");
+		mapData.vecColorTag.push_back("Red");
 
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
@@ -438,11 +506,13 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 
 	case eChair:
 	{
-		// todo : tagging
 		mapData.strObjName = string("Blue_Chair") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "";
 		mapData.strXFilePath = "blue_chair.X";
+
+		// >> tagging
+		mapData.vecColorTag.push_back("Blue");
 
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
@@ -470,6 +540,8 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 		mapData.strTxtPath = "Snowman.png";
 		mapData.strXFilePath = "Snowman.X";
 
+		mapData.vecColorTag.push_back("White");
+
 		CBackground* background = new CBackground;
 		background->Setup(mapData);
 	}
@@ -482,12 +554,38 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 		mapData.vScale = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
 		
 		string name;
-		if (index == 0) name = "_White";
-		else if (index == 1) name = "_Purple";  
-		else if (index == 2) name = "_Red";
-		else if (index == 3) name = "_Orange"; 
-		else if (index == 4)  name = "_Blue"; 
-		else if (index == 5) name = "_Yellow";
+		if (index == 0)
+		{
+			name = "_White";
+			mapData.vecColorTag.push_back("White");
+		}
+		else if (index == 1)
+		{
+			name = "_Purple";
+			mapData.vecColorTag.push_back("Red");
+			mapData.vecColorTag.push_back("Blue");
+		}
+		else if (index == 2)
+		{
+			name = "_Red";
+			mapData.vecColorTag.push_back("Red");
+		}
+		else if (index == 3)
+		{
+			name = "_Orange";
+			mapData.vecColorTag.push_back("Red");
+			mapData.vecColorTag.push_back("Yellow");
+		}
+		else if (index == 4)
+		{
+			name = "_Blue";
+			mapData.vecColorTag.push_back("Blue");
+		}
+		else if (index == 5)
+		{
+			name = "_Yellow";
+			mapData.vecColorTag.push_back("Yellow");
+		}
 
 		mapData.strObjName = string("Flower") + name + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
@@ -507,6 +605,8 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 		mapData.strObjName = string("Sprout") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Background/Else";
 		mapData.strTxtPath = "Sprout.png";
+
+		mapData.vecColorTag.push_back("Green");
 
 		mapData.strXFilePath = string("Sprout.X");
 
@@ -544,6 +644,8 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 #ifdef _DEBUG
 	case eBook:
 	{
+		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.5f, 0.5f);
+
 		mapData.strObjName = string("Book") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/XFile/Book";
 		mapData.strTxtPath = "Bookshelf_diffuse.png";
@@ -571,6 +673,8 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	{
 		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 		mapData.vTranslate = D3DXVECTOR3(0.5f, 0.15f, 0.5f);
+
+		mapData.vecColorTag.push_back("Blue");
 
 		mapData.strObjName = string("Trace_Blue") + to_string(m_nRefCnt + 1);
 		mapData.strFolderPath = "Resource/Sprite/Trace";

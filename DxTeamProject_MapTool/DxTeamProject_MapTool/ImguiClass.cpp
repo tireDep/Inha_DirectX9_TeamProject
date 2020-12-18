@@ -1157,3 +1157,30 @@ void CImguiClass::CreateMouseRBtn()
 	}
 }
 
+float CImguiClass::GetObjecFirstHeight()
+{
+	float height = 0.0f;
+	switch (m_nowObjType)
+	{
+	case eBox:
+	case eCylinder:
+	case eSphere:
+		height = 0.5f;
+		break;
+
+	case eBook:
+		height = 0.5f;
+		break;
+
+	case eOrb:
+		height = 0.6f;
+		break;
+
+	default:
+		height = 0.0f;
+		break;
+	}
+
+	return height;
+}
+
