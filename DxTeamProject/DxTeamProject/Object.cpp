@@ -10,6 +10,7 @@
 #include "Book.h"
 #include "Orb.h"
 #include "Trace.h"
+#include "EventTrigger.h"
 
 int CObject::m_nRefCount = 0;
 
@@ -277,7 +278,15 @@ void CObject::CreateObject(const ST_MapData & mapData)
 		trace->Setup(mapData);
 	}
 		break;
+		
+	case eTrigger:
+	{
+		CEventTrigger* trigger = new CEventTrigger;
+		trigger->Setup(mapData);
 	}
+		break;
+
+	} // << : switch
 }
 
 /// Physics

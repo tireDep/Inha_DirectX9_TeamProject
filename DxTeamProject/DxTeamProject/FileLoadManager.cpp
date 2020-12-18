@@ -160,6 +160,11 @@ void CFileLoadManager::LoadData(string path)
 				ReadAndCutSlashR(file , readData);
 				mapData.gimmickData.conditionName = readData;
 			}
+			else if (strstr(readData.c_str(), "# TriggerIndex"))
+			{
+				ReadAndCutSlashR(file, readData);
+				mapData.triggerIndex = atoi(readData.c_str());
+			}
 
 			if (strstr(readData.c_str(), "# Object_End"))
 				CObject::CreateObject(mapData);

@@ -252,6 +252,9 @@
     <ClCompile Include="PhysicsObjectManager.cpp">
       <Filter>...TrashCan</Filter>
     </ClCompile>
+    <ClCompile Include="EventTrigger.cpp">
+      <Filter>Object\IObject\Trigger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -527,6 +530,9 @@
     <ClInclude Include="PhysicsObjectManager.h">
       <Filter>...TrashCan</Filter>
     </ClInclude>
+    <ClInclude Include="EventTrigger.h">
+      <Filter>Object\IObject\Trigger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -677,6 +683,9 @@
     </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{8f11bd14-6ae4-4eed-ae82-786400494f04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\IObject\Trigger">
+      <UniqueIdentifier>{95a9eed5-31e0-4296-8618-5cb06804aa82}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
