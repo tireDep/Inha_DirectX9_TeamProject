@@ -183,49 +183,49 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			case PlayerInputType::eUp:
 				m_fRotation = 0.0f;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eLeftUp:
 				m_fRotation = D3DX_PI / 4.0f * -1;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eRightUp:
 				m_fRotation = D3DX_PI / 4.0f;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eDown:
 				m_fRotation = D3DX_PI;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eLeftDown:
 				m_fRotation = D3DX_PI + D3DX_PI / 4.0f;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eRightDown:
 				m_fRotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eLeft:
 				m_fRotation = -D3DX_PI / 2.0f;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eRight:
 				m_fRotation = D3DX_PI / 2.0f;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eReset:
@@ -604,9 +604,15 @@ void CCharacter::Update(float duration)
 		// m_fRadianJump += 7.0f * duration;
 		// m_vPosition.x += m_vDirection.x * m_fSpeed * duration;
 		m_vPosition.y += m_fMaxJumpHeight * sinf(m_fRadianJump) * dir;
-		// m_vPosition += (m_vDirection * m_fSpeed * duration);
 		// m_vPosition.z += m_vDirection.z * m_fSpeed * duration;
-		// DoRotation(m_preRotation);
+
+
+		cout << m_vPosition.y << endl;
+		if (m_preRotation == m_fRotation)
+		{
+			DoRotation(m_preRotation);
+			m_vPosition += (m_vDirection * m_fSpeed * duration);
+		}
 		
 
 		if (m_fRadianJump >= D3DXToRadian(180.0f))				// Low Spot	
@@ -617,14 +623,14 @@ void CCharacter::Update(float duration)
 			m_isJump = false;
 			m_fRadianJump = 0;
 			m_fSpeed = 0.0f;
-			dir = 1;
+			//dir = 1;
 		}
 		else if (m_fRadianJump >= D3DXToRadian(90.0f) && !m_isFallAni)	// High Spot
 		{
 			m_Character->SetAnimationIndex(6); // fall
 			m_isFallAni = true;
 			m_fSpeed = 0.0f;
-			dir = -1;
+			//dir = -1;
 		}
 	}
 	else
@@ -649,8 +655,9 @@ void CCharacter::Update(float duration)
 		prePos = m_vPosition;
 	}
 
-	if (!m_isJump)
+	if (m_isFallAni || !m_isJump)
 	{
+		// >> 점프 중이 아닐 때 레이 판정(낙하상태 포함)
 		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 4.5f, 0);
 		m_Ray.SetOrigin(rayOrigin);
 
