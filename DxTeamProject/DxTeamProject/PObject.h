@@ -11,12 +11,18 @@ protected:
 	Synthesize(D3DXCOLOR, m_Color, DxColor);
 	bool		  m_isPicked;
 	bool		  m_isClicked;
+	
 	D3DXCOLOR	  m_outLineColor;
 	LPD3DXEFFECT  m_pShader;
 	Color		  m_tmpColor;
 	bool LoadAssets();
 	void SetShader(const D3DXMATRIXA16& setMatWorld);
 
+	D3DXVECTOR3 saveTranslation;
+	D3DXVECTOR3 saveRotation;
+
+	D3DXVECTOR3 presentTranslation;
+	D3DXVECTOR3 presentRotation;
 	/// Physics
 	Synthesize(float, m_finverseMass, InverseMass);	// mass
 

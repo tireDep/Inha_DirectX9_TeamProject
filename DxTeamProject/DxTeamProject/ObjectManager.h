@@ -46,6 +46,9 @@ private:
 	CRITICAL_SECTION m_cs;
 	bool m_isThreadRun;
 	bool m_IsIn;
+
+	//Reset
+	bool		  Reset;
 	//collide
 	//const static unsigned maxContacts = 256;
 	//Contact contacts[maxContacts];
@@ -83,6 +86,8 @@ public:
 	void CollisionSphereToIObject(CSphere* one, IObject* two, float duration);
 	void CollisionIObject(PObject* pObject, IObject* iObject, float duration);
 	void CollisionBoxToTile(PObject* pObject, IObject* iObject, float duration);
+
+	void ResetpObject();
 
 	void Render();
 	void RenderOBBBox();

@@ -25,6 +25,7 @@ CCharacter::CCharacter()
 	, m_fPenetration(0.0f)
 	, m_isCollidedTile(false)
 	, m_fHeightTile(0.0f)
+	, Reset(false)
 	// , m_pOBB(NULL)
 	// , jumpis(false)
 	// , jumping(false)
@@ -206,12 +207,24 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				rotation = D3DX_PI / 2.0f;
 				break;
 
+			case PlayerInputType::eReset:
+				cout << "hi" << endl;
+				Reset = true;
+				g_pObjectManager->Reset = false;
+			
+				speed = -1.0f;
+				break;
+
 			default:
 				if (m_Character->CheckAnimationEnd()) // !m_isJump || 
 				{
 					speed = -1.0f;
 					m_Character->SetAnimationIndex(10); // Idle
+					
 				}
+				//g_pObjectManager->Reset = true;
+				Reset = false;
+				
 				break;
 			}
 		} // << eInputEvent
@@ -570,7 +583,7 @@ void CCharacter::Update(float duration)
 
 		if (m_fRadianJump >= D3DXToRadian(180.0f))
 		{
-			if(m_Character->CheckAnimationEnd())
+			if (m_Character->CheckAnimationEnd())
 				m_Character->SetAnimationIndexBlend(10); // idle
 
 			m_isFallAni = false;
@@ -589,6 +602,12 @@ void CCharacter::Update(float duration)
 	{
 		m_Character->Update(duration);
 		m_Character->SetTransform(&m_matWorld);
+	}
+
+	if (Reset == true)
+	{
+		m_vPosition = D3DXVECTOR3(0, 0, 0);
+		
 	}
 }
 
