@@ -1,23 +1,8 @@
 #include "stdafx.h"
 #include "Background.h"
 
-bool CBackground::CheckIsGetColorOrb()
-{
-	// >> 태그와 맞는 색상 오브가 있는지 판별
-	// >> 하나라도 존재 하지 않을 경우 false
-
-	for (int i = 0; i < m_vecColorTag.size(); i++)
-	{
-		if (!g_pGameManager->GetIsHasOrb(m_vecColorTag[i]))
-			return false;
-	}
-
-	return true;
-}
-
 CBackground::CBackground()
 {
-
 	m_strName = string("Background") + to_string(m_nRefCount);
 }
 

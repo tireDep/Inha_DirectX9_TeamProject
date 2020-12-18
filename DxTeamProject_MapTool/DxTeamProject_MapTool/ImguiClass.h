@@ -75,5 +75,6 @@ public:
 	void Destroy();
 
 	static void CreateMouseRBtn();
+	static float GetObjecFirstHeight();
 };
 

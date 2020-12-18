@@ -48,11 +48,11 @@ void CEventManager::Update(float duration)
 	bool pushD = GetKeyState('D') & 0x8000;
 	bool pushF = GetKeyState('F') & 0x8000;
 	bool pushSpace = GetKeyState(VK_SPACE) & 0x8000;
-	
+	bool pushR = GetKeyState('R') & 0x8000;
 	// >> 키 입력 딜레이
 	nowTime += duration;
 
-	if (!pushW && !pushS && !pushA && !pushD && !pushF && !pushSpace)
+	if (!pushW && !pushS && !pushA && !pushD && !pushF && !pushR &&!pushSpace )
 	{
 		lastInput = PlayerInputType::eNull;
 		return;
@@ -93,6 +93,8 @@ void CEventManager::Update(float duration)
 		msg.playerInput = PlayerInputType::eLeft;
 	else if (pushD)
 		msg.playerInput = PlayerInputType::eRight;
+	else if (pushR)
+		msg.playerInput = PlayerInputType::eReset;
 
 	if (lastInput == PlayerInputType::eNull)
 		lastInput = msg.playerInput;

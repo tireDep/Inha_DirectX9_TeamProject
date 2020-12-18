@@ -13,6 +13,13 @@ void COrb::Setup(ST_MapData setData)
 {
 	CItem::Setup(setData);
 
+	if (strstr(m_strObjName.c_str(), "Black")) m_strConditionName = "Black";
+	else if (strstr(m_strObjName.c_str(), "White")) m_strConditionName = "White";
+	else if (strstr(m_strObjName.c_str(), "Yellow")) m_strConditionName = "Yellow";
+	else if (strstr(m_strObjName.c_str(), "Green")) m_strConditionName = "Green";
+	else if (strstr(m_strObjName.c_str(), "Red")) m_strConditionName = "Red";
+	else if (strstr(m_strObjName.c_str(), "Blue")) m_strConditionName = "Blue";
+
 	ST_PT_VERTEX v;
 	float f = m_vScale.x;
 	v.p = D3DXVECTOR3(-f, -f, 0.05);	v.t = D3DXVECTOR2(m_UvX, m_UvY); m_vecVertex.push_back(v);

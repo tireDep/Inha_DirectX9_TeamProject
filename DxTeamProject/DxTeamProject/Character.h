@@ -27,9 +27,12 @@ protected:
 	//bool					jumpis;
 	//bool					jumping;
 
+	bool Reset;
+
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
-	float					rotation;
+	float					m_fSpeed;
+	float					m_fRotation;
 	float					m_preRotation;
 	// grab
 	Synthesize(bool, m_isGrab, Grab);

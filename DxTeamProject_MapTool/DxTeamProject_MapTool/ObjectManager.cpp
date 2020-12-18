@@ -181,7 +181,7 @@ void CObjectManager::RemoveClickedObj()
 			// >> 삭제하는 대상이 누군가의 조건일 경우, 조건 삭제
 
 			// >>  문은 2개가 1세트
-#ifdef _DEBUG
+
 			if (m_vecObject[i]->GetObjType() == ObjectType::eG_DoorFrame)
 			{
 				RemoveObject(m_vecObject[i]);
@@ -197,9 +197,6 @@ void CObjectManager::RemoveClickedObj()
 
 			else
 				RemoveObject(m_vecObject[i]);
-#else
-			RemoveObject(m_vecObject[i]);
-#endif // _DEBUG
 		}
 	}
 
@@ -319,12 +316,12 @@ void CObjectManager::CopyObject()
 				num = num[num.length() - 3];
 				indexNum = atoi(num.c_str()) - 1;
 			}
-#ifdef _DEBUG
+
 			else if (objType == ObjectType::eG_Door || objType == ObjectType::eG_DoorFrame)
 			{
 				objType = eG_DoorFrame;
 			}
-#endif // _DEBUG
+
 
 			IObject::CreateObject(objType, indexNum);
 			break;
@@ -363,7 +360,6 @@ void CObjectManager::CopyObject()
 		}
 		break;
 
-#ifdef _DEBUG
 		case eG_DoorFrame:	case eG_Door:
 		{
 			CDoor* temp = dynamic_cast<CDoor*> (&g_pObjectManager->GetIObject(m_vecObject.size() - 1));
@@ -383,7 +379,6 @@ void CObjectManager::CopyObject()
 			temp->SetTexture(temp2->GetTextureIndex());
 		}
 			break;
-#endif // _DEBUG
 
 		} // << : switch
 

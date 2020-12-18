@@ -28,6 +28,9 @@ protected:
 	Synthesize(bool, m_isCondition, Condition);
 	// >> On/Off 조건 변수
 
+	vector<string> m_vecColorTag;
+	bool CheckIsGetColorOrb();
+
 	COBB* m_pOBB;
 	IObject();
 public:

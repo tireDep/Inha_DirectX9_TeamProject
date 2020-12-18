@@ -15,6 +15,8 @@ void CTrace::Setup(ST_MapData setData)
 {
 	CItem::Setup(setData);
 
+	m_vecColorTag = setData.vecColorTag;
+
 	ST_PT_VERTEX v;
 	float f = m_vScale.x;
 	v.p = D3DXVECTOR3(-f, 0, -f);	v.t = D3DXVECTOR2(1, 0); m_vecVertex.push_back(v);
@@ -28,6 +30,9 @@ void CTrace::Setup(ST_MapData setData)
 
 void CTrace::Render()
 {
+	if (CheckIsGetColorOrb())
+		return;
+
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 
 	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);

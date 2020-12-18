@@ -64,11 +64,21 @@ void CItem::Setup(ST_MapData setData)
 	D3DXMatrixTranslation(&m_matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
 	m_matWorld = m_matS * m_matR * m_matT;
 
-	// OBB TEST
-	m_pOBB = new COBB;
-	m_pOBB->Setup(*this);
-	g_pObjectManager->AddOBBbox(m_pOBB);
-	m_pOBB->Update(&m_matWorld);
+	if (m_ObjectType != eTrace)
+	{
+		// OBB TEST
+		m_pOBB = new COBB;
+		m_pOBB->Setup(*this);
+		g_pObjectManager->AddOBBbox(m_pOBB);
+		m_pOBB->Update(&m_matWorld);
+	}
+	else
+	{
+		// >> 흔적은 obb 필요하지 않음
+		m_pOBB = new COBB;
+		m_pOBB->Setup(*this);
+		g_pObjectManager->AddOBBbox(NULL);
+	}
 
 }
 
