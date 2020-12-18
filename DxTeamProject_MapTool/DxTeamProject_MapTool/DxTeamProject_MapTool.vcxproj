@@ -159,6 +159,7 @@
     <ClInclude Include="Cylinder.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="Door.h" />
+    <ClInclude Include="EventTrigger.h" />
     <ClInclude Include="FileLoadManager.h" />
     <ClInclude Include="Gimmick.h" />
     <ClInclude Include="Gizmo.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="Door.cpp" />
+    <ClCompile Include="EventTrigger.cpp" />
     <ClCompile Include="FileLoadManager.cpp" />
     <ClCompile Include="Gimmick.cpp" />
     <ClCompile Include="Gizmo.cpp" />

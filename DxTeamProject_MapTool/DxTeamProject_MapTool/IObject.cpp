@@ -9,6 +9,7 @@
 #include "Gimmick.h"
 #include "Orb.h"
 #include "Trace.h"
+#include "EventTrigger.h"
 
 int IObject::m_nRefCnt = 0;
 
@@ -685,6 +686,21 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	}
 	break;
 		
+	case eTrigger:
+	{
+		mapData.vScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
+		mapData.strObjName = string("EventTrigger_Save") + to_string(m_nRefCnt + 1);
+		mapData.strFolderPath = "";
+		mapData.strTxtPath = "";
+		mapData.strXFilePath = "";
+
+		mapData.triggerIndex = 0;
+
+		CEventTrigger* trigger = new CEventTrigger;
+		trigger->Setup(mapData);
+	}
+		break;
+
 	} // << : switch
 }
 
@@ -773,5 +789,11 @@ void IObject::CreateObject(ST_MapData& mapData)
 	}
 		break;
 
+	case eTrigger:
+	{
+		CEventTrigger* trigger = new CEventTrigger;
+		trigger->Setup(mapData);
+	}
+		break;
 	} // << : switch
 }

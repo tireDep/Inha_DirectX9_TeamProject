@@ -107,7 +107,7 @@ enum ObjectType
 	eBook, eOrb,
 
 	/* Added */
-	eFlower, eSprout, eBridge, eTrace,
+	eFlower, eSprout, eBridge, eTrace, eTrigger,
 
 	eNull
 
@@ -178,6 +178,8 @@ struct ST_MapData
 	D3DXCOLOR dxColor = D3DXCOLOR(1, 1, 1, 1);
 
 	vector<string> vecColorTag;
+
+	int triggerIndex = 0;
 
 	ST_Gimmick gimmickData;
 };

@@ -15,6 +15,7 @@
 #include "ColorChanger.h"
 #include "Orb.h"
 #include "Trace.h"
+#include "EventTrigger.h"
 
 #include "ImguiClass.h"
 
@@ -145,6 +146,11 @@ void CImguiClass::SetVecItem()
 		tempVec.push_back("Item_Book");	tempObjType.push_back(eBook);
 		tempVec.push_back("Item_Orb");	tempObjType.push_back(eOrb);
 		tempVec.push_back("Item_Trace");	tempObjType.push_back(eTrace);
+	}
+
+	else if (m_NowLoadType == LoadType::eTrigger)
+	{
+		tempVec.push_back("EventTrigger");	tempObjType.push_back(eTrigger);
 	}
 
 	m_vecItem = tempVec;
@@ -624,12 +630,12 @@ void CImguiClass::Update_FileLoader()
 	ImGui::SameLine(); if (ImGui::RadioButton("Object", m_NowLoadType == LoadType::eObject)) { m_NowLoadType = LoadType::eObject; m_FileLoadIndex = 0; }
 
 	if (ImGui::RadioButton("Background", m_NowLoadType == LoadType::eBackground)) { m_NowLoadType = LoadType::eBackground; m_FileLoadIndex = 0; }
-
 	ImGui::SameLine();  if (ImGui::RadioButton("Gimmick", m_NowLoadType == LoadType::eGimmick)) { m_NowLoadType = LoadType::eGimmick; m_FileLoadIndex = 0; }
+	
 	if (ImGui::RadioButton("Item", m_NowLoadType == LoadType::eItem)) { m_NowLoadType = LoadType::eItem; m_FileLoadIndex = 0; }
 
 #ifdef _DEBUG
-	// ImGui::SameLine();  if (ImGui::RadioButton("EventTrigger", m_NowLoadType == LoadType::eTrigger)) { m_NowLoadType = LoadType::eTrigger; m_FileLoadIndex = -1; }
+	ImGui::SameLine();  if (ImGui::RadioButton("EventTrigger", m_NowLoadType == LoadType::eTrigger)) { m_NowLoadType = LoadType::eTrigger; m_FileLoadIndex = 0; }
 #endif // _DEBUG
 
 	ImGui::Separator();
@@ -1012,6 +1018,29 @@ void CImguiClass::Update_Inspector()
 
 				ImGui::Separator();
 			}
+
+			// >> 이벤트 트리거 : 트리거 종류 선택
+			else if (nowObjectType == eTrigger)
+			{
+				CEventTrigger* temp = static_cast<CEventTrigger*> (&nowObject);
+
+				ImGui::Text("Trigger");
+				int pushIndex = temp->GetTriggerIndex();
+				string charName[2] = { "Save", "Zone" };
+				for (int i = 0; i < 2; i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str(), pushIndex == i))
+					{
+						pushIndex = i;
+						temp->SetTriggerIndex(pushIndex);
+					}
+				} // << : for
+
+				ImGui::Separator();
+
+				ImGui::Text("TriggerType : ");
+				ImGui::SameLine(); ImGui::Text(temp->GetTriggerType().c_str());
+			}
 			
 			if (nowObject.GetConditionName() != "" 
 			 && (nowObjectType == ObjectType::eG_Door
@@ -1156,6 +1185,7 @@ float CImguiClass::GetObjecFirstHeight()
 	case eBox:
 	case eCylinder:
 	case eSphere:
+	case eTrigger:
 		height = 0.5f;
 		break;
 

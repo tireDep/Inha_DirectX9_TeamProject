@@ -7,6 +7,7 @@
 #include "RotationBoard.h"
 #include "MovingCube.h"
 #include "Door.h"
+#include "EventTrigger.h"
 
 #define StrFilePath(path, folder, file) { path = string(folder) + "/" + string(file); }
 #define ErrMessageBox(msg, type) { MessageBoxA(g_hWnd, string(msg).c_str(), string(type).c_str(), MB_OK); }
@@ -318,6 +319,11 @@ void CFileLoadManager::ReadMapData(string fileName)
 				ReadAndCutSlashR(mapFile, readData);
 				mapData.gimmickData.conditionName = readData;
 			}
+			else if (strstr(readData.c_str(), "# TriggerIndex"))
+			{
+				ReadAndCutSlashR(mapFile, readData);
+				mapData.triggerIndex = atoi(readData.c_str());
+			}
 
 			if (strstr(readData.c_str(), "# Object_End"))
 			{
@@ -468,6 +474,12 @@ ST_MapData CFileLoadManager::SetSaveData(int index)
 			mapData.gimmickData.conditionName = vecObject.GetConditionName();
 	}
 
+	if (mapData.objType == eTrigger)
+	{
+		CEventTrigger* temp = static_cast<CEventTrigger*> (&g_pObjectManager->GetIObject(index));
+		mapData.triggerIndex = temp->GetTriggerIndex();
+	}
+
 	return mapData;
 }
 
@@ -526,6 +538,12 @@ void CFileLoadManager::FileSave(ofstream& file, ST_MapData& mapData)
 		// >> 조건 오브젝트 저장(쌍방 저장)
 		file << "# ConditionName" << endl;
 		file << mapData.gimmickData.conditionName << endl;
+	}
+
+	if (mapData.objType == eTrigger)
+	{
+		file << "# TriggerIndex" << endl;
+		file << mapData.triggerIndex << endl;
 	}
 
 	file << "# Object_End" << endl << endl;

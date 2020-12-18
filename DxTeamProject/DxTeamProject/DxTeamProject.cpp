@@ -189,6 +189,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             EndPaint(hWnd, &ps);
         }
         break;
+
+	case WM_GETMINMAXINFO:
+		// ((MINMAXINFO*)lParam)->ptMaxTrackSize.x = 1280;
+		// ((MINMAXINFO*)lParam)->ptMaxTrackSize.y = 800;
+		// ((MINMAXINFO*)lParam)->ptMinTrackSize.x = 1280;
+		// ((MINMAXINFO*)lParam)->ptMinTrackSize.y = 800;
+		// >> todo : 사이즈 확정 나면 창 크기 고정 하기
+		break;
+
     case WM_DESTROY:
         PostQuitMessage(0);
         break;

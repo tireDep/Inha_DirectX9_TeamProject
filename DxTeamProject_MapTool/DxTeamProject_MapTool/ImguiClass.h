@@ -15,7 +15,9 @@ private:
 
 		eItem,
 
-		eGimmick, eBreakWall, eDoor, eRotateBoard, eColorChanger
+		eGimmick, eBreakWall, eDoor, eRotateBoard, eColorChanger,
+
+		eTrigger
 	};
 	enum class ColorType { eNull, eGray, eBlack, eWhite, eRed, eBlue, eGreen, eYellow };
 

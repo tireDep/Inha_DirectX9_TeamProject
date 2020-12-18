@@ -1,242 +1,14 @@
 # Object_Start
 # ObjectName
-Door1
+EventTrigger_Save1
 # FolderPath
-Resource/XFile/Gimmick/Door
-# FilePath
-door_frame.X
-# TxtPath
-cubeworld_texture.tga
-# ObjectType
-28
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
--6.5
-0
-8.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# GimmickData
-# ConditionName
-Blue
-# ConditionIndex
-0
-# ConditionOrbIndex
-5
-# Object_End
 
-# Object_Start
-# ObjectName
-Door2
-# FolderPath
-Resource/XFile/Gimmick/Door
-# FilePath
-door_right.X
-# TxtPath
-cubeworld_texture.tga
-# ObjectType
-29
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
--6.5
-0
-8.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# GimmickData
-# ConditionName
-Blue
-# ConditionIndex
-0
-# ConditionOrbIndex
-0
-# Object_End
-
-# Object_Start
-# ObjectName
-Door3
-# FolderPath
-Resource/XFile/Gimmick/Door
-# FilePath
-door_frame.X
-# TxtPath
-cubeworld_texture.tga
-# ObjectType
-28
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
-7.5
-0
-8.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# GimmickData
-# ConditionName
-Book8
-# ConditionIndex
-1
-# ConditionOrbIndex
-0
-# Object_End
-
-# Object_Start
-# ObjectName
-Door4
-# FolderPath
-Resource/XFile/Gimmick/Door
-# FilePath
-door_right.X
-# TxtPath
-cubeworld_texture.tga
-# ObjectType
-29
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
-7.5
-0
-8.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# GimmickData
-# ConditionName
-Book8
-# ConditionIndex
-1
-# ConditionOrbIndex
-0
-# Object_End
-
-# Object_Start
-# ObjectName
-Door5
-# FolderPath
-Resource/XFile/Gimmick/Door
-# FilePath
-door_frame.X
-# TxtPath
-cubeworld_texture.tga
-# ObjectType
-28
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
-5.5
-0
--8.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# GimmickData
-# ConditionName
-Switch9
-# ConditionIndex
-2
-# ConditionOrbIndex
-0
-# Object_End
-
-# Object_Start
-# ObjectName
-Door6
-# FolderPath
-Resource/XFile/Gimmick/Door
-# FilePath
-door_right.X
-# TxtPath
-cubeworld_texture.tga
-# ObjectType
-29
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
-5.5
-0
--8.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# GimmickData
-# ConditionName
-Switch9
-# ConditionIndex
-2
-# ConditionOrbIndex
-0
-# Object_End
-
-# Object_Start
-# ObjectName
-Orb_Blue7
-# FolderPath
-Resource/Sprite/Orb
 # FilePath
 
 # TxtPath
-Orb_Blue.png
+
 # ObjectType
-34
+39
 # Scale
 1
 1
@@ -246,137 +18,7 @@ Orb_Blue.png
 0
 0
 # Translate
--8.5
-0.6
-3.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# ConditionName
-Blue
-# Object_End
-
-# Object_Start
-# ObjectName
-Book8
-# FolderPath
-Resource/XFile/Book
-# FilePath
-book.X
-# TxtPath
-Bookshelf_diffuse.png
-# ObjectType
-33
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
-4.5
-0
-2.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# ConditionName
-Door3
-# Object_End
-
-# Object_Start
-# ObjectName
-Switch9
-# FolderPath
-Resource/XFile/Gimmick/Switch
-# FilePath
-Force_switch.X
-# TxtPath
-cubeworld_texture.tga
-# ObjectType
-31
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-3.5
-0
-0
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# ConditionName
-Door5
-# Object_End
-
-# Object_Start
-# ObjectName
-Box10
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-23
-# Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
-1.5
-0.5
-0.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# Object_End
-
-# Object_Start
-# ObjectName
-Sphere11
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-24
-# Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
-1.5
+-2.5
 0.5
 -1.5
 # Color
@@ -385,11 +27,13 @@ Sphere11
 0.5
 1
 # ColorTag
+# TriggerIndex
+0
 # Object_End
 
 # Object_Start
 # ObjectName
-Cylinder12
+EventTrigger_Zone2
 # FolderPath
 
 # FilePath
@@ -397,25 +41,27 @@ Cylinder12
 # TxtPath
 
 # ObjectType
-25
+39
 # Scale
 1
 1
 1
 # Rotate
-90
+0
 0
 0
 # Translate
-1.5
 0.5
-2.5
+0.5
+-1.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
+# TriggerIndex
+1
 # Object_End
 
 # Section =======================================
