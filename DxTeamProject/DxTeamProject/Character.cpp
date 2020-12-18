@@ -17,7 +17,7 @@ CCharacter::CCharacter()
 	, m_color(GRAY)
 	, m_isGrab(false)
 	, m_isJump(false)
-	, m_fMaxJumpHeight(3.0f)
+	, m_fMaxJumpHeight(0.01f)
 	, m_fRadianJump(0.0f)
 	, m_isFallAni(false)
 	, m_preRotation(0.0f)
@@ -183,49 +183,49 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			case PlayerInputType::eUp:
 				m_fRotation = 0.0f;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eLeftUp:
 				m_fRotation = D3DX_PI / 4.0f * -1;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eRightUp:
 				m_fRotation = D3DX_PI / 4.0f;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eDown:
 				m_fRotation = D3DX_PI;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eLeftDown:
 				m_fRotation = D3DX_PI + D3DX_PI / 4.0f;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eRightDown:
 				m_fRotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eLeft:
 				m_fRotation = -D3DX_PI / 2.0f;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eRight:
 				m_fRotation = D3DX_PI / 2.0f;
 				m_fSpeed = 10.0f;
-				//m_preRotation = m_fRotation;
+				m_preRotation = m_fRotation;
 				break;
 
 			case PlayerInputType::eReset:
@@ -591,17 +591,24 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 void CCharacter::Update(float duration)
 {
 	static D3DXVECTOR3 prePos = m_vPosition;
+	static float dir = 1.0f;
 
 	if (m_isJump)
 	{
-		m_fRadianJump += 7.0f * duration;
-		m_vPosition.x += m_vDirection.x * m_fSpeed * duration;
-		m_vPosition.y = m_fMaxJumpHeight * sinf(m_fRadianJump);
-		m_vPosition.z += m_vDirection.z * m_fSpeed * duration;
+		m_fRadianJump += 5.0f * duration;
+		// m_fRadianJump += 7.0f * duration;
+		// m_vPosition.x += m_vDirection.x * m_fSpeed * duration;
+		m_vPosition.y += m_fMaxJumpHeight * sinf(m_fRadianJump) * dir;
+		// m_vPosition.z += m_vDirection.z * m_fSpeed * duration;
+
+
+		cout << m_vPosition.y << endl;
+		if (m_preRotation == m_fRotation)
+		{
+			DoRotation(m_preRotation);
+			m_vPosition += (m_vDirection * m_fSpeed * duration);
+		}
 		
-		//DoRotation(m_preRotation);
-		//m_fGrabRotation = m_fRotation;
-		//DoRotation(m_fRotation);
 
 		if (m_fRadianJump >= D3DXToRadian(180.0f))				// Low Spot	
 		{
@@ -611,12 +618,14 @@ void CCharacter::Update(float duration)
 			m_isJump = false;
 			m_fRadianJump = 0;
 			m_fSpeed = 0.0f;
+			//dir = 1;
 		}
 		else if (m_fRadianJump >= D3DXToRadian(90.0f) && !m_isFallAni)	// High Spot
 		{
 			m_Character->SetAnimationIndex(6); // fall
 			m_isFallAni = true;
 			m_fSpeed = 0.0f;
+			//dir = -1;
 		}
 	}
 	else
@@ -641,29 +650,38 @@ void CCharacter::Update(float duration)
 		prePos = m_vPosition;
 	}
 
-	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 4.5f, 0);
-	m_Ray.SetOrigin(rayOrigin);
-	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
+	if (m_isFallAni || !m_isJump)
 	{
-		if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
+		// >> 점프 중이 아닐 때 레이 판정(낙하상태 포함)
+		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 4.5f, 0);
+		m_Ray.SetOrigin(rayOrigin);
+
+		for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
 		{
-			BOOL hit = false;
-			DWORD FaceIndex;
-			float u, v, dist;
-			D3DXVECTOR3 rayOrigin = m_Ray.GetOrigin();
-			D3DXMATRIXA16 matInverse;
-			D3DXMatrixInverse(&matInverse, NULL, &g_pObjectManager->GetVecIObject()[i]->GetOBB()->GetOBBWorldMatrix());
-			D3DXVec3TransformCoord(&rayOrigin, &rayOrigin, &matInverse);
-			D3DXIntersect(g_pObjectManager->GetVecIObject()[i]->GetMesh(), &rayOrigin, &m_Ray.GetDirection(), &hit, &FaceIndex, &u, &v, &dist, NULL, NULL);
-			if (hit)
+			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
 			{
-				if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
-					m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+				BOOL hit = false;
+				DWORD FaceIndex;
+				float u, v, dist;
+				D3DXVECTOR3 rayOrigin = m_Ray.GetOrigin();
+				D3DXMATRIXA16 matInverse;
+				D3DXMatrixInverse(&matInverse, NULL, &g_pObjectManager->GetVecIObject()[i]->GetOBB()->GetOBBWorldMatrix());
+				D3DXVec3TransformCoord(&rayOrigin, &rayOrigin, &matInverse);
+				D3DXIntersect(g_pObjectManager->GetVecIObject()[i]->GetMesh(), &rayOrigin, &m_Ray.GetDirection(), &hit, &FaceIndex, &u, &v, &dist, NULL, NULL);
+				if (hit)
+				{
+					if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
+						m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+				}
 			}
 		}
+
+		if (m_fHeightTile != 0)
+		{
+			m_vPosition.y = m_fHeightTile;
+			m_fHeightTile = 0.0f;
+		}
 	}
-	m_vPosition.y = m_fHeightTile;
-	m_fHeightTile = 0.0f;
 
 	if (m_Character)
 	{
