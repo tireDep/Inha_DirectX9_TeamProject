@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameManager.h"
+#include "SoundManager.h"
 
 CGameManager::CGameManager()
 {
@@ -92,6 +93,7 @@ void CGameManager::SetGetOrb(string orbType)
 			g_pEventManager->CheckEvent(msg);
 		}
 	}
+	g_pSoundManager->PlaySFX("Orb");
 }
 
 void CGameManager::InitializationOrb()

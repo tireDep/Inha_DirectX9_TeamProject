@@ -1,4 +1,7 @@
 #pragma once
+
+#define	g_pSoundManager	CSoundManager::GetInstance()
+
 #include "fmod.hpp"
 
 
@@ -12,6 +15,8 @@ using namespace FMOD;
 class CSoundManager
 {
 private:
+	SingleTone(CSoundManager);
+private:
 	System * fmodSystem;
 
 	Channel* bgmChannel;
@@ -19,17 +24,18 @@ private:
 
 	Sound* bgm;
 	map<string, Sound*> soundHash;
+	map<string, Sound*> bgmHash;
 
 public:
-	CSoundManager();
-	~CSoundManager();
+	//CSoundManager();
+	//virtual ~CSoundManager() { }
 
 	void init();
 	void AddSFX(string path, string musicName);
-	void AddBGM(string path);
+	void AddBGM(string path, string bgmName);
 
 	void PlaySFX(string soundName);
-	void PlayBGM();
+	void PlayBGM(string bgmName);
 
 	void Stop();
 

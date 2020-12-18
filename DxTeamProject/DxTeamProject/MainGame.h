@@ -27,7 +27,7 @@ class RotationBoard;
 class CSwitch;
 class CBook;
 class CDragon;
-//class CSoundManager;
+class CSoundManager;
 class CBox;
 class CSphere;
 //
@@ -69,7 +69,7 @@ private:
 	CScene* m_pScene;
 	//
 	/// 릴리즈 버전을 위한 주석처리
-	//CSoundManager* m_pSm;
+	CSoundManager* m_pSm;
 public:
 	CMainGame();
 	~CMainGame();

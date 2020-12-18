@@ -32,12 +32,22 @@ void CSoundManager::init()
 	AddSFX("sounds/lose.wav", "Lose");
 	AddSFX("sounds/start.wav", "Start");
 	AddSFX("sounds/win.wav", "Win");
+	//winter
+	AddBGM("sounds/winter/first.wav", "w_first");
+	AddBGM("sounds/winter/middle.wav", "w_middle");
+	AddBGM("sounds/winter/winter-fall.wav", "w_last");
+	//fall
+	AddBGM("sounds/fall/first.wav", "f_first");
+	AddBGM("sounds/fall/middle.wav", "f_middle");
+	AddBGM("sounds/fall/fall-sum.wav", "f_last");
+	//Orb
+	AddSFX("sounds/Orb/Orb.wav", "Orb");
+
 }
 
-void CSoundManager::AddBGM(string path)
+void CSoundManager::AddBGM(string path, string bgmName)
 {
-	//fmodSystem->createSound(path.c_str(), FMOD_LOOP_NORMAL, NULL, &bgm);
-	fmodSystem->createStream(path.c_str(), FMOD_LOOP_NORMAL, NULL, &bgm);
+	fmodSystem->createStream(path.c_str(), FMOD_LOOP_NORMAL, NULL, &bgmHash[bgmName]);
 }
 
 void CSoundManager::AddSFX(string path, string soundName)
@@ -45,9 +55,10 @@ void CSoundManager::AddSFX(string path, string soundName)
 	fmodSystem->createSound(path.c_str(), FMOD_DEFAULT, NULL, &soundHash[soundName]);
 }
 
-void CSoundManager::PlayBGM()
+void CSoundManager::PlayBGM(string bgmName)
 {
-	fmodSystem->playSound(FMOD_CHANNEL_REUSE, bgm, false, &bgmChannel);
+	if(bgmHash[bgmName] != NULL)
+	fmodSystem->playSound(FMOD_CHANNEL_REUSE, bgmHash[bgmName], false, &bgmChannel);
 }
 
 void CSoundManager::PlaySFX(string soundName)

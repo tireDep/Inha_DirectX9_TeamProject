@@ -40,7 +40,7 @@
 //#include "TestAngleSet.h"
 //#include "PSOBB.h"
 /// 릴리즈 버전을 위한 주석처리
-//#include "SoundManager.h"
+#include "SoundManager.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
@@ -61,9 +61,9 @@ CMainGame::CMainGame() :
 	//
 	m_pBook(NULL),
 	m_pDragon(NULL),
-	m_pScene(NULL)
+	m_pScene(NULL),
 	/// 릴리즈 버전을 위한 주석처리
-	//m_pSm(NULL),
+	m_pSm(NULL)
 {
 	//m_pGimmick_Door[0] = NULL;
 	//m_pGimmick_Door[1] = NULL;
@@ -230,20 +230,30 @@ void CMainGame::Setup()
 
 
 	/// 릴리즈 버전을 위한 주석처리
-	//m_pSm = new CSoundManager;
-	//m_pSm->init();
+	g_pSoundManager->init();
 }
 
 void CMainGame::Update()
 {
 	if (GetKeyState('1') & 0x8000)
 	{
+		
 		g_pGameManager->SetGetOrb("Blue");
-		g_pGameManager->SetGetOrb("Green");
-		g_pGameManager->SetGetOrb("Red");
-		g_pGameManager->SetGetOrb("White");
-		g_pGameManager->SetGetOrb("Yellow");
-		g_pGameManager->SetGetOrb("Black");
+		//g_pGameManager->SetGetOrb("Green");
+		//g_pGameManager->SetGetOrb("Red");
+		//g_pGameManager->SetGetOrb("White");
+		//g_pGameManager->SetGetOrb("Yellow");
+		//g_pGameManager->SetGetOrb("Black");
+		cout << " in" <<endl;
+	}
+	if (GetKeyState('2') & 0x8000)
+	{
+		g_pSoundManager->PlayBGM("f_last");
+		cout << "in" << endl;
+	}
+	if (GetKeyState('3') & 0x8000)
+	{
+		g_pSoundManager->PlayBGM("f_middle");
 	}
 
 	g_pGameManager->CompleteOrb();
