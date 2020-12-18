@@ -43,6 +43,10 @@ void CCylinder::Setup(const ST_MapData & mapData)
 	m_vTranslation = mapData.vTranslate;
 	m_vPosition = m_vTranslation;
 
+	//---ÀúÀå
+	saveRotation = mapData.vRotate;
+	saveTranslation = mapData.vTranslate;
+
 	m_Color = mapData.dxColor;
 	this->ChangeObjectColor();
 
