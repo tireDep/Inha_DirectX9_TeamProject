@@ -36,6 +36,7 @@ void CTrace::Render()
 
 	g_pD3DDevice->SetFVF(ST_PT_VERTEX::FVF);
 
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &GetmatWorld());
 	g_pD3DDevice->SetMaterial(&m_pMtrl);
 
 	if (m_pTexture)

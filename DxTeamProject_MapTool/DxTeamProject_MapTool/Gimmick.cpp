@@ -230,7 +230,6 @@ void CGimmick::CreateGimmick(const ObjectType& objType)
 	case eG_BreakWall:
 		break;
 
-#ifdef _DEBUG
 	case eG_DoorFrame:
 	{
 		mapData.strObjName = string("Door") + to_string(m_nRefCnt + 1);
@@ -252,7 +251,6 @@ void CGimmick::CreateGimmick(const ObjectType& objType)
 		doorRight->Setup(mapData);
 	}
 	break;
-#endif // _DEBUG
 
 	case eG_ColorChanger:
 	{
@@ -314,14 +312,12 @@ void CGimmick::CreateGimmick_SaveData(ST_MapData & mapData)
 	case eG_BreakWall:
 		break;
 
-#ifdef _DEBUG
 	case eG_DoorFrame: case eG_Door:
 	{
 		CDoor* doorFrame = new CDoor;
 		doorFrame->Setup(mapData);
 	}
 	break;
-#endif // _DEBUG
 
 	case eG_ColorChanger:
 	{
