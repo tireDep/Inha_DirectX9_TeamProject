@@ -280,7 +280,7 @@ void CObjectManager::Collide(float duration)
 					CollisionSphereToIObject(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
 					break;
 				}
-				return;
+				//return;
 			}
 			else
 			{
@@ -363,7 +363,7 @@ void CObjectManager::Collide(float duration)
 					CollisionBoxToTile(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
 					break;
 				}
-				return;
+				//return;
 			}
 			else
 			{
@@ -434,7 +434,7 @@ void CObjectManager::Collide(float duration)
 					CollisionIObject(m_vecCylinder[CylinderIndex], m_vecIObject[IObjectIndex], duration);
 					break;
 				}
-				return;
+				//return;
 			}
 			else
 			{
