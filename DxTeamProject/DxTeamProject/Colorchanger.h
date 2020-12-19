@@ -47,6 +47,8 @@ public:
 	// KT
 	void SetHitLength(float HitLength); // 빔이 맞았을때 거리 구해줌.
 
+	//
+	D3DXVECTOR3 SendPosition() { return D3DXVECTOR3(); }
 
 	//인터섹트
 	

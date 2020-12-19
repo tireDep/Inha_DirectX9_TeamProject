@@ -23,6 +23,9 @@ protected:
 	float					m_fMaxJumpHeight;
 	float					m_fRadianJump;
 	bool					m_isFallAni;
+
+	D3DXVECTOR3 m_saveZonePosition;
+
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
 	float					m_fSpeed;

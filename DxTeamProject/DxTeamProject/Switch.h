@@ -33,6 +33,9 @@ public:
 	void SetBool(bool set);
 	COBB* GetOBB2() { return m_pColl; } // 콜리더부분!
 
+	//
+	D3DXVECTOR3 SendPosition() { return D3DXVECTOR3(); }
+
 	void ChangeConditionMsg(bool set);
 };
 

@@ -20,6 +20,7 @@ public:
 	virtual void Update(float duration) { m_pOBB->Update(&m_matWorld);	};
 	virtual void Render();
 	virtual string GetName() { return m_strName; }
+	D3DXVECTOR3 SendPosition(){ return D3DXVECTOR3(); }
 };
 
 /// Delete Later..

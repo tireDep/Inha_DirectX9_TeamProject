@@ -45,6 +45,7 @@ void CEventTrigger::Setup(ST_MapData setData)
 	D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
 
 	D3DXMatrixTranslation(&m_matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+	triggerpos = m_vTranslation;
 	m_matWorld = m_matS * m_matR * m_matT;
 
 	m_pOBB = new COBB;
@@ -55,10 +56,23 @@ void CEventTrigger::Setup(ST_MapData setData)
 
 void CEventTrigger::Update(float duration)
 {
+
 }
 
 void CEventTrigger::Render()
 {
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+
+	if (m_pMesh == NULL)
+		return;
+
+	g_pD3DDevice->SetTexture(0, NULL);
+
+	if (player == true)
+	{
+		SafeRelease(m_pMesh);
+		g_pObjectManager->RemoveObject(m_pOBB);
+	}
 }
 
 string CEventTrigger::GetTriggerTypeString()
