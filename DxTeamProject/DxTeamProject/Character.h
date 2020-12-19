@@ -27,6 +27,8 @@ protected:
 	//bool					jumpis;
 	//bool					jumping;
 
+	D3DXVECTOR3 m_saveZonePosition;
+
 	/// KT Reset
 	//bool Reset;
 

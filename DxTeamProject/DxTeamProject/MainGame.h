@@ -34,6 +34,7 @@ class CSphere;
 class CScene;
 //
 
+
 class CMainGame
 {
 private:
@@ -69,6 +70,7 @@ private:
 	CScene* m_pScene;
 	//
 	/// 릴리즈 버전을 위한 주석처리
+	//
 	CSoundManager* m_pSm;
 public:
 	CMainGame();

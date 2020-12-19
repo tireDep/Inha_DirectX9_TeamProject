@@ -28,6 +28,7 @@ CCharacter::CCharacter()
 	, m_fSpeed(0.0f)
 	, m_fRotation(0.0f)
 	, m_fGrabRotation(0.0f)
+	, m_saveZonePosition(0,0,0)
 	/// KT Reset
 	//, Reset(false)
 	// , m_pOBB(NULL)
@@ -293,11 +294,16 @@ void CCharacter::ColliderObject()
 			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBook || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eOrb)
 			{
 				g_pObjectManager->GetVecIObject()[i]->SetBool(true);
+			
 				continue;
 			}
 			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
 				continue;
-
+			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eTrigger)
+			{
+				m_saveZonePosition = g_pObjectManager->GetVecIObject()[i]->SendPosition();
+				continue;
+			}
 			//if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
 			//{
 			//	BOOL hit = false;
@@ -357,7 +363,7 @@ void CCharacter::ColliderObject()
 void CCharacter::Reset()
 {
 	// Need To Modify... SavePosition;
-	m_vPosition = D3DXVECTOR3(0, 0, 0);
+	m_vPosition = D3DXVECTOR3(m_saveZonePosition.x, m_saveZonePosition.y - 0.5f, m_saveZonePosition.z);
 
 	m_vDirection = D3DXVECTOR3(0, 0, 1);
 	D3DXMatrixIdentity(&m_matWorld);
@@ -823,10 +829,16 @@ void CCharacter::ColliderOtherObject(IObject * background)
 	{
 		m_isCollided = true;
 		background->SetBool(true);
+		
+		
+
+		//m_saveZonePosition = background->GetTranslation();
 	}
 	else
 	{
 		m_isCollided = false;
 		background->SetBool(false);
 	}
+
+	
 }

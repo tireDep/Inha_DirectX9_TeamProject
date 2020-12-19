@@ -50,5 +50,7 @@ public:
 	virtual void pCylinderBool(bool set) = 0;
 	virtual	void pSphereBool(bool set) = 0;
 	virtual void ReceiveEvent(ST_EVENT eventMsg);
+
+	virtual D3DXVECTOR3 SendPosition() = 0;
 	//static void CreateObject(const ST_MapData& mapData);
 };

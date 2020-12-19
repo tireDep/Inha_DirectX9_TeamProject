@@ -19,5 +19,6 @@ public:
 	virtual void pCylinderBool(bool set) { };
 	virtual	void pSphereBool(bool set) { };
 	bool GetBool() { return render; }
+	D3DXVECTOR3 SendPosition() { return D3DXVECTOR3(); }
 };
 

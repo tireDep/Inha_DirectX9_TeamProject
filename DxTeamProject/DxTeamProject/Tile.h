@@ -19,6 +19,7 @@ public:
 	void Render();
 	bool GetBool() { return render; }
 	virtual string GetName() { return m_strName; }
+	D3DXVECTOR3 SendPosition() { return D3DXVECTOR3(); }
 };
 /// Delete Later...
 //vector<COBB*> m_pOBB;

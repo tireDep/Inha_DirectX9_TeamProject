@@ -32,6 +32,7 @@
 //
 #include "Scene.h"
 //
+
 /// 이 아래는 지울 수도 있는 선언
 //#include "CHeight.h"
 //#include "PSphere.h"
@@ -265,8 +266,8 @@ void CMainGame::Update()
 		m_pDragon->Update(m_pCharacter->GetPosition(), g_pTimeManager->GetElapsedTime());
 		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
 		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
-		//for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
-			//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);
+		/*for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
+			m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);*/
 		switch (m_pUI->GetPickColor())
 		{
 		case Pick::Red:
@@ -380,11 +381,7 @@ void CMainGame::Update()
 	//if (m_pGimmick_RotationBoard)
 	//	m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
 	
-	//if (m_pChanger)
-	//	m_pChanger->Update();
-
-	/*if (m_pMovingCube)
-		m_pMovingCube->Update();*/
+	
 
 	//for(int i =0 ; i < m_pMeshTile.size(); ++i)
 	//if (m_pMeshTile[i])
@@ -409,14 +406,7 @@ void CMainGame::Update()
 	// 	m_pGimmick_Switch->Update();
 	//// 
 	//// 
-	// if (COBB::IsCollision(m_pMovingCube->GetOBB(), m_pGimmick_Switch->GetOBB()) == true)
-	// {
-	//	 cout << 1 << endl;
-	// }
-	// else
-	// {
-	//	 cout << 2 << endl;
-	// }
+	 
 
 	//if (m_pGimmick_BreakableWall[0])
 	//	m_pGimmick_BreakableWall[0]->Update();
@@ -441,6 +431,8 @@ void CMainGame::Render()
 
 	//if (m_pSkydome)
 	//	m_pSkydome->Render(m_pCamera->GetCameraEye());
+
+	
 
 	if (g_pGameManager->GetNowScene() == SceneType::eMainScene)
 	{
