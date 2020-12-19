@@ -137,11 +137,11 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 	{
 		switch (eventMsg.message)
 		{
-		case WM_LBUTTONDOWN:
+		case WM_RBUTTONDOWN:
 			if (m_SceneName == SceneType::eEndingScene)
 			{
+				InitializationOrb();
 				m_SceneName = SceneType::eMainScene;
-				cout << "in" << endl;
 				return;
 			}
 			break;
