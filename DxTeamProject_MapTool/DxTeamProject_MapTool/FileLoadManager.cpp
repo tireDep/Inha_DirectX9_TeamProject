@@ -7,6 +7,7 @@
 #include "RotationBoard.h"
 #include "MovingCube.h"
 #include "Door.h"
+#include "Switch.h"
 #include "EventTrigger.h"
 
 #define StrFilePath(path, folder, file) { path = string(folder) + "/" + string(file); }
@@ -90,6 +91,12 @@ void CFileLoadManager::SaveGimmickData(ofstream& file, ST_MapData& mapData)
 		file << "# ConditionOrbIndex" << endl;
 		file << mapData.gimmickData.conditionOrbIndex << endl;
 	}
+
+	else if (mapData.objType == ObjectType::eG_Switch)
+	{
+		file << "# WeightIndex" << endl;
+		file << mapData.gimmickData.weightIndex << endl;
+	}
 }
 
 void CFileLoadManager::ReadGimmickData(ifstream & mapFile, string& readData, ST_MapData& mapData)
@@ -150,6 +157,14 @@ void CFileLoadManager::ReadGimmickData(ifstream & mapFile, string& readData, ST_
 			ReadAndCutSlashR(mapFile, readData);
 			mapData.gimmickData.conditionOrbIndex = atoi(readData.c_str());
 		}
+		// >> 조건들
+
+		else if (strstr(readData.c_str(), "# WeightIndex"))
+		{
+			ReadAndCutSlashR(mapFile, readData);
+			mapData.gimmickData.weightIndex = atoi(readData.c_str());
+		}
+		// >> 스위치 조건
 	}
 }
 
@@ -171,7 +186,7 @@ void CFileLoadManager::ResetMapData(ST_MapData& mapData)
 	// >> gimmickData
 	mapData.gimmickData.roationSpeed_rotaitonBoard = 0.0f;
 	mapData.gimmickData.roationAxialIndex_rotaitonBoard = 0;
-	mapData.gimmickData.conditionIndex_switch = 0;
+	mapData.gimmickData.weightIndex = 0;
 	mapData.gimmickData.maxMassIndex_switch = 0;
 	mapData.gimmickData.startPos_movingCube = 0.0f;
 	mapData.gimmickData.endPos_movingCube = 0.0f;
@@ -313,7 +328,7 @@ void CFileLoadManager::ReadMapData(string fileName)
 			// >> gimmick
 			if (strstr(readData.c_str(), "# GimmickData"))
 				ReadGimmickData(mapFile, readData, mapData);
-			else if (strstr(readData.c_str(), "# ConditionName") 
+			else if (strstr(readData.c_str(), "# ConditionName")
 				&& (mapData.objType != eG_Door && mapData.objType != eG_DoorFrame && mapData.objType != eG_ColorChanger))
 			{
 				ReadAndCutSlashR(mapFile, readData);
@@ -323,6 +338,11 @@ void CFileLoadManager::ReadMapData(string fileName)
 			{
 				ReadAndCutSlashR(mapFile, readData);
 				mapData.triggerIndex = atoi(readData.c_str());
+			}
+			else if (strstr(readData.c_str(), "# ZoneIndex"))
+			{
+				ReadAndCutSlashR(mapFile, readData);
+				mapData.zoneIndex = atoi(readData.c_str());
 			}
 
 			if (strstr(readData.c_str(), "# Object_End"))
@@ -465,6 +485,13 @@ ST_MapData CFileLoadManager::SetSaveData(int index)
 		mapData.gimmickData.conditionName = temp->GetConditionName();
 		mapData.gimmickData.conditionOrbIndex = temp->GetConditionOrbIndex();
 	}
+	else if (mapData.objType == eG_Switch)
+	{
+		CSwitch* temp = static_cast<CSwitch*> (&g_pObjectManager->GetIObject(index));
+		mapData.gimmickData.isData = true;
+		mapData.gimmickData.weightIndex = temp->GetWeightIndex();
+		mapData.gimmickData.conditionName = temp->GetConditionName();
+	}
 
 	else
 	{
@@ -478,6 +505,7 @@ ST_MapData CFileLoadManager::SetSaveData(int index)
 	{
 		CEventTrigger* temp = static_cast<CEventTrigger*> (&g_pObjectManager->GetIObject(index));
 		mapData.triggerIndex = temp->GetTriggerIndex();
+		mapData.zoneIndex = temp->GetZoneIndex();
 	}
 
 	return mapData;
@@ -544,6 +572,9 @@ void CFileLoadManager::FileSave(ofstream& file, ST_MapData& mapData)
 	{
 		file << "# TriggerIndex" << endl;
 		file << mapData.triggerIndex << endl;
+
+		file << "# ZoneIndex" << endl;
+		file << mapData.zoneIndex << endl;
 	}
 
 	file << "# Object_End" << endl << endl;

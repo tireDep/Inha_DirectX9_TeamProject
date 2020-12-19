@@ -146,7 +146,7 @@ struct ST_Gimmick
 	int roationAxialIndex_rotaitonBoard = 0;
 	// >> 회전판자
 
-	int conditionIndex_switch = 0;
+	int weightIndex = 0;
 	int maxMassIndex_switch = 0;
 	// >> 스위치?
 
@@ -180,6 +180,7 @@ struct ST_MapData
 	vector<string> vecColorTag;
 
 	int triggerIndex = 0;
+	int zoneIndex = 0;
 
 	ST_Gimmick gimmickData;
 };

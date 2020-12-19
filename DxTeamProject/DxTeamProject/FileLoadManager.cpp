@@ -165,6 +165,11 @@ void CFileLoadManager::LoadData(string path)
 				ReadAndCutSlashR(file, readData);
 				mapData.triggerIndex = atoi(readData.c_str());
 			}
+			else if (strstr(readData.c_str(), "# ZoneIndex"))
+			{
+				ReadAndCutSlashR(file, readData);
+				mapData.zoneIndex = atoi(readData.c_str());
+			}
 
 			if (strstr(readData.c_str(), "# Object_End"))
 				CObject::CreateObject(mapData);
@@ -230,7 +235,7 @@ void CFileLoadManager::ReadGimmickData(ifstream & file, string& readData, ST_Map
 		}
 		// << 무빙큐브
 
-		// >> 조건변수(문, 컬러레이저)
+		// >> 조건변수(문, 컬러레이저, 스위치)
 		else if (strstr(readData.c_str(), "# ConditionName"))
 		{
 			ReadAndCutSlashR(file, readData);
@@ -246,7 +251,14 @@ void CFileLoadManager::ReadGimmickData(ifstream & file, string& readData, ST_Map
 			ReadAndCutSlashR(file, readData);
 			mapData.gimmickData.conditionOrbIndex = atoi(readData.c_str());
 		}
-		// << 조건변수(문, 컬러레이저)
+		// << 조건변수(문, 컬러레이저, 스위치)
+
+		else if (strstr(readData.c_str(), "# WeightIndex"))
+		{
+			ReadAndCutSlashR(file, readData);
+			mapData.gimmickData.weightIndex = atoi(readData.c_str());
+		}
+		// >> 스위치 조건
 	}
 }
 
@@ -268,7 +280,7 @@ void CFileLoadManager::ResetLoadMapData(ST_MapData & mapData)
 	// >> gimmickData
 	mapData.gimmickData.roationSpeed_rotaitonBoard = 0.0f;
 	mapData.gimmickData.roationAxialIndex_rotaitonBoard = 0;
-	mapData.gimmickData.conditionIndex_switch = 0;
+	mapData.gimmickData.weightIndex = 0;
 	mapData.gimmickData.maxMassIndex_switch = 0;
 	mapData.gimmickData.startPos_movingCube = 0.0f;
 	mapData.gimmickData.endPos_movingCube = 0.0f;

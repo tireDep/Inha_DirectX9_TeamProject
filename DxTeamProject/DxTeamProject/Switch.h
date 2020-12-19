@@ -5,6 +5,9 @@ class COBB;
 class CSwitch : public CGimmick
 {
 private:
+	enum class WeightType { eBlack, eWhite, eYellow };
+	WeightType m_weightType;
+
 	D3DXMATRIXA16 matS, matT, matWorld , collWorld; // 콜리더 부분 지우면안댐!
 	D3DXVECTOR3 m_position, m_scale;
 

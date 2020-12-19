@@ -1,7 +1,11 @@
 #include "stdafx.h"
 #include "EventTrigger.h"
 
-CEventTrigger::CEventTrigger()
+CEventTrigger::CEventTrigger() :
+	m_zoneType(ZoneType::eWinter),
+	m_triggerType(TriggerType::eSave),
+	player(false), 
+	triggerpos(0,0,0)
 {
 }
 
@@ -19,6 +23,11 @@ void CEventTrigger::Setup(ST_MapData setData)
 	m_vScale = setData.vScale;
 	m_vRotation = setData.vRotate;
 	m_vTranslation = setData.vTranslate;
+
+	if (setData.zoneIndex == 0)
+		m_zoneType = ZoneType::eWinter;
+	else if (setData.zoneIndex == 1)
+		m_zoneType = ZoneType::eFall;
 
 	if (setData.triggerIndex == 0)
 	{

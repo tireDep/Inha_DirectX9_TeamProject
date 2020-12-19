@@ -9,7 +9,8 @@ void CEventTrigger::SetMaterialColor(float r, float g, float b, float a)
 }
 
 CEventTrigger::CEventTrigger() :
-	m_triggerType(TriggerType::eSave)
+	m_triggerType(TriggerType::eSave),
+	m_zoneType(ZoneType::eWinter)
 {
 }
 
@@ -27,6 +28,11 @@ void CEventTrigger::Setup(ST_MapData setData)
 	m_vScale = setData.vScale;
 	m_vRotate = setData.vRotate;
 	m_vTranslate = setData.vTranslate;
+
+	if (setData.zoneIndex == 0)
+		m_zoneType = ZoneType::eWinter;
+	else if (setData.zoneIndex == 1)
+		m_zoneType = ZoneType::eFall;
 	
 	if (setData.triggerIndex == 0)
 	{
@@ -36,13 +42,15 @@ void CEventTrigger::Setup(ST_MapData setData)
 	else if (setData.triggerIndex == 1)
 	{
 		m_triggerType = TriggerType::eZone;
-		SetMaterialColor(0.3f, 0.7f, 0.0f, 1.0f);
+		
+		if (m_zoneType == ZoneType::eWinter)
+			SetMaterialColor(0.2f, 0.3f, 0.3f, 1.0f);
+		else
+			SetMaterialColor(0.3f, 0.3f, 0.0f, 1.0f);
 	}
 
 	m_vTranslate.y = 0.5f;
 	D3DXCreateBox(g_pD3DDevice, m_vScale.x, m_vScale.y, m_vScale.z, &m_pMesh, NULL);
-
-
 
 	IObject::Setup_OBB_Box();
 }
@@ -84,7 +92,10 @@ void CEventTrigger::SetTriggerIndex(int index)
 	else if (index == 1)
 	{
 		m_triggerType = TriggerType::eZone;
-		SetMaterialColor(0.3f, 0.7f, 0.0f, 1.0f);
+		if (m_zoneType == ZoneType::eWinter)
+			SetMaterialColor(0.2f, 0.3f, 0.3f, 1.0f);
+		else
+			SetMaterialColor(0.3f, 0.3f, 0.0f, 1.0f);
 		tempName = "EventTrigger_Zone";
 	}
 
@@ -115,4 +126,25 @@ string CEventTrigger::GetTriggerType()
 		return "Save";
 	else if (m_triggerType == TriggerType::eZone)
 		return "Zone";
+}
+
+void CEventTrigger::SetZoneIndex(int index)
+{
+	if (index == 0)
+		m_zoneType = ZoneType::eWinter;
+	else if (index == 1)
+		m_zoneType = ZoneType::eFall;
+
+	if (m_zoneType == ZoneType::eWinter)
+		SetMaterialColor(0.3f, 0.3f, 0.3f, 1.0f);
+	else
+		SetMaterialColor(0.3f, 0.3f, 0.0f, 1.0f);
+}
+
+int CEventTrigger::GetZoneIndex()
+{
+	if (m_zoneType == ZoneType::eWinter)
+		return 0;
+	else if (m_zoneType == ZoneType::eFall)
+		return 1;
 }

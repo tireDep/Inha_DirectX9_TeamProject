@@ -3,7 +3,10 @@
 class CSwitch : public CGimmick
 {
 private:
-	Synthesize(int, m_conditionIndex, ConditionIndex);
+	enum class WeightType { eBlack, eWhite, eYellow };
+	WeightType m_weightType;
+
+	// Synthesize(int, m_conditionIndex, ConditionIndex);
 
 public:
 	CSwitch();
@@ -15,7 +18,7 @@ public:
 	virtual void SetTexture(int index);
 	virtual int GetTextureIndex();
 
-	virtual void SetConditionType();
-	virtual void SetCondition();
+	void SetWeightIndex(int index);
+	int GetWeightIndex();
 };
 

@@ -4,7 +4,10 @@
 class CEventTrigger : public IObject
 {
 private:
+	enum class ZoneType { eWinter, eFall };
 	enum class TriggerType { eSave, eZone };
+
+	ZoneType m_zoneType;
 	TriggerType m_triggerType;
 	bool player;
 	D3DXVECTOR3 triggerpos;
@@ -23,7 +26,7 @@ public:
 	virtual void pCylinderBool(bool set) { };
 	virtual	void pSphereBool(bool set) { };
 
-	void TriggerPosition(D3DXVECTOR3 pos) { pos = triggerpos ; }
+	void TriggerPosition(D3DXVECTOR3 pos) { pos = triggerpos; }
 	D3DXVECTOR3 SendPosition() { return triggerpos; }
 	
 	string GetTriggerTypeString();

@@ -4,6 +4,9 @@
 class CEventTrigger : public IObject
 {
 private:
+	enum class ZoneType { eWinter, eFall };
+	ZoneType m_zoneType;
+
 	enum class TriggerType { eSave, eZone };
 	TriggerType m_triggerType;
 
@@ -22,5 +25,8 @@ public:
 	void SetTriggerIndex(int index);
 	int GetTriggerIndex();
 	string GetTriggerType();
+
+	void SetZoneIndex(int index);
+	int GetZoneIndex();
 };
 
