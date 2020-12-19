@@ -876,7 +876,8 @@ bool COBB::IsCollision(COBB * otherOBB, D3DXVECTOR3 * contactNormal, float * pen
 	const float cutOff = 0.999999f;
 	bool existsParallelPair = false;
 
-	D3DXVECTOR3 D = otherOBB->m_vCenterPos - this->m_vCenterPos;
+	//D3DXVECTOR3 D = otherOBB->m_vCenterPos - this->m_vCenterPos;
+	D3DXVECTOR3 D = this->m_vCenterPos - otherOBB->m_vCenterPos;
 	float penetrationTmp = FLT_MAX;
 	unsigned best = 0xffffff;
 
@@ -1031,8 +1032,6 @@ bool COBB::IsCollision(COBB * otherOBB, D3DXVECTOR3 * contactNormal, float * pen
 			return true;
 		}
 	}
-
-	return true;
 
 	unsigned bestSingleAxis = best;
 	// --------------------------------------------------------------------------------------------------------- //

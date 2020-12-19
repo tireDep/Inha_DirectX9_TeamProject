@@ -365,7 +365,8 @@ void CCharacter::ColliderObject()
 void CCharacter::Reset()
 {
 	// Need To Modify... SavePosition;
-	m_vPosition = D3DXVECTOR3(m_saveZonePosition.x, m_saveZonePosition.y - 0.5f, m_saveZonePosition.z);
+	//m_vPosition = D3DXVECTOR3(m_saveZonePosition.x, m_saveZonePosition.y - 0.5f, m_saveZonePosition.z);
+	m_vPosition = m_saveZonePosition;
 
 	m_vDirection = D3DXVECTOR3(0, 0, 1);
 	D3DXMatrixIdentity(&m_matWorld);

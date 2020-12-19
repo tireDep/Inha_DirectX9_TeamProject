@@ -342,7 +342,7 @@ void CObjectManager::Collide(float duration)
 					D3DXVec3Normalize(&v, &v);
 					m_vecBox[BoxIndex]->SetPusingForce(v);
 				}
-				break;
+					break;
 				case eG_Door:
 					break;
 				case  eG_Switch:
@@ -354,7 +354,6 @@ void CObjectManager::Collide(float duration)
 					//	msg.eventType = EventType::eConditionChange;
 					//	msg.isCondition = false; // ¿­¸°´Ù
 					//	msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
-
 					//	g_pEventManager->CheckEvent(msg);
 					//}
 				}
@@ -786,7 +785,6 @@ void CObjectManager::CollisionSphereToIObject(CSphere * one, IObject * two, floa
 	D3DXVECTOR3 movePerIMass = contactNormal * (penetration / one->GetInverseMass());
 	one->SetPosition(one->GetPosition() + movePerIMass * one->GetInverseMass());
 }
-
 
 void CObjectManager::Render()
 {
