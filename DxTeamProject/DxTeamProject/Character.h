@@ -11,7 +11,6 @@ class CCharacter : public IListener
 public:
 	CCharacter();
 protected:
-//	vector<ST_PC_VERTEX>	m_vecVertex;
 	D3DXVECTOR3				m_vDirection;
 	D3DXVECTOR3				m_vPosition;
 	D3DXMATRIXA16			m_matRotY;
@@ -24,22 +23,14 @@ protected:
 	float					m_fMaxJumpHeight;
 	float					m_fRadianJump;
 	bool					m_isFallAni;
-	//bool					jumpis;
-	//bool					jumping;
-
-	/// KT Reset
-	//bool Reset;
-
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
 	float					m_fSpeed;
 	float					m_fRotation;
 	float					m_preRotation;
-	// grab
 	float					m_fGrabRotation;
 	Synthesize(bool, m_isGrab, Grab);
 	int						m_nGrabAbleObeject;
-	// Ray y check
 	CRay					m_Ray;
 	D3DXVECTOR3 m_vContactNormal;
 	float m_fPenetration;
@@ -62,8 +53,6 @@ public:
 
 	virtual void SetColor(D3DXCOLOR c);
 	virtual D3DXCOLOR GetColor();
-	//COBB* m_pOBB;
-	//COBB* GetOBB() { return m_pOBB; }
 	// tmp Collision Test
 	// setup erase
 	virtual bool Collider(bool isCollided);
@@ -71,7 +60,6 @@ public:
 	void ColliderOtherObject(IObject * background);
 	// void SetBool(bool istrue);
 	
-
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	virtual string GetName();
 

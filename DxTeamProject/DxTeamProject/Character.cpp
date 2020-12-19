@@ -296,8 +296,10 @@ void CCharacter::ColliderObject()
 				continue;
 			}
 			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
-				continue;
-
+			{
+				if (m_isCollidedTile)
+					continue;
+			}
 			//if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
 			//{
 			//	BOOL hit = false;
@@ -608,7 +610,6 @@ void CCharacter::Update(float duration)
 			m_vPosition += (m_vDirection * m_fSpeed * duration);
 		}
 		
-
 		if (m_fRadianJump >= D3DXToRadian(180.0f))				// Low Spot	
 		{
 			if (m_Character->CheckAnimationEnd())
@@ -639,16 +640,6 @@ void CCharacter::Update(float duration)
 		}
 	}
 
-	CCharacter::ColliderObject();
-	if (m_isCollided)
-	{
-		m_vPosition = prePos;
-	}
-	else
-	{
-		prePos = m_vPosition;
-	}
-
 	if (m_isFallAni || !m_isJump)
 	{
 		// >> 점프 중이 아닐 때 레이 판정(낙하상태 포함)
@@ -675,25 +666,34 @@ void CCharacter::Update(float duration)
 				}
 			}
 		}
-
 		if (m_fHeightTile != 0)
 		{
+			if (m_vPosition.y > m_fHeightTile)
+				m_isCollidedTile = true;
+			else
+				m_isCollidedTile = false;
 			m_vPosition.y = m_fHeightTile;
 			m_fHeightTile = 0.0f;
 		}
 	}
+
+	CCharacter::ColliderObject();
+	if (m_isCollided)
+	{
+		m_vPosition = prePos;
+	}
+	else
+	{
+		prePos = m_vPosition;
+	}
+
+
 
 	if (m_Character)
 	{
 		m_Character->Update(duration);
 		m_Character->SetTransform(&m_matWorld);
 	}
-
-	/// KT Reset
-	//if (Reset == true)
-	//{
-	//	m_vPosition = D3DXVECTOR3(0, 0, 0);
-	//}
 }
 
 void CCharacter::DoRotation(const float& radian)

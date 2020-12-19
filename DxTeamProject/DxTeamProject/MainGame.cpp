@@ -121,7 +121,7 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "triggerTest.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "JumpTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "DoorTest.dat");
