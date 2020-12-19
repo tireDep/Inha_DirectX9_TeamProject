@@ -31,6 +31,7 @@ public:
 	void Render();
 	bool GetBool() { return render; }
 	string GetName() { return m_strName; }
+	D3DXVECTOR3 SendPosition() { return D3DXVECTOR3(); }
 };
 /// Delete Later...
 //void Setup(string folder, string file);

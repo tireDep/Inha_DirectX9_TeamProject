@@ -34,5 +34,8 @@ public:
 	void pSphereBool(bool set) { pSphere = set; }
 	void SetBool(bool set) { player = set; }
 	bool GetBool() { return render; }
+
+	//
+	D3DXVECTOR3 SendPosition() { return D3DXVECTOR3(); }
 };
 

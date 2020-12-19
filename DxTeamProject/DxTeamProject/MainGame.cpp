@@ -32,6 +32,7 @@
 //
 #include "Scene.h"
 //
+
 /// 이 아래는 지울 수도 있는 선언
 //#include "CHeight.h"
 //#include "PSphere.h"
@@ -121,7 +122,7 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "triggerTest.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "JumpTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "DoorTest.dat");
@@ -226,21 +227,14 @@ void CMainGame::Setup()
 
 void CMainGame::Update()
 {
-	if (g_pGameManager->GetNowScene() == SceneType::eEndingScene)
-	{
-		g_pGameManager->SetClipCursor(-15);
-		ShowCursor(true);
-	}
-
 	if (GetKeyState('1') & 0x8000)
 	{
 		g_pGameManager->SetGetOrb("Blue");
-		g_pGameManager->SetGetOrb("Green");
-		g_pGameManager->SetGetOrb("Red");
-		g_pGameManager->SetGetOrb("White");
-		g_pGameManager->SetGetOrb("Yellow");
-		g_pGameManager->SetGetOrb("Black");
-		g_pGameManager->CompleteOrb();
+		//g_pGameManager->SetGetOrb("Green");
+		//g_pGameManager->SetGetOrb("Red");
+		//g_pGameManager->SetGetOrb("White");
+		//g_pGameManager->SetGetOrb("Yellow");
+		//g_pGameManager->SetGetOrb("Black");
 		//cout << "in" <<endl;
 	}
 	if (GetKeyState('2') & 0x8000)
@@ -253,84 +247,85 @@ void CMainGame::Update()
 		g_pSoundManager->PlayBGM("f_middle");
 	}
 
+	g_pGameManager->CompleteOrb();
 	// >> 조건 확인 테스트
 	// >> on/off 상태 조건 // 텍스쳐 태깅
-		g_pTimeManager->Update();
-		g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
-	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
-	{
-		if (m_pCamera)
-			m_pCamera->Update();
 
-		if (m_pCharacter)
+	g_pTimeManager->Update();
+
+	g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
+
+	if (m_pCamera)
+		m_pCamera->Update();
+
+	if (m_pCharacter)
+	{
+		m_pCharacter->Update(m_pCamera->GetCameraDirection());
+		m_pCharacter->Update(g_pTimeManager->GetElapsedTime());
+		m_pDragon->DirectionSet(m_pCamera->GetCameraDirection());
+		m_pDragon->Update(m_pCharacter->GetPosition(), g_pTimeManager->GetElapsedTime());
+		//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
+		//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
+		/*for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
+			m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);*/
+		switch (m_pUI->GetPickColor())
 		{
-			m_pCharacter->Update(m_pCamera->GetCameraDirection());
-			m_pCharacter->Update(g_pTimeManager->GetElapsedTime());
-			m_pDragon->DirectionSet(m_pCamera->GetCameraDirection());
-			m_pDragon->Update(m_pCharacter->GetPosition(), g_pTimeManager->GetElapsedTime());
-			//m_pCharacter->Update(m_pCamera->GetCameraDirection(), m_pHeightMap);	// heightmap... change
-			//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[0]);
-			//for(int i =0; i < g_pObjectManager->GetVecIObject().size() ;++i)
-				//m_pCharacter->ColliderOtherObject(g_pObjectManager->GetVecIObject()[i]);
-			switch (m_pUI->GetPickColor())
-			{
-			case Pick::Red:
-				m_pCharacter->SetColor(RED);
-				m_pDragon->ChangeColor(RED);
-				m_pUI->SetPickColor();
-				break;
-			case Pick::Yellow:
-				m_pCharacter->SetColor(YELLOW);
-				m_pDragon->ChangeColor(YELLOW);
-				m_pUI->SetPickColor();
-				break;
-			case Pick::Green:
-				m_pCharacter->SetColor(GREEN);
-				m_pDragon->ChangeColor(GREEN);
-				m_pUI->SetPickColor();
-				break;
-			case Pick::Blue:
-				m_pCharacter->SetColor(BLUE);
-				m_pDragon->ChangeColor(BLUE);
-				m_pUI->SetPickColor();
-				break;
-			case Pick::Black:
-				m_pCharacter->SetColor(BLACK);
-				m_pDragon->ChangeColor(BLACK);
-				m_pUI->SetPickColor();
-				break;
-			case Pick::White:
-				m_pCharacter->SetColor(WHITE);
-				m_pDragon->ChangeColor(WHITE);
-				m_pUI->SetPickColor();
-				break;
-			default:
-				break;
-			}
-			// grab
-			if (m_pCharacter->GetGrab())
-				m_pText->SetisGrabstate(true);
-			else
-				m_pText->SetisGrabstate(false);
-			//if (m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime()) != -1)
-			//{
-			//	m_pText->SetisGrabstate(true);
-			//	//D3DXVECTOR3 v;
-			//	//v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->GetPosition() - m_pCharacter->GetPosition();
-			//	//v.y -= 0.5f;
-			//	////v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
-			//	////v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
-			//	////v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
-			//	//D3DXVec3Normalize(&v, &v);
-			//	//g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->SetPusingForce(v);
-			//}
-			//else
-			//{
-			//	m_pText->SetisGrabstate(false);
-			//}
-			// Ray y check
-			/*m_pCharacter->UpdateRayYCheck(*m_pMeshTile);*/
+		case Pick::Red:
+			m_pCharacter->SetColor(RED);
+			m_pDragon->ChangeColor(RED);
+			m_pUI->SetPickColor();
+			break;
+		case Pick::Yellow:
+			m_pCharacter->SetColor(YELLOW);
+			m_pDragon->ChangeColor(YELLOW);
+			m_pUI->SetPickColor();
+			break;
+		case Pick::Green:
+			m_pCharacter->SetColor(GREEN);
+			m_pDragon->ChangeColor(GREEN);
+			m_pUI->SetPickColor();
+			break;
+		case Pick::Blue:
+			m_pCharacter->SetColor(BLUE);
+			m_pDragon->ChangeColor(BLUE);
+			m_pUI->SetPickColor();
+			break;
+		case Pick::Black:
+			m_pCharacter->SetColor(BLACK);
+			m_pDragon->ChangeColor(BLACK);
+			m_pUI->SetPickColor();
+			break;
+		case Pick::White:
+			m_pCharacter->SetColor(WHITE);
+			m_pDragon->ChangeColor(WHITE);
+			m_pUI->SetPickColor();
+			break;
+		default:
+			break;
 		}
+		// grab
+		if (m_pCharacter->GetGrab())
+			m_pText->SetisGrabstate(true);
+		else
+			m_pText->SetisGrabstate(false);
+		//if (m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime()) != -1)
+		//{
+		//	m_pText->SetisGrabstate(true);
+		//	//D3DXVECTOR3 v;
+		//	//v = g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->GetPosition() - m_pCharacter->GetPosition();
+		//	//v.y -= 0.5f;
+		//	////v.x = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().x - m_pCharacter->GetPosition().x;
+		//	////v.y = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().y - m_pCharacter->GetPosition().y - 0.5f;
+		//	////v.z = g_pObjectManager->GetVecObject()[m_pCharacter->Update(g_pObjectManager->GetVecObject())]->GetPosition().z - m_pCharacter->GetPosition().z;
+		//	//D3DXVec3Normalize(&v, &v);
+		//	//g_pObjectManager->GetVecPObejct()[m_pCharacter->Update(g_pObjectManager->GetVecPObejct(), g_pTimeManager->GetElapsedTime())]->SetPusingForce(v);
+		//}
+		//else
+		//{
+		//	m_pText->SetisGrabstate(false);
+		//}
+		// Ray y check
+		/*m_pCharacter->UpdateRayYCheck(*m_pMeshTile);*/
 	}
 
 	 //if (g_pGameManager->GetGridMapMode())
@@ -386,11 +381,7 @@ void CMainGame::Update()
 	//if (m_pGimmick_RotationBoard)
 	//	m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
 	
-	//if (m_pChanger)
-	//	m_pChanger->Update();
-
-	/*if (m_pMovingCube)
-		m_pMovingCube->Update();*/
+	
 
 	//for(int i =0 ; i < m_pMeshTile.size(); ++i)
 	//if (m_pMeshTile[i])
@@ -415,14 +406,7 @@ void CMainGame::Update()
 	// 	m_pGimmick_Switch->Update();
 	//// 
 	//// 
-	// if (COBB::IsCollision(m_pMovingCube->GetOBB(), m_pGimmick_Switch->GetOBB()) == true)
-	// {
-	//	 cout << 1 << endl;
-	// }
-	// else
-	// {
-	//	 cout << 2 << endl;
-	// }
+	 
 
 	//if (m_pGimmick_BreakableWall[0])
 	//	m_pGimmick_BreakableWall[0]->Update();
@@ -448,6 +432,8 @@ void CMainGame::Render()
 	//if (m_pSkydome)
 	//	m_pSkydome->Render(m_pCamera->GetCameraEye());
 
+	
+
 	if (g_pGameManager->GetNowScene() == SceneType::eMainScene)
 	{
 		if (m_pScene)
@@ -458,6 +444,9 @@ void CMainGame::Render()
 	{
 		if (m_pScene)
 			m_pScene->Render_Ending();
+		g_pGameManager->SetClipCursor(-15);
+		ShowCursor(true);
+		g_pGameManager->InitializationOrb();
 	}
 
 	if (m_pGrid)

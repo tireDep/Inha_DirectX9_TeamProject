@@ -30,5 +30,6 @@ public:
 	//캐릭터와충돌
 	void SetBool(bool set) { player = set; }
 	bool GetBool() { return render; }
+	D3DXVECTOR3 SendPosition() { return D3DXVECTOR3(); }
 };
 

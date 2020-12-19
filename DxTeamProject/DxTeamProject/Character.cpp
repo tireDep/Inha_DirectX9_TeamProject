@@ -28,6 +28,7 @@ CCharacter::CCharacter()
 	, m_fSpeed(0.0f)
 	, m_fRotation(0.0f)
 	, m_fGrabRotation(0.0f)
+	, m_saveZonePosition(0,0,0)
 	/// KT Reset
 	//, Reset(false)
 	// , m_pOBB(NULL)
@@ -296,8 +297,15 @@ void CCharacter::ColliderObject()
 				continue;
 			}
 			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
+			{
+				if (m_isCollidedTile)
+					continue;
+			}
+			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eTrigger)
+			{
+				m_saveZonePosition = g_pObjectManager->GetVecIObject()[i]->SendPosition();
 				continue;
-
+			}
 			//if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
 			//{
 			//	BOOL hit = false;
@@ -357,7 +365,7 @@ void CCharacter::ColliderObject()
 void CCharacter::Reset()
 {
 	// Need To Modify... SavePosition;
-	m_vPosition = D3DXVECTOR3(0, 0, 0);
+	m_vPosition = D3DXVECTOR3(m_saveZonePosition.x, m_saveZonePosition.y - 0.5f, m_saveZonePosition.z);
 
 	m_vDirection = D3DXVECTOR3(0, 0, 1);
 	D3DXMatrixIdentity(&m_matWorld);
@@ -608,7 +616,6 @@ void CCharacter::Update(float duration)
 			m_vPosition += (m_vDirection * m_fSpeed * duration);
 		}
 		
-
 		if (m_fRadianJump >= D3DXToRadian(180.0f))				// Low Spot	
 		{
 			if (m_Character->CheckAnimationEnd())
@@ -639,16 +646,6 @@ void CCharacter::Update(float duration)
 		}
 	}
 
-	CCharacter::ColliderObject();
-	if (m_isCollided)
-	{
-		m_vPosition = prePos;
-	}
-	else
-	{
-		prePos = m_vPosition;
-	}
-
 	if (m_isFallAni || !m_isJump)
 	{
 		// >> 점프 중이 아닐 때 레이 판정(낙하상태 포함)
@@ -675,25 +672,34 @@ void CCharacter::Update(float duration)
 				}
 			}
 		}
-
 		if (m_fHeightTile != 0)
 		{
+			if (m_vPosition.y > m_fHeightTile)
+				m_isCollidedTile = true;
+			else
+				m_isCollidedTile = false;
 			m_vPosition.y = m_fHeightTile;
 			m_fHeightTile = 0.0f;
 		}
 	}
+
+	CCharacter::ColliderObject();
+	if (m_isCollided)
+	{
+		m_vPosition = prePos;
+	}
+	else
+	{
+		prePos = m_vPosition;
+	}
+
+
 
 	if (m_Character)
 	{
 		m_Character->Update(duration);
 		m_Character->SetTransform(&m_matWorld);
 	}
-
-	/// KT Reset
-	//if (Reset == true)
-	//{
-	//	m_vPosition = D3DXVECTOR3(0, 0, 0);
-	//}
 }
 
 void CCharacter::DoRotation(const float& radian)
@@ -711,65 +717,65 @@ void CCharacter::DoRotation(const float& radian)
 
 void CCharacter::DoMove(const float& velocity)
 {
-	static D3DXVECTOR3 m_position = m_vPosition;
-	//D3DXVECTOR3 m_position = m_vPosition;
-	CCharacter::ColliderObject();
-	//m_vPosition.y = m_fHeightTile;
-	//m_fHeightTile = 0.0f;
-	if (m_isCollided)
-	{
-		m_vPosition = m_position;
-		//if (m_isCollidedTile)
-		//{
-		//	m_vPosition.y = m_fHeightTile;
-		//	m_fHeightTile = 0.0f;
-		//}
-		//if (m_isCollidedTile)
-		//{
-		//	//m_vPosition.y += 0.005f;
-		//	D3DXVec3Normalize(&m_vContactNormal, &m_vContactNormal);
-		//	m_vPosition += m_vContactNormal * m_fPenetration;
- 		//	//m_vPosition.x += m_vContactNormal.x * m_fPenetration;
-		//	//m_vPosition.y += m_vContactNormal.y * m_fPenetration;
-		//	//m_vPosition.z += m_vContactNormal.z * m_fPenetration;
-		//	//cout << "m_vContactNormal : " << m_vContactNormal.x << ' ' << m_vContactNormal.y << ' ' << m_vContactNormal.z << endl;
-		//	//cout << m_fPenetration << endl;
-		//	m_isCollidedTile = false;
-		//}
-	}
-	else
-	{
-		m_position = m_vPosition;
-	}
-	//cout << "m_vDirection : " << m_vDirection.x << ' ' << m_vDirection.y << ' ' << m_vDirection.z << endl;
-	//m_vPosition.y = m_fHeightTile;
-	//m_fHeightTile = 0.0f;
-	m_vPosition = m_vPosition + (m_vDirection * velocity);
-	//if (m_vPosition.y >= 0)
-	//	m_vPosition.y -= 0.005f;
+	//static D3DXVECTOR3 m_position = m_vPosition;
+	////D3DXVECTOR3 m_position = m_vPosition;
+	//CCharacter::ColliderObject();
+	////m_vPosition.y = m_fHeightTile;
+	////m_fHeightTile = 0.0f;
+	//if (m_isCollided)
+	//{
+	//	m_vPosition = m_position;
+	//	//if (m_isCollidedTile)
+	//	//{
+	//	//	m_vPosition.y = m_fHeightTile;
+	//	//	m_fHeightTile = 0.0f;
+	//	//}
+	//	//if (m_isCollidedTile)
+	//	//{
+	//	//	//m_vPosition.y += 0.005f;
+	//	//	D3DXVec3Normalize(&m_vContactNormal, &m_vContactNormal);
+	//	//	m_vPosition += m_vContactNormal * m_fPenetration;
+ //		//	//m_vPosition.x += m_vContactNormal.x * m_fPenetration;
+	//	//	//m_vPosition.y += m_vContactNormal.y * m_fPenetration;
+	//	//	//m_vPosition.z += m_vContactNormal.z * m_fPenetration;
+	//	//	//cout << "m_vContactNormal : " << m_vContactNormal.x << ' ' << m_vContactNormal.y << ' ' << m_vContactNormal.z << endl;
+	//	//	//cout << m_fPenetration << endl;
+	//	//	m_isCollidedTile = false;
+	//	//}
+	//}
 	//else
-	//	m_vPosition.y = 0;
-	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
-	{
-		if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
-		{
-			BOOL hit = false;
-			DWORD FaceIndex;
-			float u, v, dist;
-			D3DXVECTOR3 rayOrigin = m_Ray.GetOrigin();
-			D3DXMATRIXA16 matInverse;
-			D3DXMatrixInverse(&matInverse, NULL, &g_pObjectManager->GetVecIObject()[i]->GetOBB()->GetOBBWorldMatrix());
-			D3DXVec3TransformCoord(&rayOrigin, &rayOrigin, &matInverse);
-			D3DXIntersect(g_pObjectManager->GetVecIObject()[i]->GetMesh(), &rayOrigin, &m_Ray.GetDirection(), &hit, &FaceIndex, &u, &v, &dist, NULL, NULL);
-			if (hit)
-			{
-				if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
-					m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
-			}
-		}
-	}
-	m_vPosition.y = m_fHeightTile;
-	m_fHeightTile = 0.0f;
+	//{
+	//	m_position = m_vPosition;
+	//}
+	////cout << "m_vDirection : " << m_vDirection.x << ' ' << m_vDirection.y << ' ' << m_vDirection.z << endl;
+	////m_vPosition.y = m_fHeightTile;
+	////m_fHeightTile = 0.0f;
+	//m_vPosition = m_vPosition + (m_vDirection * velocity);
+	////if (m_vPosition.y >= 0)
+	////	m_vPosition.y -= 0.005f;
+	////else
+	////	m_vPosition.y = 0;
+	//for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
+	//{
+	//	if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
+	//	{
+	//		BOOL hit = false;
+	//		DWORD FaceIndex;
+	//		float u, v, dist;
+	//		D3DXVECTOR3 rayOrigin = m_Ray.GetOrigin();
+	//		D3DXMATRIXA16 matInverse;
+	//		D3DXMatrixInverse(&matInverse, NULL, &g_pObjectManager->GetVecIObject()[i]->GetOBB()->GetOBBWorldMatrix());
+	//		D3DXVec3TransformCoord(&rayOrigin, &rayOrigin, &matInverse);
+	//		D3DXIntersect(g_pObjectManager->GetVecIObject()[i]->GetMesh(), &rayOrigin, &m_Ray.GetDirection(), &hit, &FaceIndex, &u, &v, &dist, NULL, NULL);
+	//		if (hit)
+	//		{
+	//			if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
+	//				m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+	//		}
+	//	}
+	//}
+	//m_vPosition.y = m_fHeightTile;
+	//m_fHeightTile = 0.0f;
 }
 
 
@@ -823,10 +829,16 @@ void CCharacter::ColliderOtherObject(IObject * background)
 	{
 		m_isCollided = true;
 		background->SetBool(true);
+		
+		
+
+		//m_saveZonePosition = background->GetTranslation();
 	}
 	else
 	{
 		m_isCollided = false;
 		background->SetBool(false);
 	}
+
+	
 }
