@@ -27,7 +27,7 @@ void CCamera::Setup(D3DXVECTOR3* pvTarget)
 
 void CCamera::Update()
 {
-	Update_MouseMove();
+//	Update_MouseMove();
 
 	float move = 2.0f;
 
@@ -60,6 +60,8 @@ void CCamera::Update()
 	}
 	else
 	{
+		Update_MouseMove();
+
 		D3DXMatrixRotationX(&matRX, m_vCamRotAngle.x);
 		D3DXMatrixRotationY(&matRY, m_vCamRotAngle.y);
 
