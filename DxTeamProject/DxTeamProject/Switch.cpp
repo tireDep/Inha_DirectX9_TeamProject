@@ -70,7 +70,6 @@ void CSwitch::Setup()
 	m_pOBB->Setup(*this);
 	g_pObjectManager->AddOBBbox(m_pOBB);
 	g_pObjectManager->AddGimmick(this);
-
 }
 
 void CSwitch::Setup(ST_MapData setData)

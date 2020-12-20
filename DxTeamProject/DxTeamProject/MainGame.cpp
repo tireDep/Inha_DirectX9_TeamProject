@@ -122,21 +122,16 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTile.dat");
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_TileBoxSphere.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "doorTest2.dat");
 #else
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map4.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map1.dat");
 #endif // DEBUG
 	m_pScene = new CScene;
 	m_pScene->Setup();
