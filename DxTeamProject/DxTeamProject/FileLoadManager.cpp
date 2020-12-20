@@ -6,6 +6,14 @@
 #define StrFilePath(path, folder, file) { path = string(folder) + "/" + string(file); }
 #define ErrMessageBox(msg, type) { MessageBoxA(g_hWnd, string(msg).c_str(), string(type).c_str(), MB_OK); }
 
+CFileLoadManager::CFileLoadManager() :
+	m_limitX(60),
+	m_nowX(0),
+	m_nowZ(0),
+	m_addNum(30)
+{
+}
+
 LPD3DXEFFECT CFileLoadManager::LoadShader(const string fileName)
 {
 	LPD3DXEFFECT ret = NULL;
@@ -112,13 +120,13 @@ void CFileLoadManager::LoadData(string path)
 			else if (strstr(readData.c_str(), "# Translate"))
 			{
 				ReadAndCutSlashR(file, readData);
-				mapData.vTranslate.x = atof(readData.c_str());
+				mapData.vTranslate.x = atof(readData.c_str()) + m_nowX;
 
 				ReadAndCutSlashR(file, readData);
 				mapData.vTranslate.y = atof(readData.c_str());
 
 				ReadAndCutSlashR(file, readData);
-				mapData.vTranslate.z = atof(readData.c_str());
+				mapData.vTranslate.z = atof(readData.c_str()) + m_nowZ;
 			}
 
 			else if (strstr(readData.c_str(), "# Color") && strstr(readData.c_str(), "Tag") == NULL)
@@ -179,6 +187,18 @@ void CFileLoadManager::LoadData(string path)
 				g_pObjectManager->AddMap();
 		}
 	}
+
+	// >> ´ÙÀ½ ¸Ê ·Îµå ÁÂÇ¥ ¼³Á¤
+	if (m_nowX >= m_limitX)
+	{
+		m_nowX = 0;
+		m_nowZ -= m_addNum;
+	}
+	else
+	{
+		m_nowX += m_addNum;
+	}
+	// << ´ÙÀ½ ¸Ê ·Îµå ÁÂÇ¥ ¼³Á¤
 
 	file.close();
 }

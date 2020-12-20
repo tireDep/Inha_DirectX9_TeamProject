@@ -13,7 +13,6 @@ private:
 	map<string, LPD3DXEFFECT> m_mapShader;
 	map<string, ST_Sprite> m_mapSprite;
 
-	CFileLoadManager() { }
 	LPD3DXEFFECT LoadShader(const string fileName);
 
 	void LoadData(string path);
@@ -21,6 +20,13 @@ private:
 	void ReadGimmickData(ifstream& file, string& readData, ST_MapData& mapData);
 
 	void ResetLoadMapData(ST_MapData& mapData);
+	CFileLoadManager();
+
+	int m_limitX;
+	int m_nowX;
+	int m_nowZ;
+	int m_addNum;
+
 public:
 	static CFileLoadManager* GetInstance();
 	virtual ~CFileLoadManager() { }
