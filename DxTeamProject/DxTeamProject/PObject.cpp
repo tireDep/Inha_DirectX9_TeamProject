@@ -130,74 +130,77 @@ void PObject::Update(float duration)
 
 void PObject::SetPusingForce(D3DXVECTOR3 forcedirection)
 {
-	D3DXVECTOR3 forcePosition = forcedirection * m_fBoundingSphere;
-	m_vForceLocation = forcePosition;
+	//D3DXVECTOR3 forcePosition = forcedirection * m_fBoundingSphere;
+	//m_vForceLocation = forcePosition;
 	m_vForceVector = forcedirection * 2000;
 	SetForceApplied(true);
 }
 
 bool PObject::hasIntersected(PObject * otherobject)
 {
-	if (this == otherobject)
-		return false;
+	return false;
+	//if (this == otherobject)
+	//	return false;
 
-	D3DXVECTOR3 direction = this->GetPosition() - otherobject->GetPosition();
-	float distanceSq = direction.x * direction.x + direction.y * direction.y + direction.z * direction.z;
+	//D3DXVECTOR3 direction = this->GetPosition() - otherobject->GetPosition();
+	//float distanceSq = direction.x * direction.x + direction.y * direction.y + direction.z * direction.z;
 
-	if (((this->GetBoundingSphere() + otherobject->GetBoundingSphere()) * (this->GetBoundingSphere() + otherobject->GetBoundingSphere())) < distanceSq)
-		return false;
-	else
-		return true;
+	//if (((this->GetBoundingSphere() + otherobject->GetBoundingSphere()) * (this->GetBoundingSphere() + otherobject->GetBoundingSphere())) < distanceSq)
+	//	return false;
+	//else
+	//	return true;
 }
 
 void PObject::Collision3D(PObject * otherobject)
 {
-	static D3DXVECTOR3 direction;
-	static D3DXVECTOR3 warpVector;
-	static const float fix = 1.1f;
-	static float distance;
-	static float overlapInterval;
+	return;
 
-	if (hasIntersected(otherobject))
-	{
-		direction = this->GetPosition() - otherobject->GetPosition();
-		distance = sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
-		overlapInterval = 2 * otherobject->GetBoundingSphere() - distance;
-		warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetBoundingSphere() - overlapInterval));
+	//static D3DXVECTOR3 direction;
+	//static D3DXVECTOR3 warpVector;
+	//static const float fix = 1.1f;
+	//static float distance;
+	//static float overlapInterval;
 
-		if (D3DXVec3LengthSq(&otherobject->GetVelocity()) >= D3DXVec3LengthSq(&this->GetVelocity()))
-		{
-			otherobject->Collision3D(this);
-			return;
-		}
-		else
-		{
-			D3DXVECTOR3 p;
-			p = this->GetPosition() + warpVector;
-			this->SetPosition(p);
-			D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-		}
+	//if (hasIntersected(otherobject))
+	//{
+	//	direction = this->GetPosition() - otherobject->GetPosition();
+	//	distance = sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
+	//	overlapInterval = 2 * otherobject->GetBoundingSphere() - distance;
+	//	warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetBoundingSphere() - overlapInterval));
 
-		float v1, v2;
-		D3DXVec3Normalize(&direction, &direction);
-		v1 = D3DXVec3Dot(&this->GetVelocity(), &direction);
-		v2 = D3DXVec3Dot(&otherobject->GetVelocity(), &direction);
+	//	if (D3DXVec3LengthSq(&otherobject->GetVelocity()) >= D3DXVec3LengthSq(&this->GetVelocity()))
+	//	{
+	//		otherobject->Collision3D(this);
+	//		return;
+	//	}
+	//	else
+	//	{
+	//		D3DXVECTOR3 p;
+	//		p = this->GetPosition() + warpVector;
+	//		this->SetPosition(p);
+	//		D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	//	}
 
-		float elasticity = (this->GetElasticity() + otherobject->GetElasticity()) / 2;
+	//	float v1, v2;
+	//	D3DXVec3Normalize(&direction, &direction);
+	//	v1 = D3DXVec3Dot(&this->GetVelocity(), &direction);
+	//	v2 = D3DXVec3Dot(&otherobject->GetVelocity(), &direction);
 
-		float finalv1, finalv2;
-		finalv1 = (((this->GetMass() - (elasticity * otherobject->GetMass()))*v1) + ((1 + elasticity)*otherobject->GetMass()*v2))
-			/ (this->GetMass() + otherobject->GetMass());
-		finalv2 = (((otherobject->GetMass() - (elasticity * this->GetMass()))*v2) + ((1 + elasticity)*this->GetMass()*v1))
-			/ (this->GetMass() + otherobject->GetMass());
+	//	float elasticity = (this->GetElasticity() + otherobject->GetElasticity()) / 2;
 
-		D3DXVECTOR3 collisionV1, collisionV2;
-		collisionV1 = this->GetVelocity() + (finalv1 - v1) * direction;
-		collisionV2 = otherobject->GetVelocity() + (finalv2 - v2) * direction;
+	//	float finalv1, finalv2;
+	//	finalv1 = (((this->GetMass() - (elasticity * otherobject->GetMass()))*v1) + ((1 + elasticity)*otherobject->GetMass()*v2))
+	//		/ (this->GetMass() + otherobject->GetMass());
+	//	finalv2 = (((otherobject->GetMass() - (elasticity * this->GetMass()))*v2) + ((1 + elasticity)*this->GetMass()*v1))
+	//		/ (this->GetMass() + otherobject->GetMass());
 
-		this->SetVelocity(collisionV1);
-		otherobject->SetVelocity(collisionV2);
-	}
+	//	D3DXVECTOR3 collisionV1, collisionV2;
+	//	collisionV1 = this->GetVelocity() + (finalv1 - v1) * direction;
+	//	collisionV2 = otherobject->GetVelocity() + (finalv2 - v2) * direction;
+
+	//	this->SetVelocity(collisionV1);
+	//	otherobject->SetVelocity(collisionV2);
+	//}
 }
 
 void PObject::UpdateLand(float duration)

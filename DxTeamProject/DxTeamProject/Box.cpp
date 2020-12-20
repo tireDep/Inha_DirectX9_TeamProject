@@ -23,9 +23,9 @@ void CBox::Setup()
 {
 	D3DXCreateBox(g_pD3DDevice, m_fWidth, m_fHeight, m_fDepth, &m_pMesh, NULL);
 
-	float maxLength = max(m_fWidth, m_fHeight);
-	maxLength = max(maxLength, m_fDepth);
-	m_fBoundingSphere = maxLength / 2.0f;
+	//float maxLength = max(m_fWidth, m_fHeight);
+	//maxLength = max(maxLength, m_fDepth);
+	//m_fBoundingSphere = maxLength / 2.0f;
 
 	// modify? 12.0f -> 48.0f?
 	//m_vInverseRotationInertia.x = 12.0f / (GetMass() * (m_fHeight * m_fHeight + m_fDepth  * m_fDepth));

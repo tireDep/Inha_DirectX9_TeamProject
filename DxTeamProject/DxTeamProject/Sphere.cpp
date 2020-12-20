@@ -19,8 +19,16 @@ CSphere::~CSphere()
 
 void CSphere::Setup()
 {
-	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 10, 10, &m_pMesh, NULL);
+	D3DXCreateSphere(g_pD3DDevice, m_fRadius, 20, 10, &m_pMesh, NULL);
 
+	//D3DXVECTOR3* pVertices;
+	//this->GetMesh()->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+	//DWORD a = this->GetMesh()->GetNumVertices();
+	//D3DXVECTOR3 m_vMin, m_vMax;
+	//D3DXComputeBoundingBox(pVertices, this->GetMesh()->GetNumVertices(), this->GetMesh()->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+	//float m_fAxisHalfLen0 = fabsf(m_vMax.x - m_vMin.x) / 2.0f;
+	//float m_fAxisHalfLen1 = fabsf(m_vMax.y - m_vMin.y) / 2.0f;
+	//float m_fAxisHalfLen2 = fabsf(m_vMax.z - m_vMin.z) / 2.0f;
 	//m_vInverseRotationInertia.x = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
 	//m_vInverseRotationInertia.y = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
 	//m_vInverseRotationInertia.z = 5.0f / (2 * GetMass() * m_fRadius * m_fRadius);
@@ -101,12 +109,9 @@ bool CSphere::hasIntersected(CSphere * otherSphere)
 {
 	if (this == otherSphere)
 		return false;
-
 	D3DXVECTOR3 direction = this->GetPosition() - otherSphere->GetPosition();
-
-	if ((this->GetBoundingSphere() + otherSphere->GetBoundingSphere()) * (this->GetBoundingSphere() + otherSphere->GetBoundingSphere()) < D3DXVec3LengthSq(&direction))
+	if ((this->GetRadius() + otherSphere->GetRadius()) * (this->GetRadius() + otherSphere->GetRadius()) < D3DXVec3LengthSq(&direction))
 		return false;
-
 	return true;
 }
 
@@ -150,23 +155,51 @@ bool CSphere::hasIntersected(CBox * otherBox)
 
 bool CSphere::hasIntersected(CCylinder * otherCylinder)
 {
-	return false;
-}
+	D3DXMATRIXA16 inverseBoxMatrix;
+	D3DXMatrixInverse(&inverseBoxMatrix, NULL, &otherCylinder->GetmatWorld());
 
-//bool CSphere::hasIntersected(CGimmick * otherIObject)
-//{
-//	return false;
-//}
+	D3DXVECTOR3 SphereToCylinderCenter;
+	D3DXVec3TransformCoord(&SphereToCylinderCenter, &m_vPosition, &inverseBoxMatrix);
+
+	if (fabsf(SphereToCylinderCenter.x) - GetRadius() > otherCylinder->GetRadius() / 2.0f ||
+		fabsf(SphereToCylinderCenter.y) - GetRadius() > otherCylinder->GetHeight() / 2.0f ||
+		fabsf(SphereToCylinderCenter.z) - GetRadius() > otherCylinder->GetRadius() / 2.0f)
+		return false;
+
+	D3DXVECTOR3 closestPt(0, 0, 0);
+	float dist;
+
+	dist = SphereToCylinderCenter.x;
+	if (dist >  otherCylinder->GetRadius() / 2.0f) dist = otherCylinder->GetRadius() / 2.0f;
+	if (dist < -otherCylinder->GetRadius() / 2.0f) dist = -otherCylinder->GetRadius() / 2.0f;
+	closestPt.x = dist;
+
+	dist = SphereToCylinderCenter.y;
+	if (dist >  otherCylinder->GetHeight() / 2.0f) dist =  otherCylinder->GetHeight() / 2.0f;
+	if (dist < -otherCylinder->GetHeight() / 2.0f) dist = -otherCylinder->GetHeight() / 2.0f;
+	closestPt.y = dist;
+
+	dist = SphereToCylinderCenter.z;
+	if (dist >  otherCylinder->GetRadius() / 2.0f) dist = otherCylinder->GetRadius() / 2.0f;
+	if (dist < -otherCylinder->GetRadius() / 2.0f) dist = -otherCylinder->GetRadius() / 2.0f;
+	closestPt.z = dist;
+
+	D3DXVECTOR3 tmp = closestPt - SphereToCylinderCenter;
+	dist = D3DXVec3LengthSq(&tmp);
+	if (dist > GetRadius() * GetRadius())
+		return false;
+	return true;
+}
 
 bool CSphere::hasIntersected(IObject * otherIObject)
 {
 	D3DXMATRIXA16 inverseBoxMatrix;
-	D3DXMatrixInverse(&inverseBoxMatrix, NULL, &otherIObject->GetOBB()->GetOBBWorldMatrix());
+	//D3DXMatrixInverse(&inverseBoxMatrix, NULL, &otherIObject->GetOBB()->GetOBBWorldMatrix());
 	 		
-	//D3DXMatrixIdentity(&inverseBoxMatrix);
-	//inverseBoxMatrix._41 = -otherIObject->GetmatWorld()._41;
-	//inverseBoxMatrix._42 = -otherIObject->GetmatWorld()._42;
-	//inverseBoxMatrix._43 = -otherIObject->GetmatWorld()._43;
+	D3DXMatrixIdentity(&inverseBoxMatrix);
+	inverseBoxMatrix._41 = -otherIObject->GetmatWorld()._41;
+	inverseBoxMatrix._42 = -otherIObject->GetmatWorld()._42;
+	inverseBoxMatrix._43 = -otherIObject->GetmatWorld()._43;
 
 	D3DXVECTOR3 SphereToBoxCenter;
 	D3DXVec3TransformCoord(&SphereToBoxCenter, &m_vPosition, &inverseBoxMatrix);
