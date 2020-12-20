@@ -144,13 +144,9 @@ bool CBox::hasIntersected(CCylinder * otherCylinder)
 bool CBox::hasIntersected(IObject * otherIObject)
 {
 	if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
-	{
 		return true;
-	}
 	else
-	{
 		return false;
-	}
 	//if (this->m_pOBB->IsCollision(otherIObject->GetOBB()))
 	//{
 	//	D3DXVECTOR3 v;
