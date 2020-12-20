@@ -126,9 +126,9 @@ void CMainGame::Setup()
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTile.dat");
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_TileBoxSphere.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_TileBoxSphere.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "DoorTest.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");

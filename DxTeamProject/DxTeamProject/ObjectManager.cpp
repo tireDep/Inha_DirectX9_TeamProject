@@ -278,22 +278,10 @@ void CObjectManager::Collide(float duration)
 				default:
 					//CollisionSphereToIObject(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
 					CollisionBoxToTile(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
+					m_vecIObject[IObjectIndex]->pSphereBool(false);
 					break;
 				}
 				//return;
-			}
-			else
-			{
-				m_vecIObject[IObjectIndex]->pSphereBool(false);
-				//if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
-				//{
-				//	ST_EVENT msg;
-				//	msg.eventType = EventType::eConditionChange;
-				//	msg.isCondition = true; // ¿­¸°´Ù
-				//	msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
-
-				//	g_pEventManager->CheckEvent(msg);
-				//}
 			}
 		}
 	}
@@ -360,19 +348,10 @@ void CObjectManager::Collide(float duration)
 				default:
 					//CollisionIObject(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
 					CollisionBoxToTile(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
+					m_vecIObject[IObjectIndex]->pBoxBool(false);
 					break;
 				}
 				//return;
-			}
-			else
-			{
-				m_vecIObject[IObjectIndex]->pBoxBool(false);
-				//ST_EVENT msg;
-				//msg.eventType = EventType::eConditionChange;
-				//msg.isCondition = true; //´ÝÈù´Ù
-				//msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
-
-				//g_pEventManager->CheckEvent(msg);
 			}
 		}
 	}
@@ -431,21 +410,10 @@ void CObjectManager::Collide(float duration)
 					break;
 				default:
 					CollisionBoxToTile(m_vecCylinder[CylinderIndex], m_vecIObject[IObjectIndex], duration);
+					m_vecIObject[IObjectIndex]->pCylinderBool(false);
 					break;
 				}
 				//return;
-			}
-			else
-			{
-				m_vecIObject[IObjectIndex]->pCylinderBool(false);
-				//if (m_vecIObject[IObjectIndex]->GetConditionName() != "")
-				//{
-				//	ST_EVENT msg;
-				//	msg.eventType = EventType::eConditionChange;
-				//	msg.isCondition = true; // ¿­¸°´Ù
-				//	msg.conditionName = m_vecIObject[IObjectIndex]->GetObjectName();
-				//	g_pEventManager->CheckEvent(msg);
-				//}
 			}
 		}
 	}
