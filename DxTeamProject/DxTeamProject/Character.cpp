@@ -298,7 +298,7 @@ void CCharacter::ColliderObject()
 			}
 			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
 			{
-				if (m_isCollidedTile)
+//				if (m_isCollidedTile)
 					continue;
 			}
 			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eTrigger)
@@ -668,17 +668,26 @@ void CCharacter::Update(float duration)
 				D3DXIntersect(g_pObjectManager->GetVecIObject()[i]->GetMesh(), &rayOrigin, &m_Ray.GetDirection(), &hit, &FaceIndex, &u, &v, &dist, NULL, NULL);
 				if (hit)
 				{
+					//if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
+					//	m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+					float a = g_pObjectManager->GetVecIObject()[i]->GetmatWorld()._42;
+					float b = rayOrigin.y;
 					if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
+					{
 						m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+						//m_fHeightTile += g_pObjectManager->GetVecIObject()[i]->GetmatWorld()._42;
+						//m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y + g_pObjectManager->GetVecIObject()[i]->GetmatWorld()._42;
+					}
+						
 				}
 			}
 		}
 		if (m_fHeightTile != 0)
 		{
-			if (m_vPosition.y > m_fHeightTile)
-				m_isCollidedTile = true;
-			else
-				m_isCollidedTile = false;
+			//if (m_vPosition.y > m_fHeightTile)
+			//	m_isCollidedTile = true;
+			//else
+			//	m_isCollidedTile = false;
 			m_vPosition.y = m_fHeightTile;
 			m_fHeightTile = 0.0f;
 		}

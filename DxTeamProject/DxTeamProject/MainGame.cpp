@@ -122,8 +122,7 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxAboveTile2.dat");
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "JumpTest.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxBridge.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTileLand.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
@@ -134,7 +133,8 @@ void CMainGame::Setup()
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "doorTest2.dat");
 #else
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map4.dat");
 #endif // DEBUG
 	m_pScene = new CScene;
 	m_pScene->Setup();

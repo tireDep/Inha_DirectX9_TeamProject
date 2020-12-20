@@ -242,7 +242,6 @@ void CObjectManager::Collide(float duration)
 			}
 		}
 	}
-
 	// Sphere To IObject
 	for (int SphereIndex = 0; SphereIndex < m_vecSphere.size(); SphereIndex++)
 	{
@@ -323,7 +322,6 @@ void CObjectManager::Collide(float duration)
 			default:
 				break;
 			}
-
 		}
 	}
 	// Box To IObject
@@ -431,7 +429,7 @@ void CObjectManager::Collide(float duration)
 					//}
 					break;
 				default:
-					CollisionIObject(m_vecCylinder[CylinderIndex], m_vecIObject[IObjectIndex], duration);
+					CollisionBoxToTile(m_vecCylinder[CylinderIndex], m_vecIObject[IObjectIndex], duration);
 					break;
 				}
 				//return;

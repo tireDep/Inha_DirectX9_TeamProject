@@ -47,8 +47,6 @@ private:
 	bool m_isThreadRun;
 	bool m_IsIn;
 
-
-
 	/// KT Reset
 	bool		  ResetCube;
 
