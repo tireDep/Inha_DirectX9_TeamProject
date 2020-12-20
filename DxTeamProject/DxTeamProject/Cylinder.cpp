@@ -18,10 +18,10 @@ void CCylinder::Setup()
 {
 	D3DXCreateCylinder(g_pD3DDevice, m_fRadius, m_fRadius, m_fHeight, 10, 10, &m_pMesh, NULL);
 
-	if (m_fRadius >= m_fHeight / 2.0f)
-		m_fBoundingSphere = m_fRadius;
-	else
-		m_fBoundingSphere = m_fHeight / 2.0f;
+	//if (m_fRadius >= m_fHeight / 2.0f)
+	//	m_fBoundingSphere = m_fRadius;
+	//else
+	//	m_fBoundingSphere = m_fHeight / 2.0f;
 
 	//m_vInverseRotationInertia.x = 12.0f / (GetMass() * (m_fHeight * m_fHeight + 3 * m_fRadius * m_fRadius));
 	//m_vInverseRotationInertia.y = 2.0f / (GetMass() * m_fRadius * m_fRadius);

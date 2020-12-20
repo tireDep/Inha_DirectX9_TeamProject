@@ -177,19 +177,19 @@ void CSwitch::Update(float duration)
 void CSwitch::pBoxBool(bool set)
 {
 	pBox = set;
-	ChangeConditionMsg(set);
+	//ChangeConditionMsg(set);
 }
 
 void CSwitch::pCylinderBool(bool set)
 {
 	pCylinder = set;
-	ChangeConditionMsg(set);
+	//ChangeConditionMsg(set);
 }
 
 void CSwitch::pSphereBool(bool set)
 {
 	pSphere = set;
-	ChangeConditionMsg(set);
+	//ChangeConditionMsg(set);
 }
 
 void CSwitch::SetBool(bool set)
@@ -240,11 +240,12 @@ void CSwitch::Render()
 			{
 			
 				m_pMesh->DrawSubset(i);
-
+				ChangeConditionMsg(false);
 
 			}
 			else
 			{				
+				ChangeConditionMsg(true);
 				m_pMesh->DrawSubset(0);
 			}
 		}
