@@ -13,6 +13,9 @@ CTile::~CTile()
 
 void CTile::Setup(const ST_MapData & mapData)
 {
+	if (mapData.strObjName == "")
+		return;
+
 	m_strObjName = mapData.strObjName;
 	m_strFolder = mapData.strFolderPath;
 	m_strXFile = mapData.strXFilePath;
@@ -27,7 +30,8 @@ void CTile::Setup(const ST_MapData & mapData)
 
 	ST_XFile* xfile = new ST_XFile;
 
-	g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
+	if (m_strXFile != "")
+		g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
 
 	if (m_strTxtFile != "")
 		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);

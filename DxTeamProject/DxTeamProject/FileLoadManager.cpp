@@ -12,9 +12,7 @@ CFileLoadManager::CFileLoadManager() :
 	m_nowZ(0),
 	m_addNum(30),
 	m_thread(NULL),
-	m_isThreadRun(0.0f),
-	m_IsIn(false),
-	m_strLoadFile("")
+	m_isThreadRun(0.0f)
 {
 	InitializeCriticalSection(&m_cs);
 }
@@ -332,30 +330,69 @@ void CFileLoadManager::ResetLoadMapData(ST_MapData & mapData)
 //	return result;
 //}
 
-void CFileLoadManager::ThreadFunc()
+void CFileLoadManager::ThreadFunc(string filePath)
 {
-	m_IsIn = false;
 	EnterCriticalSection(&m_cs);
 
-	LoadData(m_strLoadFile);
+	m_vecIsIn.push_back(false);
 
-	// CreateObject();
+	LoadData(filePath);
+
+	m_vecIsIn[m_vecIsIn.size() - 1] = true;
+
+	m_vecVecMapdata.push_back(m_vecMapdata);
+	CreateObject();
+	m_vecMapdata.clear();
 
 	LeaveCriticalSection(&m_cs);
-	m_IsIn = true;
 }
 
 void CFileLoadManager::CheckThread()
 {
-	if (m_IsIn)
+	if (m_vecIsIn[m_nowCnt] == true)
 	{
-		if (m_vecThread[0]->joinable()) 
-			m_vecThread[0]->join();
-
-		CreateObject();
-
-		m_isThreadRun = true;
+		if (m_vecThread[m_nowCnt]->joinable())
+		{
+			m_vecThread[m_nowCnt]->join();
+			// CreateObject();
+			m_nowCnt++;
+		}
 	}
+
+	if (m_nowCnt == m_threadCnt)
+	{
+		m_isThreadRun = true;
+		// >> todo : 위치변경
+		for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
+		{
+			g_pEventManager->AddListener(g_pObjectManager->GetVecObject()[i]);
+		}
+
+		// g_pGameManager->SetNowScene(SceneType::eGameScene);
+		g_pGameManager->SetNowScene(SceneType::eMainScene);
+	}
+
+	/*if (!check)
+	{
+		for (int i = 0; i < m_vecIsIn.size(); i++)
+		{
+			if (m_vecIsIn[i] == true && m_nowCnt == i)
+			{
+				if (m_vecThread[i]->joinable())
+				{
+					check = true;
+					cout << a++ << endl;
+					m_vecThread[i]->join();
+					CreateObject();
+					m_nowCnt++;
+					check = false;
+				}
+			}
+		}
+	}
+
+	if (m_nowCnt == m_threadCnt)
+		m_isThreadRun = true;*/
 }
 
 CFileLoadManager * CFileLoadManager::GetInstance()
@@ -366,11 +403,28 @@ CFileLoadManager * CFileLoadManager::GetInstance()
 
 CFileLoadManager::~CFileLoadManager()
 {
-	if (m_thread != NULL)
+	for (int i = 0; i < m_vecThread.size(); i++)
 	{
-		if (m_thread->joinable())
-			m_thread->join();
+		if (m_vecThread[i]->joinable())
+			m_vecThread[i]->join();
 	}
+
+	vector<thread*>::iterator it;
+	for (it = m_vecThread.begin(); it != m_vecThread.end();)
+	{
+		if (*it != NULL)
+		{
+			thread* temp = *it;
+			it = m_vecThread.erase(it);
+			SafeDelete(temp);
+		}
+	}
+
+	// if (m_thread != NULL)
+	// {
+	// 	if (m_thread->joinable())
+	// 		m_thread->join();
+	// }
 }
 
 bool CFileLoadManager::FileLoad_XFile(string szFolder, string szFile, ST_XFile* setXFile)
@@ -495,13 +549,18 @@ bool CFileLoadManager::FileLoad_MapData(string szFolder, string szFile)
 {
 	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
-	m_strLoadFile = filePath;
 
-	thread* tempTread = NULL;
-	m_vecThread.push_back(tempTread);
-	m_vecThread[0] = new thread(&CFileLoadManager::ThreadFunc, this);
+	//// >> 기존 버전
+	//LoadData(filePath);
+	//m_vecVecMapdata.push_back(m_vecMapdata);
+	//CreateObject();
+	//g_pGameManager->SetNowScene(SceneType::eGameScene);
+	//// << 기존 버전
 
-	// m_vecThread[0]->detach();
+	 thread* tempTread = NULL;
+	 m_vecThread.push_back(tempTread);
+	 m_vecThread[m_threadCnt] = new thread(&CFileLoadManager::ThreadFunc, this, filePath);
+	 m_threadCnt++;
 
 	// if (m_thread == NULL)
 	// {
@@ -551,8 +610,14 @@ void CFileLoadManager::Destroy()
 
 void CFileLoadManager::CreateObject()
 {
-	for (int i = 0; i < m_vecMapdata.size(); i++)
-		IObject::CreateObject(m_vecMapdata[i]);
+	m_mutex.lock();
 
-	m_vecMapdata.clear();
+	for (int j = 0; j < m_vecVecMapdata[m_nowCnt].size(); j++)
+		IObject::CreateObject(m_vecVecMapdata[m_nowCnt][j]);
+
+	// for (int i = 0; i < m_vecMapdata.size(); i++)
+		// IObject::CreateObject(m_vecMapdata[i]);
+	// m_vecMapdata.clear();
+
+	m_mutex.unlock();
 }

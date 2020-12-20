@@ -2,6 +2,7 @@
 #include <process.h>
 #include <thread>
 #include <Windows.h>
+#include <mutex>
 
 struct ST_XFile;
 struct ST_MapData;
@@ -32,15 +33,18 @@ private:
 
 	thread* m_thread;
 	CRITICAL_SECTION m_cs;
-	Synthesize(bool, m_isThreadRun, IsThreadRun);
-	Synthesize(bool, m_IsIn, Isin);
-	string m_strLoadFile;
+	mutex m_mutex;
 	vector<ST_MapData> m_vecMapdata;
+	vector<vector<ST_MapData>> m_vecVecMapdata;
+	vector<bool> m_vecIsIn;
+	int m_threadCnt = 0;
+	int m_nowCnt = 0;
+	Synthesize(bool, m_isThreadRun, IsThreadRun);
 
 	vector<thread *> m_vecThread;
 
 public:
-	void ThreadFunc();
+	void ThreadFunc(string filePath);
 	void CheckThread();
 	static CFileLoadManager* GetInstance();
 	virtual ~CFileLoadManager();

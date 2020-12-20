@@ -122,7 +122,7 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
-	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
+	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTile.dat");
@@ -130,17 +130,25 @@ void CMainGame::Setup()
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxBridge.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTileLand.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testBook.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "doorTest2.dat");
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map4.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
+	
+	// >> loading teset
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map4.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map5.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map7.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map4.dat");
+
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTile.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
 #else
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map4.dat");
@@ -208,11 +216,6 @@ void CMainGame::Setup()
 	g_pEventManager->AddListener(m_pDragon);
 	g_pEventManager->AddListener(m_pUI);
 
-	for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
-	{
-		g_pEventManager->AddListener(g_pObjectManager->GetVecObject()[i]);
-	}
-
 	// Ray y check
 
 	//for (int i = 0; i < 8; ++i)
@@ -238,6 +241,17 @@ void CMainGame::Setup()
 
 void CMainGame::Update()
 {
+	// if (g_pGameManager->GetNowScene() == SceneType::eLoading)
+	{
+		if (!g_pFileLoadManager->GetIsThreadRun())
+			g_pFileLoadManager->CheckThread();
+		//else
+		//{
+		//	// todo : 초기화 
+		//	g_pGameManager->SetNowScene(SceneType::eGameScene);
+		//}
+	}
+
 	if (GetKeyState('1') & 0x8000)
 	{
 		g_pGameManager->SetGetOrb("Blue");
@@ -257,15 +271,10 @@ void CMainGame::Update()
 		g_pSoundManager->PlayBGM("f_middle");
 	}
 
-	// >> 조건 확인 테스트
-	// >> on/off 상태 조건 // 텍스쳐 태깅
-
-	g_pTimeManager->Update();
-
-	g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
-
 	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{
+		g_pTimeManager->Update();
+		g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
 		if (m_pCamera)
 			m_pCamera->Update();
@@ -350,84 +359,85 @@ void CMainGame::Update()
 		 //	}
 		 //}
 
-	}
-	if (g_pGameManager->GetGridMapMode())
-	{
-		m_pPrevFrustum = m_pNowFrustum;
-		m_pNowFrustum.Update();
-
-		static D3DXVECTOR3 lastPlayerPos = D3DXVECTOR3(0, 0, 0);
-		D3DXVECTOR3 tempPos = m_pCharacter->GetPosition();
-		float posCheck = 0.5f;
-
-		// >> todo : 판정 변경
-		if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum) 
-		 || fabs(lastPlayerPos.x - tempPos.x) >= posCheck 
-		 || fabs(lastPlayerPos.y - tempPos.y) >= posCheck 
-		 || fabs(lastPlayerPos.z - tempPos.z) >= posCheck)
+		if (g_pGameManager->GetGridMapMode())
 		{
-			lastPlayerPos = tempPos;
-			g_pObjectManager->UpdateNewMap(&m_pNowFrustum);
+			m_pPrevFrustum = m_pNowFrustum;
+			m_pNowFrustum.Update();
+
+			static D3DXVECTOR3 lastPlayerPos = D3DXVECTOR3(0, 0, 0);
+			D3DXVECTOR3 tempPos = m_pCharacter->GetPosition();
+			float posCheck = 0.5f;
+
+			// >> todo : 판정 변경
+			if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum)
+				|| fabs(lastPlayerPos.x - tempPos.x) >= posCheck
+				|| fabs(lastPlayerPos.y - tempPos.y) >= posCheck
+				|| fabs(lastPlayerPos.z - tempPos.z) >= posCheck)
+			{
+				lastPlayerPos = tempPos;
+				g_pObjectManager->UpdateNewMap(&m_pNowFrustum);
+			}
 		}
+
+		RECT rc;
+		GetClientRect(g_hWnd, &rc);
+		CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
+		g_pObjectManager->Update(ray, m_pCharacter->GetColor());		// Color Change
+		g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());	// PObject Physics
+		g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());		// IObject(Gimmick) Physics
+		g_pObjectManager->Collide(g_pTimeManager->GetElapsedTime());	// Collide
+		///
+		//m_pBox->Update(g_pTimeManager->GetElapsedTime());
+		//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
+		//g_pObjectManager->UpdateCollide(g_pTimeManager->GetElapsedTime());			// new Collision
+		//g_pObjectManager->Update();													// Collision
+		//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
+
+		// Gimmick
+		//if (m_pGimmick_Door[0])
+		//	m_pGimmick_Door[0]->Update(g_pTimeManager->GetElapsedTime());
+		//if (m_pGimmick_Door[1])
+		//	m_pGimmick_Door[1]->Update(g_pTimeManager->GetElapsedTime());
+
+		//if (m_pGimmick_RotationBoard)
+		//	m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
+
+
+
+		//for(int i =0 ; i < m_pMeshTile.size(); ++i)
+		//if (m_pMeshTile[i])
+		//	m_pMeshTile[i]->Update();
+
+		//for (int i = 0; i < m_pMeshTile.size(); ++i)
+		//{
+		//	if (COBB::IsCollision(m_pChanger->m_BeamOBB, m_pMeshTile[i]->GetOBB()) == true)
+		//	{
+		//		D3DXVECTOR3 tmp = m_pChanger->m_position - m_pMeshTile[i]->GetPos();
+		//		m_pChanger->SetHitLength(D3DXVec3Length(&tmp));
+		//		m_pMeshTile[i]->SetColor(m_pChanger->m_stMtl);
+		//		break;
+		//	}
+		//	else 
+		//	{
+		//		m_pChanger->SetHitLength(50);
+		//	
+		//	}
+		//}
+		// if (m_pGimmick_Switch)
+		// 	m_pGimmick_Switch->Update();
+		//// 
+		//// 
+
+
+		//if (m_pGimmick_BreakableWall[0])
+		//	m_pGimmick_BreakableWall[0]->Update();
+		//if (m_pGimmick_BreakableWall[1])
+		//	m_pGimmick_BreakableWall[1]->Update();
+
+		//if (m_pBook)
+		//	m_pBook->Update(g_pTimeManager->GetElapsedTime());
+
 	}
-
-	//RECT rc;
-	//GetClientRect(g_hWnd, &rc);
-	//CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
-	//g_pObjectManager->Update(ray, m_pCharacter->GetColor());		// Color Change
-	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());	// PObject Physics
-	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());		// IObject(Gimmick) Physics
-	//g_pObjectManager->Collide(g_pTimeManager->GetElapsedTime());	// Collide
-	///
-	//m_pBox->Update(g_pTimeManager->GetElapsedTime());
-	//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
-	//g_pObjectManager->UpdateCollide(g_pTimeManager->GetElapsedTime());			// new Collision
-	//g_pObjectManager->Update();													// Collision
-	//g_pObjectManager->Update(g_pTimeManager->GetElapsedTime(), m_pHeightMap);	// 3D Physics
-
-	// Gimmick
-	//if (m_pGimmick_Door[0])
-	//	m_pGimmick_Door[0]->Update(g_pTimeManager->GetElapsedTime());
-	//if (m_pGimmick_Door[1])
-	//	m_pGimmick_Door[1]->Update(g_pTimeManager->GetElapsedTime());
-
-	//if (m_pGimmick_RotationBoard)
-	//	m_pGimmick_RotationBoard->Update(g_pTimeManager->GetElapsedTime());
-	
-	
-
-	//for(int i =0 ; i < m_pMeshTile.size(); ++i)
-	//if (m_pMeshTile[i])
-	//	m_pMeshTile[i]->Update();
-
-	//for (int i = 0; i < m_pMeshTile.size(); ++i)
-	//{
-	//	if (COBB::IsCollision(m_pChanger->m_BeamOBB, m_pMeshTile[i]->GetOBB()) == true)
-	//	{
-	//		D3DXVECTOR3 tmp = m_pChanger->m_position - m_pMeshTile[i]->GetPos();
-	//		m_pChanger->SetHitLength(D3DXVec3Length(&tmp));
-	//		m_pMeshTile[i]->SetColor(m_pChanger->m_stMtl);
-	//		break;
-	//	}
-	//	else 
-	//	{
-	//		m_pChanger->SetHitLength(50);
-	//	
-	//	}
-	//}
-	// if (m_pGimmick_Switch)
-	// 	m_pGimmick_Switch->Update();
-	//// 
-	//// 
-	 
-
-	//if (m_pGimmick_BreakableWall[0])
-	//	m_pGimmick_BreakableWall[0]->Update();
-	//if (m_pGimmick_BreakableWall[1])
-	//	m_pGimmick_BreakableWall[1]->Update();
-
-	//if (m_pBook)
-	//	m_pBook->Update(g_pTimeManager->GetElapsedTime());
 }
 
 void CMainGame::Render()
@@ -460,90 +470,87 @@ void CMainGame::Render()
 		g_pGameManager->InitializationOrb();
 	}
 
-	else if (!g_pFileLoadManager->GetIsThreadRun())
+	else if (g_pGameManager->GetNowScene() == SceneType::eLoading)
 	{
 		if (m_pScene)
 			m_pScene->Render_Ending();
 		
 		g_pD3DDevice->EndScene();
 		g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
-
-		cout << "Loading" << endl;
-		g_pFileLoadManager->CheckThread();
 	}
 
 	else
 	{
-			if (m_pGrid)
-				m_pGrid->Render();
+		if (m_pGrid)
+			m_pGrid->Render();
 
-			D3DCOLOR c = D3DCOLOR_XRGB(255, 0, 0);
+		D3DCOLOR c = D3DCOLOR_XRGB(255, 0, 0);
 
-			if (m_pCharacter)
-				m_pCharacter->Render(c);
+		if (m_pCharacter)
+			m_pCharacter->Render(c);
 
-			g_pObjectManager->Render();
+		g_pObjectManager->Render();
 
-			//if (m_pHeightMap)
-			//	m_pHeightMap->Render();
+		//if (m_pHeightMap)
+		//	m_pHeightMap->Render();
 
-			if (g_pGameManager->GetDevMode())
+		if (g_pGameManager->GetDevMode())
+		{
+			if (m_pText)
 			{
-				if (m_pText)
-				{
-					m_pText->RenderFPS(g_pTimeManager->GetFPS());
-					m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
-					g_pObjectManager->RenderOBBBox();
-					//m_pText->RenderBoxPosition(m_pSphere1->getCenter());
-					//m_pText->RenderGrab(g_pObjectManager->GetVecObject(), m_pCharacter->GetPosition());
-				}
+				m_pText->RenderFPS(g_pTimeManager->GetFPS());
+				m_pText->RenderCharacterPosition(m_pCharacter->GetPosition());
+				g_pObjectManager->RenderOBBBox();
+				//m_pText->RenderBoxPosition(m_pSphere1->getCenter());
+				//m_pText->RenderGrab(g_pObjectManager->GetVecObject(), m_pCharacter->GetPosition());
 			}
+		}
 
-			if (m_pText->GetisGrabstate())
-				m_pText->RenderGrab();
+		if (m_pText->GetisGrabstate())
+			m_pText->RenderGrab();
 
-			// Ray y check
+		// Ray y check
 
-			/*if(m_pMovingCube)
-			m_pMovingCube->Render();*/
+		/*if(m_pMovingCube)
+		m_pMovingCube->Render();*/
 
-			//for(int i =0; i < m_pMeshTile.size(); ++i)
-			//	m_pMeshTile[i]->Render();
+		//for(int i =0; i < m_pMeshTile.size(); ++i)
+		//	m_pMeshTile[i]->Render();
 
-			//if (m_pMeshTile)
-			//	m_pMeshTile->Render();
+		//if (m_pMeshTile)
+		//	m_pMeshTile->Render();
 
-			// Gimmick
-			//if (m_pGimmick_Door[0])
-			//	m_pGimmick_Door[0]->Render();
-			//if (m_pGimmick_Door[1])
-			//	m_pGimmick_Door[1]->Render();
-			//if (m_pGimmick_RotationBoard)
-			//	m_pGimmick_RotationBoard->Render();
-			/* if (m_pGimmick_Switch)
-			m_pGimmick_Switch->Render();*/
-			//if (m_pChanger)
-			//	m_pChanger->Render();
+		// Gimmick
+		//if (m_pGimmick_Door[0])
+		//	m_pGimmick_Door[0]->Render();
+		//if (m_pGimmick_Door[1])
+		//	m_pGimmick_Door[1]->Render();
+		//if (m_pGimmick_RotationBoard)
+		//	m_pGimmick_RotationBoard->Render();
+		/* if (m_pGimmick_Switch)
+		m_pGimmick_Switch->Render();*/
+		//if (m_pChanger)
+		//	m_pChanger->Render();
 
-			/*if (m_pChanger)
-			m_pChanger->Render();*/
-			//if (m_pGimmick_BreakableWall[0])
-			//	m_pGimmick_BreakableWall[0]->Render();
-			//if (m_pGimmick_BreakableWall[1]) 
-			//	m_pGimmick_BreakableWall[1]->Render();
-			//
+		/*if (m_pChanger)
+		m_pChanger->Render();*/
+		//if (m_pGimmick_BreakableWall[0])
+		//	m_pGimmick_BreakableWall[0]->Render();
+		//if (m_pGimmick_BreakableWall[1]) 
+		//	m_pGimmick_BreakableWall[1]->Render();
+		//
 
-			//if (m_pBook)
-			//	m_pBook->Render();
+		//if (m_pBook)
+		//	m_pBook->Render();
 
-			if (m_pDragon)
-				m_pDragon->Render();
+		if (m_pDragon)
+			m_pDragon->Render();
 
-			if (g_pGameManager->GetUImode())
-			{
-				if (m_pUI)
-					m_pUI->UI_Render();
-			}
+		if (g_pGameManager->GetUImode())
+		{
+			if (m_pUI)
+				m_pUI->UI_Render();
+		}
 	}
 
 	g_pD3DDevice->EndScene();

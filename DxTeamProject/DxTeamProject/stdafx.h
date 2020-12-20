@@ -157,10 +157,10 @@ enum class EventType : int
 	eNull
 };
 
-enum class SceneType : int
+enum class SceneType
 {
-	eMainScene, eGameScene, eUIScene, eResultScene,eEndingScene,
-	// ePauseScene
+	eMainScene, eGameScene, eUIScene, eResultScene, eEndingScene,
+	eLoading, eChangeLtoG, ePauseScene,
 	eNull
 };
 

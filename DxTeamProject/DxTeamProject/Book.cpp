@@ -15,7 +15,6 @@ CBook::CBook()
 	D3DXMatrixIdentity(&m_matT);
 
 	CBook::m_nCount += 1;
-	
 }
 
 CBook::~CBook()
