@@ -10,8 +10,13 @@ CFileLoadManager::CFileLoadManager() :
 	m_limitX(60),
 	m_nowX(0),
 	m_nowZ(0),
-	m_addNum(30)
+	m_addNum(30),
+	m_thread(NULL),
+	m_isThreadRun(0.0f),
+	m_IsIn(false),
+	m_strLoadFile("")
 {
+	InitializeCriticalSection(&m_cs);
 }
 
 LPD3DXEFFECT CFileLoadManager::LoadShader(const string fileName)
@@ -180,7 +185,7 @@ void CFileLoadManager::LoadData(string path)
 			}
 
 			if (strstr(readData.c_str(), "# Object_End"))
-				CObject::CreateObject(mapData);
+				m_vecMapdata.push_back(mapData);  // CObject::CreateObject(mapData);
 
 			// >> mapTest
 			if (strstr(readData.c_str(), "# Section"))
@@ -311,10 +316,61 @@ void CFileLoadManager::ResetLoadMapData(ST_MapData & mapData)
 	mapData.gimmickData.conditionOrbIndex = 0;
 }
 
+//bool CFileLoadManager::CheckThread()
+//{
+//	bool result = false;
+//	if (m_vecThread[0] == NULL)
+//	{
+//		result = true;
+//	}
+//	else if (m_vecThread[0]->joinable())
+//	{
+//		m_vecThread[0]->join();
+//		m_vecThread[0] = NULL;
+//	}
+//
+//	return result;
+//}
+
+void CFileLoadManager::ThreadFunc()
+{
+	m_IsIn = false;
+	EnterCriticalSection(&m_cs);
+
+	LoadData(m_strLoadFile);
+
+	// CreateObject();
+
+	LeaveCriticalSection(&m_cs);
+	m_IsIn = true;
+}
+
+void CFileLoadManager::CheckThread()
+{
+	if (m_IsIn)
+	{
+		if (m_vecThread[0]->joinable()) 
+			m_vecThread[0]->join();
+
+		CreateObject();
+
+		m_isThreadRun = true;
+	}
+}
+
 CFileLoadManager * CFileLoadManager::GetInstance()
 {
 	static CFileLoadManager instance;
 	return &instance;
+}
+
+CFileLoadManager::~CFileLoadManager()
+{
+	if (m_thread != NULL)
+	{
+		if (m_thread->joinable())
+			m_thread->join();
+	}
 }
 
 bool CFileLoadManager::FileLoad_XFile(string szFolder, string szFile, ST_XFile* setXFile)
@@ -439,7 +495,23 @@ bool CFileLoadManager::FileLoad_MapData(string szFolder, string szFile)
 {
 	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
-	LoadData(filePath);
+	m_strLoadFile = filePath;
+
+	thread* tempTread = NULL;
+	m_vecThread.push_back(tempTread);
+	m_vecThread[0] = new thread(&CFileLoadManager::ThreadFunc, this);
+
+	// m_vecThread[0]->detach();
+
+	// if (m_thread == NULL)
+	// {
+	// 	m_thread = new thread(&CFileLoadManager::ThreadFunc, this);
+	// }
+	// else
+	// {
+	// 	// if (m_thread->joinable()) m_thread->join();
+	// 	// m_thread = NULL;
+	// }
 
 	return true;
 }
@@ -475,4 +547,12 @@ void CFileLoadManager::Destroy()
 	m_mapTexture.clear();
 	m_mapShader.clear();
 	m_mapSprite.clear();
+}
+
+void CFileLoadManager::CreateObject()
+{
+	for (int i = 0; i < m_vecMapdata.size(); i++)
+		IObject::CreateObject(m_vecMapdata[i]);
+
+	m_vecMapdata.clear();
 }

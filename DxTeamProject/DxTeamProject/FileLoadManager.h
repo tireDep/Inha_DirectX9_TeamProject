@@ -1,4 +1,7 @@
 #pragma once
+#include <process.h>
+#include <thread>
+#include <Windows.h>
 
 struct ST_XFile;
 struct ST_MapData;
@@ -27,9 +30,20 @@ private:
 	int m_nowZ;
 	int m_addNum;
 
+	thread* m_thread;
+	CRITICAL_SECTION m_cs;
+	Synthesize(bool, m_isThreadRun, IsThreadRun);
+	Synthesize(bool, m_IsIn, Isin);
+	string m_strLoadFile;
+	vector<ST_MapData> m_vecMapdata;
+
+	vector<thread *> m_vecThread;
+
 public:
+	void ThreadFunc();
+	void CheckThread();
 	static CFileLoadManager* GetInstance();
-	virtual ~CFileLoadManager() { }
+	virtual ~CFileLoadManager();
 
 	/*
 	// >> todo
@@ -49,5 +63,7 @@ public:
 	LPDIRECT3DTEXTURE9 GetFileNameTexture(string szFolder, string szFile);
 
 	void Destroy();
+
+	void CreateObject();
 };
 
