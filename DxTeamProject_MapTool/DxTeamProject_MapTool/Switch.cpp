@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Switch.h"
 
-CSwitch::CSwitch()
+CSwitch::CSwitch() : 
+	m_weightType(WeightType::eBlack)
 {
 }
 
@@ -13,7 +14,13 @@ void CSwitch::Setup(ST_MapData setData)
 {
 	CGimmick::Setup(setData);
 
-	// todo condition variable
+	if (setData.gimmickData.weightIndex == 0)
+		m_weightType = WeightType::eBlack;
+	else if (setData.gimmickData.weightIndex == 1)
+		m_weightType = WeightType::eWhite;
+	else if (setData.gimmickData.weightIndex == 2)
+		m_weightType = WeightType::eYellow;
+
 }
 
 void CSwitch::Render()
@@ -60,10 +67,22 @@ int CSwitch::GetTextureIndex()
 		return 3;
 }
 
-void CSwitch::SetConditionType()
+void CSwitch::SetWeightIndex(int index)
 {
+	if (index == 0)
+		m_weightType = WeightType::eBlack;
+	else if (index == 1)
+		m_weightType = WeightType::eWhite;
+	else if (index == 2)
+		m_weightType = WeightType::eYellow;
 }
 
-void CSwitch::SetCondition()
+int CSwitch::GetWeightIndex()
 {
+	if (m_weightType == WeightType::eBlack)
+		return 0;
+	else if (m_weightType == WeightType::eWhite)
+		return 1;
+	else if (m_weightType == WeightType::eYellow)
+		return 2;
 }

@@ -48,7 +48,8 @@ void CGimmick::Setup(ST_MapData setData)
 
 	if (m_ObjectType != ObjectType::eG_Door
 		&& m_ObjectType != ObjectType::eG_DoorFrame
-		&& m_ObjectType != ObjectType::eG_ColorChanger)
+		&& m_ObjectType != ObjectType::eG_ColorChanger
+		&& m_ObjectType != ObjectType::eG_Switch)
 	{
 		m_strConditionName = "";
 		return;

@@ -953,7 +953,21 @@ void CImguiClass::Update_Inspector()
 			else if (nowObjectType == eG_Switch)
 			{
 				SetGimmickTexture();
-				// todo : switchCondition
+
+				CSwitch* temp = static_cast<CSwitch*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
+				ImGui::Text("Weight");
+				int pushIndex = temp->GetWeightIndex();
+				string charName[3] = { "Black", "White", "Yellow" };
+				for (int i = 0; i < 3; i++)
+				{
+					if (ImGui::RadioButton(charName[i].c_str(), pushIndex == i))
+					{
+						pushIndex = i;
+						temp->SetWeightIndex(pushIndex);
+					}
+				} // << : for
+
+				ImGui::Separator();
 			}
 
 			// >> 무빙 큐브 기믹 : 시작점&끝점, 속도, 방향
@@ -961,8 +975,7 @@ void CImguiClass::Update_Inspector()
 			{
 				CMovingCube* temp = static_cast<CMovingCube*> (&g_pObjectManager->GetIObject(m_nowSelectindex));
 				ImGui::Text("Direction");
-				static int pushIndex = 0;
-				pushIndex = temp->GetDirection();
+				int pushIndex = temp->GetDirection();
 				string charName[3] = { "X", "Y", "Z" };
 				for (int i = 0; i < 3; i++)
 				{
@@ -1037,6 +1050,22 @@ void CImguiClass::Update_Inspector()
 				} // << : for
 
 				ImGui::Separator();
+
+				if (pushIndex == 1)
+				{
+					int zoneIndex = temp->GetZoneIndex();
+					string charName[2] = { "Winter", "Fall" };
+					for (int i = 0; i < 2; i++)
+					{
+						if (ImGui::RadioButton(charName[i].c_str(), zoneIndex == i))
+						{
+							// pushIndex = i;
+							temp->SetZoneIndex(i);
+						}
+					} // << : for
+
+					ImGui::Separator();
+				}
 
 				ImGui::Text("TriggerType : ");
 				ImGui::SameLine(); ImGui::Text(temp->GetTriggerType().c_str());

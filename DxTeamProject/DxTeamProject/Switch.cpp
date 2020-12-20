@@ -91,6 +91,14 @@ void CSwitch::Setup(ST_MapData setData)
 	m_position = m_vTranslation;
 	m_scale = m_vScale;
 
+	if (setData.gimmickData.weightIndex == 0)
+		m_weightType = WeightType::eBlack;
+	else if (setData.gimmickData.weightIndex == 1)
+		m_weightType = WeightType::eWhite;
+	else if (setData.gimmickData.weightIndex == 2)
+		m_weightType = WeightType::eYellow;
+
+
 	// todo : switchCondition
 
 	//m_strObjName = setData.strObjName;
