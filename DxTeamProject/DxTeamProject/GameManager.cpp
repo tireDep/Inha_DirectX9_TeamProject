@@ -150,8 +150,8 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 		{
 			if (m_SceneName == SceneType::eMainScene)
 			{
-				m_SceneName = SceneType::eGameScene;
-				// m_SceneName = SceneType::eLoading;
+				// m_SceneName = SceneType::eGameScene;
+				m_SceneName = SceneType::eLoadStart;
 				return;
 			}
 
