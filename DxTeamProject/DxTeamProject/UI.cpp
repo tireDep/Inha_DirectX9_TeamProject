@@ -26,7 +26,7 @@ void CUI::Setup_UI()
 	GetClientRect(g_hWnd, &UIrc);
 
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/pngegg.png",
+		"UI/palette.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -48,7 +48,7 @@ void CUI::Setup_UI()
 
 	//Red 버튼
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/red.png",
+		"UI/Bigred.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -59,7 +59,7 @@ void CUI::Setup_UI()
 
 	//yellow 버튼
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/yellow.png",
+		"UI/Bigyellow.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -70,7 +70,7 @@ void CUI::Setup_UI()
 
 	//Green 버튼
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/green.png",
+		"UI/Biggreen.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -81,7 +81,7 @@ void CUI::Setup_UI()
 
 	//Blue 버튼
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/blue.png",
+		"UI/Bigblue.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -92,7 +92,7 @@ void CUI::Setup_UI()
 
 	//Black 버튼
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/black.png",
+		"UI/Bigblack.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -103,7 +103,7 @@ void CUI::Setup_UI()
 
 	//White 버튼
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/White.png",
+		"UI/BigWhite.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -111,6 +111,68 @@ void CUI::Setup_UI()
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_stImageInfo8, NULL, &m_pTextureUI8);
+
+	////////////////////////
+	///red
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/red.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_smallInfo, NULL, &m_SmallUI);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/yellow.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_smallInfo2, NULL, &m_SmallUI2);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/green.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_smallInfo3, NULL, &m_SmallUI3);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/blue.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_smallInfo4, NULL, &m_SmallUI4);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/black.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_smallInfo5, NULL, &m_SmallUI5);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/white.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_smallInfo6, NULL, &m_SmallUI6);
 }
 
 void CUI::UI_Render()
@@ -136,6 +198,57 @@ void CUI::UI_Render()
 		D3DCOLOR_ARGB(150, 255, 255, 255));
 
 
+	///red
+	SetRect(&s_Redrc, -638, -239,
+		m_smallInfo.Width, m_smallInfo.Height);
+
+	m_pSprite->Draw(m_SmallUI, &s_Redrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+	
+	///yellow
+	SetRect(&s_Yellowrc, -558, -209,
+		m_smallInfo2.Width, m_smallInfo2.Height);
+
+	m_pSprite->Draw(m_SmallUI2, &s_Yellowrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+	///green
+	SetRect(&s_Greenrc, -585, -154,
+		m_smallInfo3.Width, m_smallInfo3.Height);
+
+	m_pSprite->Draw(m_SmallUI3, &s_Greenrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+	///blue
+	SetRect(&s_Bluerc, -647, -129,
+		m_smallInfo4.Width, m_smallInfo4.Height);
+
+	m_pSprite->Draw(m_SmallUI4, &s_Bluerc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	///black
+	SetRect(&s_Blackrc, -710, -140,
+		m_smallInfo5.Width, m_smallInfo5.Height);
+
+	m_pSprite->Draw(m_SmallUI5, &s_Blackrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+	///White
+	SetRect(&s_Whiterc, -740, -205,
+		m_smallInfo6.Width, m_smallInfo6.Height);
+
+	m_pSprite->Draw(m_SmallUI6, &s_Whiterc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
 	//MAIN UI
 	SetRect(&UIrc,-500,-50,m_stImageInfo.Width, m_stImageInfo.Height);
 
@@ -144,7 +257,7 @@ void CUI::UI_Render()
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
-
+	///big///
 	//RED BUTTON
 	if (OnButton == Color::Red)
 	{
@@ -217,6 +330,7 @@ void CUI::UI_Render()
 			&D3DXVECTOR3(0, 0, 0),
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
+	//////////////////////////////
 
 	m_pSprite->End();
 }
