@@ -370,11 +370,8 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 
 			switch (OnButton)
 			{
-				if (g_pGameManager->GetIsHasOrb("Red"))
-				{
-				case Color::Red: PickColor = Pick::Red;
-					break;
-				}
+			case Color::Red: PickColor = Pick::Red;
+				break;
 			case Color::Yellow:PickColor = Pick::Yellow;
 				break;
 			case Color::Green: PickColor = Pick::Green;
