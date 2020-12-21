@@ -199,55 +199,73 @@ void CUI::UI_Render()
 
 
 	///red
-	SetRect(&s_Redrc, -638, -239,
-		m_smallInfo.Width, m_smallInfo.Height);
+	if (g_pGameManager->GetIsHasOrb("Red"))
+	{
+		SetRect(&s_Redrc, -638, -239,
+			m_smallInfo.Width, m_smallInfo.Height);
 
-	m_pSprite->Draw(m_SmallUI, &s_Redrc,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+		m_pSprite->Draw(m_SmallUI, &s_Redrc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 	
 	///yellow
-	SetRect(&s_Yellowrc, -558, -209,
-		m_smallInfo2.Width, m_smallInfo2.Height);
+	if (g_pGameManager->GetIsHasOrb("Yellow"))
+	{
+		SetRect(&s_Yellowrc, -558, -209,
+			m_smallInfo2.Width, m_smallInfo2.Height);
 
-	m_pSprite->Draw(m_SmallUI2, &s_Yellowrc,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+		m_pSprite->Draw(m_SmallUI2, &s_Yellowrc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 	///green
-	SetRect(&s_Greenrc, -585, -154,
-		m_smallInfo3.Width, m_smallInfo3.Height);
+	if (g_pGameManager->GetIsHasOrb("Green"))
+	{
+		SetRect(&s_Greenrc, -585, -154,
+			m_smallInfo3.Width, m_smallInfo3.Height);
 
-	m_pSprite->Draw(m_SmallUI3, &s_Greenrc,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+		m_pSprite->Draw(m_SmallUI3, &s_Greenrc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 	///blue
-	SetRect(&s_Bluerc, -647, -129,
-		m_smallInfo4.Width, m_smallInfo4.Height);
+	if (g_pGameManager->GetIsHasOrb("Blue"))
+	{
+		SetRect(&s_Bluerc, -647, -129,
+			m_smallInfo4.Width, m_smallInfo4.Height);
 
-	m_pSprite->Draw(m_SmallUI4, &s_Bluerc,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+		m_pSprite->Draw(m_SmallUI4, &s_Bluerc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
 	///black
-	SetRect(&s_Blackrc, -710, -140,
-		m_smallInfo5.Width, m_smallInfo5.Height);
+	if (g_pGameManager->GetIsHasOrb("Black"))
+	{
+		SetRect(&s_Blackrc, -710, -140,
+			m_smallInfo5.Width, m_smallInfo5.Height);
 
-	m_pSprite->Draw(m_SmallUI5, &s_Blackrc,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+		m_pSprite->Draw(m_SmallUI5, &s_Blackrc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 	///White
-	SetRect(&s_Whiterc, -740, -205,
-		m_smallInfo6.Width, m_smallInfo6.Height);
+	if (g_pGameManager->GetIsHasOrb("White"))
+	{
+		SetRect(&s_Whiterc, -740, -205,
+			m_smallInfo6.Width, m_smallInfo6.Height);
 
-	m_pSprite->Draw(m_SmallUI6, &s_Whiterc,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+		m_pSprite->Draw(m_SmallUI6, &s_Whiterc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
 	//MAIN UI
 	SetRect(&UIrc,-500,-50,m_stImageInfo.Width, m_stImageInfo.Height);
