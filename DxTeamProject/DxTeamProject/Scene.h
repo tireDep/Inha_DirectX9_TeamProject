@@ -15,7 +15,7 @@ private:
 	RECT imageRC;
 	POINT px;
 	POINT PX2;
-
+	
 public:
 	CScene();
 	~CScene();

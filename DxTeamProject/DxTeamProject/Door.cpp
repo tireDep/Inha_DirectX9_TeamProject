@@ -123,7 +123,6 @@ void CDoor::Update(float duration)
 		if (m_isCondition)
 		{
 			g_pObjectManager->RemoveObject(m_pOBB);
-			// m_pOBB = NULL;
 		}
 		else
 			m_pOBB->Update(&m_matWorld);

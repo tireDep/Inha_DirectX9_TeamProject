@@ -244,8 +244,7 @@ void CMainGame::Update()
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxBridge.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTileLand.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
 
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
