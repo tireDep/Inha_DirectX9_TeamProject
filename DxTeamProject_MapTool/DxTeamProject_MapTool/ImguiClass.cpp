@@ -1078,8 +1078,14 @@ void CImguiClass::Update_Inspector()
 			{
 				// >> 선택한 오브젝트에 조건 변수가 존재할 경우
 				// >> 스위치 등 기믹에서 출력되지 않아서 if문으로 처리
+				if (nowObjectType == ObjectType::eG_Switch)
+				{
+					if (nowObject.GetConditionName() == "Black")
+						return;
+				}
+
 				ImGui::Text("Select Condition : ");
-				ImGui::SameLine(); ImGui::Text(g_pObjectManager->GetIObject(m_nowSelectindex).GetConditionName().c_str());
+				ImGui::SameLine(); ImGui::Text(nowObject.GetConditionName().c_str());
 			}
 
 			// >> tag
