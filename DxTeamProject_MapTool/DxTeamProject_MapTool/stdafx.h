@@ -130,7 +130,7 @@ enum ObjectType
 	eBook, eOrb,
 
 	/* Added */
-	eFlower, eSprout, eBridge, eTrace,
+	eFlower, eSprout, eBridge, eTrace, eTrigger,
 
 	eNull
 #endif // _Debug

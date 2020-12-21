@@ -633,10 +633,7 @@ void CImguiClass::Update_FileLoader()
 	ImGui::SameLine();  if (ImGui::RadioButton("Gimmick", m_NowLoadType == LoadType::eGimmick)) { m_NowLoadType = LoadType::eGimmick; m_FileLoadIndex = 0; }
 	
 	if (ImGui::RadioButton("Item", m_NowLoadType == LoadType::eItem)) { m_NowLoadType = LoadType::eItem; m_FileLoadIndex = 0; }
-
-#ifdef _DEBUG
 	ImGui::SameLine();  if (ImGui::RadioButton("EventTrigger", m_NowLoadType == LoadType::eTrigger)) { m_NowLoadType = LoadType::eTrigger; m_FileLoadIndex = 0; }
-#endif // _DEBUG
 
 	ImGui::Separator();
 
@@ -757,7 +754,7 @@ void CImguiClass::Update_Inspector()
 
 				case eFlower:	case eSprout:
 				
-				case eInvisibleWall:
+				// case eInvisibleWall:
 
 				case eG_RotationBoard:	case eG_MovingCube:
 
