@@ -26,6 +26,10 @@ protected:
 
 	D3DXVECTOR3 m_saveZonePosition;
 
+	//이어하기.
+	D3DXVECTOR3 SaveData;
+	
+
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
 	float					m_fSpeed;
@@ -41,6 +45,7 @@ protected:
 	bool m_isCollidedTile;
 	float m_fHeightTile;
 public:
+	bool Keep;
 	virtual ~CCharacter(void);
 	virtual void Setup();
 	virtual void Update(D3DXVECTOR3 cameradirection);

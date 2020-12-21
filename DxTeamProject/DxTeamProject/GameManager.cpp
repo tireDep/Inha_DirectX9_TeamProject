@@ -18,7 +18,28 @@ CGameManager::CGameManager()
 	m_Orbcomplete = false;
 
 	SetClipCursor(0);
-	//ShowCursor(true);
+
+	m_isDataLoad = false;
+}
+
+void CGameManager::SetShowCursor(bool set)
+{
+	/*
+	ShowCursor(true) : + 1
+	ShowCursor(false) : - 1
+
+	카운트가 음수여야 화면에서 커서가 사라짐
+	*/
+	if (set == false)
+	{
+		SetClipCursor(0);
+		while (ShowCursor(false) >= 0);
+	}
+	else
+	{
+		SetClipCursor(-15);
+		ShowCursor(set);
+	}
 }
 
 CGameManager* CGameManager::GetInstance()
@@ -122,10 +143,39 @@ bool CGameManager::CompleteOrb()
 		GetIsHasOrb("White") && GetIsHasOrb("Yellow") && GetIsHasOrb("Black"))
 	{
 		m_Orbcomplete = true;
-		m_SceneName = SceneType::eEndingScene;
+		SetNowScene(SceneType::eEndingScene);
 	}
 
 	return m_Orbcomplete;
+}
+
+void CGameManager::SetNowScene(SceneType set)
+{
+	if ((set == SceneType::eLoading || set == SceneType::eLoadStart)&& m_isDataLoad)
+		set = SceneType::eGameScene;
+
+	if (set == SceneType::eEndingScene)
+	{
+		InitializationOrb();
+		SetShowCursor(true);
+	}
+	
+	if (set == SceneType::eGameScene)
+	{
+		SetShowCursor(false);
+
+		m_isUIMode = false;
+		m_isUIModeIn = false;
+		m_isDevMode = false;
+		m_isDevMoveIn = false;
+	}
+
+	m_SceneName = set;
+}
+
+SceneType CGameManager::GetNowScene()
+{
+	return m_SceneName;
 }
 
 void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
@@ -162,13 +212,11 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 
 				if (m_isUIMode)
 				{
-					SetClipCursor(-15);
-					ShowCursor(true);
+					SetShowCursor(true);
 				}
 				else
 				{
-					SetClipCursor(0);
-					//ShowCursor(false);
+					SetShowCursor(false);
 				}
 			}
 

@@ -88,7 +88,10 @@ void CDoor::Update(float duration)
 		{
 			m_fRotAngle += m_fRotationSpeed * duration;
 			if (m_fRotAngle >= m_fOpeningAngle)
+			{
 				m_fRotationSpeed = 0;
+				m_fRotAngle = m_fOpeningAngle;
+			}
 			else
 				m_fRotationSpeed = 1.0f;
 		}
@@ -96,7 +99,10 @@ void CDoor::Update(float duration)
 		{
 			m_fRotAngle -= m_fRotationSpeed * duration;
 			if (m_fRotAngle <= 0)
+			{
 				m_fRotationSpeed = 0;
+				m_fRotAngle = 0;
+			}
 			else
 				m_fRotationSpeed = 1.0f;
 		}
@@ -114,7 +120,12 @@ void CDoor::Update(float duration)
 	}
 	else
 	{
-		m_pOBB->Update(&m_matWorld);
+		if (m_isCondition)
+		{
+			g_pObjectManager->RemoveObject(m_pOBB);
+		}
+		else
+			m_pOBB->Update(&m_matWorld);
 	}
 
 

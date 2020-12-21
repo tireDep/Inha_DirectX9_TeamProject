@@ -22,14 +22,17 @@ private:
 	bool m_Orbcomplete;
 	// << 맵 완료시 삭제
 
-	Synthesize(SceneType, m_SceneName, NowScene);
-
-	CGameManager();
+	// Synthesize(SceneType, m_SceneName, NowScene);
+	SceneType m_SceneName;
+	Synthesize(bool, m_isDataLoad, IsDataLoad);
 
 	// Orb Item
 	// bool Orb[6] = { false };
 	map<string, bool> m_mapOrb; // >> orbType, isGet
 	bool Item[ITEMCOUNT] = { false };
+	
+	CGameManager();
+	void SetShowCursor(bool set);
 
 public:
 	static CGameManager* GetInstance();
@@ -60,4 +63,7 @@ public:
 	void InitializationOrb();
 	bool GetIsHasOrb(string orbType);
 	bool CompleteOrb();
+
+	void SetNowScene(SceneType set);
+	SceneType GetNowScene();
 };

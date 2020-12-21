@@ -82,7 +82,7 @@ void CBackground::Setup(ST_MapData setData)
 	else
 	{
 		m_vTranslate.y = 0.5f;
-		D3DXCreateBox(g_pD3DDevice, m_vScale.x, m_vScale.y, m_vScale.z, &m_pMesh, NULL);
+		D3DXCreateBox(g_pD3DDevice, 1, 1, 1, &m_pMesh, NULL);
 		
 		m_pMtrl.Ambient = D3DXCOLOR(0.0f, 1.0f, 1.0f, 0.5f);
 		m_pMtrl.Diffuse = D3DXCOLOR(0.0f, 1.0f, 1.0f, 0.5f);

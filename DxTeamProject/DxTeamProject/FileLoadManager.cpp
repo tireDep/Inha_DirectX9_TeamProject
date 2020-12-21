@@ -11,6 +11,7 @@ CFileLoadManager::CFileLoadManager() :
 	m_nowX(0),
 	m_nowZ(0),
 	m_addNum(30),
+	m_addNameNum(0),
 	m_thread(NULL),
 	m_isThreadRun(0.0f)
 {
@@ -69,7 +70,9 @@ void CFileLoadManager::LoadData(string path)
 			else if (strstr(readData.c_str(), "# ObjectName"))
 			{
 				ReadAndCutSlashR(file, readData);
-				mapData.strObjName = readData;
+
+				if (strstr(readData.c_str(), "Orb") == NULL)
+					mapData.strObjName = readData + to_string(m_addNameNum);
 			}
 
 			else if (strstr(readData.c_str(), "# FolderPath"))
@@ -169,7 +172,18 @@ void CFileLoadManager::LoadData(string path)
 				&& (mapData.objType != eG_Door && mapData.objType != eG_DoorFrame && mapData.objType != eG_ColorChanger))
 			{
 				ReadAndCutSlashR(file , readData);
-				mapData.gimmickData.conditionName = readData;
+
+				if (readData != ""
+				 && readData != "Black"
+				 && readData != "White"
+				 && readData != "Yellow"
+				 && readData != "Green"
+				 && readData != "Red"
+				 && readData != "Blue")
+					mapData.gimmickData.conditionName = readData + to_string(m_addNameNum);
+				else
+					mapData.gimmickData.conditionName = readData;
+
 			}
 			else if (strstr(readData.c_str(), "# TriggerIndex"))
 			{
@@ -202,6 +216,7 @@ void CFileLoadManager::LoadData(string path)
 	{
 		m_nowX += m_addNum;
 	}
+	m_addNameNum++; // 다음 맵 오브젝트 이름 구분
 	// << 다음 맵 로드 좌표 설정
 
 	file.close();
@@ -263,7 +278,17 @@ void CFileLoadManager::ReadGimmickData(ifstream & file, string& readData, ST_Map
 		else if (strstr(readData.c_str(), "# ConditionName"))
 		{
 			ReadAndCutSlashR(file, readData);
-			mapData.gimmickData.conditionName = readData.c_str();
+
+			if (readData != ""
+				&& readData != "Black"
+				&& readData != "White"
+				&& readData != "Yellow"
+				&& readData != "Green"
+				&& readData != "Red"
+				&& readData != "Blue")
+				mapData.gimmickData.conditionName = readData + to_string(m_addNameNum);
+			else
+				mapData.gimmickData.conditionName = readData;
 		}
 		else if (strstr(readData.c_str(), "# ConditionIndex"))
 		{

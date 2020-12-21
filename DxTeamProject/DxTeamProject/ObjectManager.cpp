@@ -13,7 +13,8 @@
 CObjectManager::CObjectManager() :
 	m_frustum(NULL),
 	m_thread(NULL),
-	ResetCube(false)
+	ResetCube(false),
+	KeepGoing(false)
 {
 	InitializeCriticalSection(&m_cs);
 }
@@ -28,6 +29,9 @@ CObjectManager::~CObjectManager()
 			m_thread->join();
 	}
 	SafeDelete(m_thread);
+
+
+
 }
 
 void CObjectManager::RemoveObject(CObject * Object)
@@ -146,6 +150,21 @@ void CObjectManager::Update(float duration)
 {
 	for (int i = 0; i < m_vecIObject.size(); i++)
 		m_vecIObject[i]->Update(duration);
+
+	//
+	//ofstream fout;
+	//fout.open("PObjectData.txt");
+
+	//for (int i = 0; i < m_vecPObject.size(); ++i) //²ø¶§ ÆÇ´Ü
+	//{
+
+	//	fout << m_vecPObject[i]->GetPosition().x
+	//		<< m_vecPObject[i]->GetPosition().y
+	//		<< m_vecPObject[i]->GetPosition().z;
+	//}
+	//fout.close();
+
+
 	//for (int i = 0; i < m_vecGimmick.size(); i++)
 	//   m_vecGimmick[i]->Update(duration);
 	//for (int i = 0; i < m_vecObject.size(); i++)
@@ -192,14 +211,14 @@ void CObjectManager::Collide(float duration)
 			default:
 				break;
 			}
-		}
-		// Sphere To IObject
-		for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
-		{
-			if (m_vecSphere[SphereIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
+
+			// Sphere To IObject
+			for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
 			{
-				switch (m_vecIObject[IObjectIndex]->GetObjType())
+				if (m_vecSphere[SphereIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
 				{
+					switch (m_vecIObject[IObjectIndex]->GetObjType())
+					{
 					case eG_RotationBoard:  case eG_MovingCube:
 					{
 						D3DXVECTOR3 v;
@@ -208,18 +227,19 @@ void CObjectManager::Collide(float duration)
 						m_vecSphere[SphereIndex]->SetPusingForce(v);
 					}
 					break;
-				case eG_Door:
-					break;
+					case eG_Door:
+						break;
 					case  eG_Switch:
 					{
-						m_vecIObject[IObjectIndex]->pSphereBool(true);
+						m_vecIObject[IObjectIndex]->pBoxBool(true);
 					}
 					break;
-				default:
-					//CollisionSphereToIObject(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
-					CollisionBoxToTile(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
-					m_vecIObject[IObjectIndex]->pSphereBool(false);
-					break;
+					default:
+						//CollisionSphereToIObject(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
+						CollisionBoxToTile(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
+						m_vecIObject[IObjectIndex]->pBoxBool(false);
+						break;
+					}
 				}
 			}
 		}
@@ -249,15 +269,15 @@ void CObjectManager::Collide(float duration)
 			default:
 				break;
 			}
-		}
-		// Box To IObject
-		for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
-		{
-			if (m_vecBox[BoxIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
+
+			// Box To IObject
+			for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
 			{
-				switch (m_vecIObject[IObjectIndex]->GetObjType())
+				if (m_vecBox[BoxIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
 				{
-				case eG_RotationBoard: case eG_MovingCube:
+					switch (m_vecIObject[IObjectIndex]->GetObjType())
+					{
+					case eG_RotationBoard: case eG_MovingCube:
 					{
 						D3DXVECTOR3 v;
 						v = m_vecBox[BoxIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
@@ -265,17 +285,18 @@ void CObjectManager::Collide(float duration)
 						m_vecBox[BoxIndex]->SetPusingForce(v);
 					}
 					break;
-				case eG_Door:
+					case eG_Door:
+						break;
+					case  eG_Switch:
+					{
+						m_vecIObject[IObjectIndex]->pBoxBool(true);
+					}
 					break;
-				case  eG_Switch:
-				{
-					m_vecIObject[IObjectIndex]->pBoxBool(true);
-				}
-				break;
-				default:
-					CollisionBoxToTile(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
-					m_vecIObject[IObjectIndex]->pBoxBool(false);
-					break;
+					default:
+						CollisionBoxToTile(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
+						m_vecIObject[IObjectIndex]->pBoxBool(false);
+						break;
+					}
 				}
 			}
 		}
@@ -301,31 +322,32 @@ void CObjectManager::Collide(float duration)
 			default:
 				break;
 			}
-		}
-		// Cylinder To IObject
-		for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
-		{
-			if (m_vecCylinder[CylinderIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
+
+			// Cylinder To IObject
+			for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
 			{
-				switch (m_vecIObject[IObjectIndex]->GetObjType())
+				if (m_vecCylinder[CylinderIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
 				{
-				case eG_RotationBoard:    case eG_MovingCube:	// Complete
-				{
-					D3DXVECTOR3 v;
-					v = m_vecCylinder[CylinderIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
-					D3DXVec3Normalize(&v, &v);
-					m_vecCylinder[CylinderIndex]->SetPusingForce(v);
-				}
-				break;
-				case eG_Door:
+					switch (m_vecIObject[IObjectIndex]->GetObjType())
+					{
+					case eG_RotationBoard:    case eG_MovingCube:	// Complete
+					{
+						D3DXVECTOR3 v;
+						v = m_vecCylinder[CylinderIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
+						D3DXVec3Normalize(&v, &v);
+						m_vecCylinder[CylinderIndex]->SetPusingForce(v);
+					}
 					break;
-				case eG_Switch:
-					m_vecIObject[IObjectIndex]->pCylinderBool(true);
-					break;
-				default:
-					CollisionBoxToTile(m_vecCylinder[CylinderIndex], m_vecIObject[IObjectIndex], duration);
-					m_vecIObject[IObjectIndex]->pCylinderBool(false);
-					break;
+					case eG_Door:
+						break;
+					case eG_Switch:
+						m_vecIObject[IObjectIndex]->pBoxBool(true);
+						break;
+					default:
+						CollisionBoxToTile(m_vecCylinder[CylinderIndex], m_vecIObject[IObjectIndex], duration);
+						m_vecIObject[IObjectIndex]->pBoxBool(false);
+						break;
+					}
 				}
 			}
 		}

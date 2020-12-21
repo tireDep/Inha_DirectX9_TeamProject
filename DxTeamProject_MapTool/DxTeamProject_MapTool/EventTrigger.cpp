@@ -50,7 +50,7 @@ void CEventTrigger::Setup(ST_MapData setData)
 	}
 
 	m_vTranslate.y = 0.5f;
-	D3DXCreateBox(g_pD3DDevice, m_vScale.x, m_vScale.y, m_vScale.z, &m_pMesh, NULL);
+	D3DXCreateBox(g_pD3DDevice, 1, 1, 1, &m_pMesh, NULL);
 
 	IObject::Setup_OBB_Box();
 }
