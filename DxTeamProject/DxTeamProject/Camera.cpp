@@ -158,7 +158,7 @@ D3DXVECTOR3 CCamera::GetCameraEye()
 
 void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 {
-	if (eventMsg.eventType == EventType::eInputEvent/* && g_pGameManager->GetNowScene() == SceneType::eGameScene*/)
+	if (eventMsg.eventType == EventType::eInputEvent)
 	{
 		switch (eventMsg.message)
 		{
