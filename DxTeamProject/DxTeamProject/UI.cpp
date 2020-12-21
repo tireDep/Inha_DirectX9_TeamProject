@@ -277,7 +277,7 @@ void CUI::UI_Render()
 
 	///big///
 	//RED BUTTON
-	if (OnButton == Color::Red)
+	if (OnButton == Color::Red && g_pGameManager->GetIsHasOrb("Red"))
 	{
 		SetRect(&Redrc, -630, -230,
 			m_stImageInfo3.Width, m_stImageInfo3.Height);
@@ -289,7 +289,7 @@ void CUI::UI_Render()
 	}
 
 	//Yellow BUTTON
-	if (OnButton == Color::Yellow)
+	if (OnButton == Color::Yellow && g_pGameManager->GetIsHasOrb("Yellow"))
 	{
 		SetRect(&Yellowrc, -550, -200,
 			m_stImageInfo4.Width, m_stImageInfo4.Height);
@@ -301,7 +301,7 @@ void CUI::UI_Render()
 	}
 
 	//Green BUTTON
-	if (OnButton == Color::Green)
+	if (OnButton == Color::Green && g_pGameManager->GetIsHasOrb("Green"))
 	{
 		SetRect(&Greenrc, -575, -145,
 			m_stImageInfo5.Width, m_stImageInfo5.Height);
@@ -313,7 +313,7 @@ void CUI::UI_Render()
 	}
 
 	//Blue BUTTON
-	if (OnButton == Color::Blue)
+	if (OnButton == Color::Blue && g_pGameManager->GetIsHasOrb("Blue"))
 	{
 		SetRect(&Bluerc, -635, -120,
 			m_stImageInfo6.Width, m_stImageInfo6.Height);
@@ -325,7 +325,7 @@ void CUI::UI_Render()
 	}
 
 	//Black BUTTON
-	if (OnButton == Color::Black)
+	if (OnButton == Color::Black && g_pGameManager->GetIsHasOrb("Black"))
 	{
 		SetRect(&Blackrc, -700, -130,
 			m_stImageInfo7.Width, m_stImageInfo7.Height);
@@ -338,7 +338,7 @@ void CUI::UI_Render()
 
 
 	//White BUTTON
-	if (OnButton == Color::White)
+	if (OnButton == Color::White && g_pGameManager->GetIsHasOrb("White"))
 	{
 		SetRect(&Whiterc, -730, -195,
 			m_stImageInfo8.Width, m_stImageInfo8.Height);

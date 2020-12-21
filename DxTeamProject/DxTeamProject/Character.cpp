@@ -10,7 +10,7 @@
 
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
-	, m_vPosition(0, 0, 0)
+	, m_vPosition(0, 1.0f, 0)
 	, m_isCollided(false)
 	, m_Character(NULL)
 	, m_isColorChanged(false)
@@ -29,6 +29,7 @@ CCharacter::CCharacter()
 	, m_fRotation(0.0f)
 	, m_fGrabRotation(0.0f)
 	, m_saveZonePosition(0,0,0)
+	, m_vGrabDirection(0, 0, 1)
 	, SaveData(0,0,0)
 	, Keep(false)
 	/// KT Reset
@@ -137,15 +138,35 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				{
 					if (m_nGrabAbleObeject != -1)
 					{
+						/// Set Pusing Force
+						//D3DXVECTOR3 v;
+						//v = g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetPosition() - this->GetPosition();
+						//v.y -= 0.5f;
+						//D3DXVec3Normalize(&v, &v);
+						//g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetPusingForce(v);
+						////m_fRotation = m_fGrabRotation;
+						//// Need To Modify...
+						//m_fSpeed = 0.0f;
+						//m_Character->SetAnimationIndex(5);
+
+						/// Same Velocity Version 1...
+						//D3DXVECTOR3 v;
+						//v = g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetPosition() - this->GetPosition();
+						//// Need To modify... scale up PObject
+						//v.y -= 0.5f;
+						//D3DXVec3Normalize(&v, &v);
+						//g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetPusingForce(v);
+						// Rotation Error... 1 frame later Velocity...
+						//m_fSpeed = D3DXVec3Length(&g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetVelocity());
+
+						/// Same Velocity Version 2...
 						D3DXVECTOR3 v;
-						v = g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetPosition() - this->GetPosition();
-						v.y -= 0.5f;
-						D3DXVec3Normalize(&v, &v);
-						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetPusingForce(v);
-						//m_fRotation = m_fGrabRotation;
-						// Need To Modify...
-						m_fSpeed = 0.0f;
-						m_Character->SetAnimationIndex(5);
+						D3DXVec3Normalize(&v, &this->m_vGrabDirection);
+						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(10.0f * v);
+						m_fSpeed = 10.0f;
+						//m_fRotation = m_vGrabDirection;
+
+						// Rotation Init Error...
 					}
 					// if (m_Character->CheckAnimationEnd())
 				}
@@ -353,6 +374,7 @@ void CCharacter::ColliderObject()
 			{
 				m_isGrab = true;
 				m_nGrabAbleObeject = i;
+				m_vGrabDirection = this->m_vDirection;
 			}
 			else
 			{
@@ -413,10 +435,10 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 		m_vDirection = cameradirection;
 
 	
-	ofstream fout;
-	fout.open("SaveData.txt");
-	fout << m_vPosition.x << " " << m_vPosition.y << " " << m_vPosition.z << endl;
-	fout.close();
+	//ofstream fout;
+	//fout.open("SaveData.txt");
+	//fout << m_vPosition.x << " " << m_vPosition.y << " " << m_vPosition.z << endl;
+	//fout.close();
 
 	
 	
@@ -698,15 +720,14 @@ void CCharacter::Update(float duration)
 				{
 					//if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
 					//	m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
-					float a = g_pObjectManager->GetVecIObject()[i]->GetmatWorld()._42;
-					float b = rayOrigin.y;
+					//float a = g_pObjectManager->GetVecIObject()[i]->GetmatWorld()._42;
+					//float b = rayOrigin.y;
 					if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
 					{
 						m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
 						//m_fHeightTile += g_pObjectManager->GetVecIObject()[i]->GetmatWorld()._42;
 						//m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y + g_pObjectManager->GetVecIObject()[i]->GetmatWorld()._42;
 					}
-						
 				}
 			}
 		}
@@ -730,8 +751,6 @@ void CCharacter::Update(float duration)
 	{
 		prePos = m_vPosition;
 	}
-
-
 
 	if (m_Character)
 	{

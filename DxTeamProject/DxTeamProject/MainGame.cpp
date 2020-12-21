@@ -236,6 +236,8 @@ void CMainGame::Update()
 	{
 		g_pGameManager->SetIsDataLoad(true);
 #ifdef _DEBUG
+
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
@@ -245,6 +247,8 @@ void CMainGame::Update()
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTileLand.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1.dat");
 
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
@@ -262,7 +266,9 @@ void CMainGame::Update()
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map7.dat");
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map8.dat");
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map9.dat");
-		//#else
+#else
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map1.dat");
@@ -320,6 +326,14 @@ void CMainGame::Update()
 
 	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{
+		RECT rc;
+		GetClientRect(g_hWnd, &rc);
+		CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
+		g_pObjectManager->Update(ray, m_pCharacter->GetColor());		// Color Change
+		g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());	// PObject Physics
+		g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());		// IObject(Gimmick) Physics
+		g_pObjectManager->Collide(g_pTimeManager->GetElapsedTime());	// Collide
+
 		if (m_pCamera)
 			m_pCamera->Update();
 
@@ -423,13 +437,6 @@ void CMainGame::Update()
 			}
 		}
 
-		RECT rc;
-		GetClientRect(g_hWnd, &rc);
-		CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
-		g_pObjectManager->Update(ray, m_pCharacter->GetColor());		// Color Change
-		g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());	// PObject Physics
-		g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());		// IObject(Gimmick) Physics
-		g_pObjectManager->Collide(g_pTimeManager->GetElapsedTime());	// Collide
 		///
 		//m_pBox->Update(g_pTimeManager->GetElapsedTime());
 		//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics

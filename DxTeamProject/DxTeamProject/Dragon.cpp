@@ -126,22 +126,22 @@ void CDragon::Render()
 
 void CDragon::ChangeColor(D3DXCOLOR color)
 {
-	if (color == RED)
+	if (color == RED && g_pGameManager->GetIsHasOrb("Red"))
 		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_01(red).png", m_pTexture);
 
-	if (color == YELLOW)
+	if (color == YELLOW && g_pGameManager->GetIsHasOrb("Yellow"))
 		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_08(yellow).png", m_pTexture);
 
-	if (color == GREEN)
+	if (color == GREEN && g_pGameManager->GetIsHasOrb("Green"))
 		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_04(green).png", m_pTexture);
 
-	if (color == BLUE)
+	if (color == BLUE && g_pGameManager->GetIsHasOrb("Blue"))
 		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_16(blue).png", m_pTexture);
 
-	if (color == BLACK)
+	if (color == BLACK && g_pGameManager->GetIsHasOrb("Black"))
 		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_05(black).png", m_pTexture);
 
-	if (color == WHITE)
+	if (color == WHITE && g_pGameManager->GetIsHasOrb("White"))
 		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_17(white).png", m_pTexture);
 
 	// m_color = color;

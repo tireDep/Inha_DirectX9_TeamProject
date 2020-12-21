@@ -38,6 +38,7 @@ protected:
 	float					m_fGrabRotation;
 	Synthesize(bool, m_isGrab, Grab);
 	int						m_nGrabAbleObeject;
+	D3DXVECTOR3				m_vGrabDirection;
 	CRay					m_Ray;
 	D3DXVECTOR3 m_vContactNormal;
 	float m_fPenetration;
