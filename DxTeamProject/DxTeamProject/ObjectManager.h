@@ -75,6 +75,8 @@ public:
 	vector<PObject *> GetVecPObejct()	{ return m_vecPObject; }
 	vector<IObject *> GetVecIObject()	{ return m_vecIObject; }
 	vector<CGimmick*> GetVecGimmickObject() { return m_vecGimmick; }
+	CObject& GetVecObjectIndex(int index) { return *m_vecObject[index]; }
+
 	void Update(CRay ray, D3DXCOLOR& objectcolor);		// Color Change
 	void UpdateLand(float duration);					// PObject Physics
 	void Update(float duration);						// IObject(Gimmick) Physics		// Integration...
