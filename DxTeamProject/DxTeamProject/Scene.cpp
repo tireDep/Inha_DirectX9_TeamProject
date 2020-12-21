@@ -22,7 +22,7 @@ void CScene::Setup()
 
 	//start
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"Scene/start.png",
+		"Scene/New.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -33,7 +33,7 @@ void CScene::Setup()
 
 	//BigStart
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/black_script_1.png",
+		"Scene/continue.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -86,21 +86,21 @@ void CScene::Render_Main()
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	//start
-	SetRect(&Startrc, -250, -100, m_stImageInfo.Width, m_stImageInfo.Height);
+	SetRect(&Startrc, -590, -500, m_stImageInfo.Width, m_stImageInfo.Height);
 
 	m_pSprite->Draw(m_pTextureScene, &Startrc,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	//BigStart
+	//continue
 
-	//SetRect(&BigStartrc, -250, -100, m_stImageInfo4.Width, m_stImageInfo4.Height);
+	SetRect(&BigStartrc, -595, -560, m_stImageInfo4.Width, m_stImageInfo4.Height);
 
-	//m_pSprite->Draw(m_pTextureScene4, &BigStartrc,
-	//	&D3DXVECTOR3(0, 0, 0),
-	//	&D3DXVECTOR3(0, 0, 0),
-	//	D3DCOLOR_ARGB(255, 255, 255, 255));
+	m_pSprite->Draw(m_pTextureScene4, &BigStartrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
 	
 
 	m_pSprite->End();
@@ -147,17 +147,23 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 		case WM_LBUTTONDOWN:
 			px.x = LOWORD(eventMsg.lParam);
 			px.y = HIWORD(eventMsg.lParam);
-			if (px.x > 411 && px.x < 1076 && px.y >330 && px.y < 574 && g_pGameManager->GetNowScene() == SceneType::eMainScene)
+			if (px.x > 610 && px.x < 870 && px.y >505 && px.y < 540 && g_pGameManager->GetNowScene() == SceneType::eMainScene)
 			{
 				g_pGameManager->SetNowScene(SceneType::eLoadStart);
-				ShowCursor(false);
+				//ShowCursor(false);
+			}
+
+			if (px.x > 610 && px.x < 860 && px.y >570 && px.y < 605 && g_pGameManager->GetNowScene() == SceneType::eMainScene)
+			{
+				g_pGameManager->SetNowScene(SceneType::eLoadStart);
+				//ShowCursor(false);
 			}
 			break;
 		case WM_MOUSEMOVE:
 			px.x = LOWORD(eventMsg.lParam);
 			px.y = HIWORD(eventMsg.lParam);
-			//cout << "x : "<<px.x << endl;
-			//cout << "y : "<<px.y << endl;
+			cout << "x : "<<px.x << endl;
+			cout << "y : "<<px.y << endl;
 
 		break;
 		}
