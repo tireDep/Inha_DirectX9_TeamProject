@@ -183,6 +183,7 @@ void CMainGame::Setup()
 	g_pEventManager->AddListener(m_pCharacter);
 	g_pEventManager->AddListener(m_pDragon);
 	g_pEventManager->AddListener(m_pUI);
+	g_pEventManager->AddListener(m_pScene);
 
 	// for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
 	// {
@@ -313,10 +314,11 @@ void CMainGame::Update()
 		g_pSoundManager->PlayBGM("f_middle");
 	}
 
-	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
+	g_pTimeManager->Update();
+	g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
+
+//	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{
-		g_pTimeManager->Update();
-		g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
 		if (m_pCamera)
 			m_pCamera->Update();
