@@ -183,7 +183,8 @@ void CFileLoadManager::LoadData(string path)
 			}
 
 			if (strstr(readData.c_str(), "# Object_End"))
-				m_vecMapdata.push_back(mapData);  // CObject::CreateObject(mapData);
+				CObject::CreateObject(mapData); 
+			// m_vecMapdata.push_back(mapData); // thread?
 
 			// >> mapTest
 			if (strstr(readData.c_str(), "# Section"))
@@ -549,29 +550,21 @@ bool CFileLoadManager::FileLoad_MapData(string szFolder, string szFile)
 {
 	string filePath;
 	StrFilePath(filePath, szFolder, szFile);
+	
+	LoadData(filePath);
 
+	// ===================================
+	// >> thread
 	//// >> 기존 버전
-	//LoadData(filePath);
 	//m_vecVecMapdata.push_back(m_vecMapdata);
 	//CreateObject();
 	//g_pGameManager->SetNowScene(SceneType::eGameScene);
 	//// << 기존 버전
 
-	 thread* tempTread = NULL;
-	 m_vecThread.push_back(tempTread);
-	 m_vecThread[m_threadCnt] = new thread(&CFileLoadManager::ThreadFunc, this, filePath);
-	 m_threadCnt++;
-
-	// if (m_thread == NULL)
-	// {
-	// 	m_thread = new thread(&CFileLoadManager::ThreadFunc, this);
-	// }
-	// else
-	// {
-	// 	// if (m_thread->joinable()) m_thread->join();
-	// 	// m_thread = NULL;
-	// }
-
+	 // thread* tempTread = NULL;
+	 // m_vecThread.push_back(tempTread);
+	 // m_vecThread[m_threadCnt] = new thread(&CFileLoadManager::ThreadFunc, this, filePath);
+	 // m_threadCnt++;
 	return true;
 }
 

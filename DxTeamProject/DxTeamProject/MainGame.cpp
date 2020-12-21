@@ -122,8 +122,7 @@ void CMainGame::Setup()
 	g_pGameManager->SetLoadData();
 
 #ifdef _DEBUG
-
-	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTile.dat");
@@ -140,16 +139,15 @@ void CMainGame::Setup()
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
 	
 	// >> loading teset
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map1.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map2.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map3.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map4.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map5.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map6.dat");
 	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map7.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map4.dat");
-
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTile.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
-	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map8.dat");
+	// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map9.dat");
 #else
 	//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
@@ -243,16 +241,17 @@ void CMainGame::Setup()
 
 void CMainGame::Update()
 {
-	// if (g_pGameManager->GetNowScene() == SceneType::eLoading)
-	{
-		if (!g_pFileLoadManager->GetIsThreadRun())
-			g_pFileLoadManager->CheckThread();
-		//else
-		//{
-		//	// todo : 초기화 
-		//	g_pGameManager->SetNowScene(SceneType::eGameScene);
-		//}
-	}
+	// >> thread
+	// // if (g_pGameManager->GetNowScene() == SceneType::eLoading)
+	// {
+	// 	if (!g_pFileLoadManager->GetIsThreadRun())
+	// 		g_pFileLoadManager->CheckThread();
+	// 	//else
+	// 	//{
+	// 	//	// todo : 초기화 
+	// 	//	g_pGameManager->SetNowScene(SceneType::eGameScene);
+	// 	//}
+	// }
 
 	if (GetKeyState('1') & 0x8000)
 	{
