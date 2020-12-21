@@ -633,10 +633,7 @@ void CImguiClass::Update_FileLoader()
 	ImGui::SameLine();  if (ImGui::RadioButton("Gimmick", m_NowLoadType == LoadType::eGimmick)) { m_NowLoadType = LoadType::eGimmick; m_FileLoadIndex = 0; }
 	
 	if (ImGui::RadioButton("Item", m_NowLoadType == LoadType::eItem)) { m_NowLoadType = LoadType::eItem; m_FileLoadIndex = 0; }
-
-#ifdef _DEBUG
 	ImGui::SameLine();  if (ImGui::RadioButton("EventTrigger", m_NowLoadType == LoadType::eTrigger)) { m_NowLoadType = LoadType::eTrigger; m_FileLoadIndex = 0; }
-#endif // _DEBUG
 
 	ImGui::Separator();
 
@@ -757,7 +754,7 @@ void CImguiClass::Update_Inspector()
 
 				case eFlower:	case eSprout:
 				
-				case eInvisibleWall:
+				// case eInvisibleWall:
 
 				case eG_RotationBoard:	case eG_MovingCube:
 
@@ -806,51 +803,51 @@ void CImguiClass::Update_Inspector()
 			if (ImGui::InputFloat3("Translate", vTrans))
 			{
 				// >> 격자에 맞춰 이동(체스 느낌)
-				if (temp.x != vTrans.x)
-				{
-					if (vTrans.x == 0)
-						temp.x = 0;
-					else
-					{
-						temp.x = floor(vTrans.x);
-						temp.x = temp.x <= 0 ? temp.x + 0.5f : temp.x - 0.5f;
-					}
-				}
+				/// KT Grid Round 810 - 853
+				//// >> 격자에 맞춰 이동(체스 느낌)
+				//if (temp.x != vTrans.x)
+				//{
+				//	if (vTrans.x == 0)
+				//		temp.x = 0;
+				//	else
+				//	{
+				//		temp.x = floor(vTrans.x);
+				//		temp.x = temp.x <= 0 ? temp.x + 0.5f : temp.x - 0.5f;
+				//	}
+				//}
 
-				if (temp.y != vTrans.y)
-				{
-					temp.y = vTrans.y;
-					// >> 오브젝트 별 적용이 달라서 임시 적용
+				//if (temp.y != vTrans.y)
+				//{
+				//	temp.y = vTrans.y;
+				//	// >> 오브젝트 별 적용이 달라서 임시 적용
 
-					// if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eSphere
-					//  && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eCylinder
-					//  && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eBox)
-					// 	temp.y = floor(vTrans.y);
-					// else
-					// 	temp.y = vTrans.y;
-					// // >> 오브젝트는 크기 변경에 따라 값이 변동되기 때문에 일단 제외
+				//	// if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eSphere
+				//	//  && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eCylinder
+				//	//  && g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() != eBox)
+				//	// 	temp.y = floor(vTrans.y);
+				//	// else
+				//	// 	temp.y = vTrans.y;
+				//	// // >> 오브젝트는 크기 변경에 따라 값이 변동되기 때문에 일단 제외
 
-					// // >> 구, 실린더는 보정 값 적용?
-					// if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere)
-					// 	temp.y += 0.25f;
-					// 
-					// if(g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCylinder)
-					// 	temp.y += 0.5f;
-				}
-				
-				if (temp.z != vTrans.z)
-				{
-					if (vTrans.z == 0)
-						temp.z = 0;
-					else
-					{
-						temp.z = floor(vTrans.z);
-						temp.z = temp.z <= 0 ? temp.z + 0.5f : temp.z - 0.5f;
-					}
-				}
-
-				vTrans = temp;
-
+				//	// // >> 구, 실린더는 보정 값 적용?
+				//	// if (g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eSphere)
+				//	// 	temp.y += 0.25f;
+				//	// 
+				//	// if(g_pObjectManager->GetIObject(m_nowSelectindex).GetObjType() == eCylinder)
+				//	// 	temp.y += 0.5f;
+				//}
+				//
+				//if (temp.z != vTrans.z)
+				//{
+				//	if (vTrans.z == 0)
+				//		temp.z = 0;
+				//	else
+				//	{
+				//		temp.z = floor(vTrans.z);
+				//		temp.z = temp.z <= 0 ? temp.z + 0.5f : temp.z - 0.5f;
+				//	}
+				//}
+				// vTrans = temp;
 				if (tempType == ObjectType::eG_DoorFrame || tempType == ObjectType::eG_Door)
 				{
 					CDoor* temp = dynamic_cast<CDoor*> (&nowObject);
@@ -1081,8 +1078,14 @@ void CImguiClass::Update_Inspector()
 			{
 				// >> 선택한 오브젝트에 조건 변수가 존재할 경우
 				// >> 스위치 등 기믹에서 출력되지 않아서 if문으로 처리
+				if (nowObjectType == ObjectType::eG_Switch)
+				{
+					if (nowObject.GetConditionName() == "Black")
+						return;
+				}
+
 				ImGui::Text("Select Condition : ");
-				ImGui::SameLine(); ImGui::Text(g_pObjectManager->GetIObject(m_nowSelectindex).GetConditionName().c_str());
+				ImGui::SameLine(); ImGui::Text(nowObject.GetConditionName().c_str());
 			}
 
 			// >> tag

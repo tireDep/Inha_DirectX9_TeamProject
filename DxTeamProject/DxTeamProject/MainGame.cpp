@@ -234,8 +234,11 @@ void CMainGame::Update()
 	// >> 임시 로딩창 구현을 위해 로드 위치 이동
 	if (g_pGameManager->GetNowScene() == SceneType::eLoading)
 	{
+		g_pGameManager->SetIsDataLoad(true);
 #ifdef _DEBUG
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
+
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTile.dat");
@@ -244,6 +247,8 @@ void CMainGame::Update()
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTileLand.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1.dat");
 
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
@@ -261,7 +266,9 @@ void CMainGame::Update()
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map7.dat");
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map8.dat");
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map9.dat");
-		//#else
+#else
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map1.dat");
@@ -298,12 +305,12 @@ void CMainGame::Update()
 	if (GetKeyState('1') & 0x8000)
 	{
 		g_pGameManager->SetGetOrb("Blue");
-		//g_pGameManager->SetGetOrb("Green");
-		//g_pGameManager->SetGetOrb("Red");
-		//g_pGameManager->SetGetOrb("White");
-		//g_pGameManager->SetGetOrb("Yellow");
-		//g_pGameManager->SetGetOrb("Black");
-		g_pGameManager->CompleteOrb();
+		// g_pGameManager->SetGetOrb("Green");
+		// g_pGameManager->SetGetOrb("Red");
+		// g_pGameManager->SetGetOrb("White");
+		// g_pGameManager->SetGetOrb("Yellow");
+		// g_pGameManager->SetGetOrb("Black");
+		// g_pGameManager->CompleteOrb();
 	}
 	if (GetKeyState('2') & 0x8000)
 	{
@@ -317,8 +324,15 @@ void CMainGame::Update()
 	g_pTimeManager->Update();
 	g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
-//	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
+	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{
+		RECT rc;
+		GetClientRect(g_hWnd, &rc);
+		CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
+		g_pObjectManager->Update(ray, m_pCharacter->GetColor());		// Color Change
+		g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());	// PObject Physics
+		g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());		// IObject(Gimmick) Physics
+		g_pObjectManager->Collide(g_pTimeManager->GetElapsedTime());	// Collide
 
 		if (m_pCamera)
 			m_pCamera->Update();
@@ -423,13 +437,6 @@ void CMainGame::Update()
 			}
 		}
 
-		RECT rc;
-		GetClientRect(g_hWnd, &rc);
-		CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
-		g_pObjectManager->Update(ray, m_pCharacter->GetColor());		// Color Change
-		g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());	// PObject Physics
-		g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());		// IObject(Gimmick) Physics
-		g_pObjectManager->Collide(g_pTimeManager->GetElapsedTime());	// Collide
 		///
 		//m_pBox->Update(g_pTimeManager->GetElapsedTime());
 		//g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());					// 2D Physics
@@ -509,9 +516,6 @@ void CMainGame::Render()
 	{
 		if (m_pScene)
 			m_pScene->Render_Ending();
-		g_pGameManager->SetClipCursor(-15);
-		ShowCursor(true);
-		g_pGameManager->InitializationOrb();
 	}
 
 	else if (g_pGameManager->GetNowScene() == SceneType::eLoadStart)

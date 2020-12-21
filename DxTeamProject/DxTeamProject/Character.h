@@ -26,6 +26,10 @@ protected:
 
 	D3DXVECTOR3 m_saveZonePosition;
 
+	//이어하기.
+	D3DXVECTOR3 SaveData;
+	
+
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
 	float					m_fSpeed;
@@ -34,12 +38,14 @@ protected:
 	float					m_fGrabRotation;
 	Synthesize(bool, m_isGrab, Grab);
 	int						m_nGrabAbleObeject;
+	D3DXVECTOR3				m_vGrabDirection;
 	CRay					m_Ray;
 	D3DXVECTOR3 m_vContactNormal;
 	float m_fPenetration;
 	bool m_isCollidedTile;
 	float m_fHeightTile;
 public:
+	bool Keep;
 	virtual ~CCharacter(void);
 	virtual void Setup();
 	virtual void Update(D3DXVECTOR3 cameradirection);

@@ -30,6 +30,7 @@ private:
 	int m_nowX;
 	int m_nowZ;
 	int m_addNum;
+	int m_addNameNum;
 
 	thread* m_thread;
 	CRITICAL_SECTION m_cs;
