@@ -51,6 +51,10 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 	// float duration = *(float*) eventMsg.ptrMessage;
 	// speed *= duration;
 	// float speed = 10.0f * eventMsg.duration;
+
+	if (g_pGameManager->GetNowScene() != SceneType::eGameScene)
+		return;
+
 	m_fRotation = -1.0f;
 
 	if (!g_pGameManager->GetUImode())
