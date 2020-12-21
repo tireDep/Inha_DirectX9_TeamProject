@@ -18,7 +18,7 @@ CGameManager::CGameManager()
 	m_Orbcomplete = false;
 
 	SetClipCursor(0);
-	ShowCursor(false);
+	//ShowCursor(true);
 }
 
 CGameManager* CGameManager::GetInstance()
@@ -151,7 +151,7 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 			if (m_SceneName == SceneType::eMainScene)
 			{
 				// m_SceneName = SceneType::eGameScene;
-				m_SceneName = SceneType::eLoadStart;
+				//m_SceneName = SceneType::eLoadStart;
 				return;
 			}
 
@@ -168,7 +168,7 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 				else
 				{
 					SetClipCursor(0);
-					ShowCursor(false);
+					//ShowCursor(false);
 				}
 			}
 

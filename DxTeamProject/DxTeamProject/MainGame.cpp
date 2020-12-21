@@ -183,6 +183,7 @@ void CMainGame::Setup()
 	g_pEventManager->AddListener(m_pCharacter);
 	g_pEventManager->AddListener(m_pDragon);
 	g_pEventManager->AddListener(m_pUI);
+	g_pEventManager->AddListener(m_pScene);
 
 	// for (int i = 0; i < g_pObjectManager->GetVecObject().size(); i++)
 	// {
@@ -297,11 +298,11 @@ void CMainGame::Update()
 	if (GetKeyState('1') & 0x8000)
 	{
 		g_pGameManager->SetGetOrb("Blue");
-		g_pGameManager->SetGetOrb("Green");
-		g_pGameManager->SetGetOrb("Red");
-		g_pGameManager->SetGetOrb("White");
-		g_pGameManager->SetGetOrb("Yellow");
-		g_pGameManager->SetGetOrb("Black");
+		//g_pGameManager->SetGetOrb("Green");
+		//g_pGameManager->SetGetOrb("Red");
+		//g_pGameManager->SetGetOrb("White");
+		//g_pGameManager->SetGetOrb("Yellow");
+		//g_pGameManager->SetGetOrb("Black");
 		g_pGameManager->CompleteOrb();
 	}
 	if (GetKeyState('2') & 0x8000)
@@ -313,10 +314,11 @@ void CMainGame::Update()
 		g_pSoundManager->PlayBGM("f_middle");
 	}
 
-	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
+	g_pTimeManager->Update();
+	g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
+
+//	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{
-		g_pTimeManager->Update();
-		g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
 		if (m_pCamera)
 			m_pCamera->Update();

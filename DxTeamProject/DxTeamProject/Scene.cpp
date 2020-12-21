@@ -6,6 +6,7 @@ CScene::CScene()
 {
 	movep = 0;
 	movepy = 0;
+	m_strName = "Scene";
 }
 
 
@@ -21,7 +22,7 @@ void CScene::Setup()
 
 	//start
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"Scene/start.png",
+		"Scene/New.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -29,6 +30,17 @@ void CScene::Setup()
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_stImageInfo, NULL, &m_pTextureScene);
+
+	//BigStart
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Scene/continue.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_stImageInfo4, NULL, &m_pTextureScene4);
 
 	//backG2
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
@@ -74,13 +86,21 @@ void CScene::Render_Main()
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	//start
-	SetRect(&Startrc, -250, -100, m_stImageInfo.Width, m_stImageInfo.Height);
+	SetRect(&Startrc, -590, -500, m_stImageInfo.Width, m_stImageInfo.Height);
 
 	m_pSprite->Draw(m_pTextureScene, &Startrc,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
+	//continue
+
+	SetRect(&BigStartrc, -595, -560, m_stImageInfo4.Width, m_stImageInfo4.Height);
+
+	m_pSprite->Draw(m_pTextureScene4, &BigStartrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
 	
 
 	m_pSprite->End();
@@ -116,4 +136,41 @@ void CScene::Render_Ending()
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	m_pSprite->End();
+}
+
+void CScene::ReceiveEvent(ST_EVENT eventMsg)
+{
+	if (eventMsg.eventType == EventType::eInputEvent)
+	{
+		switch(eventMsg.message)
+		{
+		case WM_LBUTTONDOWN:
+			px.x = LOWORD(eventMsg.lParam);
+			px.y = HIWORD(eventMsg.lParam);
+			if (px.x > 610 && px.x < 870 && px.y >505 && px.y < 540 && g_pGameManager->GetNowScene() == SceneType::eMainScene)
+			{
+				g_pGameManager->SetNowScene(SceneType::eLoadStart);
+				//ShowCursor(false);
+			}
+
+			if (px.x > 610 && px.x < 860 && px.y >570 && px.y < 605 && g_pGameManager->GetNowScene() == SceneType::eMainScene)
+			{
+				g_pGameManager->SetNowScene(SceneType::eLoadStart);
+				//ShowCursor(false);
+			}
+			break;
+		case WM_MOUSEMOVE:
+			px.x = LOWORD(eventMsg.lParam);
+			px.y = HIWORD(eventMsg.lParam);
+			cout << "x : "<<px.x << endl;
+			cout << "y : "<<px.y << endl;
+
+		break;
+		}
+	}
+}
+
+string CScene::GetName()
+{
+	return m_strName;
 }
