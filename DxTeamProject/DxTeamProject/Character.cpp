@@ -10,7 +10,7 @@
 
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
-	, m_vPosition(0, 0, 0)
+	, m_vPosition(0, 1.0f, 0)
 	, m_isCollided(false)
 	, m_Character(NULL)
 	, m_isColorChanged(false)
@@ -435,10 +435,10 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 		m_vDirection = cameradirection;
 
 	
-	ofstream fout;
-	fout.open("SaveData.txt");
-	fout << m_vPosition.x << " " << m_vPosition.y << " " << m_vPosition.z << endl;
-	fout.close();
+	//ofstream fout;
+	//fout.open("SaveData.txt");
+	//fout << m_vPosition.x << " " << m_vPosition.y << " " << m_vPosition.z << endl;
+	//fout.close();
 
 	
 	
