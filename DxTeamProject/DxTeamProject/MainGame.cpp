@@ -235,7 +235,7 @@ void CMainGame::Update()
 	if (g_pGameManager->GetNowScene() == SceneType::eLoading)
 	{
 #ifdef _DEBUG
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTile.dat");
@@ -244,6 +244,8 @@ void CMainGame::Update()
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTileLand.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1.dat");
 
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
@@ -261,7 +263,8 @@ void CMainGame::Update()
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map7.dat");
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map8.dat");
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map9.dat");
-		//#else
+#else
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map1.dat");
