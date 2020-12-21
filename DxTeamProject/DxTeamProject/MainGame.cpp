@@ -268,6 +268,7 @@ void CMainGame::Update()
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map9.dat");
 #else
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map1.dat");
