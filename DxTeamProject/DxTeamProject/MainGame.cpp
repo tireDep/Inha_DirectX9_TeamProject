@@ -235,7 +235,7 @@ void CMainGame::Update()
 	if (g_pGameManager->GetNowScene() == SceneType::eLoading)
 	{
 #ifdef _DEBUG
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTile.dat");

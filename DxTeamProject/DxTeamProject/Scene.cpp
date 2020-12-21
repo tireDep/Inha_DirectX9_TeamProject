@@ -150,20 +150,23 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 			if (px.x > 610 && px.x < 870 && px.y >505 && px.y < 540 && g_pGameManager->GetNowScene() == SceneType::eMainScene)
 			{
 				g_pGameManager->SetNowScene(SceneType::eLoadStart);
+				cout << "새시작" << endl;
 				//ShowCursor(false);
+
 			}
 
 			if (px.x > 610 && px.x < 860 && px.y >570 && px.y < 605 && g_pGameManager->GetNowScene() == SceneType::eMainScene)
 			{
 				g_pGameManager->SetNowScene(SceneType::eLoadStart);
+				g_pObjectManager->KeepGoing = true;
+				cout << "이어하기" << endl;
 				//ShowCursor(false);
 			}
 			break;
 		case WM_MOUSEMOVE:
 			px.x = LOWORD(eventMsg.lParam);
 			px.y = HIWORD(eventMsg.lParam);
-			cout << "x : "<<px.x << endl;
-			cout << "y : "<<px.y << endl;
+			
 
 		break;
 		}

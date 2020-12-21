@@ -50,12 +50,19 @@ private:
 	/// KT Reset
 	bool		  ResetCube;
 
+
+	//Keep (이어하기)
+	vector<D3DXVECTOR3*> SaveData;
+	
 	//collide
 	//const static unsigned maxContacts = 256;
 	//Contact contacts[maxContacts];
 	//CollisionData cData;
 	//ContactResolver resolver;
 public:
+	//이어하기
+	bool	KeepGoing;
+
 	void AddObject(CObject* Object)			{ m_vecObject.push_back(Object); }
 	void AddObject(PObject* pObject)		{ m_vecPObject.push_back(pObject); }
 	void AddObject(IObject* iObject)		{ m_vecIObject.push_back(iObject); }

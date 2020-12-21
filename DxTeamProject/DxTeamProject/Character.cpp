@@ -29,6 +29,8 @@ CCharacter::CCharacter()
 	, m_fRotation(0.0f)
 	, m_fGrabRotation(0.0f)
 	, m_saveZonePosition(0,0,0)
+	, SaveData(0,0,0)
+	, Keep(false)
 	/// KT Reset
 	//, Reset(false)
 	// , m_pOBB(NULL)
@@ -381,6 +383,14 @@ CCharacter::~CCharacter()
 
 void CCharacter::Setup()
 {
+	
+	fstream fin;
+	fin.open("SaveData.txt");
+	fin >> SaveData.x >> SaveData.y >> SaveData.z;
+	m_vPosition = D3DXVECTOR3(SaveData.x, SaveData.y, SaveData.z);
+	fin.close();
+	
+
 	m_Character = new CSkinnedMesh;
 	m_Character->SetUp("Resource/XFile/Character", "AnimationCharacter.X");
 	// m_Character->SetAnimationIndexBlend(8);
@@ -397,6 +407,20 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	if(!m_isGrab)
 		m_vDirection = cameradirection;
+
+	
+	ofstream fout;
+	fout.open("SaveData.txt");
+	fout << m_vPosition.x << " " << m_vPosition.y << " " << m_vPosition.z << endl;
+	fout.close();
+
+	
+	
+	
+	
+	
+	
+
 	//if (m_isJump)
 	//{
 	//	// jumping = true;
