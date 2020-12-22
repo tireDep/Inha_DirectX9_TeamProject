@@ -53,7 +53,7 @@ void CEventTrigger::Setup(ST_MapData setData)
 
 	D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
 
-	D3DXMatrixTranslation(&m_matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+	D3DXMatrixTranslation(&m_matT, 1, 1, 1);
 	triggerpos = m_vTranslation;
 	m_matWorld = m_matS * m_matR * m_matT;
 
