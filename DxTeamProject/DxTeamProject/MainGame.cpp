@@ -236,6 +236,7 @@ void CMainGame::Update()
 	{
 		g_pGameManager->SetIsDataLoad(true);
 #ifdef _DEBUG
+
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
@@ -268,6 +269,7 @@ void CMainGame::Update()
 #else
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map3_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map1.dat");
@@ -303,11 +305,11 @@ void CMainGame::Update()
 
 	if (GetKeyState('1') & 0x8000)
 	{
-		g_pGameManager->SetGetOrb("Blue");
+		//g_pGameManager->SetGetOrb("Blue");
 		// g_pGameManager->SetGetOrb("Green");
 		// g_pGameManager->SetGetOrb("Red");
 		// g_pGameManager->SetGetOrb("White");
-		// g_pGameManager->SetGetOrb("Yellow");
+		g_pGameManager->SetGetOrb("Yellow");
 		// g_pGameManager->SetGetOrb("Black");
 		// g_pGameManager->CompleteOrb();
 	}
