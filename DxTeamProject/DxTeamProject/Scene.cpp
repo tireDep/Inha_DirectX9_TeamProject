@@ -74,6 +74,17 @@ void CScene::Setup()
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_stImageInfo3, NULL, &m_pTextureScene3);
+
+	//exit
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Scene/EXIT.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_stImageInfo6, NULL, &m_pTextureScene6);
 }
 
 void CScene::Render_Main()
@@ -81,7 +92,7 @@ void CScene::Render_Main()
 	SetRect(&imageRC, matT._41, matT._42,
 		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
 
-	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND); // | D3DXSPRITE_SORT_TEXTURE
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
 	D3DXMatrixTranslation(&matT, movep, movepy, 0);
 	matWorld = matT;
@@ -97,7 +108,7 @@ void CScene::Render_Main()
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	//Main
-	SetRect(&Mainrc, -440, -100, m_stImageInfo5.Width, m_stImageInfo5.Height);
+	SetRect(&Mainrc, -405, -140, m_stImageInfo5.Width, m_stImageInfo5.Height);
 
 	m_pSprite->Draw(m_pTextureScene5, &Mainrc,
 		&D3DXVECTOR3(0, 0, 0),
@@ -105,7 +116,7 @@ void CScene::Render_Main()
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	//start
-	SetRect(&Startrc, -590, -500, m_stImageInfo.Width, m_stImageInfo.Height);
+	SetRect(&Startrc, -580, -485, m_stImageInfo.Width, m_stImageInfo.Height);
 
 	m_pSprite->Draw(m_pTextureScene, &Startrc,
 		&D3DXVECTOR3(0, 0, 0),
@@ -114,9 +125,18 @@ void CScene::Render_Main()
 
 	//continue
 
-	SetRect(&BigStartrc, -595, -560, m_stImageInfo4.Width, m_stImageInfo4.Height);
+	SetRect(&BigStartrc, -575, -565, m_stImageInfo4.Width, m_stImageInfo4.Height);
 
 	m_pSprite->Draw(m_pTextureScene4, &BigStartrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	//exit
+
+	SetRect(&Exitrc, -570, -655, m_stImageInfo6.Width, m_stImageInfo6.Height);
+
+	m_pSprite->Draw(m_pTextureScene6, &Exitrc,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -130,7 +150,7 @@ void CScene::Render_Ending()
 	SetRect(&imageRC, matT._41, matT._42,
 		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
 
-	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND); // | D3DXSPRITE_SORT_TEXTURE
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
 	D3DXMatrixTranslation(&matT, movep, movepy, 0);
 	matWorld = matT;
@@ -166,24 +186,30 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 		case WM_LBUTTONDOWN:
 			px.x = LOWORD(eventMsg.lParam);
 			px.y = HIWORD(eventMsg.lParam);
-			if (px.x > 610 && px.x < 870 && px.y >505 && px.y < 540 && g_pGameManager->GetNowScene() == SceneType::eMainScene)
+
+			if (px.x > 610 && px.x < 870 && px.y >505 && px.y < 540 
+				&& g_pGameManager->GetNowScene() == SceneType::eMainScene)
 			{
+				//새로하기
 				g_pGameManager->SetNowScene(SceneType::eLoadStart);
 				g_pObjectManager->KeepGoing = false;
-				// cout << "새시작" << endl;
 			}
 
-			if (px.x > 610 && px.x < 860 && px.y >570 && px.y < 605 && g_pGameManager->GetNowScene() == SceneType::eMainScene)
+			if (px.x > 610 && px.x < 860 && px.y >570 && px.y < 605 
+				&& g_pGameManager->GetNowScene() == SceneType::eMainScene)
 			{
+				//이어하기
 				g_pGameManager->SetNowScene(SceneType::eLoadStart);
 				g_pObjectManager->KeepGoing = true;
-				// cout << "이어하기" << endl;
+			}
+
+			if (px.x > 585 && px.x < 850 && px.y > 665 && px.y < 700
+				&& g_pGameManager->GetNowScene() == SceneType::eMainScene)
+			{
+				//끝내기
+				exit(0);
 			}
 			break;
-		case WM_MOUSEMOVE:
-			px.x = LOWORD(eventMsg.lParam);
-			px.y = HIWORD(eventMsg.lParam);
-		break;
 		}
 	}
 }
