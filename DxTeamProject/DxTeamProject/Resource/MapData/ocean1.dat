@@ -1,0 +1,129 @@
+# Object_Start
+# ObjectName
+Tile_Ocean1
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_13.X
+# TxtPath
+Texture_01.png
+# ObjectType
+12
+# Scale
+3
+0.1
+1
+# Rotate
+0
+0
+0
+# Translate
+0
+0
+10
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_Ocean11
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_13.X
+# TxtPath
+Texture_01.png
+# ObjectType
+12
+# Scale
+3
+0.1
+1.1
+# Rotate
+0
+0
+0
+# Translate
+0
+0
+0
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_Ocean13
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_13.X
+# TxtPath
+Texture_01.png
+# ObjectType
+12
+# Scale
+3
+0.1
+1
+# Rotate
+0
+0
+0
+# Translate
+0
+0
+-10
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall4
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+30
+30
+30
+# Rotate
+0
+0
+0
+# Translate
+0
+1
+0
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Section =======================================
+
