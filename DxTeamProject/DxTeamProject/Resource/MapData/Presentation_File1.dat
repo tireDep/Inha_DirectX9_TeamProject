@@ -170,7 +170,7 @@ moving_cube_1.png
 # Speed
 2
 # DirectionIndex
-0
+1
 # Object_End
 
 # Object_Start
@@ -1074,7 +1074,7 @@ Box34
 # Translate
 11.5
 0.5
--2.5
+-4.5
 # Color
 0.5
 0.5
