@@ -22,8 +22,7 @@ CMainGame::CMainGame() :
 	m_pLight(NULL),
 	m_pSkydome(NULL),
 	m_pDragon(NULL),
-	m_pScene(NULL),
-	m_pSm(NULL)
+	m_pScene(NULL)
 {
 }
 
