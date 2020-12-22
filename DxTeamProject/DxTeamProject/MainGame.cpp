@@ -235,9 +235,16 @@ void CMainGame::Update()
 	if (g_pGameManager->GetNowScene() == SceneType::eLoading)
 	{
 		g_pGameManager->SetIsDataLoad(true);
+
+		if (g_pObjectManager->KeepGoing == true)
+		{
+			m_pCharacter->SaveData(g_pGameManager->SaveData());
+			m_pCharacter->SaveSetup();
+		}
 #ifdef _DEBUG
 
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "SaveZone.dat");
+		
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");

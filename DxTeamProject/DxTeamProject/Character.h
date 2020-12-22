@@ -26,10 +26,6 @@ protected:
 
 	D3DXVECTOR3 m_saveZonePosition;
 
-	//이어하기.
-	D3DXVECTOR3 SaveData;
-	
-
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
 	float					m_fSpeed;
@@ -48,6 +44,7 @@ public:
 	bool Keep;
 	virtual ~CCharacter(void);
 	virtual void Setup();
+	void SaveSetup();
 	virtual void Update(D3DXVECTOR3 cameradirection);
 	//virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
 	//int Update(vector<PObject*> ObjectPosition, float duration);
@@ -80,4 +77,8 @@ public:
 
 	/// KT Reset
 	void Reset();
+
+	//이어하기
+	void SaveData(D3DXVECTOR3 pos);
+
 };

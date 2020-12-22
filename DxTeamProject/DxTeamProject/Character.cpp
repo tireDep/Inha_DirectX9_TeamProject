@@ -28,9 +28,8 @@ CCharacter::CCharacter()
 	, m_fSpeed(0.0f)
 	, m_fRotation(0.0f)
 	, m_fGrabRotation(0.0f)
-	, m_saveZonePosition(0,0,0)
+	, m_saveZonePosition(0,1,0)
 	, m_vGrabDirection(0, 0, 1)
-	, SaveData(0,0,0)
 	, Keep(false)
 	/// KT Reset
 	//, Reset(false)
@@ -362,6 +361,10 @@ void CCharacter::ColliderObject()
 			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eTrigger)
 			{
 				m_saveZonePosition = g_pObjectManager->GetVecIObject()[i]->SendPosition();
+				ofstream fout;
+				fout.open("SaveData.txt");
+				fout << m_saveZonePosition.x << " " << m_saveZonePosition.y << " " << m_saveZonePosition.z << endl;
+				fout.close();
 				continue;
 			}
 			//if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
@@ -437,20 +440,35 @@ void CCharacter::Reset()
 	D3DXMatrixIdentity(&matT);
 }
 
+void CCharacter::SaveData(D3DXVECTOR3 pos)
+{
+	m_saveZonePosition = pos;
+}
+
 CCharacter::~CCharacter()
 {
+	
 	SafeDelete(m_Character);
 }
 
 void CCharacter::Setup()
 {
 	
-	fstream fin;
-	fin.open("SaveData.txt");
-	fin >> SaveData.x >> SaveData.y >> SaveData.z;
-	m_vPosition = D3DXVECTOR3(SaveData.x, SaveData.y, SaveData.z);
-	fin.close();
-	
+	m_Character = new CSkinnedMesh;
+	m_Character->SetUp("Resource/XFile/Character", "AnimationCharacter.X");
+	// m_Character->SetAnimationIndexBlend(8);
+	m_Character->SetAnimationIndex(10);
+
+	// Ray y check
+	//D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.95f, 0);	// 0.95 Need To Modify...
+	D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.5f, 0);	// TEST
+	m_Ray.SetOrigin(rayOrigin);
+	m_Ray.SetDirection(D3DXVECTOR3(0, -1, 0));
+}
+
+void CCharacter::SaveSetup()
+{
+	m_vPosition = m_saveZonePosition;
 
 	m_Character = new CSkinnedMesh;
 	m_Character->SetUp("Resource/XFile/Character", "AnimationCharacter.X");
