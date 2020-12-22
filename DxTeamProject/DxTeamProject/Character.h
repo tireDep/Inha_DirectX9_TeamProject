@@ -31,6 +31,7 @@ protected:
 	Synthesize(bool, m_isGrab, Grab);
 	int						m_nGrabAbleObeject;
 	D3DXVECTOR3				m_vGrabDirection;
+	D3DXVECTOR3				m_vGrabCamDir;	// >> 잡기 상태일 때 dir
 	CRay					m_Ray;
 	D3DXVECTOR3 m_vContactNormal;
 	float m_fPenetration;

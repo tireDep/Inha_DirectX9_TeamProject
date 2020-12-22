@@ -27,6 +27,7 @@ CCharacter::CCharacter()
 	, m_fGrabRotation(0.0f)
 	, m_saveZonePosition(0,0.5f,0)
 	, m_vGrabDirection(0, 0, 1)
+	, m_vGrabCamDir(0, 0, 1)
 	, Keep(false)
 {
 	D3DXMatrixIdentity(&m_matWorld);
@@ -240,7 +241,6 @@ string CCharacter::GetName()
 
 void CCharacter::ColliderObject()
 {
-	
 
 	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
 	{
@@ -290,6 +290,7 @@ void CCharacter::ColliderObject()
 				fout.close();
 				continue;
 			}
+			m_isGrab = false; // >> 잡기 상태시 충돌나면 잡기 해제
 			m_isCollided = true;
 			return;
 		}
@@ -381,6 +382,8 @@ void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
 	if (!m_isGrab)
 		m_vDirection = cameradirection;
+	else
+		m_vGrabCamDir = cameradirection;
 }
 
 void CCharacter::Update(float duration)
@@ -421,6 +424,14 @@ void CCharacter::Update(float duration)
 			m_Character->SetAnimationIndex(9); // Walk
 			DoRotation(m_fRotation);
 			m_vPosition += (m_vDirection * m_fSpeed * duration);
+		}
+		else if (m_isGrab)
+		{
+			if (D3DXVec3Dot(&m_vGrabCamDir, &m_vDirection) < 0)
+				m_vDirection = m_vGrabCamDir;	// >> 잡기 상태일 때 일정 각도 이상이면 dir 변경
+			// >> todo : 일정 거리 이상시 해제 필요?
+			// >> todo : 밀기+당기기 상태일 때 마우스 이동하면 잡기 해제 필요?
+			// -> 오브젝트방향과 플레이어 이동 방향이 달라짐
 		}
 	}
 
