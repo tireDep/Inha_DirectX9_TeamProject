@@ -128,6 +128,7 @@ void CMainGame::Update()
 				
 		}
 #ifdef _DEBUG
+		// Presentation File 1
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Presentation_File1.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "SaveZone.dat");
 
@@ -163,16 +164,15 @@ void CMainGame::Update()
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map8.dat");
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map9.dat");
 #else
-		// Presentation File 1
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Presentation_File1.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "OrbTest.dat");
-		
 		// Presentation File 2
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
 
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map3_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map4_bg.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map1.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map2.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map3.dat");
 #endif // DEBUG
 
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map1.dat");

@@ -10,6 +10,7 @@ private:
 	Synthesize(vector<D3DMATERIAL9>, m_vecMtrls, VecMtrls);
 	Synthesize(vector<IDirect3DTexture9*>, m_vecTextures, VecTexture);
 
+	void Render_Sky(const D3DXMATRIXA16& matWorld);
 public:
 	CSkydome();
 	~CSkydome();

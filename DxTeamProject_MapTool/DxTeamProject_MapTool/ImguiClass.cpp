@@ -1076,16 +1076,20 @@ void CImguiClass::Update_Inspector()
 				 || nowObjectType == ObjectType::eBook
 				 || nowObjectType == ObjectType::eOrb))
 			{
+				bool check = true;
 				// >> 선택한 오브젝트에 조건 변수가 존재할 경우
 				// >> 스위치 등 기믹에서 출력되지 않아서 if문으로 처리
 				if (nowObjectType == ObjectType::eG_Switch)
 				{
 					if (nowObject.GetConditionName() == "Black")
-						return;
+						check = false; // >> return으로 하면 디버그 상태에서 터짐
 				}
 
-				ImGui::Text("Select Condition : ");
-				ImGui::SameLine(); ImGui::Text(nowObject.GetConditionName().c_str());
+				if (check)
+				{
+					ImGui::Text("Select Condition : ");
+					ImGui::SameLine(); ImGui::Text(nowObject.GetConditionName().c_str());
+				}
 			}
 
 			// >> tag
