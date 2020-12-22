@@ -49,6 +49,7 @@ void CCharacter::SetColor(D3DXCOLOR c)
 	m_color = c;
 }
 
+static PlayerInputType preInput;
 void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 {
 	// float duration = *(float*) eventMsg.ptrMessage;
@@ -88,6 +89,16 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 		if (eventMsg.eventType == EventType::eInputEvent)
 		{
+			if (preInput == PlayerInputType::eHoldPull && preInput != eventMsg.playerInput)
+			{
+				if(m_nGrabAbleObeject != -1)
+					g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(D3DXVECTOR3(0,0,0));
+			}
+			else
+			{
+				preInput = eventMsg.playerInput;
+			}
+
 			switch (eventMsg.playerInput)
 			{
 				// todo : 점프 구현
@@ -167,6 +178,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 						m_fRotation = m_preRotation;
 						DoRotation(m_fRotation);
 						m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
+						m_vPosition.y = 0;
 						m_Character->SetAnimationIndex(5);
 						// Rotation Init Error...
 					}
@@ -182,6 +194,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			case PlayerInputType::eHoldPull:
 				if (m_isGrab)
 				{
+					if (m_nGrabAbleObeject != -1)
+					{
 					D3DXVECTOR3 v;
 					D3DXVec3Normalize(&v, &this->m_vGrabDirection);
 					g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(-10.0f * v);
@@ -189,9 +203,10 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 					m_fRotation = m_preRotation;
 					DoRotation(m_fRotation);
 					m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
-
+					m_vPosition.y = 0;
 					if (m_Character->CheckAnimationEnd())
 						m_Character->SetAnimationIndex(4);
+					}
 				}
 				else
 				{
