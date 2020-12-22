@@ -55,7 +55,7 @@ void CScene::Setup()
 
 	//backG2
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"Scene/back2.png",
+		"Scene/2.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
