@@ -124,6 +124,7 @@ enum class Pick : int
 #include "ObjectManager.h"
 #include "PhysicsObjectManager.h"
 #include "FileLoadManager.h"
+#include "SoundManager.h"
 
 struct ST_PC_VERTEX
 {

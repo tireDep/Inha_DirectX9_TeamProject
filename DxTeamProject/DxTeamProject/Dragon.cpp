@@ -55,8 +55,6 @@ void CDragon::Update(D3DXVECTOR3 pos, float duration)
 
 	m_vPosition = pos;
 
-	//m_DrangonPos.y = m_position.y + Drangon_y;
-
 	// >> testRotation
 	// Need To Modify... Variable Name
 	if (m_isTrue == false)
@@ -127,29 +125,33 @@ void CDragon::Render()
 void CDragon::ChangeColor(D3DXCOLOR color)
 {
 	if (color == RED && g_pGameManager->GetIsHasOrb("Red"))
-		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_01(red).png", m_pTexture);
+		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon",
+			"T_Dragon_01(red).png", m_pTexture);
 
 	if (color == YELLOW && g_pGameManager->GetIsHasOrb("Yellow"))
-		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_08(yellow).png", m_pTexture);
+		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", 
+			"T_Dragon_08(yellow).png", m_pTexture);
 
 	if (color == GREEN && g_pGameManager->GetIsHasOrb("Green"))
-		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_04(green).png", m_pTexture);
+		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", 
+			"T_Dragon_04(green).png", m_pTexture);
 
 	if (color == BLUE && g_pGameManager->GetIsHasOrb("Blue"))
-		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_16(blue).png", m_pTexture);
+		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", 
+			"T_Dragon_16(blue).png", m_pTexture);
 
 	if (color == BLACK && g_pGameManager->GetIsHasOrb("Black"))
-		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_05(black).png", m_pTexture);
+		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", 
+			"T_Dragon_05(black).png", m_pTexture);
 
 	if (color == WHITE && g_pGameManager->GetIsHasOrb("White"))
-		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", "T_Dragon_17(white).png", m_pTexture);
+		g_pFileLoadManager->FileLoad_Texture("Resource/XFile/Crayon", 
+			"T_Dragon_17(white).png", m_pTexture);
 
-	// m_color = color;
 }
 
 void CDragon::DoRotation()
 {
-	//m_vDirection = cameradirection;
 	m_vDirection.y = 0;
 	D3DXMatrixRotationY(&m_matRotY, rotation);
 
