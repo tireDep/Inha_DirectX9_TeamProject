@@ -182,6 +182,14 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			case PlayerInputType::eHoldPull:
 				if (m_isGrab)
 				{
+					D3DXVECTOR3 v;
+					D3DXVec3Normalize(&v, &this->m_vGrabDirection);
+					g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(-10.0f * v);
+					m_fSpeed = -10.0f;
+					m_fRotation = m_preRotation;
+					DoRotation(m_fRotation);
+					m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
+
 					if (m_Character->CheckAnimationEnd())
 						m_Character->SetAnimationIndex(4);
 				}
