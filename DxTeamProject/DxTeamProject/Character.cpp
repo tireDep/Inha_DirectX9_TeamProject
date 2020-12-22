@@ -112,8 +112,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			case PlayerInputType::eHold:
 				if (m_isGrab)
 				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(5);
+					// if (m_Character->CheckAnimationEnd())
+					// 	m_Character->SetAnimationIndex(5);
 				}
 				else
 				{
@@ -164,8 +164,10 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 						D3DXVec3Normalize(&v, &this->m_vGrabDirection);
 						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(10.0f * v);
 						m_fSpeed = 10.0f;
-						//m_fRotation = m_vGrabDirection;
-
+						m_fRotation = m_preRotation;
+						DoRotation(m_fRotation);
+						m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
+						m_Character->SetAnimationIndex(5);
 						// Rotation Init Error...
 					}
 					// if (m_Character->CheckAnimationEnd())
@@ -176,15 +178,6 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 						m_Character->SetAnimationIndex(10); // Idle
 					m_fSpeed = 0.0f;
 				}
-				//if (m_nGrabAbleObeject != -1)
-				//{
-				//	if (m_Character->CheckAnimationEnd())
-				//		m_Character->SetAnimationIndex(5); // Push
-				//}
-				//else
-				//	if (m_Character->CheckAnimationEnd())
-				//		m_Character->SetAnimationIndex(10); // Idle
-
 				break;
 			case PlayerInputType::eHoldPull:
 				if (m_isGrab)
@@ -212,48 +205,56 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				m_fRotation = 0.0f;
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
+				m_isGrab = false;
 				break;
 
 			case PlayerInputType::eLeftUp:
 				m_fRotation = D3DX_PI / 4.0f * -1;
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
+				m_isGrab = false;
 				break;
 
 			case PlayerInputType::eRightUp:
 				m_fRotation = D3DX_PI / 4.0f;
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
+				m_isGrab = false;
 				break;
 
 			case PlayerInputType::eDown:
 				m_fRotation = D3DX_PI;
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
+				m_isGrab = false;
 				break;
 
 			case PlayerInputType::eLeftDown:
 				m_fRotation = D3DX_PI + D3DX_PI / 4.0f;
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
+				m_isGrab = false;
 				break;
 
 			case PlayerInputType::eRightDown:
 				m_fRotation = (D3DX_PI + D3DX_PI / 4.0f) * -1;
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
+				m_isGrab = false;
 				break;
 
 			case PlayerInputType::eLeft:
 				m_fRotation = -D3DX_PI / 2.0f;
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
+				m_isGrab = false;
 				break;
 
 			case PlayerInputType::eRight:
 				m_fRotation = D3DX_PI / 2.0f;
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
+				m_isGrab = false;
 				break;
 
 			case PlayerInputType::eReset:
@@ -311,10 +312,17 @@ void CCharacter::UpdateRayYCheck(MeshTile & meshtile)
 	//	m_vPosition.y = 0.5f;
 }
 
+
 void CCharacter::ColliderObject()
 {
 	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
 	{
+		if (m_nGrabAbleObeject == i)
+		{
+			m_isCollided = false;
+			continue;
+		}
+
 		//if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB(), &m_vContactNormal, &m_fPenetration))
 		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
 		{
@@ -362,6 +370,10 @@ void CCharacter::ColliderObject()
 		}
 
 	}
+
+	if (m_isGrab)
+		return;
+
 	for (int i = 0; i < g_pObjectManager->GetVecPObejct().size(); i++)
 	{
 		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecPObejct()[i]->GetOBB()))
@@ -431,76 +443,8 @@ void CCharacter::Setup()
 
 void CCharacter::Update(D3DXVECTOR3 cameradirection)
 {
-	if(!m_isGrab)
+	if (!m_isGrab)
 		m_vDirection = cameradirection;
-
-	
-	//ofstream fout;
-	//fout.open("SaveData.txt");
-	//fout << m_vPosition.x << " " << m_vPosition.y << " " << m_vPosition.z << endl;
-	//fout.close();
-
-	
-	
-	
-	
-	
-	
-
-	//if (m_isJump)
-	//{
-	//	// jumping = true;
-	//	if (m_vPosition.y <= 3.f)
-	//	{
-	//		m_vPosition.y += 0.005f;
-	//		if (m_vPosition.y >= 3.f)
-	//		{
-	//			jumpis = true;
-	//			m_jump = false;
-	//		}
-	//	}
-	//}
-	//if (jumpis == true)
-	//{
-	//	m_vPosition.y -= 0.005f;
-	//	if (m_vPosition.y <= 0)
-	//	{
-	//		jumpis = false;
-	//		jumping = false;
-	//	}
-	//	m_Character->SetAnimationIndexBlend(6); // fall
-	//}
-	//if (m_jump)
-	//{
-	//	jumping = true;
-	//	if (m_vPosition.y <= 3.f)
-	//	{
-	//		m_vPosition.y += 0.005f;
-	//		if (m_vPosition.y >= 3.f)
-	//		{
-	//			jumpis = true;
-	//			m_jump = false;
-	//		}
-	//	}
-	//}
-	//if (jumpis == true)
-	//{
-	//	CCharacter::ColliderObject();
-	//	if(!m_isCollided && m_vPosition.y > 0)
-	//		m_vPosition.y -= 0.005f;
-	//	else
-	//	{
-	//		jumpis = false;
-	//		jumping = false;
-	//		//if (m_vPosition.y <= 0)
-	//		//{
-	//		//	jumpis = false;
-	//		//	jumping = false;
-	//		//}
-	//	}
-	//	
-	//	m_Character->SetAnimationIndexBlend(6); // fall
-	//}
 }
 
 //void CCharacter::Update(D3DXVECTOR3 cameradirection, CHeight* pMap)
@@ -687,7 +631,7 @@ void CCharacter::Update(float duration)
 	}
 	else
 	{
-		if (m_fSpeed > 0 && m_Character->CheckAnimationEnd())
+		if (m_fSpeed > 0 && m_Character->CheckAnimationEnd() && !m_isGrab)
 		{
 			//m_fGrabRotation = m_fRotation;
 			m_Character->SetAnimationIndex(9); // Walk
