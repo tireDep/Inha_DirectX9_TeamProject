@@ -22,6 +22,7 @@ private:
 	bool m_Orbcomplete;
 	// << 맵 완료시 삭제
 
+	
 	// Synthesize(SceneType, m_SceneName, NowScene);
 	SceneType m_SceneName;
 	Synthesize(bool, m_isDataLoad, IsDataLoad);
@@ -66,4 +67,8 @@ public:
 
 	void SetNowScene(SceneType set);
 	SceneType GetNowScene();
+
+	//이어하기
+	D3DXVECTOR3 SaveData();
+
 };

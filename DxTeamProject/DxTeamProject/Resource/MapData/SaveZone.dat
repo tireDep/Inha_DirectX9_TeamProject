@@ -1,0 +1,107 @@
+# Object_Start
+# ObjectName
+EventTrigger_Save1
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+39
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+1
+3
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# TriggerIndex
+0
+# ZoneIndex
+0
+# Object_End
+
+# Object_Start
+# ObjectName
+EventTrigger_Save2
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+39
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+3
+1
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# TriggerIndex
+0
+# ZoneIndex
+0
+# Object_End
+
+# Object_Start
+# ObjectName
+EventTrigger_Save3
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+39
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+3
+1
+3
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# TriggerIndex
+0
+# ZoneIndex
+0
+# Object_End
+
+# Section =======================================
+

@@ -150,6 +150,7 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 			if (px.x > 610 && px.x < 870 && px.y >505 && px.y < 540 && g_pGameManager->GetNowScene() == SceneType::eMainScene)
 			{
 				g_pGameManager->SetNowScene(SceneType::eLoadStart);
+				g_pObjectManager->KeepGoing = false;
 				// cout << "»õ½ÃÀÛ" << endl;
 			}
 

@@ -2,6 +2,17 @@
 #include "GameManager.h"
 #include "SoundManager.h"
 
+D3DXVECTOR3 CGameManager::SaveData()
+{
+	fstream fin;
+	D3DXVECTOR3 SaveData;
+	fin.open("SaveData.txt");
+	fin >> SaveData.x >> SaveData.y >> SaveData.z;
+	fin.close();
+
+	return SaveData;
+}
+
 CGameManager::CGameManager()
 {
 	m_strName = "GameManager";
@@ -60,6 +71,10 @@ void CGameManager::SetLoadData()
 	temp.first = "Green";	temp.second = false;	m_mapOrb.insert(temp);
 	temp.first = "Red";		temp.second = false;	m_mapOrb.insert(temp);
 	temp.first = "Blue";	temp.second = false;	m_mapOrb.insert(temp);
+
+
+
+
 }
 
 bool CGameManager::GetDevMode()
