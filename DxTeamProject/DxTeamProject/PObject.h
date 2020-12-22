@@ -57,7 +57,6 @@ public:
 	virtual float GetMass() const;
 	virtual bool hasFiniteMass() const;
 	virtual void SetPusingForce(D3DXVECTOR3 forcedirection);
-	virtual void Collision3D(PObject * otherobject);
 	virtual void UpdateLand(float duration);
 	virtual COBB* GetOBB() { return m_pOBB; }
 
