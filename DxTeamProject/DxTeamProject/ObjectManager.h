@@ -50,9 +50,6 @@ private:
 	/// KT Reset
 	bool		  ResetCube;
 
-
-	//Keep (이어하기)
-	vector<D3DXVECTOR3*> SaveData;
 	
 	//collide
 	//const static unsigned maxContacts = 256;

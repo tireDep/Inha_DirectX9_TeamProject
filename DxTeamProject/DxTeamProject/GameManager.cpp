@@ -13,6 +13,40 @@ D3DXVECTOR3 CGameManager::SaveData()
 	return SaveData;
 }
 
+bool CGameManager::SaveOrb()
+{
+	bool SaveData;
+	if (g_pObjectManager->KeepGoing == false) //처음시작.
+		SaveData = true;
+	else
+	{
+		fstream fin;
+
+		fin.open("OrbData.txt");
+		fin >> SaveData;
+		fin.close();
+	}
+
+	return SaveData;
+}
+
+bool CGameManager::SaveBook()
+{
+	bool SaveData;
+	if (g_pObjectManager->KeepGoing == false) //처음시작.
+		SaveData = true;
+	else
+	{
+		fstream fin;
+
+		fin.open("BookData.txt");
+		fin >> SaveData;
+		fin.close();
+	}
+
+	return SaveData;
+}
+
 CGameManager::CGameManager()
 {
 	m_strName = "GameManager";
@@ -71,9 +105,6 @@ void CGameManager::SetLoadData()
 	temp.first = "Green";	temp.second = false;	m_mapOrb.insert(temp);
 	temp.first = "Red";		temp.second = false;	m_mapOrb.insert(temp);
 	temp.first = "Blue";	temp.second = false;	m_mapOrb.insert(temp);
-
-
-
 
 }
 

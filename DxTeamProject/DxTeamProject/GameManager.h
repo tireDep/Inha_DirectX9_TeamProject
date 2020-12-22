@@ -40,6 +40,7 @@ public:
 	virtual ~CGameManager() { }
 
 	void SetLoadData();
+	
 	// >> todo : 세이브 파일 로드
 
 	bool GetDevMode();
@@ -70,5 +71,7 @@ public:
 
 	//이어하기
 	D3DXVECTOR3 SaveData();
+	bool SaveOrb();
+	bool SaveBook();
 
 };

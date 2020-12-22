@@ -55,6 +55,12 @@ void COrb::Setup(ST_MapData setData)
 	v.p = D3DXVECTOR3(f, -f, 0.05);		v.t = D3DXVECTOR2(m_UvY, m_UvY); m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(-f, f, 0.05);		v.t = D3DXVECTOR2(m_UvX, m_UvX); m_vecVertex.push_back(v);
 
+	
+		if (g_pGameManager->SaveOrb() == false)
+			render = false;
+		else
+			render = true;
+	
 	// g_pFileLoadManager->FileLoad_Texture("Resource/Sprite/Orb", "제목 없음-1.png", m_pTex0);
 	// 
 	// D3DXVECTOR3 size = setData.vScale;
@@ -103,7 +109,11 @@ void COrb::Render()
 		g_pGameManager->SetGetOrb(m_strConditionName);
 		g_pObjectManager->RemoveObject(m_pOBB);
 	}
-
+	if (render == false)
+	{
+		g_pGameManager->SetGetOrb(m_strConditionName);
+		g_pObjectManager->RemoveObject(m_pOBB);
+	}
 	
 	if (render == true)
 	{

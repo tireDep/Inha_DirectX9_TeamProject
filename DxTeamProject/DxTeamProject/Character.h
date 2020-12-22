@@ -40,6 +40,10 @@ protected:
 	float m_fPenetration;
 	bool m_isCollidedTile;
 	float m_fHeightTile;
+
+
+	//SaveData
+	
 public:
 	bool Keep;
 	virtual ~CCharacter(void);

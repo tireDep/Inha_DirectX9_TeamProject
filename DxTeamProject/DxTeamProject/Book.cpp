@@ -48,6 +48,11 @@ void CBook::Setup(ST_MapData setData)
 {
 	CItem::Setup(setData);
 
+	if (g_pGameManager->SaveBook() == false)
+		render = false;
+	else
+		render = true;
+
 	//m_strObjName = setData.strObjName;
 	//m_strFolder = setData.strFolderPath;
 	//m_strXFile = setData.strXFilePath;
@@ -147,7 +152,7 @@ void CBook::Render()
 		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 		m_pMesh->DrawSubset(i);
 	}
-	if (player == true)
+	if (player == true || render == false)
 	{	
 		if (m_strConditionName != "")
 		{
@@ -165,5 +170,6 @@ void CBook::Render()
 		g_pObjectManager->RemoveObject(m_pOBB);
 	}
 
+	
 	g_pD3DDevice->SetTexture(0, NULL);
 }

@@ -157,7 +157,7 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 			if (px.x > 610 && px.x < 860 && px.y >570 && px.y < 605 && g_pGameManager->GetNowScene() == SceneType::eMainScene)
 			{
 				g_pGameManager->SetNowScene(SceneType::eLoadStart);
-				g_pObjectManager->KeepGoing = true;
+				g_pObjectManager->KeepGoing = true; //이어하기
 				// cout << "이어하기" << endl;
 			}
 			break;

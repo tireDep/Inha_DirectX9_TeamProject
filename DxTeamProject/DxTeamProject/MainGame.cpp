@@ -240,6 +240,7 @@ void CMainGame::Update()
 		{
 			m_pCharacter->SaveData(g_pGameManager->SaveData());
 			m_pCharacter->SaveSetup();
+				
 		}
 #ifdef _DEBUG
 
@@ -253,7 +254,7 @@ void CMainGame::Update()
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxBridge.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTileLand.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
+		 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
 
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1.dat");
 
@@ -308,6 +309,7 @@ void CMainGame::Update()
 		}
 
 		g_pGameManager->SetNowScene(SceneType::eGameScene);
+
 	}
 
 	if (GetKeyState('1') & 0x8000)

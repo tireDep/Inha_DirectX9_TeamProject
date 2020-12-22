@@ -28,7 +28,7 @@ CCharacter::CCharacter()
 	, m_fSpeed(0.0f)
 	, m_fRotation(0.0f)
 	, m_fGrabRotation(0.0f)
-	, m_saveZonePosition(0,1,0)
+	, m_saveZonePosition(0,0.5f,0)
 	, m_vGrabDirection(0, 0, 1)
 	, Keep(false)
 	/// KT Reset
@@ -337,6 +337,8 @@ void CCharacter::UpdateRayYCheck(MeshTile & meshtile)
 
 void CCharacter::ColliderObject()
 {
+	
+
 	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
 	{
 		if (m_nGrabAbleObeject == i)
@@ -345,13 +347,30 @@ void CCharacter::ColliderObject()
 			continue;
 		}
 
+		
 		//if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB(), &m_vContactNormal, &m_fPenetration))
 		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
 		{
-			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBook || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eOrb)
+			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eOrb)
 			{
-				g_pObjectManager->GetVecIObject()[i]->SetBool(true);
-				continue;
+			
+					g_pObjectManager->GetVecIObject()[i]->SetBool(true);
+					ofstream fout;
+					fout.open("OrbData.txt");
+					fout << g_pObjectManager->GetVecIObject()[i]->GetBool(); // 0
+					fout.close();
+				
+					continue;
+			}
+			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBook)
+			{
+					g_pObjectManager->GetVecIObject()[i]->SetBool(true);
+					ofstream fout;
+					fout.open("BookData.txt");
+					fout << g_pObjectManager->GetVecIObject()[i]->GetBool(); // 0
+					fout.close();
+				
+					continue;
 			}
 			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
 			{
@@ -453,7 +472,10 @@ CCharacter::~CCharacter()
 
 void CCharacter::Setup()
 {
-	
+
+
+	m_vPosition = m_saveZonePosition;
+
 	m_Character = new CSkinnedMesh;
 	m_Character->SetUp("Resource/XFile/Character", "AnimationCharacter.X");
 	// m_Character->SetAnimationIndexBlend(8);
@@ -469,7 +491,7 @@ void CCharacter::Setup()
 void CCharacter::SaveSetup()
 {
 	m_vPosition = m_saveZonePosition;
-
+	
 	m_Character = new CSkinnedMesh;
 	m_Character->SetUp("Resource/XFile/Character", "AnimationCharacter.X");
 	// m_Character->SetAnimationIndexBlend(8);
