@@ -20,6 +20,17 @@ void CScene::Setup()
 
 	GetClientRect(g_hWnd, &imageRC);
 
+	//main
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Scene/Main.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_stImageInfo5, NULL, &m_pTextureScene5);
+
 	//start
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
 		"Scene/New.png",
@@ -44,7 +55,7 @@ void CScene::Setup()
 
 	//backG2
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"Scene/back.png",
+		"Scene/back2.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -81,6 +92,14 @@ void CScene::Render_Main()
 	SetRect(&Backrc, 0, 0, m_stImageInfo2.Width, m_stImageInfo2.Height);
 
 	m_pSprite->Draw(m_pTextureScene2, &Backrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	//Main
+	SetRect(&Mainrc, -440, -100, m_stImageInfo5.Width, m_stImageInfo5.Height);
+
+	m_pSprite->Draw(m_pTextureScene5, &Mainrc,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));

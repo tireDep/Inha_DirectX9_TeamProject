@@ -41,7 +41,6 @@
 //#include "TestAngleSet.h"
 //#include "PSOBB.h"
 /// 릴리즈 버전을 위한 주석처리
-#include "SoundManager.h"
 
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
@@ -62,9 +61,8 @@ CMainGame::CMainGame() :
 	//
 	m_pBook(NULL),
 	m_pDragon(NULL),
-	m_pScene(NULL),
+	m_pScene(NULL)
 	/// 릴리즈 버전을 위한 주석처리
-	m_pSm(NULL)
 {
 	//m_pGimmick_Door[0] = NULL;
 	//m_pGimmick_Door[1] = NULL;
@@ -102,7 +100,6 @@ CMainGame::~CMainGame()
 	// Ray y check
 	
 	/// 릴리즈 버전을 위한 주석처리
-	//SafeDelete(m_pSm);
 }
 
 void CMainGame::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
