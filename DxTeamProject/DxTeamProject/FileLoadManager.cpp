@@ -36,14 +36,6 @@ LPD3DXEFFECT CFileLoadManager::LoadShader(const string fileName)
 	{
 		int size = pError->GetBufferSize();
 		void *ack = pError->GetBufferPointer();
-
-		// if (ack)
-		// {
-		// 	char* str = new char[size];
-		// 	sprintf(str, (const char*)ack, size);
-		// 	OutputDebugString(str);
-		// 	delete[] str;
-		// }
 	}
 
 	return ret;
@@ -150,7 +142,6 @@ void CFileLoadManager::LoadData(string path)
 				mapData.dxColor.a = atof(readData.c_str());
 			}
 			
-			// >> colorTag_Background
 			else if (strstr(readData.c_str(), "# ColorTag"))
 			{
 				while (true)
@@ -238,7 +229,6 @@ void CFileLoadManager::ReadGimmickData(ifstream & file, string& readData, ST_Map
 		if (strstr(readData.c_str(), "# Object_End"))
 			break;
 
-		// >> 회전판자
 		if (strstr(readData.c_str(), "# RotationSpeed"))
 		{
 			ReadAndCutSlashR(file, readData);
@@ -249,9 +239,7 @@ void CFileLoadManager::ReadGimmickData(ifstream & file, string& readData, ST_Map
 			ReadAndCutSlashR(file, readData);
 			mapData.gimmickData.roationAxialIndex_rotaitonBoard = atoi(readData.c_str());
 		}
-		// << 회전판자
 
-		// >> 무빙큐브
 		else if (strstr(readData.c_str(), "# StartPos"))
 		{
 			ReadAndCutSlashR(file, readData);
@@ -272,9 +260,7 @@ void CFileLoadManager::ReadGimmickData(ifstream & file, string& readData, ST_Map
 			ReadAndCutSlashR(file, readData);
 			mapData.gimmickData.directionIndex_movingCube = atoi(readData.c_str());
 		}
-		// << 무빙큐브
 
-		// >> 조건변수(문, 컬러레이저, 스위치)
 		else if (strstr(readData.c_str(), "# ConditionName"))
 		{
 			ReadAndCutSlashR(file, readData);
@@ -300,14 +286,12 @@ void CFileLoadManager::ReadGimmickData(ifstream & file, string& readData, ST_Map
 			ReadAndCutSlashR(file, readData);
 			mapData.gimmickData.conditionOrbIndex = atoi(readData.c_str());
 		}
-		// << 조건변수(문, 컬러레이저, 스위치)
 
 		else if (strstr(readData.c_str(), "# WeightIndex"))
 		{
 			ReadAndCutSlashR(file, readData);
 			mapData.gimmickData.weightIndex = atoi(readData.c_str());
 		}
-		// >> 스위치 조건
 	}
 }
 

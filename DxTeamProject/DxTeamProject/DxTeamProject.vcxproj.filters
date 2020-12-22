@@ -89,7 +89,7 @@
       <Filter>...TrashCan\PhysicsOld\Physics_Particle\Collider</Filter>
     </ClCompile>
     <ClCompile Include="Xfile.cpp">
-      <Filter>Xfile</Filter>
+      <Filter>...TrashCan\Xfile</Filter>
     </ClCompile>
     <ClCompile Include="ParticleContactResolver.cpp">
       <Filter>...TrashCan\PhysicsOld\Physics_Particle\Collider</Filter>
@@ -124,9 +124,6 @@
     <ClCompile Include="SoundManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="CHeight.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Object\IObject\Tile</Filter>
     </ClCompile>
@@ -142,28 +139,9 @@
     <ClCompile Include="Contact.cpp">
       <Filter>...TrashCan\Physics\cyclone</Filter>
     </ClCompile>
-    <ClCompile Include="Skydome.cpp" />
-    <ClCompile Include="MeshTile.cpp">
-      <Filter>Object\IObject\Gimmick</Filter>
-    </ClCompile>
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="ReleaseTimer.cpp">
       <Filter>...TrashCan</Filter>
-    </ClCompile>
-    <ClCompile Include="Door.cpp">
-      <Filter>Object\IObject\Gimmick\KT</Filter>
-    </ClCompile>
-    <ClCompile Include="RotationBoard.cpp">
-      <Filter>Object\IObject\Gimmick\KT</Filter>
-    </ClCompile>
-    <ClCompile Include="Switch.cpp">
-      <Filter>Object\IObject\Gimmick\HW</Filter>
-    </ClCompile>
-    <ClCompile Include="Colorchanger.cpp">
-      <Filter>Object\IObject\Gimmick\MJ</Filter>
-    </ClCompile>
-    <ClCompile Include="BreakableWall.cpp">
-      <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
       <Filter>...TrashCan\PhysicsOld</Filter>
@@ -222,9 +200,6 @@
     <ClCompile Include="Orb.cpp">
       <Filter>Object\IObject\Item</Filter>
     </ClCompile>
-    <ClCompile Include="MovingCube.cpp">
-      <Filter>Object\IObject\Gimmick\MJ</Filter>
-    </ClCompile>
     <ClCompile Include="ColliderObject.cpp">
       <Filter>...TrashCan</Filter>
     </ClCompile>
@@ -254,6 +229,33 @@
     </ClCompile>
     <ClCompile Include="EventTrigger.cpp">
       <Filter>Object\IObject\Trigger</Filter>
+    </ClCompile>
+    <ClCompile Include="CHeight.cpp">
+      <Filter>...TrashCan</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshTile.cpp">
+      <Filter>...TrashCan</Filter>
+    </ClCompile>
+    <ClCompile Include="BreakableWall.cpp">
+      <Filter>...TrashCan</Filter>
+    </ClCompile>
+    <ClCompile Include="Switch.cpp">
+      <Filter>Object\IObject\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Object\IObject\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="RotationBoard.cpp">
+      <Filter>Object\IObject\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Colorchanger.cpp">
+      <Filter>...TrashCan</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingCube.cpp">
+      <Filter>Object\IObject\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Skydome.cpp">
+      <Filter>Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -367,7 +369,7 @@
       <Filter>...TrashCan\PhysicsOld\Physics_Particle\Collider</Filter>
     </ClInclude>
     <ClInclude Include="Xfile.h">
-      <Filter>Xfile</Filter>
+      <Filter>...TrashCan\Xfile</Filter>
     </ClInclude>
     <ClInclude Include="ParticleContactResolver.h">
       <Filter>...TrashCan\PhysicsOld\Physics_Particle\Collider</Filter>
@@ -402,9 +404,6 @@
     <ClInclude Include="SoundManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="CHeight.h">
-      <Filter>Map</Filter>
-    </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Object\IObject\Tile</Filter>
     </ClInclude>
@@ -420,27 +419,8 @@
     <ClInclude Include="Contact.h">
       <Filter>...TrashCan\Physics\cyclone</Filter>
     </ClInclude>
-    <ClInclude Include="Skydome.h" />
-    <ClInclude Include="MeshTile.h">
-      <Filter>Object\IObject\Gimmick</Filter>
-    </ClInclude>
     <ClInclude Include="ReleaseTimer.h">
       <Filter>...TrashCan</Filter>
-    </ClInclude>
-    <ClInclude Include="Door.h">
-      <Filter>Object\IObject\Gimmick\KT</Filter>
-    </ClInclude>
-    <ClInclude Include="RotationBoard.h">
-      <Filter>Object\IObject\Gimmick\KT</Filter>
-    </ClInclude>
-    <ClInclude Include="Switch.h">
-      <Filter>Object\IObject\Gimmick\HW</Filter>
-    </ClInclude>
-    <ClInclude Include="Colorchanger.h">
-      <Filter>Object\IObject\Gimmick\MJ</Filter>
-    </ClInclude>
-    <ClInclude Include="BreakableWall.h">
-      <Filter>Object\IObject\Gimmick\KT</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>...TrashCan\PhysicsOld</Filter>
@@ -499,9 +479,6 @@
     <ClInclude Include="Orb.h">
       <Filter>Object\IObject\Item</Filter>
     </ClInclude>
-    <ClInclude Include="MovingCube.h">
-      <Filter>Object\IObject\Gimmick\MJ</Filter>
-    </ClInclude>
     <ClInclude Include="ColliderObject.h">
       <Filter>...TrashCan</Filter>
     </ClInclude>
@@ -532,6 +509,33 @@
     </ClInclude>
     <ClInclude Include="EventTrigger.h">
       <Filter>Object\IObject\Trigger</Filter>
+    </ClInclude>
+    <ClInclude Include="CHeight.h">
+      <Filter>...TrashCan</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshTile.h">
+      <Filter>...TrashCan</Filter>
+    </ClInclude>
+    <ClInclude Include="BreakableWall.h">
+      <Filter>...TrashCan</Filter>
+    </ClInclude>
+    <ClInclude Include="Switch.h">
+      <Filter>Object\IObject\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Object\IObject\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="RotationBoard.h">
+      <Filter>Object\IObject\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Colorchanger.h">
+      <Filter>...TrashCan</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingCube.h">
+      <Filter>Object\IObject\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Skydome.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -594,9 +598,6 @@
     <Filter Include="Object">
       <UniqueIdentifier>{ebfb21f7-f659-4d66-b0c1-4e6fca5611dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Xfile">
-      <UniqueIdentifier>{ac0d07fd-91b0-4b6a-aaec-5117f95bdd34}</UniqueIdentifier>
-    </Filter>
     <Filter Include="...TrashCan">
       <UniqueIdentifier>{ca5cac3f-681d-4e19-823a-36efbbf714fa}</UniqueIdentifier>
     </Filter>
@@ -611,15 +612,6 @@
     </Filter>
     <Filter Include="Object\IObject\Gimmick">
       <UniqueIdentifier>{160a779f-9356-4325-b722-a130a8535a68}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\IObject\Gimmick\KT">
-      <UniqueIdentifier>{16e41f8f-ec5b-46a9-8ea9-379ce0d70cd3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\IObject\Gimmick\HW">
-      <UniqueIdentifier>{96ee8b91-2a5b-4739-9acb-e90d036b2c18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\IObject\Gimmick\MJ">
-      <UniqueIdentifier>{20582d70-2b5f-4577-b83a-7e923e967f07}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object\IObject\Background">
       <UniqueIdentifier>{a49bcd63-58f5-415e-9448-81b2e3b9ea33}</UniqueIdentifier>
@@ -686,6 +678,9 @@
     </Filter>
     <Filter Include="Object\IObject\Trigger">
       <UniqueIdentifier>{95a9eed5-31e0-4296-8618-5cb06804aa82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="...TrashCan\Xfile">
+      <UniqueIdentifier>{ac0d07fd-91b0-4b6a-aaec-5117f95bdd34}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

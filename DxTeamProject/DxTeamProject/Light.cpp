@@ -31,24 +31,3 @@ void CLight::Setup(D3DXVECTOR3 direction)
 	m_vltDirection = direction;
 	CLight::Setup();
 }
-
-void CLight::SetDiffuse(float r, float g, float b)
-{
-	m_ltDiffuse.r = r;
-	m_ltDiffuse.g = g;
-	m_ltDiffuse.b = b;
-}
-
-void CLight::SetSpecular(float r, float g, float b)
-{
-	m_ltSpecular.r = r;
-	m_ltSpecular.g = g;
-	m_ltSpecular.b = b;
-}
-
-void CLight::SetAmbient(float r, float g, float b)
-{
-	m_ltAmbient.r = r;
-	m_ltAmbient.g = g;
-	m_ltAmbient.b = b;
-}

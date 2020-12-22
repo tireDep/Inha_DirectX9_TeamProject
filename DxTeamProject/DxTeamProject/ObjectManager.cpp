@@ -807,34 +807,6 @@ void CObjectManager::Thread_CalcNewMap()
 	//LeaveCriticalSection(&m_cs);
 }
 
-// MJ Code...
-COBB * CObjectManager::GetvecOBB()
-{
-	for (int i = 0; i < m_vecBox.size(); ++i)
-		return   m_vecBox[i]->GetOBB();
-}
-
-void CObjectManager::SetScale(float scale)
-{
-	m_vScale = scale;
-}
-
-float CObjectManager::GetScale()
-{
-	return m_vScale;
-}
-
-void CObjectManager::AddTileOBB(COBB* OBBbox)
-{
-	m_OBB.push_back(OBBbox);
-}
-
-COBB* CObjectManager::GetTileOBB()
-{
-	for (int i = 0; i < m_OBB.size(); ++i)
-		return m_OBB[i];
-}
-
 /// Delete Later...
 //void CObjectManager::GenerateContacts()
 //{

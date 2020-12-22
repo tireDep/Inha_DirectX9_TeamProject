@@ -2,7 +2,6 @@
 #include "PObject.h"
 
 class IObject;
-class CGimmick;
 class CBox;
 class CCylinder;
 
@@ -24,21 +23,6 @@ public:
 	bool hasIntersected(CBox * otherBox);
 	bool hasIntersected(CCylinder * otherCylinder);
 	bool hasIntersected(IObject * otherIObject);
-	//bool hasIntersected(CGimmick * otherIObject);
 	bool GetBool() { return render; }
 	string GetName();
 };
-
-/// Delete Later...
-/// Collide
-//const static unsigned maxContacts = 256;
-//Contact contacts[maxContacts];
-//CollisionSphere collisionsphere;
-//CollisionData cData;
-//ContactResolver resolver;
-//virtual void GenerateContacts();
-//void CollideUpdate(float duration);
-//virtual void AddForce(const D3DXVECTOR3 & force) {};
-//virtual void ClearAccumulator() {};
-//virtual void Integrate(float duration) {};
-//virtual void RunPhysics(float duration) {};

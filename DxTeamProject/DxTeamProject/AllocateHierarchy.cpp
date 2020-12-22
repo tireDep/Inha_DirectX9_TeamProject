@@ -43,7 +43,6 @@ STDMETHODIMP CAllocateHierarchy::CreateMeshContainer(THIS_ LPCSTR Name,
 	ST_BONE_MESH* pBoneMesh = new ST_BONE_MESH;
 	ZeroMemory(pBoneMesh, sizeof(ST_BONE_MESH));
 
-	// >> material & texture
 	LPDIRECT3DTEXTURE9 temp = NULL;
 	for (DWORD i = 0; i < NumMaterials; i++)
 	{
@@ -53,7 +52,6 @@ STDMETHODIMP CAllocateHierarchy::CreateMeshContainer(THIS_ LPCSTR Name,
 		g_pFileLoadManager->FileLoad_Texture(m_sFolder, pMaterials[i].pTextureFilename, temp);
 		pBoneMesh->vecTexture.push_back(temp);
 	}	// : for
-	// << material & texture
 
 	pSkinInfo->AddRef();
 	pBoneMesh->pSkinInfo = pSkinInfo;
@@ -73,11 +71,9 @@ STDMETHODIMP CAllocateHierarchy::CreateMeshContainer(THIS_ LPCSTR Name,
 			D3DXGetFVFVertexSize(pMeshData->pMesh->GetFVF()), 
 			&vMin, 
 			&vMax);
-		// 바운딩 박스의 최소, 최대 구해짐
 
 		D3DXVec3Minimize(&m_vMin, &m_vMin, &vMin);
 		D3DXVec3Maximize(&m_vMax, &m_vMax, &vMax);
-		// 비교해서 작은 값, 큰 값 저장
 
 		pMeshData->pMesh->UnlockVertexBuffer();
 	}
@@ -90,7 +86,6 @@ STDMETHODIMP CAllocateHierarchy::CreateMeshContainer(THIS_ LPCSTR Name,
 		&pBoneMesh->pOriginMesh
 	);
 
-	// >> 뼈 숫자
 	DWORD dwNumBones = pSkinInfo->GetNumBones();
 	pBoneMesh->ppBoneMatrixPtrs = new D3DXMATRIX*[dwNumBones];
 	pBoneMesh->pBoneOffsetMatrices = new D3DXMATRIX[dwNumBones];
@@ -100,7 +95,6 @@ STDMETHODIMP CAllocateHierarchy::CreateMeshContainer(THIS_ LPCSTR Name,
 	{
 		pBoneMesh->pBoneOffsetMatrices[i] = *(pSkinInfo->GetBoneOffsetMatrix(i));
 	}
-	// << 뼈 숫자
 
 	*ppNewMeshContainer = pBoneMesh;
 

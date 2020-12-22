@@ -16,8 +16,4 @@ private:
 public:
 	void Setup();
 	void Setup(D3DXVECTOR3 direction);
-
-	void SetDiffuse(float r, float g, float b);
-	void SetSpecular(float r, float g, float b);
-	void SetAmbient(float r, float g, float b);
 };

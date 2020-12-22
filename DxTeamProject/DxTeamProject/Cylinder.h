@@ -2,7 +2,6 @@
 #include "PObject.h"
 
 class IObject;
-class CGimmick;
 
 class CCylinder : public PObject
 {
@@ -20,10 +19,10 @@ public:
 
 	bool hasIntersected(CCylinder * otherCylinder);
 	bool hasIntersected(IObject * otherIObject);
-	//bool hasIntersected(CGimmick * otherIObject);
 
 	string GetName();
-	// OBB TEST
+
 	COBB* GetOBB() { return m_pOBB; }
+
 	bool GetBool() { return render; }
 };

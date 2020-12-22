@@ -17,4 +17,3 @@ public:
 	void Setup(string folder, string file);
 	void Render(D3DXVECTOR3 vCamEye);
 };
-

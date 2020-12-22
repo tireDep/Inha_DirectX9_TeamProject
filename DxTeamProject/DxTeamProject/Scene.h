@@ -1,7 +1,6 @@
 #pragma once
 #include "IListener.h"
 
-
 class CScene : public IListener
 {
 private:
@@ -15,7 +14,6 @@ private:
 	RECT imageRC;
 	POINT px;
 	POINT PX2;
-	
 public:
 	CScene();
 	~CScene();
@@ -27,4 +25,3 @@ public:
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName() override;
 };
-

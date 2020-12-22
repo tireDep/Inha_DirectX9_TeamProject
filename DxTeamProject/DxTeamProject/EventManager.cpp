@@ -111,7 +111,6 @@ void CEventManager::Update(float duration)
 		
 		msg.playerInput = lastInput;
 	}
-
 	CheckEvent(msg);
 }
 

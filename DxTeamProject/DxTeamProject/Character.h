@@ -1,9 +1,7 @@
 #pragma once
 #include "IListener.h"
 
-class COBB;
 class CRay;
-class MeshTile;
 class CSkinnedMesh;
 
 class CCharacter : public IListener
@@ -23,9 +21,7 @@ protected:
 	float					m_fMaxJumpHeight;
 	float					m_fRadianJump;
 	bool					m_isFallAni;
-
 	D3DXVECTOR3 m_saveZonePosition;
-
 	CSkinnedMesh*			m_Character;
 	bool					m_isColorChanged;
 	float					m_fSpeed;
@@ -42,43 +38,29 @@ protected:
 	float m_fHeightTile;
 public:
 	bool Keep;
-	virtual ~CCharacter(void);
-	virtual void Setup();
+	~CCharacter(void);
+	void Setup();
 	void SaveSetup();
 	virtual void Update(D3DXVECTOR3 cameradirection);
-	//virtual void Update(D3DXVECTOR3 cameradirection, CHeight* pMap);
-	//int Update(vector<PObject*> ObjectPosition, float duration);
 	void Update(float duration);
-	virtual void DoRotation(const float& radian);
-	virtual void DoMove(const float& velocity);
-	virtual void Render(D3DCOLOR c);
+	void DoRotation(const float& radian);
+	void Render();
 
-	virtual D3DXVECTOR3& GetPosition();
-	virtual D3DXMATRIXA16* GetTransform();
-	virtual float Getrotation();
+	D3DXVECTOR3& GetPosition();
+	D3DXMATRIXA16* GetTransform();
+	float Getrotation();
 
-	virtual void SetColor(D3DXCOLOR c);
-	virtual D3DXCOLOR GetColor();
-	// tmp Collision Test
-	// setup erase
-	virtual bool Collider(bool isCollided);
+	void SetColor(D3DXCOLOR c);
+	D3DXCOLOR GetColor();
+	bool Collider(bool isCollided);
 
-	void ColliderOtherObject(IObject * background);
-	// void SetBool(bool istrue);
-	
 	void ReceiveEvent(ST_EVENT eventMsg) override;
-	virtual string GetName();
+	string GetName();
 
-	// Ray y check
-	virtual void UpdateRayYCheck(MeshTile & meshtile);
-
-	// KT Character to Object
 	void ColliderObject();
 
-	/// KT Reset
 	void Reset();
 
 	//이어하기
 	void SaveData(D3DXVECTOR3 pos);
-
 };

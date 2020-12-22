@@ -19,4 +19,3 @@ public:
 	void Update(float duration);
 	void CheckEvent(ST_EVENT eventMsg);
 };
-

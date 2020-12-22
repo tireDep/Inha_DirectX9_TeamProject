@@ -50,14 +50,6 @@ public:
 	static CFileLoadManager* GetInstance();
 	virtual ~CFileLoadManager();
 
-	/*
-	// >> todo
-	// >> xfile(skinnedMesh) : animation xFile
-	// >> saveData_Player(start play) : saveData
-	// >> mapData(start Play) : mapData
-	// >> script(Story) : text
-	*/
-
 	bool FileLoad_XFile(string szFolder, string szFile, ST_XFile* setXFile);
 	bool FileLoad_Texture(string szFolder, string szFile, LPDIRECT3DTEXTURE9& setTexture);
 	bool FileLoad_Sprite(string szFolder, string szFile, D3DXIMAGE_INFO& imageInfo, LPDIRECT3DTEXTURE9& lpTexture);
@@ -68,7 +60,5 @@ public:
 	LPDIRECT3DTEXTURE9 GetFileNameTexture(string szFolder, string szFile);
 
 	void Destroy();
-
 	void CreateObject();
 };
-

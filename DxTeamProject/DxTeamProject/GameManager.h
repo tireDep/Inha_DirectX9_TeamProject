@@ -4,8 +4,6 @@
 enum class SceneType;
 #define g_pGameManager CGameManager::GetInstance()
 
-const static int ITEMCOUNT = 10;
-
 class CGameManager : public IListener 
 {
 private:
@@ -22,15 +20,10 @@ private:
 	bool m_Orbcomplete;
 	// << 맵 완료시 삭제
 
-	
-	// Synthesize(SceneType, m_SceneName, NowScene);
 	SceneType m_SceneName;
 	Synthesize(bool, m_isDataLoad, IsDataLoad);
 
-	// Orb Item
-	// bool Orb[6] = { false };
 	map<string, bool> m_mapOrb; // >> orbType, isGet
-	bool Item[ITEMCOUNT] = { false };
 	
 	CGameManager();
 	void SetShowCursor(bool set);
@@ -54,12 +47,6 @@ public:
 	bool GetGridMapMode();
 	// << 맵 완료시 삭제
 
-	// void SetOrb(int index);
-	// bool GetOrb(int index);
-
-	void SetItem(int index);
-	bool GetItem(int index);
-
 	void SetGetOrb(string orbType);
 	void InitializationOrb();
 	bool GetIsHasOrb(string orbType);
@@ -70,5 +57,4 @@ public:
 
 	//이어하기
 	D3DXVECTOR3 SaveData();
-
 };

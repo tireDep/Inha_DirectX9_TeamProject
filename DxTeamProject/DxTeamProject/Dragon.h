@@ -32,7 +32,6 @@ private:
 	bool m_isEffect;
 	float m_effectDuration;
 	D3DXCOLOR m_color;
-
 public:
 	CDragon();
 	virtual ~CDragon(void);
@@ -46,4 +45,3 @@ public:
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	virtual string GetName();
 };
-

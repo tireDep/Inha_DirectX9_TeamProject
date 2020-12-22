@@ -17,10 +17,6 @@ class CSphere;
 class CBox;
 class CCylinder;
 
-// Collide
-//#include "Contact.h"
-//#include "Collision.h"
-
 #define		g_pObjectManager CObjectManager::GetInstance()
 
 class CObjectManager
@@ -47,18 +43,11 @@ private:
 	bool m_isThreadRun;
 	bool m_IsIn;
 
-	/// KT Reset
 	bool		  ResetCube;
-
 
 	//Keep (이어하기)
 	vector<D3DXVECTOR3*> SaveData;
 	
-	//collide
-	//const static unsigned maxContacts = 256;
-	//Contact contacts[maxContacts];
-	//CollisionData cData;
-	//ContactResolver resolver;
 public:
 	//이어하기
 	bool	KeepGoing;
@@ -103,16 +92,6 @@ public:
 	void RenderOBBBox();
 
 	void Destroy();
-
-	//==========================================================
-
-	void AddTileOBB(COBB* OBBbox);
-	void SetScale(float scale);
-	float GetScale();
-	
-	vector<COBB*> m_OBB;
-	COBB* GetvecOBB();
-	COBB* GetTileOBB();
 
 	// >> mapTest
 	void AddMap();
