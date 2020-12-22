@@ -16,11 +16,6 @@ PObject::PObject()
 	, m_fLinearDrag(0.995f)
 	, m_vForceVector(0, 0, 0)
 	, m_vForceLocation(0, 0, 0)
-	//, m_vForceAccum(0, 0, 0)
-	//, m_vAngularVelocity(0, 0, 0)
-	//, m_vAngularAcceleration(0, 0, 0)
-	//, m_vInverseRotationInertia(1, 1, 1)
-	//, m_vTorque(0, 0, 0)
 {
 	g_pObjectManager->AddObject(this);
 	m_Color = GRAY;
@@ -71,136 +66,12 @@ void PObject::Update(float duration)
 	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
 	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
 	m_matWorld = matS * matR * matT;
-
-	/// KT Reset
-	//if (g_pObjectManager->Reset == true)
-	//{
-	//	m_vTranslation = saveTranslation += (m_vVelocity * duration);
-	//	D3DXMATRIXA16 matS, matR, matT;
-	//	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-	//	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
-	//	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
-	//	m_matWorld = matS * matR * matT;
-	//}
-	//if (g_pObjectManager->Reset == false) //리셋이됨. 
-	//{
-	//	presentTranslation = saveTranslation += (m_vVelocity * duration);
-	//	presentRotation = saveRotation;
-	//	D3DXMATRIXA16 matS, matR, matT;
-	//	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-	//	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
-	//	D3DXMatrixTranslation(&matT, presentTranslation.x, presentTranslation.y, presentTranslation.z);
-	//	m_matWorld = matS * matR * matT;
-	//}
-
-	//D3DXMATRIXA16 matT;
-	//D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	//D3DXMatrixMultiply(&m_matWorld, &m_matWorld, &matT);
-	//D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	/// Rotation
-	//D3DXMATRIXA16 totalTransaltion;
-	//D3DXMatrixTranslation(&totalTransaltion, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	// Need to modify
-	//m_vTorque = angularforce * 10000000.0f;
-	//m_vTorque = angularforce;
-	//m_vAngularAcceleration.x = m_vTorque.x * m_vInverseRotationInertia.x;
-	//m_vAngularAcceleration.y = m_vTorque.y * m_vInverseRotationInertia.y;
-	//m_vAngularAcceleration.z = m_vTorque.z * m_vInverseRotationInertia.z;
-	//m_vAngularVelocity += m_vAngularAcceleration * duration;
-	//m_vAngularVelocity *= powf(m_fDamping, duration);
-	// tmp Test... Need to AngularDrag
-	//m_vAngularVelocity *= 0.999f;
-	//if (CloseToZero(m_vAngularVelocity.x) && CloseToZero(m_vAngularVelocity.y) && CloseToZero(m_vAngularVelocity.z))
-	//{
-	//	m_vAngularVelocity.x = m_vAngularVelocity.y = m_vAngularVelocity.z = 0.0f;
-	//}
-	//else
-	//	m_vAngularVelocity += (m_vAngularVelocity * duration);
-	//m_stOrientation.setXAngle(m_stOrientation.getXAngle() + m_vAngularVelocity.x * duration);
-	//m_stOrientation.setYAngle(m_stOrientation.getYAngle() + m_vAngularVelocity.y * duration);
-	//m_stOrientation.setZAngle(m_stOrientation.getZAngle() + m_vAngularVelocity.z * duration);
-	//D3DXMATRIXA16 rotationX, rotationY, rotationZ, totalRotation;
-	//D3DXMatrixRotationX(&rotationX, m_stOrientation.getXAngle());
-	//D3DXMatrixRotationY(&rotationY, m_stOrientation.getYAngle());
-	//D3DXMatrixRotationZ(&rotationZ, m_stOrientation.getZAngle());
-	//D3DXMatrixMultiply(&totalRotation, &rotationX, &rotationY);
-	//D3DXMatrixMultiply(&totalRotation, &totalRotation, &rotationZ);
-	//D3DXMatrixMultiply(&m_matWorld, &totalRotation, &totalTransaltion);
 }
 
 void PObject::SetPusingForce(D3DXVECTOR3 forcedirection)
 {
-	//D3DXVECTOR3 forcePosition = forcedirection * m_fBoundingSphere;
-	//m_vForceLocation = forcePosition;
 	m_vForceVector = forcedirection * 2000;
 	SetForceApplied(true);
-}
-
-bool PObject::hasIntersected(PObject * otherobject)
-{
-	return false;
-	//if (this == otherobject)
-	//	return false;
-
-	//D3DXVECTOR3 direction = this->GetPosition() - otherobject->GetPosition();
-	//float distanceSq = direction.x * direction.x + direction.y * direction.y + direction.z * direction.z;
-
-	//if (((this->GetBoundingSphere() + otherobject->GetBoundingSphere()) * (this->GetBoundingSphere() + otherobject->GetBoundingSphere())) < distanceSq)
-	//	return false;
-	//else
-	//	return true;
-}
-
-void PObject::Collision3D(PObject * otherobject)
-{
-	return;
-
-	//static D3DXVECTOR3 direction;
-	//static D3DXVECTOR3 warpVector;
-	//static const float fix = 1.1f;
-	//static float distance;
-	//static float overlapInterval;
-
-	//if (hasIntersected(otherobject))
-	//{
-	//	direction = this->GetPosition() - otherobject->GetPosition();
-	//	distance = sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
-	//	overlapInterval = 2 * otherobject->GetBoundingSphere() - distance;
-	//	warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetBoundingSphere() - overlapInterval));
-
-	//	if (D3DXVec3LengthSq(&otherobject->GetVelocity()) >= D3DXVec3LengthSq(&this->GetVelocity()))
-	//	{
-	//		otherobject->Collision3D(this);
-	//		return;
-	//	}
-	//	else
-	//	{
-	//		D3DXVECTOR3 p;
-	//		p = this->GetPosition() + warpVector;
-	//		this->SetPosition(p);
-	//		D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
-	//	}
-
-	//	float v1, v2;
-	//	D3DXVec3Normalize(&direction, &direction);
-	//	v1 = D3DXVec3Dot(&this->GetVelocity(), &direction);
-	//	v2 = D3DXVec3Dot(&otherobject->GetVelocity(), &direction);
-
-	//	float elasticity = (this->GetElasticity() + otherobject->GetElasticity()) / 2;
-
-	//	float finalv1, finalv2;
-	//	finalv1 = (((this->GetMass() - (elasticity * otherobject->GetMass()))*v1) + ((1 + elasticity)*otherobject->GetMass()*v2))
-	//		/ (this->GetMass() + otherobject->GetMass());
-	//	finalv2 = (((otherobject->GetMass() - (elasticity * this->GetMass()))*v2) + ((1 + elasticity)*this->GetMass()*v1))
-	//		/ (this->GetMass() + otherobject->GetMass());
-
-	//	D3DXVECTOR3 collisionV1, collisionV2;
-	//	collisionV1 = this->GetVelocity() + (finalv1 - v1) * direction;
-	//	collisionV2 = otherobject->GetVelocity() + (finalv2 - v2) * direction;
-
-	//	this->SetVelocity(collisionV1);
-	//	otherobject->SetVelocity(collisionV2);
-	//}
 }
 
 void PObject::UpdateLand(float duration)
@@ -232,17 +103,6 @@ void PObject::Render()
 		m_pMesh->DrawSubset(0);
 }
 
-/// Rotation
-//void PObject::SetOrientation(CTestAngleSet Orientation)
-//{
-//	m_stOrientation = Orientation;
-//}
-//CTestAngleSet PObject::GetOrientation()
-//{
-//	return m_stOrientation;
-//}
-
-/// Physics
 void PObject::SetMass(const float mass)
 {
 	assert(mass != 0);
@@ -260,7 +120,6 @@ bool PObject::hasFiniteMass() const
 	return m_finverseMass >= 0.0f;
 }
 
-/// Color
 bool PObject::LoadAssets()
 {
 	g_pFileLoadManager->FileLoad_Shader("Resource/Shader", "outLine.fx", m_pShader);
@@ -333,12 +192,6 @@ void PObject::ReceiveEvent(ST_EVENT eventMsg)
 
 	if (eventMsg.eventType == EventType::eColorChangeEvent)
 	{
-		// m_Color = *(D3DXCOLOR*)eventMsg.ptrMessage;
-		// m_outLineColor = *(D3DXCOLOR*)eventMsg.ptrMessage;
-		// m_isClicked = true;
-		// 
-		// this->ChangeObjectColor();
-
 		ST_EVENT msg;
 		msg.eventType = EventType::eChangedColorEvent;
 
@@ -348,8 +201,7 @@ void PObject::ReceiveEvent(ST_EVENT eventMsg)
 	}
 	else if (eventMsg.eventType == EventType::eColorEffect)
 	{
-		// >> 용 이펙트 발사 이벤트 후 색상 변경 처리
-
+		// >> To do 용 이펙트 발사 이벤트 후 색상 변경 처리
 		m_Color = *(D3DXCOLOR*)eventMsg.ptrMessage;
 		m_outLineColor = *(D3DXCOLOR*)eventMsg.ptrMessage;
 		m_isClicked = true;
@@ -501,4 +353,46 @@ void PObject::ChangeObjectColor()
 //		this->SetLinearVelocity(collisionV1);
 //		otherobject->SetLinearVelocity(collisionV2);
 //	}
+//}
+//void PObject::Collision3D(PObject * otherobject)
+//{
+//static D3DXVECTOR3 direction;
+//static D3DXVECTOR3 warpVector;
+//static const float fix = 1.1f;
+//static float distance;
+//static float overlapInterval;
+//if (hasIntersected(otherobject))
+//{
+//	direction = this->GetPosition() - otherobject->GetPosition();
+//	distance = sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
+//	overlapInterval = 2 * otherobject->GetBoundingSphere() - distance;
+//	warpVector = fix * direction * (overlapInterval / (2 * otherobject->GetBoundingSphere() - overlapInterval));
+//	if (D3DXVec3LengthSq(&otherobject->GetVelocity()) >= D3DXVec3LengthSq(&this->GetVelocity()))
+//	{
+//		otherobject->Collision3D(this);
+//		return;
+//	}
+//	else
+//	{
+//		D3DXVECTOR3 p;
+//		p = this->GetPosition() + warpVector;
+//		this->SetPosition(p);
+//		D3DXMatrixTranslation(&m_matWorld, m_vPosition.x, m_vPosition.y, m_vPosition.z);
+//	}
+//	float v1, v2;
+//	D3DXVec3Normalize(&direction, &direction);
+//	v1 = D3DXVec3Dot(&this->GetVelocity(), &direction);
+//	v2 = D3DXVec3Dot(&otherobject->GetVelocity(), &direction);
+//	float elasticity = (this->GetElasticity() + otherobject->GetElasticity()) / 2;
+//	float finalv1, finalv2;
+//	finalv1 = (((this->GetMass() - (elasticity * otherobject->GetMass()))*v1) + ((1 + elasticity)*otherobject->GetMass()*v2))
+//		/ (this->GetMass() + otherobject->GetMass());
+//	finalv2 = (((otherobject->GetMass() - (elasticity * this->GetMass()))*v2) + ((1 + elasticity)*this->GetMass()*v1))
+//		/ (this->GetMass() + otherobject->GetMass());
+//	D3DXVECTOR3 collisionV1, collisionV2;
+//	collisionV1 = this->GetVelocity() + (finalv1 - v1) * direction;
+//	collisionV2 = otherobject->GetVelocity() + (finalv2 - v2) * direction;
+//	this->SetVelocity(collisionV1);
+//	otherobject->SetVelocity(collisionV2);
+//}
 //}

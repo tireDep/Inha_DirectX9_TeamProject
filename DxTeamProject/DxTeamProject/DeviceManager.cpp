@@ -54,7 +54,6 @@ CDeviceManager::CDeviceManager() :
 	}
 }
 
-
 CDeviceManager::~CDeviceManager()
 {
 	Destroy();

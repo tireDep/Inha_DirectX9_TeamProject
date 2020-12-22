@@ -106,6 +106,7 @@ void CGameManager::SetLoadData()
 	temp.first = "Red";		temp.second = false;	m_mapOrb.insert(temp);
 	temp.first = "Blue";	temp.second = false;	m_mapOrb.insert(temp);
 
+
 }
 
 bool CGameManager::GetDevMode()
@@ -121,26 +122,6 @@ bool CGameManager::GetUImode()
 bool CGameManager::GetGridMapMode()
 {
 	return m_isGridMap;
-}
-
-// void CGameManager::SetOrb(int index)
-// {
-// 	Orb[index] = true;
-// }
-
-// bool CGameManager::GetOrb(int index)
-// {
-// 	return Orb[index];
-// }
-
-void CGameManager::SetItem(int index)
-{
-	Item[index] = !Item[index];
-}
-
-bool CGameManager::GetItem(int index)
-{
-	return Item[index];
 }
 
 void CGameManager::SetGetOrb(string orbType)
@@ -244,13 +225,6 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 
 		case WM_KEYDOWN:
 		{
-			if (m_SceneName == SceneType::eMainScene)
-			{
-				// m_SceneName = SceneType::eGameScene;
-				//m_SceneName = SceneType::eLoadStart;
-				return;
-			}
-
 			if (VK_CONTROL == eventMsg.wParam && !m_isUIModeIn)
 			{
 				m_isUIMode = !m_isUIMode;

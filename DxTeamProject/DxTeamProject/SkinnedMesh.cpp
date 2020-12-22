@@ -70,10 +70,6 @@ void CSkinnedMesh::Update(float duration)
 	{
 		SetAnimationIndexBlend(2); // ApplyColor
 	}
-	// else if (m_maxPlayTime <= m_passedTime + m_fBlendTime && strstr(m_sNowPlayAni.c_str(), "Jump"))
-	// {
-	// 	SetAnimationIndexBlend(6); // fall
-	// }
 	else if (m_maxPlayTime <= m_passedTime + m_fBlendTime
 		&& (strstr(m_sNowPlayAni.c_str(), "ApplyColor") 
 		 || strstr(m_sNowPlayAni.c_str(), "Push") 
@@ -91,8 +87,6 @@ void CSkinnedMesh::Update(float duration)
 			m_isAniBlend = false;
 			m_pAniController->SetTrackWeight(0, 1.0f);
 			m_pAniController->SetTrackEnable(1, false); 
-			// 같은 의미 : m_pAniController->SetTrackWeight(1, 0.0f);
-			// 애니메이션 안함
 		}
 		else
 		{
@@ -125,28 +119,6 @@ void CSkinnedMesh::Update(LPD3DXFRAME pFrame, LPD3DXFRAME pParent)
 	if (pParent)
 	{
 		pBone->CombinedTransformationMatrix *= ((ST_BONE*)pParent)->CombinedTransformationMatrix;
-		
-		//if (pBone->pMeshContainer->MeshData.pMesh)
-		//{
-		//	D3DXVECTOR3 vMin(0, 0, 0), vMax(0, 0, 0);
-		//	LPVOID pV = NULL;
-		//	pBone->pMeshContainer->MeshData.pMesh->LockVertexBuffer(0, &pV);
-
-		//	D3DXComputeBoundingBox((D3DXVECTOR3*)pV,
-		//		pBone->pMeshContainer->MeshData.pMesh->GetNumVertices(),
-		//		D3DXGetFVFVertexSize(pBone->pMeshContainer->MeshData.pMesh->GetFVF()),
-		//		&vMin,
-		//		&vMax);
-		//	D3DXVec3TransformCoord(&m_vMin, &m_vMin, &pBone->CombinedTransformationMatrix);
-		//	D3DXVec3TransformCoord(&m_vMax, &m_vMax, &pBone->CombinedTransformationMatrix);
-		//	D3DXVec3TransformCoord(&vMin, &vMin, &pBone->CombinedTransformationMatrix);
-		//	D3DXVec3TransformCoord(&vMax, &vMax, &pBone->CombinedTransformationMatrix);
-		//	D3DXVec3Minimize(&m_vMin, &m_vMin, &vMin);
-		//	D3DXVec3Maximize(&m_vMax, &m_vMax, &vMax);
-
-		//	pBone->pMeshContainer->MeshData.pMesh->UnlockVertexBuffer();
-		//}
-		//m_pOBB->Update(&pBone->CombinedTransformationMatrix);
 	}
 
 	if (pFrame->pFrameFirstChild)
@@ -202,9 +174,7 @@ void CSkinnedMesh::Render(LPD3DXFRAME pFrame)
 				g_pD3DDevice->SetMaterial(&pBoneMesh->vecMtl[i]);
 				pBoneMesh->MeshData.pMesh->DrawSubset(i);
 			}	// : for
-
 		}	// : if
-
 	}	// : if
 
 	if (pFrame->pFrameFirstChild)
@@ -268,42 +238,8 @@ void CSkinnedMesh::UpdateSkinnedMesh(LPD3DXFRAME pFrame)
 		pBoneMesh->pSkinInfo->UpdateSkinnedMesh(
 			pBoneMesh->pCurrentBoneMatrices, NULL, src, dest);
 
-		// 1. 새로 생성. 값 이상함
-		//D3DXVECTOR3 vMin(0, 0, 0), vMax(0, 0, 0);
-		//LPVOID pV = NULL;
-		//D3DXComputeBoundingBox((D3DXVECTOR3*)pV,
-		//	pBoneMesh->MeshData.pMesh->GetNumVertices(),
-		//	D3DXGetFVFVertexSize(pBoneMesh->MeshData.pMesh->GetFVF()),
-		//	&vMin,
-		//	&vMax);
-		//// 바운딩 박스의 최소, 최대 구해짐
-
-		//D3DXVec3Minimize(&m_vMin, &m_vMin, &vMin);
-		//D3DXVec3Maximize(&m_vMax, &m_vMax, &vMax);
-
-		// 2. 옮기고 비교
-		//D3DXVECTOR3 vMin(0, 0, 0), vMax(0, 0, 0);
-		//LPVOID pV = NULL;
-		//pBoneMesh->MeshData.pMesh->LockVertexBuffer(0, &pV);
-		//D3DXComputeBoundingBox((D3DXVECTOR3*)pV,
-		//		pBoneMesh->MeshData.pMesh->GetNumVertices(),
-		//		D3DXGetFVFVertexSize(pBoneMesh->MeshData.pMesh->GetFVF()),
-		//		&vMin,
-		//		&vMax);
-		//D3DXVec3TransformCoord(&m_vMin, &m_vMin, pBoneMesh->pCurrentBoneMatrices);
-		//D3DXVec3TransformCoord(&m_vMax, &m_vMax, pBoneMesh->pCurrentBoneMatrices);
-		//D3DXVec3TransformCoord(&vMin, &vMin, pBoneMesh->pCurrentBoneMatrices);
-		//D3DXVec3TransformCoord(&vMax, &vMax, pBoneMesh->pCurrentBoneMatrices);
-		//D3DXVec3Minimize(&m_vMin, &m_vMin, &vMin);
-		//D3DXVec3Maximize(&m_vMax, &m_vMax, &vMax);
-		//pBoneMesh->MeshData.pMesh->UnlockVertexBuffer();
-		
-		// 3. OBB 행렬 업데이트
-		//m_pOBB->Update(pBoneMesh->pCurrentBoneMatrices);
-
 		pBoneMesh->MeshData.pMesh->UnlockVertexBuffer();
 		pBoneMesh->pOriginMesh->UnlockVertexBuffer();
-		// 지형 조작 시, 저장할 경우 이런식으로 처리해도 됨
 		// << 정점 정보
 	}	// : if pFrame
 
@@ -397,7 +333,5 @@ bool CSkinnedMesh::CheckAnimationEnd()
 		else
 			return false;
 	}
-
 	return true;
 }
-

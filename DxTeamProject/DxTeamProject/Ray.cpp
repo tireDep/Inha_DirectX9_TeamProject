@@ -1,14 +1,12 @@
 #include "stdafx.h"
 #include "Ray.h"
 
-
 CRay::CRay()
 	: m_vOrg(0, 0, 0)
 	, m_vDir(0, 0, 0)
 	, m_eRaySpace(E_NONE)
 {
 }
-
 
 CRay::~CRay()
 {
@@ -41,7 +39,6 @@ CRay CRay::RayAtWorldSpace(int nScreenX, int nScreenY)
 
 	D3DXMatrixInverse(&matInvView, 0, &matView);
 
-
 	D3DXVec3TransformCoord(&r.m_vOrg, &r.m_vOrg, &matInvView);
 	D3DXVec3TransformNormal(&r.m_vDir, &r.m_vDir, &matInvView);
 
@@ -54,6 +51,5 @@ bool CRay::IntersectTri(IN D3DXVECTOR3 & v0, IN D3DXVECTOR3 & v1, IN D3DXVECTOR3
 {
 	float u, v, f;
 	bool b = D3DXIntersectTri(&v0, &v1, &v2, &m_vOrg, &m_vDir, &u, &v, &f);
-	//vPickedPosition = m_vOrg + f*m_vDir;
 	return b;
 }

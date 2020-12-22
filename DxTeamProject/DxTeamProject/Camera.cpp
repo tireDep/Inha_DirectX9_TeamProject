@@ -27,8 +27,6 @@ void CCamera::Setup(D3DXVECTOR3* pvTarget)
 
 void CCamera::Update()
 {
-//	Update_MouseMove();
-
 	float move = 2.0f;
 
 	D3DXMATRIXA16	matT;
@@ -191,22 +189,18 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 			if (ptCurMouse.x < rc.left + 1.0f)
 			{
 				m_camStatus = CamStatus::eLeftPos;
-				// fDeltaX -= 15.0f;
 			}
 			else if (ptCurMouse.x > rc.right - 2.0f)
 			{
 				m_camStatus = CamStatus::eRightPos;
-				// fDeltaX += 15.0f;
 			}
 			else if (ptCurMouse.y < rc.top + 1.0f)
 			{
 				m_camStatus = CamStatus::eTopPos;
-				// fDeltaY += 15.0f;
 			}
 			else if (ptCurMouse.y > rc.bottom - 2.0f)
 			{
 				m_camStatus = CamStatus::eBottomPos;
-				// fDeltaY -= 15.0f;
 			}
 			else
 			{
@@ -215,8 +209,8 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 				float fDeltaX = (float)ptCurMouse.x - m_preMousePos.x;
 				float fDeltaY = (float)ptCurMouse.y - m_preMousePos.y;
 
-				m_vCamRotAngle.y += (fDeltaX / 360.0f); // 150.0f
-				m_vCamRotAngle.x += (fDeltaY / 360.0f); // 150.0f
+				m_vCamRotAngle.y += (fDeltaX / 360.0f);
+				m_vCamRotAngle.x += (fDeltaY / 360.0f);
 
 				CheckRotRange();
 				m_preMousePos = ptCurMouse;
