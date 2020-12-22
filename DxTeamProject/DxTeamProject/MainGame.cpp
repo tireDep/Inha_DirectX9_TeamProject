@@ -335,6 +335,8 @@ void CMainGame::Render()
 	}
 	else if (g_pGameManager->GetNowScene() == SceneType::eLoadStart)
 	{		
+		if (m_pScene)
+			m_pScene->Render_Loading();
 		g_pD3DDevice->EndScene();
 		g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
 		g_pGameManager->SetNowScene(SceneType::eLoading);
