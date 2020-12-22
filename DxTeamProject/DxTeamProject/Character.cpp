@@ -25,7 +25,12 @@ CCharacter::CCharacter()
 	, m_fSpeed(0.0f)
 	, m_fRotation(0.0f)
 	, m_fGrabRotation(0.0f)
-	, m_saveZonePosition(0,0.5f,0)
+	/// Presentation
+#ifdef _DEBUG
+	, m_saveZonePosition(0, 0, -15)
+#else
+	, m_saveZonePosition(6,1,-16)
+#endif
 	, m_vGrabDirection(0, 0, 1)
 	, m_vGrabCamDir(0, 0, 1)
 	, Keep(false)
