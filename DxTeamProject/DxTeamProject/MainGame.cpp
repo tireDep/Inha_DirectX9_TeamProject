@@ -132,14 +132,12 @@ void CMainGame::Update()
 				
 		}
 #ifdef _DEBUG
-<<<<<<< HEAD
-=======
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
->>>>>>> da0ebf25f2aa73792a1ac787f8999eae109beea2
+
 
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_puzzle_test.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
