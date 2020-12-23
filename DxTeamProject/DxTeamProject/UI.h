@@ -22,12 +22,12 @@ private:
 	LPDIRECT3DTEXTURE9 m_SmallUI, m_SmallUI2, m_SmallUI3,
 		m_SmallUI4, m_SmallUI5, m_SmallUI6;
 
-	D3DXIMAGE_INFO m_textInfo;
+	D3DXIMAGE_INFO m_textInfo , m_textInfo2, m_textInfo3;
 
-	LPDIRECT3DTEXTURE9 m_textUI;
+	LPDIRECT3DTEXTURE9 m_textUI , m_textUI2 , m_textUI3;
 
 	RECT s_Redrc, s_Yellowrc, s_Greenrc, s_Bluerc, s_Blackrc, s_Whiterc;
-	RECT s_textrc;
+	RECT s_textrc, s_textrc2 , s_textrc3;
 
 	POINT pUI;
 	POINT px; //´­·¶À»¶§
@@ -50,6 +50,7 @@ public:
 	void Setup_UI();
 	void UI_Render();
 	void RenderGrab();
+	void Render_Mapname();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName() override;

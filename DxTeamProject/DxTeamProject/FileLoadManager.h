@@ -30,6 +30,7 @@ private:
 	int m_nowX;
 	int m_nowZ;
 	int m_addNum;
+	Synthesize(int, m_xCnt, MapXCnt);
 	Synthesize(int, m_addNameNum, FileLoadCnt);
 
 	thread* m_thread;

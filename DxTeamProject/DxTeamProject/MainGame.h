@@ -28,6 +28,7 @@ private:
 	CDragon* m_pDragon;
 	CScene* m_pScene;
 	CSoundManager* m_pSm;
+	float m_fCheckTime;
 public:
 	CMainGame();
 	~CMainGame();

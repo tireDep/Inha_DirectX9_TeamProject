@@ -183,6 +183,29 @@ void CUI::Setup_UI()
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_textInfo, NULL, &m_textUI);
+	//////////////////////////////////
+
+	//겨울
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Mapname/winter.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_textInfo2, NULL, &m_textUI2);
+
+	//가을
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Mapname/fall.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_textInfo3, NULL, &m_textUI3);
 }
 
 void CUI::UI_Render()
@@ -346,7 +369,6 @@ void CUI::UI_Render()
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 
-
 	//White BUTTON
 	if (OnButton == Color::White && g_pGameManager->GetIsHasOrb("White"))
 	{
@@ -358,7 +380,6 @@ void CUI::UI_Render()
 			&D3DXVECTOR3(0, 0, 0),
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-	//////////////////////////////
 
 	m_pSprite->End();
 }
@@ -368,7 +389,7 @@ void CUI::RenderGrab()
 	SetRect(&imageRC, matT._41, matT._42,
 		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
 
-	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND); // | D3DXSPRITE_SORT_TEXTURE
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
 	D3DXMatrixTranslation(&matT, movep, movepy, 0);
 	matWorld = matT;
@@ -377,6 +398,36 @@ void CUI::RenderGrab()
 
 	SetRect(&s_textrc, -732, -360, m_textInfo.Width, m_textInfo.Height);
 	m_pSprite->Draw(m_textUI, &s_textrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+
+	m_pSprite->End();
+}
+
+void CUI::Render_Mapname()
+{
+	SetRect(&imageRC, matT._41, matT._42,
+		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
+
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+	D3DXMatrixTranslation(&matT, movep, movepy, 0);
+	matWorld = matT;
+
+	m_pSprite->SetTransform(&matWorld);
+
+	//겨울
+	SetRect(&s_textrc2, -25, -295, m_textInfo2.Width, m_textInfo2.Height);
+	m_pSprite->Draw(m_textUI2, &s_textrc2,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	//가을
+	SetRect(&s_textrc3, -25, -295, m_textInfo3.Width, m_textInfo3.Height);
+	m_pSprite->Draw(m_textUI3, &s_textrc3,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));

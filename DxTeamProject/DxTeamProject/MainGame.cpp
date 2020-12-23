@@ -14,8 +14,6 @@
 #include "Scene.h"
 #include "SoundManager.h"
 
-#include "Map.h"
-
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
 	m_pUI(NULL),
@@ -24,7 +22,8 @@ CMainGame::CMainGame() :
 	m_pLight(NULL),
 	m_pSkydome(NULL),
 	m_pDragon(NULL),
-	m_pScene(NULL)
+	m_pScene(NULL),
+	m_fCheckTime(0.0f)
 {
 }
 
@@ -118,8 +117,6 @@ void CMainGame::Update()
 	// 	//}
 	// }
 
-	CMap::CalcNowPositionIndex(m_pCharacter->GetPosition());
-
 	// >> 임시 로딩창 구현을 위해 로드 위치 이동
 	if (g_pGameManager->GetNowScene() == SceneType::eLoading)
 	{
@@ -160,7 +157,6 @@ void CMainGame::Update()
 		/// 5... 
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map5.dat");
-
 #endif // DEBUG
 
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map1.dat");
@@ -189,6 +185,7 @@ void CMainGame::Update()
 
 		}
 
+		g_pObjectManager->CalcNowPositionIndex(m_pCharacter->GetPosition());
 		g_pGameManager->SetNowScene(SceneType::eGameScene);
 
 	}
@@ -218,10 +215,16 @@ void CMainGame::Update()
 
 	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{
-		//if (g_pGameManager->GetUImode())
-		//	return;
+		if (g_pGameManager->GetUImode())
+			return;
 
-		// todo : 일립스 받아서 n초 이상일때만 맵 판정 필요
+		m_fCheckTime += g_pTimeManager->GetElapsedTime();
+
+		if (m_fCheckTime >= 0.5f)
+		{
+			m_fCheckTime = 0.0f;
+			g_pObjectManager->CalcNowPositionIndex(m_pCharacter->GetPosition());
+		}
 
 		g_pTimeManager->Update();
 		g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
@@ -290,11 +293,9 @@ void CMainGame::Update()
 		//{
 		//	m_pPrevFrustum = m_pNowFrustum;
 		//	m_pNowFrustum.Update();
-
 		//	static D3DXVECTOR3 lastPlayerPos = D3DXVECTOR3(0, 0, 0);
 		//	D3DXVECTOR3 tempPos = m_pCharacter->GetPosition();
 		//	float posCheck = 0.5f;
-
 		//	// >> todo : 판정 변경
 		//	if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum)
 		//		|| fabs(lastPlayerPos.x - tempPos.x) >= posCheck

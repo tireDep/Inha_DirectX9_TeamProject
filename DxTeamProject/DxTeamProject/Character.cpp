@@ -501,7 +501,7 @@ void CCharacter::Update(float duration)
 		}
 	}
 
-	CCharacter::ColliderObject();
+	// CCharacter::ColliderObject();
 	if (m_isReset)
 	{
 		m_isCollided = false;
