@@ -25,11 +25,12 @@ CCharacter::CCharacter()
 	, m_fSpeed(0.0f)
 	, m_fRotation(0.0f)
 	, m_fGrabRotation(0.0f)
+	, m_isReset(false)
 	/// Presentation
 #ifdef _DEBUG
 	, m_saveZonePosition(0, 0, -15)
 #else
-	, m_saveZonePosition(6,1,-16)
+	, m_saveZonePosition(6, 1, -16)
 #endif
 	, m_vGrabDirection(0, 0, 1)
 	, m_vGrabCamDir(0, 0, 1)
@@ -223,6 +224,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				break;
 
 			case PlayerInputType::eReset:
+				m_isReset = true;
 				Reset();
 				g_pObjectManager->Reset();
 				g_pObjectManager->ResetCube = true;
@@ -248,7 +250,6 @@ string CCharacter::GetName()
 
 void CCharacter::ColliderObject()
 {
-
 	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
 	{
 		if (m_nGrabAbleObeject == i)
@@ -299,7 +300,6 @@ void CCharacter::ColliderObject()
 			m_isCollided = true;
 			return;
 		}
-
 	}
 
 	if (m_isGrab)
@@ -335,7 +335,6 @@ void CCharacter::Reset()
 	// Need To Modify... SavePosition;
 	//m_vPosition = D3DXVECTOR3(m_saveZonePosition.x, m_saveZonePosition.y - 0.5f, m_saveZonePosition.z);
 	m_vPosition = m_saveZonePosition;
-	m_isCollided = false;
 
 	m_vDirection = D3DXVECTOR3(0, 0, 1);
 	D3DXMatrixIdentity(&m_matWorld);
@@ -350,13 +349,11 @@ void CCharacter::SaveData(D3DXVECTOR3 pos)
 
 CCharacter::~CCharacter()
 {
-	
 	SafeDelete(m_Character);
 }
 
 void CCharacter::Setup()
 {
-
 	m_vPosition = m_saveZonePosition;
 
 	m_Character = new CSkinnedMesh;
@@ -473,6 +470,13 @@ void CCharacter::Update(float duration)
 	}
 
 	CCharacter::ColliderObject();
+	if (m_isReset)
+	{
+		m_isCollided = false;
+		m_isGrab = false;
+		m_isReset = false;
+	}
+
 	if (m_isCollided)
 	{
 		m_vPosition = prePos;

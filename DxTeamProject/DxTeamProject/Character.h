@@ -37,7 +37,7 @@ protected:
 	float m_fPenetration;
 	bool m_isCollidedTile;
 	float m_fHeightTile;
-
+	bool m_isReset;
 
 	//SaveData
 	
