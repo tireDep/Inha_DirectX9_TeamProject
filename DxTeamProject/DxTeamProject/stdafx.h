@@ -36,6 +36,8 @@
 
 using namespace std;
 
+
+
 #if _DEBUG
 // DEBUG Mode
 #ifdef UNICODE
@@ -303,3 +305,7 @@ inline bool CloseToZero(float testValue)
 }
 
 #include "ReleaseTimer.h"
+
+
+enum class TriggerType { eSave, eZone };
+enum class ZoneType { eWinter, eFall, eZone };

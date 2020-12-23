@@ -26,6 +26,7 @@ private:
 	map<string, Sound*> soundHash;
 	map<string, Sound*> bgmHash;
 
+	bool sound;
 public:
 	//CSoundManager();
 	//virtual ~CSoundManager() { }
@@ -37,6 +38,8 @@ public:
 	void PlaySFX(string soundName);
 	void PlayBGM(string bgmName);
 
+	bool isPlaying();
+	void isPlay(bool set) { sound = set; }
 	void Stop();
 
 	void Destroy();

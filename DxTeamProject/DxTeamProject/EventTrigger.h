@@ -4,8 +4,7 @@
 class CEventTrigger : public IObject
 {
 private:
-	enum class ZoneType { eWinter, eFall };
-	enum class TriggerType { eSave, eZone };
+	
 
 	ZoneType m_zoneType;
 	TriggerType m_triggerType;
@@ -25,7 +24,7 @@ public:
 	virtual void pBoxBool(bool set) { }; //피오브젝트와 상호작용
 	virtual void pCylinderBool(bool set) { };
 	virtual	void pSphereBool(bool set) { };
-
+	ZoneType ZoneIndex() { return m_zoneType; }
 	void TriggerPosition(D3DXVECTOR3 pos) { pos = triggerpos; }
 	D3DXVECTOR3 SendPosition() { return triggerpos; }
 	

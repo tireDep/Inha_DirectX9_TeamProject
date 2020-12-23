@@ -65,7 +65,7 @@ EventTrigger_Save2
 # TriggerIndex
 0
 # ZoneIndex
-0
+1
 # Object_End
 
 # Object_Start
@@ -100,7 +100,7 @@ EventTrigger_Save3
 # TriggerIndex
 0
 # ZoneIndex
-0
+2
 # Object_End
 
 # Section =======================================
