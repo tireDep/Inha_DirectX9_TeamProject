@@ -372,7 +372,10 @@ void CMainGame::Render()
 		}
 
 		if (m_pText->GetisGrabstate())
-			m_pText->RenderGrab();
+		{
+			//m_pText->RenderGrab();
+			m_pUI->RenderGrab();
+		}
 
 		if (m_pDragon)
 			m_pDragon->Render();
