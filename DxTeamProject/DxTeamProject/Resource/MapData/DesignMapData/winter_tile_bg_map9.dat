@@ -1,0 +1,2114 @@
+# Object_Start
+# ObjectName
+Tile_13_Water1
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+3
+0.1
+3
+# Rotate
+0
+0
+0
+# Translate
+0
+0
+0
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_White2
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_White.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+1.05
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_White3
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_White.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+1.05
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black10
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+1.05
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black11
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+1.05
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black20
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+1.05
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black31
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+1.05
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_White32
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_White.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+1.05
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_White33
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_White.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+1.05
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_White34
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_White.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+1.05
+-0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black36
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+1.05
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_White37
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_White.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+1.05
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_White38
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_White.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+1.05
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black47
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+0
+1.05
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_White59
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_White.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+1.05
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_White60
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_White.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+1.05
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_White61
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_White.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+1.05
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_White65
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_White.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-12.5
+1.05
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black66
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+1.05
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black68
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+1.05
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black69
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+1.05
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black70
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+1.05
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black71
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-13.5
+1.05
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock72
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+1
+2.3
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+1
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water74
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water75
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water76
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water77
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+0
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_80
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+2.3
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+11
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_82
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.03
+0.03
+0.03
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+1
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_02_85
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_02.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.04
+0.04
+0.04
+# Rotate
+9
+-90
+0
+# Translate
+-8.5
+1
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White86
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.2
+0.2
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+1
+0
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White109
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.2
+0.2
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+1
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White110
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.2
+0.2
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+1
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_08_118
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_06.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.02
+0.02
+0.02
+# Rotate
+0
+90
+0
+# Translate
+13.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_08_120
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_06.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.03
+0.03
+0.03
+# Rotate
+0
+45
+0
+# Translate
+12.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_08_121
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_06.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.02
+0.02
+0.02
+# Rotate
+0
+90
+0
+# Translate
+13.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_08_122
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_06.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.02
+0.02
+0.02
+# Rotate
+0
+-45
+0
+# Translate
+13.5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_04_128
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_04.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.03
+0.03
+0.03
+# Rotate
+0
+0
+0
+# Translate
+9.5
+1
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_04_129
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_04.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.03
+0.03
+0.03
+# Rotate
+0
+0
+0
+# Translate
+6.5
+1
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_130
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.03
+0.03
+0.03
+# Rotate
+0
+0
+0
+# Translate
+9.5
+1
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_131
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.03
+0.03
+0.03
+# Rotate
+0
+0
+0
+# Translate
+7.5
+1
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_04_132
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_04.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.02
+0.02
+0.02
+# Rotate
+0
+0
+0
+# Translate
+8.5
+1
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_133
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.03
+0.03
+0.03
+# Rotate
+0
+0
+0
+# Translate
+7.5
+1
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_134
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.04
+0.04
+0.04
+# Rotate
+0
+0
+0
+# Translate
+3.5
+1
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_135
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.03
+0.03
+0.03
+# Rotate
+0
+0
+0
+# Translate
+0
+1
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_136
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.04
+0.04
+0.04
+# Rotate
+0
+0
+0
+# Translate
+12.5
+1
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White137
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+1
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White138
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+1
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White139
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+1
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White140
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+1
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White141
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+1
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White142
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+1
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White143
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+1
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White144
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+5.5
+1
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White145
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+1
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White146
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+1
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White147
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+1
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White148
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+1
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White149
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.2
+0.2
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+1
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_150
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.025
+0.025
+0.025
+# Rotate
+0
+-30
+0
+# Translate
+-6.5
+1
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_White151
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_01.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+3.5
+1
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_489
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.025
+0.025
+0.025
+# Rotate
+0
+-30
+0
+# Translate
+-6.5
+1
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_08_490
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_06.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.02
+0.02
+0.02
+# Rotate
+0
+-45
+0
+# Translate
+13.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_04_491
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_04.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+8.5
+1
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_08_492
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_06.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.03
+0.03
+0.03
+# Rotate
+0
+45
+0
+# Translate
+13.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Section =======================================
+

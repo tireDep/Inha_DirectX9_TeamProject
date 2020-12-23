@@ -4519,5 +4519,1092 @@ Texture_01.png
 Yellow
 # Object_End
 
-# Section =======================================
+# Object_Start
+# ObjectName
+Flower_Yellow843
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
 
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+3.5
+1
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow844
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+6.5
+2
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow845
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+7.5
+2
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow846
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+6.5
+1
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow847
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+7.5
+1
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow848
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+5.5
+2
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow849
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+9.5
+2
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow850
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+7.5
+1
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow851
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+8.5
+1
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow852
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+6.5
+1
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow853
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+8.5
+1
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow854
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+11.5
+1
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow855
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+11.5
+1
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow856
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+12.5
+2
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow857
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+10.5
+1
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow858
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+8.5
+1
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow859
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+4.5
+1
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow860
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+1.5
+1
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow861
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+3.5
+1
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow862
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+2.5
+1
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow863
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+2.5
+1
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow864
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+4.5
+1
+12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow865
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+8.5
+1
+12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow867
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+0.5
+1
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow868
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+1.5
+1
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow869
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+7.5
+1
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow870
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+12.5
+1
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow871
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+10.5
+1
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow872
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+5.5
+2
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow874
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+12.5
+3
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow875
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+3.5
+2
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Flower_Yellow876
+# FolderPath
+Resource/XFile/Background/Else
+# FilePath
+Flower_06.X
+# TxtPath
+
+# ObjectType
+35
+# Scale
+0.5
+0.5
+0.5
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+1
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock1182
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+1
+3
+# Rotate
+0
+0
+0
+# Translate
+14.5
+1
+0
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock1183
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.8
+3
+# Rotate
+0
+0
+0
+# Translate
+13.5
+1
+0
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Section =======================================

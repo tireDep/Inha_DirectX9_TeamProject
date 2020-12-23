@@ -1,0 +1,12130 @@
+# Object_Start
+# ObjectName
+Tile_07_Rock2_3
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_4
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_6
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_21
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_22
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_28
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-13.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_31
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-13.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_35
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_41
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_42
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_43
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_51
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_54
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_57
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_67
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_68
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_69
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_70
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_83
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_84
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_87
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_88
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock89
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+5.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock90
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock91
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_98
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_99
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_100
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_101
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_102
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_104
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_105
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_106
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_107
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_108
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_109
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_110
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_111
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_116
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_117
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_118
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_119
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_120
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_121
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_122
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_123
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_124
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_125
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_127
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_128
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_134
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+5.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_135
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_136
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_137
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_138
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_139
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock143
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock151
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock162
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock163
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock164
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock166
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock167
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock168
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock171
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock172
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock173
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock174
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock175
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock176
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock177
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock178
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock179
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock180
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock181
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock182
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock184
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock188
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock197
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock198
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock174(2)
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock175(3)
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock176(4)
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock178(6)
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock179(7)
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock180(8)
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock181(9)
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow182
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow183
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow184
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow185
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow186
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow187
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow188
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow189
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow190
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow191
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow192
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow193
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow194
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow195
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow196
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow197
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow198
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow199
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow200
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow201
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock202
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock203
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock204
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock205
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock206
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock207
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock212
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock218
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock221
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock227
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock228
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock231
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock244
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock246
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock248
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock250
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.7
+0.1
+0.7
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock252
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock253
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock254
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock255
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock256
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock257
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock278
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock279
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock280
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock288
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock290
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock294
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock295
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock296
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock297
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock302
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock320
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock322
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock327
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock331
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock333
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock335
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock339
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock348
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock352
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock365
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock377
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock378
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock379
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock380
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock383
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.7
+0.1
+0.7
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock389
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.5
+0.1
+0.5
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock394
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock395
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock396
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock397
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock408
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock409
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock423
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock436
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock437
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock439
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock441
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock442
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock443
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock444
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock446
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock447
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock458
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock546
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+1.1
+0.1
+1.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock568
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock569
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock570
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock584
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock608
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock612
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock633
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock634
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock635
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock636
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock637
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock638
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock639
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock641
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock642
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock643
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock644
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow660
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+3.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow661
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow662
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow663
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow664
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow665
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow666
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow667
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow668
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow670
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow671
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow672
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow673
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow676
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow677
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow678
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow679
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow680
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow681
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow682
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow683
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow684
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow685
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow686
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow687
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow688
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow689
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow690
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow691
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow692
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow693
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow694
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow695
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow696
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow697
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow698
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow699
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow700
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow701
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow702
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow703
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow704
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow705
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow706
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow707
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow708
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow709
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow710
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow711
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow712
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow713
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow714
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+-0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow715
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow716
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow717
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow718
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow719
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+-0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow720
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow721
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow722
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow723
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow724
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow725
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow726
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow727
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow728
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow729
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow730
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow731
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow732
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow733
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow734
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow735
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow736
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow737
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow738
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow739
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow740
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow741
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow742
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow743
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow744
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow745
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow746
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow747
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow748
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow749
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow750
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow751
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow752
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow753
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow754
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow755
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow756
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow757
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow758
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow759
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow760
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow761
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+3.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow762
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow763
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow764
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow765
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow766
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow767
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow768
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow769
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow770
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow771
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+5.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow772
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow773
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow774
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow775
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow776
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+3.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow777
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow778
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow779
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow780
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow781
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow785
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+5.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow786
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow787
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow788
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow789
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow790
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow791
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow792
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow793
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow794
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow795
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow796
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow797
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow798
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow799
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow800
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow801
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow802
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow803
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow804
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow805
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow806
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_17_Yellow807
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_12.X
+# TxtPath
+Texture_01.png
+# ObjectType
+11
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_816
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.5
+0.1
+0.5
+# Rotate
+0
+0
+0
+# Translate
+-12.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_831
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-13.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_833
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-13.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_844
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_846
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_849
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+0
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_860
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-13.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_871
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.5
+0.1
+0.5
+# Rotate
+0
+0
+0
+# Translate
+-12.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_875
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_882
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.5
+0.1
+0.5
+# Rotate
+0
+0
+0
+# Translate
+-12.5
+0
+12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_889
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_897
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_910
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_916
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_934
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_935
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_939
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_940
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock906
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock907
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock908
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+5.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock909
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+5.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock911
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock912
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+5.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock913
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock914
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock915
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+5.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock916
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock917
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock918
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock919
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock920
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock921
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock922
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock923
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock924
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock925
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock926
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock927
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_928(-400)
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_929(-399)
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_930(-398)
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_931(-397)
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_932
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+1.5
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_384
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_385
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_386
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Section =======================================
+

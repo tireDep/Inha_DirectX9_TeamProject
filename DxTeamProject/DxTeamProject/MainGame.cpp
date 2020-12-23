@@ -132,49 +132,9 @@ void CMainGame::Update()
 				
 		}
 #ifdef _DEBUG
-<<<<<<< HEAD
-=======
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
->>>>>>> da0ebf25f2aa73792a1ac787f8999eae109beea2
-
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_puzzle_test.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-
-		// Presentation File 1
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Presentation_File1.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "SaveZone.dat");
 
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTile.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_TileBoxSphere.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxBridge.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTileLand.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
-
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1.dat");
-
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "conditionTest.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "mapData.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "AllTest_6.0.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "doorTest2.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
-
-		// >> loading teset
-
 		// >> loading test
-
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map1.dat");
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map2.dat");
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map3.dat");
@@ -185,29 +145,22 @@ void CMainGame::Update()
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map8.dat");
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map9.dat");
 #else
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_puzzle_test.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Presentation_File1.dat");
+		/// 1... puzzle side height wall
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map1_puzzle_test.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_puzzle_map1.dat");
+		/// 2... puzzle trace orb
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map2_bg.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_puzzle_map2.dat");
+		/// 3... bridge
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map3_bg.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map3.dat");
+		/// 4... 
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map4_bg.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map4.dat");
+		/// 5... 
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map5.dat");
 
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-
-		//// Presentation File 2
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
-
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map3_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map4_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map3.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map4.dat");
 #endif // DEBUG
 
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map1.dat");
@@ -233,6 +186,7 @@ void CMainGame::Update()
 		for (int i = 0; i < size; i++)
 		{
 			g_pEventManager->AddListener(&g_pObjectManager->GetVecObjectIndex(i));
+
 		}
 
 		g_pGameManager->SetNowScene(SceneType::eGameScene);
