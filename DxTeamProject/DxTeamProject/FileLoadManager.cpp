@@ -7,7 +7,9 @@
 #define ErrMessageBox(msg, type) { MessageBoxA(g_hWnd, string(msg).c_str(), string(type).c_str(), MB_OK); }
 
 CFileLoadManager::CFileLoadManager() :
-	m_limitX(120),
+	/// KT Map Index
+	// index 30(n-1) now : 60 later : 120
+	m_limitX(60),
 	m_nowX(0),
 	m_nowZ(0),
 	m_addNum(30),

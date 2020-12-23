@@ -141,8 +141,7 @@ void CGameManager::SetGetOrb(string orbType)
 			g_pEventManager->CheckEvent(msg);
 		}
 	}
-	/// Presentation
-	//g_pSoundManager->PlaySFX("Orb");
+	g_pSoundManager->PlaySFX("Orb");
 }
 
 void CGameManager::InitializationOrb()

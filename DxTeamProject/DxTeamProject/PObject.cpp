@@ -47,9 +47,8 @@ void PObject::Update(float duration)
 	if (m_finverseMass <= 0.0f) return;
 	assert(duration > 0.0f);
 	
-	/// Presentation
-//	m_vAcceleration = (linearforce + GRAVITY) * m_finverseMass;
-	m_vAcceleration = (linearforce) * m_finverseMass;
+	m_vAcceleration = (linearforce + GRAVITY) * m_finverseMass;
+	//m_vAcceleration = (linearforce) * m_finverseMass;
 	m_vVelocity += (m_vAcceleration * duration);
 	m_vVelocity *= powf(m_fDamping, duration);
 	m_vVelocity *= m_fLinearDrag;

@@ -127,8 +127,9 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 						m_fSpeed = 10.0f;
 						m_fRotation = m_preRotation;
 						DoRotation(m_fRotation);
+						m_vDirection.y = 0;
 						m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
-						m_vPosition.y = 0;
+						//m_vPosition.y = 0;
 						m_Character->SetAnimationIndex(5);
 					}
 				}
@@ -150,8 +151,9 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 					m_fSpeed = -10.0f;
 					m_fRotation = m_preRotation;
 					DoRotation(m_fRotation);
+					m_vDirection.y = 0;
 					m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
-					m_vPosition.y = 0;
+					//m_vPosition.y = 0;
 					if (m_Character->CheckAnimationEnd())
 						m_Character->SetAnimationIndex(4);
 					}
@@ -255,8 +257,6 @@ void CCharacter::ColliderObject()
 			continue;
 		}
 
-
-		
 		//if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB(), &m_vContactNormal, &m_fPenetration))
 		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
 		{
@@ -335,6 +335,7 @@ void CCharacter::Reset()
 	// Need To Modify... SavePosition;
 	//m_vPosition = D3DXVECTOR3(m_saveZonePosition.x, m_saveZonePosition.y - 0.5f, m_saveZonePosition.z);
 	m_vPosition = m_saveZonePosition;
+	m_isCollided = false;
 
 	m_vDirection = D3DXVECTOR3(0, 0, 1);
 	D3DXMatrixIdentity(&m_matWorld);

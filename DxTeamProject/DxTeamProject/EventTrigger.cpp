@@ -39,7 +39,7 @@ void CEventTrigger::Setup(ST_MapData setData)
 	}
 
 	m_vTranslation.y = 0.5f;
-	D3DXCreateBox(g_pD3DDevice, m_vScale.x, m_vScale.y, m_vScale.z, &m_pMesh, NULL);
+	D3DXCreateBox(g_pD3DDevice, 1, 1, 1, &m_pMesh, NULL);
 
 	if (m_strTxtFile != "")
 		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
@@ -53,7 +53,7 @@ void CEventTrigger::Setup(ST_MapData setData)
 
 	D3DXMatrixRotationYawPitchRoll(&m_matR, v.y, v.x, v.z);
 
-	D3DXMatrixTranslation(&m_matT, 1, 1, 1);
+	D3DXMatrixTranslation(&m_matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
 	triggerpos = m_vTranslation;
 	m_matWorld = m_matS * m_matR * m_matT;
 

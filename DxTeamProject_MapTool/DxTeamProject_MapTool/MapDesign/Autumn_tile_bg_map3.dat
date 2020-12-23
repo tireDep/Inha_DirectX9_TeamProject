@@ -264,6 +264,11 @@ cubeworld_texture.tga
 0.5
 1
 # ColorTag
+# GimmickData
+# WeightIndex
+0
+# ConditionName
+Black
 # Object_End
 
 # Object_Start
@@ -408,15 +413,15 @@ board.png
 # ObjectType
 26
 # Scale
-0.05
-0.05
-0.05
+0.03
+0.03
+0.03
 # Rotate
 0
 0
 0
 # Translate
-9.5
+8.5
 1
 0
 # Color
@@ -427,9 +432,9 @@ board.png
 # ColorTag
 # GimmickData
 # RotationSpeed
-0
+-3
 # RotationAxialIndex
-0
+1
 # Object_End
 
 # Object_Start
@@ -444,15 +449,15 @@ board.png
 # ObjectType
 26
 # Scale
-0.05
-0.05
-0.05
+0.03
+0.03
+0.03
 # Rotate
 0
 180
 0
 # Translate
-3.5
+4.5
 1
 7.5
 # Color
@@ -463,9 +468,9 @@ board.png
 # ColorTag
 # GimmickData
 # RotationSpeed
-0
+3
 # RotationAxialIndex
-0
+1
 # Object_End
 
 # Object_Start
@@ -8162,6 +8167,130 @@ autumn_texture.png
 1
 # ColorTag
 Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall252
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+3
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+2
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall253
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+3
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+2
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall254
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+3
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+2
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall255
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+3
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+2
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
 # Object_End
 
 # Section =======================================
