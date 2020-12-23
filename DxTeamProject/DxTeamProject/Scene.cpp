@@ -126,7 +126,7 @@ void CScene::Render_Main()
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	//start
-	SetRect(&Startrc, -580, -485, m_stImageInfo.Width, m_stImageInfo.Height);
+	SetRect(&Startrc, -575, -485, m_stImageInfo.Width, m_stImageInfo.Height);
 
 	m_pSprite->Draw(m_pTextureScene, &Startrc,
 		&D3DXVECTOR3(0, 0, 0),

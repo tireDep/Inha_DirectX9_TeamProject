@@ -152,7 +152,7 @@ void CMainGame::Update()
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxBridge.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTileLand.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
 
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1.dat");
 
@@ -185,15 +185,15 @@ void CMainGame::Update()
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
 
 		// Presentation File 2
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
 
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map3_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map4_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map1.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map2.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map3.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Presentation_File1.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Presentation_File1.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "aa2.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map1.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_map2.dat");
@@ -229,28 +229,6 @@ void CMainGame::Update()
 
 	}
 
-	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
-	{
-		/// Delete Later...
-		if (GetKeyState('1') & 0x8000)
-		{
-			//g_pGameManager->SetGetOrb("Blue");
-			// g_pGameManager->SetGetOrb("Green");
-			// g_pGameManager->SetGetOrb("Red");
-			// g_pGameManager->SetGetOrb("White");
-			//g_pGameManager->SetGetOrb("Yellow");
-			// g_pGameManager->SetGetOrb("Black");
-			// g_pGameManager->CompleteOrb();
-		}
-		if (GetKeyState('2') & 0x8000)
-		{
-			g_pSoundManager->PlayBGM("f_last");
-		}
-		if (GetKeyState('3') & 0x8000)
-		{
-			g_pSoundManager->PlayBGM("f_middle");
-		}
-	}
 
 	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{
@@ -401,7 +379,10 @@ void CMainGame::Render()
 		}
 
 		if (m_pText->GetisGrabstate())
-			m_pText->RenderGrab();
+		{
+			//m_pText->RenderGrab();
+			m_pUI->RenderGrab();
+		}
 
 		if (m_pDragon)
 			m_pDragon->Render();

@@ -22,7 +22,12 @@ private:
 	LPDIRECT3DTEXTURE9 m_SmallUI, m_SmallUI2, m_SmallUI3,
 		m_SmallUI4, m_SmallUI5, m_SmallUI6;
 
+	D3DXIMAGE_INFO m_textInfo;
+
+	LPDIRECT3DTEXTURE9 m_textUI;
+
 	RECT s_Redrc, s_Yellowrc, s_Greenrc, s_Bluerc, s_Blackrc, s_Whiterc;
+	RECT s_textrc;
 
 	POINT pUI;
 	POINT px; //´­·¶À»¶§
@@ -44,6 +49,7 @@ public:
 	bool m_isLButtonDown;
 	void Setup_UI();
 	void UI_Render();
+	void RenderGrab();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName() override;
