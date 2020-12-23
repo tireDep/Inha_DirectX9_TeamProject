@@ -365,11 +365,17 @@ void CUI::UI_Render()
 
 void CUI::RenderGrab()
 {
-	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
+	SetRect(&imageRC, matT._41, matT._42,
+		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
 
-	GetClientRect(g_hWnd, &UIrc);
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND); // | D3DXSPRITE_SORT_TEXTURE
 
-	SetRect(&s_textrc, 0, 0, m_textInfo.Width, m_textInfo.Height);
+	D3DXMatrixTranslation(&matT, movep, movepy, 0);
+	matWorld = matT;
+
+	m_pSprite->SetTransform(&matWorld);
+
+	SetRect(&s_textrc, -732, -360, m_textInfo.Width, m_textInfo.Height);
 	m_pSprite->Draw(m_textUI, &s_textrc,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
@@ -377,6 +383,7 @@ void CUI::RenderGrab()
 
 	m_pSprite->End();
 }
+
 
 void CUI::ReceiveEvent(ST_EVENT eventMsg)
 {
