@@ -159,55 +159,8 @@ void CMainGame::Update()
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "doorTest2.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_ALL.dat");
 
-		// >> loading teset
-
-		// >> loading test
-
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-
-		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map1.dat");
-		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map2.dat");
-		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map3.dat");
-		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map4.dat");
-		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map5.dat");
-		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map6.dat");
-		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map7.dat");
-		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map8.dat");
-		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map9.dat");
+		// >> loading teseg_pObjectManager->CalcNowPositionIndex(m_pCharacter->GetPosition());
 #else
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_puzzle_test.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Presentation_File1.dat");
 
@@ -241,7 +194,7 @@ void CMainGame::Update()
 
 		g_pObjectManager->CalcNowPositionIndex(m_pCharacter->GetPosition());
 		g_pGameManager->SetNowScene(SceneType::eGameScene);
-	}
+	} // << : loading Scene
 
 	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{

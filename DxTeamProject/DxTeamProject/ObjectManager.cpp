@@ -681,6 +681,7 @@ void CObjectManager::Render()
 			g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(255, 255, 255, 125));
 			// g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(156, 211, 226, 125));
 			// todo : fog color
+			// todo : ³Ê¹« ´«¿¡ ¶ç¿¡ ¹Ù²ñ
 
 			g_pD3DDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
 			g_pD3DDevice->SetRenderState(D3DRS_FOGSTART, DoFtoDw(10.0f));

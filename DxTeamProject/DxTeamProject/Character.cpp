@@ -258,9 +258,12 @@ void CCharacter::ColliderObject()
 			continue;
 		}
 
-		//if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB(), &m_vContactNormal, &m_fPenetration))
 		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
 		{
+			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eG_DoorFrame)
+				if (g_pObjectManager->GetVecIObject()[i]->GetCondition())
+					continue;
+
 			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eOrb || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBook)
 			{		
 				//fout.open("OrbData.txt");
@@ -316,6 +319,8 @@ void CCharacter::ColliderObject()
 
 				continue;
 			}
+
+
 			m_isGrab = false; // >> 잡기 상태시 충돌나면 잡기 해제
 			m_isCollided = true;
 			return;

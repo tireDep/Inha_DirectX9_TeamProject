@@ -7,7 +7,8 @@ class IObject : public CObject
 protected:
 	Synthesize(string, m_strConditionName, ConditionName);
 	// Synthesize(int, m_conditionOrbindex, ConditionOrbIndex); // 필요없을지도?
-	Synthesize(bool, m_isCondition, Condition);
+	/// Door Public ... Down
+	//Synthesize(bool, m_isCondition, Condition);
 	// >> On/Off 조건 변수
 
 	vector<string> m_vecColorTag;
@@ -34,4 +35,7 @@ public:
 	virtual void ReceiveEvent(ST_EVENT eventMsg);
 	virtual ZoneType ZoneIndex() { return ZoneType(); }
 	virtual D3DXVECTOR3 SendPosition() = 0;
+
+	// Door Friend CCharacter?
+	Synthesize(bool, m_isCondition, Condition);
 };
