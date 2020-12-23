@@ -13,38 +13,50 @@ D3DXVECTOR3 CGameManager::SaveData()
 	return SaveData;
 }
 
-bool CGameManager::SaveOrb()
+string CGameManager::SaveOrb()
 {
-	bool SaveData;
-	if (g_pObjectManager->KeepGoing == false) //처음시작.
-		SaveData = true;
-	else
+	ifstream fin;
+	string line;
+	string search = "0";
+	fin.open("OrbData.txt");
+	if (g_pObjectManager->KeepGoing == false) //시작..
 	{
-		fstream fin;
-
-		fin.open("OrbData.txt");
-		fin >> SaveData;
-		fin.close();
+		line = "1";
 	}
+	else //이어하기
+	{
+		while (getline(fin, line))
+		{
+			
+			fin >> line;
+			if (line.find(search, 0) != string::npos)
+			{		
+				
+				return line;
+			}
+		}
 
-	return SaveData;
+	}
+	fin.close();
+	return line;
 }
 
 bool CGameManager::SaveBook()
 {
 	bool SaveData;
-	if (g_pObjectManager->KeepGoing == false) //처음시작.
-		SaveData = true;
-	else
-	{
-		fstream fin;
+	//if (g_pObjectManager->KeepGoing == false) //처음시작.
+	//	SaveData = true;
+	//else
+	//{
+	//	ifstream fin;
 
-		fin.open("BookData.txt");
-		fin >> SaveData;
-		fin.close();
-	}
+	//	fin.open("OrbData.txt");
+	//	fin >> SaveData;
+	//	fin.close();
+	//}
 
 	return SaveData;
+
 }
 
 CGameManager::CGameManager()

@@ -230,8 +230,6 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 
 				g_pObjectManager->KeepGoing = true; //이어하기
 				// cout << "이어하기" << endl;
-
-				g_pObjectManager->KeepGoing = true;
 			}
 
 			if (px.x > 585 && px.x < 850 && px.y > 665 && px.y < 700

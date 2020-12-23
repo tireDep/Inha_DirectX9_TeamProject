@@ -9,6 +9,7 @@ CSoundManager::~CSoundManager()
 {
 	Stop();
 	fmodSystem->close();
+	sound = true;
 }
 
 // cant use
@@ -58,6 +59,14 @@ void CSoundManager::PlayBGM(string bgmName)
 {
 	if(bgmHash[bgmName] != NULL)
 	fmodSystem->playSound(FMOD_CHANNEL_REUSE, bgmHash[bgmName], false, &bgmChannel);
+}
+
+bool CSoundManager::isPlaying()
+{
+	bool playing = false;
+	bgmChannel->isPlaying(&playing);
+
+	return playing;
 }
 
 void CSoundManager::PlaySFX(string soundName)

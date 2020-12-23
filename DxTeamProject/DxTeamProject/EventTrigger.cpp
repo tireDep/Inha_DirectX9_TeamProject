@@ -28,6 +28,8 @@ void CEventTrigger::Setup(ST_MapData setData)
 		m_zoneType = ZoneType::eWinter;
 	else if (setData.zoneIndex == 1)
 		m_zoneType = ZoneType::eFall;
+	else if (setData.zoneIndex == 2)
+		m_zoneType = ZoneType::eZone;
 
 	if (setData.triggerIndex == 0)
 	{

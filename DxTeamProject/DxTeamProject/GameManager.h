@@ -59,7 +59,7 @@ public:
 	//이어하기
 	D3DXVECTOR3 SaveData();
 
-	bool SaveOrb();
+	string SaveOrb();
 	bool SaveBook();
 
 };

@@ -261,27 +261,19 @@ void CCharacter::ColliderObject()
 		//if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB(), &m_vContactNormal, &m_fPenetration))
 		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
 		{
-			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eOrb)
-			{
+			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eOrb || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBook)
+			{		
+				//fout.open("OrbData.txt");
 			
-					g_pObjectManager->GetVecIObject()[i]->SetBool(true);
-					ofstream fout;
-					fout.open("OrbData.txt");
-					fout << g_pObjectManager->GetVecIObject()[i]->GetBool(); // 0
-					fout.close();
-				
-					continue;
+				g_pObjectManager->GetVecIObject()[i]->SetBool(true);
+
+				//for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)				
+				//	fout << g_pObjectManager->GetVecIObject()[i]->GetBool(); // 
+	
+				//fout.close();
+				continue;
 			}
-			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBook)
-			{
-					g_pObjectManager->GetVecIObject()[i]->SetBool(true);
-					ofstream fout;
-					fout.open("BookData.txt");
-					fout << g_pObjectManager->GetVecIObject()[i]->GetBool(); // 0
-					fout.close();
-				
-					continue;
-			}
+
 			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
 			{
 //				if (m_isCollidedTile)
@@ -290,10 +282,38 @@ void CCharacter::ColliderObject()
 			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eTrigger)
 			{
 				m_saveZonePosition = g_pObjectManager->GetVecIObject()[i]->SendPosition();
+				ZoneType zone = g_pObjectManager->GetVecIObject()[i]->ZoneIndex();
+
+				if (zone == ZoneType::eFall)
+				{
+					
+					if (g_pSoundManager->isPlaying() == false)
+					{
+						g_pSoundManager->PlayBGM("w_first");
+					}
+				}
+
+				else if (zone == ZoneType::eWinter)
+				{
+					
+					if (g_pSoundManager->isPlaying() == false)
+					{
+						g_pSoundManager->PlayBGM("f_first");
+					}
+					
+				}
+				else  if (zone == ZoneType::eZone)
+				{
+					cout << "save" << endl;
+					g_pSoundManager->Stop();
+
+				}
 				ofstream fout;
+
 				fout.open("SaveData.txt");
 				fout << m_saveZonePosition.x << " " << m_saveZonePosition.y << " " << m_saveZonePosition.z << endl;
 				fout.close();
+
 				continue;
 			}
 			m_isGrab = false; // >> 잡기 상태시 충돌나면 잡기 해제

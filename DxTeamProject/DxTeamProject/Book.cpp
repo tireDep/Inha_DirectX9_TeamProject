@@ -48,10 +48,7 @@ void CBook::Setup(ST_MapData setData)
 {
 	CItem::Setup(setData);
 
-	if (g_pGameManager->SaveBook() == false)
-		render = false;
-	else
-		render = true;
+	
 
 	//m_strObjName = setData.strObjName;
 	//m_strFolder = setData.strFolderPath;
