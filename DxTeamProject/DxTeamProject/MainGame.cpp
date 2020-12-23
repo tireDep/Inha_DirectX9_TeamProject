@@ -14,6 +14,8 @@
 #include "Scene.h"
 #include "SoundManager.h"
 
+#include "Map.h"
+
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
 	m_pUI(NULL),
@@ -116,6 +118,8 @@ void CMainGame::Update()
 	// 	//}
 	// }
 
+	CMap::CalcNowPositionIndex(m_pCharacter->GetPosition());
+
 	// >> 임시 로딩창 구현을 위해 로드 위치 이동
 	if (g_pGameManager->GetNowScene() == SceneType::eLoading)
 	{
@@ -128,6 +132,17 @@ void CMainGame::Update()
 				
 		}
 #ifdef _DEBUG
+=======
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+
+		// Presentation File 1
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Presentation_File1.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "SaveZone.dat");
 
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
@@ -165,6 +180,18 @@ void CMainGame::Update()
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_puzzle.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+
+		// Presentation File 2
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
+
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map3_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map4_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1.dat");
@@ -230,6 +257,8 @@ void CMainGame::Update()
 		//if (g_pGameManager->GetUImode())
 		//	return;
 
+		// todo : 일립스 받아서 n초 이상일때만 맵 판정 필요
+
 		g_pTimeManager->Update();
 		g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
@@ -293,25 +322,25 @@ void CMainGame::Update()
 				m_pText->SetisGrabstate(false);
 		}
 
-		if (g_pGameManager->GetGridMapMode())
-		{
-			m_pPrevFrustum = m_pNowFrustum;
-			m_pNowFrustum.Update();
+		//if (g_pGameManager->GetGridMapMode())
+		//{
+		//	m_pPrevFrustum = m_pNowFrustum;
+		//	m_pNowFrustum.Update();
 
-			static D3DXVECTOR3 lastPlayerPos = D3DXVECTOR3(0, 0, 0);
-			D3DXVECTOR3 tempPos = m_pCharacter->GetPosition();
-			float posCheck = 0.5f;
+		//	static D3DXVECTOR3 lastPlayerPos = D3DXVECTOR3(0, 0, 0);
+		//	D3DXVECTOR3 tempPos = m_pCharacter->GetPosition();
+		//	float posCheck = 0.5f;
 
-			// >> todo : 판정 변경
-			if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum)
-				|| fabs(lastPlayerPos.x - tempPos.x) >= posCheck
-				|| fabs(lastPlayerPos.y - tempPos.y) >= posCheck
-				|| fabs(lastPlayerPos.z - tempPos.z) >= posCheck)
-			{
-				lastPlayerPos = tempPos;
-				g_pObjectManager->UpdateNewMap(&m_pNowFrustum);
-			}
-		}
+		//	// >> todo : 판정 변경
+		//	if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum)
+		//		|| fabs(lastPlayerPos.x - tempPos.x) >= posCheck
+		//		|| fabs(lastPlayerPos.y - tempPos.y) >= posCheck
+		//		|| fabs(lastPlayerPos.z - tempPos.z) >= posCheck)
+		//	{
+		//		lastPlayerPos = tempPos;
+		//		g_pObjectManager->UpdateNewMap(&m_pNowFrustum);
+		//	}
+		//}
 	}
 }
 

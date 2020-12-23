@@ -22,8 +22,8 @@ private:
 	CText*		m_pText;
 	CCharacter*	m_pCharacter;
 	CLight*		m_pLight;
-	CFrustum	m_pPrevFrustum;
-	CFrustum	m_pNowFrustum;
+	//CFrustum	m_pPrevFrustum;
+	//CFrustum	m_pNowFrustum;
 	CSkydome* m_pSkydome;
 	CDragon* m_pDragon;
 	CScene* m_pScene;

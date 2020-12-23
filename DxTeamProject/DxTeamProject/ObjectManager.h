@@ -35,13 +35,20 @@ private:
 	vector<CCylinder*>  m_vecCylinder;
 
 	// >> mapTest
-	float m_vScale;
-	multimap<vector<IObject*>, bool> m_mapObject;
-	CFrustum* m_frustum;
-	thread* m_thread;
-	CRITICAL_SECTION m_cs;
-	bool m_isThreadRun;
-	bool m_IsIn;
+// 	float m_vScale;
+// 	CFrustum* m_frustum;
+// 	thread* m_thread;
+// 	CRITICAL_SECTION m_cs;
+// 	bool m_isThreadRun;
+// 	bool m_IsIn;
+//  multimap<vector<IObject*>, bool>	m_mapObject;
+
+	multimap<int, vector<IObject*>>	m_mapObject;	// >> 맵 위치, 맵에 존재하는 오브젝트들
+	vector<bool>					m_vecIsRenderState;	// >> 맵 랜더 상태
+	int								m_IObjCnt = 0;		// >> 오브젝트 카운트
+	int								m_nowMapPos = 6;	// >> 첫 시작 위치. 0,0 바다임
+	// >> 
+
 
 	bool		  ResetCube;
 
@@ -95,12 +102,16 @@ public:
 	void Destroy();
 
 	// >> mapTest
+	// int GetMapVecSize(int mapIndex);
+	// void UpdateNewMap(CFrustum* frustum);
+	// void Thread_CalcNewMap();
 	void AddMap();
 	void RemoveMap();
-	int GetMapVecSize(int mapIndex);
 	IObject& GetIObject(int mapIndex, int vectorIndex);
-	void UpdateNewMap(CFrustum* frustum);
-	void Thread_CalcNewMap();
+	//
+	void CalcNowPositionIndex(const D3DXVECTOR3& m_characterPos);
+	void SetIsRenderState();
+
 private:
 	void Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos);
 };
