@@ -20,7 +20,6 @@ public:
 	void SetBool(bool set) { player = set; }
 	void Setup(const ST_MapData & mapData);
 	void Update(float duration);
-	void Update(float duration, bool isSwitchOn);
 	void Render();
 	bool GetBool() { return render; }
 	string GetName() { return m_strName; }
