@@ -257,6 +257,7 @@
     <ClCompile Include="Skydome.cpp">
       <Filter>Map</Filter>
     </ClCompile>
+    <ClCompile Include="Map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fmod.h">
@@ -537,6 +538,7 @@
     <ClInclude Include="Skydome.h">
       <Filter>Map</Filter>
     </ClInclude>
+    <ClInclude Include="Map.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">

@@ -46,20 +46,17 @@ void COrb::Setup(ST_MapData setData)
 	CItem::Setup(setData);
 
 	ST_PT_VERTEX v;
-	float f = m_vScale.x;
+	float f = 1.0f;
 	v.p = D3DXVECTOR3(-f, -f, 0.05);	v.t = D3DXVECTOR2(m_UvX, m_UvY); m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(-f, f, 0.05);	v.t = D3DXVECTOR2(m_UvX, m_UvX);	m_vecVertex.push_back(v);
-	v.p = D3DXVECTOR3(f, -f, 0.05);	v.t = D3DXVECTOR2(m_UvY, m_UvY);	m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(-f, f, 0.05);		v.t = D3DXVECTOR2(m_UvX, m_UvX);	m_vecVertex.push_back(v);
+	v.p = D3DXVECTOR3(f, -f, 0.05);		v.t = D3DXVECTOR2(m_UvY, m_UvY);	m_vecVertex.push_back(v);
 
 	v.p = D3DXVECTOR3(f, f, 0.05);		v.t = D3DXVECTOR2(m_UvY, m_UvX); m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(f, -f, 0.05);		v.t = D3DXVECTOR2(m_UvY, m_UvY); m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(-f, f, 0.05);		v.t = D3DXVECTOR2(m_UvX, m_UvX); m_vecVertex.push_back(v);
 
 	
-		if (g_pGameManager->SaveOrb() == false)
-			render = false;
-		else
-			render = true;
+	
 	
 	// g_pFileLoadManager->FileLoad_Texture("Resource/Sprite/Orb", "제목 없음-1.png", m_pTex0);
 	// 

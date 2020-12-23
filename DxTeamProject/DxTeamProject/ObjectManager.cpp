@@ -11,24 +11,24 @@
 #include "Cylinder.h"
 
 CObjectManager::CObjectManager() :
-	m_frustum(NULL),
-	m_thread(NULL),
+	// m_frustum(NULL),
+	// m_thread(NULL),
 	ResetCube(false),
 	KeepGoing(false)
 {
-	InitializeCriticalSection(&m_cs);
+	// InitializeCriticalSection(&m_cs);
 }
 
 CObjectManager::~CObjectManager()
 {
-	// >> mapTest
-	RemoveMap();
-	if (m_thread != NULL)
-	{
-		if (m_thread->joinable())
-			m_thread->join();
-	}
-	SafeDelete(m_thread);
+	//// >> mapTest
+	//RemoveMap();
+	//if (m_thread != NULL)
+	//{
+	//	if (m_thread->joinable())
+	//		m_thread->join();
+	//}
+	//SafeDelete(m_thread);
 
 
 
@@ -662,20 +662,32 @@ void CObjectManager::Render()
 	// << mapTest
 	if (g_pGameManager->GetGridMapMode())
 	{
-		multimap<vector<IObject*>, bool>::iterator it;
+		multimap<int, vector<IObject*>>::iterator it;
+		int index = 0;
 		for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 		{
-			if (it->second == false)
+			if (m_vecIsRenderState[index] == true)
 			{
-				// cout << "notRender" << endl;
-				continue;
+				for (int i = 0; i < it->second.size(); i++)
+					it->second[i]->Render();
 			}
+			else
+			{
+				// for (int i = 0; i < it->second.size(); i++)
+				// 	it->second[i]->Render();
+				// >> fog
+			}
+				
+			//if (it->second == false)
+			//{
+			//	// cout << "notRender" << endl;
+			//	continue;
+			//}
 
-			for (int i = 0; i < it->first.size(); i++)
-				it->first[i]->Render();
+			//for (int i = 0; i < it->first.size(); i++)
+			//	it->first[i]->Render();
 		}
 	}
-	// >> mapTest
 
 	for (int i = 0; i < m_vecObject.size(); i++)
 	{
@@ -705,7 +717,16 @@ void CObjectManager::Destroy()
 // YS CODE... MAP TEST
 void CObjectManager::AddMap()
 {
-	m_mapObject.insert(pair<vector<IObject*>, bool>(m_vecIObject, false));
+	// m_mapObject.insert(pair<vector<IObject*>, bool>(m_vecIObject, false));
+	vector<IObject*> temp;
+
+	for (int i = m_IObjCnt; i < m_vecIObject.size(); i++)
+		temp.push_back(m_vecIObject[i]);
+
+	m_mapObject.insert(pair<int, vector<IObject*>>(g_pFileLoadManager->GetFileLoadCnt(), temp));
+
+	m_IObjCnt = m_vecIObject.size();
+
 
 	// m_vecIObject.clear();
 	// >> 테스트 완료 후 적용
@@ -717,95 +738,157 @@ void CObjectManager::RemoveMap()
 		return;
 	// >> 이중 삭제 관련 임시 적용
 
-	multimap<vector<IObject*>, bool>::iterator it;
+	int size;
+	multimap<int, vector<IObject*>>::iterator it;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
-		for (int i = 0; i < it->first.size(); i++)
+		size = it->second.size();
+		for (int i = 0; i < size; i++)
 		{
-			if (&it->first != NULL)
-				SafeDelete(it->first[i]);
+			if (&it->second != NULL)
+				SafeDelete(it->second[i]);
 		}
 	} // >> : for
 
 	m_mapObject.clear();
 }
 
-int CObjectManager::GetMapVecSize(int mapIndex)
-{
-	int num = 0;
-	multimap<vector<IObject*>, bool>::iterator it;
-	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
-	{
-		if (mapIndex != num)
-			continue;
-
-		return it->first.size();
-	}
-}
+//int CObjectManager::GetMapVecSize(int mapIndex)
+//{
+//	int num = 0;
+//	multimap<vector<IObject*>, bool>::iterator it;
+//	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+//	{
+//		if (mapIndex != num)
+//			continue;
+//
+//		return it->first.size();
+//	}
+//}
 
 IObject & CObjectManager::GetIObject(int mapIndex, int vectorIndex)
 {
 	int num = 0;
-	multimap<vector<IObject*>, bool>::iterator it;
+	multimap<int, vector<IObject*>>::iterator it;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
+		num++;
 		if (mapIndex != num)
 			continue;
 
-		return *it->first[vectorIndex];
+		return *it->second[vectorIndex];
 	}
 }
 
-void CObjectManager::UpdateNewMap(CFrustum * frustum)
+void CObjectManager::CalcNowPositionIndex(const D3DXVECTOR3 & m_characterPos)
 {
-	// todo : thread
-	m_frustum = frustum;
-	if (m_thread == NULL)
-	{
-		m_thread = new thread(&CObjectManager::Thread_CalcNewMap, this);
-		// cout << "thread" << endl;
-	}
-	else
-	{
-		if (m_thread->joinable())
-			m_thread->join();
+	float mapSize = 30;
+	D3DXVECTOR3 playerPos = m_characterPos;
 
-		m_thread = NULL;
-		// cout << "threadEnd" << endl;
+	POINT result;
+	result.x = ((float)mapSize / 2.0f) + playerPos.x;
+	result.y = ((float)mapSize / 2.0f) - playerPos.z;
+
+	result.x = floorf(result.x) - 15;
+	result.y = floorf(result.y) - 15;
+
+	int gridNum = -15;
+	int gridAddNum = 30;
+	int maxSize = g_pFileLoadManager->GetFileLoadCnt();
+
+	for (int i = 0; i < maxSize; i++)
+	{
+		if (gridNum + (gridAddNum * i) <= result.x && gridNum + (gridAddNum * (i + 1)) >= result.x)
+			result.x = i;
+
+		if (gridNum + (gridAddNum * i) <= result.y && gridNum + (gridAddNum * (i + 1)) >= result.y)
+			result.y = i;
 	}
+
+	// cout << result.x << ", " << result.y << endl;
+	// cout << "-15 : ";
+	// cout << x - 15 << ", " << z - 15 << endl;
+	// -15 ~ 15
+	// 15 ~ 45
+	// 45 ~ 75
+	// ... x, z
+
+	m_nowMapPos = result.x + (result.y * 5);
+	// >> 현재 플레이어가 위치한 맵 번호
 }
 
-void CObjectManager::Thread_CalcNewMap()
+void CObjectManager::SetIsRenderState()
 {
-	//EnterCriticalSection(&m_cs);
-	//bool check = false;
-	//multimap<vector<IObject*>, bool>::iterator it;
-	//for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
-	//{
-	//   check = false;
+	int maxSize = g_pFileLoadManager->GetFileLoadCnt();
+	m_vecIsRenderState.clear();
 
-	//   for (int i = 0; i < it->first.size(); i++)
-	//   {
-	//      float radius = 0;
-	//      radius = it->first[0]->GetScale().x > it->first[0]->GetScale().y ? it->first[0]->GetScale().x : it->first[0]->GetScale().y;
-	//      radius = radius > it->first[0]->GetScale().z ? radius : it->first[0]->GetScale().z;
+	for (int i = 0; i < maxSize; i++)
+		m_vecIsRenderState.push_back(false);
 
-	//      if (m_frustum->IsInFrustum(it->first[i]->GetTranslate(), radius))
-	//      {
-	//         it->second = true;
-	//         check = true;
-	//         // >> todo
-	//         // 판정 주변 인덱스 true, 아니면 false 처리
-	//         // 맵 세로, 가로 크기 알아야 함
-	//         // 3*3 정도 판정?
-	//      }
-	//   }
+	for (int i = -1; i < 2; i++)
+	{
+		for (int j = -1; j < 2; j++)
+		{
+			if (i < 0 || j < 0 || i >= maxSize * 0.5f || j >= maxSize * 0.5f)
+				continue;
+			// >> 인덱스가 0보다 작음, 맵 범위를 넘어감
 
-	//   if (!check)
-	//      it->second = false;
-	//}
-	//LeaveCriticalSection(&m_cs);
+			m_vecIsRenderState[i + (j * 5)] = true;
+		}
+	}
+	// >> 랜더 범위 적용
 }
+
+//void CObjectManager::UpdateNewMap(CFrustum * frustum)
+//{
+//	//// todo : thread
+//	//m_frustum = frustum;
+//	//if (m_thread == NULL)
+//	//{
+//	//	m_thread = new thread(&CObjectManager::Thread_CalcNewMap, this);
+//	//	// cout << "thread" << endl;
+//	//}
+//	//else
+//	//{
+//	//	if (m_thread->joinable())
+//	//		m_thread->join();
+//
+//	//	m_thread = NULL;
+//	//	// cout << "threadEnd" << endl;
+//	//}
+//}
+//
+//void CObjectManager::Thread_CalcNewMap()
+//{
+//	//EnterCriticalSection(&m_cs);
+//	//bool check = false;
+//	//multimap<vector<IObject*>, bool>::iterator it;
+//	//for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+//	//{
+//	//   check = false;
+//
+//	//   for (int i = 0; i < it->first.size(); i++)
+//	//   {
+//	//      float radius = 0;
+//	//      radius = it->first[0]->GetScale().x > it->first[0]->GetScale().y ? it->first[0]->GetScale().x : it->first[0]->GetScale().y;
+//	//      radius = radius > it->first[0]->GetScale().z ? radius : it->first[0]->GetScale().z;
+//
+//	//      if (m_frustum->IsInFrustum(it->first[i]->GetTranslate(), radius))
+//	//      {
+//	//         it->second = true;
+//	//         check = true;
+//	//         // >> todo
+//	//         // 판정 주변 인덱스 true, 아니면 false 처리
+//	//         // 맵 세로, 가로 크기 알아야 함
+//	//         // 3*3 정도 판정?
+//	//      }
+//	//   }
+//
+//	//   if (!check)
+//	//      it->second = false;
+//	//}
+//	//LeaveCriticalSection(&m_cs);
+//}
 
 /// Delete Later...
 //void CObjectManager::GenerateContacts()

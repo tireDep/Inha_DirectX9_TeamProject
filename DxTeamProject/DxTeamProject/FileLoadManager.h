@@ -30,7 +30,7 @@ private:
 	int m_nowX;
 	int m_nowZ;
 	int m_addNum;
-	int m_addNameNum;
+	Synthesize(int, m_addNameNum, FileLoadCnt);
 
 	thread* m_thread;
 	CRITICAL_SECTION m_cs;

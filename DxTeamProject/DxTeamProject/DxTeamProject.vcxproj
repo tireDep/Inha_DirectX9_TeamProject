@@ -188,6 +188,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="MeshTile.h" />
     <ClInclude Include="MovingCube.h" />
     <ClInclude Include="OBB.h" />
@@ -279,6 +280,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="MeshTile.cpp" />
     <ClCompile Include="MovingCube.cpp" />
     <ClCompile Include="OBB.cpp" />

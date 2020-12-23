@@ -1,0 +1,1087 @@
+# Object_Start
+# ObjectName
+Orb_Black1
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Black.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0.6
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_White2
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_White.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0.6
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Yellow3
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Yellow.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0.6
+-0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+RoataionBoard4
+# FolderPath
+Resource/XFile/Gimmick/RotationBoard
+# FilePath
+Rotation_board.X
+# TxtPath
+board.png
+# ObjectType
+26
+# Scale
+0.05
+0.05
+0.05
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# RotationSpeed
+1
+# RotationAxialIndex
+1
+# Object_End
+
+# Object_Start
+# ObjectName
+MovingCube5
+# FolderPath
+Resource/XFile/Gimmick/MovingCube
+# FilePath
+moving_cube.X
+# TxtPath
+moving_cube_1.png
+# ObjectType
+32
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# StartPos
+-5
+# EndPos
+5
+# Speed
+2
+# DirectionIndex
+0
+# Object_End
+
+# Object_Start
+# ObjectName
+Door8
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_frame.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+28
+# Scale
+0.3
+0.3
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# ConditionName
+Switch10
+# ConditionIndex
+2
+# ConditionOrbIndex
+0
+# Object_End
+
+# Object_Start
+# ObjectName
+Door9
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_right.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+29
+# Scale
+0.3
+0.3
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# ConditionName
+Switch10
+# ConditionIndex
+2
+# ConditionOrbIndex
+0
+# Object_End
+
+# Object_Start
+# ObjectName
+Switch10
+# FolderPath
+Resource/XFile/Gimmick/Switch
+# FilePath
+Force_switch.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+31
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# WeightIndex
+0
+# ConditionName
+Door8
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass11
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass12
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass13
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass14
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass15
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass16
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass17
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_01_Grass18
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Door19
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_frame.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+28
+# Scale
+0.3
+0.3
+0.3
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# ConditionName
+Book21
+# ConditionIndex
+1
+# ConditionOrbIndex
+0
+# Object_End
+
+# Object_Start
+# ObjectName
+Door20
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_right.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+29
+# Scale
+0.3
+0.3
+0.3
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# ConditionName
+Book21
+# ConditionIndex
+1
+# ConditionOrbIndex
+0
+# Object_End
+
+# Object_Start
+# ObjectName
+Book21
+# FolderPath
+Resource/XFile/Book
+# FilePath
+book.X
+# TxtPath
+Bookshelf_diffuse.png
+# ObjectType
+33
+# Scale
+0.3
+0.3
+0.3
+# Rotate
+0
+0
+0
+# Translate
+0
+0.5
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Door19
+# Object_End
+
+# Object_Start
+# ObjectName
+Door22
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_frame.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+28
+# Scale
+0.3
+0.3
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# ConditionName
+Yellow
+# ConditionIndex
+0
+# ConditionOrbIndex
+2
+# Object_End
+
+# Object_Start
+# ObjectName
+Door23
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_right.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+29
+# Scale
+0.3
+0.3
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# ConditionName
+Yellow
+# ConditionIndex
+0
+# ConditionOrbIndex
+0
+# Object_End
+
+# Object_Start
+# ObjectName
+Box22
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+23
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0.5
+2.5
+# Color
+0
+0
+0
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Box24
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+23
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0.5
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Box25
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+23
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0.5
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Box26
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+23
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0.5
+-9.5
+# Color
+0
+0
+0
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Box27
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+23
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0.5
+-11.5
+# Color
+1
+1
+0
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Box28
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+23
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0.5
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Sphere29
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+24
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0.5
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Cylinder30
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+25
+# Scale
+1
+1
+1
+# Rotate
+90
+0
+0
+# Translate
+-9.5
+0.5
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Box32
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+23
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0.5
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Box33
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+23
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0.5
+-7.5
+# Color
+1
+1
+1
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Box34
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+23
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0.5
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Section =======================================
+

@@ -63,8 +63,18 @@ void CMovingCube::Setup(ST_MapData setData)
 
 	m_vPosition = m_vTranslation;
 
-	m_fStartPos = setData.gimmickData.startPos_movingCube;
-	m_fEndPos = setData.gimmickData.endPos_movingCube;
+	if (setData.gimmickData.startPos_movingCube < setData.gimmickData.endPos_movingCube)
+	{
+		m_fStartPos = setData.gimmickData.startPos_movingCube;
+		m_fEndPos = setData.gimmickData.endPos_movingCube;
+	}
+	else
+	{
+		m_fStartPos = setData.gimmickData.endPos_movingCube;
+		m_fEndPos = setData.gimmickData.startPos_movingCube;
+	}
+	// >> 끝 점이 시작점보다 클 경우 그대로, 작을 경우 반대로 저장
+
 	m_fSpeed = setData.gimmickData.speed_movingCube;
 	m_indexNum = setData.gimmickData.directionIndex_movingCube;
 
@@ -148,17 +158,17 @@ void CMovingCube::Update(float duration)
 	D3DXVECTOR3 start_pos, end_pos;
 	if (m_indexNum == 0)
 	{
-		float start = m_vPosition.y + m_fStartPos;
-		float end = m_vPosition.y + m_fEndPos;
-		start_pos = m_vPosition + D3DXVECTOR3(0, start, 0);
-		end_pos = m_vPosition + D3DXVECTOR3(0, end, 0);
-	}
-	else if(m_indexNum == 1)
-	{
 		float start = m_vPosition.x + m_fStartPos;
 		float end = m_vPosition.x + m_fEndPos;
 		start_pos = m_vPosition + D3DXVECTOR3(start, 0, 0);
 		end_pos = m_vPosition + D3DXVECTOR3(end, 0, 0);
+	}
+	else if(m_indexNum == 1)
+	{
+		float start = m_vPosition.y + m_fStartPos;
+		float end = m_vPosition.y + m_fEndPos;
+		start_pos = m_vPosition + D3DXVECTOR3(0, start, 0);
+		end_pos = m_vPosition + D3DXVECTOR3(0, end, 0);
 	}
 	else if (m_indexNum == 2)
 	{
@@ -172,21 +182,6 @@ void CMovingCube::Update(float duration)
 	{
 		if (m_istrue == false)
 		{
-			m_vPosition.y += m_fSpeed * duration;
-			if (m_vPosition.y >= m_fEndPos)
-				m_istrue = true;
-		}
-		else
-		{
-			m_vPosition.y -= m_fSpeed * duration;
-			if (m_vPosition.y <= m_fStartPos)
-				m_istrue = false;
-		}
-	}
-	else if (m_indexNum == 1)
-	{
-		if (m_istrue == false)
-		{
 			m_vPosition.x += m_fSpeed * duration;
 			if (m_vPosition.x >= m_fEndPos)
 				m_istrue = true;
@@ -195,6 +190,21 @@ void CMovingCube::Update(float duration)
 		{
 			m_vPosition.x -= m_fSpeed * duration;
 			if (m_vPosition.x <= m_fStartPos)
+				m_istrue = false;
+		}
+	}
+	else if (m_indexNum == 1)
+	{
+		if (m_istrue == false)
+		{
+			m_vPosition.y += m_fSpeed * duration;
+			if (m_vPosition.y >= m_fEndPos)
+				m_istrue = true;
+		}
+		else
+		{
+			m_vPosition.y -= m_fSpeed * duration;
+			if (m_vPosition.y <= m_fStartPos)
 				m_istrue = false;
 		}
 	}

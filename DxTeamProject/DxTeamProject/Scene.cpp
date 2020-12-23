@@ -53,7 +53,7 @@ void CScene::Setup()
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_stImageInfo4, NULL, &m_pTextureScene4);
 
-	//backG2
+	//backG
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
 		"Scene/Back.png",
 		D3DX_DEFAULT_NONPOW2,
@@ -85,6 +85,16 @@ void CScene::Setup()
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_stImageInfo6, NULL, &m_pTextureScene6);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Scene/loading.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_stLoading, NULL, &m_pLoading);
 }
 
 void CScene::Render_Main()
@@ -116,7 +126,7 @@ void CScene::Render_Main()
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	//start
-	SetRect(&Startrc, -580, -485, m_stImageInfo.Width, m_stImageInfo.Height);
+	SetRect(&Startrc, -575, -485, m_stImageInfo.Width, m_stImageInfo.Height);
 
 	m_pSprite->Draw(m_pTextureScene, &Startrc,
 		&D3DXVECTOR3(0, 0, 0),
@@ -175,6 +185,23 @@ void CScene::Render_Ending()
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	m_pSprite->End();
+}
+
+void CScene::Render_Loading()
+{
+	SetRect(&imageRC, matT._41, matT._42,
+		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
+
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+	SetRect(&loadrc, 0, 0, m_stLoading.Width, m_stLoading.Height);
+	m_pSprite->Draw(m_pLoading, &loadrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	m_pSprite->End();
+
 }
 
 void CScene::ReceiveEvent(ST_EVENT eventMsg)

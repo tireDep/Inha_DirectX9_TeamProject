@@ -14,6 +14,8 @@
 #include "Scene.h"
 #include "SoundManager.h"
 
+#include "Map.h"
+
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
 	m_pUI(NULL),
@@ -22,8 +24,7 @@ CMainGame::CMainGame() :
 	m_pLight(NULL),
 	m_pSkydome(NULL),
 	m_pDragon(NULL),
-	m_pScene(NULL),
-	m_pSm(NULL)
+	m_pScene(NULL)
 {
 }
 
@@ -64,9 +65,11 @@ void CMainGame::Setup()
 	m_pScene = new CScene;
 	m_pScene->Setup();
 
-	//m_pGrid = new CGrid;
-	//m_pGrid->Setup(30, 1.0f);
-
+	/// Presentation
+#ifdef _DEBUG
+	m_pGrid = new CGrid;
+	m_pGrid->Setup(30, 1.0f);
+#endif
 	m_pCharacter = new CCharacter;
 	m_pCharacter->Setup();
 	
@@ -115,6 +118,8 @@ void CMainGame::Update()
 	// 	//}
 	// }
 
+	CMap::CalcNowPositionIndex(m_pCharacter->GetPosition());
+
 	// >> 임시 로딩창 구현을 위해 로드 위치 이동
 	if (g_pGameManager->GetNowScene() == SceneType::eLoading)
 	{
@@ -127,7 +132,17 @@ void CMainGame::Update()
 				
 		}
 #ifdef _DEBUG
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "SaveZone.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+
+		// Presentation File 1
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Presentation_File1.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "SaveZone.dat");
 
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_PObjectBackground.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereOtherPObject.dat");
@@ -137,7 +152,7 @@ void CMainGame::Update()
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxBridge.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_BoxTileLand.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_SphereTile.dat");
-		 g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Test_Door.dat");
 
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1.dat");
 
@@ -161,10 +176,27 @@ void CMainGame::Update()
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map8.dat");
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map9.dat");
 #else
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_puzzle.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
+
+		// Presentation File 2
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1_bg.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map3_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map4_bg.dat");
+
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map3_bg.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map4_bg.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map1.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map2.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map3.dat");
+		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_Test_map4.dat");
 #endif // DEBUG
 
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map1.dat");
@@ -201,12 +233,12 @@ void CMainGame::Update()
 		/// Delete Later...
 		if (GetKeyState('1') & 0x8000)
 		{
-			//g_pGameManager->SetGetOrb("Blue");
-			// g_pGameManager->SetGetOrb("Green");
-			// g_pGameManager->SetGetOrb("Red");
-			// g_pGameManager->SetGetOrb("White");
+			g_pGameManager->SetGetOrb("Blue");
+			g_pGameManager->SetGetOrb("Green");
+			g_pGameManager->SetGetOrb("Red");
+			g_pGameManager->SetGetOrb("White");
 			g_pGameManager->SetGetOrb("Yellow");
-			// g_pGameManager->SetGetOrb("Black");
+			g_pGameManager->SetGetOrb("Black");
 			// g_pGameManager->CompleteOrb();
 		}
 		if (GetKeyState('2') & 0x8000)
@@ -221,8 +253,10 @@ void CMainGame::Update()
 
 	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{
-		if (g_pGameManager->GetUImode())
-			return;
+		//if (g_pGameManager->GetUImode())
+		//	return;
+
+		// todo : 일립스 받아서 n초 이상일때만 맵 판정 필요
 
 		g_pTimeManager->Update();
 		g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
@@ -287,25 +321,25 @@ void CMainGame::Update()
 				m_pText->SetisGrabstate(false);
 		}
 
-		if (g_pGameManager->GetGridMapMode())
-		{
-			m_pPrevFrustum = m_pNowFrustum;
-			m_pNowFrustum.Update();
+		//if (g_pGameManager->GetGridMapMode())
+		//{
+		//	m_pPrevFrustum = m_pNowFrustum;
+		//	m_pNowFrustum.Update();
 
-			static D3DXVECTOR3 lastPlayerPos = D3DXVECTOR3(0, 0, 0);
-			D3DXVECTOR3 tempPos = m_pCharacter->GetPosition();
-			float posCheck = 0.5f;
+		//	static D3DXVECTOR3 lastPlayerPos = D3DXVECTOR3(0, 0, 0);
+		//	D3DXVECTOR3 tempPos = m_pCharacter->GetPosition();
+		//	float posCheck = 0.5f;
 
-			// >> todo : 판정 변경
-			if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum)
-				|| fabs(lastPlayerPos.x - tempPos.x) >= posCheck
-				|| fabs(lastPlayerPos.y - tempPos.y) >= posCheck
-				|| fabs(lastPlayerPos.z - tempPos.z) >= posCheck)
-			{
-				lastPlayerPos = tempPos;
-				g_pObjectManager->UpdateNewMap(&m_pNowFrustum);
-			}
-		}
+		//	// >> todo : 판정 변경
+		//	if (!m_pNowFrustum.IsUpdateCheck(m_pPrevFrustum)
+		//		|| fabs(lastPlayerPos.x - tempPos.x) >= posCheck
+		//		|| fabs(lastPlayerPos.y - tempPos.y) >= posCheck
+		//		|| fabs(lastPlayerPos.z - tempPos.z) >= posCheck)
+		//	{
+		//		lastPlayerPos = tempPos;
+		//		g_pObjectManager->UpdateNewMap(&m_pNowFrustum);
+		//	}
+		//}
 	}
 }
 
@@ -336,14 +370,19 @@ void CMainGame::Render()
 	}
 	else if (g_pGameManager->GetNowScene() == SceneType::eLoadStart)
 	{		
+		if (m_pScene)
+			m_pScene->Render_Loading();
 		g_pD3DDevice->EndScene();
 		g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
 		g_pGameManager->SetNowScene(SceneType::eLoading);
 	}
 	else
 	{
-		/*if (m_pGrid)
-			m_pGrid->Render();*/
+		/// Presentation
+#ifdef _DEBUG
+		if (m_pGrid)
+			m_pGrid->Render();
+#endif
 
 		if (m_pCharacter)
 			m_pCharacter->Render();
@@ -361,7 +400,10 @@ void CMainGame::Render()
 		}
 
 		if (m_pText->GetisGrabstate())
-			m_pText->RenderGrab();
+		{
+			//m_pText->RenderGrab();
+			m_pUI->RenderGrab();
+		}
 
 		if (m_pDragon)
 			m_pDragon->Render();

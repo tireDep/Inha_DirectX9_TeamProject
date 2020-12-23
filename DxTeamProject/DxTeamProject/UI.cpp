@@ -173,6 +173,16 @@ void CUI::Setup_UI()
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_smallInfo6, NULL, &m_SmallUI6);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/message.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_textInfo, NULL, &m_textUI);
 }
 
 void CUI::UI_Render()
@@ -352,6 +362,28 @@ void CUI::UI_Render()
 
 	m_pSprite->End();
 }
+
+void CUI::RenderGrab()
+{
+	SetRect(&imageRC, matT._41, matT._42,
+		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
+
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND); // | D3DXSPRITE_SORT_TEXTURE
+
+	D3DXMatrixTranslation(&matT, movep, movepy, 0);
+	matWorld = matT;
+
+	m_pSprite->SetTransform(&matWorld);
+
+	SetRect(&s_textrc, -732, -360, m_textInfo.Width, m_textInfo.Height);
+	m_pSprite->Draw(m_textUI, &s_textrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	m_pSprite->End();
+}
+
 
 void CUI::ReceiveEvent(ST_EVENT eventMsg)
 {
