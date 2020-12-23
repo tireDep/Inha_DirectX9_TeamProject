@@ -4054,7 +4054,7 @@ Texture_01.png
 # Translate
 2.5
 0
--4.5
+-5
 # Color
 0.5
 0.5
@@ -4085,7 +4085,7 @@ Texture_01.png
 0
 0
 # Translate
-1.25
+1.5
 0
 -3.5
 # Color
@@ -4118,7 +4118,7 @@ Texture_01.png
 0
 0
 # Translate
-3.75
+3.5
 0
 -3.5
 # Color
@@ -4260,7 +4260,7 @@ cubeworld_texture.tga
 # Translate
 2.5
 1
-0.5
+0.25
 # Color
 0.5
 0.5

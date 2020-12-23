@@ -6,7 +6,7 @@ CDoor::CDoor()
 	, IsOpen(false)
 	, m_fRotAngle(0.0f)
 	, m_fRotationSpeed(1.0f)
-	,render(true)
+	, render(true)
 {
 	D3DXMatrixIdentity(&m_matS);
 	D3DXMatrixIdentity(&m_matR);
@@ -22,6 +22,7 @@ CDoor::~CDoor()
 void CDoor::Setup(const ST_MapData & mapData)
 {
 	CGimmick::SetLoadData(mapData);
+	m_fRotAngle = D3DXToRadian(m_vRotation.y);
 	ResetPosition = mapData.vTranslate;
 	//m_fOpeningAngle = mapData. XXX
 	//m_strObjName = mapData.strObjName;
@@ -87,10 +88,10 @@ void CDoor::Update(float duration)
 		if (m_isCondition)
 		{
 			m_fRotAngle += m_fRotationSpeed * duration;
-			if (m_fRotAngle >= m_fOpeningAngle)
+			if (m_fRotAngle >= m_fOpeningAngle + D3DXToRadian(m_vRotation.y))
 			{
 				m_fRotationSpeed = 0;
-				m_fRotAngle = m_fOpeningAngle;
+				m_fRotAngle = m_fOpeningAngle + D3DXToRadian(m_vRotation.y);
 			}
 			else
 				m_fRotationSpeed = 1.0f;
@@ -98,10 +99,12 @@ void CDoor::Update(float duration)
 		else
 		{
 			m_fRotAngle -= m_fRotationSpeed * duration;
-			if (m_fRotAngle <= 0)
+			//if (m_fRotAngle <= 0)
+			if(m_fRotAngle <= D3DXToRadian(m_vRotation.y))
 			{
 				m_fRotationSpeed = 0;
-				m_fRotAngle = 0;
+				//m_fRotAngle = 0;
+				m_fRotAngle = D3DXToRadian(m_vRotation.y);
 			}
 			else
 				m_fRotationSpeed = 1.0f;
@@ -189,19 +192,20 @@ void CDoor::Render()
 		g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 		if (m_ObjectType == eG_DoorFrame)
 		{
-			D3DXMATRIXA16 matS, matT;
-			D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-			D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
-			m_matWorld = matS * matT;
+			//D3DXMATRIXA16 matS, matT;
+			//D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+			//D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+			m_matWorld = m_matS * m_matR * m_matT;
 			g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 		}
 		else if(m_ObjectType == eG_Door)
 		{
-			D3DXMATRIXA16 matS, matT;
-			D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-			D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+			//D3DXMATRIXA16 matS, matT;
+			//D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
+			//D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
 			// Need to Modify... Rotation
-			m_matWorld = matS * m_matRotGimmick * matT;
+			m_matWorld = m_matS * m_matRotGimmick * m_matT;
+			//m_matWorld = matS * m_matRotGimmick * matT;
 			g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 		}
 		if (m_pMesh == NULL)

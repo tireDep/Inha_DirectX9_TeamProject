@@ -1,15 +1,9 @@
-#pragma once
+ #pragma once
 #include "Gimmick.h"
 
 class CDoor : public CGimmick
 {
 private:
-	// Need Map tool(Two Class? Need to Modify)
-	// Size : Use m_vScale;
-	// Opening_angle : m_fOpeningAngle;
-	// Required_object : IsOpen(true, false)
-		// Update(float, bool)
-		// bool : switch ON/OFF
 	D3DXMATRIXA16 m_matRotGimmick;
 	float m_fOpeningAngle;
 	bool IsOpen;
@@ -32,4 +26,3 @@ public:
 	string GetName() { return m_strName; }
 	D3DXVECTOR3 SendPosition() { return D3DXVECTOR3(); }
 };
-//void Setup(string folder, string file);

@@ -440,8 +440,15 @@ void CCharacter::Update(float duration)
 
 	if (m_isFallAni || !m_isJump)
 	{
+#ifdef _DEBUG
+		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 1.5f, 0);
+		m_Ray.SetOrigin(rayOrigin);
+#else
 		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.5f, 0);
 		m_Ray.SetOrigin(rayOrigin);
+#endif // DEBUG
+
+
 
 		for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
 		{
