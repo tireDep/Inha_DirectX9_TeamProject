@@ -13,12 +13,7 @@ private:
 	bool m_isUIModeIn;
 	bool m_isUIMode;
 
-	// >> 맵 완료시 삭제
-	bool m_isGridMapIn;
-	bool m_isGridMap;
-
 	bool m_Orbcomplete;
-	// << 맵 완료시 삭제
 
 	SceneType m_SceneName;
 	Synthesize(bool, m_isDataLoad, IsDataLoad);
@@ -43,10 +38,6 @@ public:
 	string GetName() override;
 
 	void SetClipCursor(int ySize);
-
-	// >> 맵 완료시 삭제
-	bool GetGridMapMode();
-	// << 맵 완료시 삭제
 
 	void SetGetOrb(string orbType);
 	void InitializationOrb();

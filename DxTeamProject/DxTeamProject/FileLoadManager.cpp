@@ -8,8 +8,8 @@
 
 CFileLoadManager::CFileLoadManager() :
 	/// KT Map Index
-	// index 30(n-1) now : 60 later : 120
-	m_limitX(60),
+	// xCnt : ¸Ê ÃÖ´ë °³¼ö
+	m_xCnt(3),
 	m_nowX(0),
 	m_nowZ(0),
 	m_addNum(30),
@@ -17,6 +17,8 @@ CFileLoadManager::CFileLoadManager() :
 	m_thread(NULL),
 	m_isThreadRun(0.0f)
 {
+	m_limitX = 30 * (m_xCnt - 1);
+
 	InitializeCriticalSection(&m_cs);
 }
 

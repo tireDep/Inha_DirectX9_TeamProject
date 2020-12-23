@@ -67,11 +67,6 @@ CGameManager::CGameManager()
 
 	m_isDevMode = false;
 	m_isUIMode = false;
-	
-	// >> 맵 완료시 삭제 예정
-	m_isGridMap = false;
-	// << 맵 완료시 삭제 예정
-
 	m_Orbcomplete = false;
 
 	SetClipCursor(0);
@@ -129,11 +124,6 @@ bool CGameManager::GetDevMode()
 bool CGameManager::GetUImode()
 {
 	return m_isUIMode;
-}
-
-bool CGameManager::GetGridMapMode()
-{
-	return m_isGridMap;
 }
 
 void CGameManager::SetGetOrb(string orbType)
@@ -257,14 +247,6 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 				m_isDevMode = !m_isDevMode;
 				m_isDevMoveIn = !m_isDevMoveIn;
 			}
-
-			// >> 맵 완료시 삭제 예정
-			if (VK_SCROLL == eventMsg.wParam && !m_isGridMapIn)
-			{
-				m_isGridMap = !m_isGridMap;
-				m_isGridMapIn = !m_isGridMapIn;
-			}
-			// << 맵 완료시 삭제 예정
 		}
 		break;
 
@@ -275,11 +257,6 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 
 			if (VK_TAB == eventMsg.wParam)
 				m_isDevMoveIn = false;
-
-			// >> 맵 완료시 삭제 예정
-			if (VK_SCROLL == eventMsg.wParam)
-				m_isGridMapIn = false;
-			// << 맵 완료시 삭제 예정
 		}
 		break;
 		}

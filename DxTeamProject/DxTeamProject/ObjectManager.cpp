@@ -21,17 +21,20 @@ CObjectManager::CObjectManager() :
 
 CObjectManager::~CObjectManager()
 {
-	//// >> mapTest
-	//RemoveMap();
+	RemoveMap();
+
 	//if (m_thread != NULL)
 	//{
 	//	if (m_thread->joinable())
 	//		m_thread->join();
 	//}
 	//SafeDelete(m_thread);
+}
 
-
-
+DWORD CObjectManager::DoFtoDw(float f)
+{
+	// float to dword
+	return *((DWORD*)&f);
 }
 
 void CObjectManager::RemoveObject(CObject * Object)
@@ -659,40 +662,42 @@ void CObjectManager::Reset()
 
 void CObjectManager::Render()
 {
-	// << mapTest
-	if (g_pGameManager->GetGridMapMode())
+	multimap<int, vector<IObject*>>::iterator it;
+	int index = -1;
+	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
-		multimap<int, vector<IObject*>>::iterator it;
-		int index = 0;
-		for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
-		{
-			if (m_vecIsRenderState[index] == true)
-			{
-				for (int i = 0; i < it->second.size(); i++)
-					it->second[i]->Render();
-			}
-			else
-			{
-				// for (int i = 0; i < it->second.size(); i++)
-				// 	it->second[i]->Render();
-				// >> fog
-			}
-				
-			//if (it->second == false)
-			//{
-			//	// cout << "notRender" << endl;
-			//	continue;
-			//}
+		index++;
 
-			//for (int i = 0; i < it->first.size(); i++)
-			//	it->first[i]->Render();
+		if (m_vecIsRenderState[index] == true)
+		{
+			for (int i = 0; i < it->second.size(); i++)
+				it->second[i]->Render();
+		}
+		else
+		{
+			// >> fog
+			g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, true);
+
+			g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(255, 255, 255, 125));
+			// g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(156, 211, 226, 125));
+			// todo : fog color
+
+			g_pD3DDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
+			g_pD3DDevice->SetRenderState(D3DRS_FOGSTART, DoFtoDw(10.0f));
+			g_pD3DDevice->SetRenderState(D3DRS_FOGEND, DoFtoDw(200.0f));
+			g_pD3DDevice->SetRenderState(D3DRS_RANGEFOGENABLE, true);
+
+			for (int i = 0; i < it->second.size(); i++)
+				it->second[i]->Render();
+
+			g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
 		}
 	}
 
-	for (int i = 0; i < m_vecObject.size(); i++)
-	{
-		m_vecObject[i]->Render();
-	}
+	// for (int i = 0; i < m_vecObject.size(); i++)
+	// {
+	// 	m_vecObject[i]->Render();
+	// }
 }
 
 void CObjectManager::RenderOBBBox()
@@ -717,7 +722,6 @@ void CObjectManager::Destroy()
 // YS CODE... MAP TEST
 void CObjectManager::AddMap()
 {
-	// m_mapObject.insert(pair<vector<IObject*>, bool>(m_vecIObject, false));
 	vector<IObject*> temp;
 
 	for (int i = m_IObjCnt; i < m_vecIObject.size(); i++)
@@ -805,38 +809,71 @@ void CObjectManager::CalcNowPositionIndex(const D3DXVECTOR3 & m_characterPos)
 			result.y = i;
 	}
 
-	// cout << result.x << ", " << result.y << endl;
-	// cout << "-15 : ";
-	// cout << x - 15 << ", " << z - 15 << endl;
-	// -15 ~ 15
-	// 15 ~ 45
-	// 45 ~ 75
-	// ... x, z
-
-	m_nowMapPos = result.x + (result.y * 5);
+	int mapCnt = g_pFileLoadManager->GetMapXCnt();
+	m_nowMapPos = result.x + (result.y * mapCnt);
 	// >> 현재 플레이어가 위치한 맵 번호
+
+	SetIsRenderState();
 }
 
 void CObjectManager::SetIsRenderState()
 {
-	int maxSize = g_pFileLoadManager->GetFileLoadCnt();
+	// >> 랜더 상태 결정
+	// >> 플레이어 기준 3x3 랜더, 그 외의 범위는 포그처리
+
 	m_vecIsRenderState.clear();
+	int maxSize = g_pFileLoadManager->GetFileLoadCnt();
 
 	for (int i = 0; i < maxSize; i++)
 		m_vecIsRenderState.push_back(false);
 
-	for (int i = -1; i < 2; i++)
-	{
-		for (int j = -1; j < 2; j++)
-		{
-			if (i < 0 || j < 0 || i >= maxSize * 0.5f || j >= maxSize * 0.5f)
-				continue;
-			// >> 인덱스가 0보다 작음, 맵 범위를 넘어감
+	int mapCnt = g_pFileLoadManager->GetMapXCnt();
+	int indexY = m_nowMapPos / mapCnt;
+	int indexX = m_nowMapPos % mapCnt;
 
-			m_vecIsRenderState[i + (j * 5)] = true;
+	int checkIndex = m_nowMapPos;
+	while (true)
+	{
+		// >> 가장 오른쪽 끝 라인인지 판별 인덱스 계산
+		if (checkIndex < mapCnt)
+			break;
+		else
+			checkIndex %= mapCnt;
+	}
+
+	// todo? : 꼭지점 부분, 모서리 부분에 대한 재처리 필요?
+
+	// >> 플레이어 기준 상하좌우대각선 true 처리(3 x 3)
+	if (checkIndex + 1 == mapCnt)
+	{
+		// >> 가장 오른쪽 끝일 경우
+		for (int i = indexY - 1; i < indexY + 2; i++)
+		{
+			for (int j = indexX - 1; j < indexX + 1; j++)
+			{
+				if (i < 0 || j < 0 || i >= maxSize || j >= maxSize || (i * mapCnt) + j < 0 || (i * mapCnt) + j >= maxSize)
+					continue;
+
+				m_vecIsRenderState[(i * mapCnt) + j] = true;
+			}
 		}
 	}
-	// >> 랜더 범위 적용
+	else
+	{
+		for (int i = indexY - 1; i < indexY + 2; i++)
+		{
+			for (int j = indexX - 1; j < indexX + 2; j++)
+			{
+				if (i < 0 || j < 0 || i >= maxSize || j >= maxSize || (i * mapCnt) + j < 0 || (i * mapCnt) + j >= maxSize)
+					continue;
+
+				m_vecIsRenderState[(i * mapCnt) + j] = true;
+
+			} // << : for_j
+
+		} // << : for_i
+
+	} // << : else
 }
 
 //void CObjectManager::UpdateNewMap(CFrustum * frustum)

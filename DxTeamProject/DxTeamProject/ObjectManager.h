@@ -55,6 +55,7 @@ private:
 	//Keep (이어하기)
 	vector<D3DXVECTOR3*> SaveData;
 
+	DWORD DoFtoDw(float f);
 	
 public:
 	//이어하기
