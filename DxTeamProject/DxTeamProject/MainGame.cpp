@@ -357,7 +357,7 @@ void CMainGame::Render()
 		if (m_pCharacter)
 			m_pCharacter->Render();
 
-		g_pObjectManager->Render();
+		g_pObjectManager->Render(m_pCamera->GetCameraEye());
 
 		if (g_pGameManager->GetDevMode())
 		{
