@@ -14,7 +14,8 @@ CObjectManager::CObjectManager() :
 	// m_frustum(NULL),
 	// m_thread(NULL),
 	ResetCube(false),
-	KeepGoing(false)
+	KeepGoing(false),
+	m_nowMapPos(0)
 {
 	// InitializeCriticalSection(&m_cs);
 }
@@ -901,7 +902,9 @@ void CObjectManager::SetIsRenderState()
 
 int CObjectManager::GetVecMapObjCnt()
 {
+	int result = -1;
 	int index = 0;
+
 	map<int, vector<IObject*>>::iterator it;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
@@ -910,6 +913,8 @@ int CObjectManager::GetVecMapObjCnt()
 		else
 			index++;
 	}
+
+	return result;
 }
 
 vector<IObject *> CObjectManager::GetMapVecIObject()

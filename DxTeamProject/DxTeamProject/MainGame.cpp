@@ -194,28 +194,28 @@ void CMainGame::Update()
 
 	}
 
-	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
-	{
-		/// Delete Later...
-		if (GetKeyState('1') & 0x8000)
-		{
-			g_pGameManager->SetGetOrb("Blue");
-			g_pGameManager->SetGetOrb("Green");
-			g_pGameManager->SetGetOrb("Red");
-			g_pGameManager->SetGetOrb("White");
-			g_pGameManager->SetGetOrb("Yellow");
-			g_pGameManager->SetGetOrb("Black");
-			// g_pGameManager->CompleteOrb();
-		}
-		if (GetKeyState('2') & 0x8000)
-		{
-			g_pSoundManager->PlayBGM("f_last");
-		}
-		if (GetKeyState('3') & 0x8000)
-		{
-			g_pSoundManager->PlayBGM("f_middle");
-		}
-	}
+	//else if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
+	//{
+	//	/// Delete Later...
+	//	if (GetKeyState('1') & 0x8000)
+	//	{
+	//		g_pGameManager->SetGetOrb("Blue");
+	//		g_pGameManager->SetGetOrb("Green");
+	//		g_pGameManager->SetGetOrb("Red");
+	//		g_pGameManager->SetGetOrb("White");
+	//		g_pGameManager->SetGetOrb("Yellow");
+	//		g_pGameManager->SetGetOrb("Black");
+	//		// g_pGameManager->CompleteOrb();
+	//	}
+	//	if (GetKeyState('2') & 0x8000)
+	//	{
+	//		g_pSoundManager->PlayBGM("f_last");
+	//	}
+	//	if (GetKeyState('3') & 0x8000)
+	//	{
+	//		g_pSoundManager->PlayBGM("f_middle");
+	//	}
+	//}
 
 	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{
@@ -357,7 +357,7 @@ void CMainGame::Render()
 		if (m_pCharacter)
 			m_pCharacter->Render();
 
-		g_pObjectManager->Render();
+		g_pObjectManager->Render(m_pCamera->GetCameraEye());
 
 		if (g_pGameManager->GetDevMode())
 		{
