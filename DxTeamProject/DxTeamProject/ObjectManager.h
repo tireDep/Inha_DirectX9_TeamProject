@@ -97,7 +97,7 @@ public:
 
 	void Reset();
 
-	void Render();
+	void Render(const D3DXVECTOR3& camEye);
 	void RenderOBBBox();
 
 	void Destroy();

@@ -141,6 +141,30 @@ void CMainGame::Update()
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map7.dat");
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map8.dat");
 		//	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map9.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
 #else
 		/// 1... puzzle side height wall
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map1_puzzle_test.dat");
@@ -155,34 +179,36 @@ void CMainGame::Update()
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map4_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map4.dat");
 		/// 5... 
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map5.dat");
-#endif // DEBUG
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map5.dat");
 
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map1.dat");
-		//cout << "1" << endl;
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map2.dat");
-		//cout << "2" << endl;
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map3.dat");
-		//cout << "3" << endl;
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map4.dat");
-		//cout << "4" << endl;
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map5.dat");
-		//cout << "5" << endl;
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map6.dat");
-		//cout << "6" << endl;
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map7.dat");
-		//cout << "7" << endl;
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map8.dat");
-		//cout << "8" << endl;
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map9.dat");
-		//cout << "9" << endl;
+
+#endif // DEBUG
+	/*	g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map4.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map5.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map6.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map7.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map8.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map9.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map2.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map3.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map4.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map5.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map6.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map7.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map8.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "winter_tile_map9.dat");
+*/
 
 		int size = g_pObjectManager->GetVecObject().size();
 		for (int i = 0; i < size; i++)
 		{
 			g_pEventManager->AddListener(&g_pObjectManager->GetVecObjectIndex(i));
-
 		}
 
 		g_pObjectManager->CalcNowPositionIndex(m_pCharacter->GetPosition());
@@ -353,7 +379,7 @@ void CMainGame::Render()
 		if (m_pCharacter)
 			m_pCharacter->Render();
 
-		g_pObjectManager->Render();
+		g_pObjectManager->Render(m_pCamera->GetCameraEye());
 
 		if (g_pGameManager->GetDevMode())
 		{
