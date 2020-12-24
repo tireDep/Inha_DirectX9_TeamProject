@@ -660,45 +660,66 @@ void CObjectManager::Reset()
 //	one->SetPosition(one->GetPosition() + movePerIMass * one->GetInverseMass());
 //}
 
-void CObjectManager::Render()
+void CObjectManager::Render(const D3DXVECTOR3& camEye)
 {
 	multimap<int, vector<IObject*>>::iterator it;
-	int index = -1;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
-		index++;
+		// >> fog
+		g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, true);
 
-		if (m_vecIsRenderState[index] == true)
+		g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(0.67f, 0.85f, 0.89f, 0.1f));
+		// g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.4f));
+
+		g_pD3DDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
+		g_pD3DDevice->SetRenderState(D3DRS_FOGSTART, DoFtoDw(25.0f));
+		g_pD3DDevice->SetRenderState(D3DRS_FOGEND, DoFtoDw(45.0f));
+		// >> 한 구역 크기 : 30
+		g_pD3DDevice->SetRenderState(D3DRS_RANGEFOGENABLE, true);
+
+		D3DXVECTOR3 vRender;
+		float camDist = 60.0f;
+
+		for (int i = 0; i < it->second.size(); i++)
 		{
-			for (int i = 0; i < it->second.size(); i++)
+			// >> 안개 범위 안에 들어가는 것만 랜더
+			vRender = it->second[i]->GetTranslation() - camEye;
+
+			if (D3DXVec3Length(&vRender) >= -camDist && D3DXVec3Length(&vRender) <= camDist)
 				it->second[i]->Render();
 		}
-		else
-		{
-			// >> fog
-			g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, true);
 
-			g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(255, 255, 255, 125));
-			// g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(156, 211, 226, 125));
-			// todo : fog color
-			// todo : 너무 눈에 띄에 바뀜
+		g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
 
-			g_pD3DDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
-			g_pD3DDevice->SetRenderState(D3DRS_FOGSTART, DoFtoDw(10.0f));
-			g_pD3DDevice->SetRenderState(D3DRS_FOGEND, DoFtoDw(200.0f));
-			g_pD3DDevice->SetRenderState(D3DRS_RANGEFOGENABLE, true);
+		// >> 기존 방식 : 3X3 영역만 랜더, 나머지 안개 OR 랜더 X
+		// >> 너무 바뀌는게 잘 보임
+		// if (m_vecIsRenderState[index] == true)
+		// {
+		// 	for (int i = 0; i < it->second.size(); i++)
+		// 		it->second[i]->Render();
+		// }
+		//else
+		//{
+		//	// >> fog
+		//	g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, true);
+		//
+		//	g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(255, 255, 255, 255));
+		//	// g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(156, 211, 226, 125));
+		//	// todo : fog color
+		//	// todo : 너무 눈에 띄에 바뀜
+		//
+		//	g_pD3DDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
+		//	g_pD3DDevice->SetRenderState(D3DRS_FOGSTART, DoFtoDw(10.0f));
+		//	g_pD3DDevice->SetRenderState(D3DRS_FOGEND, DoFtoDw(200.0f));
+		//	g_pD3DDevice->SetRenderState(D3DRS_RANGEFOGENABLE, true);
+		//
+		//	// for (int i = 0; i < it->second.size(); i++)
+		//	// 	it->second[i]->Render();
+		//
+		//	g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
+		//}
+	} // << : for
 
-			for (int i = 0; i < it->second.size(); i++)
-				it->second[i]->Render();
-
-			g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
-		}
-	}
-
-	// for (int i = 0; i < m_vecObject.size(); i++)
-	// {
-	// 	m_vecObject[i]->Render();
-	// }
 }
 
 void CObjectManager::RenderOBBBox()
@@ -771,19 +792,19 @@ void CObjectManager::RemoveMap()
 //	}
 //}
 
-IObject & CObjectManager::GetIObject(int mapIndex, int vectorIndex)
-{
-	int num = 0;
-	multimap<int, vector<IObject*>>::iterator it;
-	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
-	{
-		num++;
-		if (mapIndex != num)
-			continue;
-
-		return *it->second[vectorIndex];
-	}
-}
+//IObject & CObjectManager::GetIObject(int mapIndex, int vectorIndex)
+//{
+//	int num = 0;
+//	multimap<int, vector<IObject*>>::iterator it;
+//	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+//	{
+//		num++;
+//		if (mapIndex != num)
+//			continue;
+//
+//		return *it->second[vectorIndex];
+//	}
+//}
 
 void CObjectManager::CalcNowPositionIndex(const D3DXVECTOR3 & m_characterPos)
 {
@@ -814,7 +835,8 @@ void CObjectManager::CalcNowPositionIndex(const D3DXVECTOR3 & m_characterPos)
 	m_nowMapPos = result.x + (result.y * mapCnt);
 	// >> 현재 플레이어가 위치한 맵 번호
 
-	SetIsRenderState();
+	// SetIsRenderState();
+	// >> 랜더 방식 변경으로 필요하지 않음
 }
 
 void CObjectManager::SetIsRenderState()
@@ -875,6 +897,32 @@ void CObjectManager::SetIsRenderState()
 		} // << : for_i
 
 	} // << : else
+}
+
+int CObjectManager::GetVecMapObjCnt()
+{
+	int index = 0;
+	map<int, vector<IObject*>>::iterator it;
+	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+	{
+		if (index == m_nowMapPos)
+			return it->second.size();
+		else
+			index++;
+	}
+}
+
+vector<IObject *> CObjectManager::GetMapVecIObject()
+{
+	int index = 0;
+	map<int, vector<IObject*>>::iterator it;
+	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+	{
+		if (index == m_nowMapPos)
+			return it->second;
+		else
+			index++;
+	}
 }
 
 //void CObjectManager::UpdateNewMap(CFrustum * frustum)

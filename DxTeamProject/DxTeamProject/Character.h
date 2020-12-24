@@ -38,7 +38,7 @@ protected:
 	bool m_isCollidedTile;
 	float m_fHeightTile;
 	bool m_isReset;
-
+	float m_preJumpPosition;
 	//SaveData
 	
 public:
