@@ -112,6 +112,7 @@ public:
 	//
 	void CalcNowPositionIndex(const D3DXVECTOR3& m_characterPos);
 	void SetIsRenderState();
+	int GetVecMapObjCnt();
 	vector<IObject *> GetMapVecIObject();	// << 오브젝트 반환
 
 private:

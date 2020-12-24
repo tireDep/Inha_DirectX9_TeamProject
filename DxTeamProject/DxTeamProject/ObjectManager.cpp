@@ -899,6 +899,19 @@ void CObjectManager::SetIsRenderState()
 	} // << : else
 }
 
+int CObjectManager::GetVecMapObjCnt()
+{
+	int index = 0;
+	map<int, vector<IObject*>>::iterator it;
+	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+	{
+		if (index == m_nowMapPos)
+			return it->second.size();
+		else
+			index++;
+	}
+}
+
 vector<IObject *> CObjectManager::GetMapVecIObject()
 {
 	int index = 0;
