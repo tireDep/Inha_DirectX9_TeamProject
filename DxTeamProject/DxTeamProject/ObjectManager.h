@@ -108,10 +108,11 @@ public:
 	// void Thread_CalcNewMap();
 	void AddMap();
 	void RemoveMap();
-	IObject& GetIObject(int mapIndex, int vectorIndex);
+	// IObject& GetIObject(int mapIndex, int vectorIndex);
 	//
 	void CalcNowPositionIndex(const D3DXVECTOR3& m_characterPos);
 	void SetIsRenderState();
+	vector<IObject *> GetMapVecIObject();	// << 오브젝트 반환
 
 private:
 	void Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos);

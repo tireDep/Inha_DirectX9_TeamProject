@@ -792,19 +792,19 @@ void CObjectManager::RemoveMap()
 //	}
 //}
 
-IObject & CObjectManager::GetIObject(int mapIndex, int vectorIndex)
-{
-	int num = 0;
-	multimap<int, vector<IObject*>>::iterator it;
-	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
-	{
-		num++;
-		if (mapIndex != num)
-			continue;
-
-		return *it->second[vectorIndex];
-	}
-}
+//IObject & CObjectManager::GetIObject(int mapIndex, int vectorIndex)
+//{
+//	int num = 0;
+//	multimap<int, vector<IObject*>>::iterator it;
+//	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+//	{
+//		num++;
+//		if (mapIndex != num)
+//			continue;
+//
+//		return *it->second[vectorIndex];
+//	}
+//}
 
 void CObjectManager::CalcNowPositionIndex(const D3DXVECTOR3 & m_characterPos)
 {
@@ -897,6 +897,19 @@ void CObjectManager::SetIsRenderState()
 		} // << : for_i
 
 	} // << : else
+}
+
+vector<IObject *> CObjectManager::GetMapVecIObject()
+{
+	int index = 0;
+	map<int, vector<IObject*>>::iterator it;
+	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
+	{
+		if (index == m_nowMapPos)
+			return it->second;
+		else
+			index++;
+	}
 }
 
 //void CObjectManager::UpdateNewMap(CFrustum * frustum)

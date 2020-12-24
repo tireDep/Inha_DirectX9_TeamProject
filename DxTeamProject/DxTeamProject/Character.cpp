@@ -14,7 +14,7 @@ CCharacter::CCharacter()
 	, m_color(GRAY)
 	, m_isGrab(false)
 	, m_isJump(false)
-	, m_fMaxJumpHeight(0.01f)
+	, m_fMaxJumpHeight(0.1f)
 	, m_fRadianJump(0.0f)
 	, m_isFallAni(false)
 	, m_preRotation(0.0f)
@@ -28,7 +28,7 @@ CCharacter::CCharacter()
 	, m_isReset(false)
 	/// Presentation
 #ifdef _DEBUG
-	, m_saveZonePosition(0, 0, -15)
+	, m_saveZonePosition(5, 1, -5)
 #else
 	, m_saveZonePosition(6, 1, -16)
 #endif
@@ -250,7 +250,11 @@ string CCharacter::GetName()
 
 void CCharacter::ColliderObject()
 {
-	for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
+	vector<IObject *> vecCheck = g_pObjectManager->GetMapVecIObject();
+	int loopCnt = vecCheck.size();
+	ObjectType objType;
+
+	for (int i = 0; i < loopCnt; i++)
 	{
 		if (m_nGrabAbleObeject == i)
 		{
@@ -258,17 +262,19 @@ void CCharacter::ColliderObject()
 			continue;
 		}
 
-		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecIObject()[i]->GetOBB()))
+		objType = vecCheck[i]->GetObjType();
+
+		if (m_Character->GetOBB()->IsCollision(vecCheck[i]->GetOBB()))
 		{
-			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eG_DoorFrame)
-				if (g_pObjectManager->GetVecIObject()[i]->GetCondition())
+			if (objType == eG_DoorFrame)
+				if (vecCheck[i]->GetCondition())
 					continue;
 
-			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eOrb || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBook)
+			if (objType == eOrb || objType == eBook)
 			{		
 				//fout.open("OrbData.txt");
 			
-				g_pObjectManager->GetVecIObject()[i]->SetBool(true);
+				vecCheck[i]->SetBool(true);
 
 				//for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)				
 				//	fout << g_pObjectManager->GetVecIObject()[i]->GetBool(); // 
@@ -277,15 +283,15 @@ void CCharacter::ColliderObject()
 				continue;
 			}
 
-			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
+			if (objType <= eTile13 || objType == eBridge)
 			{
 //				if (m_isCollidedTile)
 					continue;
 			}
-			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() == eTrigger)
+			if (objType == eTrigger)
 			{
-				m_saveZonePosition = g_pObjectManager->GetVecIObject()[i]->SendPosition();
-				ZoneType zone = g_pObjectManager->GetVecIObject()[i]->ZoneIndex();
+				m_saveZonePosition = vecCheck[i]->SendPosition();
+				ZoneType zone = vecCheck[i]->ZoneIndex();
 
 				if (zone == ZoneType::eFall)
 				{
@@ -437,12 +443,14 @@ void CCharacter::Update(float duration)
 			m_isJump = false;
 			m_fRadianJump = 0;
 			m_fSpeed = 0.0f;
+			dir = 1.0f;
 		}
 		else if (m_fRadianJump >= D3DXToRadian(90.0f) && !m_isFallAni)	// High Spot
 		{
 			m_Character->SetAnimationIndex(6); // fall
 			m_isFallAni = true;
 			m_fSpeed = 0.0f;
+			dir = -1.0f;
 		}
 	}
 	else
@@ -466,31 +474,33 @@ void CCharacter::Update(float duration)
 	if (m_isFallAni || !m_isJump)
 	{
 #ifdef _DEBUG
-		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 1.5f, 0);
+		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.6f, 0);
 		m_Ray.SetOrigin(rayOrigin);
 #else
-		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.5f, 0);
+		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.7f, 0);
 		m_Ray.SetOrigin(rayOrigin);
 #endif // DEBUG
 
-
-
-		for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)
+		vector<IObject *> vecCheck = g_pObjectManager->GetMapVecIObject();
+		int loopCnt = vecCheck.size();
+		ObjectType objType;
+		for (int i = 0; i < loopCnt; i++)
 		{
-			if (g_pObjectManager->GetVecIObject()[i]->GetObjType() <= eTile13 || g_pObjectManager->GetVecIObject()[i]->GetObjType() == eBridge)
+			objType = vecCheck[i]->GetObjType();
+			if (objType <= eTile13 || objType == eBridge)
 			{
 				BOOL hit = false;
 				DWORD FaceIndex;
 				float u, v, dist;
 				D3DXVECTOR3 rayOrigin = m_Ray.GetOrigin();
 				D3DXMATRIXA16 matInverse;
-				D3DXMatrixInverse(&matInverse, NULL, &g_pObjectManager->GetVecIObject()[i]->GetOBB()->GetOBBWorldMatrix());
+				D3DXMatrixInverse(&matInverse, NULL, &vecCheck[i]->GetOBB()->GetOBBWorldMatrix());
 				D3DXVec3TransformCoord(&rayOrigin, &rayOrigin, &matInverse);
-				D3DXIntersect(g_pObjectManager->GetVecIObject()[i]->GetMesh(), &rayOrigin, &m_Ray.GetDirection(), &hit, &FaceIndex, &u, &v, &dist, NULL, NULL);
+				D3DXIntersect(vecCheck[i]->GetMesh(), &rayOrigin, &m_Ray.GetDirection(), &hit, &FaceIndex, &u, &v, &dist, NULL, NULL);
 				if (hit)
 				{
-					if (m_fHeightTile < m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y)
-						m_fHeightTile = m_Ray.GetOrigin().y - dist * g_pObjectManager->GetVecIObject()[i]->GetScale().y;
+					if (m_fHeightTile < m_Ray.GetOrigin().y - dist * vecCheck[i]->GetScale().y)
+						m_fHeightTile = m_Ray.GetOrigin().y - dist * vecCheck[i]->GetScale().y;
 				}
 			}
 		}
