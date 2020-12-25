@@ -6996,5 +6996,69 @@ Texture_01.png
 Yellow
 # Object_End
 
+# Object_Start
+# ObjectName
+D_Shrub_Yellow_101_637
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_05.X
+# TxtPath
+TreesYellow.png
+# ObjectType
+16
+# Scale
+0.3
+0.3
+0.3
+# Rotate
+0
+30
+0
+# Translate
+-5.5
+1
+12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Autumn_Tree_02_638
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+AutumnTree_02.X
+# TxtPath
+autumn_texture.png
+# ObjectType
+13
+# Scale
+0.025
+0.025
+0.025
+# Rotate
+0
+150
+0
+# Translate
+-8.5
+1
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Yellow
+# Object_End
+
 # Section =======================================
 
