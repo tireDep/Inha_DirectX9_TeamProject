@@ -245,3 +245,13 @@ string CCamera::GetName()
 {
 	return m_strName;
 }
+
+void CCamera::SetCameraDistance(float dist)
+{
+	m_fCameraDistance = dist;
+}
+
+float CCamera::GetCameraAngle()
+{
+	return m_vCamRotAngle.x;
+}

@@ -31,4 +31,7 @@ public:
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	void CheckRotRange();
 	string GetName();
+
+	void SetCameraDistance(float dist);
+	float GetCameraAngle();
 };

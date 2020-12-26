@@ -14,6 +14,8 @@
 #include "Scene.h"
 #include "SoundManager.h"
 
+#include "IObject.h"
+
 CMainGame::CMainGame() :
 	m_pCamera(NULL),
 	m_pUI(NULL),
@@ -172,7 +174,7 @@ void CMainGame::Update()
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_map9.dat");
 
 #endif // DEBUG
-
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map9_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map1.dat");
 		//cout << "1" << endl;
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map2.dat");
@@ -226,7 +228,6 @@ void CMainGame::Update()
 	//		g_pSoundManager->PlayBGM("f_middle");
 	//	}
 	//}
-
 	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{
 		if (g_pGameManager->GetUImode())
@@ -385,7 +386,7 @@ void CMainGame::Render()
 			m_pUI->RenderGrab();
 		}
 
-		if (m_pDragon)
+		if (m_pDragon && m_pCamera->GetCameraAngle() >= 0.0f)
 			m_pDragon->Render();
 
 		if (g_pGameManager->GetUImode())

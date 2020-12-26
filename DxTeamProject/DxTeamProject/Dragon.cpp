@@ -54,6 +54,7 @@ void CDragon::Update(D3DXVECTOR3 pos, float duration)
 	}
 
 	m_vPosition = pos;
+	m_vPosition.z += 0.5f;
 
 	// >> testRotation
 	// Need To Modify... Variable Name
