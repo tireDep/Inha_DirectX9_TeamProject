@@ -543,8 +543,8 @@ void CCharacter::Update(float duration)
 	{
 		D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 		m_matWorld = m_matRotY * matT;
-		m_Character->Update(duration);
 		m_Character->SetTransform(&m_matWorld);
+		m_Character->Update(duration);
 	}
 }
 

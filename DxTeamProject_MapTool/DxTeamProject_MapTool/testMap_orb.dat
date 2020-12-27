@@ -1,0 +1,399 @@
+# Object_Start
+# ObjectName
+Tile_01_Grass1
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+4
+0.1
+4
+# Rotate
+0
+0
+0
+# Translate
+4.86094
+0
+-3.39504
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Blue2
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Blue.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-10
+2
+5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Black3
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Black.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-10
+2
+-15
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_White4
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_White.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-10
+2
+-11
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Yellow5
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Yellow.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-10
+2
+-7
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Yellow
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Green6
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Green.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-10
+2
+-3.39504
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Green
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Red7
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Red.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-10
+2
+1
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Red
+# Object_End
+
+# Object_Start
+# ObjectName
+Box8
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+23
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+10
+2
+5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Sphere9
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+24
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+10
+2
+-3
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+Cylinder10
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+25
+# Scale
+1
+1
+1
+# Rotate
+90
+0
+0
+# Translate
+10
+2
+-10
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Section =======================================
+
+# Section =======================================
+
+# Section =======================================
+
+# Section =======================================
+
+# Object_Start
+# ObjectName
+Orb_Black3
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Black.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-10
+2
+-15
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Book11
+# FolderPath
+Resource/XFile/Book
+# FilePath
+book.X
+# TxtPath
+Bookshelf_diffuse.png
+# ObjectType
+33
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-10
+2
+-20
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Section =======================================
+
