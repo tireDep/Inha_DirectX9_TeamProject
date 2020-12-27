@@ -13,6 +13,8 @@ CUI::CUI()
 	movepy = 0;
 	px3 = { 0,0 };
 	m_strName = "UI";
+	puls = 0.f;
+	colorpuls = false;
 }
 
 CUI::~CUI()
@@ -423,16 +425,32 @@ void CUI::Render_Mapname()
 	m_pSprite->Draw(m_textUI2, &s_textrc2,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+		D3DCOLOR_ARGB(puls, 255, 255, 255));
 
 	//°¡À»
-	SetRect(&s_textrc3, -25, -295, m_textInfo3.Width, m_textInfo3.Height);
-	m_pSprite->Draw(m_textUI3, &s_textrc3,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	//SetRect(&s_textrc3, -25, -295, m_textInfo3.Width, m_textInfo3.Height);
+	//m_pSprite->Draw(m_textUI3, &s_textrc3,
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	m_pSprite->End();
+}
+
+void CUI::Update()
+{
+	if (colorpuls == false)
+	{
+		puls ++;
+		if (puls == 255)
+			colorpuls = true;
+	}
+	else if (colorpuls == true)
+	{
+		puls--;
+		if (puls == 0)
+			colorpuls = false;
+	}
 }
 
 

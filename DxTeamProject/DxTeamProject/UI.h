@@ -39,6 +39,9 @@ private:
 	RECT imageRC;
 	Color OnButton;
 	Pick PickColor;
+
+	int puls;
+	bool colorpuls;
 	///
 	
 public:
@@ -51,6 +54,7 @@ public:
 	void UI_Render();
 	void RenderGrab();
 	void Render_Mapname();
+	void Update();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName() override;
