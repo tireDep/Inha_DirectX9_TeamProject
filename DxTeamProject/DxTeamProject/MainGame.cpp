@@ -158,15 +158,10 @@ void CMainGame::Update()
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map8_bg.dat");
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map8.dat");
 		/// 9... 
-<<<<<<< HEAD
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map9_bg.dat");
-=======
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map9_bg.dat");
->>>>>>> 0a24e0ed27614dfdef2e4c70ab3ec481abfa9260
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map9.dat");
 
-<<<<<<< HEAD
-		
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map1_puzzle_test.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map2_bg.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map3_bg.dat");
@@ -186,8 +181,8 @@ void CMainGame::Update()
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "winter_tile_bg_map7.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "winter_tile_bg_map8.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "winter_tile_bg_map9.dat");
-#endif // DEBUG
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map9_bg.dat");
+
+
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map1.dat");
 		//cout << "1" << endl;
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map2.dat");
@@ -206,12 +201,10 @@ void CMainGame::Update()
 		//cout << "8" << endl;
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map9.dat");
 		//cout << "9" << endl;
-=======
 // << MapData
 	// todo : set perfect map
 
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testMap_orb.dat");
->>>>>>> 0a24e0ed27614dfdef2e4c70ab3ec481abfa9260
 
 		int size = g_pObjectManager->GetVecObject().size();
 		for (int i = 0; i < size; i++)
