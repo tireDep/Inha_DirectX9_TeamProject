@@ -299,6 +299,9 @@ void CMainGame::Update()
 		if (m_pCamera)
 			m_pCamera->Update();
 
+		if (m_pUI)
+			m_pUI->Update();
+
 		if (m_pCharacter)
 		{
 			m_pCharacter->Update(m_pCamera->GetCameraDirection());
@@ -424,9 +427,10 @@ void CMainGame::Render()
 			}
 		}
 
+		m_pUI->Render_Mapname();
+
 		if (m_pText->GetisGrabstate())
 		{
-			//m_pText->RenderGrab();
 			m_pUI->RenderGrab();
 		}
 
@@ -438,6 +442,7 @@ void CMainGame::Render()
 			if (m_pUI)
 				m_pUI->UI_Render();
 		}
+
 	}
 	g_pD3DDevice->EndScene();
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);

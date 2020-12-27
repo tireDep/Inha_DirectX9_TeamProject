@@ -15,6 +15,8 @@ private:
 		m_pTextureUI4, m_pTextureUI5, m_pTextureUI6, m_pTextureUI7,
 		m_pTextureUI8, m_pTextureUI9;
 
+	RECT UIrc, Backrc, Backrc2, Redrc, Yellowrc, Greenrc, Bluerc , Blackrc, Whiterc;
+
 	////////small
 	D3DXIMAGE_INFO m_smallInfo, m_smallInfo2, m_smallInfo3,
 		m_smallInfo4, m_smallInfo5, m_smallInfo6;
@@ -22,12 +24,27 @@ private:
 	LPDIRECT3DTEXTURE9 m_SmallUI, m_SmallUI2, m_SmallUI3,
 		m_SmallUI4, m_SmallUI5, m_SmallUI6;
 
+	RECT s_Redrc, s_Yellowrc, s_Greenrc, s_Bluerc, s_Blackrc, s_Whiterc;
+
+	///////////text
 	D3DXIMAGE_INFO m_textInfo , m_textInfo2, m_textInfo3;
 
 	LPDIRECT3DTEXTURE9 m_textUI , m_textUI2 , m_textUI3;
 
-	RECT s_Redrc, s_Yellowrc, s_Greenrc, s_Bluerc, s_Blackrc, s_Whiterc;
 	RECT s_textrc, s_textrc2 , s_textrc3;
+	
+	//////////Script
+	D3DXIMAGE_INFO m_scriInfo, m_scriInfo2, m_scriInfo3,
+		m_scriInfo4, m_scriInfo5, m_scriInfo6,
+		m_scriInfo7, m_scriInfo8, m_scriInfo9;
+
+	LPDIRECT3DTEXTURE9 m_scriUI, m_scriUI2, m_scriUI3, 
+		m_scriUI4, m_scriUI5, m_scriUI6,
+		m_scriUI7, m_scriUI8, m_scriUI9;
+
+	RECT s_scrirc, s_scrirc2, s_scrirc3,
+		s_scrirc4, s_scrirc5, s_scrirc6,
+		s_scrirc7, s_scrirc8, s_scrirc9;
 
 	POINT pUI;
 	POINT px; //´­·¶À»¶§
@@ -35,10 +52,12 @@ private:
 	POINT px3; //¶¼¾úÀ»¶§
 	D3DXMATRIXA16 matT, matWorld;
 	int movep, movepy;
-	RECT UIrc, Backrc, Backrc2, Redrc, Yellowrc, Greenrc, Bluerc , Blackrc, Whiterc;
 	RECT imageRC;
 	Color OnButton;
 	Pick PickColor;
+
+	int puls;
+	bool colorpuls;
 	///
 	
 public:
@@ -49,8 +68,11 @@ public:
 	bool m_isLButtonDown;
 	void Setup_UI();
 	void UI_Render();
-	void RenderGrab();
 	void Render_Mapname();
+	void Setup_Script();
+	void Rneder_Script();
+	void RenderGrab();
+	void Update();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName() override;
