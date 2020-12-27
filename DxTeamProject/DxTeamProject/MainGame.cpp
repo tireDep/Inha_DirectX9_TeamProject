@@ -239,8 +239,8 @@ void CMainGame::Update()
 
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "test_grab.dat");
 
-		int size = g_pObjectManager->GetVecObject().size();
-		for (int i = 0; i < size; i++)
+		int loopSize = g_pObjectManager->GetVecObject().size();
+		for (int i = 0; i < loopSize; i++)
 		{
 			g_pEventManager->AddListener(&g_pObjectManager->GetVecObjectIndex(i));
 		}

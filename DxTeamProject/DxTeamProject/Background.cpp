@@ -47,6 +47,12 @@ void CBackground::Setup(const ST_MapData & mapData)
 		m_numMtrls = xfile->nMtrlNum;
 
 		delete xfile;
+
+		m_pMesh->OptimizeInplace(
+			D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_VERTEXCACHE,
+			(DWORD*)m_adjBuffer->GetBufferPointer(),
+			(DWORD*)m_adjBuffer->GetBufferPointer(),
+			0, 0);
 	}
 	else
 	{

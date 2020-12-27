@@ -44,11 +44,17 @@ void CTile::Setup(const ST_MapData & mapData)
 
 	delete xfile;
 
-	D3DXMATRIXA16 matS, matR, matT;
-	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
-	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
-	D3DXMatrixTranslation(&matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
-	m_matWorld = matS * matR * matT;
+	m_pMesh->OptimizeInplace(
+		D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_VERTEXCACHE,
+		(DWORD*)m_adjBuffer->GetBufferPointer(),
+		(DWORD*)m_adjBuffer->GetBufferPointer(),
+		0, 0);
+
+	// D3DXMATRIXA16 matS, matR, matT;
+	D3DXMatrixScaling(&m_matS, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixRotationYawPitchRoll(&m_matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
+	D3DXMatrixTranslation(&m_matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
+	m_matWorld = m_matS * m_matR * m_matT;
 
 	// OBB Test
 	m_pOBB = new COBB;

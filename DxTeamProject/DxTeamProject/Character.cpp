@@ -341,7 +341,8 @@ void CCharacter::ColliderObject()
 	if (m_isGrab)
 		return;
 
-	for (int i = 0; i < g_pObjectManager->GetVecPObejct().size(); i++)
+	int loopSize = g_pObjectManager->GetVecPObejct().size();
+	for (int i = 0; i < loopSize; i++)
 	{
 		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecPObejct()[i]->GetOBB()))
 		{

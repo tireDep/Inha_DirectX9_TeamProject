@@ -88,6 +88,12 @@ void CGimmick::SetLoadData(const ST_MapData & mapData)
 
 	delete xfile;
 
+	m_pMesh->OptimizeInplace(
+		D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_VERTEXCACHE,
+		(DWORD*)m_adjBuffer->GetBufferPointer(),
+		(DWORD*)m_adjBuffer->GetBufferPointer(),
+		0, 0);
+
 	D3DXMatrixScaling(&m_matS, m_vScale.x, m_vScale.y, m_vScale.z);
 	D3DXMatrixRotationYawPitchRoll(&m_matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
 	D3DXMatrixTranslation(&m_matT, m_vTranslation.x, m_vTranslation.y, m_vTranslation.z);
