@@ -6,8 +6,12 @@ COrb::COrb() :
 	m_preAni(0.0f),
 	m_nowAni(0.0f),
 	m_UvX(0.0f),
-	m_UvY(0.2f)
-	,render(true)
+	m_UvY(0.2f),
+	render(true),
+	pBox(false), 
+	pCylinder(false),
+	pSphere(false),
+	player(false)
 {
 }
 
@@ -55,8 +59,6 @@ void COrb::Setup(ST_MapData setData)
 	v.p = D3DXVECTOR3(f, -f, 0.05);		v.t = D3DXVECTOR2(m_UvY, m_UvY); m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(-f, f, 0.05);		v.t = D3DXVECTOR2(m_UvX, m_UvX); m_vecVertex.push_back(v);
 
-	
-	
 	
 	// g_pFileLoadManager->FileLoad_Texture("Resource/Sprite/Orb", "제목 없음-1.png", m_pTex0);
 	// 
@@ -106,11 +108,11 @@ void COrb::Render()
 		g_pGameManager->SetGetOrb(m_strConditionName);
 		g_pObjectManager->RemoveObject(m_pOBB);
 	}
-	if (render == false)
-	{
-		g_pGameManager->SetGetOrb(m_strConditionName);
-		g_pObjectManager->RemoveObject(m_pOBB);
-	}
+	//if (render == false)
+	//{
+	//	g_pGameManager->SetGetOrb(m_strConditionName);
+	//	g_pObjectManager->RemoveObject(m_pOBB);
+	//}
 	
 	if (render == true)
 	{
@@ -162,10 +164,6 @@ void COrb::Update(float duration)
 		m_vecVertex[4].t = D3DXVECTOR2(m_UvY, m_UvY);
 		m_vecVertex[5].t = D3DXVECTOR2(m_UvX, m_UvX);
 	}
-
-	
-
-
 
 	 // m_pOBB->Update(&GetmatWorld());
 }
