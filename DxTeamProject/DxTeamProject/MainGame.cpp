@@ -165,7 +165,7 @@ void CMainGame::Update()
 // << MapData
 	// todo : set perfect map
 
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "testMap_orb.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "test_grab.dat");
 
 		int size = g_pObjectManager->GetVecObject().size();
 		for (int i = 0; i < size; i++)

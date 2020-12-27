@@ -663,6 +663,7 @@ void CObjectManager::Reset()
 
 void CObjectManager::Render(const D3DXVECTOR3& camEye)
 {
+	// >> Iobject Render
 	multimap<int, vector<IObject*>>::iterator it;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
@@ -691,6 +692,13 @@ void CObjectManager::Render(const D3DXVECTOR3& camEye)
 		}
 
 		g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
+
+		// >> pObject Render
+		int loopSize = m_vecPObject.size();
+		for (int i = 0; i < loopSize; i++)
+		{
+			m_vecPObject[i]->Render();
+		}
 
 		// >> 기존 방식 : 3X3 영역만 랜더, 나머지 안개 OR 랜더 X
 		// >> 너무 바뀌는게 잘 보임

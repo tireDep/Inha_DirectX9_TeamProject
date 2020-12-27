@@ -30,7 +30,7 @@ CCharacter::CCharacter()
 #ifdef _DEBUG
 	, m_saveZonePosition(5, 1, -5)
 #else
-	, m_saveZonePosition(0, 0, 0)
+	, m_saveZonePosition(5, 1, -5)
 #endif
 	, m_vGrabDirection(0, 0, 1)
 	, m_vGrabCamDir(0, 0, 1)
@@ -106,16 +106,20 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				break;
 
 			case PlayerInputType::eHold:
-				if (m_isGrab)
-				{
-					// if (m_Character->CheckAnimationEnd())
-					// 	m_Character->SetAnimationIndex(5);
-				}
-				else
-				{
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(10); // Idle
-				}
+				//if (m_isGrab)
+				//{
+				//	// if (m_Character->CheckAnimationEnd())
+				//	// 	m_Character->SetAnimationIndex(5);
+				//}
+				//else
+				//{
+				//	if (m_Character->CheckAnimationEnd())
+				//		m_Character->SetAnimationIndex(10); // Idle
+				//}
+
+				if (m_Character->CheckAnimationEnd())
+					m_Character->SetAnimationIndex(10);
+				// >> 애니메이션 없어서 Idle로 고정
 				m_fSpeed = 0.0f;
 				break;
 
@@ -127,13 +131,14 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 						D3DXVECTOR3 v;
 						D3DXVec3Normalize(&v, &this->m_vGrabDirection);
 						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(10.0f * v);
+						// m_fRotation = m_preRotation;
+						// DoRotation(m_fRotation);
+						// m_fSpeed = 10.0f;
+						// m_vDirection.y = 0;
+						// m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
+						if (m_Character->CheckAnimationEnd())
+							m_Character->SetAnimationIndex(5);
 						m_fSpeed = 10.0f;
-						m_fRotation = m_preRotation;
-						DoRotation(m_fRotation);
-						m_vDirection.y = 0;
-						m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
-						//m_vPosition.y = 0;
-						m_Character->SetAnimationIndex(5);
 					}
 				}
 				else
@@ -143,6 +148,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 					m_fSpeed = 0.0f;
 				}
 				break;
+
 			case PlayerInputType::eHoldPull:
 				if (m_isGrab)
 				{
@@ -151,22 +157,22 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 					D3DXVECTOR3 v;
 					D3DXVec3Normalize(&v, &this->m_vGrabDirection);
 					g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(-10.0f * v);
-					m_fSpeed = -10.0f;
-					m_fRotation = m_preRotation;
-					DoRotation(m_fRotation);
-					m_vDirection.y = 0;
-					m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
-					//m_vPosition.y = 0;
+					// m_fRotation = m_preRotation;
+					// DoRotation(m_fRotation);
+					// m_fSpeed = -10.0f;
+					// m_vDirection.y = 0;
+					// m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
 					if (m_Character->CheckAnimationEnd())
 						m_Character->SetAnimationIndex(4);
+					m_fSpeed = -10.0f;
 					}
 				}
 				else
 				{
 					if (m_Character->CheckAnimationEnd())
 						m_Character->SetAnimationIndex(10); // Idle
+					m_fSpeed = 0.0f;
 				}
-				m_fSpeed = 0.0f;
 				break;
 
 			case PlayerInputType::eUp:
@@ -339,7 +345,11 @@ void CCharacter::ColliderObject()
 	}
 
 	if (m_isGrab)
+	{
+		m_isCollided = false;
+		// >> 없으면 충돌 상태로 판단되서 캐릭터가 이동하지 않음
 		return;
+	}
 
 	for (int i = 0; i < g_pObjectManager->GetVecPObejct().size(); i++)
 	{
@@ -376,6 +386,29 @@ void CCharacter::Reset()
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
 	D3DXMatrixIdentity(&matT);
+
+	// >> reset list?
+	m_isCollided = false;
+	m_isColorChanged = false;
+	// m_color = GRAY;
+	m_isGrab = false;
+	m_isJump = false;
+	m_fMaxJumpHeight = 0.01f; 
+	m_fRadianJump = 0.0f;
+	m_isFallAni = false;
+	m_preRotation = 0.0f;
+	m_vContactNormal = D3DXVECTOR3(0, 0, 0);
+	m_fPenetration = 0.0f; 
+	m_isCollidedTile = false; 
+	m_fHeightTile = 0.0f;
+	m_fSpeed = 0.0f;
+	m_fRotation = 0.0f;
+	m_fGrabRotation = 0.0f;
+	m_isReset = false;
+	m_vGrabDirection = D3DXVECTOR3(0, 0, 1);
+	m_vGrabCamDir = D3DXVECTOR3(0, 0, 1);
+	Keep = false;
+	m_preJumpPosition = 1.0f;
 }
 
 void CCharacter::SaveData(D3DXVECTOR3 pos)
@@ -463,6 +496,7 @@ void CCharacter::Update(float duration)
 		if (m_fSpeed > 0 && m_Character->CheckAnimationEnd() && !m_isGrab)
 		{
 			m_Character->SetAnimationIndex(9); // Walk
+
 			DoRotation(m_fRotation);
 			m_vPosition += (m_vDirection * m_fSpeed * duration);
 		}
@@ -470,10 +504,19 @@ void CCharacter::Update(float duration)
 		{
 			if (D3DXVec3Dot(&m_vGrabCamDir, &m_vDirection) < 0)
 				m_vDirection = m_vGrabCamDir;	// >> 잡기 상태일 때 일정 각도 이상이면 dir 변경
+
+			m_vDirection.y = 0;
+			m_fRotation = m_preRotation;
+
+			DoRotation(m_fRotation);
+			m_vPosition += (m_vDirection * m_fSpeed * duration);
+
 			// >> todo : 일정 거리 이상시 해제 필요?
 			// >> todo : 밀기+당기기 상태일 때 마우스 이동하면 잡기 해제 필요?
 			// -> 오브젝트방향과 플레이어 이동 방향이 달라짐
 		}
+
+		// >> DoRotation if문 밖으로 빼면 매번 동작해서 안됨
 	}
 
 	//if (m_isFallAni || !m_isJump)
