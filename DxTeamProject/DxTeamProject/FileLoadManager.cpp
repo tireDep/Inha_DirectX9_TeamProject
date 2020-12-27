@@ -9,7 +9,7 @@
 CFileLoadManager::CFileLoadManager() :
 	/// KT Map Index
 	// xCnt : 맵 최대 개수
-	m_xCnt(3),
+	m_xCnt(5),
 	m_nowX(0),
 	m_nowZ(0),
 	m_addNum(30),
