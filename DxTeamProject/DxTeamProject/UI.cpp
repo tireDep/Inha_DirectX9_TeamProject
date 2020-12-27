@@ -210,6 +210,203 @@ void CUI::Setup_UI()
 		, D3DX_DEFAULT, 0, &m_textInfo3, NULL, &m_textUI3);
 }
 
+void CUI::Setup_Script()
+{
+	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
+
+	GetClientRect(g_hWnd, &UIrc);
+	////////////// black
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Script/black_script_1.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_scriInfo, NULL, &m_scriUI);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Script/black_script_2.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_scriInfo2, NULL, &m_scriUI2);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Script/black_script_3.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_scriInfo3, NULL, &m_scriUI3);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Script/black_script_3.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_scriInfo3, NULL, &m_scriUI3);
+	/////////////////////white
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Script/white_script_1.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_scriInfo4, NULL, &m_scriUI4);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Script/white_script_2.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_scriInfo5, NULL, &m_scriUI5);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Script/white_script_3.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_scriInfo6, NULL, &m_scriUI6);
+	//////////////yellow
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Script/yellow_script_1.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_scriInfo7, NULL, &m_scriUI7);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Script/yellow_script_2.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_scriInfo8, NULL, &m_scriUI8);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Script/yellow_script_3.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_scriInfo9, NULL, &m_scriUI9);
+
+}
+
+void CUI::Rneder_Script()
+{
+	SetRect(&imageRC, matT._41, matT._42,
+		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
+
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+	D3DXMatrixTranslation(&matT, movep, movepy, 0);
+	matWorld = matT;
+
+	m_pSprite->SetTransform(&matWorld);
+
+	//black
+	SetRect(&s_scrirc, -270, -590,
+		m_scriInfo.Width, m_scriInfo.Height);
+
+	m_pSprite->Draw(m_scriUI, &s_scrirc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	SetRect(&s_scrirc2, -380, -590,
+		m_scriInfo2.Width, m_scriInfo2.Height);
+
+	m_pSprite->Draw(m_scriUI2, &s_scrirc2,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	SetRect(&s_scrirc3, -190,-590,
+		m_scriInfo3.Width, m_scriInfo3.Height);
+
+	m_pSprite->Draw(m_scriUI3, &s_scrirc3,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	//white
+	SetRect(&s_scrirc4, -425, -590,
+		m_scriInfo4.Width, m_scriInfo4.Height);
+
+	m_pSprite->Draw(m_scriUI4, &s_scrirc4,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	SetRect(&s_scrirc5, -255, -590,
+		m_scriInfo5.Width, m_scriInfo5.Height);
+
+	m_pSprite->Draw(m_scriUI5, &s_scrirc5,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	SetRect(&s_scrirc6, -310, -590,
+		m_scriInfo6.Width, m_scriInfo6.Height);
+
+	m_pSprite->Draw(m_scriUI6, &s_scrirc6,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+	//yellow
+	SetRect(&s_scrirc7, -345, -590,
+		m_scriInfo7.Width, m_scriInfo7.Height);
+
+	m_pSprite->Draw(m_scriUI7, &s_scrirc7,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	SetRect(&s_scrirc8, -215, -590,
+		m_scriInfo8.Width, m_scriInfo8.Height);
+
+	m_pSprite->Draw(m_scriUI8, &s_scrirc8,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	SetRect(&s_scrirc8, -140, -590,
+		m_scriInfo9.Width, m_scriInfo9.Height);
+
+	m_pSprite->Draw(m_scriUI9, &s_scrirc9,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	m_pSprite->End();
+}
+
 void CUI::UI_Render()
 {
 	SetRect(&imageRC, matT._41, matT._42,
