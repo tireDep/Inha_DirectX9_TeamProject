@@ -668,30 +668,34 @@ void CObjectManager::Render(const D3DXVECTOR3& camEye)
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
 		// >> fog
-		g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, true);
+		//g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, true);
 
-		g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(0.67f, 0.85f, 0.89f, 0.1f));
-		// g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.4f));
+		//g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(0.67f, 0.85f, 0.89f, 0.1f));
+		//// g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.4f));
 
-		g_pD3DDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
-		g_pD3DDevice->SetRenderState(D3DRS_FOGSTART, DoFtoDw(25.0f));
-		g_pD3DDevice->SetRenderState(D3DRS_FOGEND, DoFtoDw(45.0f));
-		// >> 한 구역 크기 : 30
-		g_pD3DDevice->SetRenderState(D3DRS_RANGEFOGENABLE, true);
+		//g_pD3DDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
+		//g_pD3DDevice->SetRenderState(D3DRS_FOGSTART, DoFtoDw(25.0f));
+		//g_pD3DDevice->SetRenderState(D3DRS_FOGEND, DoFtoDw(45.0f));
+		//// >> 한 구역 크기 : 30
+		//g_pD3DDevice->SetRenderState(D3DRS_RANGEFOGENABLE, true);
 
-		D3DXVECTOR3 vRender;
-		float camDist = 60.0f;
+		//D3DXVECTOR3 vRender;
+		//float camDist = 60.0f;
 
+		//for (int i = 0; i < it->second.size(); i++)
+		//{
+		//	// >> 안개 범위 안에 들어가는 것만 랜더
+		//	vRender = it->second[i]->GetTranslation() - camEye;
+
+		//	if (D3DXVec3Length(&vRender) >= -camDist && D3DXVec3Length(&vRender) <= camDist)
+		//		it->second[i]->Render();
+		//}
+
+		//g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
+		
+		// KT fog off... Need to level design.. 
 		for (int i = 0; i < it->second.size(); i++)
-		{
-			// >> 안개 범위 안에 들어가는 것만 랜더
-			vRender = it->second[i]->GetTranslation() - camEye;
-
-			if (D3DXVec3Length(&vRender) >= -camDist && D3DXVec3Length(&vRender) <= camDist)
-				it->second[i]->Render();
-		}
-
-		g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
+			it->second[i]->Render();
 
 		// >> pObject Render
 		int loopSize = m_vecPObject.size();
@@ -728,7 +732,6 @@ void CObjectManager::Render(const D3DXVECTOR3& camEye)
 		//	g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
 		//}
 	} // << : for
-
 }
 
 void CObjectManager::RenderOBBBox()

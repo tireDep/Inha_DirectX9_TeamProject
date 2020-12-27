@@ -217,8 +217,7 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 			}
 		}
 		break;
-		// DEBUG Mode
-
+//#ifdef DEBUG
 		case WM_MOUSEWHEEL:
 		{
 			m_fCameraDistance -= (GET_WHEEL_DELTA_WPARAM(eventMsg.wParam) / 30.0f);
@@ -226,8 +225,8 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 				m_fCameraDistance = 5.0f;
 		}
 		break;
-
-		// RELEASE Mode
+//#else
+//#endif 
 		} // << : switch
 	} // << : if
 }
