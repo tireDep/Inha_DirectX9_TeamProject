@@ -1,0 +1,103 @@
+# Object_Start
+# ObjectName
+Tile_01_Grass1
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_01.X
+# TxtPath
+Texture_01.png
+# ObjectType
+0
+# Scale
+4
+0.1
+4
+# Rotate
+0
+0
+0
+# Translate
+4.86094
+0
+-3.39504
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Green
+Red
+Yellow
+# Object_End
+
+
+# Object_Start
+# ObjectName
+Orb_Black3
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Black.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-10
+2
+-15
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Orb_Black3
+# FolderPath
+Resource/Sprite/Orb
+# FilePath
+
+# TxtPath
+Orb_Blue.png
+# ObjectType
+34
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-10
+2
+0
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# ConditionName
+Blue
+# Object_End
+
+# Section =======================================
+
