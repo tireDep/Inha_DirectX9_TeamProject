@@ -30,7 +30,7 @@ CCharacter::CCharacter()
 #ifdef _DEBUG
 	, m_saveZonePosition(5, 1, -5)
 #else
-	, m_saveZonePosition(0, 0, 0)
+	, m_saveZonePosition(60, 1, -164)
 #endif
 	, m_vGrabDirection(0, 0, 1)
 	, m_vGrabCamDir(0, 0, 1)
