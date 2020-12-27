@@ -36,6 +36,7 @@ CCharacter::CCharacter()
 	, m_vGrabCamDir(0, 0, 1)
 	, Keep(false)
 	, m_preJumpPosition(1.0f)
+	, m_preInput(PlayerInputType::eNull)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixIdentity(&m_matRotY);
@@ -48,7 +49,6 @@ void CCharacter::SetColor(D3DXCOLOR c)
 	m_color = c;
 }
 
-static PlayerInputType preInput;
 void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 {
 	if (g_pGameManager->GetNowScene() != SceneType::eGameScene)
@@ -82,14 +82,14 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 		if (eventMsg.eventType == EventType::eInputEvent)
 		{
-			if (preInput == PlayerInputType::eHoldPull && preInput != eventMsg.playerInput)
+			if (m_preInput == PlayerInputType::eHoldPull && m_preInput != eventMsg.playerInput)
 			{
 				if(m_nGrabAbleObeject != -1)
 					g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(D3DXVECTOR3(0,0,0));
 			}
 			else
 			{
-				preInput = eventMsg.playerInput;
+				m_preInput = eventMsg.playerInput;
 			}
 
 			switch (eventMsg.playerInput)
@@ -128,6 +128,17 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				{
 					if (m_nGrabAbleObeject != -1)
 					{
+						D3DXVECTOR3 objPos = g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetPosition();
+
+						if(fabs(objPos.x - m_vPosition.x) >= 1.0f
+						|| fabs(objPos.y - m_vPosition.y) >= 1.0f
+						|| fabs(objPos.z - m_vPosition.z) >= 1.0f)
+						{
+							// >> 일정 거리 이상이면 잡기상태 해제
+							m_isGrab = false;
+							return;
+						}
+
 						D3DXVECTOR3 v;
 						D3DXVec3Normalize(&v, &this->m_vGrabDirection);
 						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(10.0f * v);
@@ -154,17 +165,27 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				{
 					if (m_nGrabAbleObeject != -1)
 					{
-					D3DXVECTOR3 v;
-					D3DXVec3Normalize(&v, &this->m_vGrabDirection);
-					g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(-10.0f * v);
-					// m_fRotation = m_preRotation;
-					// DoRotation(m_fRotation);
-					// m_fSpeed = -10.0f;
-					// m_vDirection.y = 0;
-					// m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
-					if (m_Character->CheckAnimationEnd())
-						m_Character->SetAnimationIndex(4);
-					m_fSpeed = -10.0f;
+						D3DXVECTOR3 objPos = g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetPosition();
+						if (fabs(objPos.x - m_vPosition.x) >= 1.0f
+						 || fabs(objPos.y - m_vPosition.y) >= 1.0f
+						 || fabs(objPos.z - m_vPosition.z) >= 1.0f)
+						{
+							// >> 일정 거리 이상이면 잡기상태 해제
+							m_isGrab = false;
+							return;
+						}
+
+						D3DXVECTOR3 v;
+						D3DXVec3Normalize(&v, &this->m_vGrabDirection);
+						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(-10.0f * v);
+						// m_fRotation = m_preRotation;
+						// DoRotation(m_fRotation);
+						// m_fSpeed = -10.0f;
+						// m_vDirection.y = 0;
+						// m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
+						if (m_Character->CheckAnimationEnd())
+							m_Character->SetAnimationIndex(4);
+						m_fSpeed = -10.0f;
 					}
 				}
 				else
@@ -510,10 +531,6 @@ void CCharacter::Update(float duration)
 
 			DoRotation(m_fRotation);
 			m_vPosition += (m_vDirection * m_fSpeed * duration);
-
-			// >> todo : 일정 거리 이상시 해제 필요?
-			// >> todo : 밀기+당기기 상태일 때 마우스 이동하면 잡기 해제 필요?
-			// -> 오브젝트방향과 플레이어 이동 방향이 달라짐
 		}
 
 		// >> DoRotation if문 밖으로 빼면 매번 동작해서 안됨

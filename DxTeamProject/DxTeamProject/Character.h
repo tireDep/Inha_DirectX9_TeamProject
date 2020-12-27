@@ -40,6 +40,8 @@ protected:
 	bool m_isReset;
 	float m_preJumpPosition;
 	//SaveData
+
+	PlayerInputType m_preInput;
 	
 public:
 	bool Keep;
