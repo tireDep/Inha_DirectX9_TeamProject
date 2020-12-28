@@ -13,6 +13,9 @@ private:
 	bool m_isUIModeIn;
 	bool m_isUIMode;
 
+	bool m_isAttModeIn;
+	bool m_isAttMode;
+
 	bool m_Orbcomplete;
 
 	SceneType m_SceneName;
@@ -33,6 +36,7 @@ public:
 
 	bool GetDevMode();
 	bool GetUImode();
+	bool GetAttMode();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName() override;

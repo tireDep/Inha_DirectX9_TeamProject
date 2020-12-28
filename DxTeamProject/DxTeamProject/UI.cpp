@@ -407,6 +407,189 @@ void CUI::Rneder_Script()
 	m_pSprite->End();
 }
 
+void CUI::Setup_Attain()
+{
+	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
+
+	GetClientRect(g_hWnd, &UIrc);
+
+	//////////////back
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Attain/back.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_attInfo, NULL, &m_attUI);
+
+	//////////////winter
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Attain/winter_01.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_attInfo2, NULL, &m_attUI2);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Attain/winter_02.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_attInfo3, NULL, &m_attUI3);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Attain/winter_03.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_attInfo4, NULL, &m_attUI4);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Attain/winter_04.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_attInfo5, NULL, &m_attUI5);
+
+	//////////fall
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Attain/fall_01.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_attInfo7, NULL, &m_attUI7);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Attain/fall_02.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_attInfo8, NULL, &m_attUI8);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Attain/fall_03.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_attInfo9, NULL, &m_attUI9);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Attain/fall_04.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_attInfo10, NULL, &m_attUI10);
+
+}
+
+void CUI::Render_Attain()
+{
+	SetRect(&imageRC, matT._41, matT._42,
+		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
+
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+	D3DXMatrixTranslation(&matT, movep, movepy, 0);
+	matWorld = matT;
+
+	m_pSprite->SetTransform(&matWorld);
+
+	////back
+	SetRect(&s_attrc, 0, 0,
+		m_attInfo.Width, m_attInfo.Height);
+	m_pSprite->Draw(m_attUI, &s_attrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	////winter
+	SetRect(&s_attrc2, -10, -160,
+		m_attInfo2.Width, m_attInfo2.Height);
+	m_pSprite->Draw(m_attUI2, &s_attrc2,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	SetRect(&s_attrc3, -10, -160,
+		m_attInfo3.Width, m_attInfo3.Height);
+	m_pSprite->Draw(m_attUI3, &s_attrc3,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	SetRect(&s_attrc4, -10, -160,
+		m_attInfo4.Width, m_attInfo4.Height);
+	m_pSprite->Draw(m_attUI4, &s_attrc4,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	SetRect(&s_attrc5, -10, -160,
+		m_attInfo5.Width, m_attInfo5.Height);
+	m_pSprite->Draw(m_attUI5, &s_attrc5,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+/////////////fall
+
+	SetRect(&s_attrc7, -710, -160,
+		m_attInfo7.Width, m_attInfo7.Height);
+	m_pSprite->Draw(m_attUI7, &s_attrc7,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	SetRect(&s_attrc8, -710, -160,
+		m_attInfo8.Width, m_attInfo8.Height);
+	m_pSprite->Draw(m_attUI8, &s_attrc8,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	SetRect(&s_attrc9, -710, -160,
+		m_attInfo9.Width, m_attInfo9.Height);
+	m_pSprite->Draw(m_attUI9, &s_attrc9,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	SetRect(&s_attrc10, -710, -160,
+		m_attInfo10.Width, m_attInfo10.Height);
+	m_pSprite->Draw(m_attUI10, &s_attrc10,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	m_pSprite->End();
+}
+
 void CUI::UI_Render()
 {
 	SetRect(&imageRC, matT._41, matT._42,
@@ -638,7 +821,7 @@ void CUI::Update()
 {
 	if (colorpuls == false)
 	{
-		puls ++;
+		puls++;
 		if (puls == 255)
 			colorpuls = true;
 	}

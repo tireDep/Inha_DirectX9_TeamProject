@@ -46,6 +46,20 @@ private:
 		s_scrirc4, s_scrirc5, s_scrirc6,
 		s_scrirc7, s_scrirc8, s_scrirc9;
 
+	/////////Attain
+	D3DXIMAGE_INFO m_attInfo, m_attInfo2, m_attInfo3,
+		m_attInfo4, m_attInfo5, m_attInfo6,
+		m_attInfo7, m_attInfo8, m_attInfo9, m_attInfo10;
+
+	LPDIRECT3DTEXTURE9 m_attUI, m_attUI2, m_attUI3,
+		m_attUI4, m_attUI5, m_attUI6,
+		m_attUI7, m_attUI8, m_attUI9, m_attUI10;
+
+	RECT s_attrc, s_attrc2, s_attrc3,
+		s_attrc4, s_attrc5, s_attrc6,
+		s_attrc7, s_attrc8, s_attrc9,
+		s_attrc10;
+
 	POINT pUI;
 	POINT px; //눌렀을때
 	POINT px2; //움직일때
@@ -66,12 +80,18 @@ public:
 	CUI();
 	~CUI();
 	bool m_isLButtonDown;
+
 	void Setup_UI();
 	void UI_Render();
 	void Render_Mapname();
+	void RenderGrab();
+
 	void Setup_Script();
 	void Rneder_Script();
-	void RenderGrab();
+
+	void Setup_Attain();
+	void Render_Attain();
+
 	void Update();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;

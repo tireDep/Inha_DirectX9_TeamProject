@@ -67,6 +67,7 @@ CGameManager::CGameManager()
 
 	m_isDevMode = false;
 	m_isUIMode = false;
+	m_isAttMode = false;
 	m_Orbcomplete = false;
 
 	SetClipCursor(0);
@@ -124,6 +125,11 @@ bool CGameManager::GetDevMode()
 bool CGameManager::GetUImode()
 {
 	return m_isUIMode;
+}
+
+bool CGameManager::GetAttMode()
+{
+	return m_isAttMode;
 }
 
 void CGameManager::SetGetOrb(string orbType)
@@ -197,6 +203,8 @@ void CGameManager::SetNowScene(SceneType set)
 		m_isUIModeIn = false;
 		m_isDevMode = false;
 		m_isDevMoveIn = false;
+		m_isAttMode = false;
+		m_isAttModeIn = false;
 	}
 
 	m_SceneName = set;
@@ -247,6 +255,12 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 				m_isDevMode = !m_isDevMode;
 				m_isDevMoveIn = !m_isDevMoveIn;
 			}
+
+			if (0x4F == eventMsg.wParam && !m_isAttModeIn)
+			{
+				m_isAttMode = !m_isAttMode;
+				m_isAttModeIn = !m_isAttModeIn;
+			}
 		}
 		break;
 
@@ -257,6 +271,9 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 
 			if (VK_TAB == eventMsg.wParam)
 				m_isDevMoveIn = false;
+
+			if (0X4F == eventMsg.wParam)
+				m_isAttModeIn = false;
 		}
 		break;
 		}
