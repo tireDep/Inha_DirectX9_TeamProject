@@ -7,6 +7,8 @@ CScene::CScene()
 	movep = 0;
 	movepy = 0;
 	m_strName = "Scene";
+	OnButton = false;
+	PickButton = false;
 }
 
 
@@ -19,7 +21,6 @@ void CScene::Setup()
 	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
 
 	GetClientRect(g_hWnd, &imageRC);
-
 	//main
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
 		"Scene/Main.png",
@@ -42,7 +43,27 @@ void CScene::Setup()
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_stImageInfo, NULL, &m_pTextureScene);
 
-	//BigStart
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Scene/OnNew.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_onImageInfo, NULL, &m_pOnTexture);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Scene/PickNew.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_onImageInfo, NULL, &m_pOnTexture);
+
+	//continue
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
 		"Scene/continue.png",
 		D3DX_DEFAULT_NONPOW2,
@@ -126,12 +147,34 @@ void CScene::Render_Main()
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	//start
-	SetRect(&Startrc, -575, -485, m_stImageInfo.Width, m_stImageInfo.Height);
 
-	m_pSprite->Draw(m_pTextureScene, &Startrc,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	if (OnButton)
+	{
+		SetRect(&OnNewrc, -575, -485, m_onImageInfo.Width, m_onImageInfo.Height);
+
+		m_pSprite->Draw(m_pOnTexture, &OnNewrc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	else if(g_pGameManager->GetNowScene() == SceneType::eMainScene)
+	{
+		SetRect(&Startrc, -575, -485, m_stImageInfo.Width, m_stImageInfo.Height);
+
+		m_pSprite->Draw(m_pTextureScene, &Startrc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+	else if (PickButton)
+	{
+		SetRect(&PickNewrc, -575, -485, m_onImageInfo2.Width, m_onImageInfo2.Height);
+
+		m_pSprite->Draw(m_pOnTexture2, &PickNewrc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
 	//continue
 
@@ -218,6 +261,8 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 				&& g_pGameManager->GetNowScene() == SceneType::eMainScene)
 			{
 				//새로하기
+				PickButton = true;
+				g_pSoundManager->PlaySFX("button");
 				g_pGameManager->SetNowScene(SceneType::eLoadStart);
 				g_pObjectManager->KeepGoing = false;
 			}
@@ -226,6 +271,8 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 				&& g_pGameManager->GetNowScene() == SceneType::eMainScene)
 			{
 				//이어하기
+				PickButton = true;
+				g_pSoundManager->PlaySFX("button");
 				g_pGameManager->SetNowScene(SceneType::eLoadStart);
 
 				g_pObjectManager->KeepGoing = true; //이어하기
@@ -236,9 +283,23 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 				&& g_pGameManager->GetNowScene() == SceneType::eMainScene)
 			{
 				//끝내기
+				PickButton = true;
+				g_pSoundManager->PlaySFX("button");
 				exit(0);
 
 			}
+			break;
+		case WM_MOUSEMOVE:
+			px.x = LOWORD(eventMsg.lParam);
+			px.y = HIWORD(eventMsg.lParam);
+
+			if (px.x > 610 && px.x < 870 && px.y >505 && px.y < 540
+				&& g_pGameManager->GetNowScene() == SceneType::eMainScene)
+			{
+				OnButton = true;
+			}
+			else OnButton = false;
+
 			break;
 		}
 	}

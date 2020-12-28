@@ -14,13 +14,20 @@ private:
 	D3DXIMAGE_INFO m_stLoading;
 	LPDIRECT3DTEXTURE9 m_pLoading;
 
+	D3DXIMAGE_INFO m_onImageInfo, m_onImageInfo2;
+
+	LPDIRECT3DTEXTURE9 m_pOnTexture, m_pOnTexture2;
+
 	D3DXMATRIXA16 matT, matWorld;
 	int movep, movepy;
 	RECT Backrc, Startrc , Endrc, BigStartrc , Mainrc, Exitrc , loadrc;
+	RECT OnNewrc, PickNewrc;
 	RECT imageRC;
 	POINT px;
 	POINT PX2;
 
+	bool OnButton;
+	bool PickButton;
 public:
 	CScene();
 	~CScene();
