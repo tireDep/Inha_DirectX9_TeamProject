@@ -162,8 +162,8 @@ enum class EventType : int
 
 enum class SceneType
 {
-	eMainScene, eGameScene, eUIScene, eResultScene, eEndingScene,
-	eLoadStart, eLoading, ePauseScene,
+	eMainScene, ePickMainScene , eGameScene, eUIScene, eResultScene, 
+	eEndingScene,eLoadStart, eLoading, ePauseScene,
 	eNull
 };
 

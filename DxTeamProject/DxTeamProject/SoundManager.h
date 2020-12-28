@@ -21,26 +21,37 @@ private:
 
 	Channel* bgmChannel;
 	Channel* sfxChannel;
+	Channel* mainChannel;
 
 	Sound* bgm;
 	map<string, Sound*> soundHash;
 	map<string, Sound*> bgmHash;
+	map<string, Sound*> mainHash;
 
 	bool sound;
+	bool sfxPlaying;
+//	CSoundManager();
 public:
-	//CSoundManager();
+
+	//static CSoundManager* GetInstance();
 	//virtual ~CSoundManager() { }
 
 	void init();
 	void AddSFX(string path, string musicName);
 	void AddBGM(string path, string bgmName);
+	void AddMain(string path, string bgmName);
 
 	void PlaySFX(string soundName);
 	void PlayBGM(string bgmName);
+	void PlayMain(string bgmName);
 
 	bool isPlaying();
+	bool MainPlaying();
+
 	void isPlay(bool set) { sound = set; }
 	void Stop();
+	void Stopmain();
+
 
 	void Destroy();
 };

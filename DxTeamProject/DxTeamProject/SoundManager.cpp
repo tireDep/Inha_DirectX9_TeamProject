@@ -3,6 +3,7 @@
 
 CSoundManager::CSoundManager()
 {
+	sfxPlaying = false;
 }
 
 CSoundManager::~CSoundManager()
@@ -18,11 +19,19 @@ void CSoundManager::Destroy()
 	delete fmodSystem;
 }
 
+//CSoundManager * CSoundManager::GetInstance()
+//{
+//	static CSoundManager instance;
+//	return &instance;
+//}
+
 void CSoundManager::init()
 {
 	System_Create(&fmodSystem);
 	fmodSystem->init(4, FMOD_INIT_NORMAL, NULL);
-	
+
+	AddMain("sounds/bgm/bgm.mp3", "bgm");
+
 	AddSFX("sounds/appear.wav", "BombPut");
 	AddSFX("sounds/die.wav", "Die");
 	AddSFX("sounds/draw.wav", "Draw");
@@ -42,6 +51,8 @@ void CSoundManager::init()
 	AddBGM("sounds/fall/fall-sum.wav", "f_last");
 	//Orb
 	AddSFX("sounds/Orb/Orb.wav", "Orb");
+	//button
+	AddSFX("sounds/button/button.wav", "button");
 
 }
 
@@ -49,6 +60,12 @@ void CSoundManager::AddBGM(string path, string bgmName)
 {
 	fmodSystem->createStream(path.c_str(), FMOD_LOOP_NORMAL, NULL, &bgmHash[bgmName]);
 }
+
+void CSoundManager::AddMain(string path, string bgmName)
+{
+	fmodSystem->createStream(path.c_str(), FMOD_LOOP_NORMAL, NULL, &mainHash[bgmName]);
+}
+
 
 void CSoundManager::AddSFX(string path, string soundName)
 {
@@ -61,12 +78,10 @@ void CSoundManager::PlayBGM(string bgmName)
 	fmodSystem->playSound(FMOD_CHANNEL_REUSE, bgmHash[bgmName], false, &bgmChannel);
 }
 
-bool CSoundManager::isPlaying()
+void CSoundManager::PlayMain(string bgmName)
 {
-	bool playing = false;
-	bgmChannel->isPlaying(&playing);
-
-	return playing;
+	if (mainHash[bgmName] != NULL)
+		fmodSystem->playSound(FMOD_CHANNEL_REUSE, mainHash[bgmName], false, &mainChannel);
 }
 
 void CSoundManager::PlaySFX(string soundName)
@@ -75,8 +90,29 @@ void CSoundManager::PlaySFX(string soundName)
 		fmodSystem->playSound(FMOD_CHANNEL_FREE, soundHash[soundName], false, &sfxChannel);
 }
 
+bool CSoundManager::isPlaying()
+{
+	bool playing = false;
+	bgmChannel->isPlaying(&playing);
+
+	return playing;
+}
+
+bool CSoundManager::MainPlaying()
+{
+	bool Main = false;
+	mainChannel->isPlaying(&Main);
+
+	return Main;
+}
+
 void CSoundManager::Stop()
 {
 	sfxChannel->stop();
 	bgmChannel->stop();
+}
+
+void CSoundManager::Stopmain()
+{
+	mainChannel->stop();
 }
