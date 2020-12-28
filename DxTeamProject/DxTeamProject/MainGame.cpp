@@ -277,8 +277,12 @@ void CMainGame::Update()
 	//}
 	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{
+		g_pTimeManager->Update();
+
 		if (g_pGameManager->GetUImode())
 			return;
+
+		g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
 		m_fCheckTime += g_pTimeManager->GetElapsedTime();
 
@@ -287,9 +291,6 @@ void CMainGame::Update()
 			m_fCheckTime = 0.0f;
 			g_pObjectManager->CalcNowPositionIndex(m_pCharacter->GetPosition());
 		}
-
-		g_pTimeManager->Update();
-		g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
 		RECT rc;
 		GetClientRect(g_hWnd, &rc);
@@ -386,9 +387,6 @@ void CMainGame::Render()
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150, 150, 150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 
-	if (m_pSkydome)
-		m_pSkydome->Render(m_pCamera->GetCameraEye());
-
 	if (g_pGameManager->GetNowScene() == SceneType::eMainScene)
 	{
 		if (m_pScene)
@@ -409,6 +407,9 @@ void CMainGame::Render()
 	}
 	else
 	{
+		if (m_pSkydome)
+			m_pSkydome->Render(m_pCamera->GetCameraEye());
+
 		/// Presentation
 #ifdef _DEBUG
 		if (m_pGrid)

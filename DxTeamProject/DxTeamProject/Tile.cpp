@@ -160,7 +160,8 @@ void CTile::Render()
 	if (m_pMesh == NULL)
 		return;
 
-	if (m_ObjectType == ObjectType::eTile13 && m_pShader_Ocean != NULL)
+	bool isUIMode = g_pGameManager->GetUImode();
+	if (m_ObjectType == ObjectType::eTile13 && m_pShader_Ocean != NULL && !isUIMode)
 	{
 		SetShader_Ocean();
 
