@@ -67,6 +67,8 @@ void CBackground::Setup(const ST_MapData & mapData)
 		m_vecMtrls.push_back(m_stMtl);
 	}
 
+	g_pFileLoadManager->FileLoad_Texture("Resource/Texture", "BasicGray_127.png", m_grayTxt);
+
 	D3DXMATRIXA16 matS, matR, matT;
 	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
 	D3DXMatrixRotationYawPitchRoll(&matR, D3DXToRadian(m_vRotation.y), D3DXToRadian(m_vRotation.x), D3DXToRadian(m_vRotation.z));
@@ -123,7 +125,7 @@ void CBackground::Render()
 			g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
 			if (!CheckIsGetColorOrb())
-				g_pD3DDevice->SetTexture(0, g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "BasicGray_127.png"));
+				g_pD3DDevice->SetTexture(0, m_grayTxt);
 			else
 			{
 				if (m_vecTextures[i] != 0)

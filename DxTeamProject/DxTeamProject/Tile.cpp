@@ -1,7 +1,47 @@
 #include "stdafx.h"
 #include "Tile.h"
 
-CTile::CTile()
+void CTile::SetShader_Ocean()
+{
+	D3DXMATRIXA16 matView, matProj;
+	D3DXMATRIXA16 matWorldViewProj, matWorldInverseTranspose, matViewInverse;
+
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+
+	matWorldViewProj = m_matWorld * matView * matProj;
+
+	D3DXMatrixInverse(&matWorldInverseTranspose, NULL, &m_matWorld);
+	D3DXMatrixTranspose(&matWorldInverseTranspose, &matWorldInverseTranspose);
+
+	D3DXMatrixInverse(&matViewInverse, NULL, &matView);
+
+	float center = 0.5f;
+	float bump = 0.2f;
+
+	m_pTexture = m_vecTextures[0];
+	m_pShader_Ocean->SetTexture("distortion_Tex", m_pTexture);
+
+	m_pShader_Ocean->SetMatrix("gWorldViewProjection", &matWorldViewProj);
+	m_pShader_Ocean->SetMatrix("gWorldInverseTranspose", &matWorldInverseTranspose);
+	m_pShader_Ocean->SetMatrix("gWorld", &m_matWorld);
+	m_pShader_Ocean->SetMatrix("gViewInverse", &matViewInverse);
+
+	m_pShader_Ocean->SetFloat("gTime", m_shaderTime);
+	m_pShader_Ocean->SetFloat("gCenter", center);
+	m_pShader_Ocean->SetFloat("gTimeAngle", m_shaderTimeAngle);
+	m_pShader_Ocean->SetFloat("gBump", bump);
+
+	// >> 속도 조정 해야함
+	float flowSpeed = 0.1f;
+	m_shaderTime += flowSpeed * g_pTimeManager->GetElapsedTime();
+	m_shaderTimeAngle += flowSpeed * g_pTimeManager->GetElapsedTime();
+}
+
+CTile::CTile() :
+	m_pShader_Ocean(NULL),
+	m_shaderTime(0.0f),
+	m_shaderTimeAngle(0.0f)
 {
 	render = false;
 	m_strName = string("Tile") + to_string(m_nRefCount);
@@ -31,24 +71,34 @@ void CTile::Setup(const ST_MapData & mapData)
 	ST_XFile* xfile = new ST_XFile;
 
 	if (m_strXFile != "")
+	{
 		g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
 
-	if (m_strTxtFile != "")
-		g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+		m_pMesh = xfile->pMesh;
+		m_adjBuffer = xfile->adjBuffer;
+		m_vecMtrls = xfile->vecMtrl;
+		m_vecTextures = xfile->vecTextrure;
+		m_numMtrls = xfile->nMtrlNum;
 
-	m_pMesh = xfile->pMesh;
-	m_adjBuffer = xfile->adjBuffer;
-	m_vecMtrls = xfile->vecMtrl;
-	m_vecTextures = xfile->vecTextrure;
-	m_numMtrls = xfile->nMtrlNum;
+		delete xfile;
 
-	delete xfile;
+		if (m_strTxtFile != "")
+			g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
 
-	m_pMesh->OptimizeInplace(
-		D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_VERTEXCACHE,
-		(DWORD*)m_adjBuffer->GetBufferPointer(),
-		(DWORD*)m_adjBuffer->GetBufferPointer(),
-		0, 0);
+		g_pFileLoadManager->FileLoad_Texture("Resource/Texture", "BasicGray_127.png", m_grayTxt);
+
+		m_pMesh->OptimizeInplace(
+			D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_VERTEXCACHE,
+			(DWORD*)m_adjBuffer->GetBufferPointer(),
+			(DWORD*)m_adjBuffer->GetBufferPointer(),
+			0, 0);
+	}
+
+	if (m_ObjectType == ObjectType::eTile13)
+	{
+		// >> ocean
+		g_pFileLoadManager->FileLoad_Shader("Resource/Shader", "flow.fx", m_pShader_Ocean);
+	}
 
 	// D3DXMATRIXA16 matS, matR, matT;
 	D3DXMatrixScaling(&m_matS, m_vScale.x, m_vScale.y, m_vScale.z);
@@ -110,26 +160,47 @@ void CTile::Render()
 	if (m_pMesh == NULL)
 		return;
 
-	for (int i = 0; i < m_vecMtrls.size(); i++)
+	if (m_ObjectType == ObjectType::eTile13 && m_pShader_Ocean != NULL)
 	{
-		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
-		/*if (!CheckIsGetColorOrb())
+		SetShader_Ocean();
+
+		UINT numPasses = 0;
+		m_pShader_Ocean->Begin(&numPasses, NULL);
 		{
-			g_pD3DDevice->SetTexture(0, g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "BasicGray_127.png"));
-		}
-		else*/
-		{
-			if (m_vecTextures[i] != 0)
-				g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
-			else if (m_pTexture != NULL)
+			for (UINT i = 0; i < numPasses; ++i)
 			{
-				g_pD3DDevice->SetTexture(0, m_pTexture);
-				// >> 텍스처 매치 안되있을 때
+				m_pShader_Ocean->BeginPass(i);
+				m_pMesh->DrawSubset(i);
+				m_pShader_Ocean->EndPass();
 			}
 		}
-		m_pMesh->DrawSubset(i);
+		m_pShader_Ocean->End();
 	}
-	g_pD3DDevice->SetTexture(0, NULL);
+
+	else
+	{
+		for (int i = 0; i < m_vecMtrls.size(); i++)
+		{
+			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
+			// >> todo : 시연할 때 주석 풀기
+			/* if (!CheckIsGetColorOrb())
+			{
+				g_pD3DDevice->SetTexture(0, m_grayTxt);
+			}
+			else */
+			{
+				if (m_vecTextures[i] != 0)
+					g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+				else if (m_pTexture != NULL)
+				{
+					g_pD3DDevice->SetTexture(0, m_pTexture);
+					// >> 텍스처 매치 안되있을 때
+				}
+			}
+			m_pMesh->DrawSubset(i);
+		}
+		g_pD3DDevice->SetTexture(0, NULL);
+	}
 }
 
 /// Delete Later...

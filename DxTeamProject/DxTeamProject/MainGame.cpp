@@ -135,6 +135,7 @@ void CMainGame::Update()
 // >> MapData
 #ifdef _DEBUG
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "test_grab.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
 #else
 /// 1... puzzle side height wall
 //g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map1_puzzle_test.dat");
