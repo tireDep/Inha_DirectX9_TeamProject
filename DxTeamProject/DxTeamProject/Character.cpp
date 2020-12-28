@@ -14,7 +14,7 @@ CCharacter::CCharacter()
 	, m_color(GRAY)
 	, m_isGrab(false)
 	, m_isJump(false)
-	, m_fMaxJumpHeight(0.01f)
+	, m_fMaxJumpHeight(0.1f)
 	, m_fRadianJump(0.0f)
 	, m_isFallAni(false)
 	, m_preRotation(0.0f)
@@ -477,8 +477,8 @@ void CCharacter::Update(float duration)
 		}
 	}
 
-	//if (m_isFallAni || !m_isJump)
-	if(m_preJumpPosition > m_vPosition.y || !m_isJump)
+	if (m_isFallAni || !m_isJump)
+	//if(m_preJumpPosition > m_vPosition.y || !m_isJump)
 	//if (prejumpyposition > m_vPosition.y)
 	{
 #ifdef _DEBUG
