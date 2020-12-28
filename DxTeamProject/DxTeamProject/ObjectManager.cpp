@@ -567,107 +567,13 @@ void CObjectManager::Reset()
 	}
 }
 
-// Integrate CollisionSphereToBox(Rotation Error)
-//void CObjectManager::CollisionSphereToIObject(CSphere * one, IObject * two, float duration)
-//{
-//	D3DXMATRIXA16 inverseBoxMatrix;
-//	//D3DXMatrixInverse(&inverseBoxMatrix, NULL, &two->GetmatWorld());
-//
-//	D3DXMatrixIdentity(&inverseBoxMatrix);
-//	inverseBoxMatrix._41 = -two->GetmatWorld()._41;
-//	inverseBoxMatrix._42 = -two->GetmatWorld()._42;
-//	inverseBoxMatrix._43 = -two->GetmatWorld()._43;
-//
-//	D3DXVECTOR3 SphereToBoxCenter;
-//	D3DXVec3TransformCoord(&SphereToBoxCenter, &one->GetPosition(), &inverseBoxMatrix);
-//
-//	D3DXVECTOR3 closestPt(0, 0, 0);
-//	float dist;
-//
-//	dist = SphereToBoxCenter.x;
-//	if (dist > two->GetOBB()->GetOBBWidth()) dist = two->GetOBB()->GetOBBWidth();
-//	if (dist < -two->GetOBB()->GetOBBWidth()) dist = -two->GetOBB()->GetOBBWidth();
-//	closestPt.x = dist;
-//
-//	dist = SphereToBoxCenter.y;
-//	if (dist >  two->GetOBB()->GetOBBHeight()) dist = two->GetOBB()->GetOBBHeight();
-//	if (dist < -two->GetOBB()->GetOBBHeight()) dist = -two->GetOBB()->GetOBBHeight();
-//	closestPt.y = dist;
-//
-//	dist = SphereToBoxCenter.z;
-//	if (dist >  two->GetOBB()->GetOBBDepth()) dist = two->GetOBB()->GetOBBDepth();
-//	if (dist < -two->GetOBB()->GetOBBDepth()) dist = -two->GetOBB()->GetOBBDepth();
-//	closestPt.z = dist;
-//
-//	//dist = SphereToBoxCenter.x;
-//	//if (dist > two->GetOBB()->GetOBBWidth() / 2.0f) dist = two->GetOBB()->GetOBBWidth() / 2.0f;
-//	//if (dist < -two->GetOBB()->GetOBBWidth() / 2.0f) dist = -two->GetOBB()->GetOBBWidth() / 2.0f;
-//	//closestPt.x = dist;
-//	//dist = SphereToBoxCenter.y;
-//	//if (dist >  two->GetOBB()->GetOBBHeight() / 2.0f) dist = two->GetOBB()->GetOBBHeight() / 2.0f;
-//	//if (dist < -two->GetOBB()->GetOBBHeight() / 2.0f) dist = -two->GetOBB()->GetOBBHeight() / 2.0f;
-//	//closestPt.y = dist;
-//	//dist = SphereToBoxCenter.z;
-//	//if (dist >  two->GetOBB()->GetOBBDepth() / 2.0f) dist = two->GetOBB()->GetOBBDepth() / 2.0f;
-//	//if (dist < -two->GetOBB()->GetOBBDepth() / 2.0f) dist = -two->GetOBB()->GetOBBDepth() / 2.0f;
-//	//closestPt.z = dist;
-//
-//	//SphereToBoxCenter.x *= two->GetmatWorld()._11;
-//	//SphereToBoxCenter.y *= two->GetmatWorld()._22;
-//	//SphereToBoxCenter.z *= two->GetmatWorld()._33;
-//
-//	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
-//	dist = D3DXVec3Length(&tmp);
-//
-//	D3DXVECTOR3 closestPtWorld;
-//	D3DXVec3TransformCoord(&closestPtWorld, &closestPt, &two->GetmatWorld());
-//
-//	D3DXVECTOR3 contactNormal = closestPtWorld - SphereToBoxCenter;                     // Need To Modify.. 1214 01:46
-//																						// TEST
-//	contactNormal.y = 0;
-//	//D3DXVECTOR3 contactNormal = SphereToBoxCenter - closestPtWorld;
-//	D3DXVec3Normalize(&contactNormal, &contactNormal);
-//	float penetration = one->GetRadius() - sqrtf(dist);
-//	float elasticity = 0.1f; // TEST
-//
-//	D3DXVECTOR3 relativeVelocity = one->GetVelocity();
-//	float separatinVelocity = D3DXVec3Dot(&relativeVelocity, &contactNormal);
-//	//if (separatinVelocity > 0) return;         // Need Modify? 1 = Elasticity          // Need To Modify.. 1214 01:46
-//	float newSepVelocity = -separatinVelocity * elasticity;
-//
-//	D3DXVECTOR3 accCausedVelocity = one->GetAcceleration();                           // Need To Modify.. 1214 01:46
-//	float accCausedSepVelocity = D3DXVec3Dot(&accCausedVelocity, &contactNormal) * duration;
-//	// Need Modify? 1 = Elasticity
-//	newSepVelocity += (elasticity * accCausedSepVelocity);
-//
-//	//D3DXVECTOR3 accCausedVelocity = one->GetAcceleration();                           // Need To Modify.. 1214 01:46
-//	//float accCausedSepVelocity = D3DXVec3Dot(&accCausedVelocity, &contactNormal) * duration; 
-//	//if (accCausedSepVelocity < 0)
-//	//{                 // Need Modify? 1 = Elasticity
-//	//   newSepVelocity += (elasticity * accCausedSepVelocity);
-//	//   if (newSepVelocity < 0) newSepVelocity = 0.0f;
-//	//}
-//
-//	float deltaVelocity = newSepVelocity - separatinVelocity;
-//	if (one->GetInverseMass() <= 0) return;
-//
-//	float impulse = deltaVelocity / one->GetInverseMass();
-//	D3DXVECTOR3 impulsePerIMass = contactNormal * impulse;
-//
-//	one->SetVelocity(one->GetVelocity() + impulsePerIMass * one->GetInverseMass());
-//
-//	//if (penetration <= 0) return;
-//	D3DXVECTOR3 movePerIMass = contactNormal * (penetration / one->GetInverseMass());
-//	one->SetPosition(one->GetPosition() + movePerIMass * one->GetInverseMass());
-//}
-
 void CObjectManager::Render(const D3DXVECTOR3& camEye)
 {
 	// >> Iobject Render
 	multimap<int, vector<IObject*>>::iterator it;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
-		// >> fog
+		//// >> fog
 		//g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, true);
 
 		//g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(0.67f, 0.85f, 0.89f, 0.1f));
@@ -1307,4 +1213,97 @@ vector<IObject *> CObjectManager::GetMapVecIObject()
 //vector<PObject*> CObjectManager::GetVecPObejct()
 //{
 //   return m_vecPObject;
+//}
+// Integrate CollisionSphereToBox(Rotation Error)
+//void CObjectManager::CollisionSphereToIObject(CSphere * one, IObject * two, float duration)
+//{
+//	D3DXMATRIXA16 inverseBoxMatrix;
+//	//D3DXMatrixInverse(&inverseBoxMatrix, NULL, &two->GetmatWorld());
+//
+//	D3DXMatrixIdentity(&inverseBoxMatrix);
+//	inverseBoxMatrix._41 = -two->GetmatWorld()._41;
+//	inverseBoxMatrix._42 = -two->GetmatWorld()._42;
+//	inverseBoxMatrix._43 = -two->GetmatWorld()._43;
+//
+//	D3DXVECTOR3 SphereToBoxCenter;
+//	D3DXVec3TransformCoord(&SphereToBoxCenter, &one->GetPosition(), &inverseBoxMatrix);
+//
+//	D3DXVECTOR3 closestPt(0, 0, 0);
+//	float dist;
+//
+//	dist = SphereToBoxCenter.x;
+//	if (dist > two->GetOBB()->GetOBBWidth()) dist = two->GetOBB()->GetOBBWidth();
+//	if (dist < -two->GetOBB()->GetOBBWidth()) dist = -two->GetOBB()->GetOBBWidth();
+//	closestPt.x = dist;
+//
+//	dist = SphereToBoxCenter.y;
+//	if (dist >  two->GetOBB()->GetOBBHeight()) dist = two->GetOBB()->GetOBBHeight();
+//	if (dist < -two->GetOBB()->GetOBBHeight()) dist = -two->GetOBB()->GetOBBHeight();
+//	closestPt.y = dist;
+//
+//	dist = SphereToBoxCenter.z;
+//	if (dist >  two->GetOBB()->GetOBBDepth()) dist = two->GetOBB()->GetOBBDepth();
+//	if (dist < -two->GetOBB()->GetOBBDepth()) dist = -two->GetOBB()->GetOBBDepth();
+//	closestPt.z = dist;
+//
+//	//dist = SphereToBoxCenter.x;
+//	//if (dist > two->GetOBB()->GetOBBWidth() / 2.0f) dist = two->GetOBB()->GetOBBWidth() / 2.0f;
+//	//if (dist < -two->GetOBB()->GetOBBWidth() / 2.0f) dist = -two->GetOBB()->GetOBBWidth() / 2.0f;
+//	//closestPt.x = dist;
+//	//dist = SphereToBoxCenter.y;
+//	//if (dist >  two->GetOBB()->GetOBBHeight() / 2.0f) dist = two->GetOBB()->GetOBBHeight() / 2.0f;
+//	//if (dist < -two->GetOBB()->GetOBBHeight() / 2.0f) dist = -two->GetOBB()->GetOBBHeight() / 2.0f;
+//	//closestPt.y = dist;
+//	//dist = SphereToBoxCenter.z;
+//	//if (dist >  two->GetOBB()->GetOBBDepth() / 2.0f) dist = two->GetOBB()->GetOBBDepth() / 2.0f;
+//	//if (dist < -two->GetOBB()->GetOBBDepth() / 2.0f) dist = -two->GetOBB()->GetOBBDepth() / 2.0f;
+//	//closestPt.z = dist;
+//
+//	//SphereToBoxCenter.x *= two->GetmatWorld()._11;
+//	//SphereToBoxCenter.y *= two->GetmatWorld()._22;
+//	//SphereToBoxCenter.z *= two->GetmatWorld()._33;
+//
+//	D3DXVECTOR3 tmp = closestPt - SphereToBoxCenter;
+//	dist = D3DXVec3Length(&tmp);
+//
+//	D3DXVECTOR3 closestPtWorld;
+//	D3DXVec3TransformCoord(&closestPtWorld, &closestPt, &two->GetmatWorld());
+//
+//	D3DXVECTOR3 contactNormal = closestPtWorld - SphereToBoxCenter;                     // Need To Modify.. 1214 01:46
+//																						// TEST
+//	contactNormal.y = 0;
+//	//D3DXVECTOR3 contactNormal = SphereToBoxCenter - closestPtWorld;
+//	D3DXVec3Normalize(&contactNormal, &contactNormal);
+//	float penetration = one->GetRadius() - sqrtf(dist);
+//	float elasticity = 0.1f; // TEST
+//
+//	D3DXVECTOR3 relativeVelocity = one->GetVelocity();
+//	float separatinVelocity = D3DXVec3Dot(&relativeVelocity, &contactNormal);
+//	//if (separatinVelocity > 0) return;         // Need Modify? 1 = Elasticity          // Need To Modify.. 1214 01:46
+//	float newSepVelocity = -separatinVelocity * elasticity;
+//
+//	D3DXVECTOR3 accCausedVelocity = one->GetAcceleration();                           // Need To Modify.. 1214 01:46
+//	float accCausedSepVelocity = D3DXVec3Dot(&accCausedVelocity, &contactNormal) * duration;
+//	// Need Modify? 1 = Elasticity
+//	newSepVelocity += (elasticity * accCausedSepVelocity);
+//
+//	//D3DXVECTOR3 accCausedVelocity = one->GetAcceleration();                           // Need To Modify.. 1214 01:46
+//	//float accCausedSepVelocity = D3DXVec3Dot(&accCausedVelocity, &contactNormal) * duration; 
+//	//if (accCausedSepVelocity < 0)
+//	//{                 // Need Modify? 1 = Elasticity
+//	//   newSepVelocity += (elasticity * accCausedSepVelocity);
+//	//   if (newSepVelocity < 0) newSepVelocity = 0.0f;
+//	//}
+//
+//	float deltaVelocity = newSepVelocity - separatinVelocity;
+//	if (one->GetInverseMass() <= 0) return;
+//
+//	float impulse = deltaVelocity / one->GetInverseMass();
+//	D3DXVECTOR3 impulsePerIMass = contactNormal * impulse;
+//
+//	one->SetVelocity(one->GetVelocity() + impulsePerIMass * one->GetInverseMass());
+//
+//	//if (penetration <= 0) return;
+//	D3DXVECTOR3 movePerIMass = contactNormal * (penetration / one->GetInverseMass());
+//	one->SetPosition(one->GetPosition() + movePerIMass * one->GetInverseMass());
 //}

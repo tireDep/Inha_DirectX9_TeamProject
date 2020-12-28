@@ -412,24 +412,24 @@ void CCharacter::Reset()
 	m_isCollided = false;
 	m_isColorChanged = false;
 	// m_color = GRAY;
-	m_isGrab = false;
-	m_isJump = false;
-	m_fMaxJumpHeight = 0.01f;
-	m_fRadianJump = 0.0f;
-	m_isFallAni = false;
-	m_preRotation = 0.0f;
-	m_vContactNormal = D3DXVECTOR3(0, 0, 0);
-	m_fPenetration = 0.0f;
-	m_isCollidedTile = false;
-	m_fHeightTile = 0.0f;
-	m_fSpeed = 0.0f;
-	m_fRotation = 0.0f;
-	m_fGrabRotation = 0.0f;
-	m_isReset = false;
-	m_vGrabDirection = D3DXVECTOR3(0, 0, 1);
-	m_vGrabCamDir = D3DXVECTOR3(0, 0, 1);
-	Keep = false;
-	m_preJumpPosition = 1.0f;
+	//m_isGrab = false;
+	//m_isJump = false;
+	//m_fMaxJumpHeight = 0.01f;
+	//m_fRadianJump = 0.0f;
+	//m_isFallAni = false;
+	//m_preRotation = 0.0f;
+	//m_vContactNormal = D3DXVECTOR3(0, 0, 0);
+	//m_fPenetration = 0.0f;
+	//m_isCollidedTile = false;
+	//m_fHeightTile = 0.0f;
+	//m_fSpeed = 0.0f;
+	//m_fRotation = 0.0f;
+	//m_fGrabRotation = 0.0f;
+	//m_isReset = false;
+	//m_vGrabDirection = D3DXVECTOR3(0, 0, 1);
+	//m_vGrabCamDir = D3DXVECTOR3(0, 0, 1);
+	//Keep = false;
+	//m_preJumpPosition = 1.0f;
 }
 
 void CCharacter::SaveData(D3DXVECTOR3 pos)

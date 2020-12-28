@@ -136,83 +136,42 @@ void CMainGame::Update()
 #ifdef _DEBUG
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "test_grab.dat");
 #else
-/// 1... puzzle side height wall
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map1_puzzle_test.dat");
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_puzzle_map1.dat");
-/// 2... puzzle trace orb
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map2_bg.dat");
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_puzzle_map2.dat");
-/// 3... bridge
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map3_bg.dat");
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map3.dat");
-/// 4... 
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map4_bg.dat");
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map4.dat");
-/// 5... 
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map5.dat");
-/// 6... Tree... Slide...
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map6_bg.dat");
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map6.dat");
-/// 7... 
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map7_bg.dat");
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_map7.dat");
-/// 8... 
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map8_bg.dat");
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map8.dat");
-/// 9... 
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map9_bg.dat");
-// g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map9_bg.dat");
-//g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "Autumn_tile_bg_map9.dat");
 
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map1_puzzle_test.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map2_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map3_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map2.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map3.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map4_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map5_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map6_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map4.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map5.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map6.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map7_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map8_bg.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "Autumn_tile_Test_map9_bg.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map7.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map8.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map9.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean2.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean2.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean2.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean2.dat");
-		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean2.dat");
-
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "winter_tile_bg_map1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "winter_tile_bg_map2.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "winter_tile_bg_map3.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map2.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map3.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "winter_tile_bg_map4.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "winter_tile_bg_map5.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "winter_tile_bg_map6.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map4.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map5.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map6.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "winter_tile_bg_map7.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "winter_tile_bg_map8.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/DesignMapData", "winter_tile_bg_map9.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map7.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map8.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map9.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
