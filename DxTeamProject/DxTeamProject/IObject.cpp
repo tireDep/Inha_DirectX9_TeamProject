@@ -2,6 +2,7 @@
 #include "IObject.h"
 
 IObject::IObject() :
+	m_grayTxt(NULL),
 	m_strConditionName(""),
 	m_isCondition(false),
 	m_pOBB(NULL)

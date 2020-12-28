@@ -79,6 +79,7 @@ void CMainGame::Setup()
 
 	m_pUI = new CUI;
 	m_pUI->Setup_UI();
+	m_pUI->Setup_Script();
 	m_pUI->Setup_Attain();
 
 	m_pCamera = new CCamera;
@@ -96,6 +97,8 @@ void CMainGame::Setup()
 	m_pDragon = new CDragon;
 	m_pDragon->Setup();
 
+	g_pSoundManager->init();
+
 	g_pEventManager->AddListener(g_pGameManager);
 	g_pEventManager->AddListener(m_pCamera);
 	g_pEventManager->AddListener(m_pCharacter);
@@ -103,7 +106,6 @@ void CMainGame::Setup()
 	g_pEventManager->AddListener(m_pUI);
 	g_pEventManager->AddListener(m_pScene);
 
-	g_pSoundManager->init();
 }
 
 void CMainGame::Update()
@@ -123,6 +125,8 @@ void CMainGame::Update()
 	// >> 임시 로딩창 구현을 위해 로드 위치 이동
 	if (g_pGameManager->GetNowScene() == SceneType::eLoading)
 	{
+		g_pSoundManager->Stopmain();
+
 		g_pGameManager->SetIsDataLoad(true);
 
 		if (g_pObjectManager->KeepGoing == true)
@@ -135,6 +139,7 @@ void CMainGame::Update()
 // >> MapData
 #ifdef _DEBUG
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "test_grab.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
 #else
 
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
@@ -210,7 +215,11 @@ void CMainGame::Update()
 		g_pGameManager->SetNowScene(SceneType::eGameScene);
 
 	}
-
+	if (g_pGameManager->GetNowScene() == SceneType::eMainScene)
+	{
+		if(g_pSoundManager->MainPlaying() == false)
+		g_pSoundManager->PlayMain("bgm");
+	}
 	//else if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	//{
 	//	/// Delete Later...
@@ -235,8 +244,12 @@ void CMainGame::Update()
 	//}
 	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{
+		g_pTimeManager->Update();
+
 		if (g_pGameManager->GetUImode())
 			return;
+
+		g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
 		m_fCheckTime += g_pTimeManager->GetElapsedTime();
 
@@ -245,9 +258,6 @@ void CMainGame::Update()
 			m_fCheckTime = 0.0f;
 			g_pObjectManager->CalcNowPositionIndex(m_pCharacter->GetPosition());
 		}
-
-		g_pTimeManager->Update();
-		g_pEventManager->Update(g_pTimeManager->GetElapsedTime());
 
 		RECT rc;
 		GetClientRect(g_hWnd, &rc);
@@ -344,9 +354,6 @@ void CMainGame::Render()
 	g_pD3DDevice->Clear(NULL, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(150, 150, 150), 1.0f, 0);
 	g_pD3DDevice->BeginScene();
 
-	if (m_pSkydome)
-		m_pSkydome->Render(m_pCamera->GetCameraEye());
-
 	if (g_pGameManager->GetNowScene() == SceneType::eMainScene)
 	{
 		if (m_pScene)
@@ -367,6 +374,9 @@ void CMainGame::Render()
 	}
 	else
 	{
+		if (m_pSkydome)
+			m_pSkydome->Render(m_pCamera->GetCameraEye());
+
 		/// Presentation
 #ifdef _DEBUG
 		if (m_pGrid)
@@ -389,6 +399,7 @@ void CMainGame::Render()
 		}
 
 		m_pUI->Render_Mapname();
+		
 
 		if (m_pText->GetisGrabstate())
 		{

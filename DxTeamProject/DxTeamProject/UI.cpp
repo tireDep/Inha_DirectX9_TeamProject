@@ -356,53 +356,53 @@ void CUI::Rneder_Script()
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	//white
-	SetRect(&s_scrirc4, -425, -590,
-		m_scriInfo4.Width, m_scriInfo4.Height);
+	//SetRect(&s_scrirc4, -425, -590,
+	//	m_scriInfo4.Width, m_scriInfo4.Height);
 
-	m_pSprite->Draw(m_scriUI4, &s_scrirc4,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	//m_pSprite->Draw(m_scriUI4, &s_scrirc4,
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	SetRect(&s_scrirc5, -255, -590,
-		m_scriInfo5.Width, m_scriInfo5.Height);
+	//SetRect(&s_scrirc5, -255, -590,
+	//	m_scriInfo5.Width, m_scriInfo5.Height);
 
-	m_pSprite->Draw(m_scriUI5, &s_scrirc5,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	//m_pSprite->Draw(m_scriUI5, &s_scrirc5,
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	SetRect(&s_scrirc6, -310, -590,
-		m_scriInfo6.Width, m_scriInfo6.Height);
+	//SetRect(&s_scrirc6, -310, -590,
+	//	m_scriInfo6.Width, m_scriInfo6.Height);
 
-	m_pSprite->Draw(m_scriUI6, &s_scrirc6,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
-	//yellow
-	SetRect(&s_scrirc7, -345, -590,
-		m_scriInfo7.Width, m_scriInfo7.Height);
+	//m_pSprite->Draw(m_scriUI6, &s_scrirc6,
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	D3DCOLOR_ARGB(255, 255, 255, 255));
+	////yellow
+	//SetRect(&s_scrirc7, -345, -590,
+	//	m_scriInfo7.Width, m_scriInfo7.Height);
 
-	m_pSprite->Draw(m_scriUI7, &s_scrirc7,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	//m_pSprite->Draw(m_scriUI7, &s_scrirc7,
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	SetRect(&s_scrirc8, -215, -590,
-		m_scriInfo8.Width, m_scriInfo8.Height);
+	//SetRect(&s_scrirc8, -215, -590,
+	//	m_scriInfo8.Width, m_scriInfo8.Height);
 
-	m_pSprite->Draw(m_scriUI8, &s_scrirc8,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	//m_pSprite->Draw(m_scriUI8, &s_scrirc8,
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	SetRect(&s_scrirc8, -140, -590,
-		m_scriInfo9.Width, m_scriInfo9.Height);
+	//SetRect(&s_scrirc8, -140, -590,
+	//	m_scriInfo9.Width, m_scriInfo9.Height);
 
-	m_pSprite->Draw(m_scriUI9, &s_scrirc9,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	//m_pSprite->Draw(m_scriUI9, &s_scrirc9,
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	m_pSprite->End();
 }

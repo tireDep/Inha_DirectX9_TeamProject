@@ -9,6 +9,9 @@
 CMainGame *g_pMainGame;
 
 HWND g_hWnd;
+const POINT g_pos = { 50, 50 };
+const int g_nWidth = 1424;
+const int g_nHeight = 720;
 
 #define MAX_LOADSTRING 100
 
@@ -120,7 +123,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // Store instance handle in our global variable
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+	   g_pos.x, g_pos.y, g_nWidth, g_nHeight, nullptr, nullptr, hInstance, nullptr);
+
+   // >> 기존버전
+   // HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   //	CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
    g_hWnd = hWnd;
 
@@ -191,10 +198,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
 
 	case WM_GETMINMAXINFO:
-		// ((MINMAXINFO*)lParam)->ptMaxTrackSize.x = 1280;
-		// ((MINMAXINFO*)lParam)->ptMaxTrackSize.y = 800;
-		// ((MINMAXINFO*)lParam)->ptMinTrackSize.x = 1280;
-		// ((MINMAXINFO*)lParam)->ptMinTrackSize.y = 800;
+		((MINMAXINFO*)lParam)->ptMaxTrackSize.x = g_nWidth;
+		((MINMAXINFO*)lParam)->ptMaxTrackSize.y = g_nHeight;
+		((MINMAXINFO*)lParam)->ptMinTrackSize.x = g_nWidth;
+		((MINMAXINFO*)lParam)->ptMinTrackSize.y = g_nHeight;
 		// >> todo : 사이즈 확정 나면 창 크기 고정 하기
 		break;
 

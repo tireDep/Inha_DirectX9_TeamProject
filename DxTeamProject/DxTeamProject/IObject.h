@@ -5,6 +5,7 @@
 class IObject : public CObject
 {
 protected:
+	LPDIRECT3DTEXTURE9 m_grayTxt;
 	Synthesize(string, m_strConditionName, ConditionName);
 	// Synthesize(int, m_conditionOrbindex, ConditionOrbIndex); // 필요없을지도?
 	/// Door Public ... Down

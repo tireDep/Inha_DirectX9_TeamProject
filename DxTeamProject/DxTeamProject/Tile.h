@@ -6,6 +6,11 @@ class CTile : public IObject
 private:
 	bool  pBox, pCylinder, pSphere;
 	bool player, render;
+	LPD3DXEFFECT m_pShader_Ocean;
+	float m_shaderTime;
+	float m_shaderTimeAngle;
+
+	void SetShader_Ocean();
 public:
 	CTile();
 	~CTile();
