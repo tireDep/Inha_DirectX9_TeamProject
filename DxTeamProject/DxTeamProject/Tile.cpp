@@ -266,7 +266,7 @@ void CTile::Setup(const ST_MapData & mapData)
 
 void CTile::Render()
 {
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 
 	if (m_pMesh == NULL)
@@ -292,16 +292,32 @@ void CTile::Render()
 
 	else
 	{
+		if (!m_isCameraRender)
+		{
+			g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+			g_pD3DDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+			g_pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+			m_isCameraRender = true;
+		}
+
 		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 			// >> todo : 시연할 때 주석 풀기
-			/*if (!CheckIsGetColorOrb())
+			if (!CheckIsGetColorOrb())
 			{
 				g_pD3DDevice->SetTexture(0, m_grayTxt);
-				m_pMesh->DrawSubset(i);
+				if (!m_isCameraRender)
+				{
+					g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
+					m_pMesh->DrawSubset(i);
+					g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+					m_pMesh->DrawSubset(i);
+				}
+				else
+					m_pMesh->DrawSubset(i);
 			}
-			else*/
+			else
 			{
 				if (m_fShaderTime < fTime && m_pShader_Tile != NULL)
 				{
@@ -330,9 +346,23 @@ void CTile::Render()
 					m_pMesh->DrawSubset(i);
 				}
 			}
+
+			if (!m_isCameraRender)
+			{
+				g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
+				m_pMesh->DrawSubset(i);
+				g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+				m_pMesh->DrawSubset(i);
+			}
+			else
+				m_pMesh->DrawSubset(i);
 		}
 		g_pD3DDevice->SetTexture(0, NULL);
 	}
+
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
+	g_pD3DDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLENDOP_ADD);
+	g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
 
 /// Delete Later...

@@ -735,6 +735,8 @@ void CObjectManager::Render(const D3DXVECTOR3& camEye)
 {
 	// >> Iobject Render
 	multimap<int, vector<CObject*>>::iterator it;
+	IObject* renderObj = NULL;
+	IObject* iObj = NULL;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
 		//// >> fog
@@ -767,17 +769,16 @@ void CObjectManager::Render(const D3DXVECTOR3& camEye)
 		//for (int i = 0; i < it->second.size(); i++)
 		//	it->second[i]->Render();
 
-		IObject* iObj = NULL;
-		int k = 0;
 		for (int i = 0; i < it->second.size(); i++)
 		{
 			iObj = dynamic_cast<IObject*> (it->second[i]);
 			if (iObj == NULL)
 				continue;
 
-			if (iObj->m_isCameraRender)
+			if (!iObj->m_isCameraRender && iObj->GetObjType() < ObjectType::eTile13 && renderObj == NULL)
+				renderObj = dynamic_cast<IObject*> (it->second[i]);
+			else
 				iObj->Render();
-
 		}
 
 		// for (int i = 0; i < it->second.size(); i++)
@@ -821,6 +822,9 @@ void CObjectManager::Render(const D3DXVECTOR3& camEye)
 		//	g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
 		//}
 	} // << : for
+
+	if (renderObj != NULL)
+		renderObj->Render();
 }
 
 void CObjectManager::RenderOBBBox()
