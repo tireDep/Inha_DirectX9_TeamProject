@@ -116,6 +116,7 @@ public:
 	int GetVecMapObjCnt();
 	vector<CObject *> GetMapVecCObject();	// << 오브젝트 반환
 	PObject* GetPObjectIndex(int index);
+	IObject* GetIObjectIndex(int index);
 
 private:
 	void Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos);

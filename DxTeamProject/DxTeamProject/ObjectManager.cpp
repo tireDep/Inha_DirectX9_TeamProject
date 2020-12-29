@@ -239,175 +239,267 @@ void CObjectManager::Collide(float duration)
 	// 		continue;
 	// }
 
+	PObject* pObjCheck = NULL;
+	IObject* iObjCheck = NULL;
+	int loopSize = g_pObjectManager->GetVecMapObjCnt();
 	///Sphere
 	for (int SphereIndex = 0; SphereIndex < m_vecSphere.size(); SphereIndex++)
 	{
 		// Sphere to Other PObject
-		for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
+		for (int PObjectIndex = 0; PObjectIndex < loopSize; PObjectIndex++)
 		{
-			switch (m_vecPObject[PObectIndex]->GetObjType())
+			pObjCheck = g_pObjectManager->GetPObjectIndex(PObjectIndex);
+
+			if (pObjCheck == NULL)
+				continue;
+
+			switch (pObjCheck->GetObjType())
 			{
 			case eSphere:
-				if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CSphere*>(m_vecPObject[PObectIndex])))
+				if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CSphere*>(pObjCheck)))
 				{
-					CollisionSphereToSphere(m_vecSphere[SphereIndex], dynamic_cast<CSphere*>(m_vecPObject[PObectIndex]), duration);
+					CollisionSphereToSphere(m_vecSphere[SphereIndex], static_cast<CSphere*>(pObjCheck), duration);
 				}
 				break;
 			case eBox:
-				if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CBox*>(m_vecPObject[PObectIndex])))
+				if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CBox*>(pObjCheck)))
 				{
-					CollisionSphereToBox(m_vecSphere[SphereIndex], m_vecPObject[PObectIndex], duration);
+					CollisionSphereToBox(m_vecSphere[SphereIndex], pObjCheck, duration);
 				}
 				break;
 			case eCylinder:
-				if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
+				if (m_vecSphere[SphereIndex]->hasIntersected(dynamic_cast<CCylinder*>(pObjCheck)))
 				{
-					CollisionSphereToBox(m_vecSphere[SphereIndex], m_vecPObject[PObectIndex], duration);
+					CollisionSphereToBox(m_vecSphere[SphereIndex], pObjCheck, duration);
 				}
 				break;
 			default:
 				break;
 			}
+		} 
+		// >> : for_pObj
 
-			// Sphere To IObject
-			for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
+		// Sphere To IObject
+		for (int IObjectIndex = 0; IObjectIndex < loopSize; IObjectIndex++)
+		{
+			iObjCheck = g_pObjectManager->GetIObjectIndex(IObjectIndex);
+
+			if (iObjCheck == NULL)
+				continue;
+
+			if (m_vecSphere[SphereIndex]->hasIntersected(iObjCheck))
 			{
-				if (m_vecSphere[SphereIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
+				switch (iObjCheck->GetObjType())
 				{
-					switch (m_vecIObject[IObjectIndex]->GetObjType())
-					{
-					case eG_RotationBoard:  case eG_MovingCube:
-					{
-						D3DXVECTOR3 v;
-						v = m_vecSphere[SphereIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
-						D3DXVec3Normalize(&v, &v);
-						m_vecSphere[SphereIndex]->SetPusingForce(v);
-					}
+				case eG_RotationBoard:  case eG_MovingCube:
+				{
+					D3DXVECTOR3 v;
+					v = m_vecSphere[SphereIndex]->GetPosition() - iObjCheck->GetOBB()->GetCenter();
+					D3DXVec3Normalize(&v, &v);
+					m_vecSphere[SphereIndex]->SetPusingForce(v);
+				}
+				break;
+				case eG_Door:
 					break;
-					case eG_Door:
-						break;
-					case  eG_Switch:
-					{
-						m_vecIObject[IObjectIndex]->pBoxBool(true);
-					}
+				case  eG_Switch:
+				{
+					iObjCheck->pBoxBool(true);
+				}
+				break;
+				default:
+					//CollisionSphereToIObject(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
+					CollisionBoxToTile(m_vecSphere[SphereIndex], iObjCheck, duration);
+					iObjCheck->pBoxBool(false);
 					break;
-					default:
-						//CollisionSphereToIObject(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
-						CollisionBoxToTile(m_vecSphere[SphereIndex], m_vecIObject[IObjectIndex], duration);
-						m_vecIObject[IObjectIndex]->pBoxBool(false);
-						break;
-					}
 				}
 			}
 		}
+		// >> : for_iObj
 	}
+
 	///Box
 	for (int BoxIndex = 0; BoxIndex < m_vecBox.size(); BoxIndex++)
 	{
 		// Box to Other PObject
-		for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
+		for (int PObjectIndex = 0; PObjectIndex < loopSize; PObjectIndex++)
 		{
-			switch (m_vecPObject[PObectIndex]->GetObjType())
+			pObjCheck = g_pObjectManager->GetPObjectIndex(PObjectIndex);
+
+			if (pObjCheck == NULL)
+				continue;
+
+			switch (pObjCheck->GetObjType())
 			{
 			case eSphere:
 				break;
 			case eBox:
-				if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CBox*>(m_vecPObject[PObectIndex])))
+				if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CBox*>(pObjCheck)))
 				{
-					CollisionBoxToBox(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
+					CollisionBoxToBox(m_vecBox[BoxIndex], pObjCheck, duration);
 				}
 				break;
 			case eCylinder:
-				if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
+				if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CCylinder*>(pObjCheck)))
 				{
-					CollisionBoxToBox(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
+					CollisionBoxToBox(m_vecBox[BoxIndex], pObjCheck, duration);
 				}
 				break;
 			default:
 				break;
 			}
+		}
 
-			// Box To IObject
-			for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
+		// Box To IObject
+		for (int IObjectIndex = 0; IObjectIndex < loopSize; IObjectIndex++)
+		{
+			iObjCheck = g_pObjectManager->GetIObjectIndex(IObjectIndex);
+
+			if (iObjCheck == NULL)
+				continue;
+
+			if (m_vecBox[BoxIndex]->hasIntersected(iObjCheck))
 			{
-				if (m_vecBox[BoxIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
+				switch (iObjCheck->GetObjType())
 				{
-					switch (m_vecIObject[IObjectIndex]->GetObjType())
-					{
-					case eG_RotationBoard: case eG_MovingCube:
-					{
-						D3DXVECTOR3 v;
-						v = m_vecBox[BoxIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
-						D3DXVec3Normalize(&v, &v);
-						m_vecBox[BoxIndex]->SetPusingForce(v);
-					}
+				case eG_RotationBoard: case eG_MovingCube:
+				{
+					D3DXVECTOR3 v;
+					v = m_vecBox[BoxIndex]->GetPosition() - iObjCheck->GetOBB()->GetCenter();
+					D3DXVec3Normalize(&v, &v);
+					m_vecBox[BoxIndex]->SetPusingForce(v);
+				}
+				break;
+				case eG_Door:
 					break;
-					case eG_Door:
-						break;
-					case  eG_Switch:
-					{
-						m_vecIObject[IObjectIndex]->pBoxBool(true);
-					}
+				case  eG_Switch:
+				{
+					iObjCheck->pBoxBool(true);
+				}
+				break;
+				default:
+					CollisionBoxToTile(m_vecBox[BoxIndex], iObjCheck, duration);
+					iObjCheck->pBoxBool(false);
 					break;
-					default:
-						CollisionBoxToTile(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
-						m_vecIObject[IObjectIndex]->pBoxBool(false);
-						break;
-					}
 				}
 			}
 		}
+
+		//// Box to Other PObject
+		//for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
+		//{
+		//	switch (m_vecPObject[PObectIndex]->GetObjType())
+		//	{
+		//	case eSphere:
+		//		break;
+		//	case eBox:
+		//		if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CBox*>(m_vecPObject[PObectIndex])))
+		//		{
+		//			CollisionBoxToBox(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
+		//		}
+		//		break;
+		//	case eCylinder:
+		//		if (m_vecBox[BoxIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
+		//		{
+		//			CollisionBoxToBox(m_vecBox[BoxIndex], m_vecPObject[PObectIndex], duration);
+		//		}
+		//		break;
+		//	default:
+		//		break;
+		//	}
+
+		//	// Box To IObject
+		//	for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
+		//	{
+		//		if (m_vecBox[BoxIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
+		//		{
+		//			switch (m_vecIObject[IObjectIndex]->GetObjType())
+		//			{
+		//			case eG_RotationBoard: case eG_MovingCube:
+		//			{
+		//				D3DXVECTOR3 v;
+		//				v = m_vecBox[BoxIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
+		//				D3DXVec3Normalize(&v, &v);
+		//				m_vecBox[BoxIndex]->SetPusingForce(v);
+		//			}
+		//			break;
+		//			case eG_Door:
+		//				break;
+		//			case  eG_Switch:
+		//			{
+		//				m_vecIObject[IObjectIndex]->pBoxBool(true);
+		//			}
+		//			break;
+		//			default:
+		//				CollisionBoxToTile(m_vecBox[BoxIndex], m_vecIObject[IObjectIndex], duration);
+		//				m_vecIObject[IObjectIndex]->pBoxBool(false);
+		//				break;
+		//			}
+		//		}
+		//	}
+		//}
 	}
 	/// Cylinder
 	for (int CylinderIndex = 0; CylinderIndex < m_vecCylinder.size(); CylinderIndex++)
 	{
 		// Cylinder to Other PObject
-		for (int PObectIndex = 0; PObectIndex < m_vecPObject.size(); PObectIndex++)
+		for (int PObjectIndex = 0; PObjectIndex < loopSize; PObjectIndex++)
 		{
-			switch (m_vecPObject[PObectIndex]->GetObjType())
+			pObjCheck = g_pObjectManager->GetPObjectIndex(PObjectIndex);
+
+			if (pObjCheck == NULL)
+				continue;
+
+			switch (pObjCheck->GetObjType())
 			{
 			case eSphere:
 				break;
 			case eBox:
 				break;
 			case eCylinder:
-				if (m_vecCylinder[CylinderIndex]->hasIntersected(dynamic_cast<CCylinder*>(m_vecPObject[PObectIndex])))
+				if (m_vecCylinder[CylinderIndex]->hasIntersected(dynamic_cast<CCylinder*>(pObjCheck)))
 				{
-					CollisionBoxToBox(m_vecCylinder[CylinderIndex], m_vecPObject[PObectIndex], duration);
+					CollisionBoxToBox(m_vecCylinder[CylinderIndex], pObjCheck, duration);
 				}
 				break;
 			default:
 				break;
 			}
+		}
+		// << : for_pObj
 
-			// Cylinder To IObject
-			for (int IObjectIndex = 0; IObjectIndex < m_vecIObject.size(); IObjectIndex++)
+		// Cylinder To IObject
+		for (int IObjectIndex = 0; IObjectIndex < loopSize; IObjectIndex++)
+		{
+			iObjCheck = g_pObjectManager->GetIObjectIndex(IObjectIndex);
+
+			if (iObjCheck == NULL)
+				continue;
+
+			if (m_vecCylinder[CylinderIndex]->hasIntersected(iObjCheck))
 			{
-				if (m_vecCylinder[CylinderIndex]->hasIntersected(m_vecIObject[IObjectIndex]))
+				switch (iObjCheck->GetObjType())
 				{
-					switch (m_vecIObject[IObjectIndex]->GetObjType())
-					{
-					case eG_RotationBoard:    case eG_MovingCube:	// Complete
-					{
-						D3DXVECTOR3 v;
-						v = m_vecCylinder[CylinderIndex]->GetPosition() - m_vecIObject[IObjectIndex]->GetOBB()->GetCenter();
-						D3DXVec3Normalize(&v, &v);
-						m_vecCylinder[CylinderIndex]->SetPusingForce(v);
-					}
+				case eG_RotationBoard:    case eG_MovingCube:	// Complete
+				{
+					D3DXVECTOR3 v;
+					v = m_vecCylinder[CylinderIndex]->GetPosition() - iObjCheck->GetOBB()->GetCenter();
+					D3DXVec3Normalize(&v, &v);
+					m_vecCylinder[CylinderIndex]->SetPusingForce(v);
+				}
+				break;
+				case eG_Door:
 					break;
-					case eG_Door:
-						break;
-					case eG_Switch:
-						m_vecIObject[IObjectIndex]->pBoxBool(true);
-						break;
-					default:
-						CollisionBoxToTile(m_vecCylinder[CylinderIndex], m_vecIObject[IObjectIndex], duration);
-						m_vecIObject[IObjectIndex]->pBoxBool(false);
-						break;
-					}
+				case eG_Switch:
+					iObjCheck->pBoxBool(true);
+					break;
+				default:
+					CollisionBoxToTile(m_vecCylinder[CylinderIndex], iObjCheck, duration);
+					iObjCheck->pBoxBool(false);
+					break;
 				}
 			}
 		}
+		// << : for_iObj
 	}
 }
 
@@ -903,6 +995,11 @@ vector<CObject *> CObjectManager::GetMapVecCObject()
 PObject * CObjectManager::GetPObjectIndex(int index)
 {
 	return dynamic_cast<PObject*> (GetMapVecCObject()[index]);
+}
+
+IObject * CObjectManager::GetIObjectIndex(int index)
+{
+	return dynamic_cast<IObject*> (GetMapVecCObject()[index]);
 }
 
 //void CObjectManager::UpdateNewMap(CFrustum * frustum)
