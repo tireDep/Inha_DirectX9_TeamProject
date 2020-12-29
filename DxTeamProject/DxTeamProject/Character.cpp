@@ -350,11 +350,14 @@ void CCharacter::ColliderObject()
 					continue;
 				}
 
-				if (objType < eTile13 || objType == eBridge)
+				if (objType < eTile13)
 				{
-					//				if (m_isCollidedTile)
-					continue;
+					if (m_isCollidedTile)
+						continue;
 				}
+				if (objType == eBridge)
+					continue;
+
 				if (objType == eTrigger)
 				{
 					m_saveZonePosition = iObjCheck->SendPosition();
@@ -586,15 +589,10 @@ void CCharacter::Update(float duration)
 	//if (prejumpyposition > m_vPosition.y)
 	//if (m_isFallAni || !m_isJump)
 	//if (m_preJumpPosition > m_vPosition.y || !m_isJump)
-		//if (prejumpyposition > m_vPosition.y)
+	//if (prejumpyposition > m_vPosition.y)
 	{
-#ifdef _DEBUG
-		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.6f, 0);
-		m_Ray.SetOrigin(rayOrigin);
-#else
 		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.7f, 0);
 		m_Ray.SetOrigin(rayOrigin);
-#endif // DEBUG
 
 		if (g_pObjectManager->GetVecMapObjCnt() > 0)
 		{
@@ -610,7 +608,7 @@ void CCharacter::Update(float duration)
 					continue;
 
 				objType = vecCheck[i]->GetObjType();
-				if (objType <= eTile13 || objType == eBridge)
+				if (objType < eTile13 || objType == eBridge)
 				{
 					BOOL hit = false;
 					DWORD FaceIndex;
