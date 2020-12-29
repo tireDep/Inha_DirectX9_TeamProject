@@ -35,7 +35,9 @@ void CTile::SetShader_Ocean()
 	// >> 속도 조정 해야함
 	float flowSpeed = 0.1f;
 	m_shaderTime += flowSpeed * g_pTimeManager->GetElapsedTime();
-	m_shaderTimeAngle += flowSpeed * g_pTimeManager->GetElapsedTime();
+	m_shaderTimeAngle = 0;
+	// >> 회전 제외
+	// m_shaderTimeAngle += flowSpeed * g_pTimeManager->GetElapsedTime();
 }
 
 CTile::CTile() :
