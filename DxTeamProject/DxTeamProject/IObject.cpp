@@ -5,7 +5,8 @@ IObject::IObject() :
 	m_grayTxt(NULL),
 	m_strConditionName(""),
 	m_isCondition(false),
-	m_pOBB(NULL)
+	m_pOBB(NULL),
+	m_isCameraRender(true)
 {
 	ResetPosition = D3DXVECTOR3(0, 0, 0);
 	PresentPosition = D3DXVECTOR3(0, 0, 0);
@@ -35,6 +36,37 @@ void IObject::Release()
 {
 	g_pObjectManager->RemoveObject(this);
 	//IObject::m_nRefCnt -= 1;
+}
+
+void IObject::Update(CRay ray)
+{
+	D3DXVECTOR3* pVertices;
+
+	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
+
+	D3DXVECTOR3 m_vMin, m_vMax;
+	D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
+	// later.. rotation add
+	m_vMin.x *= m_matWorld._11;			m_vMax.x *= m_matWorld._11;
+	m_vMin.y *= m_matWorld._22;			m_vMax.y *= m_matWorld._22;
+	m_vMin.z *= m_matWorld._33;			m_vMax.z *= m_matWorld._33;
+
+	m_vMin.x += m_matWorld._41;			m_vMax.x += m_matWorld._41;
+	m_vMin.y += m_matWorld._42;			m_vMax.y += m_matWorld._42;
+	m_vMin.z += m_matWorld._43;			m_vMax.z += m_matWorld._43;
+
+	if (D3DXBoxBoundProbe(&m_vMin, &m_vMax, &ray.GetOrigin(), &ray.GetDirection()) == true)
+	{
+		if (m_vMax.y >= 5.0f)
+			m_isCameraRender = false;
+		else
+			m_isCameraRender = true;
+	}
+	else
+	{
+		m_isCameraRender = true;
+	}
+	m_pMesh->UnlockVertexBuffer();
 }
 
 void IObject::ReceiveEvent(ST_EVENT eventMsg)

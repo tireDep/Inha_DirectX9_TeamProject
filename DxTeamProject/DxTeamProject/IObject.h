@@ -17,6 +17,8 @@ protected:
 	D3DXVECTOR3 ResetPosition;
 	D3DXVECTOR3 PresentPosition;
 	COBB* m_pOBB;
+
+	bool m_isCameraRender;
 	IObject();
 public:
 	virtual ~IObject();
@@ -25,6 +27,7 @@ public:
 	virtual void Setup() = 0;
 	virtual void Update(float duration) = 0;
 	virtual void Update(CRay ray, D3DXCOLOR& playerColor, vector<bool>& vecIsPick, vector<D3DXVECTOR3>& vecVPos) { };
+	virtual void Update(CRay ray);
 	virtual void Render() = 0;
 	virtual string GetName() { return m_strName; }
 	virtual void SetBool(bool setup) = 0; //상호작용 
