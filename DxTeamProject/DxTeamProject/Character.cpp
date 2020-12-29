@@ -331,22 +331,25 @@ void CCharacter::ColliderObject()
 
 			objType = vecCheck[i]->GetObjType();
 
-			if (m_Character->GetOBB()->IsCollision(iObjCheck->GetOBB()))
+			if (m_Character->GetOBB()->IsCollision(iObjCheck->GetOBB(), &m_vContactNormal, &m_fPenetration))
 			{
-				if (objType == eG_DoorFrame)
-					if (iObjCheck->GetCondition())
-						continue;
+				if (objType < eTile13)
+				{
+					m_isCollidedTile = true;
+					m_isCollided = true;
+					return;
+					//continue;
+					//if (m_isCollidedTile)
+					//	continue;
+				}
 
 				if (objType == eOrb)
 				{
 					//fout.open("OrbData.txt");
-
 					// vecCheck[i]->SetBool(true);
 					iObjCheck->SetBool(true);
-
 					//for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)				
 					//	fout << g_pObjectManager->GetVecIObject()[i]->GetBool(); // 
-
 					//fout.close();
 					continue;
 				}
@@ -354,21 +357,17 @@ void CCharacter::ColliderObject()
 				if (objType == eBook)
 				{
 					//fout.open("OrbData.txt");
-
 					iObjCheck->SetBool(true);
-
 					//for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)				
 					//	fout << g_pObjectManager->GetVecIObject()[i]->GetBool(); // 
-
 					//fout.close();
 					continue;
 				}
 
-				if (objType < eTile13)
-				{
-					if (m_isCollidedTile)
+				if (objType == eG_DoorFrame)
+					if (iObjCheck->GetCondition())
 						continue;
-				}
+
 				if (objType == eBridge)
 					continue;
 
@@ -419,7 +418,6 @@ void CCharacter::ColliderObject()
 					continue;
 				}
 
-
 				m_isGrab = false; // >> 잡기 상태시 충돌나면 잡기 해제
 				m_isCollided = true;
 				return;
@@ -462,7 +460,6 @@ void CCharacter::ColliderObject()
 			m_isCollided = true;
 			return;
 		}
-
 	}
 	m_isCollided = false;
 	m_isGrab = false;
@@ -666,7 +663,16 @@ void CCharacter::Update(float duration)
 
 	if (m_isCollided)
 	{
-		m_vPosition = prePos;
+		if (m_isCollidedTile)
+		{
+			m_vPosition = prePos;
+		}
+		else
+		{
+			m_vPosition = prePos;
+			D3DXVec3Normalize(&m_vContactNormal, &m_vContactNormal);
+			m_vPosition += (m_vContactNormal * m_fPenetration);
+		}
 	}
 	else
 	{
