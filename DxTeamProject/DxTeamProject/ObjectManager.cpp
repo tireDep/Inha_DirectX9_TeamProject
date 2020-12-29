@@ -138,6 +138,14 @@ void CObjectManager::Update_PickCheck(const vector<bool>& vecIsPick, const vecto
 	} // >> : for
 }
 
+void CObjectManager::Update(CRay ray)
+{
+	for (int i = 0; i < m_vecIObject.size(); i++)
+	{
+		m_vecIObject[i]->Update(ray);
+	}
+}
+
 void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 {
 	vector<bool> vecIsPick;
@@ -745,8 +753,14 @@ void CObjectManager::Render(const D3DXVECTOR3& camEye)
 		//g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
 		
 		// KT fog off... Need to level design.. 
+		//for (int i = 0; i < it->second.size(); i++)
+		//	it->second[i]->Render();
+
 		for (int i = 0; i < it->second.size(); i++)
-			it->second[i]->Render();
+		{
+			if(it->second[i]->m_isCameraRender)
+				it->second[i]->Render();
+		}
 
 		// >> pObject Render
 		int loopSize = m_vecPObject.size();

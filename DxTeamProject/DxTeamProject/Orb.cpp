@@ -21,28 +21,6 @@ COrb::~COrb()
 
 void COrb::Setup()
 {
-	/*g_pFileLoadManager->FileLoad_Texture("Resource/Sprite/Orb", "제목 없음-1.png", m_pTex0);
-	D3DXVECTOR3 size = D3DXVECTOR3(2,2,0);
-	v.p = D3DXVECTOR3(0, 0, 0);			  v.t = D3DXVECTOR2(m_Uv_x, m_Uv_y); m_vecVertex_Multi.push_back(v);
-	v.p = D3DXVECTOR3(0, size.y, 0);	  v.t = D3DXVECTOR2(m_Uv_x, m_Uv_x); m_vecVertex_Multi.push_back(v);
-	v.p = D3DXVECTOR3(size.x, 0, 0);	  v.t = D3DXVECTOR2(m_Uv_y, m_Uv_y); m_vecVertex_Multi.push_back(v);
-
-	v.p = D3DXVECTOR3(size.x, size.y, 0); v.t = D3DXVECTOR2(m_Uv_y, m_Uv_x); m_vecVertex_Multi.push_back(v);
-	v.p = D3DXVECTOR3(size.x, 0, 0);	  v.t = D3DXVECTOR2(m_Uv_y, m_Uv_y); m_vecVertex_Multi.push_back(v);
-	v.p = D3DXVECTOR3(0, size.y, 0);	  v.t = D3DXVECTOR2(m_Uv_x, m_Uv_x); m_vecVertex_Multi.push_back(v);
-	
-	D3DXCreateBox(g_pD3DDevice, size.x , size.y , size.z +3, &m_pMesh, NULL);
-
-	D3DXVECTOR3* pVertices;
-
-	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
-	D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
-	m_pMesh->UnlockVertexBuffer();
-
-	m_pOBB = new COBB;
-	m_pOBB->SetupMesh(m_vMin, m_vMax, 0.5f);
-
-	D3DXMatrixTranslation(&m_matWorld, 5, 2, 10);*/
 }
 
 void COrb::Setup(ST_MapData setData)
@@ -58,46 +36,6 @@ void COrb::Setup(ST_MapData setData)
 	v.p = D3DXVECTOR3(f, f, 0.05);		v.t = D3DXVECTOR2(m_UvY, m_UvX); m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(f, -f, 0.05);		v.t = D3DXVECTOR2(m_UvY, m_UvY); m_vecVertex.push_back(v);
 	v.p = D3DXVECTOR3(-f, f, 0.05);		v.t = D3DXVECTOR2(m_UvX, m_UvX); m_vecVertex.push_back(v);
-
-	
-	// g_pFileLoadManager->FileLoad_Texture("Resource/Sprite/Orb", "제목 없음-1.png", m_pTex0);
-	// 
-	// D3DXVECTOR3 size = setData.vScale;
-	// D3DXMatrixTranslation(&m_matWorld ,
-	// 	setData.vTranslate.x , 
-	// 	setData.vTranslate.y,
-	// 	setData.vTranslate.z);
-	// 
-	// //ST_PT_VERTEX v;
-	// v.p = D3DXVECTOR3(0, 0, 0);			  v.t = D3DXVECTOR2(m_Uv_x, m_Uv_y); m_vecVertex_Multi.push_back(v);
-	// v.p = D3DXVECTOR3(0, size.y, 0);	  v.t = D3DXVECTOR2(m_Uv_x, m_Uv_x); m_vecVertex_Multi.push_back(v);
-	// v.p = D3DXVECTOR3(size.x, 0, 0);	  v.t = D3DXVECTOR2(m_Uv_y, m_Uv_y); m_vecVertex_Multi.push_back(v);
-	// 
-	// v.p = D3DXVECTOR3(size.x, size.y, 0); v.t = D3DXVECTOR2(m_Uv_y, m_Uv_x); m_vecVertex_Multi.push_back(v);
-	// v.p = D3DXVECTOR3(size.x, 0, 0);	  v.t = D3DXVECTOR2(m_Uv_y, m_Uv_y); m_vecVertex_Multi.push_back(v);
-	// v.p = D3DXVECTOR3(0, size.y, 0);	  v.t = D3DXVECTOR2(m_Uv_x, m_Uv_x); m_vecVertex_Multi.push_back(v);
-	// 
-	// 
-	// D3DXCreateBox(g_pD3DDevice, size.x + 1, size.y + 1, size.z +3, &m_pMesh, NULL);
-	// 
-	// D3DXVECTOR3* pVertices;
-	// 
-	// m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);
-	// D3DXComputeBoundingBox(pVertices, m_pMesh->GetNumVertices(), m_pMesh->GetNumBytesPerVertex(), &m_vMin, &m_vMax);
-	// m_pMesh->UnlockVertexBuffer();
-	// 
-	// m_pOBB = new COBB;
-	// m_pOBB->SetupMesh(m_vMin, m_vMax, 0.5f);
-	// 
-	// ST_PT_VERTEX v;
-	// float f = m_vScale.x;
-	// v.p = D3DXVECTOR3(-f, -f, 0.05);	v.t = D3DXVECTOR2(m_UvX, m_UvY); m_vecVertex.push_back(v);
-	// v.p = D3DXVECTOR3(-f, f, 0.05);	v.t = D3DXVECTOR2(m_UvX, m_UvX); m_vecVertex.push_back(v);
-	// v.p = D3DXVECTOR3(f, -f, 0.05);	v.t = D3DXVECTOR2(m_UvY, m_UvY); m_vecVertex.push_back(v);
-	// 
-	// v.p = D3DXVECTOR3(f, f, 0.05);		v.t = D3DXVECTOR2(m_UvY, m_UvX); m_vecVertex.push_back(v);
-	// v.p = D3DXVECTOR3(f, -f, 0.05);		v.t = D3DXVECTOR2(m_UvY, m_UvY); m_vecVertex.push_back(v);
-	// v.p = D3DXVECTOR3(-f, f, 0.05);		v.t = D3DXVECTOR2(m_UvX, m_UvX); m_vecVertex.push_back(v);
 }
 
 void COrb::Render()
@@ -108,12 +46,7 @@ void COrb::Render()
 		g_pGameManager->SetGetOrb(m_strConditionName);
 		g_pObjectManager->RemoveObject(m_pOBB);
 	}
-	//if (render == false)
-	//{
-	//	g_pGameManager->SetGetOrb(m_strConditionName);
-	//	g_pObjectManager->RemoveObject(m_pOBB);
-	//}
-	
+
 	if (render == true)
 	{
 		SetBillbord();
@@ -164,30 +97,10 @@ void COrb::Update(float duration)
 		m_vecVertex[4].t = D3DXVECTOR2(m_UvY, m_UvY);
 		m_vecVertex[5].t = D3DXVECTOR2(m_UvX, m_UvX);
 	}
-
-	 // m_pOBB->Update(&GetmatWorld());
 }
 
 void COrb::SetBillbord()
 {
-	//D3DXMATRIXA16 matBillBoard, matView,matWorld;
-	//D3DXMatrixIdentity(&matBillBoard);
-	//g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
-	//// view 매트릭스를 구해서 y축 회전
-	//matBillBoard._11 = matView._11;
-	//matBillBoard._13 = matView._13;
-	//matBillBoard._31 = matView._31;
-	//matBillBoard._33 = matView._33;
-	//D3DXMATRIXA16 matR,matT2;
-	//D3DXMatrixIdentity(&matR);
-	//D3DXMatrixIdentity(&matT2);
-	//D3DXMatrixTranslation(&matR, 1, 0, 0);
-	//D3DXMatrixTranslation(&matT2, 10, 0, 0);
-	//matBillBoard *= matR;
-	//D3DXMatrixInverse(&matBillBoard, NULL, &matBillBoard);
-	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &matBillBoard);
-
-	
 	D3DXMATRIXA16 matView, matInvView;
 
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
@@ -198,8 +111,4 @@ void COrb::SetBillbord()
 	matInvView._43 = GetmatWorld()._43;
 
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matInvView);
-
-	
-	
-	
 }

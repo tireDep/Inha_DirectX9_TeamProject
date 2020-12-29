@@ -350,7 +350,7 @@ void CCharacter::ColliderObject()
 					continue;
 				}
 
-				if (objType <= eTile13 || objType == eBridge)
+				if (objType < eTile13 || objType == eBridge)
 				{
 					//				if (m_isCollidedTile)
 					continue;
