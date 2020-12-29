@@ -142,18 +142,42 @@ void CObjectManager::Update(CRay ray, D3DXCOLOR& objectcolor)
 {
 	vector<bool> vecIsPick;
 	vector<D3DXVECTOR3> vecVPos;
-	for (int i = 0; i < m_vecPObject.size(); i++)
+
+	vector<CObject *> vecCheck = GetMapVecCObject();
+	int loopSize = GetVecMapObjCnt();
+	for (int i = 0; i <loopSize; i++)
 	{
-		m_vecPObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
+		PObject* pObjCheck = dynamic_cast<PObject*>(vecCheck[i]);
+
+		if (pObjCheck == NULL)
+			continue;
+
+		pObjCheck->Update(ray, objectcolor, vecIsPick, vecVPos);
+
+		// m_vecPObject[i]->Update(ray, objectcolor, vecIsPick, vecVPos);
 	}
-	Update_PickCheck(vecIsPick, vecVPos);
+
+	if (vecIsPick.size() != 0)
+		Update_PickCheck(vecIsPick, vecVPos);
 }
 
 // Integrate P + I Obejct...
 void CObjectManager::Update(float duration)
 {
-	for (int i = 0; i < m_vecIObject.size(); i++)
-		m_vecIObject[i]->Update(duration);
+	vector<CObject *> vecCheck = GetMapVecCObject();
+	int loopSize = GetVecMapObjCnt();
+	for (int i = 0; i <loopSize; i++)
+	{
+		IObject* iObjCheck = dynamic_cast<IObject*>(vecCheck[i]);
+
+		if (iObjCheck == NULL)
+			continue;
+
+		iObjCheck->Update(duration);
+	}
+
+	// for (int i = 0; i < m_vecIObject.size(); i++)
+	// 	m_vecIObject[i]->Update(duration);
 
 	//
 	//ofstream fout;
@@ -175,17 +199,46 @@ void CObjectManager::Update(float duration)
 	//   m_vecObject[i]->Update(duration);
 }
 
+void CObjectManager::PreUpdate(float duration)
+{
+	for (int i = 0; i < m_vecIObject.size(); i++)
+		m_vecIObject[i]->Update(duration);
+}
+
 void CObjectManager::UpdateLand(float duration)
 {
-	for (int i = 0; i < m_vecPObject.size(); i++)
+	vector<CObject *> vecCheck = GetMapVecCObject();
+	int loopSize = GetVecMapObjCnt();
+	for (int i = 0; i <loopSize; i++)
 	{
-		m_vecPObject[i]->UpdateLand(duration);
-		m_vecPObject[i]->Update(duration);
+		PObject* pObjCheck = dynamic_cast<PObject*>(vecCheck[i]);
+
+		if (pObjCheck == NULL)
+			continue;
+
+		pObjCheck->UpdateLand(duration);
+		pObjCheck->Update(duration);
 	}
+
+	// for (int i = 0; i < m_vecPObject.size(); i++)
+	// {
+	// 	m_vecPObject[i]->UpdateLand(duration);
+	// 	m_vecPObject[i]->Update(duration);
+	// }
 }
 
 void CObjectManager::Collide(float duration)
 {
+	// vector<CObject *> vecCheck = GetMapVecCObject();
+	// int loopSize = GetVecMapObjCnt();
+	// for (int i = 0; i <loopSize; i++)
+	// {
+	// 	PObject* pObjCheck = dynamic_cast<PObject*>(vecCheck[i]);
+	// 
+	// 	if (pObjCheck == NULL)
+	// 		continue;
+	// }
+
 	///Sphere
 	for (int SphereIndex = 0; SphereIndex < m_vecSphere.size(); SphereIndex++)
 	{
@@ -570,7 +623,7 @@ void CObjectManager::Reset()
 void CObjectManager::Render(const D3DXVECTOR3& camEye)
 {
 	// >> Iobject Render
-	multimap<int, vector<IObject*>>::iterator it;
+	multimap<int, vector<CObject*>>::iterator it;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
 		//// >> fog
@@ -662,14 +715,14 @@ void CObjectManager::Destroy()
 // YS CODE... MAP TEST
 void CObjectManager::AddMap()
 {
-	vector<IObject*> temp;
+	vector<CObject*> temp;
 
-	for (int i = m_IObjCnt; i < m_vecIObject.size(); i++)
-		temp.push_back(m_vecIObject[i]);
+	for (int i = m_IObjCnt; i < m_vecObject.size(); i++)
+		temp.push_back(m_vecObject[i]);
 
-	m_mapObject.insert(pair<int, vector<IObject*>>(g_pFileLoadManager->GetFileLoadCnt(), temp));
+	m_mapObject.insert(pair<int, vector<CObject*>>(g_pFileLoadManager->GetFileLoadCnt(), temp));
 
-	m_IObjCnt = m_vecIObject.size();
+	m_IObjCnt = m_vecObject.size();
 
 
 	// m_vecIObject.clear();
@@ -683,7 +736,7 @@ void CObjectManager::RemoveMap()
 	// >> 이중 삭제 관련 임시 적용
 
 	int size;
-	multimap<int, vector<IObject*>>::iterator it;
+	multimap<int, vector<CObject*>>::iterator it;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
 		size = it->second.size();
@@ -822,7 +875,7 @@ int CObjectManager::GetVecMapObjCnt()
 	int result = -1;
 	int index = 0;
 
-	map<int, vector<IObject*>>::iterator it;
+	map<int, vector<CObject*>>::iterator it;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
 		if (index == m_nowMapPos)
@@ -834,10 +887,10 @@ int CObjectManager::GetVecMapObjCnt()
 	return result;
 }
 
-vector<IObject *> CObjectManager::GetMapVecIObject()
+vector<CObject *> CObjectManager::GetMapVecCObject()
 {
 	int index = 0;
-	map<int, vector<IObject*>>::iterator it;
+	map<int, vector<CObject*>>::iterator it;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
 		if (index == m_nowMapPos)
@@ -845,6 +898,11 @@ vector<IObject *> CObjectManager::GetMapVecIObject()
 		else
 			index++;
 	}
+}
+
+PObject * CObjectManager::GetPObjectIndex(int index)
+{
+	return dynamic_cast<PObject*> (GetMapVecCObject()[index]);
 }
 
 //void CObjectManager::UpdateNewMap(CFrustum * frustum)

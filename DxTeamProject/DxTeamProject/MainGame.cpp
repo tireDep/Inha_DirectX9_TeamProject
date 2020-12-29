@@ -145,8 +145,10 @@ void CMainGame::Update()
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_quater1.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean1.dat");
 
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_bridge_full3.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_bridge_full4.dat");
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_bridge_full3.dat");
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_bridge_full4.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map8.dat");
 #else
 
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
@@ -218,6 +220,7 @@ void CMainGame::Update()
 			g_pEventManager->AddListener(&g_pObjectManager->GetVecObjectIndex(i));
 		}
 
+		g_pObjectManager->PreUpdate();
 		g_pObjectManager->CalcNowPositionIndex(m_pCharacter->GetPosition());
 		g_pGameManager->SetNowScene(SceneType::eGameScene);
 
