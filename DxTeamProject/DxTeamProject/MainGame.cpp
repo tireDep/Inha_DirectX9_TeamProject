@@ -145,7 +145,7 @@ void CMainGame::Update()
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_quater1.dat");
 		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean1.dat");
 
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_bridge_full3.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "SaveZone.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_bridge_full4.dat");
 #else
 
@@ -269,7 +269,7 @@ void CMainGame::Update()
 		RECT rc;
 		GetClientRect(g_hWnd, &rc);
 		CRay ray = CRay::RayAtWorldSpace(rc.right / 2, rc.bottom / 2);
-		//g_pObjectManager->Update(ray);									// Camera IObject Render Off
+		g_pObjectManager->Update(ray);									// Camera IObject Render Off
 		g_pObjectManager->Update(ray, m_pCharacter->GetColor());		// Color Change
 		g_pObjectManager->UpdateLand(g_pTimeManager->GetElapsedTime());	// PObject Physics
 		g_pObjectManager->Update(g_pTimeManager->GetElapsedTime());		// IObject(Gimmick) Physics

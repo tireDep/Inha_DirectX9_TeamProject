@@ -86,7 +86,19 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 			if (m_preInput == PlayerInputType::eHoldPull && m_preInput != eventMsg.playerInput)
 			{
 				if (m_nGrabAbleObeject != -1)
-					g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(D3DXVECTOR3(0, 0, 0));
+				{
+					// vector<CObject *> vecCheck = g_pObjectManager->GetMapVecCObject();
+					// PObject* pObjCheck = dynamic_cast<PObject*>(vecCheck[m_nGrabAbleObeject]);
+
+					PObject* pObjCheck = g_pObjectManager->GetPObjectIndex(m_nGrabAbleObeject);
+
+					if (pObjCheck == NULL)
+						return;
+
+					pObjCheck->SetVelocity(D3DXVECTOR3(0, 0, 0));
+
+					// g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(D3DXVECTOR3(0, 0, 0));
+				}
 			}
 			else
 			{
@@ -129,7 +141,15 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				{
 					if (m_nGrabAbleObeject != -1)
 					{
-						D3DXVECTOR3 objPos = g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetPosition();
+						// vector<CObject *> vecCheck = g_pObjectManager->GetMapVecCObject();
+						// PObject* pObjCheck = dynamic_cast<PObject*>(vecCheck[m_nGrabAbleObeject]);
+
+						PObject* pObjCheck = g_pObjectManager->GetPObjectIndex(m_nGrabAbleObeject);
+
+						if (pObjCheck == NULL)
+							return;
+
+						D3DXVECTOR3 objPos = pObjCheck->GetPosition();
 
 						if (fabs(objPos.x - m_vPosition.x) >= 1.0f
 							|| fabs(objPos.y - m_vPosition.y) >= 1.0f
@@ -142,7 +162,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 						D3DXVECTOR3 v;
 						D3DXVec3Normalize(&v, &this->m_vGrabDirection);
-						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(10.0f * v);
+						pObjCheck->SetVelocity(10.0f * v);
 						// m_fRotation = m_preRotation;
 						// DoRotation(m_fRotation);
 						// m_fSpeed = 10.0f;
@@ -166,7 +186,16 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				{
 					if (m_nGrabAbleObeject != -1)
 					{
-						D3DXVECTOR3 objPos = g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->GetPosition();
+						// vector<CObject *> vecCheck = g_pObjectManager->GetMapVecCObject();
+						// PObject* pObjCheck = dynamic_cast<PObject*>(vecCheck[m_nGrabAbleObeject]);
+
+						PObject* pObjCheck = g_pObjectManager->GetPObjectIndex(m_nGrabAbleObeject);
+
+						if (pObjCheck == NULL)
+							return;
+
+						D3DXVECTOR3 objPos = pObjCheck->GetPosition();
+
 						if (fabs(objPos.x - m_vPosition.x) >= 1.0f
 							|| fabs(objPos.y - m_vPosition.y) >= 1.0f
 							|| fabs(objPos.z - m_vPosition.z) >= 1.0f)
@@ -178,7 +207,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 						D3DXVECTOR3 v;
 						D3DXVec3Normalize(&v, &this->m_vGrabDirection);
-						g_pObjectManager->GetVecPObejct()[m_nGrabAbleObeject]->SetVelocity(-10.0f * v);
+						pObjCheck->SetVelocity(-10.0f * v);
 						// m_fRotation = m_preRotation;
 						// DoRotation(m_fRotation);
 						// m_fSpeed = -10.0f;
@@ -280,11 +309,12 @@ string CCharacter::GetName()
 
 void CCharacter::ColliderObject()
 {
-	if (g_pObjectManager->GetVecMapObjCnt() > 0)
+	vector<CObject *> vecCheck = g_pObjectManager->GetMapVecCObject();
+	int loopCnt = vecCheck.size();
+
+	if (loopCnt > 0)
 	{
-		vector<IObject *> vecCheck = g_pObjectManager->GetMapVecIObject();
 		ObjectType objType = ObjectType::eNull;
-		int loopCnt = vecCheck.size();
 
 		for (int i = 0; i < loopCnt; i++)
 		{
@@ -294,19 +324,25 @@ void CCharacter::ColliderObject()
 				continue;
 			}
 
+			IObject* iObjCheck = dynamic_cast<IObject*>(vecCheck[i]);
+
+			if (iObjCheck == NULL)
+				continue;
+
 			objType = vecCheck[i]->GetObjType();
 
-			if (m_Character->GetOBB()->IsCollision(vecCheck[i]->GetOBB()))
+			if (m_Character->GetOBB()->IsCollision(iObjCheck->GetOBB()))
 			{
 				if (objType == eG_DoorFrame)
-					if (vecCheck[i]->GetCondition())
+					if (iObjCheck->GetCondition())
 						continue;
 
 				if (objType == eOrb)
 				{
 					//fout.open("OrbData.txt");
 
-					vecCheck[i]->SetBool(true);
+					// vecCheck[i]->SetBool(true);
+					iObjCheck->SetBool(true);
 
 					//for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)				
 					//	fout << g_pObjectManager->GetVecIObject()[i]->GetBool(); // 
@@ -319,7 +355,7 @@ void CCharacter::ColliderObject()
 				{
 					//fout.open("OrbData.txt");
 
-					vecCheck[i]->SetBool(true);
+					iObjCheck->SetBool(true);
 
 					//for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)				
 					//	fout << g_pObjectManager->GetVecIObject()[i]->GetBool(); // 
@@ -328,11 +364,14 @@ void CCharacter::ColliderObject()
 					continue;
 				}
 
-				if (objType <= eTile13 || objType == eBridge)
+				if (objType < eTile13)
 				{
-					//				if (m_isCollidedTile)
-					continue;
+					if (m_isCollidedTile)
+						continue;
 				}
+				if (objType == eBridge)
+					continue;
+
 				if (objType == eTrigger)
 				{
 					ST_EVENT msg;
@@ -341,8 +380,12 @@ void CCharacter::ColliderObject()
 
 					g_pEventManager->CheckEvent(msg);
 
-					m_saveZonePosition = vecCheck[i]->SendPosition();
-					ZoneType zone = vecCheck[i]->ZoneIndex();
+					// m_saveZonePosition = vecCheck[i]->SendPosition();
+					// ZoneType zone = vecCheck[i]->ZoneIndex();
+
+					m_saveZonePosition = iObjCheck->SendPosition();
+					ZoneType zone = iObjCheck->ZoneIndex();
+
 
 					if (zone == ZoneType::eFall)
 					{
@@ -391,14 +434,22 @@ void CCharacter::ColliderObject()
 		return;
 	}
 
-	for (int i = 0; i < g_pObjectManager->GetVecPObejct().size(); i++)
+
+	for (int i = 0; i < loopCnt; i++)
 	{
-		if (m_Character->GetOBB()->IsCollision(g_pObjectManager->GetVecPObejct()[i]->GetOBB()))
+		// PObject* pObjCheck = dynamic_cast<PObject *>(vecCheck[i]);
+		PObject* pObjCheck = g_pObjectManager->GetPObjectIndex(i);
+
+		if (pObjCheck == NULL)
+			continue;
+
+		if (m_Character->GetOBB()->IsCollision(pObjCheck->GetOBB()))
 		{
-			D3DXVECTOR3 grabvector = g_pObjectManager->GetVecPObejct()[i]->GetPosition() - this->GetPosition();
+			D3DXVECTOR3 grabvector = pObjCheck->GetPosition() - this->GetPosition();
 			float grabradian = D3DXVec3Dot(&this->m_vDirection, &grabvector) / (D3DXVec3Length(&m_vDirection) * D3DXVec3Length(&grabvector));
 			if (grabradian > cosf(D3DXToRadian(45)))
 			{
+				// cout << "check" << endl;
 				m_isGrab = true;
 				m_nGrabAbleObeject = i;
 				m_vGrabDirection = this->m_vDirection;
@@ -411,6 +462,7 @@ void CCharacter::ColliderObject()
 			m_isCollided = true;
 			return;
 		}
+
 	}
 	m_isCollided = false;
 	m_isGrab = false;
@@ -560,33 +612,33 @@ void CCharacter::Update(float duration)
 	//if (prejumpyposition > m_vPosition.y)
 	//if (m_isFallAni || !m_isJump)
 	//if (m_preJumpPosition > m_vPosition.y || !m_isJump)
-		//if (prejumpyposition > m_vPosition.y)
+	//if (prejumpyposition > m_vPosition.y)
 	{
-#ifdef _DEBUG
-		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.6f, 0);
-		m_Ray.SetOrigin(rayOrigin);
-#else
 		D3DXVECTOR3 rayOrigin = this->GetPosition() + D3DXVECTOR3(0, 0.7f, 0);
 		m_Ray.SetOrigin(rayOrigin);
-#endif // DEBUG
 
 		if (g_pObjectManager->GetVecMapObjCnt() > 0)
 		{
-			vector<IObject *> vecCheck = g_pObjectManager->GetMapVecIObject();
+			vector<CObject *> vecCheck = g_pObjectManager->GetMapVecCObject();
 			ObjectType objType = ObjectType::eNull;
 			int loopCnt = vecCheck.size();
 
 			for (int i = 0; i < loopCnt; i++)
 			{
+				IObject* iObjCheck = dynamic_cast<IObject*>(vecCheck[i]);
+
+				if (iObjCheck == NULL)
+					continue;
+
 				objType = vecCheck[i]->GetObjType();
-				if (objType <= eTile13 || objType == eBridge)
+				if (objType < eTile13 || objType == eBridge)
 				{
 					BOOL hit = false;
 					DWORD FaceIndex;
 					float u, v, dist;
 					D3DXVECTOR3 rayOrigin = m_Ray.GetOrigin();
 					D3DXMATRIXA16 matInverse;
-					D3DXMatrixInverse(&matInverse, NULL, &vecCheck[i]->GetOBB()->GetOBBWorldMatrix());
+					D3DXMatrixInverse(&matInverse, NULL, &iObjCheck->GetOBB()->GetOBBWorldMatrix());
 					D3DXVec3TransformCoord(&rayOrigin, &rayOrigin, &matInverse);
 					D3DXIntersect(vecCheck[i]->GetMesh(), &rayOrigin, &m_Ray.GetDirection(), &hit, &FaceIndex, &u, &v, &dist, NULL, NULL);
 					if (hit)
