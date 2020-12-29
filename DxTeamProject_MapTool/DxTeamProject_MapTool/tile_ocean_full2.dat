@@ -1,0 +1,65 @@
+# Object_Start
+# ObjectName
+Tile_Ocean1
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+
+# TxtPath
+Vol_36_5_Base_Color.png
+# ObjectType
+12
+# Scale
+15
+0
+5
+# Rotate
+0
+0
+0
+# Translate
+0
+0.5
+10
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall31
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+30
+15
+10
+# Rotate
+0
+0
+0
+# Translate
+0
+0.5
+10
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Section =======================================
+

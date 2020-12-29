@@ -10,17 +10,17 @@ Vol_36_5_Base_Color.png
 # ObjectType
 12
 # Scale
-15
+7.5
 0
-5
+7.5
 # Rotate
 0
 0
 0
 # Translate
-0
+-7.5
 0.5
-10
+7.5
 # Color
 0.5
 0.5
@@ -32,139 +32,103 @@ Blue
 
 # Object_Start
 # ObjectName
-Bridge6
+Tile_Ocean3
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Bridge.X
+
 # TxtPath
-Texture_01.png
+Vol_36_5_Base_Color.png
 # ObjectType
-37
+12
 # Scale
-0.3
-0.1
-0.3
+7.5
+0
+7.5
 # Rotate
 0
-90
+0
 0
 # Translate
-0
-0
-14.2
+7.5
+0.5
+7.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Red
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Bridge18
+Tile_Ocean4
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Bridge.X
+
 # TxtPath
-Texture_01.png
+Vol_36_5_Base_Color.png
 # ObjectType
-37
+12
 # Scale
-0.3
-0.1
-0.3
+7.5
+0
+7.5
 # Rotate
 0
-90
+0
 0
 # Translate
-0
-0
-11.4
+-7.5
+0.5
+-7.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Red
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Bridge19
+Tile_Ocean5
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Bridge.X
+
 # TxtPath
-Texture_01.png
+Vol_36_5_Base_Color.png
 # ObjectType
-37
+12
 # Scale
-0.3
-0.1
-0.3
+7.5
+0
+7.5
 # Rotate
 0
-90
+0
 0
 # Translate
-0
-0
-8.6
+7.5
+0.5
+-7.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Red
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Bridge20
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Bridge.X
-# TxtPath
-Texture_01.png
-# ObjectType
-37
-# Scale
-0.3
-0.1
-0.3
-# Rotate
-0
-90
-0
-# Translate
-0
-0
-5.8
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-InvisibleWall47
+InvisibleWall6
 # FolderPath
 
 # FilePath
@@ -174,79 +138,17 @@ InvisibleWall47
 # ObjectType
 22
 # Scale
-13.5
+30
 15
-10
-# Rotate
-0
-0
-0
-# Translate
--8.2
-0.5
-10
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# Object_End
-
-# Object_Start
-# ObjectName
-InvisibleWall20
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-22
-# Scale
-13.5
-15
-10
-# Rotate
-0
-0
-0
-# Translate
-8.2
-0.5
-10
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# Object_End
-
-# Object_Start
-# ObjectName
-InvisibleWall8
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-22
-# Scale
-3
-1.5
-10
+30
 # Rotate
 0
 0
 0
 # Translate
 0
-0.5
-10
+0
+0
 # Color
 0.5
 0.5

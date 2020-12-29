@@ -4,6 +4,9 @@
 
 class CTile : public IObject
 {
+private:
+	vector<ST_PNT_VERTEX> m_vecVertex;
+
 public:
 	CTile();
 	~CTile();

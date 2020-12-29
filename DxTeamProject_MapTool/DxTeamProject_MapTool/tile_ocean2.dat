@@ -10,17 +10,17 @@ Vol_36_5_Base_Color.png
 # ObjectType
 12
 # Scale
-15
+3
 0
-5
+3
 # Rotate
 0
 0
 0
 # Translate
-0
+-12
 0.5
-10
+12
 # Color
 0.5
 0.5
@@ -32,213 +32,51 @@ Blue
 
 # Object_Start
 # ObjectName
-Bridge6
+Tile_Ocean2
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Bridge.X
-# TxtPath
-Texture_01.png
-# ObjectType
-37
-# Scale
-0.3
-0.1
-0.3
-# Rotate
-0
-90
-0
-# Translate
-0
-0
-14.2
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Bridge18
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Bridge.X
-# TxtPath
-Texture_01.png
-# ObjectType
-37
-# Scale
-0.3
-0.1
-0.3
-# Rotate
-0
-90
-0
-# Translate
-0
-0
-11.4
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Bridge19
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Bridge.X
-# TxtPath
-Texture_01.png
-# ObjectType
-37
-# Scale
-0.3
-0.1
-0.3
-# Rotate
-0
-90
-0
-# Translate
-0
-0
-8.6
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Bridge20
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Bridge.X
-# TxtPath
-Texture_01.png
-# ObjectType
-37
-# Scale
-0.3
-0.1
-0.3
-# Rotate
-0
-90
-0
-# Translate
-0
-0
-5.8
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-InvisibleWall47
-# FolderPath
-
-# FilePath
 
 # TxtPath
-
+Vol_36_5_Base_Color.png
 # ObjectType
-22
-# Scale
-13.5
-15
-10
-# Rotate
-0
-0
-0
-# Translate
--8.2
-0.5
-10
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# Object_End
-
-# Object_Start
-# ObjectName
-InvisibleWall20
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-22
-# Scale
-13.5
-15
-10
-# Rotate
-0
-0
-0
-# Translate
-8.2
-0.5
-10
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# Object_End
-
-# Object_Start
-# ObjectName
-InvisibleWall8
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-22
+12
 # Scale
 3
-1.5
-10
+0
+3
+# Rotate
+0
+0
+0
+# Translate
+-6
+0.5
+12
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_Ocean3
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+
+# TxtPath
+Vol_36_5_Base_Color.png
+# ObjectType
+12
+# Scale
+3
+0
+3
 # Rotate
 0
 0
@@ -246,6 +84,262 @@ InvisibleWall8
 # Translate
 0
 0.5
+12
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_Ocean4
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+
+# TxtPath
+Vol_36_5_Base_Color.png
+# ObjectType
+12
+# Scale
+3
+0
+3
+# Rotate
+0
+0
+0
+# Translate
+6
+0.5
+12
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_Ocean5
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+
+# TxtPath
+Vol_36_5_Base_Color.png
+# ObjectType
+12
+# Scale
+3
+0
+3
+# Rotate
+0
+0
+0
+# Translate
+12
+0.5
+12
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_Ocean6
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+
+# TxtPath
+Vol_36_5_Base_Color.png
+# ObjectType
+12
+# Scale
+3
+0
+2
+# Rotate
+0
+0
+0
+# Translate
+-12
+0.5
+7
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_Ocean7
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+
+# TxtPath
+Vol_36_5_Base_Color.png
+# ObjectType
+12
+# Scale
+3
+0
+2
+# Rotate
+0
+0
+0
+# Translate
+-6
+0.5
+7
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_Ocean8
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+
+# TxtPath
+Vol_36_5_Base_Color.png
+# ObjectType
+12
+# Scale
+3
+0
+2
+# Rotate
+0
+0
+0
+# Translate
+0
+0.5
+7
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_Ocean9
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+
+# TxtPath
+Vol_36_5_Base_Color.png
+# ObjectType
+12
+# Scale
+3
+0
+2
+# Rotate
+0
+0
+0
+# Translate
+6
+0.5
+7
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_Ocean10
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+
+# TxtPath
+Vol_36_5_Base_Color.png
+# ObjectType
+12
+# Scale
+3
+0
+2
+# Rotate
+0
+0
+0
+# Translate
+12
+0.5
+7
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall31
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+30
+15
+10
+# Rotate
+0
+0
+0
+# Translate
+0
+1.5
 10
 # Color
 0.5

@@ -268,7 +268,7 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 	switch (objType)
 	{
 	case eTile01: case eTile02:	case eTile03: case eTile04: case eTile05: case eTile06:
-	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12: case eTile13:
+	case eTile07: case eTile08:	case eTile09: case eTile10: case eTile11: case eTile12:
 	{
 		// todo : tagging
 		if (objType == eTile01)
@@ -338,19 +338,31 @@ void IObject::CreateObject(const ObjectType& objType, int index)
 			mapData.strObjName = string("Tile_17_Yellow") + to_string(m_nRefCnt + 1);
 			mapData.vecColorTag.push_back("Yellow");
 		}
-		else if (objType == eTile13)
-		{
-			mapData.strObjName = string("Tile_Ocean") + to_string(m_nRefCnt + 1);
-			mapData.vecColorTag.push_back("Blue");
-		}
 
 		mapData.strFolderPath = "Resource/XFile/Tile";
 		mapData.strTxtPath = "Texture_01.png";
 
-		if(objType == eTile10 || objType == eTile11 || objType == eTile12 || objType == eTile13)
+		if(objType == eTile10 || objType == eTile11 || objType == eTile12)
 			mapData.strXFilePath = string("Tile_") + to_string(objType + 1) + ".X";
 		else
 			mapData.strXFilePath = string("Tile_0") + to_string(objType + 1) + ".X";
+
+		CTile* tile = new CTile;
+		tile->Setup(mapData);
+	}
+		break;
+
+	case eTile13:
+	{
+		mapData.vScale = D3DXVECTOR3(1.0f, 0.0f, 1.0f);
+		mapData.vRotate = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		mapData.vTranslate = D3DXVECTOR3(0.0f, 0.5f, 0.0f);
+
+		mapData.strObjName = string("Tile_Ocean") + to_string(m_nRefCnt + 1);
+		mapData.vecColorTag.push_back("Blue");
+
+		mapData.strFolderPath = "Resource/XFile/Tile";
+		mapData.strTxtPath = "Vol_36_5_Base_Color.png";
 
 		CTile* tile = new CTile;
 		tile->Setup(mapData);

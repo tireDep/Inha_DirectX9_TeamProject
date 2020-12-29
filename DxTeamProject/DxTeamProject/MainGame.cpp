@@ -138,8 +138,15 @@ void CMainGame::Update()
 
 // >> MapData
 #ifdef _DEBUG
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "test_grab.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "test_grab.dat");
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
+
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_quater1.dat");
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean1.dat");
+
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_bridge_full3.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_bridge_full4.dat");
 #else
 
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");

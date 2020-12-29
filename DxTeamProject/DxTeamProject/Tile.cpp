@@ -19,7 +19,7 @@ void CTile::SetShader_Ocean()
 	float center = 0.5f;
 	float bump = 0.2f;
 
-	m_pTexture = m_vecTextures[0];
+	// m_pTexture = m_vecTextures[0];
 	m_pShader_Ocean->SetTexture("distortion_Tex", m_pTexture);
 
 	m_pShader_Ocean->SetMatrix("gWorldViewProjection", &matWorldViewProj);
@@ -72,7 +72,70 @@ void CTile::Setup(const ST_MapData & mapData)
 
 	ST_XFile* xfile = new ST_XFile;
 
-	if (m_strXFile != "")
+	if (m_ObjectType == ObjectType::eTile13)
+	{
+		m_stMtl.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+		m_stMtl.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+		m_stMtl.Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+
+		if (m_strTxtFile != "")
+			g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
+
+		ST_PNT_VERTEX v;
+		float f = 1.0f;
+		v.p = D3DXVECTOR3(-f, 0, -f);	v.t = D3DXVECTOR2(1, 0); m_vecVertex.push_back(v);
+		v.p = D3DXVECTOR3(-f, 0, f);	v.t = D3DXVECTOR2(0, 0); m_vecVertex.push_back(v);
+		v.p = D3DXVECTOR3(f, 0, f);		v.t = D3DXVECTOR2(0, 1); m_vecVertex.push_back(v);
+
+		v.p = D3DXVECTOR3(-f, 0, -f);	v.t = D3DXVECTOR2(1, 0); m_vecVertex.push_back(v);
+		v.p = D3DXVECTOR3(f, 0, f);		v.t = D3DXVECTOR2(0, 1); m_vecVertex.push_back(v);
+		v.p = D3DXVECTOR3(f, 0, -f);	v.t = D3DXVECTOR2(1, 1); m_vecVertex.push_back(v);
+
+		D3DXVECTOR3 n1, n2, normal;
+		for (int i = 0; i < m_vecVertex.size(); i+=3)
+		{
+			n1 = m_vecVertex[i].p - m_vecVertex[i + 1].p;
+			n2 = m_vecVertex[i].p - m_vecVertex[i + 2].p;
+			D3DXVec3Cross(&normal, &n1, &n2);
+
+			m_vecVertex[i + 0].n = normal;
+			m_vecVertex[i + 1].n = normal;
+			m_vecVertex[i + 2].n = normal;
+		}
+
+		// >> createMesh
+		vector<DWORD> vecAttrBuf;
+		for (int i = 0; i < m_vecVertex.size(); i++)
+			vecAttrBuf.push_back(0);
+
+		D3DXCreateMeshFVF(vecAttrBuf.size(), m_vecVertex.size(), D3DXMESH_MANAGED, ST_PNT_VERTEX::FVF, g_pD3DDevice, &m_pMesh);
+
+		ST_PNT_VERTEX* pV = NULL;
+		m_pMesh->LockVertexBuffer(0, (LPVOID*)&pV);
+		memcpy(pV, &m_vecVertex[0], m_vecVertex.size() * sizeof(ST_PNT_VERTEX));
+		m_pMesh->UnlockVertexBuffer();
+
+		WORD* pI = NULL;
+		m_pMesh->LockIndexBuffer(0, (LPVOID*)&pI);
+		for (int i = 0; i < m_vecVertex.size(); i++)
+			pI[i] = i;
+		m_pMesh->UnlockIndexBuffer();
+
+		DWORD* pA = NULL;
+		m_pMesh->LockAttributeBuffer(0, &pA);
+		memcpy(pA, &vecAttrBuf[0], vecAttrBuf.size() * sizeof(DWORD));
+		m_pMesh->UnlockAttributeBuffer();
+		// << createMesh
+
+		// >> ocean
+		g_pFileLoadManager->FileLoad_Shader("Resource/Shader", "flow.fx", m_pShader_Ocean);
+
+		m_vecMtrls.clear();
+		m_vecMtrls.push_back(m_stMtl);
+		m_vecTextures.clear();
+		m_vecTextures.push_back(m_pTexture);
+	}
+	else if (m_strXFile != "")
 	{
 		g_pFileLoadManager->FileLoad_XFile(m_strFolder, m_strXFile, xfile);
 
@@ -94,12 +157,6 @@ void CTile::Setup(const ST_MapData & mapData)
 			(DWORD*)m_adjBuffer->GetBufferPointer(),
 			(DWORD*)m_adjBuffer->GetBufferPointer(),
 			0, 0);
-	}
-
-	if (m_ObjectType == ObjectType::eTile13)
-	{
-		// >> ocean
-		g_pFileLoadManager->FileLoad_Shader("Resource/Shader", "flow.fx", m_pShader_Ocean);
 	}
 
 	// D3DXMATRIXA16 matS, matR, matT;
@@ -166,7 +223,7 @@ void CTile::Render()
 	if (m_ObjectType == ObjectType::eTile13 && m_pShader_Ocean != NULL && !isUIMode)
 	{
 		SetShader_Ocean();
-
+		
 		UINT numPasses = 0;
 		m_pShader_Ocean->Begin(&numPasses, NULL);
 		{

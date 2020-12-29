@@ -52,7 +52,7 @@ Texture_01.png
 # Translate
 0
 0
-14.2
+14.5
 # Color
 0.5
 0.5
@@ -85,7 +85,7 @@ Texture_01.png
 # Translate
 0
 0
-11.4
+11.5
 # Color
 0.5
 0.5
@@ -118,7 +118,7 @@ Texture_01.png
 # Translate
 0
 0
-8.6
+8.5
 # Color
 0.5
 0.5
@@ -151,7 +151,7 @@ Texture_01.png
 # Translate
 0
 0
-5.8
+5.5
 # Color
 0.5
 0.5
@@ -226,7 +226,7 @@ InvisibleWall20
 
 # Object_Start
 # ObjectName
-InvisibleWall8
+InvisibleWall21
 # FolderPath
 
 # FilePath
@@ -237,15 +237,15 @@ InvisibleWall8
 22
 # Scale
 3
-1.5
-10
+1.2
+12
 # Rotate
 0
 0
 0
 # Translate
 0
-0.5
+0.65
 10
 # Color
 0.5
