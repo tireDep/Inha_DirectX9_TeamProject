@@ -72,6 +72,7 @@ private:
 
 	int puls;
 	bool colorpuls;
+	bool BookCol;
 	///
 	
 public:

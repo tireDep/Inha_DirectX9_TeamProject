@@ -74,7 +74,7 @@ void IObject::ReceiveEvent(ST_EVENT eventMsg)
 	if (m_strConditionName == "")
 		return;
 
-	if (eventMsg.eventType == EventType::eConditionChange)
+	else if (eventMsg.eventType == EventType::eConditionChange)
 	{
 		if (m_strConditionName == eventMsg.conditionName)
 			m_isCondition = !eventMsg.isCondition;

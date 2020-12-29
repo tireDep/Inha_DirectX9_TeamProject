@@ -15,6 +15,7 @@ CUI::CUI()
 	m_strName = "UI";
 	puls = 0.f;
 	colorpuls = false;
+	BookCol = false;
 }
 
 CUI::~CUI()
@@ -535,20 +536,26 @@ void CUI::Render_Attain()
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
+	
+	if (g_pGameManager->GetIsHasOrb("Black"))
+	{
+		SetRect(&s_attrc3, -10, -160,
+			m_attInfo3.Width, m_attInfo3.Height);
+		m_pSprite->Draw(m_attUI3, &s_attrc3,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
-	SetRect(&s_attrc3, -10, -160,
-		m_attInfo3.Width, m_attInfo3.Height);
-	m_pSprite->Draw(m_attUI3, &s_attrc3,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
-
-	SetRect(&s_attrc4, -10, -160,
-		m_attInfo4.Width, m_attInfo4.Height);
-	m_pSprite->Draw(m_attUI4, &s_attrc4,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	if (g_pGameManager->GetIsHasOrb("White"))
+	{
+		SetRect(&s_attrc4, -10, -160,
+			m_attInfo4.Width, m_attInfo4.Height);
+		m_pSprite->Draw(m_attUI4, &s_attrc4,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
 	SetRect(&s_attrc5, -10, -160,
 		m_attInfo5.Width, m_attInfo5.Height);
@@ -566,19 +573,25 @@ void CUI::Render_Attain()
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	SetRect(&s_attrc8, -710, -160,
-		m_attInfo8.Width, m_attInfo8.Height);
-	m_pSprite->Draw(m_attUI8, &s_attrc8,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	if (g_pGameManager->GetIsHasOrb("Yellow"))
+	{
+		SetRect(&s_attrc8, -710, -160,
+			m_attInfo8.Width, m_attInfo8.Height);
+		m_pSprite->Draw(m_attUI8, &s_attrc8,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
-	SetRect(&s_attrc9, -710, -160,
-		m_attInfo9.Width, m_attInfo9.Height);
-	m_pSprite->Draw(m_attUI9, &s_attrc9,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	if (BookCol)
+	{
+		SetRect(&s_attrc9, -710, -160,
+			m_attInfo9.Width, m_attInfo9.Height);
+		m_pSprite->Draw(m_attUI9, &s_attrc9,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
 	SetRect(&s_attrc10, -710, -160,
 		m_attInfo10.Width, m_attInfo10.Height);
@@ -836,6 +849,15 @@ void CUI::Update()
 
 void CUI::ReceiveEvent(ST_EVENT eventMsg)
 {
+	if (eventMsg.eventType == EventType::eConditionChange)
+	{
+		if (strstr(eventMsg.conditionName.c_str(), "Book"))
+			BookCol = true;
+		else if (strstr(eventMsg.conditionName.c_str(), "Trigger"))
+			cout << "hit" << endl;
+	}
+
+
 	if (eventMsg.eventType == EventType::eInputEvent && g_pGameManager->GetUImode())
 	{
 		switch (eventMsg.message)

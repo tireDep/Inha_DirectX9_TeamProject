@@ -29,7 +29,7 @@ CCharacter::CCharacter()
 	/// Presentation
 #ifdef _DEBUG
 	// , m_saveZonePosition(5, 1, -5)
-	, m_saveZonePosition(0, 1, 10)
+	, m_saveZonePosition(0, 0, 10)
 #else
 	, m_saveZonePosition(90, 1, -193)
 #endif
@@ -302,7 +302,20 @@ void CCharacter::ColliderObject()
 					if (vecCheck[i]->GetCondition())
 						continue;
 
-				if (objType == eOrb || objType == eBook)
+				if (objType == eOrb)
+				{
+					//fout.open("OrbData.txt");
+
+					vecCheck[i]->SetBool(true);
+
+					//for (int i = 0; i < g_pObjectManager->GetVecIObject().size(); i++)				
+					//	fout << g_pObjectManager->GetVecIObject()[i]->GetBool(); // 
+
+					//fout.close();
+					continue;
+				}
+
+				if (objType == eBook)
 				{
 					//fout.open("OrbData.txt");
 
@@ -322,6 +335,12 @@ void CCharacter::ColliderObject()
 				}
 				if (objType == eTrigger)
 				{
+					ST_EVENT msg;
+					msg.eventType = EventType::eConditionChange;
+					msg.conditionName = vecCheck[i]->GetObjectName();
+
+					g_pEventManager->CheckEvent(msg);
+
 					m_saveZonePosition = vecCheck[i]->SendPosition();
 					ZoneType zone = vecCheck[i]->ZoneIndex();
 
@@ -345,7 +364,6 @@ void CCharacter::ColliderObject()
 					}
 					else  if (zone == ZoneType::eZone)
 					{
-						cout << "save" << endl;
 						g_pSoundManager->Stop();
 
 					}

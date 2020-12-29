@@ -61,7 +61,7 @@ void CScene::Setup()
 		0,
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
-		, D3DX_DEFAULT, 0, &m_onImageInfo, NULL, &m_pOnTexture);
+		, D3DX_DEFAULT, 0, &m_onImageInfo2, NULL, &m_pOnTexture2);
 
 	//continue
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
@@ -166,7 +166,8 @@ void CScene::Render_Main()
 			&D3DXVECTOR3(0, 0, 0),
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-	else if (PickButton)
+
+	if (PickButton)
 	{
 		SetRect(&PickNewrc, -575, -485, m_onImageInfo2.Width, m_onImageInfo2.Height);
 
@@ -263,8 +264,6 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 				//새로하기
 				PickButton = true;
 				g_pSoundManager->PlaySFX("button");
-				g_pGameManager->SetNowScene(SceneType::eLoadStart);
-				g_pObjectManager->KeepGoing = false;
 			}
 
 			if (px.x > 610 && px.x < 860 && px.y >570 && px.y < 605 
@@ -273,10 +272,6 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 				//이어하기
 				PickButton = true;
 				g_pSoundManager->PlaySFX("button");
-				g_pGameManager->SetNowScene(SceneType::eLoadStart);
-
-				g_pObjectManager->KeepGoing = true; //이어하기
-				// cout << "이어하기" << endl;
 			}
 
 			if (px.x > 585 && px.x < 850 && px.y > 665 && px.y < 700
@@ -289,6 +284,29 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 
 			}
 			break;
+
+		case WM_LBUTTONUP:
+			px.x = LOWORD(eventMsg.lParam);
+			px.y = HIWORD(eventMsg.lParam);
+
+			if (px.x > 610 && px.x < 870 && px.y >505 && px.y < 540
+				&& g_pGameManager->GetNowScene() == SceneType::eMainScene)
+			{
+				//새로하기
+				g_pGameManager->SetNowScene(SceneType::eLoadStart);
+				g_pObjectManager->KeepGoing = false;
+			}
+
+			if (px.x > 610 && px.x < 860 && px.y >570 && px.y < 605
+				&& g_pGameManager->GetNowScene() == SceneType::eMainScene)
+			{
+				//이어하기
+				g_pGameManager->SetNowScene(SceneType::eLoadStart);
+
+				g_pObjectManager->KeepGoing = true; 
+			}
+			break;
+
 		case WM_MOUSEMOVE:
 			px.x = LOWORD(eventMsg.lParam);
 			px.y = HIWORD(eventMsg.lParam);
