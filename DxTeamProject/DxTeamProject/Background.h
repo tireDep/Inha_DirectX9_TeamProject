@@ -6,6 +6,10 @@ class CBackground : public IObject
 private:
 	bool pBox, pCylinder, pSphere;
 	bool player, render;
+	LPD3DXEFFECT m_pShader;
+	LPDIRECT3DTEXTURE9 m_pShaderTxt;
+	FLOAT m_fShaderTime;
+	void SetShader();
 public:
 	CBackground();
 	virtual ~CBackground();

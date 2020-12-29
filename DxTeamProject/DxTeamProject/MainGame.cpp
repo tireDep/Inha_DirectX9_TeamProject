@@ -138,15 +138,8 @@ void CMainGame::Update()
 
 // >> MapData
 #ifdef _DEBUG
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "test_grab.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_quater1.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean1.dat");
-
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "SaveZone.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_bridge_full4.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map9.dat");
 #else
 
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
@@ -235,14 +228,15 @@ void CMainGame::Update()
 	//	/// Delete Later...
 		if (GetKeyState('1') & 0x8000)
 		{
-			g_pGameManager->SetNowScene(SceneType::eEndingScene);
-			m_pScene->Update();
+			// g_pGameManager->SetNowScene(SceneType::eEndingScene);
+			// m_pScene->Update();
+
 			//g_pGameManager->SetGetOrb("Blue");
 			//g_pGameManager->SetGetOrb("Green");
-			//g_pGameManager->SetGetOrb("Red");
-			//g_pGameManager->SetGetOrb("White");
-			//g_pGameManager->SetGetOrb("Yellow");
-			//g_pGameManager->SetGetOrb("Black");
+			g_pGameManager->SetGetOrb("Red");
+			// g_pGameManager->SetGetOrb("White");
+			g_pGameManager->SetGetOrb("Yellow");
+			// g_pGameManager->SetGetOrb("Black");
 			// g_pGameManager->CompleteOrb();
 		}
 	//	if (GetKeyState('2') & 0x8000)

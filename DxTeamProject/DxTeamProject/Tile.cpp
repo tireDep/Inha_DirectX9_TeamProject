@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Tile.h"
 
+const float fTime = 1.5f;
+const float fAddTime = 0.01f;
+
 void CTile::SetShader_Ocean()
 {
 	D3DXMATRIXA16 matView, matProj;
@@ -40,10 +43,57 @@ void CTile::SetShader_Ocean()
 	// m_shaderTimeAngle += flowSpeed * g_pTimeManager->GetElapsedTime();
 }
 
+void CTile::SetShader_Tile()
+{
+	D3DXMATRIXA16 matView, matProj, matViewPro, matInverseWorld;
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+	matViewPro = m_matWorld * matView * matProj;
+
+	D3DXMATRIXA16 a, b;
+	D3DXMatrixIdentity(&a);
+	D3DXMatrixIdentity(&b);
+
+	D3DXMatrixInverse(&a, NULL, &m_matWorld);
+	D3DXMatrixTranspose(&b, &a);
+
+	matInverseWorld = m_matWorld * a;
+	D3DXMatrixTranspose(&matInverseWorld, &matInverseWorld);
+
+	// >> : Light Shader
+	m_pShader_Tile->SetMatrix("gViewProjection", &matViewPro);
+	m_pShader_Tile->SetMatrix("gWorld", &m_matWorld);
+	m_pShader_Tile->SetMatrix("gInverseTranspose", &matInverseWorld);
+
+	//if (m_vecTextures[0] != 0)
+	//	m_pShader->SetTexture("DiffuseSampler_Tex", m_vecTextures[0]);
+	//else if (m_pTexture != NULL)
+	//	m_pShader->SetTexture("DiffuseSampler_Tex", m_pTexture);
+
+	if (m_vecColorTag[0] == "Black")		m_pShader_Tile->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "BlackTxt2.png"));
+	else if (m_vecColorTag[0] == "White")	m_pShader_Tile->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "WhiteTxt2.png"));
+	else if (m_vecColorTag[0] == "Yellow")	m_pShader_Tile->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "YellowTxt2.png"));
+	else if (m_vecColorTag[0] == "Green")	m_pShader_Tile->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "GreenTxt2.png"));
+	else if (m_vecColorTag[0] == "Red")		m_pShader_Tile->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "RedTxt2.png"));
+	else if (m_vecColorTag[0] == "Blue")	m_pShader_Tile->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "BlueTxt2.png"));
+
+	m_pShader_Tile->SetTexture("DiffuseSampler2_Tex", m_pShaderTxt);
+
+	m_pShader_Tile->SetVector("gColor", &D3DXVECTOR4(1.0, 0.0, 0.0, 1.0));
+
+	m_pShader_Tile->SetFloat("gTime", m_fShaderTime);
+
+	m_fShaderTime += fAddTime;
+	m_pShader_Tile->SetFloat("a", 0.9f);
+}
+
 CTile::CTile() :
 	m_pShader_Ocean(NULL),
 	m_shaderTime(0.0f),
-	m_shaderTimeAngle(0.0f)
+	m_shaderTimeAngle(0.0f),
+	m_pShader_Tile(NULL),
+	m_pShaderTxt(NULL),
+	m_fShaderTime(0.0f)
 {
 	render = false;
 	m_strName = string("Tile") + to_string(m_nRefCount);
@@ -150,7 +200,8 @@ void CTile::Setup(const ST_MapData & mapData)
 		if (m_strTxtFile != "")
 			g_pFileLoadManager->FileLoad_Texture(m_strFolder, m_strTxtFile, m_pTexture);
 
-		g_pFileLoadManager->FileLoad_Texture("Resource/Texture", "BasicGray_127.png", m_grayTxt);
+		g_pFileLoadManager->FileLoad_Texture("Resource/Texture", "shader.png", m_pShaderTxt);
+		g_pFileLoadManager->FileLoad_Shader("Resource/Shader", "effect.fx", m_pShader_Tile);
 
 		m_pMesh->OptimizeInplace(
 			D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_COMPACT | D3DXMESHOPT_VERTEXCACHE,
@@ -158,6 +209,8 @@ void CTile::Setup(const ST_MapData & mapData)
 			(DWORD*)m_adjBuffer->GetBufferPointer(),
 			0, 0);
 	}
+
+	g_pFileLoadManager->FileLoad_Texture("Resource/Texture", "BasicGray_127.png", m_grayTxt);
 
 	// D3DXMATRIXA16 matS, matR, matT;
 	D3DXMatrixScaling(&m_matS, m_vScale.x, m_vScale.y, m_vScale.z);
@@ -243,21 +296,40 @@ void CTile::Render()
 		{
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 			// >> todo : 시연할 때 주석 풀기
-			/* if (!CheckIsGetColorOrb())
+			/*if (!CheckIsGetColorOrb())
 			{
 				g_pD3DDevice->SetTexture(0, m_grayTxt);
+				m_pMesh->DrawSubset(i);
 			}
-			else */
+			else*/
 			{
-				if (m_vecTextures[i] != 0)
-					g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
-				else if (m_pTexture != NULL)
+				if (m_fShaderTime < fTime && m_pShader_Tile != NULL)
 				{
-					g_pD3DDevice->SetTexture(0, m_pTexture);
-					// >> 텍스처 매치 안되있을 때
+					SetShader_Tile();
+					UINT numPasses = 0;
+					m_pShader_Tile->Begin(&numPasses, NULL);
+					{
+						for (UINT a = 0; a < numPasses; ++a)
+						{
+							m_pShader_Tile->BeginPass(a);
+							m_pMesh->DrawSubset(a);
+							m_pShader_Tile->EndPass();
+						}
+					}
+					m_pShader_Tile->End();
+				}
+				else
+				{
+					if (m_vecTextures[i] != 0)
+						g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+					else if (m_pTexture != NULL)
+					{
+						g_pD3DDevice->SetTexture(0, m_pTexture);
+						// >> 텍스처 매치 안되있을 때
+					}
+					m_pMesh->DrawSubset(i);
 				}
 			}
-			m_pMesh->DrawSubset(i);
 		}
 		g_pD3DDevice->SetTexture(0, NULL);
 	}

@@ -1,7 +1,57 @@
 #include "stdafx.h"
 #include "Background.h"
 
-CBackground::CBackground()
+const float fTime = 1.5f;
+const float fAddTime = 0.01f;
+
+void CBackground::SetShader()
+{
+	D3DXMATRIXA16 matView, matProj, matViewPro, matInverseWorld;
+	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+	matViewPro = m_matWorld * matView * matProj;
+
+	D3DXMATRIXA16 a, b;
+	D3DXMatrixIdentity(&a);
+	D3DXMatrixIdentity(&b);
+
+	D3DXMatrixInverse(&a, NULL, &m_matWorld);
+	D3DXMatrixTranspose(&b, &a);
+
+	matInverseWorld = m_matWorld * a;
+	D3DXMatrixTranspose(&matInverseWorld, &matInverseWorld);
+
+	// >> : Light Shader
+	m_pShader->SetMatrix("gViewProjection", &matViewPro);
+	m_pShader->SetMatrix("gWorld", &m_matWorld);
+	m_pShader->SetMatrix("gInverseTranspose", &matInverseWorld);
+
+	//if (m_vecTextures[0] != 0)
+	//	m_pShader->SetTexture("DiffuseSampler_Tex", m_vecTextures[0]);
+	//else if (m_pTexture != NULL)
+	//	m_pShader->SetTexture("DiffuseSampler_Tex", m_pTexture);
+
+	if(m_vecColorTag[0] == "Black")			m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "BlackTxt2.png"));
+	else if (m_vecColorTag[0] == "White")	m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "WhiteTxt2.png"));
+	else if (m_vecColorTag[0] == "Yellow")	m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "YellowTxt2.png"));
+	else if (m_vecColorTag[0] == "Green")	m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "GreenTxt2.png"));
+	else if (m_vecColorTag[0] == "Red")		m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "RedTxt2.png"));
+	else if (m_vecColorTag[0] == "Blue")	m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "BlueTxt2.png"));
+	
+	m_pShader->SetTexture("DiffuseSampler2_Tex", m_pShaderTxt);
+
+	m_pShader->SetVector("gColor", &D3DXVECTOR4(1.0, 0.0, 0.0, 1.0));
+
+	m_pShader->SetFloat("gTime", m_fShaderTime);
+
+	m_fShaderTime += fAddTime;
+	m_pShader->SetFloat("a", 0.5f);
+}
+
+CBackground::CBackground() :
+	m_pShader(NULL),
+	m_pShaderTxt(NULL),
+	m_fShaderTime(0.0f)
 {
 	m_strName = string("Background") + to_string(m_nRefCount);
 }
@@ -66,8 +116,9 @@ void CBackground::Setup(const ST_MapData & mapData)
 
 		m_vecMtrls.push_back(m_stMtl);
 	}
-
+	g_pFileLoadManager->FileLoad_Texture("Resource/Texture", "shader.png", m_pShaderTxt);
 	g_pFileLoadManager->FileLoad_Texture("Resource/Texture", "BasicGray_127.png", m_grayTxt);
+	g_pFileLoadManager->FileLoad_Shader("Resource/Shader", "effect.fx", m_pShader);
 
 	D3DXMATRIXA16 matS, matR, matT;
 	D3DXMatrixScaling(&matS, m_vScale.x, m_vScale.y, m_vScale.z);
@@ -118,33 +169,55 @@ void CBackground::Render()
 
 	for (int i = 0; i < m_vecMtrls.size(); i++)
 	{
-		g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
-
 		if (m_ObjectType != ObjectType::eFlower) // && m_ObjectType != ObjectType::eInvisibleWall)
 		{
+			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 			g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
 			if (!CheckIsGetColorOrb())
+			{
 				g_pD3DDevice->SetTexture(0, m_grayTxt);
+				m_pMesh->DrawSubset(i);
+			}
 			else
 			{
-				if (m_vecTextures[i] != 0)
-					g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
-				else if (m_pTexture != NULL)
-					g_pD3DDevice->SetTexture(0, m_pTexture);
+				if (m_fShaderTime < fTime && m_pShader != NULL)
+				{
+					SetShader();
+					UINT numPasses = 0;
+					m_pShader->Begin(&numPasses, NULL);
+					{
+						for (UINT a = 0; a < numPasses; ++a)
+						{
+							m_pShader->BeginPass(a);
+							m_pMesh->DrawSubset(a);
+							m_pShader->EndPass();
+						}
+					}
+					m_pShader->End();
+				}
+				else
+				{
+					if (m_vecTextures[i] != 0)
+						g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
+					else if (m_pTexture != NULL)
+						g_pD3DDevice->SetTexture(0, m_pTexture);
+
+					m_pMesh->DrawSubset(i);
+				}
 			}
 		}
 		else
 		{
 			// >> 투명벽, 꽃은 텍스쳐 없고 매터리얼 값으로만 이루어져 있음
+			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
 			g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 
 			if (!CheckIsGetColorOrb())
-				g_pD3DDevice->SetTexture(0,
-					g_pFileLoadManager->GetFileNameTexture("Resource/Texture","BasicGray_127.png"));
-		}
+				g_pD3DDevice->SetTexture(0, m_grayTxt);
 
-		m_pMesh->DrawSubset(i);
+			m_pMesh->DrawSubset(i);
+		}
 	}
 	g_pD3DDevice->SetTexture(0, NULL);
 }

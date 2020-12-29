@@ -13,7 +13,12 @@ private:
 	float m_shaderTime;
 	float m_shaderTimeAngle;
 
+	LPD3DXEFFECT m_pShader_Tile;
+	LPDIRECT3DTEXTURE9 m_pShaderTxt;
+	FLOAT m_fShaderTime;
+
 	void SetShader_Ocean();
+	void SetShader_Tile();
 public:
 	CTile();
 	~CTile();
