@@ -140,9 +140,18 @@ void CObjectManager::Update_PickCheck(const vector<bool>& vecIsPick, const vecto
 
 void CObjectManager::Update(CRay ray)
 {
-	for (int i = 0; i < m_vecIObject.size(); i++)
+	IObject* iObj = NULL;
+	int loopSize = GetVecMapObjCnt();
+	for (int i = 0; i < loopSize; i++)
 	{
-		m_vecIObject[i]->Update(ray);
+		iObj = GetIObjectIndex(i);
+
+		if (iObj == NULL)
+			continue;
+
+		iObj->Update(ray);
+
+		// m_vecIObject[i]->Update(ray);
 	}
 }
 
@@ -444,7 +453,7 @@ void CObjectManager::Collide(float duration)
 		//			}
 		//		}
 		//	}
-		//}
+		// }
 	}
 	/// Cylinder
 	for (int CylinderIndex = 0; CylinderIndex < m_vecCylinder.size(); CylinderIndex++)
@@ -756,11 +765,24 @@ void CObjectManager::Render(const D3DXVECTOR3& camEye)
 		//for (int i = 0; i < it->second.size(); i++)
 		//	it->second[i]->Render();
 
+		IObject* iObj = NULL;
+		int k = 0;
 		for (int i = 0; i < it->second.size(); i++)
 		{
-			if(it->second[i]->m_isCameraRender)
-				it->second[i]->Render();
+			iObj = dynamic_cast<IObject*> (it->second[i]);
+			if (iObj == NULL)
+				continue;
+
+			if (iObj->m_isCameraRender)
+				iObj->Render();
+
 		}
+
+		// for (int i = 0; i < it->second.size(); i++)
+		// {
+		// 	if(it->second[i]->m_isCameraRender)
+		// 		it->second[i]->Render();
+		// }
 
 		// >> pObject Render
 		int loopSize = m_vecPObject.size();

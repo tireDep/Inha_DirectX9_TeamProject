@@ -20,6 +20,7 @@ protected:
 
 	bool m_isCameraRender;
 	IObject();
+
 public:
 	virtual ~IObject();
 	virtual void Release();
