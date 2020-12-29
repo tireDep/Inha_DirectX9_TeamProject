@@ -301,7 +301,7 @@ void CGameManager::SetClipCursor(int ySize)
 
 	p1.x = rc.left;
 	p1.y = rc.top + ySize; // x_Btn
-	p2.x = rc.right;
+	p2.x = rc.right - 10.0f;
 	p2.y = rc.bottom;
 
 	ClientToScreen(g_hWnd, &p1);

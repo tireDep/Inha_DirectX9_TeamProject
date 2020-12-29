@@ -84,7 +84,7 @@ void CCamera::Update()
 void CCamera::Update_MouseMove()
 {
 	POINT tempMousePos = m_preMousePos;
-	float fSpeed = 1.5f;
+	float fSpeed = 2.5f;
 	bool isIn = false;
 	float fDeltaX = 0, fDeltaY = 0;
 
@@ -190,7 +190,7 @@ void CCamera::ReceiveEvent(ST_EVENT eventMsg)
 			{
 				m_camStatus = CamStatus::eLeftPos;
 			}
-			else if (ptCurMouse.x > rc.right - 2.0f)
+			else if (ptCurMouse.x >= rc.right - 12.0f)
 			{
 				m_camStatus = CamStatus::eRightPos;
 			}
