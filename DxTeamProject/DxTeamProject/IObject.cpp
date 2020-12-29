@@ -57,10 +57,13 @@ void IObject::Update(CRay ray)
 
 	if (D3DXBoxBoundProbe(&m_vMin, &m_vMax, &ray.GetOrigin(), &ray.GetDirection()) == true)
 	{
-		if (m_vMax.y >= 5.0f)
-			m_isCameraRender = false;
-		else
-			m_isCameraRender = true;
+		if (m_ObjectType < ObjectType::eTile13)
+		{
+			if (m_vMax.y >= 5.0f)
+				m_isCameraRender = false;
+			else
+				m_isCameraRender = true;
+		}
 	}
 	else
 	{
