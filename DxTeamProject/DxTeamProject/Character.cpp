@@ -31,6 +31,7 @@ CCharacter::CCharacter()
 	// , m_saveZonePosition(5, 1, -5)
 	, m_saveZonePosition(0, 0, 10)
 #else
+	//,m_saveZonePosition(30, 1, -90)
 	, m_saveZonePosition(90, 1, -193)
 #endif
 	, m_vGrabDirection(0, 0, 1)
@@ -641,7 +642,11 @@ void CCharacter::Update(float duration)
 					if (hit)
 					{
 						if (m_fHeightTile < m_Ray.GetOrigin().y - dist * vecCheck[i]->GetScale().y)
+						{
 							m_fHeightTile = m_Ray.GetOrigin().y - dist * vecCheck[i]->GetScale().y;
+							if (objType == eTile12)
+								m_fHeightTile += 0.06f;
+						}
 					}
 				}
 			}
