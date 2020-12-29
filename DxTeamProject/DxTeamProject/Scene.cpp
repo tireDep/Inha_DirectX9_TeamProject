@@ -13,6 +13,8 @@ CScene::CScene()
 	PickButton = false;
 	PickButton2 = false;
 	PickButton3 = false;
+	Alpha = 0;
+	Plus = 0.5f;
 }
 
 
@@ -294,24 +296,23 @@ void CScene::Render_Ending()
 
 	m_pSprite->SetTransform(&matWorld);
 
-	//BackG
-	SetRect(&Backrc, 0, 0, m_stImageInfo2.Width, m_stImageInfo2.Height);
-
-	m_pSprite->Draw(m_pTextureScene2, &Backrc,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
-
-
 	//End
-	SetRect(&Endrc, -50, -50, m_stImageInfo3.Width, m_stImageInfo3.Height);
+	SetRect(&Endrc, 0, 0, m_stImageInfo3.Width, m_stImageInfo3.Height);
 
 	m_pSprite->Draw(m_pTextureScene3, &Endrc,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+		D3DCOLOR_ARGB(Alpha, 255, 255, 255));
 
 	m_pSprite->End();
+}
+
+void CScene::Update()
+{
+	if (g_pGameManager->GetNowScene() == SceneType::eEndingScene && Alpha !=255)
+	{
+		Alpha += round(Plus);
+	}
 }
 
 void CScene::Render_Loading()
@@ -362,8 +363,6 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 				//끝내기
 				PickButton3 = true;
 				g_pSoundManager->PlaySFX("button");
-				exit(0);
-
 			}
 			break;
 
@@ -386,10 +385,17 @@ void CScene::ReceiveEvent(ST_EVENT eventMsg)
 				g_pGameManager->SetNowScene(SceneType::eLoadStart);
 				g_pObjectManager->KeepGoing = true;
 			}
+			if (px.x > 585 && px.x < 850 && px.y > 660 && px.y < 695
+				&& g_pGameManager->GetNowScene() == SceneType::eMainScene)
+			{
+				//끝내기
+				exit(0);
+			}
 			else
 			{
 				PickButton = false;
 				PickButton2 = false;
+				PickButton3 = false;
 			}
 			break;
 

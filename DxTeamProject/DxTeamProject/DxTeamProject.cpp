@@ -11,7 +11,7 @@ CMainGame *g_pMainGame;
 HWND g_hWnd;
 const POINT g_pos = { 50, 50 };
 const int g_nWidth = 1424;
-const int g_nHeight = 740;
+const int g_nHeight = 760;
 
 #define MAX_LOADSTRING 100
 

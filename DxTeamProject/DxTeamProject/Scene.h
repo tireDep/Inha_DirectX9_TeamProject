@@ -31,6 +31,8 @@ private:
 
 	bool OnButton, OnButton2, OnButton3;
 	bool PickButton, PickButton2, PickButton3;
+	int Alpha;
+	float Plus;
 public:
 	CScene();
 	~CScene();
@@ -38,6 +40,7 @@ public:
 	void Setup();
 	void Render_Main();
 	void Render_Ending();
+	void Update();
 	void Render_Loading();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
