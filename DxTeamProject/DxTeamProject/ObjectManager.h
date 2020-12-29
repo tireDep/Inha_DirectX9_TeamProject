@@ -43,7 +43,7 @@ private:
 // 	bool m_IsIn;
 //  multimap<vector<IObject*>, bool>	m_mapObject;
 
-	multimap<int, vector<IObject*>>	m_mapObject;	// >> 맵 위치, 맵에 존재하는 오브젝트들
+	multimap<int, vector<CObject*>>	m_mapObject;	// >> 맵 위치, 맵에 존재하는 오브젝트들
 	vector<bool>					m_vecIsRenderState;	// >> 맵 랜더 상태
 	int								m_IObjCnt = 0;		// >> 오브젝트 카운트
 	int								m_nowMapPos = 6;	// >> 첫 시작 위치. 0,0 바다임
@@ -86,6 +86,7 @@ public:
 	void Update(CRay ray, D3DXCOLOR& objectcolor);		// Color Change
 	void UpdateLand(float duration);					// PObject Physics
 	void Update(float duration);						// IObject(Gimmick) Physics		// Integration...
+	void PreUpdate(float duration = 0.001f);			// PreUpdate(setOBB BOX)
 
 	void Collide(float duration);						// Collision
 
@@ -114,7 +115,9 @@ public:
 	void CalcNowPositionIndex(const D3DXVECTOR3& m_characterPos);
 	void SetIsRenderState();
 	int GetVecMapObjCnt();
-	vector<IObject *> GetMapVecIObject();	// << 오브젝트 반환
+	vector<CObject *> GetMapVecCObject();	// << 오브젝트 반환
+	PObject* GetPObjectIndex(int index);
+	IObject* GetIObjectIndex(int index);
 
 private:
 	void Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos);

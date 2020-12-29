@@ -209,6 +209,7 @@ void CMainGame::Update()
 			g_pEventManager->AddListener(&g_pObjectManager->GetVecObjectIndex(i));
 		}
 
+		g_pObjectManager->PreUpdate();
 		g_pObjectManager->CalcNowPositionIndex(m_pCharacter->GetPosition());
 		g_pGameManager->SetNowScene(SceneType::eGameScene);
 
