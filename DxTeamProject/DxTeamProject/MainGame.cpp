@@ -138,57 +138,48 @@ void CMainGame::Update()
 
 // >> MapData
 #ifdef _DEBUG
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "test_grab.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
 
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_quater1.dat");
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean1.dat");
-
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_bridge_full3.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_bridge_full4.dat");
 #else
-
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map2.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map3.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map4.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map5.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map6.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map7.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map8.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map9.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map2.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map3.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map4.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map5.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map6.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map7.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map8.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map9.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "ocean1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
 
 		//g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "Autumn_tile_bg_map1.dat");
 		//cout << "1" << endl;
