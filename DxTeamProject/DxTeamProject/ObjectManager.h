@@ -119,6 +119,8 @@ public:
 	PObject* GetPObjectIndex(int index);
 	IObject* GetIObjectIndex(int index);
 
+	void AllUpdate();
+
 private:
 	void Update_PickCheck(const vector<bool>& vecIsPick, const vector<D3DXVECTOR3>& vecVPos);
 };

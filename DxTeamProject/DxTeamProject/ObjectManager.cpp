@@ -727,6 +727,8 @@ void CObjectManager::Reset()
 	{
 		m_vecIObject[i]->PresentPosition = m_vecIObject[i]->ResetPosition;
 	}
+
+	g_pObjectManager->AllUpdate();
 }
 
 void CObjectManager::Render(const D3DXVECTOR3& camEye)
@@ -1036,6 +1038,16 @@ PObject * CObjectManager::GetPObjectIndex(int index)
 IObject * CObjectManager::GetIObjectIndex(int index)
 {
 	return dynamic_cast<IObject*> (GetMapVecCObject()[index]);
+}
+
+void CObjectManager::AllUpdate()
+{
+	float fTime = 0.0001f;
+
+	for (int i = 0; i < m_vecObject.size(); i++)
+	{
+		m_vecObject[i]->Update(fTime);
+	}
 }
 
 //void CObjectManager::UpdateNewMap(CFrustum * frustum)

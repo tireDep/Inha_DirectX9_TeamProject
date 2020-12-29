@@ -219,6 +219,9 @@ void CMainGame::Update()
 		}
 
 		g_pObjectManager->CalcNowPositionIndex(m_pCharacter->GetPosition());
+
+		g_pObjectManager->AllUpdate();
+
 		g_pGameManager->SetNowScene(SceneType::eGameScene);
 
 	}

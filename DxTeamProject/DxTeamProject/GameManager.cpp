@@ -220,6 +220,9 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 	RECT rc;
 	POINT p1, p2;
 
+	// if(eventMsg.eventType == EventType::eConditionChange)
+	// 	g_pObjectManager->AllUpdate();
+
 	if (eventMsg.eventType == EventType::eInputEvent)
 	{
 		switch (eventMsg.message)
