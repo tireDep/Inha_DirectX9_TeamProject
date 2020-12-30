@@ -32,6 +32,134 @@ White
 
 # Object_Start
 # ObjectName
+Tile_13_Water3
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water4
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water5
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water6
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+0
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
 Tile_07_Rock2_7
 # FolderPath
 Resource/XFile/Tile
@@ -43,7 +171,7 @@ Texture_01.png
 4
 # Scale
 3
-0.8
+0.7
 0.1
 # Rotate
 0
@@ -51,7 +179,7 @@ Texture_01.png
 0
 # Translate
 0
-0
+1
 14.5
 # Color
 0.5
@@ -107,7 +235,7 @@ Texture_01.png
 4
 # Scale
 2.5
-0.8
+0.7
 0.1
 # Rotate
 0
@@ -115,7 +243,7 @@ Texture_01.png
 0
 # Translate
 14.5
-0
+1
 2.5
 # Color
 0.5
@@ -171,7 +299,7 @@ Texture_01.png
 4
 # Scale
 1.5
-0.8
+0.7
 0.1
 # Rotate
 0
@@ -179,7 +307,7 @@ Texture_01.png
 0
 # Translate
 -7.5
-0
+1
 6.5
 # Color
 0.5
@@ -203,7 +331,7 @@ Texture_01.png
 4
 # Scale
 1
-0.8
+0.7
 0.1
 # Rotate
 0
@@ -211,7 +339,7 @@ Texture_01.png
 0
 # Translate
 5.5
-0
+1
 -1.5
 # Color
 0.5
@@ -235,7 +363,7 @@ Texture_01.png
 4
 # Scale
 1
-0.8
+0.7
 0.1
 # Rotate
 0
@@ -243,7 +371,7 @@ Texture_01.png
 0
 # Translate
 5.5
-0
+1
 -1.5
 # Color
 0.5
@@ -267,7 +395,7 @@ Texture_01.png
 4
 # Scale
 0.9
-0.8
+0.7
 0.1
 # Rotate
 0
@@ -275,7 +403,7 @@ Texture_01.png
 0
 # Translate
 -3.5
-0
+1
 -1.5
 # Color
 0.5
@@ -299,7 +427,7 @@ Texture_01.png
 4
 # Scale
 3
-0.8
+0.7
 0.1
 # Rotate
 0
@@ -307,7 +435,7 @@ Texture_01.png
 0
 # Translate
 0
-0
+1
 -9.5
 # Color
 0.5
@@ -363,7 +491,7 @@ Texture_01.png
 4
 # Scale
 1
-0.8
+0.7
 0.1
 # Rotate
 0
@@ -371,7 +499,7 @@ Texture_01.png
 0
 # Translate
 9.5
-0
+1
 6.5
 # Color
 0.5
@@ -395,7 +523,7 @@ Texture_01.png
 4
 # Scale
 1.1
-0.8
+0.7
 0.1
 # Rotate
 0
@@ -403,7 +531,7 @@ Texture_01.png
 0
 # Translate
 -9.5
-0
+1
 2.5
 # Color
 0.5
@@ -427,15 +555,15 @@ Texture_01.png
 4
 # Scale
 0.8
-0.8
-0.1
+0.7
+0.2
 # Rotate
 0
 0
 0
 # Translate
 -7.5
-0
+1
 -5.5
 # Color
 0.5
@@ -458,17 +586,17 @@ Texture_01.png
 # ObjectType
 4
 # Scale
-0.6
-0.8
+0.5
+0.7
 0.1
 # Rotate
 0
 90
 0
 # Translate
--11
-0
--3
+-11.5
+1
+-2.5
 # Color
 0.5
 0.5
@@ -490,7 +618,7 @@ InvisibleWall22
 # ObjectType
 22
 # Scale
-27
+30
 7
 1
 # Rotate
@@ -589,7 +717,7 @@ Cylinder1
 1
 1
 # Rotate
-90
+0
 0
 0
 # Translate
@@ -620,7 +748,7 @@ Cylinder2
 1
 1
 # Rotate
-90
+0
 0
 0
 # Translate
@@ -713,7 +841,7 @@ Cylinder3
 1
 1
 # Rotate
-90
+0
 0
 0
 # Translate
@@ -744,7 +872,7 @@ Cylinder4
 1
 1
 # Rotate
-90
+0
 0
 0
 # Translate
@@ -803,7 +931,7 @@ Vol_36_5_Base_Color.png
 12
 # Scale
 15
-0.1
+0
 2.5
 # Rotate
 0
@@ -820,230 +948,6 @@ Vol_36_5_Base_Color.png
 1
 # ColorTag
 Blue
-# Object_End
-
-# Object_Start
-# ObjectName
-Trace_Black31
-# FolderPath
-Resource/Sprite/Trace
-# FilePath
-
-# TxtPath
-WaterColor_Black.png
-# ObjectType
-38
-# Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
-0
-1.05
-2.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
-# Object_End
-
-# Object_Start
-# ObjectName
-Trace_Black32
-# FolderPath
-Resource/Sprite/Trace
-# FilePath
-
-# TxtPath
-WaterColor_Black.png
-# ObjectType
-38
-# Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
--1.5
-3.75
--7.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
-# Object_End
-
-# Object_Start
-# ObjectName
-Trace_Black33
-# FolderPath
-Resource/Sprite/Trace
-# FilePath
-
-# TxtPath
-WaterColor_Black.png
-# ObjectType
-38
-# Scale
-3
-0.5
-3
-# Rotate
-0
-0
-0
-# Translate
--8
-2.65
--1.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
-# Object_End
-
-# Object_Start
-# ObjectName
-Trace_Black34
-# FolderPath
-Resource/Sprite/Trace
-# FilePath
-
-# TxtPath
-WaterColor_Black.png
-# ObjectType
-38
-# Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
--13
-2.65
--2.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_07_Rock2_35
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_05.X
-# TxtPath
-Texture_01.png
-# ObjectType
-4
-# Scale
-0.1
-0.8
-1.2
-# Rotate
-0
-0
-0
-# Translate
--14.5
-0
--3.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
-# Object_End
-
-# Object_Start
-# ObjectName
-Trace_Black36
-# FolderPath
-Resource/Sprite/Trace
-# FilePath
-
-# TxtPath
-WaterColor_Black.png
-# ObjectType
-38
-# Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
--12
-1.15
-10.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
-# Object_End
-
-# Object_Start
-# ObjectName
-Trace_Black37
-# FolderPath
-Resource/Sprite/Trace
-# FilePath
-
-# TxtPath
-WaterColor_Black.png
-# ObjectType
-38
-# Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
--2
-1.15
-9.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
 # Object_End
 
 # Section =======================================
