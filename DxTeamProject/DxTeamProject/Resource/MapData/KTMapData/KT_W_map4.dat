@@ -1607,7 +1607,7 @@ Vol_36_5_Base_Color.png
 12
 # Scale
 15
-0.1
+0
 2.5
 # Rotate
 0
@@ -1624,6 +1624,41 @@ Vol_36_5_Base_Color.png
 1
 # ColorTag
 Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+EventTrigger_Save52
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+39
+# Scale
+5
+5
+1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+-8
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# TriggerIndex
+0
+# ZoneIndex
+0
 # Object_End
 
 # Section =======================================
