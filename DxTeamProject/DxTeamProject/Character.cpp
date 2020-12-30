@@ -4,6 +4,7 @@
 #include "IObject.h"
 #include "PObject.h"
 #include "SkinnedMesh.h"
+#include "EventTrigger.h"
 
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
@@ -399,10 +400,11 @@ void CCharacter::ColliderObject()
 
 				if (objType == eTrigger)
 				{
+					CEventTrigger* temp = static_cast<CEventTrigger*>(vecCheck[i]);
 					ST_EVENT msg;
 					msg.eventType = EventType::eConditionChange;
-					msg.conditionName = vecCheck[i]->GetObjectName();
-
+					msg.conditionName = temp->GetTriggerTypeString();
+					
 					g_pEventManager->CheckEvent(msg);
 
 					// m_saveZonePosition = vecCheck[i]->SendPosition();

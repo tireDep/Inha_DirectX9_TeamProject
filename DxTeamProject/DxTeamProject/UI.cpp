@@ -1011,32 +1011,7 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 	{
 		if (strstr(eventMsg.conditionName.c_str(), "Book"))
 			BookCol = true;
-		else if (strstr(eventMsg.conditionName.c_str(), "Trigger"))
-		{
-			if (strstr(eventMsg.conditionName.c_str(), "Zone"))
-			{
-				if(strstr(eventMsg.conditionName.c_str(), ""))
-				/// Winter
-				{
-					CollideWinterZone = true;
-					colorpuls = false;
-					puls = 0.0f;
-				}
-				else
-				/// Autumn
-				{
-					CollideAutumnZone = true;
-					colorpuls = false;
-					puls = 0.0f;
-				}
-			}
-			/// Save
-			else
-			{
-				
-			}
-			
-		}
+		/// Orb
 		else if (strstr(eventMsg.conditionName.c_str(), "Black"))
 		{
 			colorpuls = false;
@@ -1058,6 +1033,42 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 			HasYellowOrb = false;
 			YellowScript[0] = true;
 		}
+		/// Zone
+		else if (strstr(eventMsg.conditionName.c_str(), "Winter"))
+		{
+			CollideWinterZone = true;
+			colorpuls = false;
+			puls = 0.0f;
+		}
+		else if (strstr(eventMsg.conditionName.c_str(), "Fall"))
+		{
+			CollideAutumnZone = true;
+			colorpuls = false;
+			puls = 0.0f;
+		}
+		/// Save
+		else if (strstr(eventMsg.conditionName.c_str(), "Save"))
+		{
+			return;
+			//switch (g_pObjectManager)
+			//{
+			//	case 0:
+			//		break;
+			//	case 1:
+			//		break;
+			//	case 2:
+			//		break;
+			//	case 3:
+			//		break;
+			//	case 4:
+			//		break;
+			//	case 5:
+			//		break;
+			//	default:
+			//		break;
+			//}
+		}
+
 	}
 
 	if (eventMsg.eventType == EventType::eInputEvent && g_pGameManager->GetUImode())
