@@ -27,12 +27,18 @@ private:
 	RECT s_Redrc, s_Yellowrc, s_Greenrc, s_Bluerc, s_Blackrc, s_Whiterc;
 
 	///////////text
-	D3DXIMAGE_INFO m_textInfo , m_textInfo2, m_textInfo3;
+	D3DXIMAGE_INFO m_textInfo , m_textInfo2, m_textInfo3;	// Grab, Winter, Fall
+	D3DXIMAGE_INFO m_textInfo4, m_textInfo5;				// Push, Pull
+	D3DXIMAGE_INFO m_textInfo6, m_textInfo7;				// Ctrl, Reset
 
-	LPDIRECT3DTEXTURE9 m_textUI , m_textUI2 , m_textUI3;
+	LPDIRECT3DTEXTURE9 m_textUI , m_textUI2 , m_textUI3;	// Grab, Winter, Fall
+	LPDIRECT3DTEXTURE9 m_textUI4, m_textUI5;				// Push, Pull
+	LPDIRECT3DTEXTURE9 m_textUI6, m_textUI7;				// Ctrl, Reset
 
-	RECT s_textrc, s_textrc2 , s_textrc3;
-	
+	RECT s_textrc, s_textrc2 , s_textrc3;	// Grab, Winter, Fall
+	RECT s_textrc4, s_textrc5;				// Push, Pull
+	RECT s_textrc6, s_textrc7;				// Ctrl, Reset
+
 	//////////Script
 	D3DXIMAGE_INFO m_scriInfo, m_scriInfo2, m_scriInfo3,
 		m_scriInfo4, m_scriInfo5, m_scriInfo6,
@@ -73,6 +79,10 @@ private:
 	int puls;
 	bool colorpuls;
 	bool BookCol;
+
+	int BlackAlp, BlackAlp2, BlackAlp3;
+	bool Blacksw, Blacksw2, Blacksw3;
+	bool HasOrb;
 	///
 	
 public:
@@ -86,6 +96,7 @@ public:
 	void UI_Render();
 	void Render_Mapname();
 	void RenderGrab();
+	void RenderPushPull();
 
 	void Setup_Script();
 	void Rneder_Script();
@@ -94,6 +105,7 @@ public:
 	void Render_Attain();
 
 	void Update();
+	void Script_Update();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName() override;

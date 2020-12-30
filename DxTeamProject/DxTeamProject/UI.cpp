@@ -16,6 +16,13 @@ CUI::CUI()
 	puls = 0.f;
 	colorpuls = false;
 	BookCol = false;
+
+	BlackAlp = 0;
+	BlackAlp2 = 0;
+	BlackAlp3 = 0;
+	Blacksw = false;
+	Blacksw2 = false;
+	Blacksw3 = false;
 }
 
 CUI::~CUI()
@@ -177,8 +184,9 @@ void CUI::Setup_UI()
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_smallInfo6, NULL, &m_SmallUI6);
 
+	// Grab
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/message.png",
+		"UI/Grab.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -188,7 +196,7 @@ void CUI::Setup_UI()
 		, D3DX_DEFAULT, 0, &m_textInfo, NULL, &m_textUI);
 	//////////////////////////////////
 
-	//겨울
+	// winter
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
 		"Mapname/winter.png",
 		D3DX_DEFAULT_NONPOW2,
@@ -199,7 +207,7 @@ void CUI::Setup_UI()
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_textInfo2, NULL, &m_textUI2);
 
-	//가을
+	// fall
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
 		"Mapname/fall.png",
 		D3DX_DEFAULT_NONPOW2,
@@ -209,6 +217,50 @@ void CUI::Setup_UI()
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_textInfo3, NULL, &m_textUI3);
+
+	// Push
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/Push.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_textInfo4, NULL, &m_textUI4);
+
+	// Pull
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/Pull.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_textInfo5, NULL, &m_textUI5);
+
+	// Ctrl
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/Ctrl.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_textInfo6, NULL, &m_textUI6);
+
+	// Reset
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/Reset.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_textInfo7, NULL, &m_textUI7);
 }
 
 void CUI::Setup_Script()
@@ -332,29 +384,34 @@ void CUI::Rneder_Script()
 	m_pSprite->SetTransform(&matWorld);
 
 	//black
-	SetRect(&s_scrirc, -270, -590,
-		m_scriInfo.Width, m_scriInfo.Height);
+	if (g_pGameManager->GetIsHasOrb("Black"))
+	{
+		SetRect(&s_scrirc, -270, -590,
+			m_scriInfo.Width, m_scriInfo.Height);
 
-	m_pSprite->Draw(m_scriUI, &s_scrirc,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+		m_pSprite->Draw(m_scriUI, &s_scrirc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(BlackAlp, 255, 255, 255));
 
-	SetRect(&s_scrirc2, -380, -590,
-		m_scriInfo2.Width, m_scriInfo2.Height);
+		HasOrb = true;
+	}
 
-	m_pSprite->Draw(m_scriUI2, &s_scrirc2,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	//SetRect(&s_scrirc2, -380, -590,
+	//	m_scriInfo2.Width, m_scriInfo2.Height);
 
-	SetRect(&s_scrirc3, -190,-590,
-		m_scriInfo3.Width, m_scriInfo3.Height);
+	//m_pSprite->Draw(m_scriUI2, &s_scrirc2,
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	D3DCOLOR_ARGB(BlackAlp2, 255, 255, 255));
 
-	m_pSprite->Draw(m_scriUI3, &s_scrirc3,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	//SetRect(&s_scrirc3, -190,-590,
+	//	m_scriInfo3.Width, m_scriInfo3.Height);
+
+	//m_pSprite->Draw(m_scriUI3, &s_scrirc3,
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	&D3DXVECTOR3(0, 0, 0),
+	//	D3DCOLOR_ARGB(BlackAlp2, 255, 255, 255));
 
 	//white
 	//SetRect(&s_scrirc4, -425, -590,
@@ -380,6 +437,7 @@ void CUI::Rneder_Script()
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	D3DCOLOR_ARGB(255, 255, 255, 255));
+
 	////yellow
 	//SetRect(&s_scrirc7, -345, -590,
 	//	m_scriInfo7.Width, m_scriInfo7.Height);
@@ -797,6 +855,26 @@ void CUI::RenderGrab()
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
+	m_pSprite->End();
+}
+
+void CUI::RenderPushPull()
+{
+	SetRect(&imageRC, matT._41, matT._42,
+		matT._41 + m_stImageInfo4.Width, matT._42 + m_stImageInfo4.Height);
+
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+	D3DXMatrixTranslation(&matT, movep, movepy, 0);
+	matWorld = matT;
+
+	m_pSprite->SetTransform(&matWorld);
+
+	SetRect(&s_textrc4, -732, -360, m_textInfo4.Width, m_textInfo4.Height);
+	m_pSprite->Draw(m_textUI4, &s_textrc4,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	m_pSprite->End();
 }
@@ -843,6 +921,40 @@ void CUI::Update()
 		puls--;
 		if (puls == 0)
 			colorpuls = false;
+	}
+}
+
+void CUI::Script_Update()
+{
+	if (HasOrb)
+	{
+		BlackAlp++;
+		if (BlackAlp == 255)
+			Blacksw = false;
+	}
+	else if (!Blacksw)
+	{
+		BlackAlp--;
+		if (BlackAlp == 0)
+		{
+			Blacksw2 = true;
+			HasOrb = false;
+		}
+	}
+
+	if (Blacksw2)
+	{
+		BlackAlp2++;
+		if (BlackAlp2 == 255)
+			Blacksw2 = false;
+	}
+	else if (!Blacksw2)
+	{
+		BlackAlp2--;
+		if (BlackAlp2 == 0)
+		{
+			Blacksw3 = true;
+		}
 	}
 }
 

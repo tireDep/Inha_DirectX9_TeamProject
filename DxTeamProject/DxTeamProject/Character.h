@@ -28,7 +28,8 @@ protected:
 	float					m_fRotation;
 	float					m_preRotation;
 	float					m_fGrabRotation;
-	Synthesize(bool, m_isGrab, Grab);
+	Synthesize(bool, m_isGrab, Grab);			// 잡기 상태
+	Synthesize(bool, m_isGrabState, GrabState); // UI를 위한 잡기 누른 상태
 	int						m_nGrabAbleObeject;
 	D3DXVECTOR3				m_vGrabDirection;
 	D3DXVECTOR3				m_vGrabCamDir;	// >> 잡기 상태일 때 dir

@@ -236,9 +236,9 @@ void CMainGame::Update()
 			//g_pGameManager->SetGetOrb("Blue");
 			//g_pGameManager->SetGetOrb("Green");
 			g_pGameManager->SetGetOrb("Red");
-			g_pGameManager->SetGetOrb("White");
+			// g_pGameManager->SetGetOrb("White");
 			g_pGameManager->SetGetOrb("Yellow");
-			g_pGameManager->SetGetOrb("Black");
+			// g_pGameManager->SetGetOrb("Black");
 			// g_pGameManager->CompleteOrb();
 		}
 	//	if (GetKeyState('2') & 0x8000)
@@ -281,6 +281,8 @@ void CMainGame::Update()
 
 		if (m_pUI)
 			m_pUI->Update();
+
+		m_pUI->Script_Update();
 
 		if (m_pCharacter)
 		{
@@ -325,10 +327,10 @@ void CMainGame::Update()
 			}
 
 			// grab
-			if (m_pCharacter->GetGrab())
-				m_pText->SetisGrabstate(true);
-			else
-				m_pText->SetisGrabstate(false);
+			//if (m_pCharacter->GetGrab())
+			//	m_pText->SetisGrabstate(true);
+			//else
+			//	m_pText->SetisGrabstate(false);
 		}
 
 		//if (g_pGameManager->GetGridMapMode())
@@ -408,12 +410,21 @@ void CMainGame::Render()
 		}
 
 		m_pUI->Render_Mapname();
+		m_pUI->Rneder_Script();
+		
+		if (m_pCharacter->GetGrab())
+		{
+			if (m_pCharacter->GetGrabState())
+				m_pUI->RenderPushPull();
+			else
+				m_pUI->RenderGrab();
+		}
 		
 
-		if (m_pText->GetisGrabstate())
-		{
-			m_pUI->RenderGrab();
-		}
+		//if (m_pText->GetisGrabstate())
+		//{
+		//	m_pUI->RenderGrab();
+		//}
 
 		if (m_pDragon && m_pCamera->GetCameraAngle() >= 0.0f)
 			m_pDragon->Render();
