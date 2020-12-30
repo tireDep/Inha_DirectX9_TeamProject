@@ -2,6 +2,8 @@
 #include "GameManager.h"
 #include "SoundManager.h"
 
+const int xBtnPos = -20;
+
 D3DXVECTOR3 CGameManager::SaveData()
 {
 	fstream fin;
@@ -82,6 +84,8 @@ void CGameManager::SetShowCursor(bool set)
 	ShowCursor(false) : - 1
 
 	카운트가 음수여야 화면에서 커서가 사라짐
+
+	카운트 조심!
 	*/
 	if (set == false)
 	{
@@ -90,8 +94,8 @@ void CGameManager::SetShowCursor(bool set)
 	}
 	else
 	{
-		SetClipCursor(-15);
-		ShowCursor(set);
+		SetClipCursor(xBtnPos);
+		while (ShowCursor(true) <= 0);
 	}
 }
 
@@ -113,8 +117,6 @@ void CGameManager::SetLoadData()
 	temp.first = "Green";	temp.second = false;	m_mapOrb.insert(temp);
 	temp.first = "Red";		temp.second = false;	m_mapOrb.insert(temp);
 	temp.first = "Blue";	temp.second = false;	m_mapOrb.insert(temp);
-
-
 }
 
 bool CGameManager::GetDevMode()
@@ -222,11 +224,36 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 
 	// if(eventMsg.eventType == EventType::eConditionChange)
 	// 	g_pObjectManager->AllUpdate();
+	// >> 스위치 판정이 이상해짐
 
 	if (eventMsg.eventType == EventType::eInputEvent)
 	{
 		switch (eventMsg.message)
 		{
+		case WM_MOUSEMOVE:
+			if (m_isUIMode)
+			{
+				RECT rc;
+				GetClientRect(g_hWnd, &rc);
+
+				RECT rc2;
+				GetWindowRect(g_hWnd, &rc2);
+
+				POINT pos;
+				GetCursorPos(&pos);
+				
+				if (pos.y <= rc2.bottom - rc.bottom)
+					SetShowCursor(true);
+				else
+					SetShowCursor(false);
+			}
+			else if (GetNowScene() != SceneType::eGameScene)
+				SetShowCursor(true);
+			else
+				SetShowCursor(false);
+
+			break;
+
 		case WM_RBUTTONDOWN:
 			if (m_SceneName == SceneType::eEndingScene)
 			{
@@ -238,6 +265,9 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 
 		case WM_KEYDOWN:
 		{
+			if (GetNowScene() != SceneType::eGameScene)
+				return;
+
 			if (VK_CONTROL == eventMsg.wParam && !m_isUIModeIn)
 			{
 				m_isUIMode = !m_isUIMode;
@@ -249,10 +279,6 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 					GetClientRect(g_hWnd, &rc);
 					SetCursorPos(rc.right * 0.5f + 50.0f, rc.bottom * 0.5f - 20.0f);
 
-					SetShowCursor(true);
-				}
-				else
-				{
 					SetShowCursor(false);
 				}
 			}
@@ -273,6 +299,9 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 
 		case WM_KEYUP:
 		{
+			if (GetNowScene() != SceneType::eGameScene)
+				return;
+
 			if (VK_CONTROL == eventMsg.wParam)
 				m_isUIModeIn = false;
 
@@ -302,7 +331,7 @@ void CGameManager::SetClipCursor(int ySize)
 	p1.x = rc.left;
 	p1.y = rc.top + ySize; // x_Btn
 	p2.x = rc.right - 10.0f;
-	p2.y = rc.bottom;
+	p2.y = rc.bottom - 15.0f;
 
 	ClientToScreen(g_hWnd, &p1);
 	ClientToScreen(g_hWnd, &p2);

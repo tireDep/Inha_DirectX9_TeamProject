@@ -75,8 +75,8 @@ void CTile::SetShader_Tile()
 
 	m_pShader_Tile->SetTexture("DiffuseTexture2_Tex", m_pShaderTxt);
 
-	// float grayColor = 45 / 255;
-	m_pShader_Tile->SetVector("gGrayColor", &D3DXVECTOR4(0.17f, 0.17f, 0.17f, 1.0f));
+	// float grayColor = 66 / 255;
+	m_pShader_Tile->SetVector("gGrayColor", &D3DXVECTOR4(0.25f, 0.25f, 0.25f, 1.0f));
 
 	m_fShaderTime += fAddTime;
 
@@ -247,7 +247,7 @@ void CTile::Setup(const ST_MapData & mapData)
 			0, 0);
 	}
 
-	g_pFileLoadManager->FileLoad_Texture("Resource/Texture", "BasicGray_45.png", m_grayTxt);
+	g_pFileLoadManager->FileLoad_Texture("Resource/Texture", "BasicGray_45_2.png", m_grayTxt);
 
 	// D3DXMATRIXA16 matS, matR, matT;
 	D3DXMatrixScaling(&m_matS, m_vScale.x, m_vScale.y, m_vScale.z);
