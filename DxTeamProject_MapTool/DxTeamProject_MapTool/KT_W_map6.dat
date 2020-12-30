@@ -170,7 +170,7 @@ Texture_01.png
 # ObjectType
 4
 # Scale
-1.5
+1.4
 0.8
 0.1
 # Rotate
@@ -178,7 +178,7 @@ Texture_01.png
 0
 0
 # Translate
--7.5
+-8
 0
 6.5
 # Color
@@ -530,7 +530,7 @@ Orb_Black.png
 0
 # Translate
 -8
-2
+2.65
 -1.5
 # Color
 0.5
@@ -589,7 +589,7 @@ Cylinder1
 1
 1
 # Rotate
-90
+0
 0
 0
 # Translate
@@ -620,7 +620,7 @@ Cylinder2
 1
 1
 # Rotate
-90
+0
 0
 0
 # Translate
@@ -713,7 +713,7 @@ Cylinder3
 1
 1
 # Rotate
-90
+0
 0
 0
 # Translate
@@ -744,7 +744,7 @@ Cylinder4
 1
 1
 # Rotate
-90
+0
 0
 0
 # Translate
@@ -875,7 +875,7 @@ WaterColor_Black.png
 0
 # Translate
 -1.5
-3.75
+1.15
 -7.5
 # Color
 0.5
@@ -907,7 +907,7 @@ WaterColor_Black.png
 0
 # Translate
 -8
-2.65
+2.05
 -1.5
 # Color
 0.5
@@ -1034,7 +1034,7 @@ WaterColor_Black.png
 0
 0
 # Translate
--2
+-4
 1.15
 9.5
 # Color
@@ -1044,6 +1044,105 @@ WaterColor_Black.png
 1
 # ColorTag
 Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black34(0)
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+1.45
+7
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Trace_Black35
+# FolderPath
+Resource/Sprite/Trace
+# FilePath
+
+# TxtPath
+WaterColor_Black.png
+# ObjectType
+38
+# Scale
+1
+1
+1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+1.6
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+EventTrigger_Save36
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+39
+# Scale
+1
+5
+7
+# Rotate
+0
+0
+0
+# Translate
+-14
+1
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# TriggerIndex
+0
+# ZoneIndex
+0
 # Object_End
 
 # Section =======================================

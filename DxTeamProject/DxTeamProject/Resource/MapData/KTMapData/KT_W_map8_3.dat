@@ -661,7 +661,7 @@ EventTrigger_Zone29
 0
 # Translate
 13.5
-0.5
+2
 10
 # Color
 0.5
@@ -949,70 +949,6 @@ White
 0
 # ConditionOrbIndex
 0
-# Object_End
-
-# Object_Start
-# ObjectName
-Trace_White30
-# FolderPath
-Resource/Sprite/Trace
-# FilePath
-
-# TxtPath
-WaterColor_White.png
-# ObjectType
-38
-# Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
-0
-1.15
-10
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-White
-# Object_End
-
-# Object_Start
-# ObjectName
-Trace_White31
-# FolderPath
-Resource/Sprite/Trace
-# FilePath
-
-# TxtPath
-WaterColor_White.png
-# ObjectType
-38
-# Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
--5
-1.15
-10.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-White
 # Object_End
 
 # Section =======================================
