@@ -65,6 +65,7 @@ void CMainGame::Setup()
 
 	m_pScene = new CScene;
 	m_pScene->Setup();
+	m_pScene->Cur_Setup();
 
 	/// Presentation
 #ifdef _DEBUG
@@ -368,11 +369,13 @@ void CMainGame::Render()
 	{
 		if (m_pScene)
 			m_pScene->Render_Main();
+			m_pScene->Render_Cur();
 	}
 	else if (g_pGameManager->GetNowScene() == SceneType::eEndingScene)
 	{
 		if (m_pScene)
 			m_pScene->Render_Ending();
+			m_pScene->Render_Cur();
 	}
 	else if (g_pGameManager->GetNowScene() == SceneType::eLoadStart)
 	{		
