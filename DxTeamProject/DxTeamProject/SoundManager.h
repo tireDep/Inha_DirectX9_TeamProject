@@ -30,6 +30,7 @@ private:
 
 	bool sound;
 	bool sfxPlaying;
+
 //	CSoundManager();
 public:
 

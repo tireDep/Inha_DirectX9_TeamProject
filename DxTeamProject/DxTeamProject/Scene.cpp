@@ -13,8 +13,12 @@ CScene::CScene()
 	PickButton = false;
 	PickButton2 = false;
 	PickButton3 = false;
+	TextOn = false;
+	colorpuls = false;
+	Alpha2 = 0.f;
 	Alpha = 0;
 	Plus = 0.5f;
+	endY = 0.f;
 }
 
 
@@ -113,7 +117,7 @@ void CScene::Setup()
 
 	//end
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"Scene/ending.png",
+		"Scene/endingcredit.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -162,6 +166,16 @@ void CScene::Setup()
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_stLoading, NULL, &m_pLoading);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Scene/creditMent.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_EndInfo, NULL, &m_EndTexture);
 }
 
 void CScene::Render_Main()
@@ -297,12 +311,23 @@ void CScene::Render_Ending()
 	m_pSprite->SetTransform(&matWorld);
 
 	//End
-	SetRect(&Endrc, 0, 0, m_stImageInfo3.Width, m_stImageInfo3.Height);
+	SetRect(&Endrc, 0, endY, m_stImageInfo3.Width, m_stImageInfo3.Height);
 
 	m_pSprite->Draw(m_pTextureScene3, &Endrc,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(Alpha, 255, 255, 255));
+
+	//text
+	if (TextOn)
+	{
+		SetRect(&Textrc, -310, -550, m_EndInfo.Width, m_EndInfo.Height);
+
+		m_pSprite->Draw(m_EndTexture, &Textrc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB((int)Alpha2, 255, 255, 255));
+	}
 
 	m_pSprite->End();
 }
@@ -312,6 +337,34 @@ void CScene::Update()
 	if (g_pGameManager->GetNowScene() == SceneType::eEndingScene && Alpha !=255)
 	{
 		Alpha += round(Plus);
+	}
+
+	if (g_pGameManager->GetNowScene() == SceneType::eEndingScene && endY!=2160)
+	{
+		endY += 0.25;
+	}
+
+	if (endY == 2160)
+	{
+		TextOn = true;
+	}
+	if (TextOn)
+	{
+		if (colorpuls == false)
+		{
+			Alpha2 += 0.25f;
+			if (Alpha2 >= 255)
+				colorpuls = true;
+		}
+		else if (colorpuls == true)
+		{
+			Alpha2 -= 0.25f;
+			if (Alpha2 <= 0)
+			{
+				Alpha2 = 0.0f;
+				colorpuls = false;
+			}
+		}
 	}
 }
 

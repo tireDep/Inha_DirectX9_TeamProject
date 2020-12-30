@@ -24,6 +24,9 @@ private:
 
 	LPDIRECT3DTEXTURE9 m_pCurTexture;
 
+	D3DXIMAGE_INFO	m_EndInfo;
+
+	LPDIRECT3DTEXTURE9 m_EndTexture;
 
 
 	D3DXMATRIXA16 matT, matWorld;
@@ -31,14 +34,17 @@ private:
 	RECT Backrc, Startrc , Endrc, BigStartrc , Mainrc, Exitrc , loadrc;
 	RECT OnNewrc, OnNewrc2, OnNewrc3;
 	RECT PickNewrc, PickNewrc2, PickNewrc3;
-	RECT Currc;
+	RECT Currc , Textrc;
 	RECT imageRC;
 	POINT px;
 	POINT PX2;
 
 	bool OnButton, OnButton2, OnButton3;
 	bool PickButton, PickButton2, PickButton3;
+	bool TextOn , colorpuls;
 	int Alpha;
+	float Alpha2;
+	float endY;
 	float Plus;
 public:
 	CScene();
