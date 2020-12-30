@@ -31,6 +31,8 @@ CUI::CUI()
 	BlackScript[0] = BlackScript[1] = BlackScript[2] = false;
 	WhiteScript[0] = WhiteScript[1] = WhiteScript[2] = false;
 	YellowScript[0] = YellowScript[1] = YellowScript[2] = false;
+	AttainWinter[0] = AttainWinter[1] = false;
+	AttatinAutumn[0] = AttatinAutumn[1] = false;
 }
 
 CUI::~CUI()
@@ -733,13 +735,16 @@ void CUI::Render_Attain()
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	////winter
-	SetRect(&s_attrc2, -10, -160,
-		m_attInfo2.Width, m_attInfo2.Height);
-	m_pSprite->Draw(m_attUI2, &s_attrc2,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
-	
+	if (AttainWinter[0])
+	{
+		SetRect(&s_attrc2, -10, -160,
+			m_attInfo2.Width, m_attInfo2.Height);
+		m_pSprite->Draw(m_attUI2, &s_attrc2,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+
 	if (g_pGameManager->GetIsHasOrb("Black"))
 	{
 		SetRect(&s_attrc3, -10, -160,
@@ -760,21 +765,27 @@ void CUI::Render_Attain()
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 
-	SetRect(&s_attrc5, -10, -160,
-		m_attInfo5.Width, m_attInfo5.Height);
-	m_pSprite->Draw(m_attUI5, &s_attrc5,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	if (AttainWinter[1])
+	{
+		SetRect(&s_attrc5, -10, -160,
+			m_attInfo5.Width, m_attInfo5.Height);
+		m_pSprite->Draw(m_attUI5, &s_attrc5,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
 /////////////fall
 
-	SetRect(&s_attrc7, -710, -160,
-		m_attInfo7.Width, m_attInfo7.Height);
-	m_pSprite->Draw(m_attUI7, &s_attrc7,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	if (AttatinAutumn[0])
+	{
+		SetRect(&s_attrc7, -710, -160,
+			m_attInfo7.Width, m_attInfo7.Height);
+		m_pSprite->Draw(m_attUI7, &s_attrc7,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
 	if (g_pGameManager->GetIsHasOrb("Yellow"))
 	{
@@ -796,12 +807,15 @@ void CUI::Render_Attain()
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 
-	SetRect(&s_attrc10, -710, -160,
-		m_attInfo10.Width, m_attInfo10.Height);
-	m_pSprite->Draw(m_attUI10, &s_attrc10,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	if (AttatinAutumn[1])
+	{
+		SetRect(&s_attrc10, -710, -160,
+			m_attInfo10.Width, m_attInfo10.Height);
+		m_pSprite->Draw(m_attUI10, &s_attrc10,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
 	m_pSprite->End();
 }
@@ -1341,12 +1355,14 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 		/// Zone
 		else if (strstr(eventMsg.conditionName.c_str(), "Winter"))
 		{
+			AttainWinter[0] = true;
 			CollideWinterZone = true;
 			colorpuls = false;
 			puls = 0.0f;
 		}
 		else if (strstr(eventMsg.conditionName.c_str(), "Fall"))
 		{
+			AttatinAutumn[0] = true;
 			CollideAutumnZone = true;
 			colorpuls = false;
 			puls = 0.0f;
@@ -1371,6 +1387,7 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 				case 23:	// W3
 					break;
 				case 26:	// W4
+					AttainWinter[1] = true;
 					break;
 				case 28:	// W6
 					break;

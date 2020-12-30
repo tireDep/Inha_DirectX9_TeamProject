@@ -108,6 +108,8 @@ private:
 	bool WhiteScript[3];
 	bool HasYellowOrb;
 	bool YellowScript[3];
+	bool AttainWinter[2];
+	bool AttatinAutumn[2];
 public:
 
 	CUI();
