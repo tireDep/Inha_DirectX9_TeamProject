@@ -138,10 +138,8 @@ void CMainGame::Update()
 
 // >> MapData
 #ifdef _DEBUG
-		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map1.dat");
-
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map2.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map1.dat");
 #else
 
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
@@ -176,8 +174,8 @@ void CMainGame::Update()
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map7.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map8.dat");
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_W_map9.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map2.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
