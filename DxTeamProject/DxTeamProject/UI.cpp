@@ -13,7 +13,7 @@ CUI::CUI()
 	movepy = 0;
 	px3 = { 0,0 };
 	m_strName = "UI";
-	puls = 0.f;
+	puls = 0;
 	colorpuls = false;
 	BookCol = false;
 
@@ -371,7 +371,7 @@ void CUI::Setup_Script()
 
 }
 
-void CUI::Rneder_Script()
+void CUI::Render_Script()
 {
 	SetRect(&imageRC, matT._41, matT._42,
 		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
@@ -896,7 +896,7 @@ void CUI::Render_Mapname()
 	m_pSprite->Draw(m_textUI2, &s_textrc2,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(puls, 255, 255, 255));
+		D3DCOLOR_ARGB((int)puls, 255, 255, 255));
 
 	//°¡À»
 	//SetRect(&s_textrc3, -25, -295, m_textInfo3.Width, m_textInfo3.Height);
@@ -912,15 +912,19 @@ void CUI::Update()
 {
 	if (colorpuls == false)
 	{
-		puls++;
-		if (puls == 255)
+		puls += 0.1f;
+		if (puls >= 255)
 			colorpuls = true;
 	}
 	else if (colorpuls == true)
 	{
-		puls--;
-		if (puls == 0)
-			colorpuls = false;
+		puls -= 0.1f;
+		if (puls <= 0)
+		{
+			puls = 0.0f;
+			return;
+		}
+			//colorpuls = false;
 	}
 }
 

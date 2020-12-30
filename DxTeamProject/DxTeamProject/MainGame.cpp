@@ -410,7 +410,7 @@ void CMainGame::Render()
 		}
 
 		m_pUI->Render_Mapname();
-		m_pUI->Rneder_Script();
+		m_pUI->Render_Script();
 		
 		if (m_pCharacter->GetGrab())
 		{

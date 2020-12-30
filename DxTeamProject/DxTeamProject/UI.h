@@ -76,7 +76,7 @@ private:
 	Color OnButton;
 	Pick PickColor;
 
-	int puls;
+	float puls;
 	bool colorpuls;
 	bool BookCol;
 
@@ -99,7 +99,7 @@ public:
 	void RenderPushPull();
 
 	void Setup_Script();
-	void Rneder_Script();
+	void Render_Script();
 
 	void Setup_Attain();
 	void Render_Attain();
