@@ -381,6 +381,16 @@ void CUI::Setup_Script()
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_scriInfo9, NULL, &m_scriUI9);
 
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Script/Save_1.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_scriInfo10, NULL, &m_scriUI10);
+
 }
 
 void CUI::Render_Script()
@@ -1404,7 +1414,6 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 						g_pSoundManager->PlayBGM("w_last");
 						SoundWinter[1] = false;
 					}
-					//g_pSoundManager->PlayBGM("w_last");
 					break;
 				case 28:	// W6
 					break;

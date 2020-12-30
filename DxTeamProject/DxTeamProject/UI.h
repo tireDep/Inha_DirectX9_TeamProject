@@ -54,15 +54,18 @@ private:
 	//////////Script
 	D3DXIMAGE_INFO m_scriInfo, m_scriInfo2, m_scriInfo3,
 		m_scriInfo4, m_scriInfo5, m_scriInfo6,
-		m_scriInfo7, m_scriInfo8, m_scriInfo9;
-
-	LPDIRECT3DTEXTURE9 m_scriUI, m_scriUI2, m_scriUI3, 
+		m_scriInfo7, m_scriInfo8, m_scriInfo9,
+		m_scriInfo10;	 // Save Script;
+	
+	LPDIRECT3DTEXTURE9 m_scriUI, m_scriUI2, m_scriUI3,
 		m_scriUI4, m_scriUI5, m_scriUI6,
-		m_scriUI7, m_scriUI8, m_scriUI9;
+		m_scriUI7, m_scriUI8, m_scriUI9,
+		m_scriUI10;		// Save Script;
 
 	RECT s_scrirc, s_scrirc2, s_scrirc3,	// Black Script
 		s_scrirc4, s_scrirc5, s_scrirc6,	// White Script
-		s_scrirc7, s_scrirc8, s_scrirc9;	// Yellow Script
+		s_scrirc7, s_scrirc8, s_scrirc9,	// Yellow Script
+		s_scrirc10;		// Save Script;
 
 	/////////Attain
 	D3DXIMAGE_INFO m_attInfo, m_attInfo2, m_attInfo3,
