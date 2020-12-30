@@ -20,11 +20,18 @@ private:
 	LPDIRECT3DTEXTURE9 m_pOnTexture, m_pOnTexture2, m_pOnTexture3, m_pOnTexture4
 		, m_pOnTexture5, m_pOnTexture6;
 
+	D3DXIMAGE_INFO	m_CurImageInfo;
+
+	LPDIRECT3DTEXTURE9 m_pCurTexture;
+
+
+
 	D3DXMATRIXA16 matT, matWorld;
 	int movep, movepy;
 	RECT Backrc, Startrc , Endrc, BigStartrc , Mainrc, Exitrc , loadrc;
 	RECT OnNewrc, OnNewrc2, OnNewrc3;
 	RECT PickNewrc, PickNewrc2, PickNewrc3;
+	RECT Currc;
 	RECT imageRC;
 	POINT px;
 	POINT PX2;
@@ -42,6 +49,9 @@ public:
 	void Render_Ending();
 	void Update();
 	void Render_Loading();
+	
+	void Cur_Setup();
+	void Render_Cur();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName() override;
