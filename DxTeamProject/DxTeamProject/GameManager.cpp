@@ -249,7 +249,7 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 					GetClientRect(g_hWnd, &rc);
 					SetCursorPos(rc.right * 0.5f + 50.0f, rc.bottom * 0.5f - 20.0f);
 
-					SetShowCursor(true);
+					//SetShowCursor(true);
 				}
 				else
 				{

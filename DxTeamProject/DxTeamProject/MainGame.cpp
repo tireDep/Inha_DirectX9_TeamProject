@@ -81,6 +81,7 @@ void CMainGame::Setup()
 	m_pUI->Setup_UI();
 	m_pUI->Setup_Script();
 	m_pUI->Setup_Attain();
+	m_pUI->Setup_Cursor();
 
 	m_pCamera = new CCamera;
 	m_pCamera->Setup(&m_pCharacter->GetPosition());
@@ -431,6 +432,7 @@ void CMainGame::Render()
 		{
 			if (m_pUI)
 				m_pUI->UI_Render();
+			m_pUI->Render_Cursor();
 		}
 
 		if (g_pGameManager->GetAttMode())

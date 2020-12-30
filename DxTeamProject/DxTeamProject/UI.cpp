@@ -916,6 +916,44 @@ void CUI::RenderPushPull()
 	m_pSprite->End();
 }
 
+void CUI::Setup_Cursor()
+{
+	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
+
+	GetClientRect(g_hWnd, &UIrc);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/brush.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_brushInfo, NULL, &m_brushCur);
+}
+
+void CUI::Render_Cursor()
+{
+	SetRect(&imageRC, matT._41, matT._42,
+		matT._41 + m_stImageInfo4.Width, matT._42 + m_stImageInfo4.Height);
+
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+	D3DXMatrixTranslation(&matT, movep, movepy, 0);
+	matWorld = matT;
+
+	m_pSprite->SetTransform(&matWorld);
+
+	SetRect(&s_brushrc, -px2.x+5, -px2.y+5, m_brushInfo.Width, m_brushInfo.Height);
+	m_pSprite->Draw(m_brushCur, &s_brushrc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	m_pSprite->End();
+}
+
 void CUI::Render_Mapname()
 {
 	SetRect(&imageRC, matT._41, matT._42,

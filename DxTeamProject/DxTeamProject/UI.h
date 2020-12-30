@@ -30,14 +30,17 @@ private:
 	D3DXIMAGE_INFO m_textInfo , m_textInfo2, m_textInfo3;	// Grab, Winter, Fall
 	D3DXIMAGE_INFO m_textInfo4, m_textInfo5;				// Push, Pull
 	D3DXIMAGE_INFO m_textInfo6, m_textInfo7;				// Ctrl, Reset
+	D3DXIMAGE_INFO m_brushInfo;								//Brush
 
 	LPDIRECT3DTEXTURE9 m_textUI , m_textUI2 , m_textUI3;	// Grab, Winter, Fall
 	LPDIRECT3DTEXTURE9 m_textUI4, m_textUI5;				// Push, Pull
 	LPDIRECT3DTEXTURE9 m_textUI6, m_textUI7;				// Ctrl, Reset
+	LPDIRECT3DTEXTURE9 m_brushCur;								//Brush
 
 	RECT s_textrc, s_textrc2 , s_textrc3;	// Grab, Winter, Fall
 	RECT s_textrc4, s_textrc5;				// Push, Pull
 	RECT s_textrc6, s_textrc7;				// Ctrl, Reset
+	RECT s_brushrc;							//Brush
 
 	//////////Script
 	D3DXIMAGE_INFO m_scriInfo, m_scriInfo2, m_scriInfo3,
@@ -104,6 +107,9 @@ public:
 	void Render_Mapname();
 	void RenderGrab();
 	void RenderPushPull();
+
+	void Setup_Cursor();
+	void Render_Cursor();
 
 	void Setup_Script();
 	void Render_Script();
