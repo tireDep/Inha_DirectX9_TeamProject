@@ -1049,24 +1049,29 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 		/// Save
 		else if (strstr(eventMsg.conditionName.c_str(), "Save"))
 		{
-			return;
-			//switch (g_pObjectManager)
-			//{
-			//	case 0:
-			//		break;
-			//	case 1:
-			//		break;
-			//	case 2:
-			//		break;
-			//	case 3:
-			//		break;
-			//	case 4:
-			//		break;
-			//	case 5:
-			//		break;
-			//	default:
-			//		break;
-			//}
+			int CharacterMapPos = g_pObjectManager->GetNowMapPos();
+			switch (CharacterMapPos)
+			{
+				/// Ocean
+				case 0:  case 1:  case 2:  case 3:	case 4: 
+				case 5:								case 9:
+				case 10:							case 14:
+				case 15:							case 19:
+				case 20:							case 24:
+				case 25:							case 29:
+				case 30:							case 34:
+				case 35: case 36: case 37: case 38: case 39:
+					break;
+
+				case 23:	// W3
+					break;
+				case 26:	// W4
+					break;
+				case 28:	// W6
+					break;
+				default:
+					break;
+			}
 		}
 
 	}
