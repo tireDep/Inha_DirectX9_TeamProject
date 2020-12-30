@@ -22,6 +22,8 @@ CUI::CUI()
 	Blacksw2 = false;
 	Blacksw3 = false;
 
+	scriptPlus = 0.0f;
+	is_scriptPlus = false;
 	CollideWinterZone = false;
 	CollideAutumnZone = false;
 	HasBlackOrb = false;
@@ -391,21 +393,23 @@ void CUI::Render_Script()
 
 	/// Black Orb
 	if (HasBlackOrb)
+	//if(g_pGameManager->GetIsHasOrb("Black"))
 	{
 		if (BlackScript[0])
 		{
+			cout << "In" << endl;
 			SetRect(&s_scrirc, -270, -590, m_scriInfo.Width, m_scriInfo.Height);
 			m_pSprite->Draw(m_scriUI, &s_scrirc,
 				&D3DXVECTOR3(0, 0, 0),
 				&D3DXVECTOR3(0, 0, 0),
-				D3DCOLOR_ARGB(int(puls), 255, 255, 255));
-			if (puls <= 0.0f)
+				D3DCOLOR_ARGB(int(scriptPlus), 255, 255, 255));
+			if (scriptPlus <= 0.0f)
 			{
-				puls = 0.0f;
+				scriptPlus = 0.0f;
 				BlackScript[1] = true;
 				BlackScript[0] = false;
-				puls += 0.25f;
-				colorpuls = false;
+				scriptPlus += 0.25f;
+				is_scriptPlus = false;
 			}
 		}
 		if (BlackScript[1])
@@ -414,14 +418,14 @@ void CUI::Render_Script()
 			m_pSprite->Draw(m_scriUI2, &s_scrirc2,
 				&D3DXVECTOR3(0, 0, 0),
 				&D3DXVECTOR3(0, 0, 0),
-				D3DCOLOR_ARGB(int(puls), 255, 255, 255));
-			if (puls <= 0.0f)
+				D3DCOLOR_ARGB(int(scriptPlus), 255, 255, 255));
+			if (scriptPlus <= 0.0f)
 			{
-				puls = 0.0f;
+				scriptPlus = 0.0f;
 				BlackScript[2] = true;
 				BlackScript[1] = false;
-				puls += 0.25f;
-				colorpuls = false;
+				scriptPlus += 0.25f;
+				is_scriptPlus = false;
 			}
 		}
 		if (BlackScript[2])
@@ -430,9 +434,12 @@ void CUI::Render_Script()
 			m_pSprite->Draw(m_scriUI3, &s_scrirc3,
 				&D3DXVECTOR3(0, 0, 0),
 				&D3DXVECTOR3(0, 0, 0),
-				D3DCOLOR_ARGB(int(puls), 255, 255, 255));
-			if (puls <= 0.0f)
+				D3DCOLOR_ARGB(int(scriptPlus), 255, 255, 255));
+			if (scriptPlus <= 0.0f)
+			{
 				BlackScript[2] = false;
+				//HasBlackOrb = false;
+			}
 		}
 	}
 
@@ -1141,42 +1148,57 @@ void CUI::Update()
 			puls = 0.0f;
 			return;
 		}
-			//colorpuls = false;
+		//colorpuls = false;
 	}
 }
 
 void CUI::Script_Update()
 {
-	if (HasOrb)
+	if (is_scriptPlus == false)
 	{
-		BlackAlp++;
-		if (BlackAlp == 255)
-			Blacksw = false;
+		scriptPlus += 0.25f;
+		if (scriptPlus >= 255)
+			is_scriptPlus = true;
 	}
-	else if (!Blacksw)
+	else if (is_scriptPlus == true)
 	{
-		BlackAlp--;
-		if (BlackAlp == 0)
+		scriptPlus -= 0.25f;
+		if (scriptPlus <= 0)
 		{
-			Blacksw2 = true;
-			HasOrb = false;
+			scriptPlus = 0.0f;
+			return;
 		}
 	}
 
-	if (Blacksw2)
-	{
-		BlackAlp2++;
-		if (BlackAlp2 == 255)
-			Blacksw2 = false;
-	}
-	else if (!Blacksw2)
-	{
-		BlackAlp2--;
-		if (BlackAlp2 == 0)
-		{
-			Blacksw3 = true;
-		}
-	}
+	//if (HasOrb)
+	//{
+	//	BlackAlp++;
+	//	if (BlackAlp == 255)
+	//		Blacksw = false;
+	//}
+	//else if (!Blacksw)
+	//{
+	//	BlackAlp--;
+	//	if (BlackAlp == 0)
+	//	{
+	//		Blacksw2 = true;
+	//		HasOrb = false;
+	//	}
+	//}
+	//if (Blacksw2)
+	//{
+	//	BlackAlp2++;
+	//	if (BlackAlp2 == 255)
+	//		Blacksw2 = false;
+	//}
+	//else if (!Blacksw2)
+	//{
+	//	BlackAlp2--;
+	//	if (BlackAlp2 == 0)
+	//	{
+	//		Blacksw3 = true;
+	//	}
+	//}
 }
 
 void CUI::ReceiveEvent(ST_EVENT eventMsg)
@@ -1188,23 +1210,23 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 		/// Orb
 		else if (strstr(eventMsg.conditionName.c_str(), "Black"))
 		{
-			colorpuls = false;
-			puls = 0.0f;
+			is_scriptPlus = false;
+			scriptPlus = 0.25f;
 			HasBlackOrb = true;
 			BlackScript[0] = true;
 		}
 		else if (strstr(eventMsg.conditionName.c_str(), "White"))
 		{
-			colorpuls = false;
-			puls = 0.0f;
+			is_scriptPlus = false;
+			scriptPlus = 0.25f;
 			HasWhiteOrb = true;
 			WhiteScript[0] = true;
 		}
 		else if (strstr(eventMsg.conditionName.c_str(), "Yellow"))
 		{
-			colorpuls = false;
-			puls = 0.0f;
-			HasYellowOrb = false;
+			is_scriptPlus = false;
+			scriptPlus = 0.25f;
+			HasYellowOrb = true;
 			YellowScript[0] = true;
 		}
 		/// Zone

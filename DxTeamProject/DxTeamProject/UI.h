@@ -97,6 +97,9 @@ private:
 	bool HasOrb;
 	///
 	
+	float scriptPlus;
+	bool is_scriptPlus;
+
 	bool CollideWinterZone;
 	bool CollideAutumnZone;
 	bool HasBlackOrb;

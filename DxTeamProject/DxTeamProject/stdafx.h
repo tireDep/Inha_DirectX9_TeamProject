@@ -38,16 +38,16 @@ using namespace std;
 
 
 
-#if _DEBUG
+//#if _DEBUG
 // DEBUG Mode
 #ifdef UNICODE
 #pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
 #else
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 #endif
-#else
+//#else
 // Release Mode
-#endif
+//#endif
 
 #define SafeRelease(p) { if(p) p->Release(); p = NULL; }
 #define SafeDelete(p) { if(p) delete p; }
