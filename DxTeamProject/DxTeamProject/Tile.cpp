@@ -210,7 +210,7 @@ void CTile::Setup(const ST_MapData & mapData)
 			0, 0);
 	}
 
-	g_pFileLoadManager->FileLoad_Texture("Resource/Texture", "BasicGray_127.png", m_grayTxt);
+	g_pFileLoadManager->FileLoad_Texture("Resource/Texture", "BasicGray_45.png", m_grayTxt);
 
 	// D3DXMATRIXA16 matS, matR, matT;
 	D3DXMatrixScaling(&m_matS, m_vScale.x, m_vScale.y, m_vScale.z);
@@ -292,14 +292,6 @@ void CTile::Render()
 
 	else
 	{
-		if (!m_isCameraRender)
-		{
-			g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
-			g_pD3DDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-			g_pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-			m_isCameraRender = true;
-		}
-
 		for (int i = 0; i < m_vecMtrls.size(); i++)
 		{
 			g_pD3DDevice->SetMaterial(&m_vecMtrls[i]);
@@ -309,9 +301,11 @@ void CTile::Render()
 				g_pD3DDevice->SetTexture(0, m_grayTxt);
 				if (!m_isCameraRender)
 				{
-					g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
-					m_pMesh->DrawSubset(i);
-					g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+					g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+					g_pD3DDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+					g_pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+					m_isCameraRender = true;
+
 					m_pMesh->DrawSubset(i);
 				}
 				else
@@ -336,6 +330,14 @@ void CTile::Render()
 				}
 				else
 				{
+
+					if (!m_isCameraRender)
+					{
+						g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+						g_pD3DDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+						g_pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+						m_isCameraRender = true;
+					}
 					if (m_vecTextures[i] != 0)
 						g_pD3DDevice->SetTexture(0, m_vecTextures[i]);
 					else if (m_pTexture != NULL)
@@ -346,16 +348,6 @@ void CTile::Render()
 					m_pMesh->DrawSubset(i);
 				}
 			}
-
-			if (!m_isCameraRender)
-			{
-				g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
-				m_pMesh->DrawSubset(i);
-				g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-				m_pMesh->DrawSubset(i);
-			}
-			else
-				m_pMesh->DrawSubset(i);
 		}
 		g_pD3DDevice->SetTexture(0, NULL);
 	}
