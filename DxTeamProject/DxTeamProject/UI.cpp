@@ -2,8 +2,6 @@
 #include "UI.h"
 #include "Character.h"
 
-
-
 CUI::CUI()
 {
 	m_isLButtonDown = false;
@@ -23,6 +21,9 @@ CUI::CUI()
 	Blacksw = false;
 	Blacksw2 = false;
 	Blacksw3 = false;
+
+	CollideWinterZone = false;
+	CollideAutumnZone = false;
 }
 
 CUI::~CUI()
@@ -891,19 +892,25 @@ void CUI::Render_Mapname()
 
 	m_pSprite->SetTransform(&matWorld);
 
-	//겨울
-	SetRect(&s_textrc2, -25, -295, m_textInfo2.Width, m_textInfo2.Height);
-	m_pSprite->Draw(m_textUI2, &s_textrc2,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB((int)puls, 255, 255, 255));
+	////겨울
+	if (CollideWinterZone)
+	{
+		SetRect(&s_textrc2, -25, -295, m_textInfo2.Width, m_textInfo2.Height);
+		m_pSprite->Draw(m_textUI2, &s_textrc2,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB((int)puls, 255, 255, 255));
+	}
 
 	//가을
-	//SetRect(&s_textrc3, -25, -295, m_textInfo3.Width, m_textInfo3.Height);
-	//m_pSprite->Draw(m_textUI3, &s_textrc3,
-	//	&D3DXVECTOR3(0, 0, 0),
-	//	&D3DXVECTOR3(0, 0, 0),
-	//	D3DCOLOR_ARGB(255, 255, 255, 255));
+	if (CollideAutumnZone)
+	{
+		SetRect(&s_textrc3, -25, -295, m_textInfo3.Width, m_textInfo3.Height);
+		m_pSprite->Draw(m_textUI3, &s_textrc3,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB((int)puls, 255, 255, 255));
+	}
 
 	m_pSprite->End();
 }
@@ -912,13 +919,13 @@ void CUI::Update()
 {
 	if (colorpuls == false)
 	{
-		puls += 0.1f;
+		puls += 0.25f;
 		if (puls >= 255)
 			colorpuls = true;
 	}
 	else if (colorpuls == true)
 	{
-		puls -= 0.1f;
+		puls -= 0.25f;
 		if (puls <= 0)
 		{
 			puls = 0.0f;
@@ -970,7 +977,31 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 		if (strstr(eventMsg.conditionName.c_str(), "Book"))
 			BookCol = true;
 		else if (strstr(eventMsg.conditionName.c_str(), "Trigger"))
-			cout << "hit" << endl;
+		{
+			if (strstr(eventMsg.conditionName.c_str(), "Zone"))
+			{
+				if(strstr(eventMsg.conditionName.c_str(), ""))
+				/// Winter
+				{
+					CollideWinterZone = true;
+					colorpuls = false;
+					puls = 0.0f;
+				}
+				else
+					/// Autumn
+				{
+					CollideAutumnZone = true;
+					colorpuls = false;
+					puls = 0.0f;
+				}
+			}
+			else
+			{
+				
+			}
+			
+		}
+			//cout << "hit" << endl;
 	}
 
 

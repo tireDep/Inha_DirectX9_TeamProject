@@ -85,8 +85,9 @@ private:
 	bool HasOrb;
 	///
 	
+	bool CollideWinterZone;
+	bool CollideAutumnZone;
 public:
-
 
 	CUI();
 	~CUI();
