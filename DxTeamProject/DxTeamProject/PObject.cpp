@@ -153,7 +153,7 @@ void PObject::SetShader(const D3DXMATRIXA16 & setMatWorld)
 		m_pShader->SetMatrix("gWorldCameraPos", &temp);
 
 		m_pShader->SetVector("gLightColor", &D3DXVECTOR4(D3DXVECTOR3(1.0f, 1.0f, 1.0f), 1.0f));
-		m_pShader->SetVector("gWorldLightPos", &D3DXVECTOR4(D3DXVECTOR3(0, 10.0f, 0), 1));
+		m_pShader->SetVector("gWorldLightPos", &D3DXVECTOR4(D3DXVECTOR3(0.0f, 100.0f, 0.0f), 1.0f));
 		// ===== 외부변수 받아오기?
 		// << : Light Shader
 	}
@@ -202,7 +202,8 @@ void PObject::ReceiveEvent(ST_EVENT eventMsg)
 	else if (eventMsg.eventType == EventType::eColorEffect)
 	{
 		// >> To do 용 이펙트 발사 이벤트 후 색상 변경 처리
-		m_Color = *(D3DXCOLOR*)eventMsg.ptrMessage;
+		// m_Color = *(D3DXCOLOR*)eventMsg.ptrMessage;
+		m_Color = m_outLineColor;
 		m_outLineColor = *(D3DXCOLOR*)eventMsg.ptrMessage;
 		m_isClicked = true;
 	

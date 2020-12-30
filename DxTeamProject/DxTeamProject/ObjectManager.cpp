@@ -125,6 +125,9 @@ void CObjectManager::Update_PickCheck(const vector<bool>& vecIsPick, const vecto
 	int index = 0;
 	for (int i = 1; i < m_vecPObject.size(); i++)
 	{
+		if (vecIsPick.size() == 1)
+			return;
+
 		if (vecIsPick[i] == false)
 			continue;
 		else
@@ -733,66 +736,73 @@ void CObjectManager::Reset()
 
 void CObjectManager::Render(const D3DXVECTOR3& camEye)
 {
-	// >> Iobject Render
+	PObject* pObj = NULL;
 	multimap<int, vector<CObject*>>::iterator it;
-	IObject* renderObj = NULL;
-	IObject* iObj = NULL;
 	for (it = m_mapObject.begin(); it != m_mapObject.end(); it++)
 	{
 		//// >> fog
-		//g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, true);
+		g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, true);
 
-		//g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(0.67f, 0.85f, 0.89f, 0.1f));
-		//// g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.4f));
+		g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(0.67f, 0.85f, 0.89f, 0.1f));
+		// g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.4f));
 
-		//g_pD3DDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
-		//g_pD3DDevice->SetRenderState(D3DRS_FOGSTART, DoFtoDw(25.0f));
-		//g_pD3DDevice->SetRenderState(D3DRS_FOGEND, DoFtoDw(45.0f));
-		//// >> 한 구역 크기 : 30
-		//g_pD3DDevice->SetRenderState(D3DRS_RANGEFOGENABLE, true);
+		g_pD3DDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
+		g_pD3DDevice->SetRenderState(D3DRS_FOGSTART, DoFtoDw(25.0f));
+		g_pD3DDevice->SetRenderState(D3DRS_FOGEND, DoFtoDw(45.0f));
+		// >> 한 구역 크기 : 30
+		g_pD3DDevice->SetRenderState(D3DRS_RANGEFOGENABLE, true);
 
-		//D3DXVECTOR3 vRender;
-		//float camDist = 60.0f;
+		D3DXVECTOR3 vRender;
+		float length = 0;
+		float camDist = 60.0f;
+		float camCloseDist = 37.0f;
+		for (int i = 0; i < it->second.size(); i++)
+		{
+			// >> 안개 범위 안에 들어가는 것만 랜더
+			vRender = it->second[i]->GetTranslation() - camEye;
+			length = D3DXVec3Length(&vRender);
+			if (length >= -camDist && length <= camDist)
+			{
+				// >> 색 변화, 바다 등 셰이더 적용을 위해 일정 범위 내 안개 off
+				if (length >= -camCloseDist && length <= camCloseDist)
+					g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
+
+				it->second[i]->Render();
+
+				g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, true);
+			}
+		}
+
+		g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
+		
+		//// KT fog off... Need to level design.. 
+		////for (int i = 0; i < it->second.size(); i++)
+		////	it->second[i]->Render();
 
 		//for (int i = 0; i < it->second.size(); i++)
 		//{
-		//	// >> 안개 범위 안에 들어가는 것만 랜더
-		//	vRender = it->second[i]->GetTranslation() - camEye;
+		//	iObj = dynamic_cast<IObject*> (it->second[i]);
+		//	if (iObj == NULL)
+		//		continue;
 
-		//	if (D3DXVec3Length(&vRender) >= -camDist && D3DXVec3Length(&vRender) <= camDist)
-		//		it->second[i]->Render();
+		//	if (!iObj->m_isCameraRender && iObj->GetObjType() < ObjectType::eTile13 && renderObj == NULL)
+		//		renderObj = dynamic_cast<IObject*> (it->second[i]);
+		//	else
+		//		iObj->Render();
 		//}
 
-		//g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
-		
-		// KT fog off... Need to level design.. 
-		//for (int i = 0; i < it->second.size(); i++)
-		//	it->second[i]->Render();
+		//// for (int i = 0; i < it->second.size(); i++)
+		//// {
+		//// 	if(it->second[i]->m_isCameraRender)
+		//// 		it->second[i]->Render();
+		//// }
 
-		for (int i = 0; i < it->second.size(); i++)
-		{
-			iObj = dynamic_cast<IObject*> (it->second[i]);
-			if (iObj == NULL)
-				continue;
-
-			if (!iObj->m_isCameraRender && iObj->GetObjType() < ObjectType::eTile13 && renderObj == NULL)
-				renderObj = dynamic_cast<IObject*> (it->second[i]);
-			else
-				iObj->Render();
-		}
-
-		// for (int i = 0; i < it->second.size(); i++)
-		// {
-		// 	if(it->second[i]->m_isCameraRender)
-		// 		it->second[i]->Render();
-		// }
-
-		// >> pObject Render
-		int loopSize = m_vecPObject.size();
-		for (int i = 0; i < loopSize; i++)
-		{
-			m_vecPObject[i]->Render();
-		}
+		//// >> pObject Render
+		//int loopSize = m_vecPObject.size();
+		//for (int i = 0; i < loopSize; i++)
+		//{
+		//	m_vecPObject[i]->Render();
+		//}
 
 		// >> 기존 방식 : 3X3 영역만 랜더, 나머지 안개 OR 랜더 X
 		// >> 너무 바뀌는게 잘 보임
@@ -823,8 +833,8 @@ void CObjectManager::Render(const D3DXVECTOR3& camEye)
 		//}
 	} // << : for
 
-	if (renderObj != NULL)
-		renderObj->Render();
+	// if (renderObj != NULL)
+	// 	renderObj->Render();
 }
 
 void CObjectManager::RenderOBBBox()

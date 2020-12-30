@@ -138,8 +138,10 @@ void CMainGame::Update()
 
 // >> MapData
 #ifdef _DEBUG
-		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map1.dat");
+		// g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map1.dat");
 
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map1.dat");
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map2.dat");
 #else
 
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
