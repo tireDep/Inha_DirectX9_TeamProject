@@ -922,8 +922,9 @@ void CUI::Setup_Cursor()
 
 	GetClientRect(g_hWnd, &UIrc);
 
+	//기본
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/brush.png",
+		"Brush/brush_Gray.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -931,6 +932,72 @@ void CUI::Setup_Cursor()
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_brushInfo, NULL, &m_brushCur);
+
+	//레드
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Brush/brush_Red.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_brushInfo2, NULL, &m_brushCur2);
+
+	//블루
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Brush/brush_Blue.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_brushInfo3, NULL, &m_brushCur3);
+
+	//그린
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Brush/brush_Green.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_brushInfo4, NULL, &m_brushCur4);
+
+	//블랙
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Brush/brush_Black.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_brushInfo5, NULL, &m_brushCur5);
+
+	//화이트
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Brush/brush_White.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_brushInfo6, NULL, &m_brushCur6);
+
+	//옐로우
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Brush/brush_Yellow.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_brushInfo7, NULL, &m_brushCur7);
 }
 
 void CUI::Render_Cursor()
@@ -943,13 +1010,82 @@ void CUI::Render_Cursor()
 	D3DXMatrixTranslation(&matT, movep, movepy, 0);
 	matWorld = matT;
 
-	m_pSprite->SetTransform(&matWorld);
+	//기본
+	if (PickColor == Pick::NONE)
+	{
+		m_pSprite->SetTransform(&matWorld);
+		SetRect(&s_brushrc, -px2.x+5, -px2.y+5, m_brushInfo.Width, m_brushInfo.Height);
+		m_pSprite->Draw(m_brushCur, &s_brushrc,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
-	SetRect(&s_brushrc, -px2.x+5, -px2.y+5, m_brushInfo.Width, m_brushInfo.Height);
-	m_pSprite->Draw(m_brushCur, &s_brushrc,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+	//레드
+	if (PickColor == Pick::Red)
+	{
+		m_pSprite->SetTransform(&matWorld);
+		SetRect(&s_brushrc2, -px2.x + 5, -px2.y + 5, m_brushInfo2.Width, m_brushInfo2.Height);
+		m_pSprite->Draw(m_brushCur2, &s_brushrc2,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+
+	//블루
+	if (PickColor == Pick::Blue)
+	{
+		m_pSprite->SetTransform(&matWorld);
+		SetRect(&s_brushrc3, -px2.x + 5, -px2.y + 5, m_brushInfo3.Width, m_brushInfo3.Height);
+		m_pSprite->Draw(m_brushCur3, &s_brushrc3,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+
+	//그린
+	if (PickColor == Pick::Green)
+	{
+		m_pSprite->SetTransform(&matWorld);
+		SetRect(&s_brushrc4, -px2.x + 5, -px2.y + 5, m_brushInfo4.Width, m_brushInfo4.Height);
+		m_pSprite->Draw(m_brushCur4, &s_brushrc4,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+
+	//블랙
+	if (PickColor == Pick::Black)
+	{
+		m_pSprite->SetTransform(&matWorld);
+		SetRect(&s_brushrc5, -px2.x + 5, -px2.y + 5, m_brushInfo5.Width, m_brushInfo5.Height);
+		m_pSprite->Draw(m_brushCur5, &s_brushrc5,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+
+	//화이트
+	if (PickColor == Pick::White)
+	{
+		m_pSprite->SetTransform(&matWorld);
+		SetRect(&s_brushrc6, -px2.x + 5, -px2.y + 5, m_brushInfo6.Width, m_brushInfo6.Height);
+		m_pSprite->Draw(m_brushCur6, &s_brushrc6,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
+
+	//옐로우
+	if (PickColor == Pick::Yellow)
+	{
+		m_pSprite->SetTransform(&matWorld);
+		SetRect(&s_brushrc7, -px2.x + 5, -px2.y + 5, m_brushInfo7.Width, m_brushInfo7.Height);
+		m_pSprite->Draw(m_brushCur7, &s_brushrc7,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 
 	m_pSprite->End();
 }
