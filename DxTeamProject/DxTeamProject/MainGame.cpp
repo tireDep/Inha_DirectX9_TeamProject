@@ -323,10 +323,10 @@ void CMainGame::Update()
 			}
 
 			// grab
-			if (m_pCharacter->GetGrab())
-				m_pText->SetisGrabstate(true);
-			else
-				m_pText->SetisGrabstate(false);
+			//if (m_pCharacter->GetGrab())
+			//	m_pText->SetisGrabstate(true);
+			//else
+			//	m_pText->SetisGrabstate(false);
 		}
 
 		//if (g_pGameManager->GetGridMapMode())
@@ -407,11 +407,19 @@ void CMainGame::Render()
 
 		m_pUI->Render_Mapname();
 		
-
-		if (m_pText->GetisGrabstate())
+		if (m_pCharacter->GetGrab())
 		{
-			m_pUI->RenderGrab();
+			if (m_pCharacter->GetGrabState())
+				m_pUI->RenderPushPull();
+			else
+				m_pUI->RenderGrab();
 		}
+		
+
+		//if (m_pText->GetisGrabstate())
+		//{
+		//	m_pUI->RenderGrab();
+		//}
 
 		if (m_pDragon && m_pCamera->GetCameraAngle() >= 0.0f)
 			m_pDragon->Render();
