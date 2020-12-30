@@ -54,19 +54,19 @@ void CDragon::Update(D3DXVECTOR3 pos, float duration)
 	}
 
 	m_vPosition = pos;
-	m_vPosition.z += 0.5f;
+	//m_vPosition.z -= 0.5f;
 
 	// >> testRotation
 	// Need To Modify... Variable Name
 	if (m_isTrue == false)
 	{
-		m_vDrangonPos.y += 0.0005f;
-		if (m_vDrangonPos.y >= 1.0f)
+		m_vDrangonPos.y += 0.0015f;
+		if (m_vDrangonPos.y >= 0.5f)
 			m_isTrue = true;
 	}
 	else if (m_isTrue == true)
 	{
-		m_vDrangonPos.y -= 0.0005f;
+		m_vDrangonPos.y -= 0.0015f;
 		if (m_vDrangonPos.y <= 0.0f)
 			m_isTrue = false;
 	}
@@ -102,7 +102,7 @@ void CDragon::Render()
 	D3DXMatrixIdentity(&matWorld);
 
 	D3DXMATRIXA16 matS, matT;
-	D3DXMatrixScaling(&matS, 0.7f, 0.7f, 0.7f);
+	D3DXMatrixScaling(&matS, 0.5f, 0.5f, 0.5f);
 	D3DXMatrixTranslation(&matT, m_vPosition.x, m_vPosition.y, m_vPosition.z);
 	matWorld = matS *m_matRotY* matT;
 
