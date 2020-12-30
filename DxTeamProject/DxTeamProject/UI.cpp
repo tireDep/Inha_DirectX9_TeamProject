@@ -26,8 +26,7 @@ CUI::CUI()
 	is_scriptPlus = false;
 	CollideWinterZone = false;
 	CollideAutumnZone = false;
-	HasBlackOrb = false;
-	HasYellowOrb = false;
+	HasBlackOrb = false; HasWhiteOrb = false; HasYellowOrb = false;
 	BlackScript[0] = BlackScript[1] = BlackScript[2] = false;
 	WhiteScript[0] = WhiteScript[1] = WhiteScript[2] = false;
 	YellowScript[0] = YellowScript[1] = YellowScript[2] = false;
@@ -392,7 +391,7 @@ void CUI::Render_Script()
 	m_pSprite->SetTransform(&matWorld);
 
 	/// Black Orb
-	if (HasBlackOrb)
+	if(HasBlackOrb)
 	//if(g_pGameManager->GetIsHasOrb("Black"))
 	{
 		if (BlackScript[0])
@@ -438,7 +437,107 @@ void CUI::Render_Script()
 			if (scriptPlus <= 0.0f)
 			{
 				BlackScript[2] = false;
-				//HasBlackOrb = false;
+				HasBlackOrb = false;
+			}
+		}
+	}
+	/// White Orb
+	if(HasWhiteOrb)
+	{
+		if (WhiteScript[0])
+		{
+			//cout << "In" << endl;
+			SetRect(&s_scrirc4, -270, -590, m_scriInfo4.Width, m_scriInfo4.Height);
+			m_pSprite->Draw(m_scriUI4, &s_scrirc4,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB(int(scriptPlus), 255, 255, 255));
+			if (scriptPlus <= 0.0f)
+			{
+				scriptPlus = 0.0f;
+				WhiteScript[1] = true;
+				WhiteScript[0] = false;
+				scriptPlus += 0.25f;
+				is_scriptPlus = false;
+			}
+		}
+		if (WhiteScript[1])
+		{
+			SetRect(&s_scrirc5, -425, -590, m_scriInfo5.Width, m_scriInfo5.Height);
+			m_pSprite->Draw(m_scriUI5, &s_scrirc5,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB(int(scriptPlus), 255, 255, 255));
+			if (scriptPlus <= 0.0f)
+			{
+				scriptPlus = 0.0f;
+				WhiteScript[2] = true;
+				WhiteScript[1] = false;
+				scriptPlus += 0.25f;
+				is_scriptPlus = false;
+			}
+		}
+		if (WhiteScript[2])
+		{
+			SetRect(&s_scrirc6, -310, -610, m_scriInfo6.Width, m_scriInfo6.Height);
+			m_pSprite->Draw(m_scriUI6, &s_scrirc6,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB(int(scriptPlus), 255, 255, 255));
+			if (scriptPlus <= 0.0f)
+			{
+				WhiteScript[2] = false;
+				HasWhiteOrb = false;
+			}
+		}
+	}
+	/// Yellow Orb
+	if (HasYellowOrb)
+	{
+		if (YellowScript[0])
+		{
+			//cout << "In" << endl;
+			SetRect(&s_scrirc7, -345, -590, m_scriInfo7.Width, m_scriInfo7.Height);
+			m_pSprite->Draw(m_scriUI7, &s_scrirc7,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB(int(scriptPlus), 255, 255, 255));
+			if (scriptPlus <= 0.0f)
+			{
+				scriptPlus = 0.0f;
+				YellowScript[1] = true;
+				YellowScript[0] = false;
+				scriptPlus += 0.25f;
+				is_scriptPlus = false;
+			}
+		}
+		if (YellowScript[1])
+		{
+			SetRect(&s_scrirc8, -215, -590, m_scriInfo8.Width, m_scriInfo8.Height);
+			m_pSprite->Draw(m_scriUI8, &s_scrirc8,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB(int(scriptPlus), 255, 255, 255));
+			if (scriptPlus <= 0.0f)
+			{
+				scriptPlus = 0.0f;
+				YellowScript[2] = true;
+				YellowScript[1] = false;
+				scriptPlus += 0.25f;
+				is_scriptPlus = false;
+			}
+		}
+		if (YellowScript[2])
+		{
+			SetRect(&s_scrirc9, -140, -610, m_scriInfo9.Width, m_scriInfo9.Height);
+			m_pSprite->Draw(m_scriUI9, &s_scrirc9,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB(int(scriptPlus), 255, 255, 255));
+			if (scriptPlus <= 0.0f)
+			{
+				YellowScript[2] = false;
+				HasYellowOrb = false;
 			}
 		}
 	}

@@ -241,6 +241,14 @@ void CMainGame::Update()
 			g_pGameManager->SetGetOrb("Black");
 			// g_pGameManager->CompleteOrb();
 		}
+		if (GetKeyState('2') & 0x8000)
+		{
+			g_pGameManager->SetGetOrb("White");
+		}
+		if (GetKeyState('3') & 0x8000)
+		{
+			g_pGameManager->SetGetOrb("Yellow");
+		}
 	//	if (GetKeyState('2') & 0x8000)
 	//	{
 	//		g_pSoundManager->PlayBGM("f_last");
