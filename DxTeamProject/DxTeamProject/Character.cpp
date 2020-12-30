@@ -175,7 +175,10 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 						D3DXVECTOR3 v;
 						D3DXVec3Normalize(&v, &this->m_vGrabDirection);
-						pObjCheck->SetVelocity(10.0f * v);
+						//pObjCheck->SetVelocity(10.0f * v);
+						pObjCheck->SetVelocity(10.0f * v * pObjCheck->GetInverseMass());
+
+
 						// m_fRotation = m_preRotation;
 						// DoRotation(m_fRotation);
 						// m_fSpeed = 10.0f;
@@ -183,7 +186,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 						// m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
 						if (m_Character->CheckAnimationEnd())
 							m_Character->SetAnimationIndex(5);
-						m_fSpeed = 10.0f;
+						//m_fSpeed = 10.0f;
+						m_fSpeed = 10.0f * pObjCheck->GetInverseMass();
 					}
 				}
 				else
