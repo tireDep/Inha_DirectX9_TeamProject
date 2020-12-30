@@ -24,6 +24,7 @@ CUI::CUI()
 
 	scriptPlus = 0.0f;
 	is_scriptPlus = false;
+	is_scriptBlackOrb = true;	is_scriptWhiteOrb = true; is_scriptYellowOrb = true;
 	CollideWinterZone = false;
 	CollideAutumnZone = false;
 	HasBlackOrb = false; HasWhiteOrb = false; HasYellowOrb = false;
@@ -396,7 +397,7 @@ void CUI::Render_Script()
 	{
 		if (BlackScript[0])
 		{
-			cout << "In" << endl;
+			//cout << "In" << endl;
 			SetRect(&s_scrirc, -270, -590, m_scriInfo.Width, m_scriInfo.Height);
 			m_pSprite->Draw(m_scriUI, &s_scrirc,
 				&D3DXVECTOR3(0, 0, 0),
@@ -438,6 +439,7 @@ void CUI::Render_Script()
 			{
 				BlackScript[2] = false;
 				HasBlackOrb = false;
+				is_scriptBlackOrb = false;
 			}
 		}
 	}
@@ -492,7 +494,7 @@ void CUI::Render_Script()
 		}
 	}
 	/// Yellow Orb
-	if (HasYellowOrb)
+	if(HasYellowOrb)
 	{
 		if (YellowScript[0])
 		{
@@ -1308,24 +1310,33 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 		/// Orb
 		else if (strstr(eventMsg.conditionName.c_str(), "Black"))
 		{
-			is_scriptPlus = false;
-			scriptPlus = 0.25f;
-			HasBlackOrb = true;
-			BlackScript[0] = true;
+			if (!HasBlackOrb && is_scriptBlackOrb)
+			{
+				is_scriptPlus = false;
+				scriptPlus = 0.25f;
+				HasBlackOrb = true;
+				BlackScript[0] = true;
+			}
 		}
 		else if (strstr(eventMsg.conditionName.c_str(), "White"))
 		{
-			is_scriptPlus = false;
-			scriptPlus = 0.25f;
-			HasWhiteOrb = true;
-			WhiteScript[0] = true;
+			if (!HasWhiteOrb && is_scriptWhiteOrb)
+			{
+				is_scriptPlus = false;
+				scriptPlus = 0.25f;
+				HasWhiteOrb = true;
+				WhiteScript[0] = true;
+			}
 		}
 		else if (strstr(eventMsg.conditionName.c_str(), "Yellow"))
 		{
-			is_scriptPlus = false;
-			scriptPlus = 0.25f;
-			HasYellowOrb = true;
-			YellowScript[0] = true;
+			if (!HasYellowOrb && is_scriptYellowOrb)
+			{
+				is_scriptPlus = false;
+				scriptPlus = 0.25f;
+				HasYellowOrb = true;
+				YellowScript[0] = true;
+			}
 		}
 		/// Zone
 		else if (strstr(eventMsg.conditionName.c_str(), "Winter"))

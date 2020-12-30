@@ -337,9 +337,10 @@ void CMainGame::Update()
 		}
 
 		if (m_pUI)
+		{
 			m_pUI->Update();
-
-		m_pUI->Script_Update();
+			m_pUI->Script_Update();
+		}
 
 		//if (g_pGameManager->GetGridMapMode())
 		//{
