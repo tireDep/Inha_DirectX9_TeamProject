@@ -803,7 +803,7 @@ Orb_White.png
 0
 # Translate
 11.5
-2.65
+2
 9.5
 # Color
 0.5
@@ -971,73 +971,6 @@ Box2
 0
 1
 # ColorTag
-# Object_End
-
-# Object_Start
-# ObjectName
-EventTrigger_Save31
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-39
-# Scale
-1
-5
-12
-# Rotate
-0
-0
-0
-# Translate
--12
-0
--3.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# TriggerIndex
-0
-# ZoneIndex
-0
-# Object_End
-
-# Object_Start
-# ObjectName
-Trace_White32
-# FolderPath
-Resource/Sprite/Trace
-# FilePath
-
-# TxtPath
-WaterColor_White.png
-# ObjectType
-38
-# Scale
-3
-0.5
-3
-# Rotate
-0
-0
-0
-# Translate
-11.5
-1.05
-9
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-White
 # Object_End
 
 # Section =======================================
