@@ -231,7 +231,7 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 		switch (eventMsg.message)
 		{
 		case WM_MOUSEMOVE:
-			if (m_isUIMode)
+			if (m_isUIMode || GetNowScene() != SceneType::eGameScene)
 			{
 				RECT rc;
 				GetClientRect(g_hWnd, &rc);
@@ -247,8 +247,6 @@ void CGameManager::ReceiveEvent(ST_EVENT eventMsg)
 				else
 					SetShowCursor(false);
 			}
-			else if (GetNowScene() != SceneType::eGameScene)
-				SetShowCursor(true);
 			else
 				SetShowCursor(false);
 
