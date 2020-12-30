@@ -61,9 +61,11 @@ void CTile::SetShader_Tile()
 	m_pShader_Tile->SetMatrix("WM", &m_matWorld);
 	m_pShader_Tile->SetMatrix("WITM", &matWorldInveseTranspose);
 
-	static DWORD dwOldTime = GetTickCount();
+	if (m_dwOldTime == -1)
+		m_dwOldTime = GetTickCount();
+
 	DWORD dwCurrentTime = GetTickCount();
-	DWORD dwElapsedTime = dwCurrentTime - dwOldTime;
+	DWORD dwElapsedTime = dwCurrentTime - m_dwOldTime;
 	m_pShader_Tile->SetFloat("time", dwElapsedTime / 3000.0f);
 
 	if (m_vecTextures[0] != 0)
@@ -127,7 +129,8 @@ CTile::CTile() :
 	m_shaderTimeAngle(0.0f),
 	m_pShader_Tile(NULL),
 	m_pShaderTxt(NULL),
-	m_fShaderTime(0.0f)
+	m_fShaderTime(0.0f),
+	m_dwOldTime(-1)
 {
 	render = false;
 	m_strName = string("Tile") + to_string(m_nRefCount);
@@ -310,7 +313,7 @@ void CTile::Render()
 	if (m_ObjectType == ObjectType::eTile13 && m_pShader_Ocean != NULL && !isUIMode)
 	{
 		// >> Ocean
-		// g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
+		g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
 		SetShader_Ocean();
 		
 		UINT numPasses = 0;

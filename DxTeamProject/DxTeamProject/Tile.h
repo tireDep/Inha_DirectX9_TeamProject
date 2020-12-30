@@ -16,6 +16,7 @@ private:
 	LPD3DXEFFECT m_pShader_Tile;
 	LPDIRECT3DTEXTURE9 m_pShaderTxt;
 	FLOAT m_fShaderTime;
+	DWORD m_dwOldTime;
 
 	void SetShader_Ocean();
 	void SetShader_Tile();
