@@ -566,9 +566,9 @@ Sphere1
 1.5
 8
 # Color
-0
-0
-0
+0.5
+0.5
+0.5
 1
 # ColorTag
 # Object_End
@@ -659,9 +659,9 @@ Sphere2
 1.5
 8
 # Color
-1
-1
-1
+0
+0
+0
 1
 # ColorTag
 # Object_End
@@ -1131,7 +1131,7 @@ EventTrigger_Save36
 0
 # Translate
 -14
-1
+0.5
 10.5
 # Color
 0.5

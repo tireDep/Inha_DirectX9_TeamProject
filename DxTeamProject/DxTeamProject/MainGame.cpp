@@ -65,6 +65,7 @@ void CMainGame::Setup()
 
 	m_pScene = new CScene;
 	m_pScene->Setup();
+	m_pScene->Cur_Setup();
 
 	/// Presentation
 #ifdef _DEBUG
@@ -227,19 +228,6 @@ void CMainGame::Update()
 	//else if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	//{
 	//	/// Delete Later...
-		if (GetKeyState('2') & 0x8000)
-		{
-			// g_pGameManager->SetNowScene(SceneType::eEndingScene);
-			// m_pScene->Update();
-
-			//g_pGameManager->SetGetOrb("Blue");
-			//g_pGameManager->SetGetOrb("Green");
-			//g_pGameManager->SetGetOrb("Red");
-			// g_pGameManager->SetGetOrb("White");
-			//g_pGameManager->SetGetOrb("Yellow");
-			g_pGameManager->SetGetOrb("Black");
-			// g_pGameManager->CompleteOrb();
-		}
 		if (GetKeyState('1') & 0x8000)
 		{
 			// g_pGameManager->SetNowScene(SceneType::eEndingScene);
@@ -291,11 +279,6 @@ void CMainGame::Update()
 		if (m_pCamera)
 			m_pCamera->Update();
 
-		if (m_pUI)
-			m_pUI->Update();
-
-		m_pUI->Script_Update();
-
 		if (m_pCharacter)
 		{
 			m_pCharacter->Update(m_pCamera->GetCameraDirection());
@@ -345,6 +328,11 @@ void CMainGame::Update()
 			//	m_pText->SetisGrabstate(false);
 		}
 
+		if (m_pUI)
+			m_pUI->Update();
+
+		m_pUI->Script_Update();
+
 		//if (g_pGameManager->GetGridMapMode())
 		//{
 		//	m_pPrevFrustum = m_pNowFrustum;
@@ -381,11 +369,13 @@ void CMainGame::Render()
 	{
 		if (m_pScene)
 			m_pScene->Render_Main();
+			m_pScene->Render_Cur();
 	}
 	else if (g_pGameManager->GetNowScene() == SceneType::eEndingScene)
 	{
 		if (m_pScene)
 			m_pScene->Render_Ending();
+			m_pScene->Render_Cur();
 	}
 	else if (g_pGameManager->GetNowScene() == SceneType::eLoadStart)
 	{		
@@ -421,6 +411,9 @@ void CMainGame::Render()
 			}
 		}
 
+		if (m_pDragon && m_pCamera->GetCameraAngle() >= 0.0f)
+			m_pDragon->Render();
+
 		m_pUI->Render_Mapname();
 		m_pUI->Render_Script();
 		
@@ -432,15 +425,6 @@ void CMainGame::Render()
 				m_pUI->RenderGrab();
 		}
 		
-
-		//if (m_pText->GetisGrabstate())
-		//{
-		//	m_pUI->RenderGrab();
-		//}
-
-		if (m_pDragon && m_pCamera->GetCameraAngle() >= 0.0f)
-			m_pDragon->Render();
-
 		if (g_pGameManager->GetUImode())
 		{
 			if (m_pUI)

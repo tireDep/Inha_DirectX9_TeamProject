@@ -332,6 +332,44 @@ void CScene::Render_Loading()
 
 }
 
+void CScene::Cur_Setup()
+{
+	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
+
+	GetClientRect(g_hWnd, &imageRC);
+
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"Scene/Cur.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_CurImageInfo, NULL, &m_pCurTexture);
+}
+
+void CScene::Render_Cur()
+{
+	SetRect(&imageRC, matT._41, matT._42,
+		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
+
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+	D3DXMatrixTranslation(&matT, movep, movepy, 0);
+	matWorld = matT;
+
+	m_pSprite->SetTransform(&matWorld);
+
+	SetRect(&Currc, -px.x+15,-px.y+10, m_CurImageInfo.Width, m_CurImageInfo.Height);
+	m_pSprite->Draw(m_pCurTexture, &Currc,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	m_pSprite->End();
+}
+
 void CScene::ReceiveEvent(ST_EVENT eventMsg)
 {
 	if (eventMsg.eventType == EventType::eInputEvent)
