@@ -27,12 +27,18 @@ private:
 	RECT s_Redrc, s_Yellowrc, s_Greenrc, s_Bluerc, s_Blackrc, s_Whiterc;
 
 	///////////text
-	D3DXIMAGE_INFO m_textInfo , m_textInfo2, m_textInfo3;
+	D3DXIMAGE_INFO m_textInfo , m_textInfo2, m_textInfo3;	// Grab, Winter, Fall
+	D3DXIMAGE_INFO m_textInfo4, m_textInfo5;				// Push, Pull
+	D3DXIMAGE_INFO m_textInfo6, m_textInfo7;				// Ctrl, Reset
 
-	LPDIRECT3DTEXTURE9 m_textUI , m_textUI2 , m_textUI3;
+	LPDIRECT3DTEXTURE9 m_textUI , m_textUI2 , m_textUI3;	// Grab, Winter, Fall
+	LPDIRECT3DTEXTURE9 m_textUI4, m_textUI5;				// Push, Pull
+	LPDIRECT3DTEXTURE9 m_textUI6, m_textUI7;				// Ctrl, Reset
 
-	RECT s_textrc, s_textrc2 , s_textrc3;
-	
+	RECT s_textrc, s_textrc2 , s_textrc3;	// Grab, Winter, Fall
+	RECT s_textrc4, s_textrc5;				// Push, Pull
+	RECT s_textrc6, s_textrc7;				// Ctrl, Reset
+
 	//////////Script
 	D3DXIMAGE_INFO m_scriInfo, m_scriInfo2, m_scriInfo3,
 		m_scriInfo4, m_scriInfo5, m_scriInfo6,
@@ -70,7 +76,7 @@ private:
 	Color OnButton;
 	Pick PickColor;
 
-	int puls;
+	float puls;
 	bool colorpuls;
 	bool BookCol;
 
@@ -79,8 +85,15 @@ private:
 	bool HasOrb;
 	///
 	
+	bool CollideWinterZone;
+	bool CollideAutumnZone;
+	bool HasBlackOrb;
+	bool BlackScript[3];
+	bool HasWhiteOrb;
+	bool WhiteScript[3];
+	bool HasYellowOrb;
+	bool YellowScript[3];
 public:
-
 
 	CUI();
 	~CUI();
@@ -90,9 +103,10 @@ public:
 	void UI_Render();
 	void Render_Mapname();
 	void RenderGrab();
+	void RenderPushPull();
 
 	void Setup_Script();
-	void Rneder_Script();
+	void Render_Script();
 
 	void Setup_Attain();
 	void Render_Attain();

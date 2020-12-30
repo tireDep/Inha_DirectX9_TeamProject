@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Background.h"
 
-const float fTime = 1.5f;
+const float fTime = 10.5f;
 const float fAddTime = 0.01f;
 
 void CBackground::SetShader()

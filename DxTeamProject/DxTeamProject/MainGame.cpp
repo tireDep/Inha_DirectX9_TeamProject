@@ -138,8 +138,8 @@ void CMainGame::Update()
 
 // >> MapData
 #ifdef _DEBUG
+		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map2.dat");
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData/KTMapData", "KT_A_map1.dat");
-
 #else
 
 		g_pFileLoadManager->FileLoad_MapData("Resource/MapData", "tile_ocean_full1.dat");
@@ -233,10 +233,10 @@ void CMainGame::Update()
 
 			//g_pGameManager->SetGetOrb("Blue");
 			//g_pGameManager->SetGetOrb("Green");
-			//g_pGameManager->SetGetOrb("Red");
-			//g_pGameManager->SetGetOrb("White");
-			//g_pGameManager->SetGetOrb("Yellow");
-			g_pGameManager->SetGetOrb("Black");
+			g_pGameManager->SetGetOrb("Red");
+			// g_pGameManager->SetGetOrb("White");
+			g_pGameManager->SetGetOrb("Yellow");
+			// g_pGameManager->SetGetOrb("Black");
 			// g_pGameManager->CompleteOrb();
 		}
 	//	if (GetKeyState('2') & 0x8000)
@@ -325,10 +325,10 @@ void CMainGame::Update()
 			}
 
 			// grab
-			if (m_pCharacter->GetGrab())
-				m_pText->SetisGrabstate(true);
-			else
-				m_pText->SetisGrabstate(false);
+			//if (m_pCharacter->GetGrab())
+			//	m_pText->SetisGrabstate(true);
+			//else
+			//	m_pText->SetisGrabstate(false);
 		}
 
 		//if (g_pGameManager->GetGridMapMode())
@@ -408,13 +408,21 @@ void CMainGame::Render()
 		}
 
 		m_pUI->Render_Mapname();
-
-		m_pUI->Rneder_Script();
-
-		if (m_pText->GetisGrabstate())
+		m_pUI->Render_Script();
+		
+		if (m_pCharacter->GetGrab())
 		{
-			m_pUI->RenderGrab();
+			if (m_pCharacter->GetGrabState())
+				m_pUI->RenderPushPull();
+			else
+				m_pUI->RenderGrab();
 		}
+		
+
+		//if (m_pText->GetisGrabstate())
+		//{
+		//	m_pUI->RenderGrab();
+		//}
 
 		if (m_pDragon && m_pCamera->GetCameraAngle() >= 0.0f)
 			m_pDragon->Render();

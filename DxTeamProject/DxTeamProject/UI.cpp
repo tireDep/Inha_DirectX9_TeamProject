@@ -2,8 +2,6 @@
 #include "UI.h"
 #include "Character.h"
 
-
-
 CUI::CUI()
 {
 	m_isLButtonDown = false;
@@ -13,7 +11,7 @@ CUI::CUI()
 	movepy = 0;
 	px3 = { 0,0 };
 	m_strName = "UI";
-	puls = 0.f;
+	puls = 0;
 	colorpuls = false;
 	BookCol = false;
 
@@ -23,6 +21,14 @@ CUI::CUI()
 	Blacksw = false;
 	Blacksw2 = false;
 	Blacksw3 = false;
+
+	CollideWinterZone = false;
+	CollideAutumnZone = false;
+	HasBlackOrb = false;
+	HasYellowOrb = false;
+	BlackScript[0] = BlackScript[1] = BlackScript[2] = false;
+	WhiteScript[0] = WhiteScript[1] = WhiteScript[2] = false;
+	YellowScript[0] = YellowScript[1] = YellowScript[2] = false;
 }
 
 CUI::~CUI()
@@ -184,8 +190,9 @@ void CUI::Setup_UI()
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_smallInfo6, NULL, &m_SmallUI6);
 
+	// Grab
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
-		"UI/message.png",
+		"UI/Grab.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -195,7 +202,7 @@ void CUI::Setup_UI()
 		, D3DX_DEFAULT, 0, &m_textInfo, NULL, &m_textUI);
 	//////////////////////////////////
 
-	//겨울
+	// winter
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
 		"Mapname/winter.png",
 		D3DX_DEFAULT_NONPOW2,
@@ -206,7 +213,7 @@ void CUI::Setup_UI()
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_textInfo2, NULL, &m_textUI2);
 
-	//가을
+	// fall
 	D3DXCreateTextureFromFileExA(g_pD3DDevice,
 		"Mapname/fall.png",
 		D3DX_DEFAULT_NONPOW2,
@@ -216,6 +223,50 @@ void CUI::Setup_UI()
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_textInfo3, NULL, &m_textUI3);
+
+	// Push
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/Push.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_textInfo4, NULL, &m_textUI4);
+
+	// Pull
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/Pull.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_textInfo5, NULL, &m_textUI5);
+
+	// Ctrl
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/Ctrl.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_textInfo6, NULL, &m_textUI6);
+
+	// Reset
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/Reset.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_textInfo7, NULL, &m_textUI7);
 }
 
 void CUI::Setup_Script()
@@ -326,7 +377,7 @@ void CUI::Setup_Script()
 
 }
 
-void CUI::Rneder_Script()
+void CUI::Render_Script()
 {
 	SetRect(&imageRC, matT._41, matT._42,
 		matT._41 + m_stImageInfo.Width, matT._42 + m_stImageInfo.Height);
@@ -338,81 +389,112 @@ void CUI::Rneder_Script()
 
 	m_pSprite->SetTransform(&matWorld);
 
-	//black
-	if (g_pGameManager->GetIsHasOrb("Black"))
+	/// Black Orb
+	if (HasBlackOrb)
 	{
-		SetRect(&s_scrirc, -270, -590,
-			m_scriInfo.Width, m_scriInfo.Height);
-
-		m_pSprite->Draw(m_scriUI, &s_scrirc,
-			&D3DXVECTOR3(0, 0, 0),
-			&D3DXVECTOR3(0, 0, 0),
-			D3DCOLOR_ARGB(BlackAlp, 255, 255, 255));
-
-		HasOrb = true;
+		if (BlackScript[0])
+		{
+			SetRect(&s_scrirc, -270, -590, m_scriInfo.Width, m_scriInfo.Height);
+			m_pSprite->Draw(m_scriUI, &s_scrirc,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB(int(puls), 255, 255, 255));
+			if (puls <= 0.0f)
+			{
+				puls = 0.0f;
+				BlackScript[1] = true;
+				BlackScript[0] = false;
+				puls += 0.25f;
+				colorpuls = false;
+			}
+		}
+		if (BlackScript[1])
+		{
+			SetRect(&s_scrirc2, -380, -590, m_scriInfo2.Width, m_scriInfo2.Height);
+			m_pSprite->Draw(m_scriUI2, &s_scrirc2,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB(int(puls), 255, 255, 255));
+			if (puls <= 0.0f)
+			{
+				puls = 0.0f;
+				BlackScript[2] = true;
+				BlackScript[1] = false;
+				puls += 0.25f;
+				colorpuls = false;
+			}
+		}
+		if (BlackScript[2])
+		{
+			SetRect(&s_scrirc3, -190, -610, m_scriInfo3.Width, m_scriInfo3.Height);
+			m_pSprite->Draw(m_scriUI3, &s_scrirc3,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB(int(puls), 255, 255, 255));
+			if (puls <= 0.0f)
+				BlackScript[2] = false;
+		}
 	}
+
+	//if (g_pGameManager->GetIsHasOrb("Black"))
+	//{
+	//	SetRect(&s_scrirc, -270, -590,
+	//		m_scriInfo.Width, m_scriInfo.Height);
+	//	m_pSprite->Draw(m_scriUI, &s_scrirc,
+	//		&D3DXVECTOR3(0, 0, 0),
+	//		&D3DXVECTOR3(0, 0, 0),
+	//		D3DCOLOR_ARGB(BlackAlp, 255, 255, 255));
+	//	HasOrb = true;
+	//}
+
+
 
 	//SetRect(&s_scrirc2, -380, -590,
 	//	m_scriInfo2.Width, m_scriInfo2.Height);
-
 	//m_pSprite->Draw(m_scriUI2, &s_scrirc2,
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	D3DCOLOR_ARGB(BlackAlp2, 255, 255, 255));
-
 	//SetRect(&s_scrirc3, -190,-590,
 	//	m_scriInfo3.Width, m_scriInfo3.Height);
-
 	//m_pSprite->Draw(m_scriUI3, &s_scrirc3,
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	D3DCOLOR_ARGB(BlackAlp2, 255, 255, 255));
-
 	//white
 	//SetRect(&s_scrirc4, -425, -590,
 	//	m_scriInfo4.Width, m_scriInfo4.Height);
-
 	//m_pSprite->Draw(m_scriUI4, &s_scrirc4,
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	D3DCOLOR_ARGB(255, 255, 255, 255));
-
 	//SetRect(&s_scrirc5, -255, -590,
 	//	m_scriInfo5.Width, m_scriInfo5.Height);
-
 	//m_pSprite->Draw(m_scriUI5, &s_scrirc5,
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	D3DCOLOR_ARGB(255, 255, 255, 255));
-
 	//SetRect(&s_scrirc6, -310, -590,
 	//	m_scriInfo6.Width, m_scriInfo6.Height);
-
 	//m_pSprite->Draw(m_scriUI6, &s_scrirc6,
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	D3DCOLOR_ARGB(255, 255, 255, 255));
-
 	////yellow
 	//SetRect(&s_scrirc7, -345, -590,
 	//	m_scriInfo7.Width, m_scriInfo7.Height);
-
 	//m_pSprite->Draw(m_scriUI7, &s_scrirc7,
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	D3DCOLOR_ARGB(255, 255, 255, 255));
-
 	//SetRect(&s_scrirc8, -215, -590,
 	//	m_scriInfo8.Width, m_scriInfo8.Height);
-
 	//m_pSprite->Draw(m_scriUI8, &s_scrirc8,
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	D3DCOLOR_ARGB(255, 255, 255, 255));
-
 	//SetRect(&s_scrirc8, -140, -590,
 	//	m_scriInfo9.Width, m_scriInfo9.Height);
-
 	//m_pSprite->Draw(m_scriUI9, &s_scrirc9,
 	//	&D3DXVECTOR3(0, 0, 0),
 	//	&D3DXVECTOR3(0, 0, 0),
@@ -810,6 +892,26 @@ void CUI::RenderGrab()
 		&D3DXVECTOR3(0, 0, 0),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
+	m_pSprite->End();
+}
+
+void CUI::RenderPushPull()
+{
+	SetRect(&imageRC, matT._41, matT._42,
+		matT._41 + m_stImageInfo4.Width, matT._42 + m_stImageInfo4.Height);
+
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+	D3DXMatrixTranslation(&matT, movep, movepy, 0);
+	matWorld = matT;
+
+	m_pSprite->SetTransform(&matWorld);
+
+	SetRect(&s_textrc4, -732, -360, m_textInfo4.Width, m_textInfo4.Height);
+	m_pSprite->Draw(m_textUI4, &s_textrc4,
+		&D3DXVECTOR3(0, 0, 0),
+		&D3DXVECTOR3(0, 0, 0),
+		D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	m_pSprite->End();
 }
@@ -826,19 +928,25 @@ void CUI::Render_Mapname()
 
 	m_pSprite->SetTransform(&matWorld);
 
-	//겨울
-	SetRect(&s_textrc2, -25, -295, m_textInfo2.Width, m_textInfo2.Height);
-	m_pSprite->Draw(m_textUI2, &s_textrc2,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(puls, 255, 255, 255));
+	////겨울
+	if (CollideWinterZone)
+	{
+		SetRect(&s_textrc2, -25, -295, m_textInfo2.Width, m_textInfo2.Height);
+		m_pSprite->Draw(m_textUI2, &s_textrc2,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB((int)puls, 255, 255, 255));
+	}
 
 	//가을
-	//SetRect(&s_textrc3, -25, -295, m_textInfo3.Width, m_textInfo3.Height);
-	//m_pSprite->Draw(m_textUI3, &s_textrc3,
-	//	&D3DXVECTOR3(0, 0, 0),
-	//	&D3DXVECTOR3(0, 0, 0),
-	//	D3DCOLOR_ARGB(255, 255, 255, 255));
+	if (CollideAutumnZone)
+	{
+		SetRect(&s_textrc3, -25, -295, m_textInfo3.Width, m_textInfo3.Height);
+		m_pSprite->Draw(m_textUI3, &s_textrc3,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB((int)puls, 255, 255, 255));
+	}
 
 	m_pSprite->End();
 }
@@ -847,15 +955,19 @@ void CUI::Update()
 {
 	if (colorpuls == false)
 	{
-		puls++;
-		if (puls == 255)
+		puls += 0.25f;
+		if (puls >= 255)
 			colorpuls = true;
 	}
 	else if (colorpuls == true)
 	{
-		puls--;
-		if (puls == 0)
-			colorpuls = false;
+		puls -= 0.25f;
+		if (puls <= 0)
+		{
+			puls = 0.0f;
+			return;
+		}
+			//colorpuls = false;
 	}
 }
 
@@ -893,17 +1005,71 @@ void CUI::Script_Update()
 	}
 }
 
-
 void CUI::ReceiveEvent(ST_EVENT eventMsg)
 {
 	if (eventMsg.eventType == EventType::eConditionChange)
 	{
 		if (strstr(eventMsg.conditionName.c_str(), "Book"))
 			BookCol = true;
-		else if (strstr(eventMsg.conditionName.c_str(), "Trigger"))
-			cout << "hit" << endl;
-	}
+		/// Orb
+		else if (strstr(eventMsg.conditionName.c_str(), "Black"))
+		{
+			colorpuls = false;
+			puls = 0.0f;
+			HasBlackOrb = true;
+			BlackScript[0] = true;
+		}
+		else if (strstr(eventMsg.conditionName.c_str(), "White"))
+		{
+			colorpuls = false;
+			puls = 0.0f;
+			HasWhiteOrb = true;
+			WhiteScript[0] = true;
+		}
+		else if (strstr(eventMsg.conditionName.c_str(), "Yellow"))
+		{
+			colorpuls = false;
+			puls = 0.0f;
+			HasYellowOrb = false;
+			YellowScript[0] = true;
+		}
+		/// Zone
+		else if (strstr(eventMsg.conditionName.c_str(), "Winter"))
+		{
+			CollideWinterZone = true;
+			colorpuls = false;
+			puls = 0.0f;
+		}
+		else if (strstr(eventMsg.conditionName.c_str(), "Fall"))
+		{
+			CollideAutumnZone = true;
+			colorpuls = false;
+			puls = 0.0f;
+		}
+		/// Save
+		else if (strstr(eventMsg.conditionName.c_str(), "Save"))
+		{
+			return;
+			//switch (g_pObjectManager)
+			//{
+			//	case 0:
+			//		break;
+			//	case 1:
+			//		break;
+			//	case 2:
+			//		break;
+			//	case 3:
+			//		break;
+			//	case 4:
+			//		break;
+			//	case 5:
+			//		break;
+			//	default:
+			//		break;
+			//}
+		}
 
+	}
 
 	if (eventMsg.eventType == EventType::eInputEvent && g_pGameManager->GetUImode())
 	{

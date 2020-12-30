@@ -91,5 +91,11 @@ string CEventTrigger::GetTriggerTypeString()
 	if (m_triggerType == TriggerType::eSave)
 		return "Save";
 	else if (m_triggerType == TriggerType::eZone)
-		return "Zone";
+	{
+		if (m_zoneType == ZoneType::eFall)
+			return "Fall";
+
+		else if (m_zoneType == ZoneType::eWinter)
+			return "Winter";
+	}
 }

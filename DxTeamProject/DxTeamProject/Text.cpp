@@ -3,8 +3,7 @@
 #include "FontManager.h"
 
 CText::CText() :
-	m_pFont(NULL),
-	m_isGrabState(false)
+	m_pFont(NULL)
 {
 }
 
@@ -66,14 +65,4 @@ void CText::RenderCharacterPosition(D3DXVECTOR3 CharacterPosition)
 	positionString += stream.str(); stream.str("");
 	SetRect(&rc, 320, 40, 400, 60);
 	m_pFont->DrawTextA(NULL, positionString.c_str(), positionString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, RED);
-}
-
-
-void CText::RenderGrab()
-{
-	RECT rc;
-	// later client rect
-	SetRect(&rc, 732, 360, 100, 60);
-	string GrabString = "Àâ±â(F)";
-	m_pFont->DrawTextA(NULL, GrabString.c_str(), GrabString.length(), &rc, DT_LEFT | DT_TOP | DT_NOCLIP, BLUE);
 }

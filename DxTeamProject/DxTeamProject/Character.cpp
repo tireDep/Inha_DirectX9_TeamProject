@@ -4,6 +4,7 @@
 #include "IObject.h"
 #include "PObject.h"
 #include "SkinnedMesh.h"
+#include "EventTrigger.h"
 
 CCharacter::CCharacter()
 	: m_vDirection(0, 0, 1)
@@ -26,6 +27,7 @@ CCharacter::CCharacter()
 	, m_fRotation(0.0f)
 	, m_fGrabRotation(0.0f)
 	, m_isReset(false)
+	, m_isGrabState(false)
 	/// Presentation
 #ifdef _DEBUG
 	// , m_saveZonePosition(5, 1, -5)
@@ -84,6 +86,12 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 
 		if (eventMsg.eventType == EventType::eInputEvent)
 		{
+			if (eventMsg.message == WM_KEYUP)
+			{
+				if(m_isGrabState)
+					m_isGrabState = false;
+			}
+
 			if (m_preInput == PlayerInputType::eHoldPull && m_preInput != eventMsg.playerInput)
 			{
 				if (m_nGrabAbleObeject != -1)
@@ -130,6 +138,10 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				//	if (m_Character->CheckAnimationEnd())
 				//		m_Character->SetAnimationIndex(10); // Idle
 				//}
+				if (m_isGrab)
+					m_isGrabState = true;
+				else
+					m_isGrabState = false;
 
 				if (m_Character->CheckAnimationEnd())
 					m_Character->SetAnimationIndex(10);
@@ -158,12 +170,16 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 						{
 							// >> 일정 거리 이상이면 잡기상태 해제
 							m_isGrab = false;
+							m_isGrabState = false;
 							return;
 						}
 
 						D3DXVECTOR3 v;
 						D3DXVec3Normalize(&v, &this->m_vGrabDirection);
-						pObjCheck->SetVelocity(10.0f * v);
+						//pObjCheck->SetVelocity(10.0f * v);
+						pObjCheck->SetVelocity(10.0f * v * pObjCheck->GetInverseMass());
+
+
 						// m_fRotation = m_preRotation;
 						// DoRotation(m_fRotation);
 						// m_fSpeed = 10.0f;
@@ -171,7 +187,8 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 						// m_vPosition += (m_vDirection * m_fSpeed * g_pTimeManager->GetElapsedTime());
 						if (m_Character->CheckAnimationEnd())
 							m_Character->SetAnimationIndex(5);
-						m_fSpeed = 10.0f;
+						//m_fSpeed = 10.0f;
+						m_fSpeed = 10.0f * pObjCheck->GetInverseMass();
 					}
 				}
 				else
@@ -203,6 +220,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 						{
 							// >> 일정 거리 이상이면 잡기상태 해제
 							m_isGrab = false;
+							m_isGrabState = false;
 							return;
 						}
 
@@ -232,6 +250,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
 				m_isGrab = false;
+				m_isGrabState = false;
 				break;
 
 			case PlayerInputType::eLeftUp:
@@ -239,6 +258,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
 				m_isGrab = false;
+				m_isGrabState = false;
 				break;
 
 			case PlayerInputType::eRightUp:
@@ -246,6 +266,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
 				m_isGrab = false;
+				m_isGrabState = false;
 				break;
 
 			case PlayerInputType::eDown:
@@ -253,6 +274,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
 				m_isGrab = false;
+				m_isGrabState = false;
 				break;
 
 			case PlayerInputType::eLeftDown:
@@ -260,6 +282,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
 				m_isGrab = false;
+				m_isGrabState = false;
 				break;
 
 			case PlayerInputType::eRightDown:
@@ -267,6 +290,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
 				m_isGrab = false;
+				m_isGrabState = false;
 				break;
 
 			case PlayerInputType::eLeft:
@@ -274,6 +298,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
 				m_isGrab = false;
+				m_isGrabState = false;
 				break;
 
 			case PlayerInputType::eRight:
@@ -281,6 +306,7 @@ void CCharacter::ReceiveEvent(ST_EVENT eventMsg)
 				m_fSpeed = 10.0f;
 				m_preRotation = m_fRotation;
 				m_isGrab = false;
+				m_isGrabState = false;
 				break;
 
 			case PlayerInputType::eReset:
@@ -374,10 +400,11 @@ void CCharacter::ColliderObject()
 
 				if (objType == eTrigger)
 				{
+					CEventTrigger* temp = static_cast<CEventTrigger*>(vecCheck[i]);
 					ST_EVENT msg;
 					msg.eventType = EventType::eConditionChange;
-					msg.conditionName = vecCheck[i]->GetObjectName();
-
+					msg.conditionName = temp->GetTriggerTypeString();
+					
 					g_pEventManager->CheckEvent(msg);
 
 					// m_saveZonePosition = vecCheck[i]->SendPosition();
@@ -413,6 +440,7 @@ void CCharacter::ColliderObject()
 					ofstream fout;
 
 					fout.open("SaveData.txt");
+					m_saveZonePosition.y = 1.0f;
 					fout << m_saveZonePosition.x << " " << m_saveZonePosition.y << " " << m_saveZonePosition.z << endl;
 					fout.close();
 
@@ -420,6 +448,7 @@ void CCharacter::ColliderObject()
 				}
 
 				m_isGrab = false; // >> 잡기 상태시 충돌나면 잡기 해제
+				m_isGrabState = false;
 				m_isCollided = true;
 				return;
 			}
@@ -456,6 +485,7 @@ void CCharacter::ColliderObject()
 			else
 			{
 				m_isGrab = false;
+				m_isGrabState = false;
 				m_nGrabAbleObeject = -1;
 			}
 			m_isCollided = true;
@@ -464,6 +494,7 @@ void CCharacter::ColliderObject()
 	}
 	m_isCollided = false;
 	m_isGrab = false;
+	m_isGrabState = false;
 }
 
 void CCharacter::Reset()
@@ -663,6 +694,7 @@ void CCharacter::Update(float duration)
 	{
 		m_isCollided = false;
 		m_isGrab = false;
+		m_isGrabState = false;
 		m_isReset = false;
 	}
 

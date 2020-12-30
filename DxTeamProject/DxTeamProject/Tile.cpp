@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Tile.h"
 
-const float fTime = 1.5f;
+const float fTime = 10.5f;
 const float fAddTime = 0.01f;
 
 void CTile::SetShader_Ocean()
@@ -310,6 +310,7 @@ void CTile::Render()
 	if (m_ObjectType == ObjectType::eTile13 && m_pShader_Ocean != NULL && !isUIMode)
 	{
 		// >> Ocean
+		// g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
 		SetShader_Ocean();
 		
 		UINT numPasses = 0;
