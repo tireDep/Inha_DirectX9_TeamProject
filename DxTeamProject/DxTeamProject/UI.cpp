@@ -1011,7 +1011,7 @@ void CUI::Render_Cursor()
 	matWorld = matT;
 
 	//기본
-	if (PickColor == Pick::NONE)
+	if (g_pGameManager->GetUImode())
 	{
 		m_pSprite->SetTransform(&matWorld);
 		SetRect(&s_brushrc, -px2.x+5, -px2.y+5, m_brushInfo.Width, m_brushInfo.Height);
@@ -1020,9 +1020,8 @@ void CUI::Render_Cursor()
 			&D3DXVECTOR3(0, 0, 0),
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-
 	//레드
-	if (PickColor == Pick::Red)
+	if (PickColor == Pick::Red && g_pGameManager->GetIsHasOrb("Red"))
 	{
 		m_pSprite->SetTransform(&matWorld);
 		SetRect(&s_brushrc2, -px2.x + 5, -px2.y + 5, m_brushInfo2.Width, m_brushInfo2.Height);
@@ -1033,7 +1032,7 @@ void CUI::Render_Cursor()
 	}
 
 	//블루
-	if (PickColor == Pick::Blue)
+	if (PickColor == Pick::Blue && g_pGameManager->GetIsHasOrb("Blue"))
 	{
 		m_pSprite->SetTransform(&matWorld);
 		SetRect(&s_brushrc3, -px2.x + 5, -px2.y + 5, m_brushInfo3.Width, m_brushInfo3.Height);
@@ -1044,7 +1043,7 @@ void CUI::Render_Cursor()
 	}
 
 	//그린
-	if (PickColor == Pick::Green)
+	if (PickColor == Pick::Green && g_pGameManager->GetIsHasOrb("Green"))
 	{
 		m_pSprite->SetTransform(&matWorld);
 		SetRect(&s_brushrc4, -px2.x + 5, -px2.y + 5, m_brushInfo4.Width, m_brushInfo4.Height);
@@ -1055,7 +1054,7 @@ void CUI::Render_Cursor()
 	}
 
 	//블랙
-	if (PickColor == Pick::Black)
+	if (PickColor == Pick::Black && g_pGameManager->GetIsHasOrb("Black"))
 	{
 		m_pSprite->SetTransform(&matWorld);
 		SetRect(&s_brushrc5, -px2.x + 5, -px2.y + 5, m_brushInfo5.Width, m_brushInfo5.Height);
@@ -1066,7 +1065,7 @@ void CUI::Render_Cursor()
 	}
 
 	//화이트
-	if (PickColor == Pick::White)
+	if (PickColor == Pick::White && g_pGameManager->GetIsHasOrb("White"))
 	{
 		m_pSprite->SetTransform(&matWorld);
 		SetRect(&s_brushrc6, -px2.x + 5, -px2.y + 5, m_brushInfo6.Width, m_brushInfo6.Height);
@@ -1077,7 +1076,7 @@ void CUI::Render_Cursor()
 	}
 
 	//옐로우
-	if (PickColor == Pick::Yellow)
+	if (PickColor == Pick::Yellow && g_pGameManager->GetIsHasOrb("Yellow"))
 	{
 		m_pSprite->SetTransform(&matWorld);
 		SetRect(&s_brushrc7, -px2.x + 5, -px2.y + 5, m_brushInfo7.Width, m_brushInfo7.Height);
