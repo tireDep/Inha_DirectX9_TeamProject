@@ -87,6 +87,12 @@ private:
 	
 	bool CollideWinterZone;
 	bool CollideAutumnZone;
+	bool HasBlackOrb;
+	bool BlackScript[3];
+	bool HasWhiteOrb;
+	bool WhiteScript[3];
+	bool HasYellowOrb;
+	bool YellowScript[3];
 public:
 
 	CUI();
