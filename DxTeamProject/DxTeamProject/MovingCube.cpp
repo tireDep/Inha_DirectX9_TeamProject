@@ -63,6 +63,9 @@ void CMovingCube::Setup(ST_MapData setData)
 
 	m_vPosition = m_vTranslation;
 
+	m_fSpeed = setData.gimmickData.speed_movingCube;
+	m_indexNum = setData.gimmickData.directionIndex_movingCube;
+
 	if (setData.gimmickData.startPos_movingCube < setData.gimmickData.endPos_movingCube)
 	{
 		m_fStartPos = setData.gimmickData.startPos_movingCube;
@@ -75,8 +78,21 @@ void CMovingCube::Setup(ST_MapData setData)
 	}
 	// >> 끝 점이 시작점보다 클 경우 그대로, 작을 경우 반대로 저장
 
-	m_fSpeed = setData.gimmickData.speed_movingCube;
-	m_indexNum = setData.gimmickData.directionIndex_movingCube;
+	if (m_indexNum == 0)
+	{
+		m_fStartPos = m_vPosition.x + m_fStartPos;
+		m_fEndPos = m_vPosition.x + m_fEndPos;
+	}
+	else if (m_indexNum == 1)
+	{
+		m_fStartPos = m_vPosition.y + m_fStartPos;
+		m_fEndPos = m_vPosition.y + m_fEndPos;
+	}
+	else if (m_indexNum == 2)
+	{
+		m_fStartPos = m_vPosition.z + m_fStartPos;
+		m_fEndPos = m_vPosition.z + m_fEndPos;
+	}
 
 	
 	ResetPosition = setData.vTranslate;
@@ -155,7 +171,7 @@ void CMovingCube::Setup(ST_MapData setData)
 
 void CMovingCube::Update(float duration)
 {
-	D3DXVECTOR3 start_pos, end_pos;
+	/*D3DXVECTOR3 start_pos, end_pos;
 	if (m_indexNum == 0)
 	{
 		float start = m_vPosition.x + m_fStartPos;
@@ -176,7 +192,7 @@ void CMovingCube::Update(float duration)
 		float end = m_vPosition.z + m_fEndPos;
 		start_pos = m_vPosition + D3DXVECTOR3(0, 0, start);
 		end_pos = m_vPosition + D3DXVECTOR3(0, 0, end);
-	}
+	}*/
 		
 	if (m_indexNum == 0)
 	{
