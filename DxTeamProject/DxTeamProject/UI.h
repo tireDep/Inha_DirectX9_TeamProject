@@ -79,6 +79,10 @@ private:
 	int puls;
 	bool colorpuls;
 	bool BookCol;
+
+	int BlackAlp, BlackAlp2, BlackAlp3;
+	bool Blacksw, Blacksw2, Blacksw3;
+	bool HasOrb;
 	///
 	
 public:
@@ -101,6 +105,7 @@ public:
 	void Render_Attain();
 
 	void Update();
+	void Script_Update();
 
 	void ReceiveEvent(ST_EVENT eventMsg) override;
 	string GetName() override;

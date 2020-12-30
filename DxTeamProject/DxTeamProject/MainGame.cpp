@@ -280,6 +280,8 @@ void CMainGame::Update()
 		if (m_pUI)
 			m_pUI->Update();
 
+		m_pUI->Script_Update();
+
 		if (m_pCharacter)
 		{
 			m_pCharacter->Update(m_pCamera->GetCameraDirection());
@@ -406,6 +408,7 @@ void CMainGame::Render()
 		}
 
 		m_pUI->Render_Mapname();
+		m_pUI->Rneder_Script();
 		
 		if (m_pCharacter->GetGrab())
 		{
