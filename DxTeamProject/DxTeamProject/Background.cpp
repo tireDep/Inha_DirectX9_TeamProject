@@ -6,46 +6,80 @@ const float fAddTime = 0.01f;
 
 void CBackground::SetShader()
 {
-	D3DXMATRIXA16 matView, matProj, matViewPro, matInverseWorld;
+	D3DXMATRIXA16 matView, matProjection;
+
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
+
 	g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
-	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
-	matViewPro = m_matWorld * matView * matProj;
+	g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProjection);
 
-	D3DXMATRIXA16 a, b;
-	D3DXMatrixIdentity(&a);
-	D3DXMatrixIdentity(&b);
+	D3DXMATRIXA16 matWVP, matWorldInveseTranspose, matViewInverse;
+	matWVP = m_matWorld * matView * matProjection;
+	D3DXMatrixInverse(&matWorldInveseTranspose, NULL, &m_matWorld);
+	D3DXMatrixTranspose(&matWorldInveseTranspose, &matWorldInveseTranspose);
 
-	D3DXMatrixInverse(&a, NULL, &m_matWorld);
-	D3DXMatrixTranspose(&b, &a);
+	m_pShader->SetMatrix("WVPM", &matWVP);
+	m_pShader->SetMatrix("WM", &m_matWorld);
+	m_pShader->SetMatrix("WITM", &matWorldInveseTranspose);
 
-	matInverseWorld = m_matWorld * a;
-	D3DXMatrixTranspose(&matInverseWorld, &matInverseWorld);
+	static DWORD dwOldTime = GetTickCount();
+	DWORD dwCurrentTime = GetTickCount();
+	DWORD dwElapsedTime = dwCurrentTime - dwOldTime;
+	m_pShader->SetFloat("time", dwElapsedTime / 3000.0f);
 
-	// >> : Light Shader
-	m_pShader->SetMatrix("gViewProjection", &matViewPro);
-	m_pShader->SetMatrix("gWorld", &m_matWorld);
-	m_pShader->SetMatrix("gInverseTranspose", &matInverseWorld);
+	if (m_vecTextures[0] != 0)
+		m_pShader->SetTexture("DiffuseTexture_Tex", m_vecTextures[0]);
+	else if (m_pTexture != NULL)
+		m_pShader->SetTexture("DiffuseTexture_Tex", m_pTexture);
 
-	//if (m_vecTextures[0] != 0)
-	//	m_pShader->SetTexture("DiffuseSampler_Tex", m_vecTextures[0]);
-	//else if (m_pTexture != NULL)
-	//	m_pShader->SetTexture("DiffuseSampler_Tex", m_pTexture);
+	m_pShader->SetTexture("DiffuseTexture2_Tex", m_pShaderTxt);
 
-	if(m_vecColorTag[0] == "Black")			m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "BlackTxt2.png"));
-	else if (m_vecColorTag[0] == "White")	m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "WhiteTxt2.png"));
-	else if (m_vecColorTag[0] == "Yellow")	m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "YellowTxt2.png"));
-	else if (m_vecColorTag[0] == "Green")	m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "GreenTxt2.png"));
-	else if (m_vecColorTag[0] == "Red")		m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "RedTxt2.png"));
-	else if (m_vecColorTag[0] == "Blue")	m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "BlueTxt2.png"));
-	
-	m_pShader->SetTexture("DiffuseSampler2_Tex", m_pShaderTxt);
-
-	m_pShader->SetVector("gColor", &D3DXVECTOR4(1.0, 0.0, 0.0, 1.0));
-
-	m_pShader->SetFloat("gTime", m_fShaderTime);
+	// float grayColor = 127 / 255;
+	m_pShader->SetVector("gGrayColor", &D3DXVECTOR4(0.49f, 0.49f, 0.49f, 1.0f));
 
 	m_fShaderTime += fAddTime;
-	m_pShader->SetFloat("a", 0.5f);
+
+	/// >> 기존 코드
+	//D3DXMATRIXA16 matView, matProj, matViewPro, matInverseWorld;
+	//g_pD3DDevice->GetTransform(D3DTS_VIEW, &matView);
+	//g_pD3DDevice->GetTransform(D3DTS_PROJECTION, &matProj);
+	//matViewPro = m_matWorld * matView * matProj;
+	//
+	//D3DXMATRIXA16 a, b;
+	//D3DXMatrixIdentity(&a);
+	//D3DXMatrixIdentity(&b);
+	//
+	//D3DXMatrixInverse(&a, NULL, &m_matWorld);
+	//D3DXMatrixTranspose(&b, &a);
+	//
+	//matInverseWorld = m_matWorld * a;
+	//D3DXMatrixTranspose(&matInverseWorld, &matInverseWorld);
+	//
+	//// >> : Light Shader
+	//m_pShader->SetMatrix("gViewProjection", &matViewPro);
+	//m_pShader->SetMatrix("gWorld", &m_matWorld);
+	//m_pShader->SetMatrix("gInverseTranspose", &matInverseWorld);
+	//
+	////if (m_vecTextures[0] != 0)
+	////	m_pShader->SetTexture("DiffuseSampler_Tex", m_vecTextures[0]);
+	////else if (m_pTexture != NULL)
+	////	m_pShader->SetTexture("DiffuseSampler_Tex", m_pTexture);
+	//
+	//if(m_vecColorTag[0] == "Black")			m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "BlackTxt2.png"));
+	//else if (m_vecColorTag[0] == "White")	m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "WhiteTxt2.png"));
+	//else if (m_vecColorTag[0] == "Yellow")	m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "YellowTxt2.png"));
+	//else if (m_vecColorTag[0] == "Green")	m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "GreenTxt2.png"));
+	//else if (m_vecColorTag[0] == "Red")		m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "RedTxt2.png"));
+	//else if (m_vecColorTag[0] == "Blue")	m_pShader->SetTexture("DiffuseSampler_Tex", g_pFileLoadManager->GetFileNameTexture("Resource/Texture", "BlueTxt2.png"));
+	//
+	//m_pShader->SetTexture("DiffuseSampler2_Tex", m_pShaderTxt);
+	//
+	//m_pShader->SetVector("gColor", &D3DXVECTOR4(1.0, 0.0, 0.0, 1.0));
+	//
+	//m_pShader->SetFloat("gTime", m_fShaderTime);
+	//
+	//m_fShaderTime += fAddTime;
+	//m_pShader->SetFloat("a", 0.5f);
 }
 
 CBackground::CBackground() :
@@ -162,6 +196,7 @@ void CBackground::Render()
 	// else
 	// 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
+	bool isUIMode = g_pGameManager->GetUImode();
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 
 	if (m_pMesh == NULL)
@@ -181,7 +216,7 @@ void CBackground::Render()
 			}
 			else
 			{
-				if (m_fShaderTime < fTime && m_pShader != NULL)
+				if (m_fShaderTime < fTime && m_pShader != NULL && !isUIMode)
 				{
 					SetShader();
 					UINT numPasses = 0;

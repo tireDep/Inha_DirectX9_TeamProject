@@ -1,127 +1,155 @@
-float4x4 gViewProjection : ViewProjection;
-float4x4 gWorld : World;
-float4x4 gInverseTranspose : WorldInverseTranspose;
+// : shader 
+// : dissolve 
+// https://zubi.tistory.com/18
+//
 
-float gTime;
-float a;
-float3 gColor;
+float4x4 WVPM : WorldViewProjection;
+float4x4 WM : World;
+float4x4 WITM : WorldInverseTranspose;
 
-struct VS_INPUT 
+struct VS_INPUT
 {
-   float4 mPosition : POSITION;
-   float2 mTexCoord : TEXCOORD0;
-   float3 mNormal : NORMAL;
+	float4 position : POSITION;
+	float2 uv : TEXCOORD0;
+	float3 normal : NORMAL;
 };
 
-struct VS_OUTPUT 
+struct VS_OUTPUT
 {
-   float4 mPosition : POSITION;
-   float2 mTexCoord : TEXCOORD0;
-   float4 mWPos : TEXCOORD1;
-   float3 mNormal : TEXCOORD2;
+	float4 pposition : POSITION;
+	float2 ouv : TEXCOORD0;
+	float4 wposition : TEXCOORD1;
+	float3 onormal : TEXCOORD2;
 };
 
-VS_OUTPUT VS( VS_INPUT Input )
+VS_OUTPUT vs_main(VS_INPUT input)
 {
-    VS_OUTPUT Output;
+	VS_OUTPUT output;
 
-   Output.mPosition = mul(Input.mPosition, gViewProjection);
-   Output.mWPos = mul(Input.mPosition, gWorld);
-   Output.mNormal = mul(Input.mNormal, gInverseTranspose);
+	output.pposition = mul(input.position, WVPM);
+	output.wposition = mul(input.position, WM);
+	output.onormal = mul(input.normal, WITM);
 
-   Output.mTexCoord.x = Input.mTexCoord.x;
-   Output.mTexCoord.y = 1 - Input.mTexCoord.y;
-
-   return Output;  
+	output.ouv.x = input.uv.x;
+	output.ouv.y = input.uv.y;
+	return output;
 }
 
-texture DiffuseSampler_Tex;
+texture DiffuseTexture_Tex;
 sampler2D DiffuseSampler = sampler_state
 {
-   Texture = (DiffuseSampler_Tex);
-FILTER = MIN_MAG_MIP_LINEAR;
-AddressU = Wrap;
-AddressV = Wrap;
+	Texture = (DiffuseTexture_Tex);
+MINFILTER = LINEAR;
+MAGFILTER = LINEAR;
+MIPFILTER = LINEAR;
+ADDRESSU = WRAP;
+ADDRESSV = WRAP;
+//Texture = <DiffuseTexture_Tex>;
+//FILTER = MIN_MAG_MIP_LINEAR;
+//AddressU = Wrap;
+//AddressV = Wrap;
 };
-texture DiffuseSampler2_Tex;
+
+texture DiffuseTexture2_Tex;
 sampler2D DiffuseSampler2 = sampler_state
 {
-   Texture = (DiffuseSampler2_Tex);
+	//Texture = (DiffuseTexture2_Tex);
+	//MAGFILTER = LINEAR;
+	//MINFILTER = LINEAR;
+	//MIPFILTER = LINEAR;
+	//ADDRESSU = WRAP;
+	//ADDRESSV = WRAP;
+
+	Texture = <DiffuseTexture2_Tex>;
 FILTER = MIN_MAG_MIP_LINEAR;
 AddressU = Wrap;
 AddressV = Wrap;
 };
 
-float4 PS(VS_OUTPUT Input) : COLOR0
-{   
-   float3 diffuseM = tex2D(DiffuseSampler, Input.mTexCoord);
-   float3 diffuseM2 = tex2D(DiffuseSampler2, Input.mTexCoord);
+float time = 0.1;
+float a = 0.9;
+float3 Color = { 1.0f , 0.0f, 0.0f };
+float4 gGrayColor;
 
-   float multi1 = ((diffuseM2.r * sin(gTime))*2.8);
-   float multi2 = diffuseM2.r * sin(gTime);
-   float b = saturate(pow(multi1 + multi2, 20));
-   float c = pow(multi1 + multi2, 20);
-
-   float3 ke;
-   if(a >= b)
-      ke = (1.0f, 1.0f, 1.0f);
-   else
-      ke = (0.0f, 0.0f, 0.0f);
-
-   float3 diffuse = (ke * gColor + diffuseM);
-
-   if(diffuseM.x < diffuse.x || diffuseM.y < diffuse.y || diffuseM.z < diffuse.z)
-	diffuse = (0.5, 0.5, 0.5);
-
-   return float4(diffuse, 1.0);
-}
-
-//--------------------------------------------------------------//
-// Pass 1
-//--------------------------------------------------------------//
-
-float4 PS1(VS_OUTPUT Input) : COLOR0
-{   
-   float3 diffuseM = tex2D(DiffuseSampler, Input.mTexCoord);
-   float3 diffuseM2 = tex2D(DiffuseSampler2, Input.mTexCoord);
-
-   float multi1 = ((diffuseM2.r * sin(gTime))*2.8);
-   float multi2 = diffuseM2.r * sin(gTime);
-   float b = saturate(pow(multi1 + multi2, 20));
-   float c = pow(multi1 + multi2, 100) * 10;
-
-   float3 ke;
-   if(a >= b)
-       ke = (0.8f, 0.1f, 0.1f);
-   else
-      ke = (0.0f, 0.0f, 0.0f);
-
-   float3 diffuse = (ke * gColor);
-
-   return float4(diffuse, 1.0);
-}
-
-technique Default_DirectX_Effect
+struct PS_INPUT
 {
-   pass Pass_0
-   {
-CullMode = None;
-AlphaBlendEnable = true;
-DestBlend = InvsrcAlpha;
-SrcBlend = SrcAlpha;
-      VertexShader = compile vs_2_0 VS();
-      PixelShader = compile ps_2_0 PS();
-   }
+	float4 pposition : POSITION;
+	float2 ouv : TEXCOORD0;
+	float4 wposition : TEXCOORD1;
+	float3 onormal : TEXCOORD2;
+};
 
-  pass Pass_1
-  {	
-CullMode = None;
-AlphaBlendEnable = true;
-DestBlend = One;
-SrcBlend = SrcAlpha;	
-	VertexShader = compile vs_2_0 VS();
-	PixelShader = compile ps_2_0 PS1();
-   }
+float4 ps_main(PS_INPUT input) : COLOR
+{
+	float3 diffuseM = tex2D(DiffuseSampler, input.ouv);
+float3 diffuseM2 = tex2D(DiffuseSampler2, input.ouv);
 
+float multi1 = ((diffuseM2.r * sin(time)) * 2.8);
+float multi2 = diffuseM2.r * sin(time);
+float b = saturate(pow(multi1 + multi2, 20));
+
+float alpha = pow(multi1 + multi2, 20);
+
+float3 Ke;
+if (a >= b)
+Ke = (100.0f, 1.0f, 1.0f);
+else
+Ke = (0, 0, 0);
+
+float3 diffuse = (Ke*Color + diffuseM);
+
+// : 투명하게 하지 말고 투명도 일정 부분 이하면 회색으로 처리하는 걸로 수정 
+if (alpha < 0.2)
+	return gGrayColor;
+	// return float4(0.4, 0.4, 0.4, 1.0);
+
+return float4(diffuse, alpha);
 }
 
+
+float4 ps_main_2(PS_INPUT input) : COLOR
+{
+	float3 diffuseM = tex2D(DiffuseSampler, input.ouv);
+float3 diffuseM2 = tex2D(DiffuseSampler2, input.ouv);
+
+float multi1 = ((diffuseM2.r * sin(time)) * 2.8);
+float multi2 = diffuseM2.r * sin(time);
+float b = saturate(pow(multi1 + multi2, 20));
+
+float c = pow(multi1 + multi2, 100) * 10;
+
+float3 Ke;
+if (a >= b)
+Ke = (0.8f, 0.1f, 0.1f);
+else
+Ke = (0, 0, 0);
+
+float3 diffuse = (Ke*Color);
+
+return float4(diffuse, c);
+}
+//--------------------------------------------------------------//
+// Technique Section for ColorShader
+//--------------------------------------------------------------//
+technique DissolveShader
+{
+	pass Pass_0
+	{
+		CullMode = None;
+	AlphaBlendEnable = true;
+	DestBlend = InvsrcAlpha;
+	SrcBlend = SrcAlpha;
+	VertexShader = compile vs_2_0 vs_main();
+	PixelShader = compile ps_2_0 ps_main();
+	}
+
+		pass Pass_1
+	{
+		CullMode = None;
+	AlphaBlendEnable = true;
+	DestBlend = One;
+	SrcBlend = SrcAlpha;
+	VertexShader = compile vs_2_0 vs_main();
+	PixelShader = compile ps_2_0 ps_main_2();
+	}
+}
