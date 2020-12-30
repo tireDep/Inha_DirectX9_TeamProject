@@ -438,6 +438,7 @@ void CCharacter::ColliderObject()
 					ofstream fout;
 
 					fout.open("SaveData.txt");
+					m_saveZonePosition.y = 1.0f;
 					fout << m_saveZonePosition.x << " " << m_saveZonePosition.y << " " << m_saveZonePosition.z << endl;
 					fout.close();
 
