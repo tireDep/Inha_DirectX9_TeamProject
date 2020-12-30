@@ -46,7 +46,7 @@ private:
 	multimap<int, vector<CObject*>>	m_mapObject;	// >> 맵 위치, 맵에 존재하는 오브젝트들
 	vector<bool>					m_vecIsRenderState;	// >> 맵 랜더 상태
 	int								m_IObjCnt = 0;		// >> 오브젝트 카운트
-	int								m_nowMapPos = 6;	// >> 첫 시작 위치. 0,0 바다임
+	Synthesize(int, m_nowMapPos, NowMapPos);		// >> 플레이어가 현재 위치한 맵 위치
 	// >> 
 
 
