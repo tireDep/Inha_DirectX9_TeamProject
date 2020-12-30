@@ -61,9 +61,11 @@ void CTile::SetShader_Tile()
 	m_pShader_Tile->SetMatrix("WM", &m_matWorld);
 	m_pShader_Tile->SetMatrix("WITM", &matWorldInveseTranspose);
 
-	static DWORD dwOldTime = GetTickCount();
+	if (m_dwOldTime == -1)
+		m_dwOldTime = GetTickCount();
+
 	DWORD dwCurrentTime = GetTickCount();
-	DWORD dwElapsedTime = dwCurrentTime - dwOldTime;
+	DWORD dwElapsedTime = dwCurrentTime - m_dwOldTime;
 	m_pShader_Tile->SetFloat("time", dwElapsedTime / 3000.0f);
 
 	if (m_vecTextures[0] != 0)
@@ -73,8 +75,8 @@ void CTile::SetShader_Tile()
 
 	m_pShader_Tile->SetTexture("DiffuseTexture2_Tex", m_pShaderTxt);
 
-	// float grayColor = 45 / 255;
-	m_pShader_Tile->SetVector("gGrayColor", &D3DXVECTOR4(0.17f, 0.17f, 0.17f, 1.0f));
+	// float grayColor = 66 / 255;
+	m_pShader_Tile->SetVector("gGrayColor", &D3DXVECTOR4(0.25f, 0.25f, 0.25f, 1.0f));
 
 	m_fShaderTime += fAddTime;
 
@@ -127,7 +129,8 @@ CTile::CTile() :
 	m_shaderTimeAngle(0.0f),
 	m_pShader_Tile(NULL),
 	m_pShaderTxt(NULL),
-	m_fShaderTime(0.0f)
+	m_fShaderTime(0.0f),
+	m_dwOldTime(-1)
 {
 	render = false;
 	m_strName = string("Tile") + to_string(m_nRefCount);
@@ -244,7 +247,7 @@ void CTile::Setup(const ST_MapData & mapData)
 			0, 0);
 	}
 
-	g_pFileLoadManager->FileLoad_Texture("Resource/Texture", "BasicGray_45.png", m_grayTxt);
+	g_pFileLoadManager->FileLoad_Texture("Resource/Texture", "BasicGray_45_2.png", m_grayTxt);
 
 	// D3DXMATRIXA16 matS, matR, matT;
 	D3DXMatrixScaling(&m_matS, m_vScale.x, m_vScale.y, m_vScale.z);
@@ -310,7 +313,7 @@ void CTile::Render()
 	if (m_ObjectType == ObjectType::eTile13 && m_pShader_Ocean != NULL && !isUIMode)
 	{
 		// >> Ocean
-		// g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
+		g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, false);
 		SetShader_Ocean();
 		
 		UINT numPasses = 0;

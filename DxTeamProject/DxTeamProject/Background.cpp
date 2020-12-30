@@ -22,9 +22,11 @@ void CBackground::SetShader()
 	m_pShader->SetMatrix("WM", &m_matWorld);
 	m_pShader->SetMatrix("WITM", &matWorldInveseTranspose);
 
-	static DWORD dwOldTime = GetTickCount();
+	if (m_dwOldTime == -1)
+		m_dwOldTime = GetTickCount();
+
 	DWORD dwCurrentTime = GetTickCount();
-	DWORD dwElapsedTime = dwCurrentTime - dwOldTime;
+	DWORD dwElapsedTime = dwCurrentTime - m_dwOldTime;
 	m_pShader->SetFloat("time", dwElapsedTime / 3000.0f);
 
 	if (m_vecTextures[0] != 0)
@@ -85,7 +87,8 @@ void CBackground::SetShader()
 CBackground::CBackground() :
 	m_pShader(NULL),
 	m_pShaderTxt(NULL),
-	m_fShaderTime(0.0f)
+	m_fShaderTime(0.0f),
+	m_dwOldTime(-1)
 {
 	m_strName = string("Background") + to_string(m_nRefCount);
 }

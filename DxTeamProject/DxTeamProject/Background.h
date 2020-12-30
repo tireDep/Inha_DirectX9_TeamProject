@@ -9,6 +9,7 @@ private:
 	LPD3DXEFFECT m_pShader;
 	LPDIRECT3DTEXTURE9 m_pShaderTxt;
 	FLOAT m_fShaderTime;
+	DWORD m_dwOldTime;
 	void SetShader();
 public:
 	CBackground();
