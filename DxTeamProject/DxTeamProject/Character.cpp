@@ -414,29 +414,24 @@ void CCharacter::ColliderObject()
 					ZoneType zone = iObjCheck->ZoneIndex();
 
 
-					if (zone == ZoneType::eFall)
-					{
-
-						if (g_pSoundManager->isPlaying() == false)
-						{
-							g_pSoundManager->PlayBGM("w_first");
-						}
-					}
-
-					else if (zone == ZoneType::eWinter)
-					{
-
-						if (g_pSoundManager->isPlaying() == false)
-						{
-							g_pSoundManager->PlayBGM("f_first");
-						}
-
-					}
-					else  if (zone == ZoneType::eZone)
-					{
-						g_pSoundManager->Stop();
-
-					}
+					//if (zone == ZoneType::eFall)
+					//{
+					//	if (g_pSoundManager->isPlaying() == false)
+					//	{
+					//		g_pSoundManager->PlayBGM("w_first");
+					//	}
+					//}
+					//else if (zone == ZoneType::eWinter)
+					//{
+					//	if (g_pSoundManager->isPlaying() == false)
+					//	{
+					//		g_pSoundManager->PlayBGM("f_first");
+					//	}
+					//}
+					//else  if (zone == ZoneType::eZone)
+					//{
+					//	g_pSoundManager->Stop();
+					//}
 					ofstream fout;
 
 					fout.open("SaveData.txt");

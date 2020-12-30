@@ -33,6 +33,8 @@ CUI::CUI()
 	YellowScript[0] = YellowScript[1] = YellowScript[2] = false;
 	AttainWinter[0] = AttainWinter[1] = false;
 	AttatinAutumn[0] = AttatinAutumn[1] = false;
+	SoundWinter[0] = SoundWinter[1] = true;
+	SoundAutumn[0] = SoundAutumn[1] = true;
 }
 
 CUI::~CUI()
@@ -1334,6 +1336,12 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 		}
 		else if (strstr(eventMsg.conditionName.c_str(), "White"))
 		{
+			if (g_pSoundManager->isPlaying() && SoundWinter[0])
+			{
+				g_pSoundManager->Stop();
+				g_pSoundManager->PlayBGM("w_middle");
+				SoundWinter[0] = false;
+			}
 			if (!HasWhiteOrb && is_scriptWhiteOrb)
 			{
 				is_scriptPlus = false;
@@ -1355,6 +1363,8 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 		/// Zone
 		else if (strstr(eventMsg.conditionName.c_str(), "Winter"))
 		{
+			if (!g_pSoundManager->isPlaying())
+				g_pSoundManager->PlayBGM("w_first");
 			AttainWinter[0] = true;
 			CollideWinterZone = true;
 			colorpuls = false;
@@ -1388,6 +1398,13 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 					break;
 				case 26:	// W4
 					AttainWinter[1] = true;
+					if (g_pSoundManager->isPlaying() && SoundWinter[1])
+					{
+						g_pSoundManager->Stop();
+						g_pSoundManager->PlayBGM("w_last");
+						SoundWinter[1] = false;
+					}
+					//g_pSoundManager->PlayBGM("w_last");
 					break;
 				case 28:	// W6
 					break;
