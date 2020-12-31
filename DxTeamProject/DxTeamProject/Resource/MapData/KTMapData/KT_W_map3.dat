@@ -985,16 +985,16 @@ EventTrigger_Save31
 # ObjectType
 39
 # Scale
-1
+2
 5
-12
+15
 # Rotate
 0
 0
 0
 # Translate
--12
-0
+-13
+0.5
 -3.5
 # Color
 0.5

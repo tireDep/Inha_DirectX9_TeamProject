@@ -35,6 +35,7 @@ CUI::CUI()
 	AttatinAutumn[0] = AttatinAutumn[1] = false;
 	SoundWinter[0] = SoundWinter[1] = true;
 	SoundAutumn[0] = SoundAutumn[1] = true;
+	CollideSavePoint = false;
 }
 
 CUI::~CUI()
@@ -273,6 +274,17 @@ void CUI::Setup_UI()
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED, D3DX_FILTER_NONE
 		, D3DX_DEFAULT, 0, &m_textInfo7, NULL, &m_textUI7);
+
+	// Gain
+	D3DXCreateTextureFromFileExA(g_pD3DDevice,
+		"UI/Gain.png",
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT_NONPOW2,
+		D3DX_DEFAULT,
+		0,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_MANAGED, D3DX_FILTER_NONE
+		, D3DX_DEFAULT, 0, &m_textInfo8, NULL, &m_textUI8);
 }
 
 void CUI::Setup_Script()
@@ -407,11 +419,23 @@ void CUI::Render_Script()
 
 	/// Black Orb
 	if(HasBlackOrb)
-	//if(g_pGameManager->GetIsHasOrb("Black"))
 	{
 		if (BlackScript[0])
 		{
-			//cout << "In" << endl;
+			// Ctrl
+			SetRect(&s_textrc6, -470, -270, m_textInfo6.Width, m_textInfo6.Height);
+			m_pSprite->Draw(m_textUI6, &s_textrc6,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB((int)scriptPlus, 255, 255, 255));
+
+			// Gain
+			SetRect(&s_textrc8, -720, -270, m_textInfo8.Width, m_textInfo8.Height);
+			m_pSprite->Draw(m_textUI8, &s_textrc8,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB((int)scriptPlus, 255, 255, 255));
+
 			SetRect(&s_scrirc, -270, -590, m_scriInfo.Width, m_scriInfo.Height);
 			m_pSprite->Draw(m_scriUI, &s_scrirc,
 				&D3DXVECTOR3(0, 0, 0),
@@ -462,7 +486,19 @@ void CUI::Render_Script()
 	{
 		if (WhiteScript[0])
 		{
-			//cout << "In" << endl;
+			// Ctrl
+			SetRect(&s_textrc6, -470, -270, m_textInfo6.Width, m_textInfo6.Height);
+			m_pSprite->Draw(m_textUI6, &s_textrc6,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB((int)scriptPlus, 255, 255, 255));
+			// Gain
+			SetRect(&s_textrc8, -720, -270, m_textInfo8.Width, m_textInfo8.Height);
+			m_pSprite->Draw(m_textUI8, &s_textrc8,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB((int)scriptPlus, 255, 255, 255));
+
 			SetRect(&s_scrirc4, -270, -590, m_scriInfo4.Width, m_scriInfo4.Height);
 			m_pSprite->Draw(m_scriUI4, &s_scrirc4,
 				&D3DXVECTOR3(0, 0, 0),
@@ -495,7 +531,7 @@ void CUI::Render_Script()
 		}
 		if (WhiteScript[2])
 		{
-			SetRect(&s_scrirc6, -310, -610, m_scriInfo6.Width, m_scriInfo6.Height);
+			SetRect(&s_scrirc6, -310, -590, m_scriInfo6.Width, m_scriInfo6.Height);
 			m_pSprite->Draw(m_scriUI6, &s_scrirc6,
 				&D3DXVECTOR3(0, 0, 0),
 				&D3DXVECTOR3(0, 0, 0),
@@ -512,7 +548,20 @@ void CUI::Render_Script()
 	{
 		if (YellowScript[0])
 		{
-			//cout << "In" << endl;
+			// Ctrl
+			SetRect(&s_textrc6, -470, -270, m_textInfo6.Width, m_textInfo6.Height);
+			m_pSprite->Draw(m_textUI6, &s_textrc6,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB((int)scriptPlus, 255, 255, 255));
+
+			// Gain
+			SetRect(&s_textrc8, -720, -270, m_textInfo8.Width, m_textInfo8.Height);
+			m_pSprite->Draw(m_textUI8, &s_textrc8,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB((int)scriptPlus, 255, 255, 255));
+
 			SetRect(&s_scrirc7, -345, -590, m_scriInfo7.Width, m_scriInfo7.Height);
 			m_pSprite->Draw(m_scriUI7, &s_scrirc7,
 				&D3DXVECTOR3(0, 0, 0),
@@ -568,9 +617,6 @@ void CUI::Render_Script()
 	//		D3DCOLOR_ARGB(BlackAlp, 255, 255, 255));
 	//	HasOrb = true;
 	//}
-
-
-
 	//SetRect(&s_scrirc2, -380, -590,
 	//	m_scriInfo2.Width, m_scriInfo2.Height);
 	//m_pSprite->Draw(m_scriUI2, &s_scrirc2,
@@ -1238,21 +1284,75 @@ void CUI::Render_Mapname()
 	////겨울
 	if (CollideWinterZone)
 	{
+		// Gain
+		SetRect(&s_textrc8, -720, -270, m_textInfo8.Width, m_textInfo8.Height);
+		m_pSprite->Draw(m_textUI8, &s_textrc8,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB((int)puls, 255, 255, 255));
+
 		SetRect(&s_textrc2, -25, -295, m_textInfo2.Width, m_textInfo2.Height);
 		m_pSprite->Draw(m_textUI2, &s_textrc2,
 			&D3DXVECTOR3(0, 0, 0),
 			&D3DXVECTOR3(0, 0, 0),
 			D3DCOLOR_ARGB((int)puls, 255, 255, 255));
+		if (puls <= 0.0f)
+		{
+			puls = 0.0f;
+			CollideWinterZone = false;
+		}
 	}
 
 	//가을
 	if (CollideAutumnZone)
 	{
+		// Gain
+		SetRect(&s_textrc8, -720, -270, m_textInfo8.Width, m_textInfo8.Height);
+		m_pSprite->Draw(m_textUI8, &s_textrc8,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB((int)puls, 255, 255, 255));
+
 		SetRect(&s_textrc3, -25, -295, m_textInfo3.Width, m_textInfo3.Height);
 		m_pSprite->Draw(m_textUI3, &s_textrc3,
 			&D3DXVECTOR3(0, 0, 0),
 			&D3DXVECTOR3(0, 0, 0),
 			D3DCOLOR_ARGB((int)puls, 255, 255, 255));
+		if (puls <= 0.0f)
+		{
+			puls = 0.0f;
+			CollideAutumnZone = false;
+		}
+	}
+
+	if (CollideSavePoint)
+	{
+		// Gain
+		if (AttainWinter[1] || AttatinAutumn[1])
+		{
+			SetRect(&s_textrc8, -720, -270, m_textInfo8.Width, m_textInfo8.Height);
+			m_pSprite->Draw(m_textUI8, &s_textrc8,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB((int)puls, 255, 255, 255));
+		}
+		// Script
+		SetRect(&s_scrirc10, -1050, -15, m_scriInfo10.Width, m_scriInfo10.Height);
+		m_pSprite->Draw(m_scriUI10, &s_scrirc10,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(int(puls), 255, 255, 255));
+		// Reset Button
+		SetRect(&s_textrc7, -720, -420, m_textInfo7.Width, m_textInfo7.Height);
+		m_pSprite->Draw(m_textUI7, &s_textrc7,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB((int)puls, 255, 255, 255));
+		if (puls <= 0.0f)
+		{
+			puls = 0.0f;
+			CollideSavePoint = false;
+		}
 	}
 
 	m_pSprite->End();
@@ -1405,8 +1505,14 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 					break;
 
 				case 23:	// W3
+					CollideSavePoint = true;
+					colorpuls = false;
+					puls = 0.0f;
 					break;
 				case 26:	// W4
+					CollideSavePoint = true;
+					colorpuls = false;
+					puls = 0.0f;
 					AttainWinter[1] = true;
 					if (g_pSoundManager->isPlaying() && SoundWinter[1])
 					{
@@ -1416,6 +1522,9 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 					}
 					break;
 				case 28:	// W6
+					CollideSavePoint = true;
+					colorpuls = false;
+					puls = 0.0f;
 					break;
 				default:
 					break;

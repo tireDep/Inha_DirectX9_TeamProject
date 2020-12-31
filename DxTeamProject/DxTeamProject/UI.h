@@ -29,7 +29,7 @@ private:
 	///////////text
 	D3DXIMAGE_INFO m_textInfo , m_textInfo2, m_textInfo3;	// Grab, Winter, Fall
 	D3DXIMAGE_INFO m_textInfo4, m_textInfo5;				// Push, Pull
-	D3DXIMAGE_INFO m_textInfo6, m_textInfo7;				// Ctrl, Reset
+	D3DXIMAGE_INFO m_textInfo6, m_textInfo7, m_textInfo8;	// Ctrl, Reset, Gain
 
 	D3DXIMAGE_INFO m_brushInfo, m_brushInfo2, m_brushInfo3,	//Brush
 		m_brushInfo4, m_brushInfo5, m_brushInfo6, m_brushInfo7;
@@ -37,7 +37,7 @@ private:
 
 	LPDIRECT3DTEXTURE9 m_textUI , m_textUI2 , m_textUI3;	// Grab, Winter, Fall
 	LPDIRECT3DTEXTURE9 m_textUI4, m_textUI5;				// Push, Pull
-	LPDIRECT3DTEXTURE9 m_textUI6, m_textUI7;				// Ctrl, Reset
+	LPDIRECT3DTEXTURE9 m_textUI6, m_textUI7, m_textUI8;		// Ctrl, Reset, Gain
 
 	LPDIRECT3DTEXTURE9 m_brushCur, m_brushCur2, m_brushCur3, //Brush
 		m_brushCur4, m_brushCur5, m_brushCur6, m_brushCur7;
@@ -45,7 +45,7 @@ private:
 
 	RECT s_textrc, s_textrc2 , s_textrc3;	// Grab, Winter, Fall
 	RECT s_textrc4, s_textrc5;				// Push, Pull
-	RECT s_textrc6, s_textrc7;				// Ctrl, Reset
+	RECT s_textrc6, s_textrc7, s_textrc8;	// Ctrl, Reset, Gain
 	RECT s_brushrc, s_brushrc2,				//Brush
 		s_brushrc3, s_brushrc4,
 		s_brushrc5, s_brushrc6,
@@ -115,6 +115,7 @@ private:
 	bool AttatinAutumn[2];
 	bool SoundWinter[2];
 	bool SoundAutumn[2];
+	bool CollideSavePoint;
 public:
 
 	CUI();
