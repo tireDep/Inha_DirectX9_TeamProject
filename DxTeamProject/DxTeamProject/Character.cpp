@@ -33,8 +33,8 @@ CCharacter::CCharacter()
 	// , m_saveZonePosition(5, 1, -5)
 	, m_saveZonePosition(0, 0, 10)
 #else
-	//,m_saveZonePosition(30, 1, -110)
-	, m_saveZonePosition(90, 1, -193)
+	, m_saveZonePosition(30, 1, -110)
+	//, m_saveZonePosition(90, 1, -193)
 #endif
 	, m_vGrabDirection(0, 0, 1)
 	, m_vGrabCamDir(0, 0, 1)

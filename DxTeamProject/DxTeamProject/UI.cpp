@@ -1539,7 +1539,11 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 					colorpuls = false;
 					puls = 0.0f;
 					break;
-
+				case 7:		// A2
+					CollideSavePoint = true;
+					colorpuls = false;
+					puls = 0.0f;
+					break;
 				default:
 					break;
 			}
