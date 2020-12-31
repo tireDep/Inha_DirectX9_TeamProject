@@ -4416,6 +4416,82 @@ White
 
 # Object_Start
 # ObjectName
+Door144
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_frame.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+28
+# Scale
+0.2
+0.2
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+1
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# ConditionName
+Yellow
+# ConditionIndex
+0
+# ConditionOrbIndex
+2
+# Object_End
+
+# Object_Start
+# ObjectName
+Door145
+# FolderPath
+Resource/XFile/Gimmick/Door
+# FilePath
+door_right.X
+# TxtPath
+cubeworld_texture.tga
+# ObjectType
+29
+# Scale
+0.2
+0.2
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+1
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# GimmickData
+# ConditionName
+Yellow
+# ConditionIndex
+0
+# ConditionOrbIndex
+0
+# Object_End
+
+# Object_Start
+# ObjectName
 Autumn_Tree_04_146
 # FolderPath
 Resource/XFile/Background/SeasonTree
@@ -4627,7 +4703,7 @@ InvisibleWall154
 0
 # Translate
 7.5
-0.5
+1.5
 14.5
 # Color
 0.5
@@ -4658,7 +4734,7 @@ InvisibleWall155
 0
 # Translate
 -10.5
-0.5
+1.5
 14.5
 # Color
 0.5
