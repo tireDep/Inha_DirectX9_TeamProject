@@ -115,6 +115,7 @@ private:
 	bool AttatinAutumn[2];
 	bool SoundWinter[2];
 	bool SoundAutumn[2];
+	bool CollideSavePoint;
 public:
 
 	CUI();

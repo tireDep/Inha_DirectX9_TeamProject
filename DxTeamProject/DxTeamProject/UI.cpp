@@ -35,6 +35,7 @@ CUI::CUI()
 	AttatinAutumn[0] = AttatinAutumn[1] = false;
 	SoundWinter[0] = SoundWinter[1] = true;
 	SoundAutumn[0] = SoundAutumn[1] = true;
+	CollideSavePoint = false;
 }
 
 CUI::~CUI()
@@ -407,11 +408,9 @@ void CUI::Render_Script()
 
 	/// Black Orb
 	if(HasBlackOrb)
-	//if(g_pGameManager->GetIsHasOrb("Black"))
 	{
 		if (BlackScript[0])
 		{
-			//cout << "In" << endl;
 			SetRect(&s_scrirc, -270, -590, m_scriInfo.Width, m_scriInfo.Height);
 			m_pSprite->Draw(m_scriUI, &s_scrirc,
 				&D3DXVECTOR3(0, 0, 0),
@@ -462,7 +461,6 @@ void CUI::Render_Script()
 	{
 		if (WhiteScript[0])
 		{
-			//cout << "In" << endl;
 			SetRect(&s_scrirc4, -270, -590, m_scriInfo4.Width, m_scriInfo4.Height);
 			m_pSprite->Draw(m_scriUI4, &s_scrirc4,
 				&D3DXVECTOR3(0, 0, 0),
@@ -512,7 +510,6 @@ void CUI::Render_Script()
 	{
 		if (YellowScript[0])
 		{
-			//cout << "In" << endl;
 			SetRect(&s_scrirc7, -345, -590, m_scriInfo7.Width, m_scriInfo7.Height);
 			m_pSprite->Draw(m_scriUI7, &s_scrirc7,
 				&D3DXVECTOR3(0, 0, 0),
@@ -568,9 +565,6 @@ void CUI::Render_Script()
 	//		D3DCOLOR_ARGB(BlackAlp, 255, 255, 255));
 	//	HasOrb = true;
 	//}
-
-
-
 	//SetRect(&s_scrirc2, -380, -590,
 	//	m_scriInfo2.Width, m_scriInfo2.Height);
 	//m_pSprite->Draw(m_scriUI2, &s_scrirc2,
@@ -1243,6 +1237,11 @@ void CUI::Render_Mapname()
 			&D3DXVECTOR3(0, 0, 0),
 			&D3DXVECTOR3(0, 0, 0),
 			D3DCOLOR_ARGB((int)puls, 255, 255, 255));
+		if (puls <= 0.0f)
+		{
+			puls = 0.0f;
+			CollideWinterZone = false;
+		}
 	}
 
 	//°¡À»
@@ -1253,8 +1252,26 @@ void CUI::Render_Mapname()
 			&D3DXVECTOR3(0, 0, 0),
 			&D3DXVECTOR3(0, 0, 0),
 			D3DCOLOR_ARGB((int)puls, 255, 255, 255));
+		if (puls <= 0.0f)
+		{
+			puls = 0.0f;
+			CollideAutumnZone = false;
+		}
 	}
 
+	if (CollideSavePoint)
+	{
+		SetRect(&s_scrirc10, -1050, -15, m_scriInfo10.Width, m_scriInfo10.Height);
+		m_pSprite->Draw(m_scriUI10, &s_scrirc10,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB(int(puls), 255, 255, 255));
+		if (puls <= 0.0f)
+		{
+			puls = 0.0f;
+			CollideSavePoint = false;
+		}
+	}
 	m_pSprite->End();
 }
 
@@ -1405,8 +1422,14 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 					break;
 
 				case 23:	// W3
+					CollideSavePoint = true;
+					colorpuls = false;
+					puls = 0.0f;
 					break;
 				case 26:	// W4
+					CollideSavePoint = true;
+					colorpuls = false;
+					puls = 0.0f;
 					AttainWinter[1] = true;
 					if (g_pSoundManager->isPlaying() && SoundWinter[1])
 					{
@@ -1416,6 +1439,9 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 					}
 					break;
 				case 28:	// W6
+					CollideSavePoint = true;
+					colorpuls = false;
+					puls = 0.0f;
 					break;
 				default:
 					break;
