@@ -411,6 +411,13 @@ void CUI::Render_Script()
 	{
 		if (BlackScript[0])
 		{
+			// Ctrl
+			SetRect(&s_textrc6, -470, -270, m_textInfo6.Width, m_textInfo6.Height);
+			m_pSprite->Draw(m_textUI6, &s_textrc6,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB((int)scriptPlus, 255, 255, 255));
+
 			SetRect(&s_scrirc, -270, -590, m_scriInfo.Width, m_scriInfo.Height);
 			m_pSprite->Draw(m_scriUI, &s_scrirc,
 				&D3DXVECTOR3(0, 0, 0),
@@ -461,6 +468,13 @@ void CUI::Render_Script()
 	{
 		if (WhiteScript[0])
 		{
+			// Ctrl
+			SetRect(&s_textrc6, -470, -270, m_textInfo6.Width, m_textInfo6.Height);
+			m_pSprite->Draw(m_textUI6, &s_textrc6,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB((int)scriptPlus, 255, 255, 255));
+
 			SetRect(&s_scrirc4, -270, -590, m_scriInfo4.Width, m_scriInfo4.Height);
 			m_pSprite->Draw(m_scriUI4, &s_scrirc4,
 				&D3DXVECTOR3(0, 0, 0),
@@ -493,7 +507,7 @@ void CUI::Render_Script()
 		}
 		if (WhiteScript[2])
 		{
-			SetRect(&s_scrirc6, -310, -610, m_scriInfo6.Width, m_scriInfo6.Height);
+			SetRect(&s_scrirc6, -310, -590, m_scriInfo6.Width, m_scriInfo6.Height);
 			m_pSprite->Draw(m_scriUI6, &s_scrirc6,
 				&D3DXVECTOR3(0, 0, 0),
 				&D3DXVECTOR3(0, 0, 0),
@@ -510,6 +524,13 @@ void CUI::Render_Script()
 	{
 		if (YellowScript[0])
 		{
+			// Ctrl
+			SetRect(&s_textrc6, -470, -270, m_textInfo6.Width, m_textInfo6.Height);
+			m_pSprite->Draw(m_textUI6, &s_textrc6,
+				&D3DXVECTOR3(0, 0, 0),
+				&D3DXVECTOR3(0, 0, 0),
+				D3DCOLOR_ARGB((int)scriptPlus, 255, 255, 255));
+
 			SetRect(&s_scrirc7, -345, -590, m_scriInfo7.Width, m_scriInfo7.Height);
 			m_pSprite->Draw(m_scriUI7, &s_scrirc7,
 				&D3DXVECTOR3(0, 0, 0),
