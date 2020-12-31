@@ -1352,6 +1352,7 @@ void CUI::Render_Mapname()
 		{
 			puls = 0.0f;
 			CollideSavePoint = false;
+			AttainWinter[1] = false;
 		}
 	}
 
@@ -1532,6 +1533,13 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 					colorpuls = false;
 					puls = 0.0f;
 					break;
+
+				case 6:		// A1
+					CollideSavePoint = true;
+					colorpuls = false;
+					puls = 0.0f;
+					break;
+
 				default:
 					break;
 			}
