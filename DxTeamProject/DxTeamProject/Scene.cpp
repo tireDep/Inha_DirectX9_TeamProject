@@ -339,12 +339,12 @@ void CScene::Update()
 		Alpha += round(Plus);
 	}
 
-	if (g_pGameManager->GetNowScene() == SceneType::eEndingScene && endY!=2160)
+	if (g_pGameManager->GetNowScene() == SceneType::eEndingScene && endY<=2160)
 	{
-		endY += 0.25;
+		endY += 0.025;
 	}
 
-	if (endY == 2160)
+	if (endY >= 2160)
 	{
 		TextOn = true;
 	}
@@ -352,13 +352,13 @@ void CScene::Update()
 	{
 		if (colorpuls == false)
 		{
-			Alpha2 += 0.25f;
+			Alpha2 += 0.025f;
 			if (Alpha2 >= 255)
 				colorpuls = true;
 		}
 		else if (colorpuls == true)
 		{
-			Alpha2 -= 0.25f;
+			Alpha2 -= 0.025f;
 			if (Alpha2 <= 0)
 			{
 				Alpha2 = 0.0f;
