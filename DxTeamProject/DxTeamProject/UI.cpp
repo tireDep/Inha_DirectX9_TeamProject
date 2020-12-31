@@ -1463,6 +1463,12 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 		}
 		else if (strstr(eventMsg.conditionName.c_str(), "Yellow"))
 		{
+			if (g_pSoundManager->isPlaying() && SoundAutumn[1])
+			{
+				g_pSoundManager->Stop();
+				g_pSoundManager->PlayBGM("f_middle");
+				SoundAutumn[1] = false;
+			}
 			if (!HasYellowOrb && is_scriptYellowOrb)
 			{
 				is_scriptPlus = false;
