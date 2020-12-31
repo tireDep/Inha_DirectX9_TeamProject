@@ -246,10 +246,7 @@ void CMainGame::Update()
 		if (GetKeyState('2') & 0x8000)
 		{
 			g_pGameManager->SetGetOrb("White");
-		}
-		if (GetKeyState('3') & 0x8000)
-		{
-			g_pGameManager->SetGetOrb("Yellow");
+			g_pGameManager->SetGetOrb("Black");
 		}
 	//	if (GetKeyState('2') & 0x8000)
 	//	{

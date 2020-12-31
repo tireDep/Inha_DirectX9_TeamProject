@@ -34,7 +34,7 @@ CUI::CUI()
 	AttainWinter[0] = AttainWinter[1] = false;
 	AttatinAutumn[0] = AttatinAutumn[1] = false;
 	SoundWinter[0] = SoundWinter[1] = true;
-	SoundAutumn[0] = SoundAutumn[1] = true;
+	SoundAutumn[0] = SoundAutumn[1] = SoundAutumn[2] = true;
 	CollideSavePoint = false;
 }
 
@@ -1482,6 +1482,12 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 		}
 		else if (strstr(eventMsg.conditionName.c_str(), "Fall"))
 		{
+			if (g_pSoundManager->isPlaying() && SoundAutumn[0])
+			{
+				g_pSoundManager->Stop();
+				g_pSoundManager->PlayBGM("f_first");
+				SoundAutumn[0] = false;
+			}
 			AttatinAutumn[0] = true;
 			CollideAutumnZone = true;
 			colorpuls = false;

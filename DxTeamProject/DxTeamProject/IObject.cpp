@@ -40,6 +40,8 @@ void IObject::Release()
 
 void IObject::Update(CRay ray)
 {
+	if (m_pMesh == NULL)
+		return;
 	D3DXVECTOR3* pVertices;
 
 	m_pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVertices);

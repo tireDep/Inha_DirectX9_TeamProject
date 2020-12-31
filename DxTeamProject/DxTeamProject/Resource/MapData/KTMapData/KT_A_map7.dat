@@ -8371,7 +8371,7 @@ InvisibleWall1042
 0
 # Translate
 14.5
-2
+0.5
 13.5
 # Color
 0.5
@@ -8402,7 +8402,7 @@ InvisibleWall1043
 0
 # Translate
 14.5
-2
+0.5
 11.5
 # Color
 0.5
@@ -8433,7 +8433,7 @@ InvisibleWall1044
 0
 # Translate
 14.5
-2
+0.5
 9.5
 # Color
 0.5
@@ -8464,7 +8464,7 @@ InvisibleWall1045
 0
 # Translate
 14.5
-2
+0.5
 8.5
 # Color
 0.5
@@ -8495,7 +8495,7 @@ InvisibleWall1046
 0
 # Translate
 14.5
-2
+0.5
 7.5
 # Color
 0.5
@@ -8526,7 +8526,7 @@ InvisibleWall1047
 0
 # Translate
 14.5
-2
+0.5
 6.5
 # Color
 0.5
@@ -8557,7 +8557,7 @@ InvisibleWall1048
 0
 # Translate
 13.5
-1
+0.5
 11.5
 # Color
 0.5
@@ -8588,7 +8588,7 @@ InvisibleWall1049
 0
 # Translate
 14.5
-2
+0.5
 4.5
 # Color
 0.5
@@ -8619,7 +8619,7 @@ InvisibleWall1050
 0
 # Translate
 14.5
-2
+0.5
 2.5
 # Color
 0.5
@@ -8650,7 +8650,7 @@ InvisibleWall1051
 0
 # Translate
 14.5
-2
+0.5
 0.5
 # Color
 0.5
@@ -8681,7 +8681,7 @@ InvisibleWall1053
 0
 # Translate
 14.5
-2
+0.5
 -1.5
 # Color
 0.5
@@ -8712,7 +8712,7 @@ InvisibleWall1054
 0
 # Translate
 14.5
-2
+0.5
 -3.5
 # Color
 0.5
@@ -8743,7 +8743,7 @@ InvisibleWall1055
 0
 # Translate
 14.5
-2
+0.5
 -5.5
 # Color
 0.5
@@ -8774,7 +8774,7 @@ InvisibleWall1056
 0
 # Translate
 14.5
-2
+0.5
 -7.5
 # Color
 0.5
@@ -8805,7 +8805,7 @@ InvisibleWall1057
 0
 # Translate
 14.5
-2
+0.5
 -9.5
 # Color
 0.5
@@ -8836,7 +8836,7 @@ InvisibleWall1058
 0
 # Translate
 14.5
-2
+0.5
 -11.5
 # Color
 0.5
@@ -8867,7 +8867,7 @@ InvisibleWall1059
 0
 # Translate
 14.5
-2
+0.5
 -13.5
 # Color
 0.5
@@ -8875,6 +8875,41 @@ InvisibleWall1059
 0.5
 1
 # ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+EventTrigger_Zone279
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+39
+# Scale
+12
+7
+1
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+-12
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# TriggerIndex
+1
+# ZoneIndex
+1
 # Object_End
 
 # Section =======================================

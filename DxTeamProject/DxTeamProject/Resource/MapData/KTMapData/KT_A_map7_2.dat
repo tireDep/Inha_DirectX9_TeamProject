@@ -1,37 +1,5 @@
 # Object_Start
 # ObjectName
-Tile_07_Rock2_2
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_05.X
-# TxtPath
-Texture_01.png
-# ObjectType
-4
-# Scale
-0.1
-0.5
-0.3
-# Rotate
-0
-0
-0
-# Translate
-8.5
-0
-13.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
-# Object_End
-
-# Object_Start
-# ObjectName
 Tile_07_Rock2_1
 # FolderPath
 Resource/XFile/Tile
@@ -43,16 +11,48 @@ Texture_01.png
 4
 # Scale
 0.1
-0.5
-0.3
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
-4.5
+-2.5
 0
-13.5
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_2
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-1.5
+0
+13
 # Color
 0.5
 0.5
@@ -82,9 +82,9 @@ Texture_01.png
 0
 0
 # Translate
--7.5
+-2.5
 0
-12.5
+11.5
 # Color
 0.5
 0.5
@@ -108,15 +108,15 @@ Texture_01.png
 # Scale
 0.1
 0.1
-0.1
+0.5
 # Rotate
 0
 0
 0
 # Translate
--11.5
+-3.5
 0
-7.5
+8.5
 # Color
 0.5
 0.5
@@ -140,15 +140,15 @@ Texture_01.png
 # Scale
 0.1
 0.1
-0.1
+0.2
 # Rotate
 0
 0
 0
 # Translate
--4.5
+-2.5
 0
-7.5
+5
 # Color
 0.5
 0.5
@@ -170,17 +170,17 @@ Texture_01.png
 # ObjectType
 4
 # Scale
-0.2
 0.1
-0.5
+0.1
+0.6
 # Rotate
 0
 0
 0
 # Translate
--14
+-1.5
 0
--11.5
+1
 # Color
 0.5
 0.5
@@ -202,7 +202,7 @@ Texture_01.png
 # ObjectType
 4
 # Scale
-0.2
+0.1
 0.1
 0.1
 # Rotate
@@ -210,9 +210,9 @@ Texture_01.png
 0
 0
 # Translate
--10
+-2.5
 0
--14.5
+-2.5
 # Color
 0.5
 0.5
@@ -234,7 +234,7 @@ Texture_01.png
 # ObjectType
 4
 # Scale
-0.3
+0.1
 0.1
 0.1
 # Rotate
@@ -242,9 +242,9 @@ Texture_01.png
 0
 0
 # Translate
--4.5
+-3.5
 0
--14.5
+-3.5
 # Color
 0.5
 0.5
@@ -274,9 +274,9 @@ Texture_01.png
 0
 0
 # Translate
-2.5
+-4.5
 0
--1.5
+-4.5
 # Color
 0.5
 0.5
@@ -298,17 +298,17 @@ Texture_01.png
 # ObjectType
 4
 # Scale
-0.2
 0.1
-0.4
+0.1
+0.5
 # Rotate
 0
 0
 0
 # Translate
-3
+-5.5
 0
--4
+-7.5
 # Color
 0.5
 0.5
@@ -332,15 +332,15 @@ Texture_01.png
 # Scale
 0.1
 0.1
-0.4
+0.1
 # Rotate
 0
 0
 0
 # Translate
-2.5
+-4.5
 0
--8
+-10.5
 # Color
 0.5
 0.5
@@ -362,17 +362,17 @@ Texture_01.png
 # ObjectType
 4
 # Scale
-0.2
 0.1
-0.9
+0.1
+0.2
 # Rotate
 0
 0
 0
 # Translate
-4
+-3.5
 0
--10.5
+-12
 # Color
 0.5
 0.5
@@ -394,17 +394,17 @@ Texture_01.png
 # ObjectType
 4
 # Scale
-0.5
-0.5
 0.1
+0.1
+0.2
 # Rotate
 0
 0
 0
 # Translate
-6.5
+-2.5
 0
-15.5
+-14
 # Color
 0.5
 0.5
@@ -416,145 +416,113 @@ Black
 
 # Object_Start
 # ObjectName
-Tile_16_Water4_10
+Tile_07_Rock2_14
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_11.X
+Tile_05.X
 # TxtPath
 Texture_01.png
 # ObjectType
-10
+4
 # Scale
 0.1
 0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--6.5
-0
--13.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Blue
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_16_Water4_11
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_11.X
-# TxtPath
-Texture_01.png
-# ObjectType
-10
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--4.5
-0
--7.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Blue
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_16_Water4_7
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_11.X
-# TxtPath
-Texture_01.png
-# ObjectType
-10
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--4.5
-0
-3.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Blue
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_16_Water4_6
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_11.X
-# TxtPath
-Texture_01.png
-# ObjectType
-10
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--6.5
-0
-3.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Blue
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_16_Water4_5
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_11.X
-# TxtPath
-Texture_01.png
-# ObjectType
-10
-# Scale
 0.2
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+-14
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_15
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+-12
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_16
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_17
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
 0.1
 0.3
 # Rotate
@@ -562,95 +530,191 @@ Texture_01.png
 0
 0
 # Translate
--6
+-1.5
 0
-5.5
+-8.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Blue
+Black
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_16_Water4_3
+Tile_07_Rock2_18
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_11.X
+Tile_05.X
 # TxtPath
 Texture_01.png
 # ObjectType
-10
+4
 # Scale
 0.1
 0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--6.5
-0
-7.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Blue
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_16_Water4_2
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_11.X
-# TxtPath
-Texture_01.png
-# ObjectType
-10
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--10.5
-0
-7.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Blue
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_16_Water4_4
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_11.X
-# TxtPath
-Texture_01.png
-# ObjectType
-10
-# Scale
 0.2
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+-6
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_19
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+0.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_20
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_21
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_22
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
+0.1
+0.6
+# Rotate
+0
+0
+0
+# Translate
+3.5
+0
+1
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_07_Rock2_23
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_05.X
+# TxtPath
+Texture_01.png
+# ObjectType
+4
+# Scale
+0.1
 0.1
 0.4
 # Rotate
@@ -658,93 +722,61 @@ Texture_01.png
 0
 0
 # Translate
--11
-0
-5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Blue
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_16_Water4_8
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_11.X
-# TxtPath
-Texture_01.png
-# ObjectType
-10
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--11.5
-0
 2.5
+0
+6
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Blue
+Black
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_16_Water4_9
+Tile_07_Rock2_24
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_11.X
+Tile_05.X
 # TxtPath
 Texture_01.png
 # ObjectType
-10
+4
 # Scale
 0.1
 0.1
-0.1
+0.4
 # Rotate
 0
 0
 0
 # Translate
--8.5
-0
 1.5
+0
+10
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Blue
+Black
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_16_Water4_12
+Tile_07_Rock2_25
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_11.X
+Tile_05.X
 # TxtPath
 Texture_01.png
 # ObjectType
-10
+4
 # Scale
 0.1
 0.1
@@ -754,48 +786,48 @@ Texture_01.png
 0
 0
 # Translate
--11.5
+2.5
 0
--0.5
+12.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Blue
+Black
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_16_Water4_1
+Tile_07_Rock2_26
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_11.X
+Tile_05.X
 # TxtPath
 Texture_01.png
 # ObjectType
-10
+4
 # Scale
-0.3
 0.1
-0.7
+0.1
+0.2
 # Rotate
 0
 0
 0
 # Translate
--8.5
+3.5
 0
-5.5
+14
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Blue
+Black
 # Object_End
 
 # Object_Start
@@ -810,7 +842,7 @@ Texture_01.png
 # ObjectType
 3
 # Scale
-1.5
+0.1
 0.1
 0.1
 # Rotate
@@ -818,7 +850,7 @@ Texture_01.png
 0
 0
 # Translate
--7.5
+-1.5
 0
 14.5
 # Color
@@ -842,15 +874,15 @@ Texture_01.png
 # ObjectType
 3
 # Scale
-0.5
+0.3
 0.1
-0.1
+0.3
 # Rotate
 0
 0
 0
 # Translate
--6.5
+0.5
 0
 13.5
 # Color
@@ -874,17 +906,17 @@ Texture_01.png
 # ObjectType
 3
 # Scale
-0.3
-0.09
-0.3
+0.1
+0.1
+0.2
 # Rotate
 0
 0
 0
 # Translate
-6.5
--0.05
-13.5
+2.5
+0
+14
 # Color
 0.5
 0.5
@@ -908,15 +940,15 @@ Texture_01.png
 # Scale
 0.3
 0.1
-0.3
+0.1
 # Rotate
 0
 0
 0
 # Translate
--13.5
+-0.5
 0
-5.5
+11.5
 # Color
 0.5
 0.5
@@ -938,17 +970,49 @@ Texture_01.png
 # ObjectType
 3
 # Scale
-0.3
+0.4
 0.1
-0.3
+0.5
 # Rotate
 0
 0
 0
 # Translate
--3.5
+-1
 0
-5.5
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock6
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+7
 # Color
 0.5
 0.5
@@ -970,17 +1034,17 @@ Texture_01.png
 # ObjectType
 3
 # Scale
+0.4
 0.1
-0.5
-1.3
+0.2
 # Rotate
 0
 0
 0
 # Translate
--14.5
 0
--2.5
+0
+5
 # Color
 0.5
 0.5
@@ -1002,17 +1066,17 @@ Texture_01.png
 # ObjectType
 3
 # Scale
+0.4
 0.1
-0.3
-1.3
+0.6
 # Rotate
 0
 0
 0
 # Translate
--13.5
+1
 0
--2.5
+1
 # Color
 0.5
 0.5
@@ -1036,15 +1100,111 @@ Texture_01.png
 # Scale
 0.1
 0.1
-0.9
+0.1
 # Rotate
 0
 0
 0
 # Translate
--12.5
+1.5
 0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock10
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.3
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
 -0.5
+0
+-3
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock11
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2.5
+0
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_05_Rock12
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_04.X
+# TxtPath
+Texture_01.png
+# ObjectType
+3
+# Scale
+0.4
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-2
+0
+-4.5
 # Color
 0.5
 0.5
@@ -1068,15 +1228,15 @@ Texture_01.png
 # Scale
 0.1
 0.1
-0.4
+0.2
 # Rotate
 0
 0
 0
 # Translate
-4.5
+-1.5
 0
--4
+-6
 # Color
 0.5
 0.5
@@ -1100,15 +1260,15 @@ Texture_01.png
 # Scale
 0.3
 0.1
-1.3
+0.5
 # Rotate
 0
 0
 0
 # Translate
-6.5
+-3.5
 0
--8.5
+-7.5
 # Color
 0.5
 0.5
@@ -1120,7 +1280,7 @@ Black
 
 # Object_Start
 # ObjectName
-Tile_05_Rock12
+Tile_05_Rock15
 # FolderPath
 Resource/XFile/Tile
 # FilePath
@@ -1130,7 +1290,7 @@ Texture_01.png
 # ObjectType
 3
 # Scale
-0.2
+0.3
 0.1
 0.1
 # Rotate
@@ -1138,41 +1298,9 @@ Texture_01.png
 0
 0
 # Translate
-7
+-2.5
 0
--1.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_05_Rock17
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_04.X
-# TxtPath
-Texture_01.png
-# ObjectType
-3
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-10.5
-0
--5.5
+-10.5
 # Color
 0.5
 0.5
@@ -1196,15 +1324,15 @@ Texture_01.png
 # Scale
 0.3
 0.1
-0.1
+0.2
 # Rotate
 0
 0
 0
 # Translate
-11.5
+-1.5
 0
--4.5
+-12
 # Color
 0.5
 0.5
@@ -1216,7 +1344,7 @@ Black
 
 # Object_Start
 # ObjectName
-Tile_05_Rock15
+Tile_05_Rock17
 # FolderPath
 Resource/XFile/Tile
 # FilePath
@@ -1226,9 +1354,3529 @@ Texture_01.png
 # ObjectType
 3
 # Scale
+0.3
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+-14
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Black
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_1
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.7
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+14
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_2
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.5
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_3
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.3
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_4
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
 0.2
 0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-14
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_5
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.5
+0.1
 0.3
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_6
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+8
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_7
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_10
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_8
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-13.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_9
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.6
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-10
+0
+3
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_12
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-6.50034
+0
+-1
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_13
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_11
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.4
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-4
+0
+0
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_14
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.5
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-12.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_15
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.3
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-6
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_16
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_17
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.5
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_18
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.5
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_19
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-13.0006
+0
+-14
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_20
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.3
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_21
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-8.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_22
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+11
+0
+-14
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_23
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.3
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_25
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_24
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.4
+0.1
+1
+# Rotate
+0
+0
+0
+# Translate
+13
+0
+-5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_26
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_27
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+10
+0
+-4
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_28
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_29
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_32
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_31
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.3
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_33
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_30
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_34
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+5
+0
+2
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_35
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+7
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_36
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.3
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+1
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_37
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+10
+0
+5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_38
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_39
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_40
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.3
+0.1
+0.4
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+12
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_41
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_42
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.4
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+10
+0
+12
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_43
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0
+12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_44
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.2
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+6
+0
+10
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_45
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+4.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_14_Water2_46
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_09.X
+# TxtPath
+Texture_01.png
+# ObjectType
+8
+# Scale
+0.5
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water1
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.2
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water2
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.2
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-12
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water3
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.2
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-11
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water4
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.2
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-12.5
+0
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water5
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.2
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-13.5034
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water6
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.2
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-12.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water7
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.2
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+0
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water8
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.2
+0.3
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water9
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.2
+0.3
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water10
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.2
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+0
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water11
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.2
+0.3
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water12
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.2
+0.3
+# Rotate
+0
+0
+0
+# Translate
+14.5
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water13
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.2
+0.3
+# Rotate
+0
+0
+0
+# Translate
+11.5
+0
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water14
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.2
+0.3
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water15
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.4
+# Rotate
+0
+0
+0
+# Translate
+-14
+0
+11
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water16
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.5
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+11
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water17
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9
+0
+12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water18
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.4
+0.1
+0.5
+# Rotate
+0
+0
+0
+# Translate
+-6
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water19
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-3
+0
+13
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water20
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water48
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.3
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water49
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-4.5
+0
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water23
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.5
+# Rotate
+0
+0
+0
+# Translate
+-14
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water22
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-12
+0
+5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water21
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.7
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water24
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water26
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water25
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.4
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-4
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.4
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-8
+0
+1
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water27
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+0
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water28
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-14
+0
+1
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water29
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-12.5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water30
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.8
+0.1
+0.4
+# Rotate
+0
+0
+0
+# Translate
+-11
+0
+-2
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water31
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3
+0
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water32
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-3.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water33
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.3
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+-3
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water34
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water35
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-5.5
+0
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water36
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.5
+# Rotate
+0
+0
+0
+# Translate
+-7
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water37
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.3
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-8
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water38
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-12
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water39
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water40
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.4
+0.1
+0.5
+# Rotate
+0
+0
+0
+# Translate
+-13
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water41
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+0
+-14
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water44
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-11
+0
+-14
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water45
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water46
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water42
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water43
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.7
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+0
+-12
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water47
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.4
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+-5
+0
+-14
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water58
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.3
+# Rotate
+0
+0
+0
+# Translate
+-0.5
+0
+-8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water56
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.6
+# Rotate
+0
+0
+0
+# Translate
+1
+0
+-8
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water57
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+1.5
+0
+-12
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water59
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+2.5
+0
+-7
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water50
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.6
+0.1
+0.7
+# Rotate
+0
+0
+0
+# Translate
+5
+0
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water51
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water52
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.4
+# Rotate
+0
+0
+0
+# Translate
+9
+0
+-13
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water53
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.2
+# Rotate
+0
+0
+0
+# Translate
+11
+0
+-12
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water54
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.3
+0.1
+0.4
+# Rotate
+0
+0
+0
+# Translate
+13.5
+0
+-13
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water55
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14
+0
+-10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water67
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.3
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water90
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10
+0
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water66
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.3
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+7.5
+0
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water65
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.4
+0.1
+0.1
 # Rotate
 0
 0
@@ -1243,372 +4891,84 @@ Texture_01.png
 0.5
 1
 # ColorTag
-Black
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_05_Rock11
+Tile_13_Water60
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_04.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-3
-# Scale
-0.7
-0.1
-0.7
-# Rotate
-0
-0
-0
-# Translate
-11.5
-0
--0.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_05_Rock10
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_04.X
-# TxtPath
-Texture_01.png
-# ObjectType
-3
+7
 # Scale
 0.2
 0.1
-0.2
-# Rotate
-0
-0
-0
-# Translate
-10
-0
-4
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_05_Rock6
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_04.X
-# TxtPath
-Texture_01.png
-# ObjectType
-3
-# Scale
-0.3
-0.1
-0.7
-# Rotate
-0
-0
-0
-# Translate
-12.5
-0
-6.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_17_Yellow1
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_12.X
-# TxtPath
-Texture_01.png
-# ObjectType
-11
-# Scale
-0.5
-0.1
-0.3
-# Rotate
-0
-0
-0
-# Translate
--12.5
-0
-10.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_17_Yellow2
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_12.X
-# TxtPath
-Texture_01.png
-# ObjectType
-11
-# Scale
-0.2
-0.1
-0.5
-# Rotate
-0
-0
-0
-# Translate
--5
-0
-10.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_17_Yellow4
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_12.X
-# TxtPath
-Texture_01.png
-# ObjectType
-11
-# Scale
-0.3
-0.1
 0.1
 # Rotate
 0
 0
 0
 # Translate
-1.5
+2
 0
-14.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_17_Yellow3
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_12.X
-# TxtPath
-Texture_01.png
-# ObjectType
-11
-# Scale
-0.7
-0.1
-0.7
-# Rotate
-0
-0
-0
-# Translate
--0.5
-0
-10.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_17_Yellow7
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_12.X
-# TxtPath
-Texture_01.png
-# ObjectType
-11
-# Scale
-0.1
-0.1
-0.3
-# Rotate
-0
-0
-0
-# Translate
 -4.5
-0
-1.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_17_Yellow13
+Tile_13_Water61
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_12.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-11
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--11.5
-0
--1.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_17_Yellow6
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_12.X
-# TxtPath
-Texture_01.png
-# ObjectType
-11
+7
 # Scale
 0.2
 0.1
-0.5
-# Rotate
-0
-0
-0
-# Translate
--3
-0
-1.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_17_Yellow5
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_12.X
-# TxtPath
-Texture_01.png
-# ObjectType
-11
-# Scale
-0.5
 0.1
-0.8
 # Rotate
 0
 0
 0
 # Translate
-0.5
-0
 3
+0
+-3.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_17_Yellow9
+Tile_13_Water62
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_12.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-11
+7
 # Scale
 0.1
 0.1
@@ -1618,39 +4978,7 @@ Texture_01.png
 0
 0
 # Translate
--2.5
-0
--1.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_17_Yellow10
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_12.X
-# TxtPath
-Texture_01.png
-# ObjectType
-11
-# Scale
-0.2
-0.1
-0.3
-# Rotate
-0
-0
-0
-# Translate
--1
+3.5
 0
 -2.5
 # Color
@@ -1659,94 +4987,62 @@ Texture_01.png
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_17_Yellow12
+Tile_13_Water64
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_12.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-11
+7
 # Scale
+0.2
 0.1
 0.1
-0.3
 # Rotate
 0
 0
 0
 # Translate
--0.5
+7
 0
--5.5
+-4.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_17_Yellow11
+Tile_13_Water63
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_12.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-11
+7
 # Scale
-0.2
+0.5
 0.1
-1.2
+0.4
 # Rotate
 0
 0
 0
 # Translate
-1
-0
--7
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_17_Yellow14
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_12.X
-# TxtPath
-Texture_01.png
-# ObjectType
-11
-# Scale
-0.2
-0.1
-0.2
-# Rotate
-0
-0
-0
-# Translate
--10
+6.5
 0
 -2
 # Color
@@ -1755,20 +5051,116 @@ Texture_01.png
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_17_Yellow15
+Tile_13_Water70
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_12.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-11
+7
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water71
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10
+0
+-0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water68
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.2
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+5
+0
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water69
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
 # Scale
 0.1
 0.1
@@ -1778,61 +5170,61 @@ Texture_01.png
 0
 0
 # Translate
--8.5
+6.5
 0
--3
+1
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_17_Yellow16
+Tile_13_Water72
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_12.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-11
+7
 # Scale
-0.6
+0.5
 0.1
-0.7
+0.3
 # Rotate
 0
 0
 0
 # Translate
--10
+12.5
 0
--9.5
+1.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_17_Yellow22
+Tile_13_Water73
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_12.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-11
+7
 # Scale
 0.2
 0.1
@@ -1844,27 +5236,59 @@ Texture_01.png
 # Translate
 14
 0
--14
+4
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_17_Yellow18
+Tile_13_Water74
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_12.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-11
+7
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+0
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water75
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
 # Scale
 0.1
 0.1
@@ -1876,93 +5300,29 @@ Texture_01.png
 # Translate
 10.5
 0
--6.5
+3.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_17_Yellow17
+Tile_13_Water76
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_12.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-11
+7
 # Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-10.5
-0
--9.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_17_Yellow19
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_12.X
-# TxtPath
-Texture_01.png
-# ObjectType
-11
-# Scale
-0.1
-0.1
-0.4
-# Rotate
-0
-0
-0
-# Translate
-11.5
-0
--8
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_17_Yellow21
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_12.X
-# TxtPath
-Texture_01.png
-# ObjectType
-11
-# Scale
-0.1
+0.2
 0.1
 0.2
 # Rotate
@@ -1970,203 +5330,135 @@ Texture_01.png
 0
 0
 # Translate
-11.5
+9
 0
--12
+3
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_17_Yellow20
+Tile_13_Water77
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_12.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-11
-# Scale
-0.3
-0.1
-0.7
-# Rotate
-0
-0
-0
-# Translate
-13.5
-0
--9.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_17_Yellow8
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_12.X
-# TxtPath
-Texture_01.png
-# ObjectType
-11
+7
 # Scale
 0.4
 0.1
-0.5
+0.1
 # Rotate
 0
 0
 0
 # Translate
-11
+6
 0
-12.5
+3.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_17_Yellow23
+Tile_13_Water78
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_12.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-11
+7
+# Scale
+0.6
+0.1
+0.5
+# Rotate
+0
+0
+0
+# Translate
+6
+0
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water79
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
 # Scale
 0.3
 0.1
-1.3
+0.4
 # Rotate
 0
 0
 0
 # Translate
-6.5
-0
-5.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass1
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--14.5
-0
-13.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass2
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.1
-0.1
-0.5
-# Rotate
-0
-0
-0
-# Translate
--6.5
-0
 10.5
+0
+8
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Green
-Red
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_01_Grass70
+Tile_13_Water80
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_01.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-0
+7
 # Scale
-0.5
 0.1
 0.1
+0.3
 # Rotate
 0
 0
 0
 # Translate
--12.5
+12.5
 0
 8.5
 # Color
@@ -2175,58 +5467,22 @@ Texture_01.png
 0.5
 1
 # ColorTag
-Green
-Red
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_01_Grass4
+Tile_13_Water81
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_01.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-0
+7
 # Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--7.5
-0
-1.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass5
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.1
+0.2
 0.1
 0.3
 # Rotate
@@ -2234,33 +5490,31 @@ Texture_01.png
 0
 0
 # Translate
--6.5
+14
 0
-1.5
+7.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Green
-Red
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_01_Grass6
+Tile_13_Water82
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_01.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-0
+7
 # Scale
-0.1
+0.2
 0.1
 0.1
 # Rotate
@@ -2268,31 +5522,29 @@ Texture_01.png
 0
 0
 # Translate
--5.5
+10
 0
-0.5
+10.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Green
-Red
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_01_Grass7
+Tile_13_Water83
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_01.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-0
+7
 # Scale
 0.2
 0.1
@@ -2302,31 +5554,29 @@ Texture_01.png
 0
 0
 # Translate
--5
+8
 0
--1
+10
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Green
-Red
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_01_Grass8
+Tile_13_Water84
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_01.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-0
+7
 # Scale
 0.1
 0.1
@@ -2336,101 +5586,31 @@ Texture_01.png
 0
 0
 # Translate
--3.5
+7.5
 0
--1.5
+11.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Green
-Red
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_01_Grass9
+Tile_13_Water85
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_01.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-0
+7
 # Scale
 0.3
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--3.5
-0
--2.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass10
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.1
-0.1
-0.2
-# Rotate
-0
-0
-0
-# Translate
--2.5
-0
--4
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass11
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.1
 0.1
 0.3
 # Rotate
@@ -2438,31 +5618,29 @@ Texture_01.png
 0
 0
 # Translate
--1.5
+5.5
 0
--5.5
+12.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Green
-Red
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_01_Grass12
+Tile_13_Water86
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_01.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-0
+7
 # Scale
 0.1
 0.1
@@ -2472,237 +5650,31 @@ Texture_01.png
 0
 0
 # Translate
--0.5
+4.5
 0
--7.5
+10.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Green
-Red
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_01_Grass13
+Tile_13_Water87
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_01.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-0
+7
 # Scale
 0.1
-0.1
-0.2
-# Rotate
-0
-0
-0
-# Translate
--11.5
-0
--3
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass14
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.2
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--10
-0
--3.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass15
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--12.5
-0
--5.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass16
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.5
-0.1
-0.2
-# Rotate
-0
-0
-0
-# Translate
--9.5
-0
--5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass17
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--6.5
-0
--4.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass18
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.2
-0.1
-0.8
-# Rotate
-0
-0
-0
-# Translate
--6
-0
--9
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass19
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.2
 0.1
 0.4
 # Rotate
@@ -2710,137 +5682,33 @@ Texture_01.png
 0
 0
 # Translate
--4
+3.5
 0
--11
+11
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Green
-Red
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_01_Grass20
+Tile_13_Water88
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_01.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-0
-# Scale
-0.5
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--9.5
-0
--13.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass21
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.3
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--4.5
-0
--13.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass22
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
+7
 # Scale
 0.1
 0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--6.5
-0
--14.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass23
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.1
-0.1
-0.5
+0.4
 # Rotate
 0
 0
@@ -2848,33 +5716,63 @@ Texture_01.png
 # Translate
 2.5
 0
--12.5
+10
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Green
-Red
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_01_Grass25
+Tile_13_Water182
 # FolderPath
 Resource/XFile/Tile
 # FilePath
-Tile_01.X
+Tile_08.X
 # TxtPath
 Texture_01.png
 # ObjectType
-0
+7
 # Scale
-0.2
+0.5
 0.1
-0.2
+0.1
+# Rotate
+0
+0
+0
+# Translate
+9.5
+0
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Tile_13_Water89
+# FolderPath
+Resource/XFile/Tile
+# FilePath
+Tile_08.X
+# TxtPath
+Texture_01.png
+# ObjectType
+7
+# Scale
+0.6
+0.1
+0.1
 # Rotate
 0
 0
@@ -2882,278 +5780,6 @@ Texture_01.png
 # Translate
 12
 0
--14
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass26
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-11.5
-0
--10.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass27
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-9.5
-0
--9.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass24
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.3
-0.1
-0.5
-# Rotate
-0
-0
-0
-# Translate
-9.5
-0
--12.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass28
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.4
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-13
-0
--5.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass30
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.1
-0.1
-0.3
-# Rotate
-0
-0
-0
-# Translate
-3.5
-0
-13.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass29
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.2
-0.1
-1.4
-# Rotate
-0
-0
-0
-# Translate
-4
-0
-5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass31
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.1
-0.1
-0.9
-# Rotate
-0
-0
-0
-# Translate
-8.5
-0
-7.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Green
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_01_Grass32
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_01.X
-# TxtPath
-Texture_01.png
-# ObjectType
-0
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-14.5
-0
 14.5
 # Color
 0.5
@@ -3161,1181 +5787,446 @@ Texture_01.png
 0.5
 1
 # ColorTag
-Green
-Red
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_05_Rock18
+Winter_Tree_01_951
 # FolderPath
-Resource/XFile/Tile
+Resource/XFile/Background/SeasonTree
 # FilePath
-Tile_04.X
+WinterTree_01.X
 # TxtPath
-Texture_01.png
+winter_texture.png
 # ObjectType
-3
+15
 # Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--12.5
-0
--13.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_05_Rock29
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_04.X
-# TxtPath
-Texture_01.png
-# ObjectType
-3
-# Scale
-0.4
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--13
-0
--14.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Black
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground1
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--14.5
-0
-12.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground2
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.5
-0.1
-0.2
-# Rotate
-0
-0
-0
-# Translate
--11.5
-0
-13
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground3
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--8.5
-0
-12.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground4
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.3
-0.1
-0.3
-# Rotate
-0
-0
-0
-# Translate
--8.5
-0
-10.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground5
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.3
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--13.5
-0
-7.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground6
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--5.5
-0
-7.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground7
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-0.3
-# Rotate
-0
-0
-0
-# Translate
--5.5
-0
-2.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground8
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--10.5
-0
-2.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground9
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.3
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--10.5
-0
-1.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground10
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--11.5
-0
-0.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground11
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.3
-0.1
-0.2
-# Rotate
-0
-0
-0
-# Translate
--9.5
-0
-0
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground12
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--7.5
-0
-0.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground13
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--8.5
-0
--1.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground14
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.2
-0.1
-0.4
-# Rotate
-0
-0
-0
-# Translate
--7
-0
--2
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground15
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-0.3
-# Rotate
-0
-0
-0
-# Translate
--5.5
-0
--3.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground16
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.2
-0.1
-0.4
-# Rotate
-0
-0
-0
-# Translate
--4
-0
--5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground17
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-0.2
-# Rotate
-0
-0
-0
-# Translate
--2.5
-0
--6
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground18
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.3
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--2.5
-0
--7.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground19
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.2
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--4
-0
--8.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground21
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.2
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
--8
-0
--14.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground20
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.3
-0.1
-0.7
-# Rotate
-0
-0
-0
-# Translate
--1.5
-0
--11.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground22
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.2
-0.1
-0.2
-# Rotate
-0
-0
-0
-# Translate
-1
-0
--14
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground23
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-8.5
-0
--9.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground24
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.3
-0.1
-0.2
-# Rotate
-0
-0
-0
-# Translate
-9.5
-0
--8
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground25
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.2
-0.1
-0.1
-# Rotate
-0
-0
-0
-# Translate
-14
-0
--4.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground26
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.2
-0.1
-0.5
-# Rotate
-0
-0
-0
-# Translate
-10
-0
-7.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground27
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-0.5
-# Rotate
-0
-0
-0
-# Translate
-13.5
-0
-12.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Tile_02_Ground28
-# FolderPath
-Resource/XFile/Tile
-# FilePath
-Tile_02.X
-# TxtPath
-Texture_01.png
-# ObjectType
-1
-# Scale
-0.1
-0.1
-1.1
+0.01
+0.01
+0.01
 # Rotate
 0
 0
 0
 # Translate
 14.5
-0
-8.5
+1
+14.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Red
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Tile_02_Ground29
+Winter_Tree_01_952
 # FolderPath
-Resource/XFile/Tile
+Resource/XFile/Background/SeasonTree
 # FilePath
-Tile_02.X
+WinterTree_01.X
 # TxtPath
-Texture_01.png
+winter_texture.png
 # ObjectType
-1
+15
 # Scale
-0.1
-0.1
-0.1
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+12.5
+1
+12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_953
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+14.5
+1
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_954
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+8.5
+1
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_955
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+14.5
+1
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_956
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
 # Rotate
 0
 0
 0
 # Translate
 5.5
-0
--1.5
+1
+6.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Red
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Autumn_Tree_02_210
+Winter_Tree_01_957
 # FolderPath
 Resource/XFile/Background/SeasonTree
 # FilePath
-AutumnTree_02.X
+WinterTree_01.X
 # TxtPath
-autumn_texture.png
+winter_texture.png
 # ObjectType
-13
+15
 # Scale
-0.02
-0.02
-0.02
+0.01
+0.01
+0.01
 # Rotate
 0
-90
+0
 0
 # Translate
--13.5
+12.5
 1
+1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_958
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+9.5
+1
+-0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_959
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+14.5
+1
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_960
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+13.5
+1
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_961
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+6.5
+1
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_962
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
 10.5
-# Color
-0.5
-0.5
-0.5
 1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_02_211
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_02.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.02
-0.02
-0.02
-# Rotate
-0
-120
-0
-# Translate
--10.5
-1
-11.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_04_212
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_04.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.03
-0.03
-0.03
-# Rotate
-0
-0
-0
-# Translate
 -4.5
-1
-10.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Autumn_Tree_04_213
+Winter_Tree_01_963
 # FolderPath
 Resource/XFile/Background/SeasonTree
 # FilePath
-AutumnTree_04.X
+WinterTree_01.X
 # TxtPath
-autumn_texture.png
+winter_texture.png
 # ObjectType
-13
+15
 # Scale
-0.03
-0.03
-0.03
+0.01
+0.01
+0.01
 # Rotate
 0
 0
 0
 # Translate
--1.5
+-14.5
 1
-11.5
+12.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Autumn_Tree_02_214
+Winter_Tree_01_964
 # FolderPath
 Resource/XFile/Background/SeasonTree
 # FilePath
-AutumnTree_02.X
+WinterTree_01.X
 # TxtPath
-autumn_texture.png
+winter_texture.png
 # ObjectType
-13
+15
 # Scale
-0.02
-0.02
-0.02
+0.01
+0.01
+0.01
 # Rotate
 0
-120
+0
 0
 # Translate
--2.5
+-9.5
 1
 8.5
 # Color
@@ -4344,56 +6235,24 @@ autumn_texture.png
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Flower_Yellow216
+Winter_Tree_01_965
 # FolderPath
-Resource/XFile/Background/Else
+Resource/XFile/Background/SeasonTree
 # FilePath
-Flower_06.X
+WinterTree_01.X
 # TxtPath
-
+winter_texture.png
 # ObjectType
-35
+15
 # Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
--10.5
-1
--1.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Yellow217
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_06.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.5
-0.5
-0.5
+0.01
+0.01
+0.01
 # Rotate
 0
 0
@@ -4401,101 +6260,69 @@ Flower_06.X
 # Translate
 -9.5
 1
--2.5
+5.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Flower_Yellow218
+Winter_Tree_01_967
 # FolderPath
-Resource/XFile/Background/Else
+Resource/XFile/Background/SeasonTree
 # FilePath
-Flower_06.X
+WinterTree_01.X
 # TxtPath
-
+winter_texture.png
 # ObjectType
-35
+15
 # Scale
-0.5
-0.5
-0.5
+0.01
+0.01
+0.01
 # Rotate
 0
 0
 0
 # Translate
--8.5
+-11.5
 1
--2.5
+12.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Flower_Yellow219
+Winter_Tree_01_968
 # FolderPath
-Resource/XFile/Background/Else
+Resource/XFile/Background/SeasonTree
 # FilePath
-Flower_06.X
+WinterTree_01.X
 # TxtPath
-
+winter_texture.png
 # ObjectType
-35
+15
 # Scale
-0.5
-0.5
-0.5
+0.01
+0.01
+0.01
 # Rotate
 0
 0
 0
 # Translate
--10.5
-1
--2.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Yellow220
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_06.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
--4.5
+-11.5
 1
 -1.5
 # Color
@@ -4504,62 +6331,734 @@ Flower_06.X
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Flower_Yellow221
+Winter_Tree_01_969
 # FolderPath
-Resource/XFile/Background/Else
+Resource/XFile/Background/SeasonTree
 # FilePath
-Flower_06.X
+WinterTree_01.X
 # TxtPath
-
+winter_texture.png
 # ObjectType
-35
+15
 # Scale
-0.5
-0.5
-0.5
+0.01
+0.01
+0.01
 # Rotate
 0
 0
 0
 # Translate
--5.5
+-13.5
 1
--0.5
+1.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Flower_Yellow222
+Winter_Tree_01_970
 # FolderPath
-Resource/XFile/Background/Else
+Resource/XFile/Background/SeasonTree
 # FilePath
-Flower_06.X
+WinterTree_01.X
 # TxtPath
-
+winter_texture.png
 # ObjectType
-35
+15
 # Scale
-0.5
-0.5
-0.5
+0.01
+0.01
+0.01
 # Rotate
 0
 0
 0
 # Translate
--0.5
+-10.5
+1
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_971
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+-13.5
+1
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_01_972
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_01.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+-14.5
+1
+-4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_973
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+-12.5
+1
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_974
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+2
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_975
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+1
+12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_976
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+2
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_977
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+-13.5
+1
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_979
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+2
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_981
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+-9.5
+2
+5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_982
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+-12.5
+2
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_983
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+1
+-14.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_984
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+10.5
+1
+12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_985
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+12.5
+1
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_986
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+11.5
+1
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_987
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+8.5
+1
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_988
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+10.5
+1
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_989
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+14.5
+1
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_990
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+10.5
+1
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_991
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+12.5
+1
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_992
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+9.5
+1
+3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+White
+# Object_End
+
+# Object_Start
+# ObjectName
+Winter_Tree_03_993
+# FolderPath
+Resource/XFile/Background/SeasonTree
+# FilePath
+WinterTree_03.X
+# TxtPath
+winter_texture.png
+# ObjectType
+15
+# Scale
+0.01
+0.01
+0.01
+# Rotate
+0
+0
+0
+# Translate
+12.5
 1
 -7.5
 # Color
@@ -4568,30 +7067,30 @@ Flower_06.X
 0.5
 1
 # ColorTag
-Yellow
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Flower_Red223
+Winter_Tree_03_994
 # FolderPath
-Resource/XFile/Background/Else
+Resource/XFile/Background/SeasonTree
 # FilePath
-Flower_03.X
+WinterTree_03.X
 # TxtPath
-
+winter_texture.png
 # ObjectType
-35
+15
 # Scale
-0.5
-0.5
-0.5
+0.01
+0.01
+0.01
 # Rotate
 0
 0
 0
 # Translate
--2.5
+9.5
 1
 -3.5
 # Color
@@ -4600,222 +7099,350 @@ Flower_03.X
 0.5
 1
 # ColorTag
-Red
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Flower_Red224
+Winter_Tree_03_995
 # FolderPath
-Resource/XFile/Background/Else
+Resource/XFile/Background/SeasonTree
 # FilePath
-Flower_03.X
+WinterTree_03.X
 # TxtPath
-
+winter_texture.png
 # ObjectType
-35
+15
 # Scale
-0.5
-0.5
-0.5
+0.01
+0.01
+0.01
 # Rotate
 0
 0
 0
 # Translate
--3.5
+11.5
 1
-1.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Red225
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_03.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
--9.5
-1
--4.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Blue227
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_05.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.3
-0.3
-0.3
-# Rotate
-0
-0
-0
-# Translate
 -10.5
-1
--3.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Blue
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Flower_Blue228
+Winter_Tree_03_996
 # FolderPath
-Resource/XFile/Background/Else
+Resource/XFile/Background/SeasonTree
 # FilePath
-Flower_05.X
+WinterTree_03.X
 # TxtPath
-
+winter_texture.png
 # ObjectType
-35
+15
 # Scale
-0.3
-0.3
-0.3
+0.01
+0.01
+0.01
 # Rotate
 0
 0
 0
 # Translate
--11.5
+5.5
 1
--2.5
+-12.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Blue
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-Flower_Red230
+Winter_Tree_03_997
 # FolderPath
-Resource/XFile/Background/Else
+Resource/XFile/Background/SeasonTree
 # FilePath
-Flower_03.X
+WinterTree_03.X
 # TxtPath
-
+winter_texture.png
 # ObjectType
-35
+15
 # Scale
-0.5
-0.5
-0.5
+0.01
+0.01
+0.01
 # Rotate
 0
 0
 0
 # Translate
--6.5
+10.5
 1
-1.5
+-12.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Red
+White
 # Object_End
 
 # Object_Start
 # ObjectName
-A_Tree_Yellow_020_232
-# FolderPath
-Resource/XFile/Background/ColorTree
-# FilePath
-Tree_02.X
-# TxtPath
-TreesYellow.png
-# ObjectType
-16
-# Scale
-0.2
-0.2
-0.2
-# Rotate
-0
-0
-0
-# Translate
--10.5
-1
--11.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-A_Tree_Yellow_016_233
+A_Tree_Blue_016_998
 # FolderPath
 Resource/XFile/Background/ColorTree
 # FilePath
 Tree_01.X
 # TxtPath
-TreesYellow.png
+TreesBlue.png
 # ObjectType
 16
 # Scale
-0.2
-0.2
-0.2
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
+13.5
+1
+10.5
+# Color
 0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+A_Tree_Blue_016_999
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_01.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+10.5
+1
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+A_Tree_Blue_016_1000
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_01.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+1
+10.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+A_Tree_Blue_016_1001
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_01.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+8.5
+1
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+A_Tree_Blue_016_1002
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_01.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+1
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+A_Tree_Blue_020_1003
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_02.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+11.5
+2
+4.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+A_Tree_Blue_020_1004
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_02.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+14.5
+1
+8.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+A_Tree_Blue_020_1005
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_02.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
 1
 0.5
 # Color
@@ -4824,126 +7451,126 @@ TreesYellow.png
 0.5
 1
 # ColorTag
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Autumn_Tree_01_236
+A_Tree_Blue_020_1006
 # FolderPath
-Resource/XFile/Background/SeasonTree
+Resource/XFile/Background/ColorTree
 # FilePath
-AutumnTree_01.X
+Tree_02.X
 # TxtPath
-autumn_texture.png
+TreesBlue.png
 # ObjectType
-13
+16
 # Scale
-0.02
-0.02
-0.02
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
--8.5
+9.5
 1
--7.5
+5.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Autumn_Tree_02_237
+A_Tree_Blue_020_1007
 # FolderPath
-Resource/XFile/Background/SeasonTree
+Resource/XFile/Background/ColorTree
 # FilePath
-AutumnTree_02.X
+Tree_02.X
 # TxtPath
-autumn_texture.png
+TreesBlue.png
 # ObjectType
-13
+16
 # Scale
-0.025
-0.025
-0.025
+0.1
+0.1
+0.1
 # Rotate
 0
-450
+0
 0
 # Translate
--5.5
+8.5
 1
--10.5
+3.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Autumn_Tree_04_216
+A_Tree_Blue_020_1008
 # FolderPath
-Resource/XFile/Background/SeasonTree
+Resource/XFile/Background/ColorTree
 # FilePath
-AutumnTree_04.X
+Tree_02.X
 # TxtPath
-autumn_texture.png
+TreesBlue.png
 # ObjectType
-13
+16
 # Scale
-0.015
-0.015
-0.015
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
--3.5
-1
--13.5
+14.5
+2
+-2.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Autumn_Tree_02_218
+A_Tree_Blue_020_1009
 # FolderPath
-Resource/XFile/Background/SeasonTree
+Resource/XFile/Background/ColorTree
 # FilePath
-AutumnTree_02.X
+Tree_02.X
 # TxtPath
-autumn_texture.png
+TreesBlue.png
 # ObjectType
-13
+16
 # Scale
-0.025
-0.025
-0.025
+0.1
+0.1
+0.1
 # Rotate
 0
-140
+0
 0
 # Translate
-1.5
+12.5
 1
 -6.5
 # Color
@@ -4952,63 +7579,30 @@ autumn_texture.png
 0.5
 1
 # ColorTag
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Flower_Orange219
+A_Tree_Blue_020_1010
 # FolderPath
-Resource/XFile/Background/Else
+Resource/XFile/Background/ColorTree
 # FilePath
-Flower_04.X
+Tree_02.X
 # TxtPath
-
+TreesBlue.png
 # ObjectType
-35
+16
 # Scale
-0.5
-0.5
-0.5
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
--1.5
-1
--5.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Orange220
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_04.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
--3.5
+10.5
 1
 -2.5
 # Color
@@ -5017,126 +7611,91 @@ Flower_04.X
 0.5
 1
 # ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Orange221
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_04.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
--7.5
-1
--4.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Red222
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_03.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
--6.5
-1
--5.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Purple223
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_02.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
--5.5
-1
--5.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Red
 Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-D_Shrub_Yellow_101_224
+C_Bush_Blue_070_1011
 # FolderPath
 Resource/XFile/Background/ColorTree
 # FilePath
-Tree_05.X
+Tree_03.X
 # TxtPath
-TreesYellow.png
+TreesBlue.png
 # ObjectType
 16
 # Scale
-0.2
-0.2
-0.2
+0.1
+0.1
+0.1
 # Rotate
 0
-90
+0
+0
+# Translate
+14.5
+1
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+C_Bush_Blue_070_1013
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_03.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+12.5
+1
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+C_Bush_Blue_070_1014
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_03.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
 0
 # Translate
 10.5
@@ -5148,216 +7707,56 @@ TreesYellow.png
 0.5
 1
 # ColorTag
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-D_Shrub_Yellow_101_225
+C_Bush_Blue_070_1016
 # FolderPath
 Resource/XFile/Background/ColorTree
 # FilePath
-Tree_05.X
+Tree_03.X
 # TxtPath
-TreesYellow.png
+TreesBlue.png
 # ObjectType
 16
 # Scale
-0.2
-0.2
-0.2
+0.1
+0.1
+0.1
 # Rotate
 0
-90
+0
 0
 # Translate
-11.5
+9.5
 1
--13.5
+-14.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-D_Shrub_Yellow_101_226
+C_Bush_Blue_070_1018
 # FolderPath
 Resource/XFile/Background/ColorTree
 # FilePath
-Tree_05.X
+Tree_03.X
 # TxtPath
-TreesYellow.png
+TreesBlue.png
 # ObjectType
 16
 # Scale
-0.25
-0.25
-0.25
-# Rotate
-0
-90
-0
-# Translate
-9.5
-1
--12.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Yellow228
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_06.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
-9.5
-1
--8.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Yellow229
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_06.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.8
-0.8
-0.8
-# Rotate
-0
-0
-0
-# Translate
-9.5
-1
--7.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Yellow230
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_06.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.6
-0.6
-0.6
-# Rotate
-0
-0
-0
-# Translate
-8.5
-1
--9.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Yellow231
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_06.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.7
-0.7
-0.7
-# Rotate
-0
-0
-0
-# Translate
-8.5
-1
--8.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Yellow232
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_06.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.5
-0.5
-0.5
+0.1
+0.1
+0.1
 # Rotate
 0
 0
@@ -5365,95 +7764,63 @@ Flower_06.X
 # Translate
 10.5
 1
--8.5
+-6.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Autumn_Tree_04_233
+C_Bush_Blue_070_1019
 # FolderPath
-Resource/XFile/Background/SeasonTree
+Resource/XFile/Background/ColorTree
 # FilePath
-AutumnTree_04.X
+Tree_03.X
 # TxtPath
-autumn_texture.png
+TreesBlue.png
 # ObjectType
-13
+16
 # Scale
-0.03
-0.03
-0.03
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
-12.5
-1
--7.5
+9.5
+2
+-10.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Autumn_Tree_04_234
+C_Bush_Blue_070_1020
 # FolderPath
-Resource/XFile/Background/SeasonTree
+Resource/XFile/Background/ColorTree
 # FilePath
-AutumnTree_04.X
+Tree_03.X
 # TxtPath
-autumn_texture.png
+TreesBlue.png
 # ObjectType
-13
+16
 # Scale
-0.025
-0.025
-0.025
-# Rotate
-0
-0
-0
-# Translate
-13.5
-1
--11.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_02_236
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_02.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.015
-0.015
-0.015
+0.1
+0.1
+0.1
 # Rotate
 0
 0
@@ -5468,248 +7835,24 @@ autumn_texture.png
 0.5
 1
 # ColorTag
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Autumn_Tree_02_237(-2)
+D_Shrub_Blue_101_1022
 # FolderPath
-Resource/XFile/Background/SeasonTree
+Resource/XFile/Background/ColorTree
 # FilePath
-AutumnTree_02.X
+Tree_05.X
 # TxtPath
-autumn_texture.png
+TreesBlue.png
 # ObjectType
-13
+16
 # Scale
-0.013
-0.013
-0.013
-# Rotate
-0
-270
-0
-# Translate
-14.5
-1
--8.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_04_238
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_04.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.02
-0.02
-0.02
-# Rotate
-0
-0
-0
-# Translate
-0.5
-1
--5.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_04_239
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_04.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.03
-0.03
-0.03
-# Rotate
-0
-60
-0
-# Translate
-0.5
-1
--2.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_04_240
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_04.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.03
-0.03
-0.03
-# Rotate
-0
-0
-0
-# Translate
--2.5
-1
-2.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_02_241
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_02.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.03
-0.03
-0.03
-# Rotate
-0
-90
-0
-# Translate
--0.5
-1
-3.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_04_242
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_04.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.025
-0.025
-0.025
-# Rotate
-0
-120
-0
-# Translate
-1.5
-1
-12.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_04_243
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_04.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.03
-0.03
-0.03
-# Rotate
-0
-0
-0
-# Translate
-11.5
-1
-12.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_04_244
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_04.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.02
-0.02
-0.02
+0.1
+0.1
+0.1
 # Rotate
 0
 0
@@ -5717,101 +7860,165 @@ autumn_texture.png
 # Translate
 9.5
 1
-10.5
+-6.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Autumn_Tree_02_245
+D_Shrub_Blue_101_1023
 # FolderPath
-Resource/XFile/Background/SeasonTree
+Resource/XFile/Background/ColorTree
 # FilePath
-AutumnTree_02.X
+Tree_05.X
 # TxtPath
-autumn_texture.png
+TreesBlue.png
 # ObjectType
-13
+16
 # Scale
-0.01
-0.01
-0.01
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
-12.5
+7.5
 1
-10.5
+-3.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Yellow
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Flower_Red246
+D_Shrub_Blue_101_1024
 # FolderPath
-Resource/XFile/Background/Else
+Resource/XFile/Background/ColorTree
 # FilePath
-Flower_03.X
+Tree_05.X
 # TxtPath
-
+TreesBlue.png
 # ObjectType
-35
+16
 # Scale
-0.5
-0.5
-0.5
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
-14.5
+8.5
 1
-14.5
+0.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-Red
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Flower_Blue247
+D_Shrub_Blue_101_1025
 # FolderPath
-Resource/XFile/Background/Else
+Resource/XFile/Background/ColorTree
 # FilePath
-Flower_05.X
+Tree_05.X
 # TxtPath
-
+TreesBlue.png
 # ObjectType
-35
+16
 # Scale
-0.5
-0.5
-0.5
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
-14.5
+8.5
+1
+-0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+D_Shrub_Blue_101_1026
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_05.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+5.5
+2
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+D_Shrub_Blue_101_1027
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_05.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+7.5
 1
 12.5
 # Color
@@ -5825,284 +8032,16 @@ Blue
 
 # Object_Start
 # ObjectName
-Flower_Yellow248
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_06.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
-14.5
-1
-4.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Flower_Yellow249
-# FolderPath
-Resource/XFile/Background/Else
-# FilePath
-Flower_06.X
-# TxtPath
-
-# ObjectType
-35
-# Scale
-0.5
-0.5
-0.5
-# Rotate
-0
-0
-0
-# Translate
-10.5
-1
-7.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-C_Bush_Yellow_070_250
-# FolderPath
-Resource/XFile/Background/ColorTree
-# FilePath
-Tree_03.X
-# TxtPath
-TreesYellow.png
-# ObjectType
-16
-# Scale
-0.2
-0.2
-0.2
-# Rotate
-0
-0
-0
-# Translate
--0.5
-1
-6.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-D_Shrub_Yellow_101_251
+D_Shrub_Blue_101_1028
 # FolderPath
 Resource/XFile/Background/ColorTree
 # FilePath
 Tree_05.X
 # TxtPath
-TreesYellow.png
+TreesBlue.png
 # ObjectType
 16
 # Scale
-0.22
-0.22
-0.22
-# Rotate
-0
-90
-0
-# Translate
--0.5
-1
-4.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_02_254
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_02.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.025
-0.025
-0.025
-# Rotate
-0
-180
-0
-# Translate
--8.5
-1
-14.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Autumn_Tree_04_255
-# FolderPath
-Resource/XFile/Background/SeasonTree
-# FilePath
-AutumnTree_04.X
-# TxtPath
-autumn_texture.png
-# ObjectType
-13
-# Scale
-0.02
-0.02
-0.02
-# Rotate
-0
-120
-0
-# Translate
--3.5
-1
-14.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-Yellow
-# Object_End
-
-# Object_Start
-# ObjectName
-Door188
-# FolderPath
-Resource/XFile/Gimmick/Door
-# FilePath
-door_frame.X
-# TxtPath
-cubeworld_texture.tga
-# ObjectType
-28
-# Scale
-0.3
-0.3
-0.3
-# Rotate
-0
-90
-0
-# Translate
-1
-1
--13
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# GimmickData
-# ConditionName
-Switch190
-# ConditionIndex
-2
-# ConditionOrbIndex
-0
-# Object_End
-
-# Object_Start
-# ObjectName
-Door189
-# FolderPath
-Resource/XFile/Gimmick/Door
-# FilePath
-door_right.X
-# TxtPath
-cubeworld_texture.tga
-# ObjectType
-29
-# Scale
-0.3
-0.3
-0.3
-# Rotate
-0
-90
-0
-# Translate
-1
-1
--13
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# GimmickData
-# ConditionName
-Switch190
-# ConditionIndex
-2
-# ConditionOrbIndex
-0
-# Object_End
-
-# Object_Start
-# ObjectName
-Switch190
-# FolderPath
-Resource/XFile/Gimmick/Switch
-# FilePath
-Force_switch.X
-# TxtPath
-cubeworld_texture.tga
-# ObjectType
-31
-# Scale
 0.1
 0.1
 0.1
@@ -6111,7 +8050,7 @@ cubeworld_texture.tga
 0
 0
 # Translate
-6.5
+-7.5
 1
 13.5
 # Color
@@ -6120,137 +8059,411 @@ cubeworld_texture.tga
 0.5
 1
 # ColorTag
-# GimmickData
-# WeightIndex
-0
-# ConditionName
-Door188
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-RoataionBoard191
+D_Shrub_Blue_101_1029
 # FolderPath
-Resource/XFile/Gimmick/RotationBoard
+Resource/XFile/Background/ColorTree
 # FilePath
-Rotation_board.X
+Tree_05.X
 # TxtPath
-board.png
+TreesBlue.png
 # ObjectType
-26
+16
 # Scale
-0.04
-0.04
-0.04
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
-4
-1
-6
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# GimmickData
-# RotationSpeed
-0.5
-# RotationAxialIndex
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-RoataionBoard192
-# FolderPath
-Resource/XFile/Gimmick/RotationBoard
-# FilePath
-Rotation_board.X
-# TxtPath
-board.png
-# ObjectType
-26
-# Scale
-0.04
-0.04
-0.04
-# Rotate
-0
-0
-0
-# Translate
-10.5
-1
-1.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# GimmickData
-# RotationSpeed
--0.5
-# RotationAxialIndex
-1
-# Object_End
-
-# Object_Start
-# ObjectName
-Box193
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-23
-# Scale
-1
-1
-1
-# Rotate
-0
-0
-0
-# Translate
-6.5
-1.5
 -8.5
+1
+9.5
 # Color
-1
-1
-0
+0.5
+0.5
+0.5
 1
 # ColorTag
+Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Orb_Blue194
+D_Shrub_Blue_101_1032
 # FolderPath
-Resource/Sprite/Orb
+Resource/XFile/Background/ColorTree
 # FilePath
-
+Tree_05.X
 # TxtPath
-Orb_Blue.png
+TreesBlue.png
 # ObjectType
-34
+16
 # Scale
-1
-1
-1
+0.1
+0.1
+0.1
 # Rotate
 0
 0
 0
 # Translate
 -13.5
+1
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+D_Shrub_Blue_101_1033
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_05.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+2
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+D_Shrub_Blue_101_1035
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_05.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-6.5
+1
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+D_Shrub_Blue_101_1036
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_05.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-10.5
+1
+-6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+D_Shrub_Blue_101_1037
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_05.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+1
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+D_Shrub_Blue_101_1039
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_05.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-7.5
+1
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+D_Shrub_Blue_101_1040
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_05.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-11.5
+1
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+D_Shrub_Blue_101_1041
+# FolderPath
+Resource/XFile/Background/ColorTree
+# FilePath
+Tree_05.X
+# TxtPath
+TreesBlue.png
+# ObjectType
+16
+# Scale
+0.1
+0.1
+0.1
+# Rotate
+0
+0
+0
+# Translate
+-12.5
+1
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+Blue
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1042
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1043
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1044
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1045
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
 2
 8.5
 # Color
@@ -6259,21 +8472,81 @@ Orb_Blue.png
 0.5
 1
 # ColorTag
-# ConditionName
-Blue
 # Object_End
 
 # Object_Start
 # ObjectName
-Orb_Red195
+InvisibleWall1046
 # FolderPath
-Resource/Sprite/Orb
+
 # FilePath
 
 # TxtPath
-Orb_Red.png
+
 # ObjectType
-34
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1047
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+6.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1048
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
 # Scale
 1
 1
@@ -6283,50 +8556,325 @@ Orb_Red.png
 0
 0
 # Translate
--13.5
-2
-5.5
+13.5
+1
+11.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-# ConditionName
-Red
 # Object_End
 
 # Object_Start
 # ObjectName
-Orb_Green196
+InvisibleWall1049
 # FolderPath
-Resource/Sprite/Orb
+
 # FilePath
 
 # TxtPath
-Orb_Green.png
+
 # ObjectType
-34
+22
 # Scale
-1
-1
-1
+2
+2
+2
 # Rotate
 0
 0
 0
 # Translate
--13.5
+14.5
 2
-7
+4.5
 # Color
 0.5
 0.5
 0.5
 1
 # ColorTag
-# ConditionName
-Green
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1050
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1051
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+0.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1053
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+-1.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1054
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+-3.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1055
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+-5.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1056
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+-7.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1057
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+-9.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1058
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+-11.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+InvisibleWall1059
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+22
+# Scale
+2
+2
+2
+# Rotate
+0
+0
+0
+# Translate
+14.5
+2
+-13.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
 # Object_End
 
 # Section =======================================
