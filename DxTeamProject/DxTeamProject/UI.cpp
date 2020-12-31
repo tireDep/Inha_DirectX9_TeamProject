@@ -1261,11 +1261,18 @@ void CUI::Render_Mapname()
 
 	if (CollideSavePoint)
 	{
+		// Script
 		SetRect(&s_scrirc10, -1050, -15, m_scriInfo10.Width, m_scriInfo10.Height);
 		m_pSprite->Draw(m_scriUI10, &s_scrirc10,
 			&D3DXVECTOR3(0, 0, 0),
 			&D3DXVECTOR3(0, 0, 0),
 			D3DCOLOR_ARGB(int(puls), 255, 255, 255));
+		// Reset Button
+		SetRect(&s_textrc7, -720, -420, m_textInfo7.Width, m_textInfo7.Height);
+		m_pSprite->Draw(m_textUI7, &s_textrc7,
+			&D3DXVECTOR3(0, 0, 0),
+			&D3DXVECTOR3(0, 0, 0),
+			D3DCOLOR_ARGB((int)puls, 255, 255, 255));
 		if (puls <= 0.0f)
 		{
 			puls = 0.0f;
