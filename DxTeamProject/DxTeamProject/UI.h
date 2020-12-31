@@ -112,7 +112,7 @@ private:
 	bool HasYellowOrb;
 	bool YellowScript[3];
 	bool AttainWinter[2];
-	bool AttatinAutumn[2];
+	bool AttatinAutumn[3];
 	bool SoundWinter[2];
 	bool SoundAutumn[3];
 	bool CollideSavePoint;

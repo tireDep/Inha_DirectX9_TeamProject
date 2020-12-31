@@ -7190,7 +7190,7 @@ InvisibleWall1
 0
 # Translate
 -6
-2
+0.5
 14.5
 # Color
 0.5
@@ -7198,6 +7198,41 @@ InvisibleWall1
 0.5
 1
 # ColorTag
+# Object_End
+
+# Object_Start
+# ObjectName
+EventTrigger_Save224
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+39
+# Scale
+3
+7
+7
+# Rotate
+0
+0
+0
+# Translate
+-12.5
+0
+-2.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# TriggerIndex
+0
+# ZoneIndex
+0
 # Object_End
 
 # Section =======================================

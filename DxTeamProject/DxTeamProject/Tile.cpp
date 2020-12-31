@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Tile.h"
 
-const float fTime = 10.5f;
+const float fTime = 7.5f;
 const float fAddTime = 0.01f;
 
 void CTile::SetShader_Ocean()

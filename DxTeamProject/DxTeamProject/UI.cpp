@@ -32,7 +32,7 @@ CUI::CUI()
 	WhiteScript[0] = WhiteScript[1] = WhiteScript[2] = false;
 	YellowScript[0] = YellowScript[1] = YellowScript[2] = false;
 	AttainWinter[0] = AttainWinter[1] = false;
-	AttatinAutumn[0] = AttatinAutumn[1] = false;
+	AttatinAutumn[0] = AttatinAutumn[1] =  AttatinAutumn[2] = false;
 	SoundWinter[0] = SoundWinter[1] = true;
 	SoundAutumn[0] = SoundAutumn[1] = SoundAutumn[2] = true;
 	CollideSavePoint = false;
@@ -446,7 +446,7 @@ void CUI::Render_Script()
 				scriptPlus = 0.0f;
 				BlackScript[1] = true;
 				BlackScript[0] = false;
-				scriptPlus += 0.25f;
+				scriptPlus += 2.5f;
 				is_scriptPlus = false;
 			}
 		}
@@ -462,7 +462,7 @@ void CUI::Render_Script()
 				scriptPlus = 0.0f;
 				BlackScript[2] = true;
 				BlackScript[1] = false;
-				scriptPlus += 0.25f;
+				scriptPlus += 2.5f;
 				is_scriptPlus = false;
 			}
 		}
@@ -509,7 +509,7 @@ void CUI::Render_Script()
 				scriptPlus = 0.0f;
 				WhiteScript[1] = true;
 				WhiteScript[0] = false;
-				scriptPlus += 0.25f;
+				scriptPlus += 2.5f;
 				is_scriptPlus = false;
 			}
 		}
@@ -525,7 +525,7 @@ void CUI::Render_Script()
 				scriptPlus = 0.0f;
 				WhiteScript[2] = true;
 				WhiteScript[1] = false;
-				scriptPlus += 0.25f;
+				scriptPlus += 2.5f;
 				is_scriptPlus = false;
 			}
 		}
@@ -572,7 +572,7 @@ void CUI::Render_Script()
 				scriptPlus = 0.0f;
 				YellowScript[1] = true;
 				YellowScript[0] = false;
-				scriptPlus += 0.25f;
+				scriptPlus += 2.5f;
 				is_scriptPlus = false;
 			}
 		}
@@ -588,7 +588,7 @@ void CUI::Render_Script()
 				scriptPlus = 0.0f;
 				YellowScript[2] = true;
 				YellowScript[1] = false;
-				scriptPlus += 0.25f;
+				scriptPlus += 2.5f;
 				is_scriptPlus = false;
 			}
 		}
@@ -865,7 +865,7 @@ void CUI::Render_Attain()
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 
-	if (AttatinAutumn[1])
+	if (AttatinAutumn[2])
 	{
 		SetRect(&s_attrc10, -710, -160,
 			m_attInfo10.Width, m_attInfo10.Height);
@@ -1328,7 +1328,7 @@ void CUI::Render_Mapname()
 	if (CollideSavePoint)
 	{
 		// Gain
-		if (AttainWinter[1] || AttatinAutumn[1])
+		if (AttainWinter[1] || AttatinAutumn[1] || AttatinAutumn[2])
 		{
 			SetRect(&s_textrc8, -720, -270, m_textInfo8.Width, m_textInfo8.Height);
 			m_pSprite->Draw(m_textUI8, &s_textrc8,
@@ -1353,6 +1353,8 @@ void CUI::Render_Mapname()
 			puls = 0.0f;
 			CollideSavePoint = false;
 			AttainWinter[1] = false;
+			AttatinAutumn[1] = false;
+			AttatinAutumn[2] = false;
 		}
 	}
 
@@ -1363,13 +1365,13 @@ void CUI::Update()
 {
 	if (colorpuls == false)
 	{
-		puls += 0.25f;
+		puls += 2.5f;
 		if (puls >= 255)
 			colorpuls = true;
 	}
 	else if (colorpuls == true)
 	{
-		puls -= 0.25f;
+		puls -= 2.5f;
 		if (puls <= 0)
 		{
 			puls = 0.0f;
@@ -1383,13 +1385,13 @@ void CUI::Script_Update()
 {
 	if (is_scriptPlus == false)
 	{
-		scriptPlus += 0.25f;
+		scriptPlus += 2.5f;
 		if (scriptPlus >= 255)
 			is_scriptPlus = true;
 	}
 	else if (is_scriptPlus == true)
 	{
-		scriptPlus -= 0.25f;
+		scriptPlus -= 2.5f;
 		if (scriptPlus <= 0)
 		{
 			scriptPlus = 0.0f;
@@ -1433,14 +1435,16 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 	if (eventMsg.eventType == EventType::eConditionChange)
 	{
 		if (strstr(eventMsg.conditionName.c_str(), "Book"))
+		{
 			BookCol = true;
+		}
 		/// Orb
 		else if (strstr(eventMsg.conditionName.c_str(), "Black"))
 		{
 			if (!HasBlackOrb && is_scriptBlackOrb)
 			{
 				is_scriptPlus = false;
-				scriptPlus = 0.25f;
+				scriptPlus = 2.5f;
 				HasBlackOrb = true;
 				BlackScript[0] = true;
 			}
@@ -1456,7 +1460,7 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 			if (!HasWhiteOrb && is_scriptWhiteOrb)
 			{
 				is_scriptPlus = false;
-				scriptPlus = 0.25f;
+				scriptPlus = 2.5f;
 				HasWhiteOrb = true;
 				WhiteScript[0] = true;
 			}
@@ -1472,7 +1476,7 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 			if (!HasYellowOrb && is_scriptYellowOrb)
 			{
 				is_scriptPlus = false;
-				scriptPlus = 0.25f;
+				scriptPlus = 2.5f;
 				HasYellowOrb = true;
 				YellowScript[0] = true;
 			}
@@ -1549,6 +1553,23 @@ void CUI::ReceiveEvent(ST_EVENT eventMsg)
 					CollideSavePoint = true;
 					colorpuls = false;
 					puls = 0.0f;
+					break;
+				case 18:
+					CollideSavePoint = true;
+					colorpuls = false;
+					puls = 0.0f;
+					AttainWinter[1] = true;
+				case 8:
+					CollideSavePoint = true;
+					colorpuls = false;
+					puls = 0.0f;
+					AttainWinter[2] = true;
+					if (g_pSoundManager->isPlaying() && SoundAutumn[1])
+					{
+						g_pSoundManager->Stop();
+						g_pSoundManager->PlayBGM("f_last");
+						SoundAutumn[1] = false;
+					}
 					break;
 				default:
 					break;

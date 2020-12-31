@@ -875,7 +875,7 @@ Texture_01.png
 3
 # Scale
 0.3
-0.09
+0.1
 0.3
 # Rotate
 0
@@ -883,7 +883,7 @@ Texture_01.png
 0
 # Translate
 6.5
--0.05
+0
 13.5
 # Color
 0.5
@@ -6327,6 +6327,41 @@ Orb_Green.png
 # ColorTag
 # ConditionName
 Green
+# Object_End
+
+# Object_Start
+# ObjectName
+EventTrigger_Save195
+# FolderPath
+
+# FilePath
+
+# TxtPath
+
+# ObjectType
+39
+# Scale
+7
+7
+3
+# Rotate
+0
+0
+0
+# Translate
+6.5
+0
+-12.5
+# Color
+0.5
+0.5
+0.5
+1
+# ColorTag
+# TriggerIndex
+0
+# ZoneIndex
+0
 # Object_End
 
 # Section =======================================

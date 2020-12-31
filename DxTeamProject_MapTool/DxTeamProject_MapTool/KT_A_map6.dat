@@ -3666,40 +3666,5 @@ autumn_texture.png
 Yellow
 # Object_End
 
-# Object_Start
-# ObjectName
-EventTrigger_Save204
-# FolderPath
-
-# FilePath
-
-# TxtPath
-
-# ObjectType
-39
-# Scale
-5
-3
-3
-# Rotate
-0
-0
-0
-# Translate
-6.5
-0.5
--9.5
-# Color
-0.5
-0.5
-0.5
-1
-# ColorTag
-# TriggerIndex
-0
-# ZoneIndex
-0
-# Object_End
-
 # Section =======================================
 

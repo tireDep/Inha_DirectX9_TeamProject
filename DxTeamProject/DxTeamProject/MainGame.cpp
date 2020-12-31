@@ -230,17 +230,17 @@ void CMainGame::Update()
 	//	/// Delete Later...
 		if (GetKeyState('1') & 0x8000)
 		{
-			 g_pGameManager->SetNowScene(SceneType::eEndingScene);
+			 // g_pGameManager->SetNowScene(SceneType::eEndingScene);
 			//m_pScene->Update();
 
-			//g_pGameManager->SetGetOrb("Blue");
-			//g_pGameManager->SetGetOrb("Green");
-			//g_pGameManager->SetGetOrb("Red");
+			// g_pGameManager->SetGetOrb("Blue");
+			// g_pGameManager->SetGetOrb("Green");
+			// g_pGameManager->SetGetOrb("Red");
 			// g_pGameManager->SetGetOrb("White");
-			//g_pGameManager->SetGetOrb("White");
-			//g_pGameManager->SetGetOrb("Yellow");
-			//g_pGameManager->SetGetOrb("Black");
-			// g_pGameManager->CompleteOrb();
+			// g_pGameManager->SetGetOrb("White");
+			g_pGameManager->SetGetOrb("Yellow");
+			// g_pGameManager->SetGetOrb("Black");
+			
 		}
 		m_pScene->Update();
 		if (GetKeyState('2') & 0x8000)
@@ -259,6 +259,8 @@ void CMainGame::Update()
 	//}
 	if (g_pGameManager->GetNowScene() == SceneType::eGameScene)
 	{
+		g_pGameManager->CompleteOrb();
+
 		g_pTimeManager->Update();
 
 		if (g_pGameManager->GetUImode())
